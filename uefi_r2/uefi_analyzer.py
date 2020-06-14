@@ -303,6 +303,8 @@ class r2_uefi_analyzer():
             print('{} protocols:\n{}'.format(
                 cls.r2_name, json.dumps(cls.protocols, indent=4)))
 
+        cls.close()
+
         return summary
 
     def _guid_to_bytes(self, guid):
@@ -331,3 +333,9 @@ class r2_uefi_analyzer():
         """Convert word to array of bytes"""
 
         return [(word & 0x00ff), (word & 0xff00) >> 8]
+
+    def close(self):
+        self.r2.quit()
+
+    def __exit__(self):
+        self.r2.quit()
