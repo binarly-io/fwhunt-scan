@@ -221,8 +221,10 @@ class r2_uefi_analyzer():
                             p_guid_b = self.r2.cmdj('xj 16')
                             p_guid = self._bytes_to_guid(p_guid_b)
                             p_elem = {}
-                            p_elem['address'] = p_guid_addr
-                            p_elem['p_guid_value'] = p_guid
+                            p_elem['guid_address'] = p_guid_addr
+                            p_elem['address'] = insn["offset"]
+                            p_elem['guid'] = p_guid
+                            p_elem['service'] = bs['service_name']
                             guid_str = get_guid_str(p_guid)
                             if guid_str in GUID_TO_NAME:
                                 p_elem['name'] = GUID_TO_NAME[guid_str]
@@ -260,7 +262,7 @@ class r2_uefi_analyzer():
         return True
 
     @classmethod
-    def r2_get_summary(cls, image_path, debug):
+    def r2_get_summary(cls, image_path, debug=False):
         """Collect all the information in a JSON object"""
 
         cls = cls(image_path, debug)
@@ -268,6 +270,9 @@ class r2_uefi_analyzer():
 
         cls.r2_get_common_properties()
         summary['info'] = cls.r2_info
+        if cls.r2_debug:
+            print('{} r2_info:\n{}'.format(
+                cls.r2_name, json.dumps(cls.r2_info, indent=4)))
 
         cls.r2_get_g_bs_x64()
         cls.r2_get_g_rt_x64()
@@ -298,7 +303,37 @@ class r2_uefi_analyzer():
                                          json.dumps(cls.p_guids, indent=4)))
 
         cls.r2_get_protocols_x64()
-        summary['protocols'] = cls.p_guids
+        summary['protocols'] = cls.protocols
+        if cls.r2_debug:
+            print('{} protocols:\n{}'.format(
+                cls.r2_name, json.dumps(cls.protocols, indent=4)))
+
+        cls.close()
+
+        return summary
+
+    @classmethod
+    def r2_get_protocols_info(cls, image_path, debug=False):
+
+        cls = cls(image_path, debug)
+        summary = {}
+
+        cls.r2_get_common_properties()
+        summary['info'] = cls.r2_info
+
+        cls.r2_get_g_bs_x64()
+        summary['g_bs'] = cls.g_bs
+        if cls.r2_debug:
+            print('{} g_bs: 0x{:x}'.format(cls.r2_name, cls.g_bs))
+
+        cls.r2_get_boot_services_prot_x64()
+        summary['bs_list'] = cls.bs_list
+        if cls.r2_debug:
+            print('{} boot services:\n{}'.format(
+                cls.r2_name, json.dumps(cls.bs_list, indent=4)))
+
+        cls.r2_get_protocols_x64()
+        summary['protocols'] = cls.protocols
         if cls.r2_debug:
             print('{} protocols:\n{}'.format(
                 cls.r2_name, json.dumps(cls.protocols, indent=4)))
