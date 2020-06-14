@@ -55,15 +55,16 @@ class r2_uefi_analyzer():
             self.g_bs = 0
             g_bs_reg = None
             for insn in func_insns['ops']:
-                esil = insn['esil'].split(',')
-                if (esil[0] == '0x60') and (esil[2] == '+') and (
-                        esil[3] == '[8]') and (esil[-1] == '='):
-                    g_bs_reg = esil[-2]
-                if g_bs_reg:
-                    if (esil[0] == g_bs_reg) and (esil[-1] == '=[8]'):
-                        if 'ptr' in insn:
-                            self.g_bs = insn['ptr']
-                            return True
+                if("esil" in insn):
+                    esil = insn['esil'].split(',')
+                    if (esil[0] == '0x60') and (esil[2] == '+') and (
+                            esil[3] == '[8]') and (esil[-1] == '='):
+                        g_bs_reg = esil[-2]
+                    if g_bs_reg:
+                        if (esil[0] == g_bs_reg) and (esil[-1] == '=[8]'):
+                            if 'ptr' in insn:
+                                self.g_bs = insn['ptr']
+                                return True
         return False
 
     def r2_get_g_rt_x64(self):
@@ -75,15 +76,16 @@ class r2_uefi_analyzer():
             self.g_rt = 0
             g_rt_reg = None
             for insn in func_insns['ops']:
-                esil = insn['esil'].split(',')
-                if (esil[0] == '0x58') and (esil[2] == '+') and (
-                        esil[3] == '[8]') and (esil[-1] == '='):
-                    g_rt_reg = esil[-2]
-                if g_rt_reg:
-                    if (esil[0] == g_rt_reg) and (esil[-1] == '=[8]'):
-                        if 'ptr' in insn:
-                            self.g_rt = insn['ptr']
-                            return True
+                if("esil" in insn):
+                    esil = insn['esil'].split(',')
+                    if (esil[0] == '0x58') and (esil[2] == '+') and (
+                            esil[3] == '[8]') and (esil[-1] == '='):
+                        g_rt_reg = esil[-2]
+                    if g_rt_reg:
+                        if (esil[0] == g_rt_reg) and (esil[-1] == '=[8]'):
+                            if 'ptr' in insn:
+                                self.g_rt = insn['ptr']
+                                return True
         return False
 
     def r2_get_boot_services_g_bs_x64(self):
@@ -96,34 +98,35 @@ class r2_uefi_analyzer():
             for insn in func_insns['ops']:
                 # find "mov rax, qword [g_bs]" instruction
                 g_bs_found = False
-                esil = insn['esil'].split(',')
-                if (insn['type'] == 'mov') and (esil[-1] == '=') and (
-                        esil[-3] == '[8]') and (esil[-4] == '+'):
-                    if ('ptr' in insn) and (insn['ptr'] == self.g_bs):
-                        g_bs_found = True
-                if not g_bs_found:
+                if("esil" in insn):
+                    esil = insn['esil'].split(',')
+                    if (insn['type'] == 'mov') and (esil[-1] == '=') and (
+                            esil[-3] == '[8]') and (esil[-4] == '+'):
+                        if ('ptr' in insn) and (insn['ptr'] == self.g_bs):
+                            g_bs_found = True
+                    if not g_bs_found:
+                        insn_index += 1
+                        continue
+                    # if current instriction is "mov rax, qword [g_bs]"
+                    for g_bs_area_insn in func_insns['ops'][insn_index:insn_index +
+                                                            0x10]:
+                        g_bs_area_esil = g_bs_area_insn['esil'].split(',')
+                        if (g_bs_area_insn['type'] == 'ucall') and (
+                                g_bs_area_esil[1] == 'rax') and (
+                                    g_bs_area_esil[2] == '+') and (
+                                        g_bs_area_esil[3] == '[8]') and (
+                                            g_bs_area_esil[-1] == '='):
+                            if 'ptr' in g_bs_area_insn:
+                                service_offset = g_bs_area_insn['ptr']
+                                if service_offset in EFI_BOOT_SERVICES_X64:
+                                    self.bs_list.append({
+                                        'address':
+                                        g_bs_area_insn['offset'],
+                                        'service_name':
+                                        EFI_BOOT_SERVICES_X64[service_offset]
+                                    })
+                                    break
                     insn_index += 1
-                    continue
-                # if current instriction is "mov rax, qword [g_bs]"
-                for g_bs_area_insn in func_insns['ops'][insn_index:insn_index +
-                                                        0x10]:
-                    g_bs_area_esil = g_bs_area_insn['esil'].split(',')
-                    if (g_bs_area_insn['type'] == 'ucall') and (
-                            g_bs_area_esil[1] == 'rax') and (
-                                g_bs_area_esil[2] == '+') and (
-                                    g_bs_area_esil[3] == '[8]') and (
-                                        g_bs_area_esil[-1] == '='):
-                        if 'ptr' in g_bs_area_insn:
-                            service_offset = g_bs_area_insn['ptr']
-                            if service_offset in EFI_BOOT_SERVICES_X64:
-                                self.bs_list.append({
-                                    'address':
-                                    g_bs_area_insn['offset'],
-                                    'service_name':
-                                    EFI_BOOT_SERVICES_X64[service_offset]
-                                })
-                                break
-                insn_index += 1
         return True
 
     def r2_get_boot_services_prot_x64(self):
@@ -133,28 +136,29 @@ class r2_uefi_analyzer():
             func_addr = func['offset']
             func_insns = self.r2.cmdj('pdfj @{:#x}'.format(func_addr))
             for insn in func_insns['ops']:
-                esil = insn['esil'].split(',')
-                if (insn['type'] == 'ucall') and (esil[1] == 'rax') and (
-                        esil[2] == '+') and (esil[3] == '[8]'):
-                    if 'ptr' in insn:
-                        service_offset = insn['ptr']
-                        for service_name in BS_PROTOCOLS_INFO_X64:
-                            if BS_PROTOCOLS_INFO_X64[service_name][
-                                    'offset'] == service_offset:
-                                # found boot service that work with protocol
-                                new = True
-                                for bs in self.bs_list:
-                                    if bs['address'] == insn['offset']:
-                                        new = False
-                                        break
-                                service = {
-                                    'address': insn['offset'],
-                                    'service_name': service_name
-                                }
-                                if new:
-                                    self.bs_list.append(service)
-                                self.bs_prot.append(service)
-                                break
+                if("esil" in insn):
+                    esil = insn['esil'].split(',')
+                    if (insn['type'] == 'ucall') and (esil[1] == 'rax') and (
+                            esil[2] == '+') and (esil[3] == '[8]'):
+                        if 'ptr' in insn:
+                            service_offset = insn['ptr']
+                            for service_name in BS_PROTOCOLS_INFO_X64:
+                                if BS_PROTOCOLS_INFO_X64[service_name][
+                                        'offset'] == service_offset:
+                                    # found boot service that work with protocol
+                                    new = True
+                                    for bs in self.bs_list:
+                                        if bs['address'] == insn['offset']:
+                                            new = False
+                                            break
+                                    service = {
+                                        'address': insn['offset'],
+                                        'service_name': service_name
+                                    }
+                                    if new:
+                                        self.bs_list.append(service)
+                                    self.bs_prot.append(service)
+                                    break
         return True
 
     def r2_get_runtime_services_x64(self):
@@ -169,34 +173,35 @@ class r2_uefi_analyzer():
             for insn in func_insns['ops']:
                 # find "mov rax, qword [g_rt]" instruction
                 g_rt_found = False
-                esil = insn['esil'].split(',')
-                if (insn['type'] == 'mov') and (esil[-1] == '=') and (
-                        esil[-3] == '[8]') and (esil[-4] == '+'):
-                    if ('ptr' in insn) and (insn['ptr'] == self.g_bs):
-                        g_rt_found = True
-                if not g_rt_found:
+                if("esil" in insn):
+                    esil = insn['esil'].split(',')
+                    if (insn['type'] == 'mov') and (esil[-1] == '=') and (
+                            esil[-3] == '[8]') and (esil[-4] == '+'):
+                        if ('ptr' in insn) and (insn['ptr'] == self.g_bs):
+                            g_rt_found = True
+                    if not g_rt_found:
+                        insn_index += 1
+                        continue
+                    # if current instriction is "mov rax, qword [g_rt]"
+                    for g_rt_area_insn in func_insns['ops'][insn_index:insn_index +
+                                                            0x10]:
+                        g_rt_area_esil = g_rt_area_insn['esil'].split(',')
+                        if (g_rt_area_insn['type'] == 'ucall') and (
+                                g_rt_area_esil[1] == 'rax') and (
+                                    g_rt_area_esil[2] == '+') and (
+                                        g_rt_area_esil[3] == '[8]') and (
+                                            g_rt_area_esil[-1] == '='):
+                            if 'ptr' in g_rt_area_insn:
+                                service_offset = g_rt_area_insn['ptr']
+                                if service_offset in EFI_RUNTIME_SERVICES_X64:
+                                    self.rt_list.append({
+                                        'address':
+                                        g_rt_area_insn['offset'],
+                                        'service_name':
+                                        EFI_RUNTIME_SERVICES_X64[service_offset]
+                                    })
+                                    break
                     insn_index += 1
-                    continue
-                # if current instriction is "mov rax, qword [g_rt]"
-                for g_rt_area_insn in func_insns['ops'][insn_index:insn_index +
-                                                        0x10]:
-                    g_rt_area_esil = g_rt_area_insn['esil'].split(',')
-                    if (g_rt_area_insn['type'] == 'ucall') and (
-                            g_rt_area_esil[1] == 'rax') and (
-                                g_rt_area_esil[2] == '+') and (
-                                    g_rt_area_esil[3] == '[8]') and (
-                                        g_rt_area_esil[-1] == '='):
-                        if 'ptr' in g_rt_area_insn:
-                            service_offset = g_rt_area_insn['ptr']
-                            if service_offset in EFI_RUNTIME_SERVICES_X64:
-                                self.rt_list.append({
-                                    'address':
-                                    g_rt_area_insn['offset'],
-                                    'service_name':
-                                    EFI_RUNTIME_SERVICES_X64[service_offset]
-                                })
-                                break
-                insn_index += 1
         return True
 
     def r2_get_protocols_x64(self):
@@ -205,26 +210,27 @@ class r2_uefi_analyzer():
         for bs in self.bs_prot:
             block_insns = self.r2.cmdj('pdbj @{:#x}'.format(bs['address']))
             for insn in block_insns:
-                esil = insn['esil'].split(',')
-                if (insn['type'] == 'lea') and (esil[-1] == '=') and (
-                        esil[-2] == BS_PROTOCOLS_INFO_X64[
-                            bs['service_name']]['reg']) and (esil[-3] == '+'):
-                    if 'ptr' in insn:
-                        p_guid_addr = insn['ptr']
-                        self.r2.cmd('s {:#x}'.format(p_guid_addr))
-                        p_guid_b = self.r2.cmdj('xj 16')
-                        p_guid = self._bytes_to_guid(p_guid_b)
-                        p_elem = {}
-                        p_elem['address'] = p_guid_addr
-                        p_elem['p_guid_value'] = p_guid
-                        for protocol in PROTOCOLS_GUIDS:
-                            guid = PROTOCOLS_GUIDS[protocol]
-                            if p_guid == guid:
-                                p_elem['p_name'] = protocol
-                                break
-                        if not 'p_name' in p_elem:
-                            p_elem['p_name'] = 'proprietary_protocol'
-                        self.protocols.append(p_elem)
+                if("esil" in insn):
+                    esil = insn['esil'].split(',')
+                    if (insn['type'] == 'lea') and (esil[-1] == '=') and (
+                            esil[-2] == BS_PROTOCOLS_INFO_X64[
+                                bs['service_name']]['reg']) and (esil[-3] == '+'):
+                        if 'ptr' in insn:
+                            p_guid_addr = insn['ptr']
+                            self.r2.cmd('s {:#x}'.format(p_guid_addr))
+                            p_guid_b = self.r2.cmdj('xj 16')
+                            p_guid = self._bytes_to_guid(p_guid_b)
+                            p_elem = {}
+                            p_elem['address'] = p_guid_addr
+                            p_elem['p_guid_value'] = p_guid
+                            for protocol in PROTOCOLS_GUIDS:
+                                guid = PROTOCOLS_GUIDS[protocol]
+                                if p_guid == guid:
+                                    p_elem['p_name'] = protocol
+                                    break
+                            if not 'p_name' in p_elem:
+                                p_elem['p_name'] = 'proprietary_protocol'
+                            self.protocols.append(p_elem)
         return True
 
     def r2_get_p_guids(self):
