@@ -1,5 +1,16 @@
 # uefi_r2: tools for analyzing UEFI firmware using radare2
 
+def get_guid_str(guid_struct):
+    '''
+    get GUID output string
+    '''
+    guid = '{dw:08X}-'.format(dw=guid_struct[0])
+    guid += '{w:04X}-'.format(w=guid_struct[1])
+    guid += '{w:04X}-'.format(w=guid_struct[2])
+    guid += ''.join(
+        ['{b:02X}'.format(b=guid_struct[i]) for i in range(3, 11)])
+    return guid
+
 PROTOCOLS_GUIDS = {
     "ACOUSTIC_SETUP_PROTOCOL_GUID": [
         3252127133,
@@ -39457,3 +39468,5 @@ PROTOCOLS_GUIDS = {
         229
     ]
 }
+
+GUID_TO_NAME = dict([(get_guid_str(PROTOCOLS_GUIDS[p]), p) for p in PROTOCOLS_GUIDS.keys()])

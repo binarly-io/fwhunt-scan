@@ -151,3 +151,5 @@ BS_PROTOCOLS_INFO_X64 = {
         'reg': 'rdx'
     }
 }
+
+OFFSET_TO_SERVICE = dict([(BS_PROTOCOLS_INFO_X64[s]["offset"], s) for s in BS_PROTOCOLS_INFO_X64])

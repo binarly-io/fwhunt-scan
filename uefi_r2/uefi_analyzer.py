@@ -7,8 +7,8 @@ import struct
 
 import click
 import r2pipe
-from uefi_r2.uefi_protocols import PROTOCOLS_GUIDS
-from uefi_r2.uefi_tables import (BS_PROTOCOLS, BS_PROTOCOLS_INFO_X64,
+from uefi_r2.uefi_protocols import PROTOCOLS_GUIDS, GUID_TO_NAME, get_guid_str
+from uefi_r2.uefi_tables import (BS_PROTOCOLS, BS_PROTOCOLS_INFO_X64, OFFSET_TO_SERVICE,
                                  EFI_BOOT_SERVICES_X64,
                                  EFI_RUNTIME_SERVICES_X64)
 
@@ -143,23 +143,22 @@ class r2_uefi_analyzer():
                             esil[2] == '+') and (esil[3] == '[8]'):
                         if 'ptr' in insn:
                             service_offset = insn['ptr']
-                            for service_name in BS_PROTOCOLS_INFO_X64:
-                                if BS_PROTOCOLS_INFO_X64[service_name][
-                                        'offset'] == service_offset:
-                                    # found boot service that work with protocol
-                                    new = True
-                                    for bs in self.bs_list:
-                                        if bs['address'] == insn['offset']:
-                                            new = False
-                                            break
-                                    service = {
-                                        'address': insn['offset'],
-                                        'service_name': service_name
-                                    }
-                                    if new:
-                                        self.bs_list.append(service)
-                                    self.bs_prot.append(service)
-                                    break
+                            if service_offset in OFFSET_TO_SERVICE:
+                                service_name = OFFSET_TO_SERVICE[service_offset]
+                                # found boot service that work with protocol
+                                new = True
+                                for bs in self.bs_list:
+                                    if bs['address'] == insn['offset']:
+                                        new = False
+                                        break
+                                service = {
+                                    'address': insn['offset'],
+                                    'service_name': service_name
+                                }
+                                if new:
+                                    self.bs_list.append(service)
+                                self.bs_prot.append(service)
+                                break
         return True
 
     def r2_get_runtime_services_x64(self):
@@ -224,13 +223,11 @@ class r2_uefi_analyzer():
                             p_elem = {}
                             p_elem['address'] = p_guid_addr
                             p_elem['p_guid_value'] = p_guid
-                            for protocol in PROTOCOLS_GUIDS:
-                                guid = PROTOCOLS_GUIDS[protocol]
-                                if p_guid == guid:
-                                    p_elem['p_name'] = protocol
-                                    break
-                            if not 'p_name' in p_elem:
-                                p_elem['p_name'] = 'proprietary_protocol'
+                            guid_str = get_guid_str(p_guid)
+                            if guid_str in GUID_TO_NAME:
+                                p_elem['name'] = GUID_TO_NAME[guid_str]
+                            else:
+                                p_elem['name'] = 'proprietary_protocol'
                             self.protocols.append(p_elem)
         return True
 
