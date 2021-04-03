@@ -372,5 +372,5 @@ class r2_uefi_analyzer():
     def close(self):
         self.r2.quit()
 
-    def __exit__(self):
+    def __exit__(self, exception_type, exception_value, traceback):
         self.r2.quit()
