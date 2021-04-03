@@ -345,7 +345,8 @@ class r2_uefi_analyzer():
         return self._dword_to_bytes(guid[0]) + self._word_to_bytes(
             guid[1]) + self._word_to_bytes(guid[2]) + guid[3:]
 
-    def _bytes_to_guid(self, guid_b):
+    @staticmethod
+    def _bytes_to_guid(guid_b):
         """Convert array of bytes to guid structure"""
 
         return [
