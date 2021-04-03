@@ -1,14 +1,11 @@
 # uefi_r2: tools for analyzing UEFI firmware using radare2
 
-import binascii
 import json
-import os
-import struct
 
 import click
 import r2pipe
 from uefi_r2.uefi_protocols import PROTOCOLS_GUIDS, GUID_TO_NAME, get_guid_str
-from uefi_r2.uefi_tables import (BS_PROTOCOLS, BS_PROTOCOLS_INFO_X64, OFFSET_TO_SERVICE,
+from uefi_r2.uefi_tables import (BS_PROTOCOLS_INFO_X64, OFFSET_TO_SERVICE,
                                  EFI_BOOT_SERVICES_X64,
                                  EFI_RUNTIME_SERVICES_X64)
 
