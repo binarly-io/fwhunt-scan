@@ -22,7 +22,7 @@ python setup.py install
 ### With script
 
 ```
-uefi_r2_analyzer.py analyze_image <image_path> -o out.json
+uefi_r2_analyzer.py analyze-image <image_path> -o out.json
 ```
 
 ### From code
