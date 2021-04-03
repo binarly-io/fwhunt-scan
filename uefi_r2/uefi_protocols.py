@@ -1,6 +1,10 @@
 # uefi_r2: tools for analyzing UEFI firmware using radare2
+#
+# pylint: disable=missing-module-docstring,too-many-lines
 
-def get_guid_str(guid_struct):
+from typing import List
+
+def get_guid_str(guid_struct: List[int]) -> str:
     '''
     get GUID output string
     '''

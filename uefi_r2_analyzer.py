@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+#
+# pylint: disable=invalid-name,missing-module-docstring,missing-function-docstring
 
 # uefi_r2: tools for analyzing UEFI firmware using radare2
 
@@ -17,7 +19,7 @@ def cli():
 @click.command()
 @click.argument('image_path')
 @click.option('-o', '--out', help='Output JSON file.')
-def analyze_image(image_path, out):
+def analyze_image(image_path: str, out: str) -> bool:
     """Analyze input UEFI image."""
 
     if not os.path.isfile(image_path):
@@ -28,6 +30,7 @@ def analyze_image(image_path, out):
     if out:
         with open(out, 'w') as f:
             json.dump(summary, f, indent=4)
+    return True
 
 
 cli.add_command(analyze_image)
