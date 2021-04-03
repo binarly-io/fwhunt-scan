@@ -6,7 +6,6 @@ import json
 import os
 
 import click
-import uefi_r2
 from uefi_r2.uefi_analyzer import r2_uefi_analyzer
 
 
