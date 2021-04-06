@@ -5,11 +5,13 @@
 # pylint: disable=too-few-public-methods,too-many-arguments,too-many-instance-attributes
 
 import json
+import uuid
+
 from typing import List, Dict, Any, Optional
 
 import click
 import r2pipe
-from uefi_r2.uefi_protocols import PROTOCOLS_GUIDS, GUID_TO_NAME, get_guid_str
+from uefi_r2.uefi_protocols import GUID_FROM_BYTES, r2_uefi_guid
 from uefi_r2.uefi_tables import (
     BS_PROTOCOLS_INFO_X64,
     OFFSET_TO_SERVICE,
@@ -24,22 +26,26 @@ class r2_uefi_service:
         self.address: int = address
 
 
-class r2_uefi_protocol:
+class r2_uefi_protocol(r2_uefi_guid):
     def __init__(
-        self, name: str, address: int, guid: List[int], guid_address: int, service: str
+        self, name: str, address: int, value: str, guid_address: int, service: str
     ) -> None:
-        self.name: str = name
         self.address: int = address
-        self.guid: List[int] = guid
         self.guid_address: int = guid_address
         self.service: str = service
 
+        # superclass
+        self.name = name
+        self.value = value
 
-class r2_uefi_protocol_guid:
-    def __init__(self, name: str, address: int, value: List[int]) -> None:
-        self.name: str = name
+
+class r2_uefi_protocol_guid(r2_uefi_guid):
+    def __init__(self, name: str, address: int, value: str) -> None:
         self.address: int = address
-        self.value: List[int] = value
+
+        # superclass
+        self.name = name
+        self.value = value
 
 
 class r2_uefi_analyzer:
@@ -285,16 +291,22 @@ class r2_uefi_analyzer:
                         if "ptr" in insn:
                             p_guid_addr = insn["ptr"]
                             self.r2.cmd("s {:#x}".format(p_guid_addr))
-                            p_guid_b = self.r2.cmdj("xj 16")
-                            p_guid = self._bytes_to_guid(p_guid_b)
+                            p_guid_b = bytes(self.r2.cmdj("xj 16"))
+
+                            # look up in known list
+                            guid = GUID_FROM_BYTES.get(p_guid_b)
+                            if not guid:
+                                guid = r2_uefi_guid(
+                                    value=str(uuid.UUID(bytes_le=p_guid_b)),
+                                    name="proprietary_protocol",
+                                )
+
                             self.protocols.append(
                                 r2_uefi_protocol(
-                                    name=GUID_TO_NAME.get(
-                                        get_guid_str(p_guid), "proprietary_protocol"
-                                    ),
+                                    name=guid.name,
+                                    value=guid.value,
                                     guid_address=p_guid_addr,
                                     address=insn["offset"],
-                                    guid=p_guid,
                                     service=bs.name,
                                 )
                             )
@@ -307,26 +319,23 @@ class r2_uefi_analyzer:
         for section in self.r2_sections:
             if section["name"] in target_sections:
                 self.r2.cmd("s {:#x}".format(section["vaddr"]))
-                section_data = self.r2.cmdj("xj {:#d}".format(section["vsize"]))
+                section_data = bytes(self.r2.cmdj("xj {:#d}".format(section["vsize"])))
+
                 # find guids in section data:
                 for i in range(len(section_data) - 15):
-                    if (section_data[i : i + 8] == [0x00] * 8) or (
-                        section_data[i : i + 8] == [0xFF] * 8
-                    ):
-                        continue
                     chunk = section_data[i : i + 16]
-                    for protocol in PROTOCOLS_GUIDS:
-                        guid = PROTOCOLS_GUIDS[protocol]
-                        b_guid = self._guid_to_bytes(guid)
-                        if b_guid == chunk:
-                            self.p_guids.append(
-                                r2_uefi_protocol_guid(
-                                    address=section["vaddr"] + i,
-                                    name=protocol,
-                                    value=guid,
-                                )
-                            )
-                            break
+                    guid = GUID_FROM_BYTES.get(chunk)
+                    if not guid:
+                        continue
+                    if guid.value in ["00000000-0000-0000-0000000000000000"]:
+                        continue
+                    self.p_guids.append(
+                        r2_uefi_protocol_guid(
+                            address=section["vaddr"] + i,
+                            name=guid.name,
+                            value=guid.value,
+                        )
+                    )
         return True
 
     @classmethod
@@ -432,43 +441,6 @@ class r2_uefi_analyzer:
         self.close()
 
         return summary
-
-    def _guid_to_bytes(self, guid: List[int]) -> List[int]:
-        """Convert guid structure to array of bytes"""
-
-        return (
-            self._dword_to_bytes(guid[0])
-            + self._word_to_bytes(guid[1])
-            + self._word_to_bytes(guid[2])
-            + guid[3:]
-        )
-
-    @staticmethod
-    def _bytes_to_guid(guid_b: List[int]) -> List[int]:
-        """Convert array of bytes to guid structure"""
-
-        return [
-            (guid_b[0] | guid_b[1] << 8 | guid_b[2] << 16 | guid_b[3] << 24),
-            (guid_b[4] | guid_b[5] << 8),
-            (guid_b[6] | guid_b[7] << 8),
-        ] + guid_b[8:]
-
-    @staticmethod
-    def _dword_to_bytes(dword: int) -> List[int]:
-        """Convert dword to array of bytes"""
-
-        return [
-            (dword & 0x000000FF),
-            (dword & 0x0000FF00) >> 8,
-            (dword & 0x00FF0000) >> 16,
-            (dword & 0xFF000000) >> 24,
-        ]
-
-    @staticmethod
-    def _word_to_bytes(word: int) -> List[int]:
-        """Convert word to array of bytes"""
-
-        return [(word & 0x00FF), (word & 0xFF00) >> 8]
 
     def close(self) -> None:
         self.r2.quit()
