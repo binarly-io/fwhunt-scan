@@ -23,4 +23,15 @@ setup(name='uefi_r2',
           'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
           'Operating System :: OS Independent',
           'Programming Language :: Python :: 3',
-      ])
+      ],
+      include_package_data=True,
+      zip_safe=False,
+      package_data={
+          "uefi_r2": [
+              "py.typed",
+              "uefi_analyzer.pyi",
+              "uefi_protocols.pyi",
+              "uefi_tables.pyi",
+              "__init__.pyi",
+          ]
+      })
