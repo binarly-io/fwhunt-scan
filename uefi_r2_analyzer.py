@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 #
+# SPDX-License-Identifier: GPL-3.0+
+#
 # pylint: disable=invalid-name,missing-module-docstring,missing-function-docstring
 
 # uefi_r2: tools for analyzing UEFI firmware using radare2
