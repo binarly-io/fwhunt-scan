@@ -5,7 +5,7 @@
 # pylint: disable=too-few-public-methods,too-many-arguments,too-many-instance-attributes
 
 import json
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 import click
 import r2pipe
@@ -40,14 +40,15 @@ class r2_uefi_protocol_guid:
 
 
 class r2_uefi_analyzer:
-    def __init__(self, image_path: str, debug: bool = False):
+    def __init__(self, image_path: Optional[str] = None, debug: bool = False):
         """UEFI analyzer initialization"""
 
         # init r2
         self.r2_image_path = image_path
-        self.r2 = r2pipe.open(image_path, flags=['-2'])
-        # analyze image
-        self.r2.cmd('aaa')
+        if image_path:
+            self.r2 = r2pipe.open(image_path, flags=['-2'])
+            # analyze image
+            self.r2.cmd('aaa')
         # debug
         self.r2_debug = debug
         # name
