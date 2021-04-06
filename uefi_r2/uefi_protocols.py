@@ -6,16 +6,17 @@
 
 from typing import List
 
+
 def get_guid_str(guid_struct: List[int]) -> str:
-    '''
+    """
     get GUID output string
-    '''
-    guid = '{dw:08X}-'.format(dw=guid_struct[0])
-    guid += '{w:04X}-'.format(w=guid_struct[1])
-    guid += '{w:04X}-'.format(w=guid_struct[2])
-    guid += ''.join(
-        ['{b:02X}'.format(b=guid_struct[i]) for i in range(3, 11)])
+    """
+    guid = "{dw:08X}-".format(dw=guid_struct[0])
+    guid += "{w:04X}-".format(w=guid_struct[1])
+    guid += "{w:04X}-".format(w=guid_struct[2])
+    guid += "".join(["{b:02X}".format(b=guid_struct[i]) for i in range(3, 11)])
     return guid
+
 
 PROTOCOLS_GUIDS = {
     "ACOUSTIC_SETUP_PROTOCOL_GUID": [
@@ -29,7 +30,7 @@ PROTOCOLS_GUIDS = {
         227,
         2,
         100,
-        209
+        209,
     ],
     "ADD_BOOT_OPTION_GUID": [
         433679679,
@@ -42,7 +43,7 @@ PROTOCOLS_GUIDS = {
         50,
         218,
         59,
-        226
+        226,
     ],
     "ADVANCED_FORM_SET_GUID": [
         3780052218,
@@ -55,7 +56,7 @@ PROTOCOLS_GUIDS = {
         36,
         116,
         111,
-        159
+        159,
     ],
     "AHCI_BUS_INIT_PROTOCOL_GUID": [
         3002746724,
@@ -68,7 +69,7 @@ PROTOCOLS_GUIDS = {
         90,
         62,
         86,
-        104
+        104,
     ],
     "AHCI_SMM_PROTOCOL_GUID": [
         3002750820,
@@ -81,7 +82,7 @@ PROTOCOLS_GUIDS = {
         90,
         62,
         86,
-        104
+        104,
     ],
     "AMICSM_PCIBUSNUM_XLAT_PROTOCOL_GUID": [
         3411825856,
@@ -94,21 +95,9 @@ PROTOCOLS_GUIDS = {
         79,
         140,
         145,
-        92
+        92,
     ],
-    "AMITSESETUP_GUID": [
-        3356621368,
-        17096,
-        17785,
-        169,
-        187,
-        96,
-        233,
-        78,
-        221,
-        251,
-        52
-    ],
+    "AMITSESETUP_GUID": [3356621368, 17096, 17785, 169, 187, 96, 233, 78, 221, 251, 52],
     "AMITSE_ADMIN_PASSWORD_VALID_GUID": [
         1411209845,
         38382,
@@ -120,7 +109,7 @@ PROTOCOLS_GUIDS = {
         220,
         72,
         98,
-        73
+        73,
     ],
     "AMITSE_AFTER_FIRST_BOOT_OPTION_GUID": [
         3297600796,
@@ -133,7 +122,7 @@ PROTOCOLS_GUIDS = {
         171,
         131,
         107,
-        48
+        48,
     ],
     "AMITSE_BOOT_ORDER_CHANGE_GUID": [
         460048393,
@@ -146,7 +135,7 @@ PROTOCOLS_GUIDS = {
         134,
         34,
         254,
-        80
+        80,
     ],
     "AMITSE_DRIVER_HEALTH_CTRL_GUID": [
         1478990893,
@@ -159,7 +148,7 @@ PROTOCOLS_GUIDS = {
         112,
         22,
         220,
-        37
+        37,
     ],
     "AMITSE_DRIVER_HEALTH_ENB_GUID": [
         142996104,
@@ -172,7 +161,7 @@ PROTOCOLS_GUIDS = {
         97,
         218,
         8,
-        254
+        254,
     ],
     "AMITSE_DRIVER_HEALTH_GUID": [
         1952032724,
@@ -185,7 +174,7 @@ PROTOCOLS_GUIDS = {
         90,
         68,
         67,
-        201
+        201,
     ],
     "AMITSE_EVENT_BEFORE_BOOT_GUID": [
         913798927,
@@ -198,7 +187,7 @@ PROTOCOLS_GUIDS = {
         233,
         96,
         72,
-        130
+        130,
     ],
     "AMITSE_INVALID_PASSWORD_GUID": [
         3599909056,
@@ -211,7 +200,7 @@ PROTOCOLS_GUIDS = {
         218,
         110,
         97,
-        95
+        95,
     ],
     "AMITSE_NVRAM_UPDATE_GUID": [
         3628855280,
@@ -224,7 +213,7 @@ PROTOCOLS_GUIDS = {
         71,
         75,
         211,
-        177
+        177,
     ],
     "AMITSE_PASSWORD_PROMPT_ENTER_GUID": [
         121536001,
@@ -237,7 +226,7 @@ PROTOCOLS_GUIDS = {
         118,
         124,
         186,
-        0
+        0,
     ],
     "AMITSE_PASSWORD_PROMPT_EXIT_GUID": [
         3115333808,
@@ -250,7 +239,7 @@ PROTOCOLS_GUIDS = {
         236,
         254,
         208,
-        50
+        50,
     ],
     "AMITSE_SETUP_ENTER_GUID": [
         1897934574,
@@ -263,7 +252,7 @@ PROTOCOLS_GUIDS = {
         38,
         217,
         102,
-        87
+        87,
     ],
     "AMITSE_USER_PASSWORD_VALID_GUID": [
         2870215882,
@@ -276,7 +265,7 @@ PROTOCOLS_GUIDS = {
         33,
         218,
         212,
-        211
+        211,
     ],
     "AMI_APTIO_SIG_OWNER_GUID": [
         651970641,
@@ -289,7 +278,7 @@ PROTOCOLS_GUIDS = {
         131,
         187,
         179,
-        94
+        94,
     ],
     "AMI_BBS_DEVICE_PATH_GUID": [
         498173102,
@@ -302,7 +291,7 @@ PROTOCOLS_GUIDS = {
         12,
         44,
         172,
-        92
+        92,
     ],
     "AMI_BEFORE_CPU_RC_PROTOCOL_GUID": [
         489074115,
@@ -315,7 +304,7 @@ PROTOCOLS_GUIDS = {
         170,
         204,
         51,
-        146
+        146,
     ],
     "AMI_BIOSPPI_FLAGS_MANAGEMENT_GUID": [
         3909127536,
@@ -328,7 +317,7 @@ PROTOCOLS_GUIDS = {
         87,
         103,
         229,
-        239
+        239,
     ],
     "AMI_BOARD_INFO_PROTOCOL_GUID": [
         41096300,
@@ -341,7 +330,7 @@ PROTOCOLS_GUIDS = {
         82,
         74,
         10,
-        226
+        226,
     ],
     "AMI_BOARD_INFO_SECTION_GUID": [
         3874814199,
@@ -354,7 +343,7 @@ PROTOCOLS_GUIDS = {
         116,
         94,
         74,
-        35
+        35,
     ],
     "AMI_CALLBACK_GUID": [
         2633036174,
@@ -367,7 +356,7 @@ PROTOCOLS_GUIDS = {
         214,
         178,
         16,
-        7
+        7,
     ],
     "AMI_CAPSULE_HOB_GUID": [
         3211197943,
@@ -380,7 +369,7 @@ PROTOCOLS_GUIDS = {
         170,
         42,
         139,
-        234
+        234,
     ],
     "AMI_CCID_IO_PROTOCOL_GUID": [
         2976367349,
@@ -393,7 +382,7 @@ PROTOCOLS_GUIDS = {
         199,
         240,
         42,
-        136
+        136,
     ],
     "AMI_CCID_PRESENCE_GUID": [
         1608441869,
@@ -406,7 +395,7 @@ PROTOCOLS_GUIDS = {
         128,
         234,
         143,
-        118
+        118,
     ],
     "AMI_CMOS_BAD_FLAG_HOB_GUID": [
         2962814822,
@@ -419,7 +408,7 @@ PROTOCOLS_GUIDS = {
         241,
         68,
         140,
-        21
+        21,
     ],
     "AMI_CPUID_CKSUM_HOB_GUID": [
         3570021041,
@@ -432,7 +421,7 @@ PROTOCOLS_GUIDS = {
         184,
         25,
         42,
-        59
+        59,
     ],
     "AMI_CPU_INFO_2_PROTOCOL_GUID": [
         2895966376,
@@ -445,7 +434,7 @@ PROTOCOLS_GUIDS = {
         100,
         238,
         162,
-        115
+        115,
     ],
     "AMI_CSM_DRIVER_STARTED_GUID": [
         1051206865,
@@ -458,7 +447,7 @@ PROTOCOLS_GUIDS = {
         101,
         223,
         124,
-        70
+        70,
     ],
     "AMI_CSM_THUNK_PROTOCOL_GUID": [
         593685148,
@@ -471,7 +460,7 @@ PROTOCOLS_GUIDS = {
         236,
         181,
         124,
-        187
+        187,
     ],
     "AMI_DDDT_PRESENT_FLAG_HOB_GUID": [
         1316680727,
@@ -484,7 +473,7 @@ PROTOCOLS_GUIDS = {
         218,
         211,
         8,
-        150
+        150,
     ],
     "AMI_DEBUGGER_CPU_PROTOCOL_GUID": [
         2871110851,
@@ -497,7 +486,7 @@ PROTOCOLS_GUIDS = {
         119,
         17,
         26,
-        178
+        178,
     ],
     "AMI_DEBUGPORT_HOB_GUID": [
         3902059283,
@@ -510,7 +499,7 @@ PROTOCOLS_GUIDS = {
         138,
         201,
         2,
-        124
+        124,
     ],
     "AMI_DEVICE_NAME_DEVICE_PATH_GUID": [
         761546735,
@@ -523,7 +512,7 @@ PROTOCOLS_GUIDS = {
         208,
         27,
         76,
-        230
+        230,
     ],
     "AMI_DIGITAL_SIGNATURE_PROTOCOL_GUID": [
         1602730519,
@@ -536,7 +525,7 @@ PROTOCOLS_GUIDS = {
         200,
         121,
         136,
-        153
+        153,
     ],
     "AMI_DIMM_SPD_DATA_HOB_GUID": [
         3570021043,
@@ -549,7 +538,7 @@ PROTOCOLS_GUIDS = {
         187,
         22,
         34,
-        51
+        51,
     ],
     "AMI_EARLY_BIST_PPI_GUID": [
         2816659058,
@@ -562,7 +551,7 @@ PROTOCOLS_GUIDS = {
         10,
         229,
         204,
-        71
+        71,
     ],
     "AMI_EFIKEYCODE_PROTOCOL_GUID": [
         182433325,
@@ -575,7 +564,7 @@ PROTOCOLS_GUIDS = {
         75,
         234,
         135,
-        168
+        168,
     ],
     "AMI_FAST_BOOT_PROTOCOL_GUID": [
         882287002,
@@ -588,7 +577,7 @@ PROTOCOLS_GUIDS = {
         46,
         191,
         42,
-        85
+        85,
     ],
     "AMI_FW_RECOVERY_CAPSULE_GUID": [
         1585005335,
@@ -601,7 +590,7 @@ PROTOCOLS_GUIDS = {
         125,
         98,
         50,
-        202
+        202,
     ],
     "AMI_HECI_SMM_GUID": [
         4237971649,
@@ -614,7 +603,7 @@ PROTOCOLS_GUIDS = {
         215,
         137,
         108,
-        186
+        186,
     ],
     "AMI_INTERNAL_FACTORY_TDC_TDP_HOB_GUID": [
         2553121903,
@@ -627,7 +616,7 @@ PROTOCOLS_GUIDS = {
         62,
         165,
         100,
-        23
+        23,
     ],
     "AMI_INTERNAL_UCODE_HOB_GUID": [
         2488695919,
@@ -640,7 +629,7 @@ PROTOCOLS_GUIDS = {
         204,
         171,
         58,
-        17
+        17,
     ],
     "AMI_INT_SMM_COMM_PROTOCOL_GUID": [
         2994580280,
@@ -653,7 +642,7 @@ PROTOCOLS_GUIDS = {
         154,
         20,
         37,
-        143
+        143,
     ],
     "AMI_IRQ_DMA_MASK_VARIABLE_GUID": [
         4237027175,
@@ -666,7 +655,7 @@ PROTOCOLS_GUIDS = {
         30,
         188,
         135,
-        204
+        204,
     ],
     "AMI_ISO9660_MEDIA_GUID": [
         3128706769,
@@ -679,7 +668,7 @@ PROTOCOLS_GUIDS = {
         31,
         35,
         254,
-        1
+        1,
     ],
     "AMI_LOAD_CSM_GUID": [
         371751844,
@@ -692,7 +681,7 @@ PROTOCOLS_GUIDS = {
         120,
         203,
         43,
-        224
+        224,
     ],
     "AMI_MASKED_DEVICE_PATH_GUID": [
         2581755367,
@@ -705,7 +694,7 @@ PROTOCOLS_GUIDS = {
         94,
         108,
         0,
-        203
+        203,
     ],
     "AMI_MEASURE_PCIOPROM_GUID": [
         3017467648,
@@ -718,7 +707,7 @@ PROTOCOLS_GUIDS = {
         180,
         132,
         190,
-        97
+        97,
     ],
     "AMI_MEDIA_DEVICE_PATH_GUID": [
         1344518492,
@@ -731,7 +720,7 @@ PROTOCOLS_GUIDS = {
         102,
         76,
         128,
-        18
+        18,
     ],
     "AMI_MEMORY_ERROR_REPORT_PPI_GUID": [
         2233623897,
@@ -744,7 +733,7 @@ PROTOCOLS_GUIDS = {
         214,
         164,
         223,
-        1
+        1,
     ],
     "AMI_MRC_INFO_HOB_GUID": [
         2788498055,
@@ -757,7 +746,7 @@ PROTOCOLS_GUIDS = {
         90,
         192,
         181,
-        228
+        228,
     ],
     "AMI_NB_MRC_INFO_GUID": [
         1731695435,
@@ -770,7 +759,7 @@ PROTOCOLS_GUIDS = {
         98,
         115,
         104,
-        11
+        11,
     ],
     "AMI_NVRAM_SPD_MAP_GUID": [
         1904197968,
@@ -783,7 +772,7 @@ PROTOCOLS_GUIDS = {
         35,
         234,
         185,
-        92
+        92,
     ],
     "AMI_OPROM_POLICY_PROTOCOL_GUID": [
         1412260424,
@@ -796,7 +785,7 @@ PROTOCOLS_GUIDS = {
         100,
         109,
         99,
-        180
+        180,
     ],
     "AMI_OS_PPI_CONFIRMATION_OVERRIDE_GUID": [
         1595350879,
@@ -809,7 +798,7 @@ PROTOCOLS_GUIDS = {
         6,
         174,
         74,
-        61
+        61,
     ],
     "AMI_PB_KEY_RSA2048_GUID": [
         73563035,
@@ -822,7 +811,7 @@ PROTOCOLS_GUIDS = {
         25,
         242,
         3,
-        148
+        148,
     ],
     "AMI_PCI_BUS_EXT_PROTOCOL_GUID": [
         4096393373,
@@ -835,7 +824,7 @@ PROTOCOLS_GUIDS = {
         163,
         190,
         217,
-        175
+        175,
     ],
     "AMI_PEIM_HOB_GUID": [
         4098431908,
@@ -848,7 +837,7 @@ PROTOCOLS_GUIDS = {
         157,
         34,
         218,
-        87
+        87,
     ],
     "AMI_PEIM_LOAD_HOB_GUID": [
         3969660669,
@@ -861,7 +850,7 @@ PROTOCOLS_GUIDS = {
         45,
         6,
         111,
-        180
+        180,
     ],
     "AMI_PEI_AFTER_MRC_GUID": [
         1690920704,
@@ -874,7 +863,7 @@ PROTOCOLS_GUIDS = {
         232,
         246,
         2,
-        178
+        178,
     ],
     "AMI_PEI_CPUINIT_POLICY_PPI_GUID": [
         4163161275,
@@ -887,7 +876,7 @@ PROTOCOLS_GUIDS = {
         75,
         70,
         61,
-        181
+        181,
     ],
     "AMI_PEI_END_MEMORY_DETECT_GUID": [
         2673402916,
@@ -900,7 +889,7 @@ PROTOCOLS_GUIDS = {
         57,
         74,
         153,
-        217
+        217,
     ],
     "AMI_PEI_END_OF_MRC_GUID": [
         1664193726,
@@ -913,7 +902,7 @@ PROTOCOLS_GUIDS = {
         72,
         36,
         1,
-        155
+        155,
     ],
     "AMI_PEI_MRC_DEFAULT_GUID": [
         3893616918,
@@ -926,7 +915,7 @@ PROTOCOLS_GUIDS = {
         213,
         233,
         165,
-        208
+        208,
     ],
     "AMI_PEI_NBINIT_POLICY_PPI_GUID": [
         2632243512,
@@ -939,7 +928,7 @@ PROTOCOLS_GUIDS = {
         63,
         175,
         139,
-        79
+        79,
     ],
     "AMI_PEI_NB_CPU_ONLY_RESET_PPI_GUID": [
         521077918,
@@ -952,7 +941,7 @@ PROTOCOLS_GUIDS = {
         237,
         121,
         32,
-        231
+        231,
     ],
     "AMI_PEI_NB_CUSTOM_PPI_GUID": [
         1481427359,
@@ -965,7 +954,7 @@ PROTOCOLS_GUIDS = {
         195,
         148,
         121,
-        252
+        252,
     ],
     "AMI_PEI_PCI_TABLE_INIT_PPI_GUID": [
         2549685880,
@@ -978,7 +967,7 @@ PROTOCOLS_GUIDS = {
         120,
         194,
         134,
-        115
+        115,
     ],
     "AMI_PEI_SBINIT_POLICY_PPI_GUID": [
         2515014955,
@@ -991,7 +980,7 @@ PROTOCOLS_GUIDS = {
         88,
         62,
         188,
-        66
+        66,
     ],
     "AMI_PEI_SB_CUSTOM_PPI_GUID": [
         949377973,
@@ -1004,7 +993,7 @@ PROTOCOLS_GUIDS = {
         74,
         100,
         155,
-        100
+        100,
     ],
     "AMI_PEI_SB_OEM_PLATFORM_POLICY_OVERRIDE_PPI_GUID": [
         1628993895,
@@ -1017,7 +1006,7 @@ PROTOCOLS_GUIDS = {
         86,
         25,
         8,
-        21
+        21,
     ],
     "AMI_PEI_SET_NB_SUBID_PPI_GUID": [
         1481427359,
@@ -1030,7 +1019,7 @@ PROTOCOLS_GUIDS = {
         195,
         148,
         121,
-        252
+        252,
     ],
     "AMI_PERF_TUNE_DATA_HOB_GUID": [
         1298924694,
@@ -1043,7 +1032,7 @@ PROTOCOLS_GUIDS = {
         185,
         21,
         106,
-        197
+        197,
     ],
     "AMI_PLL_OVER_VOTAGE_FLAG_HOB_GUID": [
         404653901,
@@ -1056,7 +1045,7 @@ PROTOCOLS_GUIDS = {
         97,
         52,
         130,
-        32
+        32,
     ],
     "AMI_POST_MANAGER_PROTOCOL_GUID": [
         2324804065,
@@ -1069,7 +1058,7 @@ PROTOCOLS_GUIDS = {
         161,
         114,
         158,
-        255
+        255,
     ],
     "AMI_RECOVERY_IMAGE_HOB_GUID": [
         3670264728,
@@ -1082,7 +1071,7 @@ PROTOCOLS_GUIDS = {
         163,
         32,
         207,
-        49
+        49,
     ],
     "AMI_RESET_TYPE_HOB_GUID": [
         971558305,
@@ -1095,7 +1084,7 @@ PROTOCOLS_GUIDS = {
         149,
         247,
         3,
-        128
+        128,
     ],
     "AMI_RESET_TYPE_VARIABLE_GUID": [
         814600236,
@@ -1108,7 +1097,7 @@ PROTOCOLS_GUIDS = {
         68,
         10,
         107,
-        74
+        74,
     ],
     "AMI_ROM_LAYOUT_HOB_GUID": [
         3613664323,
@@ -1121,7 +1110,7 @@ PROTOCOLS_GUIDS = {
         168,
         28,
         29,
-        134
+        134,
     ],
     "AMI_SB_SMI_PROTOCOL_GUID": [
         1486603798,
@@ -1134,7 +1123,7 @@ PROTOCOLS_GUIDS = {
         60,
         105,
         126,
-        37
+        37,
     ],
     "AMI_SETUP_NVRAM_UPDATE_GUID": [
         3628855280,
@@ -1147,7 +1136,7 @@ PROTOCOLS_GUIDS = {
         71,
         75,
         211,
-        177
+        177,
     ],
     "AMI_SMBIOS_CPU_INFO_PROTOCOL_GUID": [
         1030544138,
@@ -1160,7 +1149,7 @@ PROTOCOLS_GUIDS = {
         103,
         249,
         218,
-        181
+        181,
     ],
     "AMI_SMBIOS_MEMORY_INFO_HOB_GUID": [
         2104198964,
@@ -1173,7 +1162,7 @@ PROTOCOLS_GUIDS = {
         132,
         58,
         211,
-        241
+        241,
     ],
     "AMI_SMBUS_HOB_GUID": [
         24949943,
@@ -1186,7 +1175,7 @@ PROTOCOLS_GUIDS = {
         43,
         187,
         37,
-        183
+        183,
     ],
     "AMI_SMBUS_SMM_PROTOCOL_GUID": [
         1927544980,
@@ -1199,7 +1188,7 @@ PROTOCOLS_GUIDS = {
         74,
         158,
         156,
-        12
+        12,
     ],
     "AMI_SMM_DIGITAL_SIGNATURE_PROTOCOL_GUID": [
         2443954224,
@@ -1212,7 +1201,7 @@ PROTOCOLS_GUIDS = {
         187,
         65,
         20,
-        2
+        2,
     ],
     "AMI_SMM_INFO_PROTOCOL_GUID": [
         3947993323,
@@ -1225,7 +1214,7 @@ PROTOCOLS_GUIDS = {
         100,
         187,
         73,
-        146
+        146,
     ],
     "AMI_STANDARD_DEFAULTS_VARIABLE_GUID": [
         1167708783,
@@ -1238,7 +1227,7 @@ PROTOCOLS_GUIDS = {
         69,
         207,
         248,
-        36
+        36,
     ],
     "AMI_STATUS_CODE_CPU_BIST_DATA_GUID": [
         3444841847,
@@ -1251,7 +1240,7 @@ PROTOCOLS_GUIDS = {
         197,
         213,
         185,
-        70
+        70,
     ],
     "AMI_TCG_CONFIRMATION_FLAGS_GUID": [
         2101202670,
@@ -1264,7 +1253,7 @@ PROTOCOLS_GUIDS = {
         47,
         30,
         219,
-        222
+        222,
     ],
     "AMI_TCG_EFI_OS_VARIABLE_GUID": [
         2829191483,
@@ -1277,7 +1266,7 @@ PROTOCOLS_GUIDS = {
         104,
         71,
         38,
-        94
+        94,
     ],
     "AMI_TCG_PERM_FLAGS_GUID": [
         589689596,
@@ -1290,7 +1279,7 @@ PROTOCOLS_GUIDS = {
         13,
         251,
         227,
-        37
+        37,
     ],
     "AMI_TCG_PLATFORM_PPI_AFTER_MEM_GUID": [
         2299276527,
@@ -1303,7 +1292,7 @@ PROTOCOLS_GUIDS = {
         170,
         23,
         152,
-        180
+        180,
     ],
     "AMI_TCG_PLATFORM_PPI_BEFORE_MEM_GUID": [
         3253106973,
@@ -1316,7 +1305,7 @@ PROTOCOLS_GUIDS = {
         186,
         127,
         134,
-        161
+        161,
     ],
     "AMI_TCG_PLATFORM_PPI_GUID": [
         90734410,
@@ -1329,7 +1318,7 @@ PROTOCOLS_GUIDS = {
         206,
         163,
         86,
-        159
+        159,
     ],
     "AMI_TCG_PLATFORM_PROTOCOL_GUID": [
         839638073,
@@ -1342,7 +1331,7 @@ PROTOCOLS_GUIDS = {
         114,
         186,
         156,
-        161
+        161,
     ],
     "AMI_TCG_RESETVAR_HOB_GUID": [
         2829191483,
@@ -1355,7 +1344,7 @@ PROTOCOLS_GUIDS = {
         104,
         71,
         38,
-        94
+        94,
     ],
     "AMI_USB_SMM_PROTOCOL_GUID": [
         1056395278,
@@ -1368,7 +1357,7 @@ PROTOCOLS_GUIDS = {
         14,
         172,
         236,
-        210
+        210,
     ],
     "AMT_FORCE_PUSH_PET_HOB_GUID": [
         1325010358,
@@ -1381,7 +1370,7 @@ PROTOCOLS_GUIDS = {
         99,
         12,
         123,
-        60
+        60,
     ],
     "AMT_FORCE_PUSH_PET_POLICY_GUID": [
         2898846180,
@@ -1394,7 +1383,7 @@ PROTOCOLS_GUIDS = {
         82,
         243,
         76,
-        165
+        165,
     ],
     "AMT_FORCE_PUSH_PET_VARIABLE_GUID": [
         3618411695,
@@ -1407,21 +1396,9 @@ PROTOCOLS_GUIDS = {
         149,
         52,
         97,
-        139
+        139,
     ],
-    "AMT_INT16_CSM_GUID": [
-        1615259256,
-        9455,
-        16389,
-        186,
-        57,
-        189,
-        161,
-        31,
-        109,
-        85,
-        93
-    ],
+    "AMT_INT16_CSM_GUID": [1615259256, 9455, 16389, 186, 57, 189, 161, 31, 109, 85, 93],
     "AMT_READY_TO_BOOT_PROTOCOL_GUID": [
         1085315930,
         61679,
@@ -1433,7 +1410,7 @@ PROTOCOLS_GUIDS = {
         75,
         117,
         77,
-        5
+        5,
     ],
     "AOAC_EC_WAKEUP_CUSTOM_PPI_GUID": [
         2187492047,
@@ -1446,7 +1423,7 @@ PROTOCOLS_GUIDS = {
         172,
         217,
         18,
-        35
+        35,
     ],
     "AOAC_FFS_TABLE_STORAGE_GUID": [
         4211367346,
@@ -1459,7 +1436,7 @@ PROTOCOLS_GUIDS = {
         27,
         27,
         213,
-        77
+        77,
     ],
     "APTIO_FW_CAPSULE_GUID": [
         1245488779,
@@ -1472,7 +1449,7 @@ PROTOCOLS_GUIDS = {
         193,
         254,
         196,
-        77
+        77,
     ],
     "APTIO_HII_PROTOCOL_GUID": [
         3934350636,
@@ -1485,7 +1462,7 @@ PROTOCOLS_GUIDS = {
         92,
         187,
         208,
-        119
+        119,
     ],
     "AUTHVAR_MAILBOX_VARIABLE_GUID": [
         1395352882,
@@ -1498,7 +1475,7 @@ PROTOCOLS_GUIDS = {
         121,
         201,
         77,
-        249
+        249,
     ],
     "BDS_ALL_DRIVERS_CONNECTED_PROTOCOL_GUID": [
         3687447841,
@@ -1511,7 +1488,7 @@ PROTOCOLS_GUIDS = {
         136,
         103,
         204,
-        147
+        147,
     ],
     "BDS_CONNECT_DRIVERS_PROTOCOL_GUID": [
         984102725,
@@ -1524,7 +1501,7 @@ PROTOCOLS_GUIDS = {
         208,
         47,
         171,
-        142
+        142,
     ],
     "BLOCK_DEVICE_RECOVERY_CAPSULE_GUID": [
         195569212,
@@ -1537,7 +1514,7 @@ PROTOCOLS_GUIDS = {
         242,
         247,
         231,
-        125
+        125,
     ],
     "BOOT_FLOW_VARIABLE_GUID": [
         4011143092,
@@ -1550,7 +1527,7 @@ PROTOCOLS_GUIDS = {
         5,
         130,
         110,
-        100
+        100,
     ],
     "BOOT_FORM_SET_GUID": [
         2335440864,
@@ -1563,7 +1540,7 @@ PROTOCOLS_GUIDS = {
         88,
         193,
         63,
-        142
+        142,
     ],
     "BOOT_MANAGER_GUID": [
         3029376243,
@@ -1576,21 +1553,9 @@ PROTOCOLS_GUIDS = {
         34,
         11,
         155,
-        178
+        178,
     ],
-    "BOOT_NOW_COUNT_GUID": [
-        86929072,
-        62016,
-        17093,
-        131,
-        9,
-        69,
-        135,
-        69,
-        69,
-        198,
-        180
-    ],
+    "BOOT_NOW_COUNT_GUID": [86929072, 62016, 17093, 131, 9, 69, 135, 69, 69, 198, 180],
     "CHIPSET_FORM_SET_GUID": [
         2919118024,
         39649,
@@ -1602,7 +1567,7 @@ PROTOCOLS_GUIDS = {
         162,
         203,
         44,
-        91
+        91,
     ],
     "CMOS_MANAGER_HOB_GUID": [
         3577116674,
@@ -1615,7 +1580,7 @@ PROTOCOLS_GUIDS = {
         204,
         245,
         197,
-        85
+        85,
     ],
     "CONSOLE_IN_DEVICES_STARTED_PROTOCOL_GUID": [
         770826321,
@@ -1628,7 +1593,7 @@ PROTOCOLS_GUIDS = {
         83,
         120,
         251,
-        158
+        158,
     ],
     "CONSOLE_OUT_DEVICES_STARTED_PROTOCOL_GUID": [
         4019861873,
@@ -1641,7 +1606,7 @@ PROTOCOLS_GUIDS = {
         101,
         242,
         220,
-        58
+        58,
     ],
     "CPU_MICROCODE_FILE_GUID": [
         386434418,
@@ -1654,7 +1619,7 @@ PROTOCOLS_GUIDS = {
         255,
         70,
         160,
-        112
+        112,
     ],
     "CPU_WAKE_UP_BUFFER_VARIABLE_GUID": [
         3748024978,
@@ -1667,7 +1632,7 @@ PROTOCOLS_GUIDS = {
         148,
         98,
         129,
-        133
+        133,
     ],
     "CSM_VIDEO_POLICY_PROTOCOL_GUID": [
         978207606,
@@ -1680,21 +1645,9 @@ PROTOCOLS_GUIDS = {
         242,
         174,
         205,
-        0
+        0,
     ],
-    "DCA_HOB_GUID": [
-        1751499861,
-        34342,
-        16600,
-        144,
-        244,
-        166,
-        148,
-        96,
-        164,
-        171,
-        90
-    ],
+    "DCA_HOB_GUID": [1751499861, 34342, 16600, 144, 244, 166, 148, 96, 164, 171, 90],
     "DEBUGGER_TERMINAL_VAR_GUID": [
         2546604635,
         46944,
@@ -1706,7 +1659,7 @@ PROTOCOLS_GUIDS = {
         146,
         3,
         44,
-        144
+        144,
     ],
     "DEFINE_GUID_CRBDXEBin_GUID": [
         371662794,
@@ -1719,7 +1672,7 @@ PROTOCOLS_GUIDS = {
         177,
         40,
         222,
-        182
+        182,
     ],
     "DEFINE_GUID_CRBSMIBin_GUID": [
         572464463,
@@ -1732,7 +1685,7 @@ PROTOCOLS_GUIDS = {
         103,
         43,
         6,
-        215
+        215,
     ],
     "DEFINE_GUID_AcpiPlatformPeiBin_GUID": [
         859550371,
@@ -1745,7 +1698,7 @@ PROTOCOLS_GUIDS = {
         215,
         67,
         21,
-        248
+        248,
     ],
     "DEFINE_GUID_OEMPEIBin_GUID": [
         1851383558,
@@ -1758,7 +1711,7 @@ PROTOCOLS_GUIDS = {
         248,
         74,
         148,
-        228
+        228,
     ],
     "DEFINE_GUID_SBDXEBin_GUID": [
         3083965585,
@@ -1771,7 +1724,7 @@ PROTOCOLS_GUIDS = {
         223,
         164,
         25,
-        116
+        116,
     ],
     "DEFINE_GUID_OEMDXEBin_GUID": [
         3219260873,
@@ -1784,7 +1737,7 @@ PROTOCOLS_GUIDS = {
         74,
         248,
         225,
-        153
+        153,
     ],
     "DEFINE_GUID_SBPEIBin_GUID": [
         3254507044,
@@ -1797,7 +1750,7 @@ PROTOCOLS_GUIDS = {
         220,
         92,
         126,
-        13
+        13,
     ],
     "DEFINE_GUID_CRBPEIBin_GUID": [
         220123895,
@@ -1810,7 +1763,7 @@ PROTOCOLS_GUIDS = {
         236,
         145,
         126,
-        174
+        174,
     ],
     "DEFINE_GUID_AcpiPlatformSmiBin_GUID": [
         3755529676,
@@ -1823,7 +1776,7 @@ PROTOCOLS_GUIDS = {
         228,
         230,
         64,
-        239
+        239,
     ],
     "DEFINE_GUID_NBPEIBin_GUID": [
         2041208966,
@@ -1836,7 +1789,7 @@ PROTOCOLS_GUIDS = {
         170,
         39,
         240,
-        226
+        226,
     ],
     "DEFINE_GUID_NBDXEBin_GUID": [
         3840725170,
@@ -1849,7 +1802,7 @@ PROTOCOLS_GUIDS = {
         92,
         154,
         129,
-        46
+        46,
     ],
     "DEFINE_GUID_SBRunBin_GUID": [
         3795814113,
@@ -1862,7 +1815,7 @@ PROTOCOLS_GUIDS = {
         103,
         193,
         121,
-        212
+        212,
     ],
     "DEL_BOOT_OPTION_GUID": [
         4140250905,
@@ -1875,7 +1828,7 @@ PROTOCOLS_GUIDS = {
         203,
         188,
         254,
-        79
+        79,
     ],
     "DIMM_TS_INFO_GUID": [
         3462871592,
@@ -1888,7 +1841,7 @@ PROTOCOLS_GUIDS = {
         249,
         179,
         217,
-        198
+        198,
     ],
     "DXE_CPU_CACHE_PROTOCOL_GUID": [
         1550820041,
@@ -1901,7 +1854,7 @@ PROTOCOLS_GUIDS = {
         202,
         218,
         180,
-        129
+        129,
     ],
     "DXE_CPU_INFO_PROTOCOL_GUID": [
         3793997669,
@@ -1914,7 +1867,7 @@ PROTOCOLS_GUIDS = {
         138,
         255,
         64,
-        161
+        161,
     ],
     "DXE_CPU_PLATFORM_POLICY_PROTOCOL_GUID": [
         3173436873,
@@ -1927,7 +1880,7 @@ PROTOCOLS_GUIDS = {
         173,
         206,
         72,
-        18
+        18,
     ],
     "DXE_ENHANCED_SPEEDSTEP_PROTOCOL_GUID": [
         15302689,
@@ -1940,7 +1893,7 @@ PROTOCOLS_GUIDS = {
         55,
         58,
         250,
-        1
+        1,
     ],
     "DXE_PCH_PLATFORM_POLICY_PROTOCOL_GUID": [
         3768786366,
@@ -1953,7 +1906,7 @@ PROTOCOLS_GUIDS = {
         162,
         125,
         61,
-        105
+        105,
     ],
     "DXE_PLATFORM_AMT_POLICY_GUID": [
         2997555550,
@@ -1966,7 +1919,7 @@ PROTOCOLS_GUIDS = {
         216,
         146,
         108,
-        206
+        206,
     ],
     "DXE_PLATFORM_ME_POLICY_GUID": [
         4173328404,
@@ -1979,7 +1932,7 @@ PROTOCOLS_GUIDS = {
         115,
         141,
         190,
-        237
+        237,
     ],
     "DXE_PLATFORM_SA_POLICY_GUID": [
         3441636311,
@@ -1992,7 +1945,7 @@ PROTOCOLS_GUIDS = {
         218,
         54,
         162,
-        199
+        199,
     ],
     "DXE_PLATFORM_SG_POLICY_GUID": [
         1637473334,
@@ -2005,7 +1958,7 @@ PROTOCOLS_GUIDS = {
         189,
         128,
         169,
-        113
+        113,
     ],
     "DXE_PLATFORM_TDT_POLICY_GUID": [
         551219452,
@@ -2018,7 +1971,7 @@ PROTOCOLS_GUIDS = {
         240,
         162,
         46,
-        71
+        71,
     ],
     "DXE_TXT_POLICY_PROTOCOL_GUID": [
         1140223997,
@@ -2031,7 +1984,7 @@ PROTOCOLS_GUIDS = {
         3,
         231,
         48,
-        162
+        162,
     ],
     "DYNAMIC_PAGE_COUNT_GUID": [
         3057383424,
@@ -2044,7 +1997,7 @@ PROTOCOLS_GUIDS = {
         179,
         182,
         152,
-        70
+        70,
     ],
     "EFI_ABSOLUTE_POINTER_PROTOCOL_GUID": [
         2371474219,
@@ -2057,7 +2010,7 @@ PROTOCOLS_GUIDS = {
         4,
         153,
         42,
-        67
+        67,
     ],
     "EFI_ACPI_20_TABLE_GUID": [
         2288576625,
@@ -2070,7 +2023,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "EFI_ACPI_S3_SAVE_GUID": [
         308227553,
@@ -2083,7 +2036,7 @@ PROTOCOLS_GUIDS = {
         53,
         138,
         141,
-        56
+        56,
     ],
     "EFI_ACPI_SDT_PROTOCOL_GUID": [
         3952543886,
@@ -2096,7 +2049,7 @@ PROTOCOLS_GUIDS = {
         165,
         178,
         14,
-        134
+        134,
     ],
     "EFI_ACPI_SUPPORT_GUID": [
         3690962261,
@@ -2109,21 +2062,9 @@ PROTOCOLS_GUIDS = {
         61,
         192,
         36,
-        29
+        29,
     ],
-    "EFI_ACPI_TABLE_GUID": [
-        3952946480,
-        11656,
-        4563,
-        154,
-        22,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
+    "EFI_ACPI_TABLE_GUID": [3952946480, 11656, 4563, 154, 22, 0, 144, 39, 63, 193, 77],
     "EFI_ACPI_TABLE_PROTOCOL_GUID": [
         4292897757,
         24839,
@@ -2135,7 +2076,7 @@ PROTOCOLS_GUIDS = {
         126,
         197,
         39,
-        92
+        92,
     ],
     "EFI_ACPI_TABLE_STORAGE_GUID": [
         2117553701,
@@ -2148,7 +2089,7 @@ PROTOCOLS_GUIDS = {
         35,
         198,
         6,
-        205
+        205,
     ],
     "EFI_ACPI_VARIABLE_GUID": [
         2946497895,
@@ -2161,7 +2102,7 @@ PROTOCOLS_GUIDS = {
         94,
         226,
         44,
-        46
+        46,
     ],
     "EFI_ACTIVE_BIOS_PROTOCOL_GUID": [
         3955109147,
@@ -2174,7 +2115,7 @@ PROTOCOLS_GUIDS = {
         227,
         150,
         212,
-        26
+        26,
     ],
     "EFI_ACTIVE_MANAGEMENT_PROTOCOL_GUID": [
         2237005120,
@@ -2187,7 +2128,7 @@ PROTOCOLS_GUIDS = {
         120,
         160,
         153,
-        250
+        250,
     ],
     "EFI_AHCI_INT13_INIT_PROTOCOL_GUID": [
         1736574258,
@@ -2200,7 +2141,7 @@ PROTOCOLS_GUIDS = {
         227,
         167,
         218,
-        99
+        99,
     ],
     "EFI_ALERT_STANDARD_FORMAT_PROTOCOL_GUID": [
         3432228619,
@@ -2213,7 +2154,7 @@ PROTOCOLS_GUIDS = {
         30,
         254,
         214,
-        226
+        226,
     ],
     "EFI_ALTERNATE_FV_BLOCK_GUID": [
         4103508525,
@@ -2226,7 +2167,7 @@ PROTOCOLS_GUIDS = {
         148,
         156,
         52,
-        134
+        134,
     ],
     "EFI_AMI_LEGACYBOOT_PROTOCOL_GUID": [
         302852266,
@@ -2239,21 +2180,9 @@ PROTOCOLS_GUIDS = {
         194,
         56,
         59,
-        245
+        245,
     ],
-    "EFI_APRIORI_GUID": [
-        4233170663,
-        65500,
-        4564,
-        189,
-        65,
-        0,
-        128,
-        199,
-        60,
-        136,
-        129
-    ],
+    "EFI_APRIORI_GUID": [4233170663, 65500, 4564, 189, 65, 0, 128, 199, 60, 136, 129],
     "EFI_ARP_PROTOCOL_GUID": [
         4105447355,
         47649,
@@ -2265,7 +2194,7 @@ PROTOCOLS_GUIDS = {
         22,
         171,
         97,
-        156
+        156,
     ],
     "EFI_ARP_SERVICE_BINDING_PROTOCOL_GUID": [
         4098621678,
@@ -2278,7 +2207,7 @@ PROTOCOLS_GUIDS = {
         62,
         8,
         0,
-        163
+        163,
     ],
     "EFI_AUTHENTICATION_INFO_PROTOCOL_GUID": [
         1987172816,
@@ -2291,7 +2220,7 @@ PROTOCOLS_GUIDS = {
         242,
         31,
         11,
-        199
+        199,
     ],
     "EFI_AUTHORIZATION_PROTOCOL_GUID": [
         2572257457,
@@ -2304,7 +2233,7 @@ PROTOCOLS_GUIDS = {
         41,
         46,
         138,
-        59
+        59,
     ],
     "EFI_BDAT_ACCESS_GUID": [
         3111744618,
@@ -2317,7 +2246,7 @@ PROTOCOLS_GUIDS = {
         58,
         113,
         167,
-        10
+        10,
     ],
     "EFI_BDS_ARCH_PROTOCOL_GUID": [
         1717452790,
@@ -2330,7 +2259,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_BIS_PROTOCOL_GUID": [
         191146672,
@@ -2343,7 +2272,7 @@ PROTOCOLS_GUIDS = {
         201,
         31,
         173,
-        207
+        207,
     ],
     "EFI_BLOCK_IO_PROTOCOL_GUID": [
         2521717537,
@@ -2356,7 +2285,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "EFI_BOOT_SCRIPT_SAVE_PROTOCOL_GUID": [
         1192105257,
@@ -2369,7 +2298,7 @@ PROTOCOLS_GUIDS = {
         109,
         41,
         249,
-        178
+        178,
     ],
     "EFI_BUS_SPECIFIC_DRIVER_OVERRIDE_PROTOCOL_GUID": [
         1002549893,
@@ -2382,7 +2311,7 @@ PROTOCOLS_GUIDS = {
         19,
         251,
         50,
-        101
+        101,
     ],
     "EFI_CACHE_INSTALL_PPI_GUID": [
         3143797472,
@@ -2395,7 +2324,7 @@ PROTOCOLS_GUIDS = {
         111,
         209,
         224,
-        91
+        91,
     ],
     "EFI_CACHE_SUBCLASS_GUID": [
         2130711463,
@@ -2408,7 +2337,7 @@ PROTOCOLS_GUIDS = {
         95,
         220,
         130,
-        157
+        157,
     ],
     "EFI_CAPSULE_AMI_GUID": [
         4207079341,
@@ -2421,7 +2350,7 @@ PROTOCOLS_GUIDS = {
         87,
         186,
         148,
-        136
+        136,
     ],
     "EFI_CAPSULE_ARCH_PROTOCOL_GUID": [
         1347643774,
@@ -2434,21 +2363,9 @@ PROTOCOLS_GUIDS = {
         222,
         238,
         87,
-        84
+        84,
     ],
-    "EFI_CAPSULE_GUID": [
-        996574909,
-        3446,
-        16432,
-        183,
-        14,
-        181,
-        81,
-        158,
-        47,
-        197,
-        160
-    ],
+    "EFI_CAPSULE_GUID": [996574909, 3446, 16432, 183, 14, 181, 81, 158, 47, 197, 160],
     "EFI_CAPSULE_INFO_GUID": [
         2335500999,
         9872,
@@ -2460,7 +2377,7 @@ PROTOCOLS_GUIDS = {
         50,
         131,
         23,
-        53
+        53,
     ],
     "EFI_CAPSULE_VENDOR_GUID": [
         1897689151,
@@ -2473,7 +2390,7 @@ PROTOCOLS_GUIDS = {
         189,
         60,
         139,
-        226
+        226,
     ],
     "EFI_CERT_RSA2048_GUID": [
         1012360936,
@@ -2486,7 +2403,7 @@ PROTOCOLS_GUIDS = {
         110,
         133,
         179,
-        182
+        182,
     ],
     "EFI_CERT_RSA2048_SHA1_GUID": [
         1744323663,
@@ -2499,7 +2416,7 @@ PROTOCOLS_GUIDS = {
         184,
         115,
         96,
-        128
+        128,
     ],
     "EFI_CERT_RSA2048_SHA256_GUID": [
         3803406736,
@@ -2512,7 +2429,7 @@ PROTOCOLS_GUIDS = {
         187,
         163,
         39,
-        132
+        132,
     ],
     "EFI_CERT_SHA1_GUID": [
         2188158226,
@@ -2525,7 +2442,7 @@ PROTOCOLS_GUIDS = {
         73,
         102,
         49,
-        189
+        189,
     ],
     "EFI_CERT_SHA256_GUID": [
         3250853414,
@@ -2538,7 +2455,7 @@ PROTOCOLS_GUIDS = {
         54,
         147,
         67,
-        40
+        40,
     ],
     "EFI_CERT_TYPE_PKCS7_GUID": [
         1253036701,
@@ -2551,7 +2468,7 @@ PROTOCOLS_GUIDS = {
         55,
         86,
         101,
-        167
+        167,
     ],
     "EFI_CERT_TYPE_RSA2048_SHA256_GUID": [
         2809230356,
@@ -2564,7 +2481,7 @@ PROTOCOLS_GUIDS = {
         18,
         167,
         53,
-        191
+        191,
     ],
     "EFI_CLP_PROTOCOL_GUID": [
         3418284854,
@@ -2577,7 +2494,7 @@ PROTOCOLS_GUIDS = {
         150,
         126,
         90,
-        103
+        103,
     ],
     "EFI_CMOS_DATA_HOB_INSTALLED_GUID": [
         1516934132,
@@ -2590,7 +2507,7 @@ PROTOCOLS_GUIDS = {
         160,
         149,
         158,
-        9
+        9,
     ],
     "EFI_COMPATIBLE_MEMORY_TESTED_PROTOCOL_GUID": [
         1690596847,
@@ -2603,7 +2520,7 @@ PROTOCOLS_GUIDS = {
         180,
         57,
         80,
-        4
+        4,
     ],
     "EFI_COMPONENT_NAME2_PROTOCOL_GUID": [
         1786404095,
@@ -2616,7 +2533,7 @@ PROTOCOLS_GUIDS = {
         48,
         37,
         206,
-        20
+        20,
     ],
     "EFI_COMPONENT_NAME_PROTOCOL_GUID": [
         276461356,
@@ -2629,7 +2546,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_CONFIG_FILE_NAME_GUID": [
         2562250139,
@@ -2642,7 +2559,7 @@ PROTOCOLS_GUIDS = {
         57,
         47,
         30,
-        219
+        219,
     ],
     "EFI_CONSOLE_IN_DEVICE_GUID": [
         3551751979,
@@ -2655,7 +2572,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_CONSOLE_LOCK_GUID": [
         915200525,
@@ -2668,7 +2585,7 @@ PROTOCOLS_GUIDS = {
         191,
         255,
         21,
-        126
+        126,
     ],
     "EFI_CONSOLE_OUT_DEVICE_GUID": [
         3551751980,
@@ -2681,7 +2598,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_CPU_ARCH_PROTOCOL_GUID": [
         649776305,
@@ -2694,7 +2611,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "EFI_CPU_IO2_PROTOCOL_GUID": [
         2908877201,
@@ -2707,7 +2624,7 @@ PROTOCOLS_GUIDS = {
         210,
         136,
         198,
-        79
+        79,
     ],
     "EFI_CPU_IO_PROTOCOL_GUID": [
         2960336166,
@@ -2720,7 +2637,7 @@ PROTOCOLS_GUIDS = {
         176,
         106,
         172,
-        69
+        69,
     ],
     "EFI_CPU_TYPE_FRU_GUID": [
         4033136927,
@@ -2733,7 +2650,7 @@ PROTOCOLS_GUIDS = {
         184,
         106,
         41,
-        243
+        243,
     ],
     "EFI_CRC32_GUIDED_SECTION_EXTRACTION_PROTOCOL_GUID": [
         4229680560,
@@ -2746,7 +2663,7 @@ PROTOCOLS_GUIDS = {
         13,
         157,
         208,
-        131
+        131,
     ],
     "EFI_CUSTOMIZED_DECOMPRESS_PROTOCOL_GUID": [
         2588154254,
@@ -2759,7 +2676,7 @@ PROTOCOLS_GUIDS = {
         253,
         172,
         137,
-        111
+        111,
     ],
     "EFI_DATA_HUB_PROTOCOL_GUID": [
         2927677473,
@@ -2772,7 +2689,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "EFI_DEBUGPORT_PROTOCOL_GUID": [
         3953453266,
@@ -2785,7 +2702,7 @@ PROTOCOLS_GUIDS = {
         186,
         150,
         96,
-        208
+        208,
     ],
     "EFI_DEBUG_ASSERT_PROTOCOL_GUID": [
         3192495250,
@@ -2798,7 +2715,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "EFI_DEBUG_IMAGE_INFO_TABLE_GUID": [
         1226124919,
@@ -2811,7 +2728,7 @@ PROTOCOLS_GUIDS = {
         254,
         217,
         94,
-        139
+        139,
     ],
     "EFI_DEBUG_MASK_PPI_GUID": [
         1004089597,
@@ -2824,7 +2741,7 @@ PROTOCOLS_GUIDS = {
         254,
         54,
         172,
-        226
+        226,
     ],
     "EFI_DEBUG_MASK_PROTOCOL_GUID": [
         1284121681,
@@ -2837,7 +2754,7 @@ PROTOCOLS_GUIDS = {
         19,
         37,
         19,
-        65
+        65,
     ],
     "EFI_DEBUG_SUPPORT_PROTOCOL_GUID": [
         659904780,
@@ -2850,7 +2767,7 @@ PROTOCOLS_GUIDS = {
         84,
         60,
         218,
-        37
+        37,
     ],
     "EFI_DECOMPRESS_PROTOCOL_GUID": [
         3625024766,
@@ -2863,7 +2780,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_DEFERRED_IMAGE_LOAD_PROTOCOL_GUID": [
         361053564,
@@ -2876,7 +2793,7 @@ PROTOCOLS_GUIDS = {
         91,
         143,
         135,
-        44
+        44,
     ],
     "EFI_DEVICE_IO_PROTOCOL_GUID": [
         2943009553,
@@ -2889,7 +2806,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL_GUID": [
         97098273,
@@ -2902,7 +2819,7 @@ PROTOCOLS_GUIDS = {
         51,
         67,
         245,
-        30
+        30,
     ],
     "EFI_DEVICE_PATH_PROTOCOL_GUID": [
         156724881,
@@ -2915,7 +2832,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "EFI_DEVICE_PATH_TO_TEXT_PROTOCOL_GUID": [
         2340699680,
@@ -2928,7 +2845,7 @@ PROTOCOLS_GUIDS = {
         78,
         74,
         127,
-        28
+        28,
     ],
     "EFI_DEVICE_PATH_UTILITIES_PROTOCOL_GUID": [
         58310222,
@@ -2941,7 +2858,7 @@ PROTOCOLS_GUIDS = {
         47,
         183,
         114,
-        164
+        164,
     ],
     "EFI_DHCP4_PROTOCOL_GUID": [
         2317457176,
@@ -2954,7 +2871,7 @@ PROTOCOLS_GUIDS = {
         75,
         218,
         158,
-        86
+        86,
     ],
     "EFI_DHCP4_SERVICE_BINDING_PROTOCOL_GUID": [
         2644130264,
@@ -2967,7 +2884,7 @@ PROTOCOLS_GUIDS = {
         75,
         225,
         19,
-        128
+        128,
     ],
     "EFI_DISK_INFO_AHCI_INTERFACE_GUID": [
         2655619378,
@@ -2980,7 +2897,7 @@ PROTOCOLS_GUIDS = {
         120,
         123,
         231,
-        198
+        198,
     ],
     "EFI_DISK_INFO_IDE_INTERFACE_GUID": [
         1586794467,
@@ -2993,7 +2910,7 @@ PROTOCOLS_GUIDS = {
         135,
         24,
         141,
-        236
+        236,
     ],
     "EFI_DISK_INFO_PROTOCOL_GUID": [
         3560089215,
@@ -3006,7 +2923,7 @@ PROTOCOLS_GUIDS = {
         145,
         132,
         147,
-        39
+        39,
     ],
     "EFI_DISK_INFO_SCSI_INTERFACE_GUID": [
         150424490,
@@ -3019,7 +2936,7 @@ PROTOCOLS_GUIDS = {
         15,
         135,
         128,
-        188
+        188,
     ],
     "EFI_DISK_INFO_USB_INTERFACE_GUID": [
         3414627698,
@@ -3032,7 +2949,7 @@ PROTOCOLS_GUIDS = {
         175,
         167,
         119,
-        39
+        39,
     ],
     "EFI_DISK_IO_PROTOCOL_GUID": [
         3459535217,
@@ -3045,7 +2962,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "EFI_DMI_FORMAT_FRU_GUID": [
         1743747699,
@@ -3058,7 +2975,7 @@ PROTOCOLS_GUIDS = {
         250,
         188,
         210,
-        200
+        200,
     ],
     "EFI_DRIVER_BINDING_PROTOCOL_GUID": [
         413151659,
@@ -3071,7 +2988,7 @@ PROTOCOLS_GUIDS = {
         38,
         30,
         159,
-        113
+        113,
     ],
     "EFI_DRIVER_CONFIGURATION2_PROTOCOL_GUID": [
         3218594845,
@@ -3084,7 +3001,7 @@ PROTOCOLS_GUIDS = {
         187,
         107,
         78,
-        190
+        190,
     ],
     "EFI_DRIVER_CONFIGURATION_PROTOCOL_GUID": [
         276461355,
@@ -3097,7 +3014,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_DRIVER_DIAGNOSTICS2_PROTOCOL_GUID": [
         1295188769,
@@ -3110,7 +3027,7 @@ PROTOCOLS_GUIDS = {
         0,
         23,
         59,
-        99
+        99,
     ],
     "EFI_DRIVER_DIAGNOSTICS_PROTOCOL_GUID": [
         126128719,
@@ -3123,7 +3040,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_DRIVER_FAMILY_OVERRIDE_PROTOCOL_GUID": [
         2985169566,
@@ -3136,7 +3053,7 @@ PROTOCOLS_GUIDS = {
         146,
         55,
         102,
-        167
+        167,
     ],
     "EFI_DRIVER_HEALTH_PROTOCOL_GUID": [
         710099472,
@@ -3149,7 +3066,7 @@ PROTOCOLS_GUIDS = {
         1,
         162,
         177,
-        39
+        39,
     ],
     "EFI_DRIVER_SUPPORTED_EFI_VERSION_PROTOCOL_GUID": [
         1545176929,
@@ -3162,7 +3079,7 @@ PROTOCOLS_GUIDS = {
         121,
         84,
         248,
-        29
+        29,
     ],
     "EFI_DXE_CMOS_ACCESS_GUID": [
         2555474956,
@@ -3175,7 +3092,7 @@ PROTOCOLS_GUIDS = {
         113,
         194,
         81,
-        201
+        201,
     ],
     "EFI_DXE_IPL_PPI_GUID": [
         183029341,
@@ -3188,7 +3105,7 @@ PROTOCOLS_GUIDS = {
         241,
         148,
         247,
-        49
+        49,
     ],
     "EFI_DXE_SERVICES_TABLE_GUID": [
         95237306,
@@ -3201,7 +3118,7 @@ PROTOCOLS_GUIDS = {
         57,
         142,
         43,
-        185
+        185,
     ],
     "EFI_DXE_SMM_READY_TO_LOCK_PROTOCOL_GUID": [
         1627359588,
@@ -3214,7 +3131,7 @@ PROTOCOLS_GUIDS = {
         233,
         116,
         224,
-        142
+        142,
     ],
     "EFI_EBC_INTERPRETER_PROTOCOL_GUID": [
         330067409,
@@ -3227,7 +3144,7 @@ PROTOCOLS_GUIDS = {
         0,
         189,
         109,
-        231
+        231,
     ],
     "EFI_EDID_ACTIVE_PROTOCOL_GUID": [
         3180073046,
@@ -3240,7 +3157,7 @@ PROTOCOLS_GUIDS = {
         127,
         129,
         121,
-        134
+        134,
     ],
     "EFI_EDID_DISCOVERED_PROTOCOL_GUID": [
         470562038,
@@ -3253,7 +3170,7 @@ PROTOCOLS_GUIDS = {
         108,
         26,
         102,
-        170
+        170,
     ],
     "EFI_EDID_OVERRIDE_PROTOCOL_GUID": [
         1223472177,
@@ -3266,7 +3183,7 @@ PROTOCOLS_GUIDS = {
         254,
         4,
         11,
-        213
+        213,
     ],
     "EFI_EMUL6064KBDINPUT_PROTOCOL_GUID": [
         1657728858,
@@ -3279,7 +3196,7 @@ PROTOCOLS_GUIDS = {
         73,
         76,
         137,
-        144
+        144,
     ],
     "EFI_EMUL6064MSINPUT_PROTOCOL_GUID": [
         1970844423,
@@ -3292,7 +3209,7 @@ PROTOCOLS_GUIDS = {
         14,
         57,
         147,
-        198
+        198,
     ],
     "EFI_EMUL6064TRAP_PROTOCOL_GUID": [
         1856042780,
@@ -3305,7 +3222,7 @@ PROTOCOLS_GUIDS = {
         212,
         232,
         50,
-        104
+        104,
     ],
     "EFI_EVENT_LEGACY_BOOT_GUID": [
         710349313,
@@ -3318,7 +3235,7 @@ PROTOCOLS_GUIDS = {
         65,
         243,
         47,
-        16
+        16,
     ],
     "EFI_EXTENDED_SAL_BASE_IO_SERVICES_PROTOCOL_GUID": [
         1525301941,
@@ -3331,7 +3248,7 @@ PROTOCOLS_GUIDS = {
         37,
         117,
         101,
-        166
+        166,
     ],
     "EFI_EXTENDED_SAL_BASE_SERVICES_PROTOCOL_GUID": [
         3655989766,
@@ -3344,7 +3261,7 @@ PROTOCOLS_GUIDS = {
         90,
         51,
         148,
-        248
+        248,
     ],
     "EFI_EXTENDED_SAL_CACHE_SERVICES_PROTOCOL_GUID": [
         249336980,
@@ -3357,7 +3274,7 @@ PROTOCOLS_GUIDS = {
         82,
         19,
         241,
-        136
+        136,
     ],
     "EFI_EXTENDED_SAL_ELOG_SERVICES_PROTOCOL_GUID": [
         3588550239,
@@ -3370,7 +3287,7 @@ PROTOCOLS_GUIDS = {
         187,
         6,
         54,
-        90
+        90,
     ],
     "EFI_EXTENDED_SAL_FV_BLOCK_SERVICES_PROTOCOL_GUID": [
         2720472561,
@@ -3383,7 +3300,7 @@ PROTOCOLS_GUIDS = {
         23,
         47,
         7,
-        26
+        26,
     ],
     "EFI_EXTENDED_SAL_LOCK_SERVICES_PROTOCOL_GUID": [
         1991728163,
@@ -3396,7 +3313,7 @@ PROTOCOLS_GUIDS = {
         61,
         187,
         73,
-        74
+        74,
     ],
     "EFI_EXTENDED_SAL_MCA_LOG_SERVICES_PROTOCOL_GUID": [
         3409959022,
@@ -3409,7 +3326,7 @@ PROTOCOLS_GUIDS = {
         163,
         162,
         171,
-        122
+        122,
     ],
     "EFI_EXTENDED_SAL_MCA_SERVICES_PROTOCOL_GUID": [
         710480168,
@@ -3422,7 +3339,7 @@ PROTOCOLS_GUIDS = {
         59,
         104,
         45,
-        187
+        187,
     ],
     "EFI_EXTENDED_SAL_MP_SERVICES_PROTOCOL_GUID": [
         1769832866,
@@ -3435,7 +3352,7 @@ PROTOCOLS_GUIDS = {
         59,
         97,
         138,
-        63
+        63,
     ],
     "EFI_EXTENDED_SAL_MTC_SERVICES_PROTOCOL_GUID": [
         2308635928,
@@ -3448,7 +3365,7 @@ PROTOCOLS_GUIDS = {
         126,
         205,
         244,
-        84
+        84,
     ],
     "EFI_EXTENDED_SAL_PAL_SERVICES_PROTOCOL_GUID": [
         3788348705,
@@ -3461,7 +3378,7 @@ PROTOCOLS_GUIDS = {
         109,
         150,
         30,
-        87
+        87,
     ],
     "EFI_EXTENDED_SAL_PCI_SERVICES_PROTOCOL_GUID": [
         2758482481,
@@ -3474,7 +3391,7 @@ PROTOCOLS_GUIDS = {
         89,
         220,
         48,
-        99
+        99,
     ],
     "EFI_EXTENDED_SAL_RESET_SERVICES_PROTOCOL_GUID": [
         2097256848,
@@ -3487,7 +3404,7 @@ PROTOCOLS_GUIDS = {
         152,
         103,
         106,
-        160
+        160,
     ],
     "EFI_EXTENDED_SAL_RTC_SERVICES_PROTOCOL_GUID": [
         2123867248,
@@ -3500,7 +3417,7 @@ PROTOCOLS_GUIDS = {
         210,
         123,
         162,
-        150
+        150,
     ],
     "EFI_EXTENDED_SAL_SENSOR_SERVICES_PROTOCOL_GUID": [
         1242905454,
@@ -3513,7 +3430,7 @@ PROTOCOLS_GUIDS = {
         252,
         164,
         171,
-        161
+        161,
     ],
     "EFI_EXTENDED_SAL_SM_COM_LAYER_SERVICES_PROTOCOL_GUID": [
         70608793,
@@ -3526,7 +3443,7 @@ PROTOCOLS_GUIDS = {
         250,
         71,
         186,
-        66
+        66,
     ],
     "EFI_EXTENDED_SAL_SST_GUID": [
         947922688,
@@ -3539,7 +3456,7 @@ PROTOCOLS_GUIDS = {
         220,
         207,
         180,
-        111
+        111,
     ],
     "EFI_EXTENDED_SAL_STALL_SERVICES_PROTOCOL_GUID": [
         1403358470,
@@ -3552,7 +3469,7 @@ PROTOCOLS_GUIDS = {
         128,
         101,
         65,
-        112
+        112,
     ],
     "EFI_EXTENDED_SAL_STATUS_CODE_SERVICES_PROTOCOL_GUID": [
         14407965,
@@ -3565,7 +3482,7 @@ PROTOCOLS_GUIDS = {
         132,
         55,
         180,
-        79
+        79,
     ],
     "EFI_EXTENDED_SAL_VARIABLE_SERVICES_PROTOCOL_GUID": [
         1321954387,
@@ -3578,7 +3495,7 @@ PROTOCOLS_GUIDS = {
         73,
         110,
         131,
-        120
+        120,
     ],
     "EFI_EXTENDED_SAL_VIRTUAL_SERVICES_PROTOCOL_GUID": [
         3248963670,
@@ -3591,7 +3508,7 @@ PROTOCOLS_GUIDS = {
         166,
         91,
         110,
-        17
+        17,
     ],
     "EFI_EXT_SCSI_PASS_THRU_PROTOCOL_GUID": [
         339441202,
@@ -3604,7 +3521,7 @@ PROTOCOLS_GUIDS = {
         165,
         185,
         191,
-        254
+        254,
     ],
     "EFI_FAULT_TOLERANT_WRITE_PROTOCOL_GUID": [
         1052614274,
@@ -3617,7 +3534,7 @@ PROTOCOLS_GUIDS = {
         252,
         183,
         200,
-        129
+        129,
     ],
     "EFI_FFS_VOLUME_TOP_FILE_GUID": [
         463472174,
@@ -3630,7 +3547,7 @@ PROTOCOLS_GUIDS = {
         232,
         247,
         143,
-        9
+        9,
     ],
     "EFI_FILE_SYSTEM_INFO_ID_GUID": [
         156724883,
@@ -3643,7 +3560,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "EFI_FILE_SYSTEM_VOLUME_LABEL_INFO_ID_GUID": [
         3678918611,
@@ -3656,7 +3573,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_FIND_FV_PPI_GUID": [
         907429906,
@@ -3669,7 +3586,7 @@ PROTOCOLS_GUIDS = {
         60,
         119,
         0,
-        170
+        170,
     ],
     "EFI_FIRMWARE_FILE_SYSTEM2_GUID": [
         2358044024,
@@ -3682,7 +3599,7 @@ PROTOCOLS_GUIDS = {
         133,
         195,
         45,
-        211
+        211,
     ],
     "EFI_FIRMWARE_FILE_SYSTEM_GUID": [
         2056475865,
@@ -3695,7 +3612,7 @@ PROTOCOLS_GUIDS = {
         23,
         216,
         144,
-        223
+        223,
     ],
     "EFI_FIRMWARE_VOLUME2_PROTOCOL_GUID": [
         571372470,
@@ -3708,7 +3625,7 @@ PROTOCOLS_GUIDS = {
         177,
         8,
         97,
-        154
+        154,
     ],
     "EFI_FIRMWARE_VOLUME_BLOCK2_PROTOCOL_GUID": [
         2405715881,
@@ -3721,7 +3638,7 @@ PROTOCOLS_GUIDS = {
         105,
         142,
         141,
-        164
+        164,
     ],
     "EFI_FIRMWARE_VOLUME_BLOCK_PROTOCOL_GUID": [
         2405715881,
@@ -3734,7 +3651,7 @@ PROTOCOLS_GUIDS = {
         105,
         142,
         141,
-        164
+        164,
     ],
     "EFI_FIRMWARE_VOLUME_DISPATCH_PROTOCOL_GUID": [
         2057525865,
@@ -3747,7 +3664,7 @@ PROTOCOLS_GUIDS = {
         245,
         111,
         113,
-        200
+        200,
     ],
     "EFI_FIRMWARE_VOLUME_PROTOCOL_GUID": [
         949974303,
@@ -3760,7 +3677,7 @@ PROTOCOLS_GUIDS = {
         84,
         189,
         39,
-        248
+        248,
     ],
     "EFI_FORM_BROWSER2_PROTOCOL_GUID": [
         3117728608,
@@ -3773,7 +3690,7 @@ PROTOCOLS_GUIDS = {
         54,
         152,
         34,
-        88
+        88,
     ],
     "EFI_FORM_BROWSER_PROTOCOL_GUID": [
         263702610,
@@ -3786,7 +3703,7 @@ PROTOCOLS_GUIDS = {
         27,
         28,
         225,
-        26
+        26,
     ],
     "EFI_FORM_CALLBACK_PROTOCOL_GUID": [
         4091827261,
@@ -3799,7 +3716,7 @@ PROTOCOLS_GUIDS = {
         52,
         77,
         252,
-        84
+        84,
     ],
     "EFI_FRAMEWORK_DEVICE_PATH_GUID": [
         3070774883,
@@ -3812,7 +3729,7 @@ PROTOCOLS_GUIDS = {
         83,
         219,
         240,
-        80
+        80,
     ],
     "EFI_FTW_LITE_PROTOCOL_GUID": [
         1062564233,
@@ -3825,7 +3742,7 @@ PROTOCOLS_GUIDS = {
         202,
         122,
         167,
-        160
+        160,
     ],
     "EFI_FVB_EXTENSION_PROTOCOL_GUID": [
         1403307803,
@@ -3838,7 +3755,7 @@ PROTOCOLS_GUIDS = {
         122,
         75,
         92,
-        70
+        70,
     ],
     "EFI_GENERIC_MEMORY_TEST_PROTOCOL_GUID": [
         815654897,
@@ -3851,7 +3768,7 @@ PROTOCOLS_GUIDS = {
         229,
         170,
         149,
-        239
+        239,
     ],
     "EFI_GENERIC_VARIABLE_GUID": [
         1506918991,
@@ -3864,7 +3781,7 @@ PROTOCOLS_GUIDS = {
         13,
         174,
         212,
-        67
+        67,
     ],
     "EFI_GLOBAL_NVS_AREA_PROTOCOL_GUID": [
         122560072,
@@ -3877,7 +3794,7 @@ PROTOCOLS_GUIDS = {
         173,
         154,
         102,
-        220
+        220,
     ],
     "EFI_GLOBAL_VARIABLE_GUID": [
         2347032417,
@@ -3890,7 +3807,7 @@ PROTOCOLS_GUIDS = {
         152,
         3,
         43,
-        140
+        140,
     ],
     "EFI_GPIO_PROTOCOL_GUID": [
         3050344580,
@@ -3903,7 +3820,7 @@ PROTOCOLS_GUIDS = {
         138,
         251,
         139,
-        141
+        141,
     ],
     "EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID": [
         2420287966,
@@ -3916,21 +3833,9 @@ PROTOCOLS_GUIDS = {
         208,
         128,
         81,
-        106
+        106,
     ],
-    "EFI_GUID": [
-        4249125387,
-        61867,
-        16832,
-        174,
-        78,
-        12,
-        85,
-        85,
-        110,
-        185,
-        189
-    ],
+    "EFI_GUID": [4249125387, 61867, 16832, 174, 78, 12, 85, 85, 110, 185, 189],
     "EFI_HARDWARE_ERROR_VARIABLE_GUID": [
         1095658461,
         58491,
@@ -3942,7 +3847,7 @@ PROTOCOLS_GUIDS = {
         2,
         12,
         245,
-        22
+        22,
     ],
     "EFI_HASH_ALGORITHM_SHA1_GUID": [
         719968271,
@@ -3955,7 +3860,7 @@ PROTOCOLS_GUIDS = {
         87,
         185,
         70,
-        182
+        182,
     ],
     "EFI_HASH_ALGORITHM_SHA224_GUID": [
         2381322758,
@@ -3968,7 +3873,7 @@ PROTOCOLS_GUIDS = {
         217,
         204,
         244,
-        91
+        91,
     ],
     "EFI_HASH_ALGORITHM_SHA256_GUID": [
         1370118622,
@@ -3981,7 +3886,7 @@ PROTOCOLS_GUIDS = {
         183,
         132,
         46,
-        233
+        233,
     ],
     "EFI_HASH_ALGORITHM_SHA384_GUID": [
         4020855858,
@@ -3994,7 +3899,7 @@ PROTOCOLS_GUIDS = {
         51,
         223,
         119,
-        122
+        122,
     ],
     "EFI_HASH_ALGORITHM_SHA512_GUID": [
         3399759902,
@@ -4007,7 +3912,7 @@ PROTOCOLS_GUIDS = {
         180,
         228,
         33,
-        48
+        48,
     ],
     "EFI_HASH_ALGORTIHM_MD5_GUID": [
         184010652,
@@ -4020,7 +3925,7 @@ PROTOCOLS_GUIDS = {
         72,
         78,
         74,
-        215
+        215,
     ],
     "EFI_HASH_PROTOCOL_GUID": [
         3306703154,
@@ -4033,7 +3938,7 @@ PROTOCOLS_GUIDS = {
         218,
         156,
         20,
-        53
+        53,
     ],
     "EFI_HASH_SERVICE_BINDING_PROTOCOL_GUID": [
         1116216472,
@@ -4046,7 +3951,7 @@ PROTOCOLS_GUIDS = {
         134,
         103,
         216,
-        205
+        205,
     ],
     "EFI_HII_CONFIG_ACCESS_PROTOCOL_GUID": [
         856508166,
@@ -4059,7 +3964,7 @@ PROTOCOLS_GUIDS = {
         168,
         213,
         67,
-        133
+        133,
     ],
     "EFI_HII_CONFIG_ROUTING_PROTOCOL_GUID": [
         1484681943,
@@ -4072,7 +3977,7 @@ PROTOCOLS_GUIDS = {
         31,
         193,
         161,
-        15
+        15,
     ],
     "EFI_HII_DATABASE_PROTOCOL_GUID": [
         4020224370,
@@ -4085,7 +3990,7 @@ PROTOCOLS_GUIDS = {
         252,
         65,
         96,
-        66
+        66,
     ],
     "EFI_HII_DRIVER_HEALTH_FORMSET_GUID": [
         4063216140,
@@ -4098,7 +4003,7 @@ PROTOCOLS_GUIDS = {
         80,
         185,
         93,
-        211
+        211,
     ],
     "EFI_HII_EXT_PROTOCOL_GUID": [
         710389365,
@@ -4111,7 +4016,7 @@ PROTOCOLS_GUIDS = {
         221,
         195,
         111,
-        123
+        123,
     ],
     "EFI_HII_FONT_PROTOCOL_GUID": [
         3922347893,
@@ -4124,7 +4029,7 @@ PROTOCOLS_GUIDS = {
         90,
         8,
         67,
-        36
+        36,
     ],
     "EFI_HII_FRONT_PAGE_CLASS_GUID": [
         2496926135,
@@ -4137,7 +4042,7 @@ PROTOCOLS_GUIDS = {
         138,
         113,
         86,
-        129
+        129,
     ],
     "EFI_HII_IMAGE_PROTOCOL_GUID": [
         832979050,
@@ -4150,7 +4055,7 @@ PROTOCOLS_GUIDS = {
         137,
         196,
         9,
-        32
+        32,
     ],
     "EFI_HII_NEW_PROTOCOL_GUID": [
         3934350636,
@@ -4163,7 +4068,7 @@ PROTOCOLS_GUIDS = {
         92,
         187,
         208,
-        119
+        119,
     ],
     "EFI_HII_OLD_PROTOCOL_GUID": [
         3442874711,
@@ -4176,7 +4081,7 @@ PROTOCOLS_GUIDS = {
         137,
         207,
         254,
-        123
+        123,
     ],
     "EFI_HII_PACKAGE_LIST_PROTOCOL_GUID": [
         1780410211,
@@ -4189,7 +4094,7 @@ PROTOCOLS_GUIDS = {
         226,
         171,
         86,
-        252
+        252,
     ],
     "EFI_HII_PLATFORM_SETUP_FORMSET_GUID": [
         2466486641,
@@ -4202,7 +4107,7 @@ PROTOCOLS_GUIDS = {
         131,
         38,
         4,
-        14
+        14,
     ],
     "EFI_HII_PROTOCOL_GUID": [
         3618464622,
@@ -4215,7 +4120,7 @@ PROTOCOLS_GUIDS = {
         137,
         121,
         128,
-        225
+        225,
     ],
     "EFI_HII_SET_KEYBOARD_LAYOUT_EVENT_GUID": [
         345516623,
@@ -4228,7 +4133,7 @@ PROTOCOLS_GUIDS = {
         155,
         194,
         50,
-        223
+        223,
     ],
     "EFI_HII_STRING_PROTOCOL_GUID": [
         265906548,
@@ -4241,7 +4146,7 @@ PROTOCOLS_GUIDS = {
         119,
         80,
         50,
-        42
+        42,
     ],
     "EFI_HII_USER_CREDENTIAL_FORMSET_GUID": [
         863978503,
@@ -4254,21 +4159,9 @@ PROTOCOLS_GUIDS = {
         202,
         48,
         136,
-        205
+        205,
     ],
-    "EFI_HOB_LIST_GUID": [
-        2000286284,
-        37847,
-        4564,
-        154,
-        58,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
+    "EFI_HOB_LIST_GUID": [2000286284, 37847, 4564, 154, 58, 0, 144, 39, 63, 193, 77],
     "EFI_HOB_MEMORY_ALLOC_BSP_STORE_GUID": [
         1447769037,
         51498,
@@ -4280,7 +4173,7 @@ PROTOCOLS_GUIDS = {
         228,
         60,
         99,
-        34
+        34,
     ],
     "EFI_HOB_MEMORY_ALLOC_STACK_GUID": [
         1322565415,
@@ -4293,7 +4186,7 @@ PROTOCOLS_GUIDS = {
         29,
         0,
         201,
-        189
+        189,
     ],
     "EFI_HOT_KEYS_PROTOCOL_GUID": [
         4058284679,
@@ -4306,7 +4199,7 @@ PROTOCOLS_GUIDS = {
         195,
         218,
         39,
-        89
+        89,
     ],
     "EFI_HT_BIST_HOB_GUID": [
         3194241025,
@@ -4319,7 +4212,7 @@ PROTOCOLS_GUIDS = {
         71,
         188,
         122,
-        231
+        231,
     ],
     "EFI_IDER_CONTROLLER_DRIVER_PROTOCOL_GUID": [
         2506763984,
@@ -4332,7 +4225,7 @@ PROTOCOLS_GUIDS = {
         76,
         62,
         60,
-        2
+        2,
     ],
     "EFI_IDE_CONTROLLER_INIT_PROTOCOL_GUID": [
         2716037202,
@@ -4345,7 +4238,7 @@ PROTOCOLS_GUIDS = {
         85,
         196,
         62,
-        201
+        201,
     ],
     "EFI_IFR_TIANO_GUID": [
         252385077,
@@ -4358,7 +4251,7 @@ PROTOCOLS_GUIDS = {
         56,
         175,
         72,
-        206
+        206,
     ],
     "EFI_IMAGE_SECURITY_DATABASE_GUID": [
         3608785611,
@@ -4371,7 +4264,7 @@ PROTOCOLS_GUIDS = {
         14,
         103,
         101,
-        111
+        111,
     ],
     "EFI_INCOMPATIBLE_PCI_DEVICE_SUPPORT_PROTOCOL_GUID": [
         3945002330,
@@ -4384,7 +4277,7 @@ PROTOCOLS_GUIDS = {
         53,
         222,
         3,
-        117
+        117,
     ],
     "EFI_INTEL_MFG_FORMAT_FRU_GUID": [
         2045299143,
@@ -4397,7 +4290,7 @@ PROTOCOLS_GUIDS = {
         196,
         4,
         26,
-        224
+        224,
     ],
     "EFI_IOBASE_HOB_GUID": [
         3567422014,
@@ -4410,7 +4303,7 @@ PROTOCOLS_GUIDS = {
         42,
         124,
         171,
-        9
+        9,
     ],
     "EFI_IP4_CONFIG_PROTOCOL_GUID": [
         999664177,
@@ -4423,7 +4316,7 @@ PROTOCOLS_GUIDS = {
         8,
         146,
         224,
-        94
+        94,
     ],
     "EFI_IP4_PROTOCOL_GUID": [
         1104760018,
@@ -4436,7 +4329,7 @@ PROTOCOLS_GUIDS = {
         19,
         52,
         170,
-        221
+        221,
     ],
     "EFI_IP4_SERVICE_BINDING_PROTOCOL_GUID": [
         3306623463,
@@ -4449,7 +4342,7 @@ PROTOCOLS_GUIDS = {
         142,
         241,
         255,
-        228
+        228,
     ],
     "EFI_IP_PROTOCOL_GUID": [
         2313088823,
@@ -4462,7 +4355,7 @@ PROTOCOLS_GUIDS = {
         188,
         134,
         108,
-        251
+        251,
     ],
     "EFI_ISA_ACPI_PROTOCOL_GUID": [
         1688769244,
@@ -4475,7 +4368,7 @@ PROTOCOLS_GUIDS = {
         252,
         24,
         51,
-        85
+        85,
     ],
     "EFI_ISA_IO_PROTOCOL_GUID": [
         2128788804,
@@ -4488,7 +4381,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_ISCSI_INITIATOR_NAME_PROTOCOL_GUID": [
         1496467781,
@@ -4501,7 +4394,7 @@ PROTOCOLS_GUIDS = {
         57,
         223,
         7,
-        12
+        12,
     ],
     "EFI_LEGACY_8259_PROTOCOL_GUID": [
         942808506,
@@ -4514,7 +4407,7 @@ PROTOCOLS_GUIDS = {
         85,
         234,
         237,
-        193
+        193,
     ],
     "EFI_LEGACY_BIOS_EXT_PROTOCOL_GUID": [
         2382398736,
@@ -4527,7 +4420,7 @@ PROTOCOLS_GUIDS = {
         186,
         134,
         93,
-        185
+        185,
     ],
     "EFI_LEGACY_BIOS_GUID": [
         774915244,
@@ -4540,7 +4433,7 @@ PROTOCOLS_GUIDS = {
         175,
         105,
         95,
-        80
+        80,
     ],
     "EFI_LEGACY_BIOS_PLATFORM_PROTOCOL_GUID": [
         2016827555,
@@ -4553,7 +4446,7 @@ PROTOCOLS_GUIDS = {
         7,
         156,
         12,
-        180
+        180,
     ],
     "EFI_LEGACY_BIOS_PROTOCOL_GUID": [
         3684310589,
@@ -4566,7 +4459,7 @@ PROTOCOLS_GUIDS = {
         127,
         219,
         46,
-        45
+        45,
     ],
     "EFI_LEGACY_BIOS_THUNK_PROTOCOL_GUID": [
         1280419770,
@@ -4579,7 +4472,7 @@ PROTOCOLS_GUIDS = {
         110,
         47,
         246,
-        236
+        236,
     ],
     "EFI_LEGACY_INTERRUPT_PROTOCOL_GUID": [
         835606845,
@@ -4592,7 +4485,7 @@ PROTOCOLS_GUIDS = {
         31,
         41,
         102,
-        190
+        190,
     ],
     "EFI_LEGACY_SREDIR_PROTOCOL_GUID": [
         2690830111,
@@ -4605,7 +4498,7 @@ PROTOCOLS_GUIDS = {
         196,
         255,
         169,
-        169
+        169,
     ],
     "EFI_LIGHT_ISA_IO_PROTOCOL_GUID": [
         2093477248,
@@ -4618,7 +4511,7 @@ PROTOCOLS_GUIDS = {
         153,
         16,
         90,
-        254
+        254,
     ],
     "EFI_LOADED_IMAGE_DEVICE_PATH_PROTOCOL_GUID": [
         3160544638,
@@ -4631,7 +4524,7 @@ PROTOCOLS_GUIDS = {
         54,
         215,
         80,
-        223
+        223,
     ],
     "EFI_LOADED_IMAGE_PROTOCOL_GUID": [
         1528508833,
@@ -4644,7 +4537,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "EFI_LOAD_FILE2_PROTOCOL_GUID": [
         1074184385,
@@ -4657,7 +4550,7 @@ PROTOCOLS_GUIDS = {
         135,
         36,
         224,
-        109
+        109,
     ],
     "EFI_MANAGED_NETWORK_PROTOCOL_GUID": [
         2058566289,
@@ -4670,7 +4563,7 @@ PROTOCOLS_GUIDS = {
         51,
         211,
         159,
-        22
+        22,
     ],
     "EFI_MANAGED_NETWORK_SERVICE_BINDING_PROTOCOL_GUID": [
         4084201328,
@@ -4683,7 +4576,7 @@ PROTOCOLS_GUIDS = {
         242,
         113,
         244,
-        76
+        76,
     ],
     "EFI_MEMORY_CONFIG_DATA_GUID": [
         2161890608,
@@ -4696,7 +4589,7 @@ PROTOCOLS_GUIDS = {
         101,
         83,
         40,
-        49
+        49,
     ],
     "EFI_MEMORY_PRODUCER_GUID": [
         494591342,
@@ -4709,7 +4602,7 @@ PROTOCOLS_GUIDS = {
         66,
         244,
         99,
-        86
+        86,
     ],
     "EFI_MEMORY_SUBCLASS_DRIVER_GUID": [
         392679149,
@@ -4722,7 +4615,7 @@ PROTOCOLS_GUIDS = {
         138,
         140,
         207,
-        255
+        255,
     ],
     "EFI_MEMORY_SUBCLASS_GUID": [
         1318014651,
@@ -4735,7 +4628,7 @@ PROTOCOLS_GUIDS = {
         73,
         35,
         80,
-        151
+        151,
     ],
     "EFI_MEMORY_TYPE_FRU_GUID": [
         3573691636,
@@ -4748,7 +4641,7 @@ PROTOCOLS_GUIDS = {
         51,
         217,
         185,
-        177
+        177,
     ],
     "EFI_METRONOME_ARCH_PROTOCOL_GUID": [
         649776306,
@@ -4761,7 +4654,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "EFI_ME_BIOS_EXTENSION_SETUP_GUID": [
         464351516,
@@ -4774,7 +4667,7 @@ PROTOCOLS_GUIDS = {
         129,
         46,
         12,
-        112
+        112,
     ],
     "EFI_ME_FW_SKU_VARIABLE_GUID": [
         3785498004,
@@ -4787,7 +4680,7 @@ PROTOCOLS_GUIDS = {
         31,
         36,
         187,
-        158
+        158,
     ],
     "EFI_ME_RC_INFO_PROTOCOL_GUID": [
         301727227,
@@ -4800,7 +4693,7 @@ PROTOCOLS_GUIDS = {
         110,
         220,
         203,
-        154
+        154,
     ],
     "EFI_MINI_SHELL_FILE_GUID": [
         2259493675,
@@ -4813,7 +4706,7 @@ PROTOCOLS_GUIDS = {
         11,
         169,
         47,
-        226
+        226,
     ],
     "EFI_MISC_PRODUCER_GUID": [
         1649486994,
@@ -4826,7 +4719,7 @@ PROTOCOLS_GUIDS = {
         220,
         68,
         128,
-        229
+        229,
     ],
     "EFI_MISC_SUBCLASS_DRIVER_GUID": [
         4111364140,
@@ -4839,7 +4732,7 @@ PROTOCOLS_GUIDS = {
         213,
         91,
         52,
-        184
+        184,
     ],
     "EFI_MISC_SUBCLASS_GUID": [
         1998881970,
@@ -4852,7 +4745,7 @@ PROTOCOLS_GUIDS = {
         248,
         28,
         88,
-        129
+        129,
     ],
     "EFI_MONTONIC_COUNTER_ARCH_PROTOCOL_GUID": [
         497643634,
@@ -4865,21 +4758,9 @@ PROTOCOLS_GUIDS = {
         181,
         111,
         255,
-        42
+        42,
     ],
-    "EFI_MPS_TABLE_GUID": [
-        3952946479,
-        11656,
-        4563,
-        154,
-        22,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
+    "EFI_MPS_TABLE_GUID": [3952946479, 11656, 4563, 154, 22, 0, 144, 39, 63, 193, 77],
     "EFI_MP_SERVICES_PROTOCOL_GUID": [
         1071490565,
         42862,
@@ -4891,7 +4772,7 @@ PROTOCOLS_GUIDS = {
         83,
         27,
         61,
-        8
+        8,
     ],
     "EFI_MTFTP4_PROTOCOL_GUID": [
         2015657047,
@@ -4904,7 +4785,7 @@ PROTOCOLS_GUIDS = {
         169,
         166,
         31,
-        107
+        107,
     ],
     "EFI_MTFTP4_SERVICE_BINDING_PROTOCOL_GUID": [
         803733694,
@@ -4917,7 +4798,7 @@ PROTOCOLS_GUIDS = {
         136,
         225,
         131,
-        63
+        63,
     ],
     "EFI_NB_ERROR_LOG_DISPATCH_PROTOCOL_GUID": [
         4281160916,
@@ -4930,7 +4811,7 @@ PROTOCOLS_GUIDS = {
         124,
         184,
         185,
-        149
+        149,
     ],
     "EFI_NB_MRC_INFO_GUID": [
         3619508912,
@@ -4943,7 +4824,7 @@ PROTOCOLS_GUIDS = {
         215,
         40,
         246,
-        189
+        189,
     ],
     "EFI_NETWORK_INTERFACE_IDENTIFIER_PROTOCOL_GUID": [
         3783606733,
@@ -4956,7 +4837,7 @@ PROTOCOLS_GUIDS = {
         138,
         121,
         178,
-        41
+        41,
     ],
     "EFI_NIC_IP4_CONFIG_PROTOCOL_GUID": [
         231357773,
@@ -4969,7 +4850,7 @@ PROTOCOLS_GUIDS = {
         185,
         40,
         208,
-        103
+        103,
     ],
     "EFI_NIC_IP4_CONFIG_VARIABLE_GUID": [
         3633595731,
@@ -4982,7 +4863,7 @@ PROTOCOLS_GUIDS = {
         124,
         251,
         38,
-        123
+        123,
     ],
     "EFI_NONSMMEMUL6064TRAP_PROTOCOL_GUID": [
         1756896849,
@@ -4995,7 +4876,7 @@ PROTOCOLS_GUIDS = {
         50,
         54,
         196,
-        241
+        241,
     ],
     "EFI_OEM_BADGING_PROTOCOL_GUID": [
         386798528,
@@ -5008,7 +4889,7 @@ PROTOCOLS_GUIDS = {
         198,
         248,
         135,
-        188
+        188,
     ],
     "EFI_PART_TYPE_EFI_SYSTEM_PART_GUID": [
         3240784680,
@@ -5021,7 +4902,7 @@ PROTOCOLS_GUIDS = {
         201,
         62,
         201,
-        59
+        59,
     ],
     "EFI_PART_TYPE_LEGACY_MBR_GUID": [
         38661697,
@@ -5034,7 +4915,7 @@ PROTOCOLS_GUIDS = {
         199,
         129,
         243,
-        159
+        159,
     ],
     "EFI_PATH_FILE_NAME_GUID": [
         1984217473,
@@ -5047,7 +4928,7 @@ PROTOCOLS_GUIDS = {
         144,
         64,
         98,
-        232
+        232,
     ],
     "EFI_PCCARD_CS_PROTOCOL_GUID": [
         3394565187,
@@ -5060,7 +4941,7 @@ PROTOCOLS_GUIDS = {
         183,
         32,
         181,
-        135
+        135,
     ],
     "EFI_PCCARD_SS_PROTOCOL_GUID": [
         3280891188,
@@ -5073,7 +4954,7 @@ PROTOCOLS_GUIDS = {
         48,
         56,
         2,
-        118
+        118,
     ],
     "EFI_PCH_INFO_PROTOCOL_GUID": [
         2555294953,
@@ -5086,7 +4967,7 @@ PROTOCOLS_GUIDS = {
         140,
         165,
         19,
-        192
+        192,
     ],
     "EFI_PCH_S3_IMAGE_GUID": [
         656266994,
@@ -5099,7 +4980,7 @@ PROTOCOLS_GUIDS = {
         60,
         26,
         199,
-        6
+        6,
     ],
     "EFI_PCH_S3_SUPPORT_PROTOCOL_GUID": [
         3800551947,
@@ -5112,7 +4993,7 @@ PROTOCOLS_GUIDS = {
         99,
         147,
         106,
-        4
+        4,
     ],
     "EFI_PCI_EXPRESS_BASE_ADDRESS_GUID": [
         913823017,
@@ -5125,7 +5006,7 @@ PROTOCOLS_GUIDS = {
         224,
         29,
         203,
-        176
+        176,
     ],
     "EFI_PCI_HOTPLUG_DEVICE_GUID": [
         187172886,
@@ -5138,7 +5019,7 @@ PROTOCOLS_GUIDS = {
         65,
         203,
         239,
-        195
+        195,
     ],
     "EFI_PCI_HOT_PLUG_INIT_PROTOCOL_GUID": [
         2853080001,
@@ -5151,7 +5032,7 @@ PROTOCOLS_GUIDS = {
         22,
         155,
         43,
-        234
+        234,
     ],
     "EFI_PCI_IO_PROTOCOL_GUID": [
         1291170304,
@@ -5164,7 +5045,7 @@ PROTOCOLS_GUIDS = {
         63,
         80,
         2,
-        154
+        154,
     ],
     "EFI_PCI_OPTION_ROM_TABLE_GUID": [
         1952605711,
@@ -5177,7 +5058,7 @@ PROTOCOLS_GUIDS = {
         121,
         19,
         131,
-        28
+        28,
     ],
     "EFI_PCI_PLATFORM_PROTOCOL_GUID": [
         131551872,
@@ -5190,7 +5071,7 @@ PROTOCOLS_GUIDS = {
         226,
         56,
         179,
-        65
+        65,
     ],
     "EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL_GUID": [
         795901627,
@@ -5203,7 +5084,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_PCMCIA_REQUEST_PROTOCOL_GUID": [
         4063818876,
@@ -5216,21 +5097,9 @@ PROTOCOLS_GUIDS = {
         78,
         107,
         91,
-        229
+        229,
     ],
-    "EFI_PC_ANSI_GUID": [
-        3770763091,
-        63934,
-        4562,
-        154,
-        12,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
+    "EFI_PC_ANSI_GUID": [3770763091, 63934, 4562, 154, 12, 0, 144, 39, 63, 193, 77],
     "EFI_PEI_AMI_KEYCODE_PPI_GUID": [
         548467138,
         45272,
@@ -5242,7 +5111,7 @@ PROTOCOLS_GUIDS = {
         128,
         223,
         223,
-        139
+        139,
     ],
     "EFI_PEI_APRIORI_FILE_NAME_GUID": [
         457559050,
@@ -5255,7 +5124,7 @@ PROTOCOLS_GUIDS = {
         77,
         160,
         230,
-        230
+        230,
     ],
     "EFI_PEI_CAPSULE_PPI_GUID": [
         107447729,
@@ -5268,7 +5137,7 @@ PROTOCOLS_GUIDS = {
         4,
         184,
         105,
-        47
+        47,
     ],
     "EFI_PEI_CMOS_ACCESS_GUID": [
         3435079558,
@@ -5281,7 +5150,7 @@ PROTOCOLS_GUIDS = {
         112,
         206,
         191,
-        129
+        129,
     ],
     "EFI_PEI_CONSPLIT_AMI_KEYCODE_PPI_GUID": [
         1943909857,
@@ -5294,7 +5163,7 @@ PROTOCOLS_GUIDS = {
         117,
         190,
         203,
-        182
+        182,
     ],
     "EFI_PEI_CORE_PRIVATE_GUID": [
         3594625269,
@@ -5307,7 +5176,7 @@ PROTOCOLS_GUIDS = {
         180,
         217,
         227,
-        185
+        185,
     ],
     "EFI_PEI_CPU_IO_PPI_INSTALLED_GUID": [
         3870236539,
@@ -5320,7 +5189,7 @@ PROTOCOLS_GUIDS = {
         87,
         164,
         66,
-        130
+        130,
     ],
     "EFI_PEI_DECOMPRESS_PPI_GUID": [
         439805159,
@@ -5333,7 +5202,7 @@ PROTOCOLS_GUIDS = {
         5,
         118,
         253,
-        215
+        215,
     ],
     "EFI_PEI_DEVICE_RECOVERY_MODULE_PPI_GUID": [
         232967717,
@@ -5346,7 +5215,7 @@ PROTOCOLS_GUIDS = {
         38,
         52,
         75,
-        55
+        55,
     ],
     "EFI_PEI_END_OF_PEI_PHASE_PPI_GUID": [
         1616815696,
@@ -5359,7 +5228,7 @@ PROTOCOLS_GUIDS = {
         42,
         182,
         24,
-        198
+        198,
     ],
     "EFI_PEI_FIRMWARE_VOLUME_INFO_PPI_GUID": [
         1240314305,
@@ -5372,7 +5241,7 @@ PROTOCOLS_GUIDS = {
         49,
         170,
         187,
-        57
+        57,
     ],
     "EFI_PEI_FLUSH_INSTRUCTION_CACHE_GUID": [
         3625024764,
@@ -5385,7 +5254,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_PEI_LOADED_IMAGE_PPI_GUID": [
         3254572104,
@@ -5398,7 +5267,7 @@ PROTOCOLS_GUIDS = {
         1,
         83,
         100,
-        188
+        188,
     ],
     "EFI_PEI_LOAD_FILE_GUID": [
         3118509054,
@@ -5411,7 +5280,7 @@ PROTOCOLS_GUIDS = {
         120,
         194,
         120,
-        166
+        166,
     ],
     "EFI_PEI_LOAD_FILE_PPI_GUID": [
         3118509054,
@@ -5424,7 +5293,7 @@ PROTOCOLS_GUIDS = {
         120,
         194,
         120,
-        166
+        166,
     ],
     "EFI_PEI_PCI_CFG2_PPI_GUID": [
         91899034,
@@ -5437,7 +5306,7 @@ PROTOCOLS_GUIDS = {
         106,
         153,
         187,
-        146
+        146,
     ],
     "EFI_PEI_PCI_CFG_PPI_INSTALLED_GUID": [
         3790793632,
@@ -5450,7 +5319,7 @@ PROTOCOLS_GUIDS = {
         33,
         100,
         42,
-        144
+        144,
     ],
     "EFI_PEI_PERFORMANCE_HOB_GUID": [
         284439262,
@@ -5463,7 +5332,7 @@ PROTOCOLS_GUIDS = {
         93,
         143,
         128,
-        187
+        187,
     ],
     "EFI_PEI_PE_COFF_LOADER_GUID": [
         3625024767,
@@ -5476,7 +5345,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_PEI_PLATFORMPEI_EXECUTED_PPI_GUID": [
         2356331374,
@@ -5489,7 +5358,7 @@ PROTOCOLS_GUIDS = {
         29,
         136,
         255,
-        84
+        84,
     ],
     "EFI_PEI_READ_ONLY_VARIABLE2_PPI_GUID": [
         716730101,
@@ -5502,7 +5371,7 @@ PROTOCOLS_GUIDS = {
         202,
         31,
         225,
-        180
+        180,
     ],
     "EFI_PEI_READ_ONLY_VARIABLE_PPI_GUID": [
         1021087942,
@@ -5515,7 +5384,7 @@ PROTOCOLS_GUIDS = {
         221,
         120,
         185,
-        250
+        250,
     ],
     "EFI_PEI_RECOVERY_MODULE_PPI_GUID": [
         4218262850,
@@ -5528,7 +5397,7 @@ PROTOCOLS_GUIDS = {
         82,
         233,
         61,
-        207
+        207,
     ],
     "EFI_PEI_REPORT_PROGRESS_CODE_PPI_GUID": [
         580399827,
@@ -5541,7 +5410,7 @@ PROTOCOLS_GUIDS = {
         183,
         212,
         84,
-        54
+        54,
     ],
     "EFI_PEI_RESET_PPI_GUID": [
         4013526360,
@@ -5554,7 +5423,7 @@ PROTOCOLS_GUIDS = {
         244,
         254,
         113,
-        47
+        47,
     ],
     "EFI_PEI_RSC_HANDLER_PPI_GUID": [
         6673300,
@@ -5567,7 +5436,7 @@ PROTOCOLS_GUIDS = {
         133,
         121,
         194,
-        81
+        81,
     ],
     "EFI_PEI_S3_RESUME2_PPI_GUID": [
         1834495420,
@@ -5580,7 +5449,7 @@ PROTOCOLS_GUIDS = {
         98,
         39,
         177,
-        71
+        71,
     ],
     "EFI_PEI_SECTION_EXTRACTION_PPI_GUID": [
         1334436360,
@@ -5593,7 +5462,7 @@ PROTOCOLS_GUIDS = {
         79,
         126,
         54,
-        215
+        215,
     ],
     "EFI_PEI_SECURITY2_PPI_GUID": [
         3704667683,
@@ -5606,7 +5475,7 @@ PROTOCOLS_GUIDS = {
         44,
         237,
         78,
-        222
+        222,
     ],
     "EFI_PEI_STALL_PPI_GUID": [
         525102992,
@@ -5619,7 +5488,7 @@ PROTOCOLS_GUIDS = {
         241,
         205,
         125,
-        86
+        86,
     ],
     "EFI_PEI_TEMPORARY_RAM_SUPPORT_PPI_GUID": [
         3689036457,
@@ -5632,7 +5501,7 @@ PROTOCOLS_GUIDS = {
         241,
         97,
         115,
-        137
+        137,
     ],
     "EFI_PEI_TRANSFER_CONTROL_GUID": [
         3625024770,
@@ -5645,7 +5514,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_PERFORMANCE_PROTOCOL_GUID": [
         4293722111,
@@ -5658,7 +5527,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         86,
-        59
+        59,
     ],
     "EFI_PI_MP_SERVICES_PROTOCOL_GUID": [
         1071490565,
@@ -5671,7 +5540,7 @@ PROTOCOLS_GUIDS = {
         83,
         27,
         61,
-        8
+        8,
     ],
     "EFI_PLATFORM_DRIVER_OVERRIDE_PROTOCOL_GUID": [
         1798358840,
@@ -5684,7 +5553,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_PLATFORM_GOP_POLICY_PROTOCOL_GUID": [
         3962475291,
@@ -5697,7 +5566,7 @@ PROTOCOLS_GUIDS = {
         139,
         237,
         60,
-        93
+        93,
     ],
     "EFI_PLATFORM_INFO_PROTOCOL_GUID": [
         3640873333,
@@ -5710,7 +5579,7 @@ PROTOCOLS_GUIDS = {
         229,
         226,
         168,
-        133
+        133,
     ],
     "EFI_PLATFORM_MEMTEST_PROTOCOL_GUID": [
         140098072,
@@ -5723,7 +5592,7 @@ PROTOCOLS_GUIDS = {
         99,
         145,
         123,
-        221
+        221,
     ],
     "EFI_PLATFORM_TO_DRIVER_CONFIGURATION_CLP_GUID": [
         878627854,
@@ -5736,7 +5605,7 @@ PROTOCOLS_GUIDS = {
         156,
         71,
         51,
-        62
+        62,
     ],
     "EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL_GUID": [
         1680659856,
@@ -5749,7 +5618,7 @@ PROTOCOLS_GUIDS = {
         7,
         210,
         60,
-        75
+        75,
     ],
     "EFI_POWER_ON_HOB_GUID": [
         73967105,
@@ -5762,7 +5631,7 @@ PROTOCOLS_GUIDS = {
         153,
         27,
         23,
-        140
+        140,
     ],
     "EFI_PPM_GLOBAL_NVS_AREA_PROTOCOL_GUID": [
         1817234891,
@@ -5775,7 +5644,7 @@ PROTOCOLS_GUIDS = {
         163,
         198,
         17,
-        40
+        40,
     ],
     "EFI_PPM_INFO_PROTOCOL_GUID": [
         3609047302,
@@ -5788,7 +5657,7 @@ PROTOCOLS_GUIDS = {
         119,
         135,
         23,
-        97
+        97,
     ],
     "EFI_PRIMARY_CONSOLE_IN_DEVICE_GUID": [
         3830570174,
@@ -5801,7 +5670,7 @@ PROTOCOLS_GUIDS = {
         44,
         255,
         71,
-        253
+        253,
     ],
     "EFI_PRIMARY_CONSOLE_OUT_DEVICE_GUID": [
         1656615818,
@@ -5814,7 +5683,7 @@ PROTOCOLS_GUIDS = {
         246,
         110,
         103,
-        46
+        46,
     ],
     "EFI_PRIMARY_STANDARD_ERROR_DEVICE_GUID": [
         1516771611,
@@ -5827,7 +5696,7 @@ PROTOCOLS_GUIDS = {
         93,
         169,
         66,
-        177
+        177,
     ],
     "EFI_PRINT_PROTOCOL_GUID": [
         3744302734,
@@ -5840,7 +5709,7 @@ PROTOCOLS_GUIDS = {
         93,
         19,
         67,
-        208
+        208,
     ],
     "EFI_PROCESSOR_PRODUCER_GUID": [
         468740842,
@@ -5853,7 +5722,7 @@ PROTOCOLS_GUIDS = {
         9,
         86,
         45,
-        48
+        48,
     ],
     "EFI_PROCESSOR_SUBCLASS_GUID": [
         654175102,
@@ -5866,7 +5735,7 @@ PROTOCOLS_GUIDS = {
         60,
         228,
         140,
-        167
+        167,
     ],
     "EFI_PS2_POLICY_PROTOCOL_GUID": [
         1307677273,
@@ -5879,7 +5748,7 @@ PROTOCOLS_GUIDS = {
         181,
         120,
         196,
-        24
+        24,
     ],
     "EFI_PXE_BASE_CODE_CALLBACK_PROTOCOL_GUID": [
         610126369,
@@ -5892,7 +5761,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "EFI_PXE_BASE_CODE_PROTOCOL_GUID": [
         63235587,
@@ -5905,7 +5774,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_PXE_DHCP4_CALLBACK_PROTOCOL_GUID": [
         3243527169,
@@ -5918,7 +5787,7 @@ PROTOCOLS_GUIDS = {
         131,
         194,
         54,
-        33
+        33,
     ],
     "EFI_PXE_DHCP4_PROTOCOL_GUID": [
         63235620,
@@ -5931,7 +5800,7 @@ PROTOCOLS_GUIDS = {
         41,
         63,
         193,
-        77
+        77,
     ],
     "EFI_REAL_TIME_CLOCK_ARCH_PROTOCOL_GUID": [
         667921543,
@@ -5944,7 +5813,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_RESET_ARCH_PROTOCOL_GUID": [
         667921544,
@@ -5957,7 +5826,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_S3_SAVE_STATE_PROTOCOL_GUID": [
         3898067702,
@@ -5970,7 +5839,7 @@ PROTOCOLS_GUIDS = {
         101,
         251,
         168,
-        135
+        135,
     ],
     "EFI_S3_SMM_SAVE_STATE_PROTOCOL_GUID": [
         839581282,
@@ -5983,7 +5852,7 @@ PROTOCOLS_GUIDS = {
         244,
         175,
         1,
-        76
+        76,
     ],
     "EFI_SAL_SYSTEM_TABLE_GUID": [
         3952946482,
@@ -5996,7 +5865,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_SA_INFO_PROTOCOL_GUID": [
         1228626860,
@@ -6009,7 +5878,7 @@ PROTOCOLS_GUIDS = {
         172,
         169,
         133,
-        65
+        65,
     ],
     "EFI_SB_PCIE_ERROR_LOG_DISPATCH_PROTOCOL_GUID": [
         4068605038,
@@ -6022,7 +5891,7 @@ PROTOCOLS_GUIDS = {
         174,
         121,
         132,
-        236
+        236,
     ],
     "EFI_SCSI_IO_PROTOCOL_GUID": [
         2469349350,
@@ -6035,7 +5904,7 @@ PROTOCOLS_GUIDS = {
         75,
         19,
         143,
-        133
+        133,
     ],
     "EFI_SCSI_PASS_THRU_PROTOCOL_GUID": [
         2778632143,
@@ -6048,7 +5917,7 @@ PROTOCOLS_GUIDS = {
         46,
         202,
         168,
-        119
+        119,
     ],
     "EFI_SECTION_EXTRACTION_PROTOCOL_GUID": [
         1150246308,
@@ -6061,7 +5930,7 @@ PROTOCOLS_GUIDS = {
         65,
         146,
         33,
-        93
+        93,
     ],
     "EFI_SECURITY_ARCH_PROTOCOL_GUID": [
         2758026211,
@@ -6074,7 +5943,7 @@ PROTOCOLS_GUIDS = {
         169,
         17,
         88,
-        57
+        57,
     ],
     "EFI_SECURITY_POLICY_PROTOCOL_GUID": [
         2028261957,
@@ -6087,7 +5956,7 @@ PROTOCOLS_GUIDS = {
         232,
         108,
         252,
-        171
+        171,
     ],
     "EFI_SEC_PLATFORM_INFORMATION_GUID": [
         1871457077,
@@ -6100,7 +5969,7 @@ PROTOCOLS_GUIDS = {
         25,
         214,
         16,
-        119
+        119,
     ],
     "EFI_SEC_SMI_FLASH_GUID": [
         1005891350,
@@ -6113,7 +5982,7 @@ PROTOCOLS_GUIDS = {
         172,
         93,
         220,
-        108
+        108,
     ],
     "EFI_SERIAL_GPIO_PROTOCOL_GUID": [
         4113315928,
@@ -6126,7 +5995,7 @@ PROTOCOLS_GUIDS = {
         239,
         138,
         69,
-        163
+        163,
     ],
     "EFI_SERIAL_IO_PROTOCOL_GUID": [
         3139817327,
@@ -6139,21 +6008,9 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        253
+        253,
     ],
-    "EFI_SHELL_FILE_GUID": [
-        3313161911,
-        1301,
-        16552,
-        157,
-        33,
-        85,
-        22,
-        82,
-        133,
-        78,
-        55
-    ],
+    "EFI_SHELL_FILE_GUID": [3313161911, 1301, 16552, 157, 33, 85, 22, 82, 133, 78, 55],
     "EFI_SIMPLE_AUDIO_OUT_PROTOCOL_GUID": [
         3341021832,
         21241,
@@ -6165,7 +6022,7 @@ PROTOCOLS_GUIDS = {
         249,
         48,
         160,
-        220
+        220,
     ],
     "EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID": [
         2521717538,
@@ -6178,7 +6035,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "EFI_SIMPLE_NETWORK_PROTOCOL_GUID": [
         2711106233,
@@ -6191,7 +6048,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL_GUID": [
         3718149428,
@@ -6204,7 +6061,7 @@ PROTOCOLS_GUIDS = {
         23,
         166,
         37,
-        170
+        170,
     ],
     "EFI_SIMPLE_TEXT_INPUT_PROTOCOL_GUID": [
         947156929,
@@ -6217,7 +6074,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "EFI_SIMPLE_TEXT_IN_PROTOCOL_GUID": [
         947156929,
@@ -6230,7 +6087,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "EFI_SIMPLE_TEXT_OUT_PROTOCOL_GUID": [
         947156930,
@@ -6243,7 +6100,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "EFI_SIO_PROTOCOL_GUID": [
         559930648,
@@ -6256,7 +6113,7 @@ PROTOCOLS_GUIDS = {
         11,
         71,
         57,
-        233
+        233,
     ],
     "EFI_SMBIOS_BOARD_PROTOCOL_GUID": [
         151248148,
@@ -6269,7 +6126,7 @@ PROTOCOLS_GUIDS = {
         163,
         13,
         120,
-        92
+        92,
     ],
     "EFI_SMBIOS_DYNAMIC_DATA_GUID": [
         3816826892,
@@ -6282,7 +6139,7 @@ PROTOCOLS_GUIDS = {
         137,
         162,
         185,
-        38
+        38,
     ],
     "EFI_SMBIOS_NVRAM_DATA_GUID": [
         1261470371,
@@ -6295,7 +6152,7 @@ PROTOCOLS_GUIDS = {
         23,
         38,
         93,
-        241
+        241,
     ],
     "EFI_SMBIOS_PROTOCOL_GUID": [
         56115190,
@@ -6308,7 +6165,7 @@ PROTOCOLS_GUIDS = {
         159,
         74,
         250,
-        247
+        247,
     ],
     "EFI_SMBIOS_STATIC_DATA_GUID": [
         3673472905,
@@ -6321,7 +6178,7 @@ PROTOCOLS_GUIDS = {
         50,
         251,
         197,
-        159
+        159,
     ],
     "EFI_SMBIOS_TABLE_GUID": [
         3952946481,
@@ -6334,7 +6191,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_SMBUS_ARP_MAP_GUID": [
         1887168574,
@@ -6347,7 +6204,7 @@ PROTOCOLS_GUIDS = {
         58,
         160,
         184,
-        226
+        226,
     ],
     "EFI_SMBUS_HC_PROTOCOL_GUID": [
         3835507693,
@@ -6360,7 +6217,7 @@ PROTOCOLS_GUIDS = {
         170,
         117,
         28,
-        27
+        27,
     ],
     "EFI_SMM_ACCESS_PROTOCOL_GUID": [
         932317530,
@@ -6373,7 +6230,7 @@ PROTOCOLS_GUIDS = {
         101,
         90,
         23,
-        241
+        241,
     ],
     "EFI_SMM_BASE_PROTOCOL_GUID": [
         328242509,
@@ -6386,7 +6243,7 @@ PROTOCOLS_GUIDS = {
         194,
         23,
         218,
-        168
+        168,
     ],
     "EFI_SMM_BIOS_WRITE_DISPATCH_PROTOCOL_GUID": [
         3843219428,
@@ -6399,7 +6256,7 @@ PROTOCOLS_GUIDS = {
         11,
         227,
         39,
-        117
+        117,
     ],
     "EFI_SMM_CMOS_ACCESS_GUID": [
         3855811178,
@@ -6412,7 +6269,7 @@ PROTOCOLS_GUIDS = {
         250,
         60,
         110,
-        170
+        170,
     ],
     "EFI_SMM_COMMUNICATION_PROTOCOL_GUID": [
         3331250402,
@@ -6425,7 +6282,7 @@ PROTOCOLS_GUIDS = {
         172,
         197,
         195,
-        50
+        50,
     ],
     "EFI_SMM_CONTROL_PROTOCOL_GUID": [
         2366825009,
@@ -6438,7 +6295,7 @@ PROTOCOLS_GUIDS = {
         167,
         231,
         178,
-        229
+        229,
     ],
     "EFI_SMM_CPU_IO2_PROTOCOL_GUID": [
         843229656,
@@ -6451,7 +6308,7 @@ PROTOCOLS_GUIDS = {
         20,
         13,
         228,
-        210
+        210,
     ],
     "EFI_SMM_CPU_IO_GUID": [
         1598265867,
@@ -6464,7 +6321,7 @@ PROTOCOLS_GUIDS = {
         107,
         81,
         52,
-        65
+        65,
     ],
     "EFI_SMM_CPU_PROTOCOL_GUID": [
         3946081175,
@@ -6477,7 +6334,7 @@ PROTOCOLS_GUIDS = {
         43,
         179,
         213,
-        105
+        105,
     ],
     "EFI_SMM_CPU_SAVE_STATE_PROTOCOL_GUID": [
         569574061,
@@ -6490,7 +6347,7 @@ PROTOCOLS_GUIDS = {
         0,
         64,
         58,
-        29
+        29,
     ],
     "EFI_SMM_GPI_DISPATCH2_PROTOCOL_GUID": [
         626420483,
@@ -6503,7 +6360,7 @@ PROTOCOLS_GUIDS = {
         62,
         162,
         67,
-        128
+        128,
     ],
     "EFI_SMM_GPI_DISPATCH_PROTOCOL_GUID": [
         3765717889,
@@ -6516,7 +6373,7 @@ PROTOCOLS_GUIDS = {
         94,
         112,
         57,
-        218
+        218,
     ],
     "EFI_SMM_ICHN_DISPATCH_EX_PROTOCOL_GUID": [
         958414939,
@@ -6529,7 +6386,7 @@ PROTOCOLS_GUIDS = {
         138,
         111,
         247,
-        54
+        54,
     ],
     "EFI_SMM_ICHN_DISPATCH_PROTOCOL_GUID": [
         3305845310,
@@ -6542,7 +6399,7 @@ PROTOCOLS_GUIDS = {
         106,
         16,
         133,
-        204
+        204,
     ],
     "EFI_SMM_IO_TRAP_DISPATCH2_PROTOCOL_GUID": [
         1490826893,
@@ -6555,7 +6412,7 @@ PROTOCOLS_GUIDS = {
         65,
         141,
         249,
-        48
+        48,
     ],
     "EFI_SMM_IO_TRAP_DISPATCH_PROTOCOL_GUID": [
         3682554731,
@@ -6568,7 +6425,7 @@ PROTOCOLS_GUIDS = {
         235,
         170,
         32,
-        29
+        29,
     ],
     "EFI_SMM_PCI_ROOT_BRIDGE_IO_PROTOCOL_GUID": [
         2344710477,
@@ -6581,7 +6438,7 @@ PROTOCOLS_GUIDS = {
         208,
         109,
         152,
-        234
+        234,
     ],
     "EFI_SMM_PERIODIC_TIMER_DISPATCH2_PROTOCOL_GUID": [
         1290548878,
@@ -6594,7 +6451,7 @@ PROTOCOLS_GUIDS = {
         69,
         252,
         138,
-        83
+        83,
     ],
     "EFI_SMM_PERIODIC_TIMER_DISPATCH_PROTOCOL_GUID": [
         2630484988,
@@ -6607,7 +6464,7 @@ PROTOCOLS_GUIDS = {
         71,
         155,
         222,
-        85
+        85,
     ],
     "EFI_SMM_POWER_BUTTON_DISPATCH2_PROTOCOL_GUID": [
         454132730,
@@ -6620,7 +6477,7 @@ PROTOCOLS_GUIDS = {
         135,
         85,
         64,
-        157
+        157,
     ],
     "EFI_SMM_POWER_BUTTON_DISPATCH_PROTOCOL_GUID": [
         3070881696,
@@ -6633,7 +6490,7 @@ PROTOCOLS_GUIDS = {
         231,
         168,
         238,
-        86
+        86,
     ],
     "EFI_SMM_RC_TO_APTIO_BRIDGE_GUID": [
         4242503560,
@@ -6646,7 +6503,7 @@ PROTOCOLS_GUIDS = {
         204,
         119,
         136,
-        204
+        204,
     ],
     "EFI_SMM_READY_TO_LOCK_PROTOCOL_GUID": [
         1203239564,
@@ -6659,7 +6516,7 @@ PROTOCOLS_GUIDS = {
         134,
         240,
         210,
-        200
+        200,
     ],
     "EFI_SMM_RSC_HANDLER_PROTOCOL_GUID": [
         804429735,
@@ -6672,7 +6529,7 @@ PROTOCOLS_GUIDS = {
         60,
         85,
         79,
-        244
+        244,
     ],
     "EFI_SMM_RUNTIME_PROTOCOL_GUID": [
         2775095201,
@@ -6685,7 +6542,7 @@ PROTOCOLS_GUIDS = {
         168,
         1,
         250,
-        154
+        154,
     ],
     "EFI_SMM_RUNTIME_SERVICES_TABLE_GUID": [
         962343934,
@@ -6698,7 +6555,7 @@ PROTOCOLS_GUIDS = {
         192,
         225,
         212,
-        62
+        62,
     ],
     "EFI_SMM_SMBUS_PROTOCOL_GUID": [
         1927544980,
@@ -6711,7 +6568,7 @@ PROTOCOLS_GUIDS = {
         74,
         158,
         156,
-        12
+        12,
     ],
     "EFI_SMM_SPI_PROTOCOL_GUID": [
         2951986761,
@@ -6724,7 +6581,7 @@ PROTOCOLS_GUIDS = {
         80,
         142,
         132,
-        125
+        125,
     ],
     "EFI_SMM_STANDBY_BUTTON_DISPATCH2_PROTOCOL_GUID": [
         1929430177,
@@ -6737,7 +6594,7 @@ PROTOCOLS_GUIDS = {
         127,
         64,
         88,
-        91
+        91,
     ],
     "EFI_SMM_STANDBY_BUTTON_DISPATCH_PROTOCOL_GUID": [
         2023119768,
@@ -6750,7 +6607,7 @@ PROTOCOLS_GUIDS = {
         78,
         73,
         138,
-        152
+        152,
     ],
     "EFI_SMM_STATUS_CODE_PROTOCOL_GUID": [
         1794976631,
@@ -6763,7 +6620,7 @@ PROTOCOLS_GUIDS = {
         57,
         222,
         15,
-        177
+        177,
     ],
     "EFI_SMM_SW_DISPATCH2_PROTOCOL_GUID": [
         413386460,
@@ -6776,7 +6633,7 @@ PROTOCOLS_GUIDS = {
         137,
         249,
         137,
-        153
+        153,
     ],
     "EFI_SMM_SW_DISPATCH_PROTOCOL_GUID": [
         3846289267,
@@ -6789,7 +6646,7 @@ PROTOCOLS_GUIDS = {
         54,
         83,
         248,
-        191
+        191,
     ],
     "EFI_SMM_SX_DISPATCH2_PROTOCOL_GUID": [
         1164781657,
@@ -6802,7 +6659,7 @@ PROTOCOLS_GUIDS = {
         216,
         134,
         153,
-        125
+        125,
     ],
     "EFI_SMM_TCO_DISPATCH_PROTOCOL_GUID": [
         237857713,
@@ -6815,7 +6672,7 @@ PROTOCOLS_GUIDS = {
         209,
         129,
         166,
-        7
+        7,
     ],
     "EFI_SMM_THUNK_PROTOCOL_GUID": [
         713227494,
@@ -6828,7 +6685,7 @@ PROTOCOLS_GUIDS = {
         192,
         82,
         45,
-        243
+        243,
     ],
     "EFI_SMM_USB_DISPATCH2_PROTOCOL_GUID": [
         4003171728,
@@ -6841,7 +6698,7 @@ PROTOCOLS_GUIDS = {
         141,
         51,
         204,
-        161
+        161,
     ],
     "EFI_SMM_USB_DISPATCH_PROTOCOL_GUID": [
         2690347005,
@@ -6854,7 +6711,7 @@ PROTOCOLS_GUIDS = {
         182,
         60,
         243,
-        243
+        243,
     ],
     "EFI_SMM_VARIABLE_PROTOCOL_GUID": [
         3979531571,
@@ -6867,7 +6724,7 @@ PROTOCOLS_GUIDS = {
         205,
         217,
         152,
-        167
+        167,
     ],
     "EFI_SMRAM_NVS_HEADER_GUID": [
         3967766433,
@@ -6880,7 +6737,7 @@ PROTOCOLS_GUIDS = {
         67,
         5,
         213,
-        186
+        186,
     ],
     "EFI_SMTP_PROTOCOL_GUID": [
         1600640012,
@@ -6893,7 +6750,7 @@ PROTOCOLS_GUIDS = {
         63,
         70,
         225,
-        220
+        220,
     ],
     "EFI_SPEAKER_INTERFACE_PROTOCOL_GUID": [
         1074480246,
@@ -6906,7 +6763,7 @@ PROTOCOLS_GUIDS = {
         41,
         69,
         195,
-        185
+        185,
     ],
     "EFI_SPI_PROTOCOL_GUID": [
         27680985,
@@ -6919,7 +6776,7 @@ PROTOCOLS_GUIDS = {
         118,
         205,
         93,
-        10
+        10,
     ],
     "EFI_STANDARD_CALLER_ID_GUID": [
         3386700905,
@@ -6932,7 +6789,7 @@ PROTOCOLS_GUIDS = {
         41,
         69,
         195,
-        185
+        185,
     ],
     "EFI_STANDARD_ERROR_DEVICE_GUID": [
         3551751981,
@@ -6945,7 +6802,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_STATUS_CODE_ARCH_PROTOCOL_GUID": [
         3649978019,
@@ -6958,7 +6815,7 @@ PROTOCOLS_GUIDS = {
         12,
         203,
         44,
-        149
+        149,
     ],
     "EFI_STATUS_CODE_DATA_TYPE_ASSERT_GUID": [
         3663140245,
@@ -6971,7 +6828,7 @@ PROTOCOLS_GUIDS = {
         103,
         125,
         51,
-        7
+        7,
     ],
     "EFI_STATUS_CODE_DATA_TYPE_DEBUG_GUID": [
         2588840518,
@@ -6984,7 +6841,7 @@ PROTOCOLS_GUIDS = {
         41,
         69,
         195,
-        185
+        185,
     ],
     "EFI_STATUS_CODE_DATA_TYPE_ERROR_GUID": [
         2872417507,
@@ -6997,7 +6854,7 @@ PROTOCOLS_GUIDS = {
         176,
         114,
         225,
-        155
+        155,
     ],
     "EFI_STATUS_CODE_DATA_TYPE_EXCEPTION_HANDLER_GUID": [
         1002618130,
@@ -7010,7 +6867,7 @@ PROTOCOLS_GUIDS = {
         41,
         69,
         195,
-        185
+        185,
     ],
     "EFI_STATUS_CODE_DATA_TYPE_PROGRESS_CODE_GUID": [
         2740366137,
@@ -7023,7 +6880,7 @@ PROTOCOLS_GUIDS = {
         158,
         139,
         54,
-        163
+        163,
     ],
     "EFI_STATUS_CODE_DATA_TYPE_STRING_GUID": [
         2463174784,
@@ -7036,7 +6893,7 @@ PROTOCOLS_GUIDS = {
         136,
         56,
         43,
-        10
+        10,
     ],
     "EFI_STATUS_CODE_GUID": [
         3498305868,
@@ -7049,7 +6906,7 @@ PROTOCOLS_GUIDS = {
         90,
         223,
         106,
-        42
+        42,
     ],
     "EFI_STATUS_CODE_SPECIFIC_DATA_GUID": [
         861504701,
@@ -7062,7 +6919,7 @@ PROTOCOLS_GUIDS = {
         206,
         95,
         247,
-        166
+        166,
     ],
     "EFI_STORAGE_SECURITY_COMMAND_PROTOCOL_GUID": [
         3364555629,
@@ -7075,7 +6932,7 @@ PROTOCOLS_GUIDS = {
         75,
         76,
         58,
-        120
+        120,
     ],
     "EFI_SWAP_ADDRESS_RANGE_PROTOCOL_GUID": [
         307885581,
@@ -7088,7 +6945,7 @@ PROTOCOLS_GUIDS = {
         93,
         85,
         232,
-        126
+        126,
     ],
     "EFI_SYSTEM_NV_DATA_FV_GUID": [
         4293995405,
@@ -7101,7 +6958,7 @@ PROTOCOLS_GUIDS = {
         7,
         91,
         79,
-        80
+        80,
     ],
     "EFI_SYSTEM_NV_DATA_HOB_GUID": [
         3605334317,
@@ -7114,7 +6971,7 @@ PROTOCOLS_GUIDS = {
         230,
         249,
         94,
-        120
+        120,
     ],
     "EFI_SYSTEM_TYPE_FRU_GUID": [
         2863751192,
@@ -7127,7 +6984,7 @@ PROTOCOLS_GUIDS = {
         247,
         134,
         106,
-        155
+        155,
     ],
     "EFI_TAPE_IO_PROTOCOL_GUID": [
         513009203,
@@ -7140,7 +6997,7 @@ PROTOCOLS_GUIDS = {
         236,
         38,
         109,
-        24
+        24,
     ],
     "EFI_TCG_LOG_HOB_GUID": [
         1602047502,
@@ -7153,7 +7010,7 @@ PROTOCOLS_GUIDS = {
         232,
         62,
         60,
-        49
+        49,
     ],
     "EFI_TCG_PEI_READ_ONLY_VARIABLE_PPI_GUID": [
         1021087942,
@@ -7166,7 +7023,7 @@ PROTOCOLS_GUIDS = {
         221,
         120,
         185,
-        250
+        250,
     ],
     "EFI_TCG_PLATFORM_PROTOCOL_GUID": [
         2353830465,
@@ -7179,7 +7036,7 @@ PROTOCOLS_GUIDS = {
         109,
         102,
         17,
-        92
+        92,
     ],
     "EFI_TCG_PRIVATE_INTERFACE_GUID": [
         2353830465,
@@ -7192,7 +7049,7 @@ PROTOCOLS_GUIDS = {
         109,
         102,
         17,
-        92
+        92,
     ],
     "EFI_TCG_PROTOCOL_GUID": [
         4114708845,
@@ -7205,7 +7062,7 @@ PROTOCOLS_GUIDS = {
         246,
         27,
         156,
-        221
+        221,
     ],
     "EFI_TCG_WAKE_EVENT_DATA_HOB_GUID": [
         3149402299,
@@ -7218,7 +7075,7 @@ PROTOCOLS_GUIDS = {
         170,
         80,
         239,
-        10
+        10,
     ],
     "EFI_TCP4_PROTOCOL_GUID": [
         1699941319,
@@ -7231,7 +7088,7 @@ PROTOCOLS_GUIDS = {
         199,
         236,
         43,
-        98
+        98,
     ],
     "EFI_TCP4_SERVICE_BINDING_PROTOCOL_GUID": [
         7472741,
@@ -7244,21 +7101,9 @@ PROTOCOLS_GUIDS = {
         58,
         28,
         124,
-        201
+        201,
     ],
-    "EFI_TCP_PROTOCOL_GUID": [
-        45340146,
-        44072,
-        4563,
-        154,
-        45,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
+    "EFI_TCP_PROTOCOL_GUID": [45340146, 44072, 4563, 154, 45, 0, 144, 39, 63, 193, 77],
     "EFI_TCP_SOCK_PROTOCOL_GUID": [
         1367815579,
         30989,
@@ -7270,7 +7115,7 @@ PROTOCOLS_GUIDS = {
         219,
         60,
         235,
-        173
+        173,
     ],
     "EFI_TDT_PROTOCOL_GUID": [
         200736871,
@@ -7283,7 +7128,7 @@ PROTOCOLS_GUIDS = {
         145,
         198,
         20,
-        17
+        17,
     ],
     "EFI_TELNET_SERVER_PROTOCOL_GUID": [
         1832217044,
@@ -7296,7 +7141,7 @@ PROTOCOLS_GUIDS = {
         166,
         225,
         171,
-        90
+        90,
     ],
     "EFI_TIANO_DECOMPRESS_PROTOCOL_GUID": [
         3897356956,
@@ -7309,7 +7154,7 @@ PROTOCOLS_GUIDS = {
         236,
         234,
         234,
-        11
+        11,
     ],
     "EFI_TIMER_ARCH_PROTOCOL_GUID": [
         649776307,
@@ -7322,7 +7167,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "EFI_TIME_VARIABLE_GUID": [
         2634916713,
@@ -7335,7 +7180,7 @@ PROTOCOLS_GUIDS = {
         44,
         48,
         30,
-        21
+        21,
     ],
     "EFI_TPM_DEVICE_PROTOCOL_GUID": [
         3725991166,
@@ -7348,7 +7193,7 @@ PROTOCOLS_GUIDS = {
         240,
         115,
         82,
-        18
+        18,
     ],
     "EFI_TPM_STATE_INIT_HUB_GUID": [
         2697386264,
@@ -7361,7 +7206,7 @@ PROTOCOLS_GUIDS = {
         165,
         114,
         182,
-        82
+        82,
     ],
     "EFI_TXT_INFO_PROTOCOL_GUID": [
         1611796956,
@@ -7374,7 +7219,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         36,
-        104
+        104,
     ],
     "EFI_UDP4_PROTOCOL_GUID": [
         987356969,
@@ -7387,7 +7232,7 @@ PROTOCOLS_GUIDS = {
         231,
         14,
         80,
-        243
+        243,
     ],
     "EFI_UDP4_SERVICE_BINDING_PROTOCOL_GUID": [
         2213549156,
@@ -7400,7 +7245,7 @@ PROTOCOLS_GUIDS = {
         5,
         216,
         233,
-        230
+        230,
     ],
     "EFI_UDP_PROTOCOL_GUID": [
         3312431538,
@@ -7413,7 +7258,7 @@ PROTOCOLS_GUIDS = {
         79,
         250,
         158,
-        51
+        51,
     ],
     "EFI_UGA_DRAW_PROTOCOL_GUID": [
         2553031051,
@@ -7426,7 +7271,7 @@ PROTOCOLS_GUIDS = {
         104,
         143,
         184,
-        57
+        57,
     ],
     "EFI_UGA_IO_PROTOCOL_GUID": [
         1638192286,
@@ -7439,7 +7284,7 @@ PROTOCOLS_GUIDS = {
         237,
         11,
         7,
-        162
+        162,
     ],
     "EFI_UGA_SPLASH_PROTOCOL_GUID": [
         2757442061,
@@ -7452,7 +7297,7 @@ PROTOCOLS_GUIDS = {
         130,
         11,
         80,
-        126
+        126,
     ],
     "EFI_UNICODE_COLLATION2_PROTOCOL_GUID": [
         2764526076,
@@ -7465,7 +7310,7 @@ PROTOCOLS_GUIDS = {
         207,
         99,
         243,
-        73
+        73,
     ],
     "EFI_UNICODE_COLLATION_PROTOCOL2_GUID": [
         2764526076,
@@ -7478,7 +7323,7 @@ PROTOCOLS_GUIDS = {
         207,
         99,
         243,
-        73
+        73,
     ],
     "EFI_UNICODE_COLLATION_PROTOCOL_GUID": [
         495308159,
@@ -7491,7 +7336,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_USB2_HC_PROTOCOL_GUID": [
         1047810598,
@@ -7504,7 +7349,7 @@ PROTOCOLS_GUIDS = {
         14,
         139,
         162,
-        188
+        188,
     ],
     "EFI_USB_ATAPI_PROTOCOL_GUID": [
         724527322,
@@ -7517,7 +7362,7 @@ PROTOCOLS_GUIDS = {
         11,
         27,
         91,
-        117
+        117,
     ],
     "EFI_USB_HC_PROTOCOL_GUID": [
         4110979686,
@@ -7530,7 +7375,7 @@ PROTOCOLS_GUIDS = {
         138,
         115,
         181,
-        25
+        25,
     ],
     "EFI_USB_IO_PROTOCOL_GUID": [
         724527318,
@@ -7543,7 +7388,7 @@ PROTOCOLS_GUIDS = {
         11,
         27,
         91,
-        117
+        117,
     ],
     "EFI_USB_POLICY_PROTOCOL_GUID": [
         1482279798,
@@ -7556,7 +7401,7 @@ PROTOCOLS_GUIDS = {
         26,
         39,
         240,
-        18
+        18,
     ],
     "EFI_USB_PROTOCOL_GUID": [
         718856914,
@@ -7569,7 +7414,7 @@ PROTOCOLS_GUIDS = {
         229,
         235,
         227,
-        22
+        22,
     ],
     "EFI_USER_CREDENTIAL_PROTOCOL_GUID": [
         1911447188,
@@ -7582,7 +7427,7 @@ PROTOCOLS_GUIDS = {
         134,
         207,
         230,
-        190
+        190,
     ],
     "EFI_USER_INFO_ACCESS_SETUP_ADMIN_GUID": [
         2243384839,
@@ -7595,7 +7440,7 @@ PROTOCOLS_GUIDS = {
         95,
         114,
         50,
-        238
+        238,
     ],
     "EFI_USER_INFO_ACCESS_SETUP_NORMAL_GUID": [
         498244320,
@@ -7608,7 +7453,7 @@ PROTOCOLS_GUIDS = {
         73,
         100,
         221,
-        226
+        226,
     ],
     "EFI_USER_INFO_ACCESS_SETUP_RESTRICTED_GUID": [
         3182657829,
@@ -7621,7 +7466,7 @@ PROTOCOLS_GUIDS = {
         90,
         25,
         10,
-        248
+        248,
     ],
     "EFI_USER_MANAGER_PROTOCOL_GUID": [
         1876275212,
@@ -7634,7 +7479,7 @@ PROTOCOLS_GUIDS = {
         207,
         28,
         177,
-        254
+        254,
     ],
     "EFI_VARIABLE_ARCH_PROTOCOL_GUID": [
         508979426,
@@ -7647,7 +7492,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "EFI_VARIABLE_STORE_PROTOCOL_GUID": [
         4035497361,
@@ -7660,7 +7505,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "EFI_VARIABLE_WRITE_ARCH_PROTOCOL_GUID": [
         1682044952,
@@ -7673,7 +7518,7 @@ PROTOCOLS_GUIDS = {
         49,
         221,
         36,
-        83
+        83,
     ],
     "EFI_VGA_MINI_PORT_PROTOCOL_GUID": [
         3346225711,
@@ -7686,7 +7531,7 @@ PROTOCOLS_GUIDS = {
         140,
         139,
         134,
-        179
+        179,
     ],
     "EFI_VIRTUAL_MEMORY_ACCESS_PROTOCOL_GUID": [
         1952266106,
@@ -7699,21 +7544,9 @@ PROTOCOLS_GUIDS = {
         13,
         197,
         102,
-        152
+        152,
     ],
-    "EFI_VT_100_GUID": [
-        3752222821,
-        46105,
-        4563,
-        154,
-        45,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
+    "EFI_VT_100_GUID": [3752222821, 46105, 4563, 154, 45, 0, 144, 39, 63, 193, 77],
     "EFI_VT_100_PLUS_GUID": [
         2075051787,
         22496,
@@ -7725,7 +7558,7 @@ PROTOCOLS_GUIDS = {
         40,
         8,
         131,
-        67
+        67,
     ],
     "EFI_VT_UTF8_GUID": [
         2903875798,
@@ -7738,7 +7571,7 @@ PROTOCOLS_GUIDS = {
         231,
         126,
         45,
-        136
+        136,
     ],
     "EFI_WATCHDOG_TIMER_ARCH_PROTOCOL_GUID": [
         1717452789,
@@ -7751,7 +7584,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_WIN_NT_BUS_DRIVER_IO_PROTOCOL_GUID": [
         2532002518,
@@ -7764,7 +7597,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "EFI_WIN_NT_SERIAL_PORT_GUID": [
         211134781,
@@ -7777,7 +7610,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "EFI_WIN_NT_THUNK_PROTOCOL_GUID": [
         1489311921,
@@ -7790,7 +7623,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "ERROR_MANAGER_GUID": [
         2917056386,
@@ -7803,7 +7636,7 @@ PROTOCOLS_GUIDS = {
         171,
         97,
         174,
-        218
+        218,
     ],
     "EXIT_FORM_SET_GUID": [
         2755331036,
@@ -7816,21 +7649,9 @@ PROTOCOLS_GUIDS = {
         170,
         162,
         87,
-        19
+        19,
     ],
-    "EXIT_PAGE_GUID": [
-        3968325187,
-        60324,
-        19381,
-        161,
-        229,
-        63,
-        62,
-        54,
-        178,
-        13,
-        169
-    ],
+    "EXIT_PAGE_GUID": [3968325187, 60324, 19381, 161, 229, 63, 62, 54, 178, 13, 169],
     "FAST_BOOT_TSE_PROTOCOL_GUID": [
         263865272,
         44251,
@@ -7842,7 +7663,7 @@ PROTOCOLS_GUIDS = {
         213,
         182,
         195,
-        197
+        197,
     ],
     "FAST_BOOT_VARIABLE_GUID": [
         3040912688,
@@ -7855,7 +7676,7 @@ PROTOCOLS_GUIDS = {
         215,
         100,
         210,
-        98
+        98,
     ],
     "FID_FFS_SECTION_GUID": [
         784204405,
@@ -7868,21 +7689,9 @@ PROTOCOLS_GUIDS = {
         237,
         177,
         0,
-        170
+        170,
     ],
-    "FID_TABLE_GUID": [
-        1070715810,
-        39415,
-        16907,
-        188,
-        105,
-        139,
-        177,
-        212,
-        146,
-        163,
-        50
-    ],
+    "FID_TABLE_GUID": [1070715810, 39415, 16907, 188, 105, 139, 177, 212, 146, 163, 50],
     "FID_TABLE_SECTION_GUID": [
         784204405,
         25688,
@@ -7894,7 +7703,7 @@ PROTOCOLS_GUIDS = {
         237,
         177,
         0,
-        170
+        170,
     ],
     "FIRMWARE_PERFORMANCE_PROTOCOL_GUID": [
         3158388085,
@@ -7907,7 +7716,7 @@ PROTOCOLS_GUIDS = {
         88,
         143,
         246,
-        111
+        111,
     ],
     "FLASH_PROTOCOL_GUID": [
         1968924054,
@@ -7920,7 +7729,7 @@ PROTOCOLS_GUIDS = {
         159,
         209,
         234,
-        136
+        136,
     ],
     "FLASH_SMM_PROTOCOL_GUID": [
         3971508139,
@@ -7933,7 +7742,7 @@ PROTOCOLS_GUIDS = {
         27,
         155,
         90,
-        117
+        117,
     ],
     "FLASH_UPDATE_GUID": [
         2537697749,
@@ -7946,21 +7755,9 @@ PROTOCOLS_GUIDS = {
         92,
         193,
         77,
-        104
+        104,
     ],
-    "FONT_FFS_FILE_GUID": [
-        3670192407,
-        46587,
-        18788,
-        163,
-        18,
-        13,
-        204,
-        119,
-        6,
-        27,
-        155
-    ],
+    "FONT_FFS_FILE_GUID": [3670192407, 46587, 18788, 163, 18, 13, 204, 119, 6, 27, 155],
     "FPDT_PERFORMANCE_PROTOCOL_GUID": [
         1145844227,
         63665,
@@ -7972,7 +7769,7 @@ PROTOCOLS_GUIDS = {
         2,
         91,
         225,
-        42
+        42,
     ],
     "FRAMEWORK_EFI_FIRMWARE_VOLUME_BLOCK_PROTOCOL_GUID": [
         3727211609,
@@ -7985,21 +7782,9 @@ PROTOCOLS_GUIDS = {
         173,
         181,
         141,
-        161
+        161,
     ],
-    "FW_VERSION_GUID": [
-        3049623687,
-        65196,
-        19265,
-        157,
-        128,
-        121,
-        11,
-        165,
-        170,
-        7,
-        15
-    ],
+    "FW_VERSION_GUID": [3049623687, 65196, 19265, 157, 128, 121, 11, 165, 170, 7, 15],
     "FW_VOLUME_BLOCK_PROTOCOL_GUID": [
         3727211609,
         25128,
@@ -8011,7 +7796,7 @@ PROTOCOLS_GUIDS = {
         173,
         181,
         141,
-        161
+        161,
     ],
     "HDD_SECURITY_END_PROTOCOL_GUID": [
         2910301737,
@@ -8024,7 +7809,7 @@ PROTOCOLS_GUIDS = {
         97,
         155,
         103,
-        106
+        106,
     ],
     "HDD_SECURITY_INIT_PROTOCOL_GUID": [
         3463415483,
@@ -8037,7 +7822,7 @@ PROTOCOLS_GUIDS = {
         163,
         188,
         29,
-        174
+        174,
     ],
     "HDD_SMART_INIT_PROTOCOL_GUID": [
         2483141967,
@@ -8050,7 +7835,7 @@ PROTOCOLS_GUIDS = {
         228,
         227,
         72,
-        222
+        222,
     ],
     "HDD_UNLOCKED_GUID": [
         533896166,
@@ -8063,7 +7848,7 @@ PROTOCOLS_GUIDS = {
         14,
         106,
         195,
-        118
+        118,
     ],
     "HECI_PROTOCOL_GUID": [
         3484629008,
@@ -8076,7 +7861,7 @@ PROTOCOLS_GUIDS = {
         190,
         7,
         246,
-        232
+        232,
     ],
     "HII_RESOURCES_FFS_SECTION_GUID": [
         2548304358,
@@ -8089,7 +7874,7 @@ PROTOCOLS_GUIDS = {
         0,
         0,
         0,
-        0
+        0,
     ],
     "HOT_PLUG_DEVICE_GUID": [
         571130930,
@@ -8102,7 +7887,7 @@ PROTOCOLS_GUIDS = {
         166,
         122,
         210,
-        59
+        59,
     ],
     "ICC_OVERCLOCKING_PROTOCOL_GUID": [
         2391587928,
@@ -8115,7 +7900,7 @@ PROTOCOLS_GUIDS = {
         207,
         90,
         113,
-        124
+        124,
     ],
     "ICC_PERSISTENT_DATA_GUID": [
         1679371722,
@@ -8128,7 +7913,7 @@ PROTOCOLS_GUIDS = {
         41,
         235,
         76,
-        116
+        116,
     ],
     "ICC_VOLATILE_SETUP_DATA_GUID": [
         2071460747,
@@ -8141,7 +7926,7 @@ PROTOCOLS_GUIDS = {
         162,
         97,
         224,
-        119
+        119,
     ],
     "IDE_BUS_DRIVER_BINDING_PROTOCOL_GUID": [
         2326163569,
@@ -8154,7 +7939,7 @@ PROTOCOLS_GUIDS = {
         183,
         35,
         208,
-        114
+        114,
     ],
     "IDE_BUS_INIT_PROTOCOL_GUID": [
         3780749654,
@@ -8167,7 +7952,7 @@ PROTOCOLS_GUIDS = {
         26,
         78,
         94,
-        159
+        159,
     ],
     "IDE_CONTROLLER_PROTOCOL_GUID": [
         551716743,
@@ -8180,7 +7965,7 @@ PROTOCOLS_GUIDS = {
         163,
         55,
         30,
-        248
+        248,
     ],
     "IDE_HPA_INTERFACE_GUID": [
         1370121724,
@@ -8193,7 +7978,7 @@ PROTOCOLS_GUIDS = {
         122,
         141,
         125,
-        180
+        180,
     ],
     "IDE_POWER_MGMT_INTERFACE_GUID": [
         1740388483,
@@ -8206,7 +7991,7 @@ PROTOCOLS_GUIDS = {
         209,
         117,
         137,
-        186
+        186,
     ],
     "IDE_SECURITY_INTERFACE_GUID": [
         4109776169,
@@ -8219,7 +8004,7 @@ PROTOCOLS_GUIDS = {
         118,
         99,
         132,
-        190
+        190,
     ],
     "IDE_SECURITY_PWNV_GUID": [
         1771469452,
@@ -8232,7 +8017,7 @@ PROTOCOLS_GUIDS = {
         198,
         229,
         153,
-        160
+        160,
     ],
     "IDE_SETUP_PROTOCOL_GUID": [
         1433972246,
@@ -8245,7 +8030,7 @@ PROTOCOLS_GUIDS = {
         248,
         252,
         248,
-        74
+        74,
     ],
     "IDE_SMART_INTERFACE_GUID": [
         4290616018,
@@ -8258,7 +8043,7 @@ PROTOCOLS_GUIDS = {
         237,
         234,
         134,
-        181
+        181,
     ],
     "IFFS_ACPI_TABLE_STORAGE_GUID": [
         1621899919,
@@ -8271,7 +8056,7 @@ PROTOCOLS_GUIDS = {
         110,
         102,
         101,
-        238
+        238,
     ],
     "IFFS_GLOBAL_NVS_AREA_PROTOCOL_GUID": [
         2773851910,
@@ -8284,21 +8069,9 @@ PROTOCOLS_GUIDS = {
         249,
         205,
         156,
-        155
+        155,
     ],
-    "IFFS_GPT_GUID": [
-        3552568030,
-        15791,
-        4575,
-        186,
-        64,
-        227,
-        165,
-        86,
-        216,
-        149,
-        147
-    ],
+    "IFFS_GPT_GUID": [3552568030, 15791, 4575, 186, 64, 227, 165, 86, 216, 149, 147],
     "IFFS_INFO_PROTOCOL_GUID": [
         3526482779,
         19100,
@@ -8310,7 +8083,7 @@ PROTOCOLS_GUIDS = {
         188,
         125,
         106,
-        166
+        166,
     ],
     "IFFS_PARTITION_STATUS_PROTOCOL_GUID": [
         1701024068,
@@ -8323,7 +8096,7 @@ PROTOCOLS_GUIDS = {
         84,
         94,
         74,
-        48
+        48,
     ],
     "IFFS_PERSISTENT_DATA_GUID": [
         4193300785,
@@ -8336,7 +8109,7 @@ PROTOCOLS_GUIDS = {
         7,
         43,
         58,
-        125
+        125,
     ],
     "IFFS_PLATFORM_POLICY_PROTOCOL_GUID": [
         1119595683,
@@ -8349,21 +8122,9 @@ PROTOCOLS_GUIDS = {
         46,
         77,
         246,
-        20
+        20,
     ],
-    "IFFS_PPI_GUID": [
-        1024353850,
-        56434,
-        17545,
-        135,
-        197,
-        228,
-        158,
-        231,
-        115,
-        164,
-        82
-    ],
+    "IFFS_PPI_GUID": [1024353850, 56434, 17545, 135, 197, 228, 158, 231, 115, 164, 82],
     "IGD_OPREGION_PROTOCOL_GUID": [
         3452296671,
         59293,
@@ -8375,7 +8136,7 @@ PROTOCOLS_GUIDS = {
         73,
         13,
         185,
-        211
+        211,
     ],
     "INTEL_MEBX_PROTOCOL_GUID": [
         27990057,
@@ -8388,7 +8149,7 @@ PROTOCOLS_GUIDS = {
         214,
         111,
         62,
-        116
+        116,
     ],
     "LEGACY_DEV_ORDER_GUID": [
         2774562011,
@@ -8401,7 +8162,7 @@ PROTOCOLS_GUIDS = {
         221,
         142,
         150,
-        82
+        82,
     ],
     "LOAD_FILE_PROTOCOL_GUID": [
         1458319505,
@@ -8414,7 +8175,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "MAIN_FORM_SET_GUID": [
         2556358289,
@@ -8427,7 +8188,7 @@ PROTOCOLS_GUIDS = {
         220,
         147,
         242,
-        78
+        78,
     ],
     "MDES_STATUS_CODE_PROTOCOL_GUID": [
         3855648602,
@@ -8440,21 +8201,9 @@ PROTOCOLS_GUIDS = {
         64,
         41,
         204,
-        68
+        68,
     ],
-    "MEBX_FILE_GUID": [
-        2088879722,
-        20241,
-        18347,
-        130,
-        211,
-        103,
-        196,
-        214,
-        53,
-        174,
-        209
-    ],
+    "MEBX_FILE_GUID": [2088879722, 20241, 18347, 130, 211, 103, 196, 214, 53, 174, 209],
     "MEMORY_ONLY_RESET_CONTROL_GUID": [
         3792255422,
         13012,
@@ -8466,7 +8215,7 @@ PROTOCOLS_GUIDS = {
         133,
         212,
         152,
-        41
+        41,
     ],
     "MEM_INFO_PROTOCOL_GUID": [
         1864431560,
@@ -8479,21 +8228,9 @@ PROTOCOLS_GUIDS = {
         240,
         196,
         150,
-        174
+        174,
     ],
-    "MEUD_ERROR_GUID": [
-        120765753,
-        54960,
-        16441,
-        182,
-        194,
-        150,
-        84,
-        70,
-        109,
-        229,
-        37
-    ],
+    "MEUD_ERROR_GUID": [120765753, 54960, 16441, 182, 194, 150, 84, 70, 109, 229, 37],
     "MEUD_FILE_GUID": [
         4272596902,
         52117,
@@ -8505,7 +8242,7 @@ PROTOCOLS_GUIDS = {
         166,
         202,
         107,
-        174
+        174,
     ],
     "ME_ALERT_AT_HANDLER_GUID": [
         3024215943,
@@ -8518,7 +8255,7 @@ PROTOCOLS_GUIDS = {
         123,
         248,
         157,
-        42
+        42,
     ],
     "ME_BIOS_PAYLOAD_DATA_PROTOCOL_GUID": [
         1906414740,
@@ -8531,7 +8268,7 @@ PROTOCOLS_GUIDS = {
         37,
         66,
         115,
-        254
+        254,
     ],
     "ME_INFO_SETUP_GUID": [
         2015728691,
@@ -8544,7 +8281,7 @@ PROTOCOLS_GUIDS = {
         194,
         195,
         161,
-        125
+        125,
     ],
     "ME_PLATFORM_GET_RESET_TYPE_GUID": [
         3100495575,
@@ -8557,7 +8294,7 @@ PROTOCOLS_GUIDS = {
         189,
         247,
         72,
-        105
+        105,
     ],
     "MICROCODE_LOADER_PPI_GUID": [
         2607738102,
@@ -8570,7 +8307,7 @@ PROTOCOLS_GUIDS = {
         64,
         213,
         118,
-        97
+        97,
     ],
     "MINI_SETUP_RESOURCE_SECTION_GUID": [
         2548304358,
@@ -8583,60 +8320,12 @@ PROTOCOLS_GUIDS = {
         0,
         0,
         0,
-        0
+        0,
     ],
-    "MXM30_PEI_GUID": [
-        787593754,
-        51254,
-        19024,
-        191,
-        137,
-        82,
-        95,
-        242,
-        159,
-        247,
-        135
-    ],
-    "MXM3_EFI_GUID": [
-        1319752958,
-        59126,
-        16651,
-        144,
-        55,
-        15,
-        152,
-        181,
-        150,
-        139,
-        101
-    ],
-    "MXMOEM1_GUID": [
-        1728533358,
-        18095,
-        17107,
-        143,
-        108,
-        21,
-        242,
-        242,
-        2,
-        194,
-        52
-    ],
-    "NBCI_EFI_GUID": [
-        1319752958,
-        59126,
-        16651,
-        128,
-        55,
-        15,
-        152,
-        181,
-        150,
-        139,
-        101
-    ],
+    "MXM30_PEI_GUID": [787593754, 51254, 19024, 191, 137, 82, 95, 242, 159, 247, 135],
+    "MXM3_EFI_GUID": [1319752958, 59126, 16651, 144, 55, 15, 152, 181, 150, 139, 101],
+    "MXMOEM1_GUID": [1728533358, 18095, 17107, 143, 108, 21, 242, 242, 2, 194, 52],
+    "NBCI_EFI_GUID": [1319752958, 59126, 16651, 128, 55, 15, 152, 181, 150, 139, 101],
     "NETWORK_STACK_GUID": [
         3510656278,
         31484,
@@ -8648,21 +8337,9 @@ PROTOCOLS_GUIDS = {
         157,
         54,
         149,
-        162
+        162,
     ],
-    "NVRAM_HOB_GUID": [
-        3236692221,
-        49912,
-        20039,
-        144,
-        239,
-        156,
-        129,
-        85,
-        40,
-        91,
-        236
-    ],
+    "NVRAM_HOB_GUID": [3236692221, 49912, 20039, 144, 239, 156, 129, 85, 40, 91, 236],
     "NVRAM_MAILBOX_ADDRESS_VARIABLE_GUID": [
         1418803821,
         62702,
@@ -8674,7 +8351,7 @@ PROTOCOLS_GUIDS = {
         43,
         252,
         236,
-        245
+        245,
     ],
     "OEM_RECOVERY_CAPSULE_GUID": [
         1499098844,
@@ -8687,60 +8364,12 @@ PROTOCOLS_GUIDS = {
         40,
         81,
         223,
-        254
+        254,
     ],
-    "OEM_ROM_HOLE_0_GUID": [
-        97124860,
-        4033,
-        4572,
-        144,
-        17,
-        0,
-        23,
-        49,
-        83,
-        235,
-        168
-    ],
-    "OEM_ROM_HOLE_1_GUID": [
-        97124861,
-        4033,
-        4572,
-        144,
-        17,
-        0,
-        23,
-        49,
-        83,
-        235,
-        168
-    ],
-    "OEM_TSE_VAR_GUID": [
-        4105355271,
-        38049,
-        19669,
-        167,
-        16,
-        244,
-        20,
-        31,
-        206,
-        188,
-        160
-    ],
-    "ONBOARD_RAID_GUID": [
-        1562406355,
-        20842,
-        18396,
-        161,
-        188,
-        109,
-        162,
-        4,
-        170,
-        190,
-        8
-    ],
+    "OEM_ROM_HOLE_0_GUID": [97124860, 4033, 4572, 144, 17, 0, 23, 49, 83, 235, 168],
+    "OEM_ROM_HOLE_1_GUID": [97124861, 4033, 4572, 144, 17, 0, 23, 49, 83, 235, 168],
+    "OEM_TSE_VAR_GUID": [4105355271, 38049, 19669, 167, 16, 244, 20, 31, 206, 188, 160],
+    "ONBOARD_RAID_GUID": [1562406355, 20842, 18396, 161, 188, 109, 162, 4, 170, 190, 8],
     "OPAL_SEC_INIT_PROTOCOL_GUID": [
         1504646832,
         26141,
@@ -8752,7 +8381,7 @@ PROTOCOLS_GUIDS = {
         104,
         56,
         93,
-        141
+        141,
     ],
     "OPROM_START_END_PROTOCOL_GUID": [
         4070648063,
@@ -8765,7 +8394,7 @@ PROTOCOLS_GUIDS = {
         199,
         220,
         223,
-        172
+        172,
     ],
     "PARTITION_VARIABLE_GUID": [
         2377554380,
@@ -8778,21 +8407,9 @@ PROTOCOLS_GUIDS = {
         83,
         0,
         215,
-        89
-    ],
-    "PASSWORD_HOB_GUID": [
-        2043545978,
-        37290,
-        16895,
-        179,
-        168,
-        83,
-        69,
         89,
-        179,
-        13,
-        177
     ],
+    "PASSWORD_HOB_GUID": [2043545978, 37290, 16895, 179, 168, 83, 69, 89, 179, 13, 177],
     "PCH_DMI_TC_VC_PPI_GUID": [
         3976819538,
         36929,
@@ -8804,7 +8421,7 @@ PROTOCOLS_GUIDS = {
         80,
         158,
         136,
-        69
+        69,
     ],
     "PCH_EFI_RAID_DRIVER_EXECUTION_GUID": [
         2580903292,
@@ -8817,21 +8434,9 @@ PROTOCOLS_GUIDS = {
         72,
         36,
         1,
-        155
+        155,
     ],
-    "PCH_INIT_PPI_GUID": [
-        3905408532,
-        7917,
-        18685,
-        131,
-        71,
-        142,
-        85,
-        65,
-        16,
-        192,
-        217
-    ],
+    "PCH_INIT_PPI_GUID": [3905408532, 7917, 18685, 131, 71, 142, 85, 65, 16, 192, 217],
     "PCH_INIT_VARIABLE_GUID": [
         3871536906,
         46596,
@@ -8843,7 +8448,7 @@ PROTOCOLS_GUIDS = {
         137,
         225,
         23,
-        235
+        235,
     ],
     "PCH_ME_UMA_PPI_GUID": [
         2352439312,
@@ -8856,7 +8461,7 @@ PROTOCOLS_GUIDS = {
         29,
         243,
         201,
-        209
+        209,
     ],
     "PCH_PLATFORM_POLICY_PPI_GUID": [
         570904177,
@@ -8869,7 +8474,7 @@ PROTOCOLS_GUIDS = {
         237,
         253,
         128,
-        50
+        50,
     ],
     "PCH_RESET_CALLBACK_PROTOCOL_GUID": [
         976421035,
@@ -8882,7 +8487,7 @@ PROTOCOLS_GUIDS = {
         193,
         53,
         98,
-        192
+        192,
     ],
     "PCH_RESET_PROTOCOL_GUID": [
         3680721196,
@@ -8895,7 +8500,7 @@ PROTOCOLS_GUIDS = {
         52,
         89,
         138,
-        90
+        90,
     ],
     "PCH_SATA_CONTROLLER_DRIVER_GUID": [
         3146948009,
@@ -8908,7 +8513,7 @@ PROTOCOLS_GUIDS = {
         63,
         35,
         218,
-        85
+        85,
     ],
     "PCH_USB_POLICY_PPI_GUID": [
         3224044915,
@@ -8921,7 +8526,7 @@ PROTOCOLS_GUIDS = {
         123,
         80,
         68,
-        44
+        44,
     ],
     "PEI_AMT_PLATFORM_POLICY_PPI_GUID": [
         3030458510,
@@ -8934,7 +8539,7 @@ PROTOCOLS_GUIDS = {
         97,
         230,
         197,
-        172
+        172,
     ],
     "PEI_AMT_STATUS_CODE_PPI_GUID": [
         2283276242,
@@ -8947,7 +8552,7 @@ PROTOCOLS_GUIDS = {
         196,
         47,
         36,
-        73
+        73,
     ],
     "PEI_AP_STARTUP_FILE_GUID": [
         3521486672,
@@ -8960,7 +8565,7 @@ PROTOCOLS_GUIDS = {
         2,
         35,
         60,
-        151
+        151,
     ],
     "PEI_ATA_CONTROLLER_PPI_GUID": [
         2757648593,
@@ -8973,7 +8578,7 @@ PROTOCOLS_GUIDS = {
         127,
         133,
         144,
-        109
+        109,
     ],
     "PEI_ATA_POLICY_PPI_GUID": [
         462282404,
@@ -8986,7 +8591,7 @@ PROTOCOLS_GUIDS = {
         177,
         108,
         228,
-        100
+        100,
     ],
     "PEI_BASE_MEMORY_TEST_GUID": [
         3068936764,
@@ -8999,7 +8604,7 @@ PROTOCOLS_GUIDS = {
         100,
         234,
         166,
-        116
+        116,
     ],
     "PEI_BIOS_ACM_FILE_GUID": [
         757581336,
@@ -9012,7 +8617,7 @@ PROTOCOLS_GUIDS = {
         107,
         231,
         225,
-        67
+        67,
     ],
     "PEI_BLOCK_IO_PPI_GUID": [
         1767738017,
@@ -9025,7 +8630,7 @@ PROTOCOLS_GUIDS = {
         188,
         231,
         153,
-        227
+        227,
     ],
     "PEI_BOOT_SCRIPT_DONE_PPI_GUID": [
         4252780133,
@@ -9038,7 +8643,7 @@ PROTOCOLS_GUIDS = {
         83,
         206,
         68,
-        176
+        176,
     ],
     "PEI_BOOT_SCRIPT_EXECUTER_PPI_GUID": [
         2882807957,
@@ -9051,7 +8656,7 @@ PROTOCOLS_GUIDS = {
         24,
         11,
         251,
-        255
+        255,
     ],
     "PEI_CACHE_PPI_GUID": [
         3243450458,
@@ -9064,7 +8669,7 @@ PROTOCOLS_GUIDS = {
         188,
         197,
         200,
-        162
+        162,
     ],
     "PEI_CAPSULE_PPI_GUID": [
         986657774,
@@ -9077,7 +8682,7 @@ PROTOCOLS_GUIDS = {
         210,
         225,
         50,
-        61
+        61,
     ],
     "PEI_CPU_IO_PPI_GUID": [
         3870236539,
@@ -9090,7 +8695,7 @@ PROTOCOLS_GUIDS = {
         87,
         164,
         66,
-        130
+        130,
     ],
     "PEI_CPU_PLATFORM_POLICY_PPI_GUID": [
         2072962977,
@@ -9103,7 +8708,7 @@ PROTOCOLS_GUIDS = {
         226,
         68,
         69,
-        194
+        194,
     ],
     "PEI_END_OF_PEI_PHASE_PPI_GUID": [
         1616815696,
@@ -9116,7 +8721,7 @@ PROTOCOLS_GUIDS = {
         42,
         182,
         24,
-        198
+        198,
     ],
     "PEI_FLASH_MAP_PPI_GUID": [
         4081856416,
@@ -9129,21 +8734,9 @@ PROTOCOLS_GUIDS = {
         34,
         244,
         82,
-        28
+        28,
     ],
-    "PEI_HECI_PPI_GUID": [
-        3993937937,
-        64473,
-        18295,
-        185,
-        90,
-        186,
-        79,
-        113,
-        16,
-        31,
-        116
-    ],
+    "PEI_HECI_PPI_GUID": [3993937937, 64473, 18295, 185, 90, 186, 79, 113, 16, 31, 116],
     "PEI_IDE_RECOVERY_NATIVE_MODE_PPI_GUID": [
         2115199866,
         50168,
@@ -9155,7 +8748,7 @@ PROTOCOLS_GUIDS = {
         215,
         8,
         236,
-        122
+        122,
     ],
     "PEI_IFFS_TRANSITION_START_PPI_GUID": [
         3733923960,
@@ -9168,7 +8761,7 @@ PROTOCOLS_GUIDS = {
         38,
         71,
         179,
-        53
+        53,
     ],
     "PEI_IN_MEMORY_GUID": [
         1681622918,
@@ -9181,7 +8774,7 @@ PROTOCOLS_GUIDS = {
         147,
         28,
         174,
-        216
+        216,
     ],
     "PEI_ME_PLATFORM_POLICY_PPI_GUID": [
         2061749943,
@@ -9194,7 +8787,7 @@ PROTOCOLS_GUIDS = {
         188,
         131,
         202,
-        191
+        191,
     ],
     "PEI_PCI_CFG_PPI_GUID": [
         3790793632,
@@ -9207,7 +8800,7 @@ PROTOCOLS_GUIDS = {
         33,
         100,
         42,
-        144
+        144,
     ],
     "PEI_PERMANENT_MEMORY_INSTALLED_PPI_GUID": [
         4170474557,
@@ -9220,7 +8813,7 @@ PROTOCOLS_GUIDS = {
         216,
         198,
         91,
-        222
+        222,
     ],
     "PEI_PLATFORM_MEMORY_RANGE_PPI_GUID": [
         820717945,
@@ -9233,7 +8826,7 @@ PROTOCOLS_GUIDS = {
         150,
         206,
         177,
-        244
+        244,
     ],
     "PEI_PLATFORM_MEMORY_SIZE_PPI_GUID": [
         2592011294,
@@ -9246,7 +8839,7 @@ PROTOCOLS_GUIDS = {
         36,
         11,
         76,
-        230
+        230,
     ],
     "PEI_READ_ONLY_VARIABLE_ACCESS_PPI_GUID": [
         1021087942,
@@ -9259,7 +8852,7 @@ PROTOCOLS_GUIDS = {
         221,
         120,
         185,
-        250
+        250,
     ],
     "PEI_RESET_PPI_GUID": [
         4013526360,
@@ -9272,7 +8865,7 @@ PROTOCOLS_GUIDS = {
         244,
         254,
         113,
-        47
+        47,
     ],
     "PEI_S3_RESUME_PPI_GUID": [
         1143393458,
@@ -9285,7 +8878,7 @@ PROTOCOLS_GUIDS = {
         176,
         37,
         183,
-        16
+        16,
     ],
     "PEI_SECURITY_PPI_GUID": [
         327681646,
@@ -9298,7 +8891,7 @@ PROTOCOLS_GUIDS = {
         58,
         149,
         138,
-        41
+        41,
     ],
     "PEI_SMBUS2_PPI_GUID": [
         2628335143,
@@ -9311,7 +8904,7 @@ PROTOCOLS_GUIDS = {
         97,
         118,
         69,
-        67
+        67,
     ],
     "PEI_SMBUS_POLICY_PPI_GUID": [
         1672930357,
@@ -9324,21 +8917,9 @@ PROTOCOLS_GUIDS = {
         160,
         254,
         26,
-        108
+        108,
     ],
-    "PEI_SMBUS_PPI_GUID": [
-        2882807957,
-        30927,
-        18546,
-        132,
-        68,
-        27,
-        92,
-        24,
-        11,
-        251,
-        218
-    ],
+    "PEI_SMBUS_PPI_GUID": [2882807957, 30927, 18546, 132, 68, 27, 92, 24, 11, 251, 218],
     "PEI_SMM_ACCESS_PPI_GUID": [
         646919081,
         52429,
@@ -9350,7 +8931,7 @@ PROTOCOLS_GUIDS = {
         58,
         195,
         46,
-        214
+        214,
     ],
     "PEI_SMM_CONTROL_PPI_GUID": [
         1640400642,
@@ -9363,7 +8944,7 @@ PROTOCOLS_GUIDS = {
         5,
         206,
         116,
-        197
+        197,
     ],
     "PEI_SPI_PPI_GUID": [
         1692675730,
@@ -9376,7 +8957,7 @@ PROTOCOLS_GUIDS = {
         144,
         167,
         108,
-        89
+        89,
     ],
     "PEI_STALL_PPI_GUID": [
         525102992,
@@ -9389,7 +8970,7 @@ PROTOCOLS_GUIDS = {
         241,
         205,
         125,
-        86
+        86,
     ],
     "PEI_STATUS_CODE_MEMORY_PPI_GUID": [
         653830913,
@@ -9402,7 +8983,7 @@ PROTOCOLS_GUIDS = {
         247,
         104,
         57,
-        91
+        91,
     ],
     "PEI_STATUS_CODE_PPI_GUID": [
         580399827,
@@ -9415,7 +8996,7 @@ PROTOCOLS_GUIDS = {
         183,
         212,
         84,
-        54
+        54,
     ],
     "PEI_TCG_INTERNAL_FLAGS_GUID": [
         1895821567,
@@ -9428,21 +9009,9 @@ PROTOCOLS_GUIDS = {
         144,
         65,
         32,
-        128
+        128,
     ],
-    "PEI_TCG_PPI_GUID": [
-        394082770,
-        17336,
-        16584,
-        154,
-        225,
-        60,
-        81,
-        152,
-        214,
-        148,
-        30
-    ],
+    "PEI_TCG_PPI_GUID": [394082770, 17336, 16584, 154, 225, 60, 81, 152, 214, 148, 30],
     "PEI_TPM_INITIALIZED_PPI_GUID": [
         3923447128,
         54413,
@@ -9454,7 +9023,7 @@ PROTOCOLS_GUIDS = {
         232,
         108,
         123,
-        65
+        65,
     ],
     "PEI_TPM_PPI_2_GUID": [
         3393737716,
@@ -9467,7 +9036,7 @@ PROTOCOLS_GUIDS = {
         138,
         127,
         172,
-        45
+        45,
     ],
     "PEI_TPM_PPI_GUID": [
         3923447128,
@@ -9480,7 +9049,7 @@ PROTOCOLS_GUIDS = {
         232,
         108,
         123,
-        65
+        65,
     ],
     "PEI_TXT_MEMORY_UNLOCKED_PPI_GUID": [
         953012491,
@@ -9493,7 +9062,7 @@ PROTOCOLS_GUIDS = {
         29,
         254,
         47,
-        165
+        165,
     ],
     "PEI_USB_CONTROLLER_PPI_GUID": [
         1002567390,
@@ -9506,21 +9075,9 @@ PROTOCOLS_GUIDS = {
         60,
         164,
         32,
-        178
+        178,
     ],
-    "PERF_TUNE_PPI_GUID": [
-        3297872371,
-        7500,
-        19159,
-        164,
-        57,
-        208,
-        19,
-        171,
-        114,
-        9,
-        49
-    ],
+    "PERF_TUNE_PPI_GUID": [3297872371, 7500, 19159, 164, 57, 208, 19, 171, 114, 9, 49],
     "PERF_TUNE_PROTOCOL_GUID": [
         3714867514,
         23159,
@@ -9532,7 +9089,7 @@ PROTOCOLS_GUIDS = {
         42,
         226,
         29,
-        129
+        129,
     ],
     "PERF_TUNE_WDT_PPI_GUID": [
         2814939054,
@@ -9545,7 +9102,7 @@ PROTOCOLS_GUIDS = {
         85,
         23,
         115,
-        6
+        6,
     ],
     "PERF_TUNE_WDT_PROTOCOL_GUID": [
         3226828525,
@@ -9558,21 +9115,9 @@ PROTOCOLS_GUIDS = {
         81,
         242,
         186,
-        9
+        9,
     ],
-    "PKPUB_KEY_GUID": [
-        2797658398,
-        37534,
-        17075,
-        144,
-        204,
-        79,
-        119,
-        142,
-        3,
-        255,
-        87
-    ],
+    "PKPUB_KEY_GUID": [2797658398, 37534, 17075, 144, 204, 79, 119, 142, 3, 255, 87],
     "PK_PUB_FFS_FILE_EFI_AUTH_VAR_GUID": [
         2657245735,
         18496,
@@ -9584,7 +9129,7 @@ PROTOCOLS_GUIDS = {
         17,
         207,
         198,
-        14
+        14,
     ],
     "PLATFORM_IDE_PROTOCOL_GUID": [
         1731720859,
@@ -9597,7 +9142,7 @@ PROTOCOLS_GUIDS = {
         238,
         247,
         12,
-        222
+        222,
     ],
     "PLATFORM_ME_HOOK_PPI_GUID": [
         3892724303,
@@ -9610,7 +9155,7 @@ PROTOCOLS_GUIDS = {
         3,
         137,
         161,
-        90
+        90,
     ],
     "PLATFORM_ME_HOOK_PROTOCOL_GUID": [
         3159508846,
@@ -9623,7 +9168,7 @@ PROTOCOLS_GUIDS = {
         72,
         120,
         170,
-        194
+        194,
     ],
     "POWER_MANAGEMENT_ACPI_TABLE_STORAGE_GUID": [
         697385403,
@@ -9636,7 +9181,7 @@ PROTOCOLS_GUIDS = {
         10,
         58,
         0,
-        110
+        110,
     ],
     "PPM_PLATFORM_POLICY_PROTOCOL_GUID": [
         1864886672,
@@ -9649,7 +9194,7 @@ PROTOCOLS_GUIDS = {
         6,
         54,
         147,
-        233
+        233,
     ],
     "PPM_PROCESSOR_SUPPORT_PROTOCOL_3_GUID": [
         2785836493,
@@ -9662,7 +9207,7 @@ PROTOCOLS_GUIDS = {
         1,
         94,
         6,
-        183
+        183,
     ],
     "PR_KEY_FFS_FILE_RAW_GUID": [
         1072613458,
@@ -9675,21 +9220,9 @@ PROTOCOLS_GUIDS = {
         140,
         91,
         190,
-        204
+        204,
     ],
-    "PR_KEY_GUID": [
-        1309645780,
-        58168,
-        19238,
-        132,
-        62,
-        189,
-        58,
-        217,
-        178,
-        131,
-        123
-    ],
+    "PR_KEY_GUID": [1309645780, 58168, 19238, 132, 62, 189, 58, 217, 178, 131, 123],
     "PTID_FFS_TABLE_STORAGE_GUID": [
         2514471653,
         47912,
@@ -9701,7 +9234,7 @@ PROTOCOLS_GUIDS = {
         166,
         191,
         67,
-        79
+        79,
     ],
     "RECOVERY_FORM_SET_GUID": [
         2162237486,
@@ -9714,7 +9247,7 @@ PROTOCOLS_GUIDS = {
         44,
         62,
         88,
-        99
+        99,
     ],
     "ROM_CACHE_ENABLE_PPI_GUID": [
         921187771,
@@ -9727,7 +9260,7 @@ PROTOCOLS_GUIDS = {
         37,
         218,
         233,
-        16
+        16,
     ],
     "ROM_IMAGE_ADDRESS_GUID": [
         3722558578,
@@ -9740,7 +9273,7 @@ PROTOCOLS_GUIDS = {
         45,
         47,
         80,
-        116
+        116,
     ],
     "ROM_IMAGE_MEMORY_HOB_GUID": [
         3996075474,
@@ -9753,7 +9286,7 @@ PROTOCOLS_GUIDS = {
         223,
         163,
         182,
-        197
+        197,
     ],
     "ROM_LAYOUT_FFS_GUID": [
         231373114,
@@ -9766,7 +9299,7 @@ PROTOCOLS_GUIDS = {
         104,
         78,
         56,
-        193
+        193,
     ],
     "ROM_LAYOUT_SECTION_GUID": [
         2292275791,
@@ -9779,7 +9312,7 @@ PROTOCOLS_GUIDS = {
         49,
         108,
         31,
-        50
+        50,
     ],
     "RSDP_PLUS_PROTOCOL_GUID": [
         2738035125,
@@ -9792,7 +9325,7 @@ PROTOCOLS_GUIDS = {
         91,
         9,
         2,
-        204
+        204,
     ],
     "SATA_CONTROLLER_PROTOCOL_GUID": [
         717973031,
@@ -9805,7 +9338,7 @@ PROTOCOLS_GUIDS = {
         250,
         110,
         157,
-        166
+        166,
     ],
     "SA_PEG_DATA_HOB_GUID": [
         1599943938,
@@ -9818,7 +9351,7 @@ PROTOCOLS_GUIDS = {
         66,
         122,
         19,
-        26
+        26,
     ],
     "SA_PEG_DATA_VARIABLE_GUID": [
         3298251264,
@@ -9831,7 +9364,7 @@ PROTOCOLS_GUIDS = {
         248,
         157,
         152,
-        94
+        94,
     ],
     "SA_PEI_INIT_PPI_GUID": [
         166365457,
@@ -9844,7 +9377,7 @@ PROTOCOLS_GUIDS = {
         147,
         180,
         142,
-        17
+        17,
     ],
     "SA_PLATFORM_POLICY_PPI_GUID": [
         353166358,
@@ -9857,7 +9390,7 @@ PROTOCOLS_GUIDS = {
         187,
         224,
         70,
-        55
+        55,
     ],
     "SECURITY_FORM_SET_GUID": [
         2552031982,
@@ -9870,7 +9403,7 @@ PROTOCOLS_GUIDS = {
         188,
         253,
         119,
-        225
+        225,
     ],
     "SERIAL_RECOVERY_CAPSULE_GUID": [
         1771756912,
@@ -9883,7 +9416,7 @@ PROTOCOLS_GUIDS = {
         192,
         129,
         221,
-        133
+        133,
     ],
     "SETUP_DEFAULTS_FFS_GUID": [
         2451648859,
@@ -9896,21 +9429,9 @@ PROTOCOLS_GUIDS = {
         244,
         113,
         43,
-        211
+        211,
     ],
-    "SETUP_GUID": [
-        3968325187,
-        60324,
-        19381,
-        161,
-        229,
-        63,
-        62,
-        54,
-        178,
-        13,
-        169
-    ],
+    "SETUP_GUID": [3968325187, 60324, 19381, 161, 229, 63, 62, 54, 178, 13, 169],
     "SGOEM_ACPI_SSDT_GUID": [
         1529028742,
         13578,
@@ -9922,7 +9443,7 @@ PROTOCOLS_GUIDS = {
         181,
         118,
         93,
-        133
+        133,
     ],
     "SGTPV_ACPI_SSDT_GUID": [
         1778782483,
@@ -9935,7 +9456,7 @@ PROTOCOLS_GUIDS = {
         53,
         158,
         176,
-        105
+        105,
     ],
     "SG_ACPI_TABLE_STORAGE_GUID": [
         3402315799,
@@ -9948,21 +9469,9 @@ PROTOCOLS_GUIDS = {
         143,
         36,
         236,
-        40
+        40,
     ],
-    "SG_INFO_HOB_GUID": [
-        1686954107,
-        44637,
-        18803,
-        189,
-        60,
-        140,
-        145,
-        83,
-        192,
-        93,
-        197
-    ],
+    "SG_INFO_HOB_GUID": [1686954107, 44637, 18803, 189, 60, 140, 145, 83, 192, 93, 197],
     "SG_PEI_INIT_PPI_GUID": [
         2856374286,
         23451,
@@ -9974,7 +9483,7 @@ PROTOCOLS_GUIDS = {
         203,
         239,
         129,
-        112
+        112,
     ],
     "SG_PLATFORM_POLICY_PPI_GUID": [
         2744248354,
@@ -9987,7 +9496,7 @@ PROTOCOLS_GUIDS = {
         68,
         184,
         98,
-        124
+        124,
     ],
     "SIO_DEV_STATUS_VAR_GUID": [
         1478549144,
@@ -10000,7 +9509,7 @@ PROTOCOLS_GUIDS = {
         13,
         22,
         42,
-        126
+        126,
     ],
     "SIO_IO_PROTOCOL_GUID": [
         2521717537,
@@ -10013,7 +9522,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "SMBIOS_FLASH_DATA_FFS_GUID": [
         4249125387,
@@ -10026,7 +9535,7 @@ PROTOCOLS_GUIDS = {
         85,
         110,
         185,
-        189
+        189,
     ],
     "SMM_CHILD_DISPATCHER2_GUID": [
         2500606502,
@@ -10039,7 +9548,7 @@ PROTOCOLS_GUIDS = {
         245,
         199,
         59,
-        150
+        150,
     ],
     "SMM_COMMUNICATE_HEADER_GUID": [
         4079543148,
@@ -10052,7 +9561,7 @@ PROTOCOLS_GUIDS = {
         149,
         52,
         205,
-        117
+        117,
     ],
     "SMM_HECI_PROTOCOL_GUID": [
         4237971649,
@@ -10065,7 +9574,7 @@ PROTOCOLS_GUIDS = {
         215,
         137,
         108,
-        186
+        186,
     ],
     "SMRAM_CPU_DATA_HEADER_GUID": [
         1481178413,
@@ -10078,7 +9587,7 @@ PROTOCOLS_GUIDS = {
         231,
         10,
         232,
-        35
+        35,
     ],
     "SMRAM_CPU_DATA_VARIABLE_GUID": [
         1117061593,
@@ -10091,7 +9600,7 @@ PROTOCOLS_GUIDS = {
         58,
         29,
         181,
-        78
+        78,
     ],
     "SM_BUS_CONTROLLER_IDENTIFIER_GUID": [
         2284791110,
@@ -10104,7 +9613,7 @@ PROTOCOLS_GUIDS = {
         90,
         215,
         132,
-        28
+        28,
     ],
     "SYSTEM_ACCESS_GUID": [
         3882924905,
@@ -10117,7 +9626,7 @@ PROTOCOLS_GUIDS = {
         148,
         86,
         254,
-        172
+        172,
     ],
     "TCG_EFI_ACPI_TABLE_GUID": [
         3952946480,
@@ -10130,7 +9639,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "TCG_EFI_HOB_LIST_GUID": [
         2000286284,
@@ -10143,7 +9652,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "TCG_INTERNAL_FLAGS_GUID": [
         1895821567,
@@ -10156,7 +9665,7 @@ PROTOCOLS_GUIDS = {
         144,
         65,
         32,
-        128
+        128,
     ],
     "TCG_LOCK_DOWN_VAR_GUID": [
         1851807030,
@@ -10169,7 +9678,7 @@ PROTOCOLS_GUIDS = {
         63,
         121,
         141,
-        123
+        123,
     ],
     "TCG_PLATFORM_SETUP_PEI_POLICY_GUID": [
         2808827426,
@@ -10182,7 +9691,7 @@ PROTOCOLS_GUIDS = {
         176,
         186,
         65,
-        4
+        4,
     ],
     "TCG_PLATFORM_SETUP_POLICY_GUID": [
         3144466175,
@@ -10195,7 +9704,7 @@ PROTOCOLS_GUIDS = {
         91,
         222,
         135,
-        231
+        231,
     ],
     "TCG_PPI_SYNC_FLAG_GUID": [
         4092433887,
@@ -10208,7 +9717,7 @@ PROTOCOLS_GUIDS = {
         25,
         101,
         166,
-        52
+        52,
     ],
     "TDTHI_PROTOCOL_FIXED_GUID": [
         4203697640,
@@ -10221,7 +9730,7 @@ PROTOCOLS_GUIDS = {
         57,
         0,
         37,
-        116
+        116,
     ],
     "TDTHI_PROTOCOL_GUID": [
         1011372758,
@@ -10234,7 +9743,7 @@ PROTOCOLS_GUIDS = {
         193,
         170,
         67,
-        10
+        10,
     ],
     "TDT_VOLATILE_SETUP_DATA_GUID": [
         2071460747,
@@ -10247,7 +9756,7 @@ PROTOCOLS_GUIDS = {
         162,
         97,
         224,
-        118
+        118,
     ],
     "TEMPORARY_RAM_SUPPORT_PPI_GUID": [
         3689036457,
@@ -10260,21 +9769,9 @@ PROTOCOLS_GUIDS = {
         241,
         97,
         115,
-        137
+        137,
     ],
-    "TERMINAL_VAR_GUID": [
-        1443624330,
-        7693,
-        19838,
-        149,
-        63,
-        41,
-        128,
-        162,
-        97,
-        224,
-        49
-    ],
+    "TERMINAL_VAR_GUID": [1443624330, 7693, 19838, 149, 63, 41, 128, 162, 97, 224, 49],
     "TPM_BOOT_FLOW_VARIABLE_GUID": [
         3058043465,
         2753,
@@ -10286,34 +9783,10 @@ PROTOCOLS_GUIDS = {
         178,
         57,
         219,
-        61
+        61,
     ],
-    "TXT_INFO_HOB_GUID": [
-        696682559,
-        35040,
-        18640,
-        75,
-        130,
-        32,
-        194,
-        105,
-        72,
-        221,
-        172
-    ],
-    "TXT_ONE_TOUCH_GUID": [
-        1033409649,
-        53164,
-        18103,
-        155,
-        28,
-        8,
-        67,
-        1,
-        9,
-        64,
-        45
-    ],
+    "TXT_INFO_HOB_GUID": [696682559, 35040, 18640, 75, 130, 32, 194, 105, 72, 221, 172],
+    "TXT_ONE_TOUCH_GUID": [1033409649, 53164, 18103, 155, 28, 8, 67, 1, 9, 64, 45],
     "TXT_ONE_TOUCH_OP_PROTOCOL_GUID": [
         4196612269,
         32991,
@@ -10325,7 +9798,7 @@ PROTOCOLS_GUIDS = {
         69,
         208,
         58,
-        118
+        118,
     ],
     "UNKNOWN_DEVICE_GUID": [
         3476159173,
@@ -10338,7 +9811,7 @@ PROTOCOLS_GUIDS = {
         201,
         62,
         201,
-        59
+        59,
     ],
     "USB_TIMING_POLICY_PROTOCOL_GUID": [
         2313404892,
@@ -10351,21 +9824,9 @@ PROTOCOLS_GUIDS = {
         178,
         130,
         140,
-        24
+        24,
     ],
-    "USER_DEFAULTS_GUID": [
-        3301707240,
-        1671,
-        17442,
-        153,
-        193,
-        101,
-        53,
-        26,
-        93,
-        95,
-        149
-    ],
+    "USER_DEFAULTS_GUID": [3301707240, 1671, 17442, 153, 193, 101, 53, 26, 93, 95, 149],
     "WDT_APP_PROTOCOL_GUID": [
         2462568635,
         26526,
@@ -10377,21 +9838,9 @@ PROTOCOLS_GUIDS = {
         41,
         104,
         87,
-        139
-    ],
-    "WDT_HOB_GUID": [
-        1701271430,
-        44234,
-        19217,
-        138,
-        183,
-        248,
-        67,
-        170,
-        42,
         139,
-        234
     ],
+    "WDT_HOB_GUID": [1701271430, 44234, 19217, 138, 183, 248, 67, 170, 42, 139, 234],
     "WDT_PERSISTENT_DATA_GUID": [
         2026775380,
         53180,
@@ -10403,34 +9852,10 @@ PROTOCOLS_GUIDS = {
         127,
         168,
         146,
-        191
+        191,
     ],
-    "WDT_PPI_GUID": [
-        4086108984,
-        44922,
-        20406,
-        145,
-        219,
-        26,
-        156,
-        33,
-        131,
-        87,
-        13
-    ],
-    "WDT_PROTOCOL_GUID": [
-        3022753042,
-        10955,
-        18842,
-        169,
-        32,
-        221,
-        91,
-        230,
-        207,
-        9,
-        177
-    ],
+    "WDT_PPI_GUID": [4086108984, 44922, 20406, 145, 219, 26, 156, 33, 131, 87, 13],
+    "WDT_PROTOCOL_GUID": [3022753042, 10955, 18842, 169, 32, 221, 91, 230, 207, 9, 177],
     "ASROCK_ACPIS4_DXE_GUID": [
         69196166,
         45078,
@@ -10442,21 +9867,9 @@ PROTOCOLS_GUIDS = {
         237,
         212,
         173,
-        100
+        100,
     ],
-    "ASROCK_USBRT_GUID": [
-        82487969,
-        10657,
-        4567,
-        136,
-        56,
-        0,
-        80,
-        4,
-        115,
-        212,
-        235
-    ],
+    "ASROCK_USBRT_GUID": [82487969, 10657, 4567, 136, 56, 0, 80, 4, 115, 212, 235],
     "ASROCK_RAID_SETUP_GUID": [
         152494882,
         14144,
@@ -10468,7 +9881,7 @@ PROTOCOLS_GUIDS = {
         44,
         236,
         202,
-        54
+        54,
     ],
     "ASROCK_RAID_LOADER_GUID": [
         164506669,
@@ -10481,7 +9894,7 @@ PROTOCOLS_GUIDS = {
         235,
         84,
         144,
-        184
+        184,
     ],
     "ASROCK_SIOSLPSMI_GUID": [
         204970154,
@@ -10494,21 +9907,9 @@ PROTOCOLS_GUIDS = {
         251,
         29,
         134,
-        211
+        211,
     ],
-    "ASROCK_PLEDDXE_GUID": [
-        260599413,
-        12329,
-        20175,
-        182,
-        148,
-        34,
-        137,
-        77,
-        63,
-        33,
-        67
-    ],
+    "ASROCK_PLEDDXE_GUID": [260599413, 12329, 20175, 182, 148, 34, 137, 77, 63, 33, 67],
     "ASROCK_A_DEFAULT_DXE_GUID": [
         303480106,
         49246,
@@ -10520,7 +9921,7 @@ PROTOCOLS_GUIDS = {
         55,
         173,
         59,
-        122
+        122,
     ],
     "ASROCK_USER_DEF_SETUP_DXE_GUID": [
         321832763,
@@ -10533,7 +9934,7 @@ PROTOCOLS_GUIDS = {
         80,
         239,
         189,
-        137
+        137,
     ],
     "ASROCK_WAKEUP_CTRL_SMM_GUID": [
         460234064,
@@ -10546,7 +9947,7 @@ PROTOCOLS_GUIDS = {
         236,
         89,
         212,
-        252
+        252,
     ],
     "ASROCK_AMI_AGESA_DXE_GUID": [
         503020538,
@@ -10559,7 +9960,7 @@ PROTOCOLS_GUIDS = {
         208,
         68,
         35,
-        16
+        16,
     ],
     "ASROCK_HDD_READY_SMI_GUID": [
         560462180,
@@ -10572,7 +9973,7 @@ PROTOCOLS_GUIDS = {
         152,
         214,
         0,
-        168
+        168,
     ],
     "ASROCK_MOUSE_DRIVER_GUID": [
         719032155,
@@ -10585,21 +9986,9 @@ PROTOCOLS_GUIDS = {
         77,
         246,
         104,
-        161
+        161,
     ],
-    "ASROCK_IDESMM_GUID": [
-        829100592,
-        1280,
-        17810,
-        140,
-        9,
-        234,
-        186,
-        15,
-        182,
-        176,
-        127
-    ],
+    "ASROCK_IDESMM_GUID": [829100592, 1280, 17810, 140, 9, 234, 186, 15, 182, 176, 127],
     "ASROCK_BFGSMI_GUID": [
         978522445,
         22131,
@@ -10611,7 +10000,7 @@ PROTOCOLS_GUIDS = {
         195,
         71,
         102,
-        155
+        155,
     ],
     "ASROCK_ASRLOGODXE_GUID": [
         1033880909,
@@ -10624,7 +10013,7 @@ PROTOCOLS_GUIDS = {
         135,
         215,
         96,
-        229
+        229,
     ],
     "ASROCK_ASM104_X_DXE_GUID": [
         1080004582,
@@ -10637,7 +10026,7 @@ PROTOCOLS_GUIDS = {
         122,
         255,
         121,
-        91
+        91,
     ],
     "ASROCK_HDAUDIO_SMI_GUID": [
         1254707048,
@@ -10650,7 +10039,7 @@ PROTOCOLS_GUIDS = {
         239,
         250,
         15,
-        96
+        96,
     ],
     "ASROCK_SM_BUS_DXE_GUID": [
         1265110573,
@@ -10663,7 +10052,7 @@ PROTOCOLS_GUIDS = {
         149,
         185,
         179,
-        163
+        163,
     ],
     "ASROCK_USBINT13_GUID": [
         1275096281,
@@ -10676,7 +10065,7 @@ PROTOCOLS_GUIDS = {
         148,
         161,
         172,
-        252
+        252,
     ],
     "ASROCK_SLP_SUPPORT_GUID": [
         1279872597,
@@ -10689,7 +10078,7 @@ PROTOCOLS_GUIDS = {
         82,
         33,
         33,
-        33
+        33,
     ],
     "ASROCK_PATA_CONTROLLER_GUID": [
         1334921163,
@@ -10702,7 +10091,7 @@ PROTOCOLS_GUIDS = {
         130,
         201,
         217,
-        60
+        60,
     ],
     "ASROCK_SATA_CONTROLLER_GUID": [
         1359869601,
@@ -10715,7 +10104,7 @@ PROTOCOLS_GUIDS = {
         32,
         248,
         152,
-        189
+        189,
     ],
     "ASROCK_ACPIS4_SMM_GUID": [
         1368992111,
@@ -10728,7 +10117,7 @@ PROTOCOLS_GUIDS = {
         176,
         108,
         135,
-        30
+        30,
     ],
     "ASROCK_POST_REPORT_GUID": [
         1413923475,
@@ -10741,7 +10130,7 @@ PROTOCOLS_GUIDS = {
         227,
         148,
         8,
-        204
+        204,
     ],
     "ASROCK_CLOCK_GEN_DXE_GUID": [
         1447053695,
@@ -10754,21 +10143,9 @@ PROTOCOLS_GUIDS = {
         200,
         189,
         71,
-        131
+        131,
     ],
-    "ASROCK_UHCD_GUID": [
-        1477302528,
-        14429,
-        4567,
-        136,
-        58,
-        0,
-        80,
-        4,
-        115,
-        212,
-        235
-    ],
+    "ASROCK_UHCD_GUID": [1477302528, 14429, 4567, 136, 58, 0, 80, 4, 115, 212, 235],
     "ASROCK_LEGACY_REGION_GUID": [
         1495543256,
         59343,
@@ -10780,21 +10157,9 @@ PROTOCOLS_GUIDS = {
         126,
         42,
         24,
-        95
+        95,
     ],
-    "ASROCK_SLEEP_SMI_GUID": [
-        1654193688,
-        54767,
-        17079,
-        187,
-        12,
-        41,
-        83,
-        40,
-        63,
-        87,
-        4
-    ],
+    "ASROCK_SLEEP_SMI_GUID": [1654193688, 54767, 17079, 187, 12, 41, 83, 40, 63, 87, 4],
     "ASROCK_CMOS_MANAGER_SMM_GUID": [
         1751762355,
         44173,
@@ -10806,7 +10171,7 @@ PROTOCOLS_GUIDS = {
         219,
         243,
         74,
-        221
+        221,
     ],
     "ASROCK_AMD_AGESA_DXE_DRIVER_GUID": [
         1766895615,
@@ -10819,7 +10184,7 @@ PROTOCOLS_GUIDS = {
         32,
         12,
         154,
-        102
+        102,
     ],
     "ASROCK_RE_FLASH_GUID": [
         1893836824,
@@ -10832,7 +10197,7 @@ PROTOCOLS_GUIDS = {
         140,
         127,
         2,
-        168
+        168,
     ],
     "ASROCK_LEGACY_INTERRUPT_GUID": [
         1911362257,
@@ -10845,7 +10210,7 @@ PROTOCOLS_GUIDS = {
         250,
         119,
         23,
-        1
+        1,
     ],
     "ASROCK_SMM_CHILD_DISPATCHER_GUID": [
         1966485705,
@@ -10858,7 +10223,7 @@ PROTOCOLS_GUIDS = {
         33,
         205,
         114,
-        130
+        130,
     ],
     "ASROCK_BFGDXE_GUID": [
         1988600983,
@@ -10871,7 +10236,7 @@ PROTOCOLS_GUIDS = {
         246,
         92,
         66,
-        209
+        209,
     ],
     "ASROCK_IFLASHSETUP_GUID": [
         2011543064,
@@ -10884,7 +10249,7 @@ PROTOCOLS_GUIDS = {
         77,
         138,
         62,
-        254
+        254,
     ],
     "ASROCK_S4_SLEEPDELAY_GUID": [
         2075935011,
@@ -10897,7 +10262,7 @@ PROTOCOLS_GUIDS = {
         164,
         135,
         1,
-        202
+        202,
     ],
     "ASROCK_HDD_READY_DXE_GUID": [
         2179248970,
@@ -10910,7 +10275,7 @@ PROTOCOLS_GUIDS = {
         62,
         111,
         110,
-        105
+        105,
     ],
     "ASROCK_RTLANDXE_GUID": [
         2332955475,
@@ -10923,7 +10288,7 @@ PROTOCOLS_GUIDS = {
         29,
         171,
         152,
-        155
+        155,
     ],
     "ASROCK_AMD_SB900_DXE_GUID": [
         2333274783,
@@ -10936,7 +10301,7 @@ PROTOCOLS_GUIDS = {
         247,
         75,
         101,
-        234
+        234,
     ],
     "ASROCK_SB900_SMBUS_LIGHT_GUID": [
         2551896525,
@@ -10949,7 +10314,7 @@ PROTOCOLS_GUIDS = {
         247,
         75,
         101,
-        234
+        234,
     ],
     "ASROCK_AAFTBL_SMI_GUID": [
         2667102838,
@@ -10962,7 +10327,7 @@ PROTOCOLS_GUIDS = {
         113,
         196,
         114,
-        72
+        72,
     ],
     "ASROCK_NVRAMID_GUID": [
         2708185858,
@@ -10975,7 +10340,7 @@ PROTOCOLS_GUIDS = {
         183,
         222,
         44,
-        33
+        33,
     ],
     "ASROCK_IDE_SECURITY_GUID": [
         2847342799,
@@ -10988,7 +10353,7 @@ PROTOCOLS_GUIDS = {
         234,
         1,
         105,
-        158
+        158,
     ],
     "ASROCK_ASM1061_DXE_GUID": [
         2848876245,
@@ -11001,7 +10366,7 @@ PROTOCOLS_GUIDS = {
         122,
         11,
         60,
-        194
+        194,
     ],
     "ASROCK_ASM104_X_SMI_GUID": [
         2904508538,
@@ -11014,7 +10379,7 @@ PROTOCOLS_GUIDS = {
         234,
         116,
         184,
-        242
+        242,
     ],
     "ASROCK_RTLANSMI_GUID": [
         3005543067,
@@ -11027,7 +10392,7 @@ PROTOCOLS_GUIDS = {
         193,
         246,
         5,
-        213
+        213,
     ],
     "ASROCK_GEC_UPDATE_SMI_GUID": [
         3092850716,
@@ -11040,7 +10405,7 @@ PROTOCOLS_GUIDS = {
         48,
         169,
         115,
-        189
+        189,
     ],
     "ASROCK_APMOFF_GUID": [
         3146872289,
@@ -11053,7 +10418,7 @@ PROTOCOLS_GUIDS = {
         163,
         78,
         183,
-        246
+        246,
     ],
     "ASROCK_SMIFLASH_GUID": [
         3157425597,
@@ -11066,7 +10431,7 @@ PROTOCOLS_GUIDS = {
         215,
         233,
         135,
-        197
+        197,
     ],
     "ASROCK_RAID_X64_GUID": [
         3295196034,
@@ -11079,7 +10444,7 @@ PROTOCOLS_GUIDS = {
         20,
         27,
         63,
-        74
+        74,
     ],
     "ASROCK_AMD_SB900_SMM_GUID": [
         3351810409,
@@ -11092,7 +10457,7 @@ PROTOCOLS_GUIDS = {
         6,
         113,
         201,
-        166
+        166,
     ],
     "ASROCK_FIREWIRE_GUID": [
         3367390790,
@@ -11105,7 +10470,7 @@ PROTOCOLS_GUIDS = {
         218,
         109,
         139,
-        27
+        27,
     ],
     "ASROCK_IDE_SMART_GUID": [
         3581707566,
@@ -11118,7 +10483,7 @@ PROTOCOLS_GUIDS = {
         192,
         203,
         120,
-        238
+        238,
     ],
     "ASROCK_SB_INTERFACE_DXE_GUID": [
         3622218689,
@@ -11131,7 +10496,7 @@ PROTOCOLS_GUIDS = {
         102,
         38,
         122,
-        217
+        217,
     ],
     "ASROCK_AMD_SB900_SMM_DISPATCHER_GUID": [
         3748899802,
@@ -11144,7 +10509,7 @@ PROTOCOLS_GUIDS = {
         6,
         113,
         201,
-        166
+        166,
     ],
     "ASROCK_AMDCPU_DXE_GUID": [
         3786566962,
@@ -11157,7 +10522,7 @@ PROTOCOLS_GUIDS = {
         119,
         243,
         93,
-        190
+        190,
     ],
     "ASROCK_SMBIOS_DMIEDIT_GUID": [
         3802613560,
@@ -11170,7 +10535,7 @@ PROTOCOLS_GUIDS = {
         72,
         200,
         220,
-        27
+        27,
     ],
     "ASROCK_SECURITY_SELECT_DXE_GUID": [
         3832130086,
@@ -11183,7 +10548,7 @@ PROTOCOLS_GUIDS = {
         238,
         55,
         64,
-        75
+        75,
     ],
     "ASROCK_FILE_EXPLORER_LITE_GUID": [
         3875982164,
@@ -11196,7 +10561,7 @@ PROTOCOLS_GUIDS = {
         213,
         203,
         135,
-        179
+        179,
     ],
     "ASROCK_PLEDSMM_GUID": [
         3911953940,
@@ -11209,7 +10574,7 @@ PROTOCOLS_GUIDS = {
         243,
         108,
         120,
-        70
+        70,
     ],
     "ASROCK_CPU_SMBIOS_DRIVER_GUID": [
         3930959592,
@@ -11222,7 +10587,7 @@ PROTOCOLS_GUIDS = {
         162,
         82,
         130,
-        145
+        145,
     ],
     "ASROCK_AAFTBL_DXE_GUID": [
         4279363330,
@@ -11235,7 +10600,7 @@ PROTOCOLS_GUIDS = {
         226,
         64,
         221,
-        16
+        16,
     ],
     "DELL_COMPUTRACE_BINARY_GUID": [
         623147636,
@@ -11248,7 +10613,7 @@ PROTOCOLS_GUIDS = {
         164,
         214,
         235,
-        164
+        164,
     ],
     "DELL_MEBX_SETUP_BINARY_GUID": [
         393683817,
@@ -11261,7 +10626,7 @@ PROTOCOLS_GUIDS = {
         31,
         38,
         99,
-        165
+        165,
     ],
     "DELL_ERROR_LOG_CONFIG_GUID": [
         59564679,
@@ -11274,21 +10639,9 @@ PROTOCOLS_GUIDS = {
         175,
         75,
         145,
-        185
+        185,
     ],
-    "DELL_FP_THUNK_GUID": [
-        69003667,
-        26231,
-        18208,
-        166,
-        101,
-        55,
-        91,
-        128,
-        255,
-        224,
-        18
-    ],
+    "DELL_FP_THUNK_GUID": [69003667, 26231, 18208, 166, 101, 55, 91, 128, 255, 224, 18],
     "DELL_INTEL_LOM_SMM_GUID": [
         145481829,
         50009,
@@ -11300,7 +10653,7 @@ PROTOCOLS_GUIDS = {
         142,
         182,
         87,
-        181
+        181,
     ],
     "DELL_LEGACY_VIDEO_ROM_GUID": [
         149252656,
@@ -11313,7 +10666,7 @@ PROTOCOLS_GUIDS = {
         94,
         230,
         83,
-        215
+        215,
     ],
     "DELL_PCH_S3_SUPPORT_GUID": [
         150128187,
@@ -11326,7 +10679,7 @@ PROTOCOLS_GUIDS = {
         100,
         74,
         28,
-        72
+        72,
     ],
     "DELL_SPI_PART_MICRON_GUID": [
         152362504,
@@ -11339,7 +10692,7 @@ PROTOCOLS_GUIDS = {
         138,
         234,
         247,
-        224
+        224,
     ],
     "DELL_DCP_REGISTER_GUID": [
         161470591,
@@ -11352,21 +10705,9 @@ PROTOCOLS_GUIDS = {
         249,
         146,
         9,
-        247
+        247,
     ],
-    "DELL_AHCI_DXE_GUID": [
-        163151961,
-        11636,
-        17349,
-        151,
-        9,
-        173,
-        10,
-        0,
-        81,
-        134,
-        125
-    ],
+    "DELL_AHCI_DXE_GUID": [163151961, 11636, 17349, 151, 9, 173, 10, 0, 81, 134, 125],
     "DELL_SIMPLE_BOOT_FLAG_SRC_GUID": [
         175448545,
         2545,
@@ -11378,7 +10719,7 @@ PROTOCOLS_GUIDS = {
         183,
         137,
         113,
-        214
+        214,
     ],
     "DELL_EDIAGS_DXE_GUID": [
         186863089,
@@ -11391,7 +10732,7 @@ PROTOCOLS_GUIDS = {
         163,
         161,
         31,
-        170
+        170,
     ],
     "DELL_ACPI_OEM_CONFIG_GUID": [
         187580522,
@@ -11404,7 +10745,7 @@ PROTOCOLS_GUIDS = {
         176,
         24,
         65,
-        252
+        252,
     ],
     "DELL_SPI_PART_MXIC_GUID": [
         192673644,
@@ -11417,7 +10758,7 @@ PROTOCOLS_GUIDS = {
         60,
         164,
         87,
-        241
+        241,
     ],
     "DELL_DTWLAN_SMM_GUID": [
         195268242,
@@ -11430,7 +10771,7 @@ PROTOCOLS_GUIDS = {
         87,
         28,
         219,
-        113
+        113,
     ],
     "DELL_LEGACY16_ROM_GUID": [
         196160684,
@@ -11443,7 +10784,7 @@ PROTOCOLS_GUIDS = {
         36,
         129,
         9,
-        208
+        208,
     ],
     "DELL_DEVICE_NAME_CONFIG_GUID": [
         197273096,
@@ -11456,7 +10797,7 @@ PROTOCOLS_GUIDS = {
         104,
         55,
         46,
-        68
+        68,
     ],
     "DELL_AI13_ROM_GUID": [
         215208698,
@@ -11469,7 +10810,7 @@ PROTOCOLS_GUIDS = {
         11,
         56,
         243,
-        36
+        36,
     ],
     "DELL_JPEG_DECODER_GUID": [
         220504629,
@@ -11482,7 +10823,7 @@ PROTOCOLS_GUIDS = {
         245,
         40,
         2,
-        9
+        9,
     ],
     "DELL_DA_HDD_PROTECTION_GUID": [
         220775721,
@@ -11495,7 +10836,7 @@ PROTOCOLS_GUIDS = {
         42,
         159,
         226,
-        74
+        74,
     ],
     "DELL_DCCS_SMM_DRIVER_GUID": [
         226622917,
@@ -11508,7 +10849,7 @@ PROTOCOLS_GUIDS = {
         192,
         102,
         58,
-        190
+        190,
     ],
     "DELL_INTRUSION_DETECT_SMM_GUID": [
         232691254,
@@ -11521,7 +10862,7 @@ PROTOCOLS_GUIDS = {
         163,
         180,
         115,
-        245
+        245,
     ],
     "DELL_VIRT_RTC_SMM_GUID": [
         242451377,
@@ -11534,7 +10875,7 @@ PROTOCOLS_GUIDS = {
         134,
         240,
         58,
-        214
+        214,
     ],
     "DELL_SMM_HWM_DRIVER_GUID": [
         245618257,
@@ -11547,7 +10888,7 @@ PROTOCOLS_GUIDS = {
         121,
         243,
         222,
-        118
+        118,
     ],
     "DELL_SM_BIOS_STRUC_DB_GUID": [
         246741696,
@@ -11560,7 +10901,7 @@ PROTOCOLS_GUIDS = {
         255,
         209,
         174,
-        51
+        51,
     ],
     "DELL_CENTURY_ROLLOVER_SMM_GUID": [
         293724525,
@@ -11573,7 +10914,7 @@ PROTOCOLS_GUIDS = {
         208,
         155,
         211,
-        118
+        118,
     ],
     "DELL_SMM_SECURITY_VAULT_GUID": [
         295647076,
@@ -11586,7 +10927,7 @@ PROTOCOLS_GUIDS = {
         94,
         116,
         48,
-        73
+        73,
     ],
     "DELL_DXE_SW_SMI_GUID": [
         299700076,
@@ -11599,7 +10940,7 @@ PROTOCOLS_GUIDS = {
         155,
         124,
         199,
-        86
+        86,
     ],
     "DELL_SMM_SB_ACPI_GUID": [
         311836245,
@@ -11612,7 +10953,7 @@ PROTOCOLS_GUIDS = {
         179,
         7,
         110,
-        197
+        197,
     ],
     "DELL_SMM_ACCESS_GUID": [
         321112056,
@@ -11625,7 +10966,7 @@ PROTOCOLS_GUIDS = {
         251,
         244,
         21,
-        21
+        21,
     ],
     "DELL_MFG_MODE_SMM_DRIVER_GUID": [
         343426378,
@@ -11638,7 +10979,7 @@ PROTOCOLS_GUIDS = {
         206,
         18,
         157,
-        187
+        187,
     ],
     "DELL_SPI_PART_ATMEL_GUID": [
         350738878,
@@ -11651,7 +10992,7 @@ PROTOCOLS_GUIDS = {
         130,
         62,
         226,
-        73
+        73,
     ],
     "DELL_EDIAGS_CONFIG_GUID": [
         353288559,
@@ -11664,7 +11005,7 @@ PROTOCOLS_GUIDS = {
         75,
         137,
         209,
-        91
+        91,
     ],
     "DELL_VARIABLE_SMM_GUID": [
         376426563,
@@ -11677,7 +11018,7 @@ PROTOCOLS_GUIDS = {
         149,
         185,
         70,
-        39
+        39,
     ],
     "DELL_SMM_GPIO_POLICY_GUID": [
         381905150,
@@ -11690,21 +11031,9 @@ PROTOCOLS_GUIDS = {
         153,
         211,
         77,
-        149
+        149,
     ],
-    "DELL_ACPI_GUID": [
-        382771774,
-        49308,
-        16509,
-        161,
-        74,
-        173,
-        5,
-        143,
-        221,
-        12,
-        161
-    ],
+    "DELL_ACPI_GUID": [382771774, 49308, 16509, 161, 74, 173, 5, 143, 221, 12, 161],
     "DELL_RUNTIME_ACPI_DXE_GUID": [
         389612339,
         19686,
@@ -11716,7 +11045,7 @@ PROTOCOLS_GUIDS = {
         91,
         102,
         107,
-        116
+        116,
     ],
     "DELL_SERVICE_MENU_GUID": [
         420935486,
@@ -11729,7 +11058,7 @@ PROTOCOLS_GUIDS = {
         210,
         142,
         68,
-        49
+        49,
     ],
     "DELL_MONOTONIC_COUNTER_GUID": [
         424600875,
@@ -11742,7 +11071,7 @@ PROTOCOLS_GUIDS = {
         229,
         28,
         184,
-        148
+        148,
     ],
     "DELL_CSM_OEM_ROM_GUID": [
         438112772,
@@ -11755,7 +11084,7 @@ PROTOCOLS_GUIDS = {
         206,
         56,
         9,
-        172
+        172,
     ],
     "DELL_DIAGS_SB_CONTROL_SMM_GUID": [
         452881360,
@@ -11768,7 +11097,7 @@ PROTOCOLS_GUIDS = {
         125,
         15,
         37,
-        96
+        96,
     ],
     "DELL_AMT_PLATFORM_POLICY_GUID": [
         468079106,
@@ -11781,7 +11110,7 @@ PROTOCOLS_GUIDS = {
         43,
         214,
         10,
-        238
+        238,
     ],
     "DELL_MFG_AUTHENTICATION_GUID": [
         473155928,
@@ -11794,7 +11123,7 @@ PROTOCOLS_GUIDS = {
         20,
         174,
         135,
-        228
+        228,
     ],
     "DELL_SM_BIOS_STRUC_DA_GUID": [
         477314229,
@@ -11807,7 +11136,7 @@ PROTOCOLS_GUIDS = {
         112,
         137,
         235,
-        8
+        8,
     ],
     "DELL_DXE_COMPUTRACE_GUID": [
         484872944,
@@ -11820,7 +11149,7 @@ PROTOCOLS_GUIDS = {
         237,
         9,
         31,
-        64
+        64,
     ],
     "DELL_SMM_STATUS_CODE_GUID": [
         495067551,
@@ -11833,7 +11162,7 @@ PROTOCOLS_GUIDS = {
         36,
         44,
         7,
-        96
+        96,
     ],
     "DELL_POWER_BUTTON_CONFIG_GUID": [
         519056625,
@@ -11846,7 +11175,7 @@ PROTOCOLS_GUIDS = {
         93,
         34,
         76,
-        250
+        250,
     ],
     "DELL_REBOOT_DXE_GUID": [
         536913970,
@@ -11859,7 +11188,7 @@ PROTOCOLS_GUIDS = {
         112,
         164,
         247,
-        253
+        253,
     ],
     "DELL_FLASH_IO_DXE_GUID": [
         560621596,
@@ -11872,7 +11201,7 @@ PROTOCOLS_GUIDS = {
         188,
         208,
         95,
-        93
+        93,
     ],
     "DELL_SM_BIOS_STRUC_B1_GUID": [
         589118053,
@@ -11885,21 +11214,9 @@ PROTOCOLS_GUIDS = {
         23,
         101,
         120,
-        241
+        241,
     ],
-    "DELL_IO_TRAP_GUID": [
-        594865631,
-        61955,
-        20416,
-        162,
-        14,
-        97,
-        186,
-        215,
-        48,
-        137,
-        214
-    ],
+    "DELL_IO_TRAP_GUID": [594865631, 61955, 20416, 162, 14, 97, 186, 215, 48, 137, 214],
     "DELL_SM_BIOS_DXE_DRIVER_GUID": [
         596042289,
         43471,
@@ -11911,7 +11228,7 @@ PROTOCOLS_GUIDS = {
         108,
         19,
         59,
-        70
+        70,
     ],
     "DELL_UPDATE_MEMORY_RECORD_GUID": [
         617403252,
@@ -11924,7 +11241,7 @@ PROTOCOLS_GUIDS = {
         105,
         32,
         161,
-        69
+        69,
     ],
     "DELL_BIOS_BLK_IO_SRC_GUID": [
         632090968,
@@ -11937,7 +11254,7 @@ PROTOCOLS_GUIDS = {
         30,
         154,
         38,
-        199
+        199,
     ],
     "DELL_ACPIS3_SAVE_GUID": [
         648169502,
@@ -11950,7 +11267,7 @@ PROTOCOLS_GUIDS = {
         57,
         234,
         216,
-        248
+        248,
     ],
     "DELL_SB_SERVICES_SMM_GUID": [
         650136819,
@@ -11963,7 +11280,7 @@ PROTOCOLS_GUIDS = {
         10,
         147,
         39,
-        131
+        131,
     ],
     "DELL_SYSTEM_ID_CONFIG_DXE_GUID": [
         656963409,
@@ -11976,7 +11293,7 @@ PROTOCOLS_GUIDS = {
         246,
         174,
         61,
-        254
+        254,
     ],
     "DELL_OROM_KB_ACCESS_GUID": [
         660110193,
@@ -11989,7 +11306,7 @@ PROTOCOLS_GUIDS = {
         209,
         79,
         109,
-        236
+        236,
     ],
     "DELL_SMSC5544_DXE_GUID": [
         670270351,
@@ -12002,7 +11319,7 @@ PROTOCOLS_GUIDS = {
         162,
         138,
         67,
-        27
+        27,
     ],
     "DELL_AMT_PET_ALERT_GUID": [
         688824905,
@@ -12015,7 +11332,7 @@ PROTOCOLS_GUIDS = {
         222,
         121,
         32,
-        204
+        204,
     ],
     "DELL_CSM_VIDEO_GUID": [
         701453816,
@@ -12028,7 +11345,7 @@ PROTOCOLS_GUIDS = {
         62,
         207,
         208,
-        99
+        99,
     ],
     "DELL_BINDINGS_SMM_GUID": [
         720216299,
@@ -12041,7 +11358,7 @@ PROTOCOLS_GUIDS = {
         60,
         47,
         162,
-        217
+        217,
     ],
     "DELL_EDIAGS_SMM_GUID": [
         762170232,
@@ -12054,7 +11371,7 @@ PROTOCOLS_GUIDS = {
         183,
         230,
         74,
-        117
+        117,
     ],
     "DELL_PBA_UPEK_DPBA_GUID": [
         762651386,
@@ -12067,7 +11384,7 @@ PROTOCOLS_GUIDS = {
         241,
         127,
         75,
-        4
+        4,
     ],
     "DELL_PPM_POLICY_INIT_DXE_GUID": [
         770768916,
@@ -12080,7 +11397,7 @@ PROTOCOLS_GUIDS = {
         184,
         238,
         81,
-        80
+        80,
     ],
     "DELL_GENERIC_SIO_DXE_GUID": [
         771101699,
@@ -12093,7 +11410,7 @@ PROTOCOLS_GUIDS = {
         184,
         143,
         233,
-        186
+        186,
     ],
     "DELL_SM_BIOS_SMM_DA_CI_GUID": [
         775889525,
@@ -12106,7 +11423,7 @@ PROTOCOLS_GUIDS = {
         217,
         75,
         205,
-        204
+        204,
     ],
     "DELL_USB_MOUSE_GUID": [
         788490211,
@@ -12119,7 +11436,7 @@ PROTOCOLS_GUIDS = {
         166,
         122,
         235,
-        147
+        147,
     ],
     "DELL_DXE_GPIO_POLICY_GUID": [
         800200429,
@@ -12132,34 +11449,10 @@ PROTOCOLS_GUIDS = {
         36,
         205,
         154,
-        172
+        172,
     ],
-    "DELL_GSET_GUID": [
-        800665338,
-        12000,
-        19374,
-        158,
-        182,
-        116,
-        68,
-        18,
-        94,
-        30,
-        247
-    ],
-    "DELL_UHCI_GUID": [
-        800665338,
-        12000,
-        19374,
-        158,
-        182,
-        116,
-        100,
-        18,
-        94,
-        30,
-        247
-    ],
+    "DELL_GSET_GUID": [800665338, 12000, 19374, 158, 182, 116, 68, 18, 94, 30, 247],
+    "DELL_UHCI_GUID": [800665338, 12000, 19374, 158, 182, 116, 100, 18, 94, 30, 247],
     "DELL_SPI_PART_PROM_JET_GUID": [
         805154634,
         43445,
@@ -12171,7 +11464,7 @@ PROTOCOLS_GUIDS = {
         17,
         170,
         178,
-        132
+        132,
     ],
     "DELL_PCI_HOT_PLUG_GUID": [
         807593234,
@@ -12184,7 +11477,7 @@ PROTOCOLS_GUIDS = {
         23,
         120,
         153,
-        216
+        216,
     ],
     "DELL_SMB_PROTOCOL_ACCESS_GUID": [
         849285743,
@@ -12197,7 +11490,7 @@ PROTOCOLS_GUIDS = {
         16,
         235,
         70,
-        201
+        201,
     ],
     "DELL_ALERT_STANDARD_FORMAT_DXE_GUID": [
         868630637,
@@ -12210,7 +11503,7 @@ PROTOCOLS_GUIDS = {
         251,
         99,
         60,
-        9
+        9,
     ],
     "DELL_LEG_USB_MEM_SMM_GUID": [
         917420886,
@@ -12223,7 +11516,7 @@ PROTOCOLS_GUIDS = {
         165,
         212,
         196,
-        10
+        10,
     ],
     "DELL_ERROR_HANDLER_SMM_GUID": [
         925400203,
@@ -12236,7 +11529,7 @@ PROTOCOLS_GUIDS = {
         233,
         6,
         177,
-        43
+        43,
     ],
     "DELL_DEFAULT_BOOT_LIST_SMM_GUID": [
         925400203,
@@ -12249,21 +11542,9 @@ PROTOCOLS_GUIDS = {
         233,
         6,
         255,
-        255
+        255,
     ],
-    "DELL_TPMDXE_GUID": [
-        946780090,
-        25412,
-        17640,
-        152,
-        92,
-        57,
-        120,
-        253,
-        71,
-        145,
-        107
-    ],
+    "DELL_TPMDXE_GUID": [946780090, 25412, 17640, 152, 92, 57, 120, 253, 71, 145, 107],
     "DELL_OEM_SX_SMM_GUID": [
         948378608,
         50762,
@@ -12275,7 +11556,7 @@ PROTOCOLS_GUIDS = {
         133,
         12,
         126,
-        104
+        104,
     ],
     "DELL_AC_LOSS_SMM_GUID": [
         948378608,
@@ -12288,7 +11569,7 @@ PROTOCOLS_GUIDS = {
         117,
         12,
         125,
-        104
+        104,
     ],
     "DELL_DIAGS_SB_CONTROL_DXE_GUID": [
         955198347,
@@ -12301,7 +11582,7 @@ PROTOCOLS_GUIDS = {
         21,
         228,
         57,
-        133
+        133,
     ],
     "DELL_SMM_LEGACY_REGION_GUID": [
         962780853,
@@ -12314,7 +11595,7 @@ PROTOCOLS_GUIDS = {
         145,
         142,
         132,
-        217
+        217,
     ],
     "DELL_PS2_EMUL_GUID": [
         967310044,
@@ -12327,7 +11608,7 @@ PROTOCOLS_GUIDS = {
         178,
         76,
         34,
-        253
+        253,
     ],
     "DELL_MEMORY_S4_GUID": [
         975822105,
@@ -12340,7 +11621,7 @@ PROTOCOLS_GUIDS = {
         175,
         251,
         100,
-        97
+        97,
     ],
     "DELL_SB_SERVICES_DXE_GUID": [
         977290450,
@@ -12353,7 +11634,7 @@ PROTOCOLS_GUIDS = {
         205,
         190,
         61,
-        176
+        176,
     ],
     "DELL_STOP_SHIP_CONFIG_GUID": [
         993507108,
@@ -12366,7 +11647,7 @@ PROTOCOLS_GUIDS = {
         143,
         79,
         86,
-        60
+        60,
     ],
     "DELL_BLOCK_IO_GUID": [
         1002555495,
@@ -12379,7 +11660,7 @@ PROTOCOLS_GUIDS = {
         91,
         214,
         212,
-        115
+        115,
     ],
     "DELL_PCI_BUS_GUID": [
         1008591775,
@@ -12392,21 +11673,9 @@ PROTOCOLS_GUIDS = {
         251,
         127,
         29,
-        215
+        215,
     ],
-    "DELL_TX_TDXE_GUID": [
-        1029076176,
-        44661,
-        18211,
-        145,
-        89,
-        29,
-        101,
-        59,
-        64,
-        64,
-        47
-    ],
+    "DELL_TX_TDXE_GUID": [1029076176, 44661, 18211, 145, 89, 29, 101, 59, 64, 64, 47],
     "DELL_SM_BIOS_STRUC_D3_GUID": [
         1037980905,
         36120,
@@ -12418,7 +11687,7 @@ PROTOCOLS_GUIDS = {
         70,
         225,
         142,
-        35
+        35,
     ],
     "DELL_SMB_BOOT_PRIORITY_GUID": [
         1099196974,
@@ -12431,7 +11700,7 @@ PROTOCOLS_GUIDS = {
         212,
         159,
         146,
-        225
+        225,
     ],
     "DELL_SPI_CONTROLLER_SMM_GUID": [
         1099935596,
@@ -12444,7 +11713,7 @@ PROTOCOLS_GUIDS = {
         225,
         182,
         123,
-        76
+        76,
     ],
     "DELL_ME_PCI_PLATFORM_CONFIG_DXE_GUID": [
         1106536082,
@@ -12457,7 +11726,7 @@ PROTOCOLS_GUIDS = {
         104,
         24,
         45,
-        228
+        228,
     ],
     "DELL_PBA_UPEK_DXE_GUID": [
         1120087503,
@@ -12470,7 +11739,7 @@ PROTOCOLS_GUIDS = {
         120,
         215,
         127,
-        80
+        80,
     ],
     "DELL_GPE_CONFIG_GUID": [
         1174254635,
@@ -12483,7 +11752,7 @@ PROTOCOLS_GUIDS = {
         251,
         139,
         203,
-        1
+        1,
     ],
     "DELL_POWER_OFF_SMM_GUID": [
         1190974936,
@@ -12496,21 +11765,9 @@ PROTOCOLS_GUIDS = {
         7,
         188,
         95,
-        92
+        92,
     ],
-    "DELL_GPE_GUID": [
-        1198704346,
-        20589,
-        19605,
-        172,
-        23,
-        174,
-        102,
-        136,
-        95,
-        109,
-        83
-    ],
+    "DELL_GPE_GUID": [1198704346, 20589, 19605, 172, 23, 174, 102, 136, 95, 109, 83],
     "DELL_PASSWORD_MGR_SMM_GUID": [
         1202852751,
         23147,
@@ -12522,7 +11779,7 @@ PROTOCOLS_GUIDS = {
         89,
         93,
         22,
-        173
+        173,
     ],
     "DELL_SMM_SB_GPIO_CONTROL_GUID": [
         1206402316,
@@ -12535,7 +11792,7 @@ PROTOCOLS_GUIDS = {
         104,
         193,
         142,
-        158
+        158,
     ],
     "DELL_RAID_ROM_GUID": [
         1226990052,
@@ -12548,7 +11805,7 @@ PROTOCOLS_GUIDS = {
         67,
         137,
         231,
-        167
+        167,
     ],
     "DELL_SMM_DISPATCHER_GUID": [
         1245131275,
@@ -12561,7 +11818,7 @@ PROTOCOLS_GUIDS = {
         198,
         0,
         57,
-        93
+        93,
     ],
     "DELL_DXE_SIO_GPIO_CONTROL_GUID": [
         1248129536,
@@ -12574,7 +11831,7 @@ PROTOCOLS_GUIDS = {
         226,
         211,
         235,
-        93
+        93,
     ],
     "DELL_VARIABLE_DXE_GUID": [
         1267189915,
@@ -12587,7 +11844,7 @@ PROTOCOLS_GUIDS = {
         158,
         220,
         80,
-        135
+        135,
     ],
     "DELL_CPU_SMM_GUID": [
         1318627838,
@@ -12600,7 +11857,7 @@ PROTOCOLS_GUIDS = {
         112,
         203,
         215,
-        51
+        51,
     ],
     "DELL_CHASSIS_CONFIG_SMM_GUID": [
         1373013960,
@@ -12613,7 +11870,7 @@ PROTOCOLS_GUIDS = {
         152,
         14,
         168,
-        182
+        182,
     ],
     "DELL_SMM_DELAY_GUID": [
         1378954463,
@@ -12626,7 +11883,7 @@ PROTOCOLS_GUIDS = {
         245,
         28,
         214,
-        34
+        34,
     ],
     "DELL_SPI_PART_EON_GUID": [
         1386777386,
@@ -12639,7 +11896,7 @@ PROTOCOLS_GUIDS = {
         101,
         152,
         18,
-        139
+        139,
     ],
     "DELL_CHASSIS_CONFIG_DXE_GUID": [
         1421699677,
@@ -12652,7 +11909,7 @@ PROTOCOLS_GUIDS = {
         228,
         244,
         89,
-        20
+        20,
     ],
     "DELL_HIIPARSER_DXE_DRIVER_GUID": [
         1436706812,
@@ -12665,7 +11922,7 @@ PROTOCOLS_GUIDS = {
         211,
         211,
         244,
-        226
+        226,
     ],
     "DELL_BINDINGS_DXE_GUID": [
         1438341707,
@@ -12678,7 +11935,7 @@ PROTOCOLS_GUIDS = {
         166,
         126,
         142,
-        231
+        231,
     ],
     "DELL_HECI_DXE_GUID": [
         1441228356,
@@ -12691,7 +11948,7 @@ PROTOCOLS_GUIDS = {
         165,
         121,
         136,
-        146
+        146,
     ],
     "DELL_SMM_BBSMANAGER_LEGACY_GUID": [
         1442227219,
@@ -12704,7 +11961,7 @@ PROTOCOLS_GUIDS = {
         242,
         157,
         215,
-        208
+        208,
     ],
     "DELL_GRASSLAKE_CONFIG_GUID": [
         1458496326,
@@ -12717,7 +11974,7 @@ PROTOCOLS_GUIDS = {
         240,
         255,
         57,
-        187
+        187,
     ],
     "DELL_IDE_SMM_GUID": [
         1461526225,
@@ -12730,7 +11987,7 @@ PROTOCOLS_GUIDS = {
         188,
         104,
         112,
-        72
+        72,
     ],
     "DELL_PASSWORD_MGR_DXE_GUID": [
         1475622312,
@@ -12743,7 +12000,7 @@ PROTOCOLS_GUIDS = {
         148,
         221,
         206,
-        243
+        243,
     ],
     "DELL_ME_FW_DOWNGRADE_GUID": [
         1478553268,
@@ -12756,7 +12013,7 @@ PROTOCOLS_GUIDS = {
         252,
         68,
         117,
-        233
+        233,
     ],
     "DELL_CSM_CONFIG_GUID": [
         1484687255,
@@ -12769,7 +12026,7 @@ PROTOCOLS_GUIDS = {
         108,
         86,
         45,
-        245
+        245,
     ],
     "DELL_GPE_OROM_GUID": [
         1489880953,
@@ -12782,7 +12039,7 @@ PROTOCOLS_GUIDS = {
         6,
         209,
         134,
-        95
+        95,
     ],
     "DELL_SM_BIOS_SMM_DRIVER_GUID": [
         1493767628,
@@ -12795,7 +12052,7 @@ PROTOCOLS_GUIDS = {
         231,
         96,
         20,
-        31
+        31,
     ],
     "DELL_PCH_SMBUS_SMM_GUID": [
         1495822712,
@@ -12808,7 +12065,7 @@ PROTOCOLS_GUIDS = {
         18,
         234,
         44,
-        83
+        83,
     ],
     "DELL_DASH_BIOS_MANAGER_GUID": [
         1496809990,
@@ -12821,7 +12078,7 @@ PROTOCOLS_GUIDS = {
         79,
         3,
         12,
-        75
+        75,
     ],
     "DELL_WDT_DXE_GUID": [
         1521189861,
@@ -12834,21 +12091,9 @@ PROTOCOLS_GUIDS = {
         140,
         201,
         228,
-        83
+        83,
     ],
-    "DELL_CORE_DXE_GUID": [
-        1524888446,
-        20142,
-        16814,
-        130,
-        64,
-        53,
-        70,
-        91,
-        94,
-        129,
-        235
-    ],
+    "DELL_CORE_DXE_GUID": [1524888446, 20142, 16814, 130, 64, 53, 70, 91, 94, 129, 235],
     "DELL_PASSWORD_UI_GUID": [
         1564786295,
         22121,
@@ -12860,7 +12105,7 @@ PROTOCOLS_GUIDS = {
         248,
         62,
         251,
-        152
+        152,
     ],
     "DELL_HOT_SOS_SMM_DRIVER_GUID": [
         1571415364,
@@ -12873,7 +12118,7 @@ PROTOCOLS_GUIDS = {
         54,
         213,
         222,
-        69
+        69,
     ],
     "DELL_SIO_CONFIG_DXE_GUID": [
         1572044380,
@@ -12886,7 +12131,7 @@ PROTOCOLS_GUIDS = {
         2,
         211,
         148,
-        93
+        93,
     ],
     "DELL_TCG_DXE_GUID": [
         1587325859,
@@ -12899,7 +12144,7 @@ PROTOCOLS_GUIDS = {
         117,
         233,
         205,
-        233
+        233,
     ],
     "DELL_ACPI_CONFIG_GUID": [
         1591357731,
@@ -12912,7 +12157,7 @@ PROTOCOLS_GUIDS = {
         85,
         239,
         59,
-        183
+        183,
     ],
     "DELL_FLASH_SCREEN_DXE_GUID": [
         1626069668,
@@ -12925,21 +12170,9 @@ PROTOCOLS_GUIDS = {
         166,
         85,
         73,
-        165
+        165,
     ],
-    "DELL_TXT_DXE_GUID": [
-        1630407945,
-        23825,
-        17686,
-        130,
-        238,
-        109,
-        214,
-        5,
-        254,
-        38,
-        95
-    ],
+    "DELL_TXT_DXE_GUID": [1630407945, 23825, 17686, 130, 238, 109, 214, 5, 254, 38, 95],
     "DELL_DIAGS_DXE_DRIVER_GUID": [
         1662733815,
         47850,
@@ -12951,7 +12184,7 @@ PROTOCOLS_GUIDS = {
         98,
         101,
         40,
-        34
+        34,
     ],
     "DELL_FLASH_UPDATE_DXE_GUID": [
         1680263188,
@@ -12964,7 +12197,7 @@ PROTOCOLS_GUIDS = {
         111,
         143,
         37,
-        79
+        79,
     ],
     "DELL_SMM_GPE_GUID": [
         1709829021,
@@ -12977,7 +12210,7 @@ PROTOCOLS_GUIDS = {
         75,
         204,
         164,
-        148
+        148,
     ],
     "DELL_RTC_AUTO_ON_SMM_GUID": [
         1732878212,
@@ -12990,7 +12223,7 @@ PROTOCOLS_GUIDS = {
         137,
         221,
         97,
-        115
+        115,
     ],
     "DELL_SMM_FLASH_WRITE_PROTECT_GUID": [
         1777301692,
@@ -13003,7 +12236,7 @@ PROTOCOLS_GUIDS = {
         249,
         20,
         132,
-        48
+        48,
     ],
     "DELL_DIAGS_CONFIG_GUID": [
         1777957454,
@@ -13016,7 +12249,7 @@ PROTOCOLS_GUIDS = {
         234,
         40,
         72,
-        133
+        133,
     ],
     "DELL_AUDIO_CONFIG_DXE_GUID": [
         1788978124,
@@ -13029,7 +12262,7 @@ PROTOCOLS_GUIDS = {
         52,
         92,
         29,
-        179
+        179,
     ],
     "DELL_SPECIAL_BOOT_STUB_GUID": [
         1797814372,
@@ -13042,7 +12275,7 @@ PROTOCOLS_GUIDS = {
         182,
         148,
         205,
-        59
+        59,
     ],
     "DELL_DA_SERVICE_TAG_GUID": [
         1854722743,
@@ -13055,7 +12288,7 @@ PROTOCOLS_GUIDS = {
         189,
         202,
         89,
-        25
+        25,
     ],
     "DELL_DXE_SB_ACPI_GUID": [
         1855444212,
@@ -13068,7 +12301,7 @@ PROTOCOLS_GUIDS = {
         222,
         211,
         47,
-        216
+        216,
     ],
     "DELL_MONOTONIC_COUNTER_SMM_GUID": [
         1898086669,
@@ -13081,7 +12314,7 @@ PROTOCOLS_GUIDS = {
         118,
         69,
         201,
-        120
+        120,
     ],
     "DELL_SMM_SB_GENERIC_GUID": [
         1898475784,
@@ -13094,7 +12327,7 @@ PROTOCOLS_GUIDS = {
         45,
         235,
         202,
-        157
+        157,
     ],
     "DELL_ACPI_MODE_ENABLE_GUID": [
         1963495590,
@@ -13107,7 +12340,7 @@ PROTOCOLS_GUIDS = {
         194,
         190,
         169,
-        90
+        90,
     ],
     "DELL_SMM_SIO_EMI_GUID": [
         1971880107,
@@ -13120,7 +12353,7 @@ PROTOCOLS_GUIDS = {
         173,
         242,
         194,
-        241
+        241,
     ],
     "DELL_PSTATE_CONTROL_GUID": [
         1975412348,
@@ -13133,7 +12366,7 @@ PROTOCOLS_GUIDS = {
         56,
         237,
         135,
-        255
+        255,
     ],
     "DELL_DA_EPPID_GUID": [
         1990319997,
@@ -13146,7 +12379,7 @@ PROTOCOLS_GUIDS = {
         216,
         66,
         222,
-        246
+        246,
     ],
     "DELL_PROGRESS_BAR_GUID": [
         1992170175,
@@ -13159,7 +12392,7 @@ PROTOCOLS_GUIDS = {
         132,
         253,
         218,
-        188
+        188,
     ],
     "DELL_PBA_MGR_SMM_GUID": [
         1994516974,
@@ -13172,7 +12405,7 @@ PROTOCOLS_GUIDS = {
         119,
         150,
         87,
-        58
+        58,
     ],
     "DELL_AMT_SETUP_GUID": [
         2000466059,
@@ -13185,7 +12418,7 @@ PROTOCOLS_GUIDS = {
         244,
         182,
         74,
-        82
+        82,
     ],
     "DELL_STORAGE_AGENTS_DXE_GUID": [
         2013853122,
@@ -13198,7 +12431,7 @@ PROTOCOLS_GUIDS = {
         83,
         195,
         99,
-        180
+        180,
     ],
     "DELL_VARIABLE_RUNTIME_DXE_GUID": [
         2021476419,
@@ -13211,7 +12444,7 @@ PROTOCOLS_GUIDS = {
         114,
         186,
         236,
-        249
+        249,
     ],
     "DELL_PBA_SCARD_DXE_GUID": [
         2044959363,
@@ -13224,7 +12457,7 @@ PROTOCOLS_GUIDS = {
         113,
         71,
         53,
-        28
+        28,
     ],
     "DELL_SOL_POST_MESSAGE_GUID": [
         2047396760,
@@ -13237,7 +12470,7 @@ PROTOCOLS_GUIDS = {
         243,
         241,
         245,
-        35
+        35,
     ],
     "DELL_TERMINAL_GUID": [
         2047396760,
@@ -13250,7 +12483,7 @@ PROTOCOLS_GUIDS = {
         243,
         241,
         245,
-        149
+        149,
     ],
     "DELL_SM_BIOS_STRUC_D0_GUID": [
         2075890981,
@@ -13263,7 +12496,7 @@ PROTOCOLS_GUIDS = {
         183,
         135,
         68,
-        165
+        165,
     ],
     "DELL_SMM_RUNTIME_GUID": [
         2088348812,
@@ -13276,7 +12509,7 @@ PROTOCOLS_GUIDS = {
         238,
         124,
         23,
-        46
+        46,
     ],
     "DELL_FLASH_IO_SMM_GUID": [
         2092505544,
@@ -13289,7 +12522,7 @@ PROTOCOLS_GUIDS = {
         158,
         52,
         61,
-        219
+        219,
     ],
     "DELL_SYSTEM_PW_SMM_GUID": [
         2158681357,
@@ -13302,7 +12535,7 @@ PROTOCOLS_GUIDS = {
         139,
         178,
         48,
-        1
+        1,
     ],
     "DELL_PCI_ROOT_BRIDGE_GUID": [
         2162585098,
@@ -13315,7 +12548,7 @@ PROTOCOLS_GUIDS = {
         224,
         241,
         57,
-        16
+        16,
     ],
     "DELL_POWER_OFF_CONFIG_GUID": [
         2163227679,
@@ -13328,7 +12561,7 @@ PROTOCOLS_GUIDS = {
         233,
         169,
         41,
-        252
+        252,
     ],
     "DELL_DXE_HWM_DRIVER_GUID": [
         2189636628,
@@ -13341,7 +12574,7 @@ PROTOCOLS_GUIDS = {
         218,
         171,
         19,
-        15
+        15,
     ],
     "DELL_PXE_UNDI_ROM_GUID": [
         2197545579,
@@ -13354,7 +12587,7 @@ PROTOCOLS_GUIDS = {
         18,
         110,
         202,
-        79
+        79,
     ],
     "DELL_PW_BY_PASS_SMM_GUID": [
         2209781945,
@@ -13367,7 +12600,7 @@ PROTOCOLS_GUIDS = {
         208,
         190,
         252,
-        74
+        74,
     ],
     "DELL_HOT_KEY_HANDLER_SMM_GUID": [
         2221392131,
@@ -13380,7 +12613,7 @@ PROTOCOLS_GUIDS = {
         76,
         17,
         30,
-        148
+        148,
     ],
     "DELL_POWER_MANAGEMENT_DXE_GUID": [
         2224624263,
@@ -13393,7 +12626,7 @@ PROTOCOLS_GUIDS = {
         65,
         134,
         44,
-        118
+        118,
     ],
     "DELL_AC_RECOVERY_SMM_GUID": [
         2239859116,
@@ -13406,7 +12639,7 @@ PROTOCOLS_GUIDS = {
         64,
         153,
         83,
-        200
+        200,
     ],
     "DELL_SMM_SIO_DASH_GUID": [
         2277981212,
@@ -13419,7 +12652,7 @@ PROTOCOLS_GUIDS = {
         62,
         248,
         200,
-        39
+        39,
     ],
     "DELL_SMM_EVENT_DXE_GUID": [
         2295339961,
@@ -13432,7 +12665,7 @@ PROTOCOLS_GUIDS = {
         159,
         17,
         36,
-        248
+        248,
     ],
     "DELL_SETUP_PREP_GUID": [
         2308179927,
@@ -13445,7 +12678,7 @@ PROTOCOLS_GUIDS = {
         50,
         140,
         172,
-        33
+        33,
     ],
     "DELL_DXE_PREREQ_GUID": [
         2311005263,
@@ -13458,7 +12691,7 @@ PROTOCOLS_GUIDS = {
         239,
         213,
         23,
-        28
+        28,
     ],
     "DELL_SPI_PART_ST_MICRO_GUID": [
         2325708028,
@@ -13471,7 +12704,7 @@ PROTOCOLS_GUIDS = {
         27,
         167,
         172,
-        137
+        137,
     ],
     "DELL_DIAGS_LEGACY_GUID": [
         2337444691,
@@ -13484,7 +12717,7 @@ PROTOCOLS_GUIDS = {
         159,
         156,
         191,
-        122
+        122,
     ],
     "DELL_ACPI_PLATFORM_GUID": [
         2338306749,
@@ -13497,7 +12730,7 @@ PROTOCOLS_GUIDS = {
         163,
         138,
         229,
-        43
+        43,
     ],
     "DELL_POWER_MANAGEMENT_GUID": [
         2356689264,
@@ -13510,7 +12743,7 @@ PROTOCOLS_GUIDS = {
         165,
         30,
         236,
-        141
+        141,
     ],
     "DELL_AHCI_SMM_GUID": [
         3157411261,
@@ -13523,7 +12756,7 @@ PROTOCOLS_GUIDS = {
         215,
         233,
         135,
-        197
+        197,
     ],
     "DELL_ME_PLATFORM_CONFIG_DXE_GUID": [
         2368893290,
@@ -13536,7 +12769,7 @@ PROTOCOLS_GUIDS = {
         140,
         200,
         43,
-        108
+        108,
     ],
     "DELL_PCI_HOST_BRIDGE_GUID": [
         2372359865,
@@ -13549,7 +12782,7 @@ PROTOCOLS_GUIDS = {
         114,
         221,
         247,
-        114
+        114,
     ],
     "DELL_SMM_SERVICES_GUID": [
         2379094359,
@@ -13562,7 +12795,7 @@ PROTOCOLS_GUIDS = {
         28,
         178,
         224,
-        204
+        204,
     ],
     "DELL_MOD_BAY_CONFIG_GUID": [
         2384466983,
@@ -13575,7 +12808,7 @@ PROTOCOLS_GUIDS = {
         117,
         246,
         27,
-        170
+        170,
     ],
     "DELL_SERVICE_RESET_SMM_GUID": [
         2395179049,
@@ -13588,7 +12821,7 @@ PROTOCOLS_GUIDS = {
         21,
         161,
         87,
-        209
+        209,
     ],
     "DELL_EC_CONFIG_DXE_GUID": [
         2395213747,
@@ -13601,7 +12834,7 @@ PROTOCOLS_GUIDS = {
         131,
         44,
         124,
-        237
+        237,
     ],
     "DELL_ERROR_HANDLER_DXE_GUID": [
         2403573131,
@@ -13614,7 +12847,7 @@ PROTOCOLS_GUIDS = {
         21,
         113,
         170,
-        117
+        117,
     ],
     "DELL_DEFAULT_BOOT_LIST_DXE_GUID": [
         2403573131,
@@ -13627,7 +12860,7 @@ PROTOCOLS_GUIDS = {
         21,
         113,
         255,
-        255
+        255,
     ],
     "DELL_AHCISRC_GUID": [
         2405051906,
@@ -13640,7 +12873,7 @@ PROTOCOLS_GUIDS = {
         106,
         203,
         197,
-        82
+        82,
     ],
     "DELL_SB_ACCESS_SMM_GUID": [
         2411212196,
@@ -13653,7 +12886,7 @@ PROTOCOLS_GUIDS = {
         214,
         9,
         114,
-        166
+        166,
     ],
     "DELL_IMG_SRV_BASE_ROM_GUID": [
         2419529971,
@@ -13666,7 +12899,7 @@ PROTOCOLS_GUIDS = {
         19,
         129,
         160,
-        38
+        38,
     ],
     "DELL_SMART_TIMER_GUID": [
         2429253083,
@@ -13679,7 +12912,7 @@ PROTOCOLS_GUIDS = {
         119,
         236,
         114,
-        18
+        18,
     ],
     "DELL_PBA_FP_DXE_GUID": [
         2444894238,
@@ -13692,7 +12925,7 @@ PROTOCOLS_GUIDS = {
         62,
         202,
         212,
-        188
+        188,
     ],
     "DELL_HECI_SMM_GUID": [
         2451363715,
@@ -13705,7 +12938,7 @@ PROTOCOLS_GUIDS = {
         65,
         151,
         252,
-        200
+        200,
     ],
     "DELL_SMM_COMPUTRACE_GUID": [
         2462551630,
@@ -13718,7 +12951,7 @@ PROTOCOLS_GUIDS = {
         186,
         104,
         88,
-        201
+        201,
     ],
     "DELL_FILE_SYSTEM_GUID": [
         2466393996,
@@ -13731,7 +12964,7 @@ PROTOCOLS_GUIDS = {
         255,
         96,
         157,
-        245
+        245,
     ],
     "DELL_DIRTY_SHUTDOWN_DXE_GUID": [
         2474053840,
@@ -13744,7 +12977,7 @@ PROTOCOLS_GUIDS = {
         114,
         43,
         23,
-        181
+        181,
     ],
     "DELL_SB_ACPI_CONFIG_GUID": [
         2492620721,
@@ -13757,7 +12990,7 @@ PROTOCOLS_GUIDS = {
         74,
         170,
         129,
-        199
+        199,
     ],
     "DELL_TCG_SETUP_GUID": [
         2498613546,
@@ -13770,7 +13003,7 @@ PROTOCOLS_GUIDS = {
         112,
         120,
         57,
-        3
+        3,
     ],
     "DELL_SERVICE_RESET_DXE_GUID": [
         2537284199,
@@ -13783,7 +13016,7 @@ PROTOCOLS_GUIDS = {
         201,
         42,
         70,
-        186
+        186,
     ],
     "DELL_BIOS_EXTENSION_LOADER_GUID": [
         2546758024,
@@ -13796,7 +13029,7 @@ PROTOCOLS_GUIDS = {
         100,
         191,
         156,
-        105
+        105,
     ],
     "DELL_HOT_SOS_DXE_DRIVER_GUID": [
         2564335444,
@@ -13809,7 +13042,7 @@ PROTOCOLS_GUIDS = {
         47,
         52,
         217,
-        247
+        247,
     ],
     "DELL_SM_BIOS_STRUC_DE_GUID": [
         2573047489,
@@ -13822,7 +13055,7 @@ PROTOCOLS_GUIDS = {
         23,
         180,
         59,
-        29
+        29,
     ],
     "DELL_SB_SMM_HOOKS_GUID": [
         2577523701,
@@ -13835,7 +13068,7 @@ PROTOCOLS_GUIDS = {
         100,
         107,
         193,
-        66
+        66,
     ],
     "DELL_BBSMANAGER_DXE_GUID": [
         2595435247,
@@ -13848,7 +13081,7 @@ PROTOCOLS_GUIDS = {
         87,
         78,
         133,
-        102
+        102,
     ],
     "DELL_GSET_CONFIG_GUID": [
         2599541285,
@@ -13861,7 +13094,7 @@ PROTOCOLS_GUIDS = {
         80,
         191,
         118,
-        91
+        91,
     ],
     "DELL_MULTI_DISPLAY_DXE_GUID": [
         2617192461,
@@ -13874,7 +13107,7 @@ PROTOCOLS_GUIDS = {
         211,
         215,
         204,
-        198
+        198,
     ],
     "DELL_AMI_BOARD_INFO_GUID": [
         2671378454,
@@ -13887,7 +13120,7 @@ PROTOCOLS_GUIDS = {
         211,
         68,
         195,
-        71
+        71,
     ],
     "DELL_DA_NON_VOLITILE_STORAGE_GUID": [
         2679520249,
@@ -13900,7 +13133,7 @@ PROTOCOLS_GUIDS = {
         133,
         74,
         49,
-        42
+        42,
     ],
     "DELL_DXE_MAIN_GUID": [
         2681197550,
@@ -13913,7 +13146,7 @@ PROTOCOLS_GUIDS = {
         99,
         113,
         246,
-        74
+        74,
     ],
     "DELL_SIO_POLICY_CONFIG_DXE_GUID": [
         2688661718,
@@ -13926,7 +13159,7 @@ PROTOCOLS_GUIDS = {
         86,
         114,
         226,
-        149
+        149,
     ],
     "DELL_CSMCORE_GUID": [
         2690830111,
@@ -13939,7 +13172,7 @@ PROTOCOLS_GUIDS = {
         196,
         255,
         233,
-        168
+        168,
     ],
     "DELL_HDD_PW_SMM_GUID": [
         2696445586,
@@ -13952,7 +13185,7 @@ PROTOCOLS_GUIDS = {
         49,
         71,
         236,
-        4
+        4,
     ],
     "DELL_SMM_CONTROL_GUID": [
         2696600055,
@@ -13965,7 +13198,7 @@ PROTOCOLS_GUIDS = {
         127,
         132,
         185,
-        224
+        224,
     ],
     "DELL_PCI_EXPRESS_DXE_GUID": [
         2711597294,
@@ -13978,7 +13211,7 @@ PROTOCOLS_GUIDS = {
         130,
         255,
         149,
-        198
+        198,
     ],
     "DELL_SPI_PART_SST_GUID": [
         2726778251,
@@ -13991,7 +13224,7 @@ PROTOCOLS_GUIDS = {
         210,
         254,
         245,
-        145
+        145,
     ],
     "DELL_SPI_CONTROLLER_DXE_GUID": [
         2742722115,
@@ -14004,7 +13237,7 @@ PROTOCOLS_GUIDS = {
         155,
         3,
         43,
-        35
+        35,
     ],
     "DELL_SMB_FACT_DEFAULT_GUID": [
         2748922409,
@@ -14017,7 +13250,7 @@ PROTOCOLS_GUIDS = {
         188,
         239,
         144,
-        167
+        167,
     ],
     "DELL_SMM_SIO_GPIO_CONTROL_GUID": [
         2806725359,
@@ -14030,7 +13263,7 @@ PROTOCOLS_GUIDS = {
         119,
         98,
         115,
-        234
+        234,
     ],
     "DELL_IMAGE_SERVER_SMM_GUID": [
         2812134215,
@@ -14043,7 +13276,7 @@ PROTOCOLS_GUIDS = {
         142,
         127,
         6,
-        1
+        1,
     ],
     "DELL_PBA_MGR_DXE_GUID": [
         2813554127,
@@ -14056,7 +13289,7 @@ PROTOCOLS_GUIDS = {
         12,
         190,
         22,
-        59
+        59,
     ],
     "DELL_IMAGE_SERVER_DXE_GUID": [
         2821932058,
@@ -14069,7 +13302,7 @@ PROTOCOLS_GUIDS = {
         123,
         102,
         70,
-        167
+        167,
     ],
     "DELL_LOM_CONFIG_GUID": [
         2826249488,
@@ -14082,7 +13315,7 @@ PROTOCOLS_GUIDS = {
         135,
         136,
         42,
-        254
+        254,
     ],
     "DELL_LEGACY_USB_SMM_GUID": [
         2829252321,
@@ -14095,7 +13328,7 @@ PROTOCOLS_GUIDS = {
         214,
         214,
         228,
-        118
+        118,
     ],
     "DELL_AMT_SMBIOS_GUID": [
         2831577685,
@@ -14108,21 +13341,9 @@ PROTOCOLS_GUIDS = {
         233,
         193,
         28,
-        115
+        115,
     ],
-    "DELL_TCG_MOR_GUID": [
-        2906746083,
-        42115,
-        17841,
-        148,
-        194,
-        75,
-        78,
-        77,
-        87,
-        85,
-        98
-    ],
+    "DELL_TCG_MOR_GUID": [2906746083, 42115, 17841, 148, 194, 75, 78, 77, 87, 85, 98],
     "DELL_DO_SIODIAG_LED_DXE_GUID": [
         2907311365,
         32877,
@@ -14134,7 +13355,7 @@ PROTOCOLS_GUIDS = {
         45,
         140,
         76,
-        224
+        224,
     ],
     "DELL_AUDIO_DXE_GUID": [
         2921628957,
@@ -14147,7 +13368,7 @@ PROTOCOLS_GUIDS = {
         234,
         153,
         54,
-        60
+        60,
     ],
     "DELL_FV_MAINNESTED_GUID": [
         2926672943,
@@ -14160,7 +13381,7 @@ PROTOCOLS_GUIDS = {
         156,
         160,
         126,
-        7
+        7,
     ],
     "DELL_SMM_CRYPTO_ALGORITHM_GUID": [
         2951172549,
@@ -14173,7 +13394,7 @@ PROTOCOLS_GUIDS = {
         80,
         243,
         95,
-        212
+        212,
     ],
     "DELL_PCH_SMI_DISPATCHER_GUID": [
         2966875475,
@@ -14186,7 +13407,7 @@ PROTOCOLS_GUIDS = {
         82,
         100,
         231,
-        126
+        126,
     ],
     "DELL_SMBIOS64_GUID": [
         2973687096,
@@ -14199,21 +13420,9 @@ PROTOCOLS_GUIDS = {
         227,
         36,
         151,
-        223
+        223,
     ],
-    "DELL_AMITSE_GUID": [
-        2983856863,
-        20343,
-        16496,
-        168,
-        142,
-        191,
-        254,
-        28,
-        96,
-        82,
-        154
-    ],
+    "DELL_AMITSE_GUID": [2983856863, 20343, 16496, 168, 142, 191, 254, 28, 96, 82, 154],
     "DELL_DXE_DELAY_GUID": [
         3021497697,
         35175,
@@ -14225,7 +13434,7 @@ PROTOCOLS_GUIDS = {
         118,
         112,
         196,
-        160
+        160,
     ],
     "DELL_LEG_USB_MEM_INFO_DXE_GUID": [
         3025887172,
@@ -14238,7 +13447,7 @@ PROTOCOLS_GUIDS = {
         32,
         151,
         239,
-        20
+        20,
     ],
     "DELL_SECURITY_CONFIG_GUID": [
         3072249106,
@@ -14251,7 +13460,7 @@ PROTOCOLS_GUIDS = {
         89,
         212,
         91,
-        60
+        60,
     ],
     "DELL_SMB_VERSION_MANIFEST_GUID": [
         3108097809,
@@ -14264,7 +13473,7 @@ PROTOCOLS_GUIDS = {
         112,
         198,
         183,
-        66
+        66,
     ],
     "DELL_SMBIOSUPDATE_DATA_GUID": [
         3112802724,
@@ -14277,7 +13486,7 @@ PROTOCOLS_GUIDS = {
         38,
         245,
         15,
-        90
+        90,
     ],
     "DELL_PCH_RESET_GUID": [
         3139419471,
@@ -14290,7 +13499,7 @@ PROTOCOLS_GUIDS = {
         114,
         188,
         143,
-        254
+        254,
     ],
     "DELL_SATA_CONTROLLER_GUID": [
         3143996459,
@@ -14303,7 +13512,7 @@ PROTOCOLS_GUIDS = {
         64,
         207,
         96,
-        210
+        210,
     ],
     "DELL_ALERT_STANDARD_FORMAT_SMM_GUID": [
         3146232605,
@@ -14316,7 +13525,7 @@ PROTOCOLS_GUIDS = {
         176,
         155,
         151,
-        182
+        182,
     ],
     "DELL_DA_TAA_MAC_GUID": [
         3165370077,
@@ -14329,7 +13538,7 @@ PROTOCOLS_GUIDS = {
         154,
         246,
         52,
-        44
+        44,
     ],
     "DELL_HOT_KEY_HANDLER_DXE_GUID": [
         3166386450,
@@ -14342,7 +13551,7 @@ PROTOCOLS_GUIDS = {
         115,
         159,
         239,
-        81
+        81,
     ],
     "DELL_CMOS_MANAGER_DXE_SRC_GUID": [
         3175457368,
@@ -14355,7 +13564,7 @@ PROTOCOLS_GUIDS = {
         94,
         2,
         248,
-        119
+        119,
     ],
     "DELL_DXE_GPIO_CONTROL_GUID": [
         3184242748,
@@ -14368,7 +13577,7 @@ PROTOCOLS_GUIDS = {
         196,
         250,
         129,
-        168
+        168,
     ],
     "DELL_DT_LEG_USB_POLICY_GUID": [
         3186172457,
@@ -14381,7 +13590,7 @@ PROTOCOLS_GUIDS = {
         103,
         146,
         163,
-        149
+        149,
     ],
     "DELL_PXE_BASE_ROM_GUID": [
         3187322150,
@@ -14394,7 +13603,7 @@ PROTOCOLS_GUIDS = {
         203,
         74,
         164,
-        7
+        7,
     ],
     "DELL_SMI_VARIABLE_GUID": [
         3189861288,
@@ -14407,7 +13616,7 @@ PROTOCOLS_GUIDS = {
         91,
         67,
         173,
-        223
+        223,
     ],
     "DELL_POWER_BUTTON_DXE_GUID": [
         3207045736,
@@ -14420,7 +13629,7 @@ PROTOCOLS_GUIDS = {
         238,
         127,
         60,
-        41
+        41,
     ],
     "DELL_ACTIVE_BIOS_GUID": [
         3218447682,
@@ -14433,7 +13642,7 @@ PROTOCOLS_GUIDS = {
         138,
         26,
         236,
-        133
+        133,
     ],
     "DELL_D010_ALEGACY_VIDEO_ROM_GUID": [
         3233357934,
@@ -14446,7 +13655,7 @@ PROTOCOLS_GUIDS = {
         199,
         102,
         152,
-        189
+        189,
     ],
     "DELL_SMM_DIAG_LEDS_GUID": [
         3238698573,
@@ -14459,7 +13668,7 @@ PROTOCOLS_GUIDS = {
         248,
         111,
         87,
-        57
+        57,
     ],
     "DELL_FLASH_WRITE_PROTECT_GUID": [
         3242472502,
@@ -14472,7 +13681,7 @@ PROTOCOLS_GUIDS = {
         66,
         194,
         21,
-        57
+        57,
     ],
     "DELL_LEGACY_INTERRUPT_GUID": [
         3250854137,
@@ -14485,7 +13694,7 @@ PROTOCOLS_GUIDS = {
         150,
         223,
         234,
-        134
+        134,
     ],
     "DELL_SAVE_MEMORY_CONFIG_DXE_GUID": [
         3289668034,
@@ -14498,7 +13707,7 @@ PROTOCOLS_GUIDS = {
         255,
         63,
         61,
-        160
+        160,
     ],
     "DELL_SPI_PART_WINBOND_GUID": [
         3291682642,
@@ -14511,7 +13720,7 @@ PROTOCOLS_GUIDS = {
         223,
         176,
         51,
-        196
+        196,
     ],
     "DELL_DA_ASSET_TAG_GUID": [
         3301417385,
@@ -14524,7 +13733,7 @@ PROTOCOLS_GUIDS = {
         106,
         225,
         139,
-        252
+        252,
     ],
     "DELL_IDE_RCONTROLLER_GUID": [
         3304247303,
@@ -14537,21 +13746,9 @@ PROTOCOLS_GUIDS = {
         56,
         134,
         230,
-        202
+        202,
     ],
-    "DELL_PBA_USH_GUID": [
-        3327848673,
-        33459,
-        16746,
-        143,
-        10,
-        221,
-        208,
-        211,
-        9,
-        140,
-        88
-    ],
+    "DELL_PBA_USH_GUID": [3327848673, 33459, 16746, 143, 10, 221, 208, 211, 9, 140, 88],
     "DELL_LEGACY_TCG_SUPPORT_GUID": [
         3330062921,
         46022,
@@ -14563,7 +13760,7 @@ PROTOCOLS_GUIDS = {
         136,
         113,
         33,
-        40
+        40,
     ],
     "DELL_SMB_STRUC_B2_CONFIG_GUID": [
         3350273852,
@@ -14576,21 +13773,9 @@ PROTOCOLS_GUIDS = {
         139,
         23,
         88,
-        13
+        13,
     ],
-    "DELL_TDT_AM_GUID": [
-        3356510302,
-        53484,
-        20120,
-        170,
-        181,
-        18,
-        12,
-        126,
-        85,
-        68,
-        40
-    ],
+    "DELL_TDT_AM_GUID": [3356510302, 53484, 20120, 170, 181, 18, 12, 126, 85, 68, 40],
     "DELL_HOT_KEYS_CONFIG_GUID": [
         3361833421,
         45964,
@@ -14602,7 +13787,7 @@ PROTOCOLS_GUIDS = {
         89,
         24,
         22,
-        169
+        169,
     ],
     "DELL_SMM_EVENT_SMM_GUID": [
         3363683096,
@@ -14615,7 +13800,7 @@ PROTOCOLS_GUIDS = {
         121,
         90,
         217,
-        66
+        66,
     ],
     "DELL_DASH_CONFIG_GUID": [
         3365727239,
@@ -14628,7 +13813,7 @@ PROTOCOLS_GUIDS = {
         67,
         55,
         47,
-        34
+        34,
     ],
     "DELL_SMM_MULTI_PLATFORM_GUID": [
         3386494532,
@@ -14641,7 +13826,7 @@ PROTOCOLS_GUIDS = {
         51,
         153,
         156,
-        40
+        40,
     ],
     "DELL_RUNTIME_GUID": [
         3418725450,
@@ -14654,7 +13839,7 @@ PROTOCOLS_GUIDS = {
         174,
         165,
         103,
-        228
+        228,
     ],
     "DELL_SM_BIOS_STRUC_D2_GUID": [
         3435955970,
@@ -14667,7 +13852,7 @@ PROTOCOLS_GUIDS = {
         0,
         76,
         219,
-        55
+        55,
     ],
     "DELL_CSP_LIB_DXE_GUID": [
         3448002092,
@@ -14680,7 +13865,7 @@ PROTOCOLS_GUIDS = {
         94,
         130,
         185,
-        32
+        32,
     ],
     "DELL_TCG_SMM_GUID": [
         3451984617,
@@ -14693,7 +13878,7 @@ PROTOCOLS_GUIDS = {
         216,
         129,
         152,
-        147
+        147,
     ],
     "DELL_SMBIOS_BOARD_GUID": [
         3472264294,
@@ -14706,21 +13891,9 @@ PROTOCOLS_GUIDS = {
         136,
         91,
         87,
-        37
-    ],
-    "DELL_SMM_BASE_GUID": [
-        3496160400,
-        45015,
-        17554,
-        177,
-        134,
         37,
-        124,
-        99,
-        20,
-        60,
-        97
     ],
+    "DELL_SMM_BASE_GUID": [3496160400, 45015, 17554, 177, 134, 37, 124, 99, 20, 60, 97],
     "DELL_SLP_MARKER_CTRL_GUID": [
         3511775422,
         54546,
@@ -14732,7 +13905,7 @@ PROTOCOLS_GUIDS = {
         111,
         245,
         197,
-        97
+        97,
     ],
     "DELL_THROTTLING_DRIVER_GUID": [
         3564284724,
@@ -14745,7 +13918,7 @@ PROTOCOLS_GUIDS = {
         222,
         41,
         35,
-        117
+        117,
     ],
     "DELL_TERMINAL_PLATFORM_POLICY_GUID": [
         3567753741,
@@ -14758,7 +13931,7 @@ PROTOCOLS_GUIDS = {
         36,
         55,
         41,
-        52
+        52,
     ],
     "DELL_DIAGS_SMM_GUID": [
         3568703808,
@@ -14771,7 +13944,7 @@ PROTOCOLS_GUIDS = {
         202,
         74,
         44,
-        55
+        55,
     ],
     "DELL_HDD_SMART_SMM_GUID": [
         3592121466,
@@ -14784,7 +13957,7 @@ PROTOCOLS_GUIDS = {
         165,
         7,
         102,
-        57
+        57,
     ],
     "DELL_PCH_POLICY_INIT_DXE_GUID": [
         3601615554,
@@ -14797,7 +13970,7 @@ PROTOCOLS_GUIDS = {
         20,
         105,
         222,
-        2
+        2,
     ],
     "DELL_NB_CONFIG_DXE_GUID": [
         3607159740,
@@ -14810,7 +13983,7 @@ PROTOCOLS_GUIDS = {
         2,
         61,
         230,
-        88
+        88,
     ],
     "DELL_I_AMTDXE_GUID": [
         3610900841,
@@ -14823,7 +13996,7 @@ PROTOCOLS_GUIDS = {
         39,
         211,
         254,
-        222
+        222,
     ],
     "DELL_AMT_WRAPPER_DXE_GUID": [
         3615264781,
@@ -14836,7 +14009,7 @@ PROTOCOLS_GUIDS = {
         55,
         252,
         164,
-        50
+        50,
     ],
     "DELL_PHYSICAL_PRESENCE_GUID": [
         3629795852,
@@ -14849,7 +14022,7 @@ PROTOCOLS_GUIDS = {
         195,
         136,
         42,
-        104
+        104,
     ],
     "DELL_SMM_GPIO_CONTROL_GUID": [
         3644366586,
@@ -14862,7 +14035,7 @@ PROTOCOLS_GUIDS = {
         57,
         141,
         141,
-        243
+        243,
     ],
     "DELL_SM_BIOS_STRUC_D9_GUID": [
         3654093472,
@@ -14875,7 +14048,7 @@ PROTOCOLS_GUIDS = {
         253,
         4,
         132,
-        217
+        217,
     ],
     "DELL_STORAGE_AGENTS_SMM_GUID": [
         3661961974,
@@ -14888,7 +14061,7 @@ PROTOCOLS_GUIDS = {
         71,
         238,
         31,
-        126
+        126,
     ],
     "DELL_SMB_BBS_INFO_GUID": [
         3698353148,
@@ -14901,7 +14074,7 @@ PROTOCOLS_GUIDS = {
         8,
         132,
         188,
-        83
+        83,
     ],
     "DELL_SM_BIOS_STRUC_B2_GUID": [
         3701255400,
@@ -14914,7 +14087,7 @@ PROTOCOLS_GUIDS = {
         117,
         254,
         155,
-        102
+        102,
     ],
     "DELL_TDT_DXE_GUID": [
         3702147936,
@@ -14927,7 +14100,7 @@ PROTOCOLS_GUIDS = {
         212,
         239,
         9,
-        80
+        80,
     ],
     "DELL_SA_INIT_DXE_GUID": [
         3726879982,
@@ -14940,7 +14113,7 @@ PROTOCOLS_GUIDS = {
         181,
         61,
         232,
-        17
+        17,
     ],
     "DELL_PCH_INIT_DXE_GUID": [
         3726879982,
@@ -14953,7 +14126,7 @@ PROTOCOLS_GUIDS = {
         181,
         61,
         232,
-        35
+        35,
     ],
     "DELL_SMBIOS_GET_FLASH_DATA64_GUID": [
         3738670445,
@@ -14966,21 +14139,9 @@ PROTOCOLS_GUIDS = {
         57,
         176,
         77,
-        91
+        91,
     ],
-    "DELL_IDE_DXE_GUID": [
-        3741056122,
-        52226,
-        16933,
-        136,
-        173,
-        60,
-        65,
-        230,
-        33,
-        120,
-        91
-    ],
+    "DELL_IDE_DXE_GUID": [3741056122, 52226, 16933, 136, 173, 60, 65, 230, 33, 120, 91],
     "DELL_MFG_MODE_DXE_DRIVER_GUID": [
         3756519012,
         54525,
@@ -14992,7 +14153,7 @@ PROTOCOLS_GUIDS = {
         82,
         66,
         54,
-        251
+        251,
     ],
     "DELL_DA_OWNER_TAG_GUID": [
         3757369032,
@@ -15005,21 +14166,9 @@ PROTOCOLS_GUIDS = {
         94,
         144,
         213,
-        57
+        57,
     ],
-    "DELL_DA_BFA_GUID": [
-        3761655790,
-        5184,
-        19009,
-        173,
-        62,
-        80,
-        224,
-        177,
-        6,
-        168,
-        61
-    ],
+    "DELL_DA_BFA_GUID": [3761655790, 5184, 19009, 173, 62, 80, 224, 177, 6, 168, 61],
     "DELL_CPU_DXE_GUID": [
         3761945311,
         58678,
@@ -15031,7 +14180,7 @@ PROTOCOLS_GUIDS = {
         120,
         235,
         52,
-        254
+        254,
     ],
     "DELL_PCH_SMBUS_DXE_GUID": [
         3763525798,
@@ -15044,7 +14193,7 @@ PROTOCOLS_GUIDS = {
         225,
         98,
         54,
-        77
+        77,
     ],
     "DELL_DA_PASSWORDS_GUID": [
         3775216056,
@@ -15057,7 +14206,7 @@ PROTOCOLS_GUIDS = {
         93,
         6,
         93,
-        213
+        213,
     ],
     "DELL_SLP_CONFIG_GUID": [
         3805262678,
@@ -15070,7 +14219,7 @@ PROTOCOLS_GUIDS = {
         210,
         235,
         40,
-        23
+        23,
     ],
     "DELL_DXE_SB_GPIO_CONTROL_GUID": [
         3808813313,
@@ -15083,7 +14232,7 @@ PROTOCOLS_GUIDS = {
         140,
         93,
         179,
-        38
+        38,
     ],
     "DELL_SMB_DA_TOKENS_CONFIG_GUID": [
         3816052554,
@@ -15096,7 +14245,7 @@ PROTOCOLS_GUIDS = {
         95,
         192,
         128,
-        38
+        38,
     ],
     "DELL_OEM_BADGING_SUPPORT_GUID": [
         3818072628,
@@ -15109,7 +14258,7 @@ PROTOCOLS_GUIDS = {
         155,
         69,
         106,
-        21
+        21,
     ],
     "DELL_SMM_CIRC_BUFF_GUID": [
         3823991841,
@@ -15122,7 +14271,7 @@ PROTOCOLS_GUIDS = {
         127,
         226,
         6,
-        62
+        62,
     ],
     "DELL_POWER_BUTTON_GUID": [
         3848712343,
@@ -15135,7 +14284,7 @@ PROTOCOLS_GUIDS = {
         124,
         25,
         12,
-        226
+        226,
     ],
     "DELL_ASF_TABLE_GUID": [
         3877971919,
@@ -15148,7 +14297,7 @@ PROTOCOLS_GUIDS = {
         103,
         250,
         74,
-        164
+        164,
     ],
     "DELL_RUNTIME_ACPI_SMM_GUID": [
         3883815845,
@@ -15161,7 +14310,7 @@ PROTOCOLS_GUIDS = {
         111,
         26,
         200,
-        17
+        17,
     ],
     "DELL_TAGS_CONFIG_GUID": [
         3892811838,
@@ -15174,7 +14323,7 @@ PROTOCOLS_GUIDS = {
         230,
         2,
         44,
-        150
+        150,
     ],
     "DELL_SM_BIOS_STRUC_FAN_GUID": [
         3916771658,
@@ -15187,7 +14336,7 @@ PROTOCOLS_GUIDS = {
         144,
         60,
         182,
-        196
+        196,
     ],
     "DELL_SMM_ASF_INIT_GUID": [
         3950562942,
@@ -15200,7 +14349,7 @@ PROTOCOLS_GUIDS = {
         216,
         172,
         73,
-        80
+        80,
     ],
     "DELL_SM_BIOS_STRUC_D8_GUID": [
         3973583987,
@@ -15213,7 +14362,7 @@ PROTOCOLS_GUIDS = {
         222,
         39,
         81,
-        155
+        155,
     ],
     "DELL_SM_BIOS_MEMORY_GUID": [
         3986920450,
@@ -15226,7 +14375,7 @@ PROTOCOLS_GUIDS = {
         60,
         184,
         167,
-        106
+        106,
     ],
     "DELL_S3_RESUME_GUID": [
         4023800524,
@@ -15239,7 +14388,7 @@ PROTOCOLS_GUIDS = {
         8,
         144,
         112,
-        252
+        252,
     ],
     "DELL_DXE_DIAG_LEDS_GUID": [
         4040744618,
@@ -15252,7 +14401,7 @@ PROTOCOLS_GUIDS = {
         1,
         104,
         38,
-        10
+        10,
     ],
     "DELL_WARM_BOOT_SMM_GUID": [
         4043307108,
@@ -15265,7 +14414,7 @@ PROTOCOLS_GUIDS = {
         240,
         164,
         26,
-        72
+        72,
     ],
     "DELL_BOOT_SCRIPT_SMI_HANDLER_GUID": [
         4053894950,
@@ -15278,7 +14427,7 @@ PROTOCOLS_GUIDS = {
         140,
         196,
         107,
-        6
+        6,
     ],
     "DELL_TPM_SMM_GUID": [
         4078416539,
@@ -15291,7 +14440,7 @@ PROTOCOLS_GUIDS = {
         126,
         244,
         241,
-        24
+        24,
     ],
     "DELL_DXE_SIO_EMI_GUID": [
         4078728889,
@@ -15304,7 +14453,7 @@ PROTOCOLS_GUIDS = {
         197,
         236,
         17,
-        108
+        108,
     ],
     "DELL_GT2_LEGACY_VIDEO_ROM_GUID": [
         4132371130,
@@ -15317,7 +14466,7 @@ PROTOCOLS_GUIDS = {
         72,
         100,
         123,
-        241
+        241,
     ],
     "DELL_SM_BIOS_STRUC_THERM_GUID": [
         4140673760,
@@ -15330,7 +14479,7 @@ PROTOCOLS_GUIDS = {
         230,
         174,
         210,
-        110
+        110,
     ],
     "DELL_VIDEO_CONFIG_DXE_GUID": [
         4158125896,
@@ -15343,7 +14492,7 @@ PROTOCOLS_GUIDS = {
         237,
         172,
         194,
-        29
+        29,
     ],
     "DELL_SMB_RUN_ROM_GUID": [
         4173021602,
@@ -15356,7 +14505,7 @@ PROTOCOLS_GUIDS = {
         98,
         248,
         77,
-        222
+        222,
     ],
     "DELL_BBSMANAGER_SMM_GUID": [
         4178613140,
@@ -15369,7 +14518,7 @@ PROTOCOLS_GUIDS = {
         213,
         52,
         69,
-        30
+        30,
     ],
     "DELL_PHYSICAL_PRESENCE_SMM_GUID": [
         4181065499,
@@ -15382,7 +14531,7 @@ PROTOCOLS_GUIDS = {
         167,
         167,
         215,
-        20
+        20,
     ],
     "DELL_ME_LOCAL_FW_UPDATE_DXE_GUID": [
         4182422346,
@@ -15395,7 +14544,7 @@ PROTOCOLS_GUIDS = {
         239,
         55,
         217,
-        190
+        190,
     ],
     "DELL_PCI_SERIAL_GUID": [
         4212403097,
@@ -15408,7 +14557,7 @@ PROTOCOLS_GUIDS = {
         88,
         167,
         52,
-        249
+        249,
     ],
     "DELL_PCH_SERIAL_GPIO_GUID": [
         4229658176,
@@ -15421,7 +14570,7 @@ PROTOCOLS_GUIDS = {
         83,
         148,
         181,
-        194
+        194,
     ],
     "DELL_SMI_CPU_DECODE_GUID": [
         4236726303,
@@ -15434,21 +14583,9 @@ PROTOCOLS_GUIDS = {
         125,
         217,
         4,
-        220
+        220,
     ],
-    "DELL_SMM_S3_GUID": [
-        160950128,
-        30062,
-        16697,
-        191,
-        63,
-        127,
-        194,
-        163,
-        8,
-        23,
-        126
-    ],
+    "DELL_SMM_S3_GUID": [160950128, 30062, 16697, 191, 63, 127, 194, 163, 8, 23, 126],
     "DELL_CPU_PEI_BEFORE_MEM_GUID": [
         357936371,
         48391,
@@ -15460,21 +14597,9 @@ PROTOCOLS_GUIDS = {
         69,
         164,
         18,
-        77
+        77,
     ],
-    "DELL_WDT_PEI_GUID": [
-        495502658,
-        40439,
-        16970,
-        170,
-        144,
-        2,
-        182,
-        31,
-        40,
-        105,
-        56
-    ],
+    "DELL_WDT_PEI_GUID": [495502658, 40439, 16970, 170, 144, 2, 182, 31, 40, 105, 56],
     "DELL_PEI_HWM_INIT_GUID": [
         572352352,
         19136,
@@ -15486,7 +14611,7 @@ PROTOCOLS_GUIDS = {
         228,
         217,
         193,
-        200
+        200,
     ],
     "DELL_CPU_PEI_GUID": [
         733327273,
@@ -15499,7 +14624,7 @@ PROTOCOLS_GUIDS = {
         60,
         43,
         147,
-        191
+        191,
     ],
     "DELL_AUDIO_CONFIG_PEI_GUID": [
         862772714,
@@ -15512,21 +14637,9 @@ PROTOCOLS_GUIDS = {
         57,
         31,
         235,
-        184
+        184,
     ],
-    "DELL_TCG_PEI_GUID": [
-        882417038,
-        37642,
-        19093,
-        171,
-        4,
-        46,
-        108,
-        253,
-        255,
-        102,
-        49
-    ],
+    "DELL_TCG_PEI_GUID": [882417038, 37642, 19093, 171, 4, 46, 108, 253, 255, 102, 49],
     "DELL_MEMORY_INIT_GUID": [
         994242391,
         5843,
@@ -15538,7 +14651,7 @@ PROTOCOLS_GUIDS = {
         6,
         180,
         20,
-        81
+        81,
     ],
     "DELL_ALERT_STANDARD_FORMAT_PEI_GUID": [
         1044912125,
@@ -15551,7 +14664,7 @@ PROTOCOLS_GUIDS = {
         50,
         128,
         50,
-        156
+        156,
     ],
     "DELL_AMT_CONFIG_PEI_GUID": [
         1240117670,
@@ -15564,7 +14677,7 @@ PROTOCOLS_GUIDS = {
         91,
         59,
         141,
-        237
+        237,
     ],
     "DELL_OP_PRESENCE_GUID": [
         1340568296,
@@ -15577,7 +14690,7 @@ PROTOCOLS_GUIDS = {
         60,
         73,
         4,
-        136
+        136,
     ],
     "DELL_START_WATCH_DOG_GUID": [
         1417273500,
@@ -15590,7 +14703,7 @@ PROTOCOLS_GUIDS = {
         46,
         56,
         141,
-        31
+        31,
     ],
     "DELL_ERROR_HANDLER_PEI_GUID": [
         1495580163,
@@ -15603,7 +14716,7 @@ PROTOCOLS_GUIDS = {
         171,
         254,
         11,
-        75
+        75,
     ],
     "DELL_PCH_SMBUS_ARP_DISABLED_GUID": [
         1681782647,
@@ -15616,21 +14729,9 @@ PROTOCOLS_GUIDS = {
         87,
         225,
         138,
-        214
+        214,
     ],
-    "DELL_PCH_USB_GUID": [
-        1800395730,
-        18401,
-        18953,
-        186,
-        142,
-        142,
-        4,
-        31,
-        32,
-        139,
-        149
-    ],
+    "DELL_PCH_USB_GUID": [1800395730, 18401, 18953, 186, 142, 142, 4, 31, 32, 139, 149],
     "DELL_TCG_PEI2_GUID": [
         1894142482,
         62381,
@@ -15642,7 +14743,7 @@ PROTOCOLS_GUIDS = {
         84,
         46,
         215,
-        213
+        213,
     ],
     "DELL_SB_POWER_OFF_PEI_GUID": [
         2035578841,
@@ -15655,7 +14756,7 @@ PROTOCOLS_GUIDS = {
         98,
         63,
         126,
-        248
+        248,
     ],
     "DELL_CMOS_MANAGER_PEI_SRC_GUID": [
         2104986061,
@@ -15668,7 +14769,7 @@ PROTOCOLS_GUIDS = {
         61,
         94,
         61,
-        158
+        158,
     ],
     "DELL_MFG_MODE_PEI_DRIVER_GUID": [
         2180037874,
@@ -15681,7 +14782,7 @@ PROTOCOLS_GUIDS = {
         52,
         39,
         171,
-        196
+        196,
     ],
     "DELL_CORE_PEI_GUID": [
         2456312131,
@@ -15694,7 +14795,7 @@ PROTOCOLS_GUIDS = {
         144,
         119,
         106,
-        31
+        31,
     ],
     "DELL_HECI_PEI_GUID": [
         2633171749,
@@ -15707,7 +14808,7 @@ PROTOCOLS_GUIDS = {
         92,
         95,
         127,
-        196
+        196,
     ],
     "DELL_AUDIO_PEI_GUID": [
         2698503429,
@@ -15720,7 +14821,7 @@ PROTOCOLS_GUIDS = {
         149,
         99,
         196,
-        249
+        249,
     ],
     "DELL_FLASH_UPDATE_PEI_GUID": [
         2726198370,
@@ -15733,7 +14834,7 @@ PROTOCOLS_GUIDS = {
         2,
         3,
         93,
-        236
+        236,
     ],
     "DELL_WARM_BOOT_PEI_GUID": [
         2977490346,
@@ -15746,7 +14847,7 @@ PROTOCOLS_GUIDS = {
         78,
         110,
         224,
-        91
+        91,
     ],
     "DELL_PEI_MAIN_GUID": [
         2981029912,
@@ -15759,7 +14860,7 @@ PROTOCOLS_GUIDS = {
         165,
         76,
         179,
-        110
+        110,
     ],
     "DELL_DO_SIODIAG_LED_PEI_GUID": [
         3062824394,
@@ -15772,7 +14873,7 @@ PROTOCOLS_GUIDS = {
         60,
         203,
         254,
-        60
+        60,
     ],
     "DELL_PCH_ME_UMA_GUID": [
         3064115187,
@@ -15785,7 +14886,7 @@ PROTOCOLS_GUIDS = {
         46,
         247,
         101,
-        67
+        67,
     ],
     "DELL_PEI_DIAG_LEDS_GUID": [
         3355234115,
@@ -15798,21 +14899,9 @@ PROTOCOLS_GUIDS = {
         38,
         237,
         139,
-        3
+        3,
     ],
-    "DELL_TXT_PEI_GUID": [
-        3399321111,
-        54866,
-        16443,
-        182,
-        197,
-        186,
-        71,
-        87,
-        1,
-        22,
-        173
-    ],
+    "DELL_TXT_PEI_GUID": [3399321111, 54866, 16443, 182, 197, 186, 71, 87, 1, 22, 173],
     "DELL_TXT_CONFIG_PEI_GUID": [
         3451279361,
         18765,
@@ -15824,7 +14913,7 @@ PROTOCOLS_GUIDS = {
         183,
         110,
         141,
-        31
+        31,
     ],
     "DELL_PEI_SIO_EMI_GUID": [
         3493973952,
@@ -15837,7 +14926,7 @@ PROTOCOLS_GUIDS = {
         146,
         59,
         40,
-        93
+        93,
     ],
     "DELL_SYSTEM_ID_CONFIG_PEI_GUID": [
         3733609004,
@@ -15850,7 +14939,7 @@ PROTOCOLS_GUIDS = {
         142,
         88,
         223,
-        236
+        236,
     ],
     "DELL_NB_CONFIG_PEI_GUID": [
         3844102995,
@@ -15863,7 +14952,7 @@ PROTOCOLS_GUIDS = {
         228,
         29,
         103,
-        66
+        66,
     ],
     "DELL_DIRTY_SHUTDOWN_PEI_GUID": [
         3848613761,
@@ -15876,7 +14965,7 @@ PROTOCOLS_GUIDS = {
         241,
         130,
         144,
-        22
+        22,
     ],
     "DELL_SIO_POLICY_CONFIG_PEI_GUID": [
         3880245503,
@@ -15889,7 +14978,7 @@ PROTOCOLS_GUIDS = {
         217,
         198,
         15,
-        17
+        17,
     ],
     "DELL_ACLOSS_PEI_GUID": [
         3919974292,
@@ -15902,7 +14991,7 @@ PROTOCOLS_GUIDS = {
         82,
         107,
         87,
-        22
+        22,
     ],
     "DELL_SB_CONFIG_PEI_GUID": [
         3921022868,
@@ -15915,7 +15004,7 @@ PROTOCOLS_GUIDS = {
         82,
         108,
         87,
-        25
+        25,
     ],
     "DELL_VIDEO_CONFIG_PEI_GUID": [
         4133865501,
@@ -15928,7 +15017,7 @@ PROTOCOLS_GUIDS = {
         183,
         72,
         210,
-        180
+        180,
     ],
     "DELL_EC_CONFIG_PEI_GUID": [
         4219737527,
@@ -15941,7 +15030,7 @@ PROTOCOLS_GUIDS = {
         59,
         209,
         218,
-        215
+        215,
     ],
     "DELL_SA_INIT_PEIM_GUID": [
         4246956775,
@@ -15954,7 +15043,7 @@ PROTOCOLS_GUIDS = {
         238,
         225,
         168,
-        17
+        17,
     ],
     "DELL_PCH_INIT_PEIM_GUID": [
         4246956775,
@@ -15967,7 +15056,7 @@ PROTOCOLS_GUIDS = {
         238,
         225,
         168,
-        56
+        56,
     ],
     "gArmTokenSpaceGuid": [
         3138514174,
@@ -15980,7 +15069,7 @@ PROTOCOLS_GUIDS = {
         254,
         48,
         37,
-        150
+        150,
     ],
     "gArmMpCoreInfoGuid": [
         2767062824,
@@ -15993,7 +15082,7 @@ PROTOCOLS_GUIDS = {
         216,
         87,
         232,
-        52
+        52,
     ],
     "gArmScmiBaseProtocolGuid": [
         3622153193,
@@ -16006,7 +15095,7 @@ PROTOCOLS_GUIDS = {
         226,
         186,
         142,
-        47
+        47,
     ],
     "gArmScmiClockProtocolGuid": [
         2446223272,
@@ -16019,7 +15108,7 @@ PROTOCOLS_GUIDS = {
         243,
         4,
         142,
-        170
+        170,
     ],
     "gArmScmiClock2ProtocolGuid": [
         3101215474,
@@ -16032,7 +15121,7 @@ PROTOCOLS_GUIDS = {
         252,
         5,
         239,
-        207
+        207,
     ],
     "gArmScmiPerformanceProtocolGuid": [
         163101316,
@@ -16045,7 +15134,7 @@ PROTOCOLS_GUIDS = {
         165,
         240,
         123,
-        173
+        173,
     ],
     "gArmMpCoreInfoPpiGuid": [
         1749535860,
@@ -16058,7 +15147,7 @@ PROTOCOLS_GUIDS = {
         231,
         84,
         168,
-        252
+        252,
     ],
     "gArmPlatformTokenSpaceGuid": [
         2617945812,
@@ -16071,7 +15160,7 @@ PROTOCOLS_GUIDS = {
         56,
         20,
         206,
-        118
+        118,
     ],
     "gArmVirtTokenSpaceGuid": [
         191847591,
@@ -16084,7 +15173,7 @@ PROTOCOLS_GUIDS = {
         91,
         128,
         99,
-        102
+        102,
     ],
     "gEarlyPL011BaseAddressGuid": [
         2979651241,
@@ -16097,7 +15186,7 @@ PROTOCOLS_GUIDS = {
         112,
         120,
         3,
-        5
+        5,
     ],
     "gArmVirtVariableGuid": [
         1354670565,
@@ -16110,7 +15199,7 @@ PROTOCOLS_GUIDS = {
         101,
         22,
         176,
-        10
+        10,
     ],
     "gFdtClientProtocolGuid": [
         3776949408,
@@ -16123,7 +15212,7 @@ PROTOCOLS_GUIDS = {
         162,
         89,
         27,
-        76
+        76,
     ],
     "gEdkiiConfigurationManagerProtocolGuid": [
         3629795381,
@@ -16136,7 +15225,7 @@ PROTOCOLS_GUIDS = {
         67,
         213,
         151,
-        142
+        142,
     ],
     "gEdkiiDynamicTableFactoryProtocolGuid": [
         2446451495,
@@ -16149,7 +15238,7 @@ PROTOCOLS_GUIDS = {
         45,
         219,
         69,
-        236
+        236,
     ],
     "gEmbeddedTokenSpaceGuid": [
         3772303895,
@@ -16162,47 +15251,11 @@ PROTOCOLS_GUIDS = {
         129,
         61,
         60,
-        79
+        79,
     ],
-    "gFdtTableGuid": [
-        2981503445,
-        61852,
-        16805,
-        131,
-        11,
-        217,
-        21,
-        44,
-        105,
-        170,
-        224
-    ],
-    "gFdtHobGuid": [
-        378897478,
-        6583,
-        18443,
-        176,
-        71,
-        116,
-        133,
-        173,
-        63,
-        113,
-        109
-    ],
-    "gFdtVariableGuid": [
-        631569738,
-        38659,
-        19369,
-        161,
-        144,
-        183,
-        200,
-        78,
-        251,
-        62,
-        87
-    ],
+    "gFdtTableGuid": [2981503445, 61852, 16805, 131, 11, 217, 21, 44, 105, 170, 224],
+    "gFdtHobGuid": [378897478, 6583, 18443, 176, 71, 116, 133, 173, 63, 113, 109],
+    "gFdtVariableGuid": [631569738, 38659, 19369, 161, 144, 183, 200, 78, 251, 62, 87],
     "gEdkiiPlatformHasDeviceTreeGuid": [
         2126221837,
         6831,
@@ -16214,7 +15267,7 @@ PROTOCOLS_GUIDS = {
         29,
         206,
         20,
-        139
+        139,
     ],
     "gDtPlatformFormSetGuid": [
         729424909,
@@ -16227,7 +15280,7 @@ PROTOCOLS_GUIDS = {
         65,
         95,
         85,
-        38
+        38,
     ],
     "gDtPlatformDefaultDtbFileGuid": [
         625355994,
@@ -16240,7 +15293,7 @@ PROTOCOLS_GUIDS = {
         250,
         164,
         227,
-        38
+        38,
     ],
     "gConsolePrefFormSetGuid": [
         757291188,
@@ -16253,7 +15306,7 @@ PROTOCOLS_GUIDS = {
         223,
         199,
         213,
-        111
+        111,
     ],
     "gEdkiiNvVarStoreFormattedGuid": [
         3517476415,
@@ -16266,7 +15319,7 @@ PROTOCOLS_GUIDS = {
         41,
         200,
         145,
-        163
+        163,
     ],
     "gHardwareInterruptProtocolGuid": [
         680571882,
@@ -16279,7 +15332,7 @@ PROTOCOLS_GUIDS = {
         8,
         218,
         63,
-        241
+        241,
     ],
     "gHardwareInterrupt2ProtocolGuid": [
         847872802,
@@ -16292,7 +15345,7 @@ PROTOCOLS_GUIDS = {
         207,
         86,
         148,
-        112
+        112,
     ],
     "gEmbeddedDeviceGuid": [
         3209403664,
@@ -16305,7 +15358,7 @@ PROTOCOLS_GUIDS = {
         113,
         143,
         39,
-        222
+        222,
     ],
     "gEmbeddedExternalDeviceProtocolGuid": [
         1935641700,
@@ -16318,7 +15371,7 @@ PROTOCOLS_GUIDS = {
         208,
         90,
         84,
-        6
+        6,
     ],
     "gEmbeddedGpioProtocolGuid": [
         396403671,
@@ -16331,7 +15384,7 @@ PROTOCOLS_GUIDS = {
         135,
         223,
         226,
-        238
+        238,
     ],
     "gPeCoffLoaderProtocolGuid": [
         3005421467,
@@ -16344,7 +15397,7 @@ PROTOCOLS_GUIDS = {
         145,
         250,
         17,
-        171
+        171,
     ],
     "gEfiMmcHostProtocolGuid": [
         1046027264,
@@ -16357,7 +15410,7 @@ PROTOCOLS_GUIDS = {
         165,
         213,
         197,
-        27
+        27,
     ],
     "gAndroidFastbootTransportProtocolGuid": [
         1958584288,
@@ -16370,7 +15423,7 @@ PROTOCOLS_GUIDS = {
         56,
         252,
         154,
-        49
+        49,
     ],
     "gAndroidFastbootPlatformProtocolGuid": [
         1380353440,
@@ -16383,7 +15436,7 @@ PROTOCOLS_GUIDS = {
         246,
         164,
         3,
-        8
+        8,
     ],
     "gUsbDeviceProtocolGuid": [
         35377866,
@@ -16396,7 +15449,7 @@ PROTOCOLS_GUIDS = {
         23,
         199,
         11,
-        68
+        68,
     ],
     "gPlatformBootManagerProtocolGuid": [
         1905772711,
@@ -16409,7 +15462,7 @@ PROTOCOLS_GUIDS = {
         249,
         136,
         121,
-        139
+        139,
     ],
     "gPlatformGpioProtocolGuid": [
         1389271109,
@@ -16422,7 +15475,7 @@ PROTOCOLS_GUIDS = {
         18,
         84,
         122,
-        194
+        194,
     ],
     "gPlatformVirtualKeyboardProtocolGuid": [
         238421714,
@@ -16435,7 +15488,7 @@ PROTOCOLS_GUIDS = {
         130,
         162,
         101,
-        71
+        71,
     ],
     "gAndroidBootImgProtocolGuid": [
         2556017433,
@@ -16448,7 +15501,7 @@ PROTOCOLS_GUIDS = {
         101,
         101,
         244,
-        165
+        165,
     ],
     "gEdkiiEmbeddedGpioPpiGuid": [
         566472981,
@@ -16461,7 +15514,7 @@ PROTOCOLS_GUIDS = {
         165,
         117,
         201,
-        123
+        123,
     ],
     "gEmuThunkProtocolGuid": [
         1559440907,
@@ -16474,7 +15527,7 @@ PROTOCOLS_GUIDS = {
         94,
         153,
         236,
-        28
+        28,
     ],
     "gEmuIoThunkProtocolGuid": [
         1160997110,
@@ -16487,7 +15540,7 @@ PROTOCOLS_GUIDS = {
         183,
         255,
         169,
-        38
+        38,
     ],
     "gEmuGraphicsWindowProtocolGuid": [
         821899626,
@@ -16500,7 +15553,7 @@ PROTOCOLS_GUIDS = {
         51,
         216,
         202,
-        193
+        193,
     ],
     "gEmuThreadThunkProtocolGuid": [
         991841148,
@@ -16513,7 +15566,7 @@ PROTOCOLS_GUIDS = {
         235,
         139,
         68,
-        39
+        39,
     ],
     "gEmuBlockIoProtocolGuid": [
         1753785518,
@@ -16526,7 +15579,7 @@ PROTOCOLS_GUIDS = {
         218,
         230,
         160,
-        48
+        48,
     ],
     "gEmuSnpProtocolGuid": [
         4250910292,
@@ -16539,7 +15592,7 @@ PROTOCOLS_GUIDS = {
         165,
         253,
         5,
-        33
+        33,
     ],
     "gEmuThunkPpiGuid": [
         3776182422,
@@ -16552,7 +15605,7 @@ PROTOCOLS_GUIDS = {
         121,
         232,
         174,
-        103
+        103,
     ],
     "gEmulatorPkgTokenSpaceGuid": [
         1333341800,
@@ -16565,7 +15618,7 @@ PROTOCOLS_GUIDS = {
         243,
         242,
         213,
-        165
+        165,
     ],
     "gEmuSystemConfigGuid": [
         4167197029,
@@ -16578,34 +15631,10 @@ PROTOCOLS_GUIDS = {
         185,
         214,
         87,
-        40
+        40,
     ],
-    "gEmuVirtualDisksGuid": [
-        4072289050,
-        35205,
-        4571,
-        164,
-        6,
-        0,
-        64,
-        208,
-        43,
-        24,
-        53
-    ],
-    "gEmuPhysicalDisksGuid": [
-        4072524950,
-        35205,
-        4571,
-        135,
-        25,
-        0,
-        64,
-        208,
-        43,
-        24,
-        53
-    ],
+    "gEmuVirtualDisksGuid": [4072289050, 35205, 4571, 164, 6, 0, 64, 208, 43, 24, 53],
+    "gEmuPhysicalDisksGuid": [4072524950, 35205, 4571, 135, 25, 0, 64, 208, 43, 24, 53],
     "gFmpDevicePkgTokenSpaceGuid": [
         1085462884,
         65041,
@@ -16617,7 +15646,7 @@ PROTOCOLS_GUIDS = {
         218,
         41,
         83,
-        86
+        86,
     ],
     "gEdkiiCapsuleUpdatePolicyProtocolGuid": [
         1215792325,
@@ -16630,7 +15659,7 @@ PROTOCOLS_GUIDS = {
         39,
         124,
         247,
-        87
+        87,
     ],
     "gFspReadyForNotifyPhasePpiGuid": [
         3440802846,
@@ -16643,7 +15672,7 @@ PROTOCOLS_GUIDS = {
         6,
         25,
         152,
-        16
+        16,
     ],
     "gFspInApiModePpiGuid": [
         2716773255,
@@ -16656,7 +15685,7 @@ PROTOCOLS_GUIDS = {
         244,
         6,
         26,
-        62
+        62,
     ],
     "gFspmArchConfigPpiGuid": [
         2186107450,
@@ -16669,7 +15698,7 @@ PROTOCOLS_GUIDS = {
         109,
         202,
         74,
-        187
+        187,
     ],
     "gFspTempRamExitPpiGuid": [
         3156016091,
@@ -16682,7 +15711,7 @@ PROTOCOLS_GUIDS = {
         169,
         12,
         176,
-        82
+        82,
     ],
     "gIntelFsp2PkgTokenSpaceGuid": [
         3983410481,
@@ -16695,21 +15724,9 @@ PROTOCOLS_GUIDS = {
         94,
         246,
         152,
-        162
+        162,
     ],
-    "gFspHeaderFileGuid": [
-        2435268798,
-        8836,
-        18228,
-        185,
-        113,
-        132,
-        176,
-        39,
-        53,
-        63,
-        12
-    ],
+    "gFspHeaderFileGuid": [2435268798, 8836, 18228, 185, 113, 132, 176, 39, 53, 63, 12],
     "gFspReservedMemoryResourceHobGuid": [
         1772590937,
         4979,
@@ -16721,7 +15738,7 @@ PROTOCOLS_GUIDS = {
         158,
         253,
         152,
-        110
+        110,
     ],
     "gFspNonVolatileStorageHobGuid": [
         1914359554,
@@ -16734,7 +15751,7 @@ PROTOCOLS_GUIDS = {
         123,
         169,
         228,
-        176
+        176,
     ],
     "gFspBootLoaderTolumHobGuid": [
         1946111830,
@@ -16747,7 +15764,7 @@ PROTOCOLS_GUIDS = {
         54,
         103,
         173,
-        68
+        68,
     ],
     "gFspPerformanceDataGuid": [
         1458381238,
@@ -16760,7 +15777,7 @@ PROTOCOLS_GUIDS = {
         142,
         24,
         46,
-        227
+        227,
     ],
     "gFspEventEndOfFirmwareGuid": [
         3175413289,
@@ -16773,7 +15790,7 @@ PROTOCOLS_GUIDS = {
         176,
         253,
         113,
-        126
+        126,
     ],
     "gIntelFsp2WrapperTokenSpaceGuid": [
         2739728514,
@@ -16786,7 +15803,7 @@ PROTOCOLS_GUIDS = {
         48,
         43,
         197,
-        30
+        30,
     ],
     "gFspApiPerformanceGuid": [
         3373408917,
@@ -16799,21 +15816,9 @@ PROTOCOLS_GUIDS = {
         137,
         77,
         62,
-        64
+        64,
     ],
-    "gFspHobGuid": [
-        1837562678,
-        47760,
-        18220,
-        181,
-        131,
-        63,
-        190,
-        211,
-        251,
-        32,
-        154
-    ],
+    "gFspHobGuid": [1837562678, 47760, 18220, 181, 131, 63, 190, 211, 251, 32, 154],
     "gFspSiliconInitDonePpiGuid": [
         1320607900,
         53846,
@@ -16825,7 +15830,7 @@ PROTOCOLS_GUIDS = {
         210,
         132,
         179,
-        222
+        222,
     ],
     "gTopOfTemporaryRamPpiGuid": [
         792289970,
@@ -16838,7 +15843,7 @@ PROTOCOLS_GUIDS = {
         211,
         2,
         3,
-        43
+        43,
     ],
     "gAddPerfRecordProtocolGuid": [
         3299183981,
@@ -16851,7 +15856,7 @@ PROTOCOLS_GUIDS = {
         118,
         95,
         181,
-        94
+        94,
     ],
     "gEfiMdeModulePkgTokenSpaceGuid": [
         2712662089,
@@ -16864,7 +15869,7 @@ PROTOCOLS_GUIDS = {
         76,
         183,
         43,
-        188
+        188,
     ],
     "gPcdDataBaseHobGuid": [
         3928583570,
@@ -16877,7 +15882,7 @@ PROTOCOLS_GUIDS = {
         224,
         169,
         18,
-        104
+        104,
     ],
     "gPcdDataBaseSignatureGuid": [
         1014831420,
@@ -16890,21 +15895,9 @@ PROTOCOLS_GUIDS = {
         234,
         79,
         67,
-        126
+        126,
     ],
-    "gEfiIfrTianoGuid": [
-        252385077,
-        34720,
-        16787,
-        178,
-        102,
-        83,
-        140,
-        56,
-        175,
-        72,
-        206
-    ],
+    "gEfiIfrTianoGuid": [252385077, 34720, 16787, 178, 102, 83, 140, 56, 175, 72, 206],
     "gEdkiiIfrBitVarstoreGuid": [
         2195576459,
         37219,
@@ -16916,7 +15909,7 @@ PROTOCOLS_GUIDS = {
         253,
         96,
         167,
-        29
+        29,
     ],
     "gEfiIfrFrameworkGuid": [
         835345690,
@@ -16929,7 +15922,7 @@ PROTOCOLS_GUIDS = {
         43,
         23,
         140,
-        215
+        215,
     ],
     "gEfiSystemNvDataFvGuid": [
         4293995405,
@@ -16942,7 +15935,7 @@ PROTOCOLS_GUIDS = {
         7,
         91,
         79,
-        80
+        80,
     ],
     "gEdkiiWorkingBlockSignatureGuid": [
         2656577835,
@@ -16955,7 +15948,7 @@ PROTOCOLS_GUIDS = {
         253,
         159,
         27,
-        149
+        149,
     ],
     "gEdkiiFaultTolerantWriteGuid": [
         490642616,
@@ -16968,7 +15961,7 @@ PROTOCOLS_GUIDS = {
         170,
         83,
         32,
-        71
+        71,
     ],
     "gEfiConsoleOutDeviceGuid": [
         3551751980,
@@ -16981,7 +15974,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiConsoleInDeviceGuid": [
         3551751979,
@@ -16994,7 +15987,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiMemoryTypeInformationGuid": [
         1276707999,
@@ -17007,7 +16000,7 @@ PROTOCOLS_GUIDS = {
         168,
         63,
         253,
-        250
+        250,
     ],
     "gEfiCapsuleVendorGuid": [
         1897689151,
@@ -17020,7 +16013,7 @@ PROTOCOLS_GUIDS = {
         189,
         60,
         139,
-        226
+        226,
     ],
     "gEfiStandardErrorDeviceGuid": [
         3551751981,
@@ -17033,7 +16026,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiVariableGuid": [
         3721344534,
@@ -17046,7 +16039,7 @@ PROTOCOLS_GUIDS = {
         112,
         127,
         254,
-        125
+        125,
     ],
     "gEfiAuthenticatedVariableGuid": [
         2868063352,
@@ -17059,7 +16052,7 @@ PROTOCOLS_GUIDS = {
         78,
         195,
         119,
-        146
+        146,
     ],
     "gEfiVariableIndexTableGuid": [
         2365438152,
@@ -17072,7 +16065,7 @@ PROTOCOLS_GUIDS = {
         124,
         201,
         139,
-        124
+        124,
     ],
     "gSmmVariableWriteGuid": [
         2478446630,
@@ -17085,7 +16078,7 @@ PROTOCOLS_GUIDS = {
         170,
         59,
         189,
-        243
+        243,
     ],
     "gPerformanceProtocolGuid": [
         1991687674,
@@ -17098,7 +16091,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         217,
-        55
+        55,
     ],
     "gSmmPerformanceProtocolGuid": [
         4167443050,
@@ -17111,7 +16104,7 @@ PROTOCOLS_GUIDS = {
         165,
         124,
         88,
-        142
+        142,
     ],
     "gPerformanceExProtocolGuid": [
         514333676,
@@ -17124,7 +16117,7 @@ PROTOCOLS_GUIDS = {
         206,
         47,
         192,
-        34
+        34,
     ],
     "gSmmPerformanceExProtocolGuid": [
         2468331592,
@@ -17137,7 +16130,7 @@ PROTOCOLS_GUIDS = {
         48,
         227,
         14,
-        229
+        229,
     ],
     "gEdkiiPerformanceMeasurementProtocolGuid": [
         3361539774,
@@ -17150,7 +16143,7 @@ PROTOCOLS_GUIDS = {
         186,
         59,
         135,
-        177
+        177,
     ],
     "gEdkiiSmmPerformanceMeasurementProtocolGuid": [
         3580587379,
@@ -17163,7 +16156,7 @@ PROTOCOLS_GUIDS = {
         23,
         41,
         237,
-        36
+        36,
     ],
     "gEfiCrc32GuidedSectionExtractionGuid": [
         4229680560,
@@ -17176,7 +16169,7 @@ PROTOCOLS_GUIDS = {
         13,
         157,
         208,
-        131
+        131,
     ],
     "gStatusCodeCallbackGuid": [
         3875620236,
@@ -17189,7 +16182,7 @@ PROTOCOLS_GUIDS = {
         148,
         159,
         121,
-        39
+        39,
     ],
     "gMemoryStatusCodeRecordGuid": [
         101498918,
@@ -17202,7 +16195,7 @@ PROTOCOLS_GUIDS = {
         239,
         0,
         165,
-        2
+        2,
     ],
     "gEfiStatusCodeDataTypeDebugGuid": [
         2588840518,
@@ -17215,7 +16208,7 @@ PROTOCOLS_GUIDS = {
         41,
         69,
         195,
-        185
+        185,
     ],
     "gLoadFixedAddressConfigurationTableGuid": [
         749243219,
@@ -17228,7 +16221,7 @@ PROTOCOLS_GUIDS = {
         186,
         226,
         75,
-        9
+        9,
     ],
     "gEfiGenericVariableGuid": [
         1506918991,
@@ -17241,7 +16234,7 @@ PROTOCOLS_GUIDS = {
         13,
         174,
         212,
-        67
+        67,
     ],
     "gIdleLoopEventGuid": [
         1015884108,
@@ -17254,7 +16247,7 @@ PROTOCOLS_GUIDS = {
         50,
         41,
         94,
-        108
+        108,
     ],
     "gRecoveryOnFatUsbDiskGuid": [
         268160537,
@@ -17267,7 +16260,7 @@ PROTOCOLS_GUIDS = {
         174,
         46,
         177,
-        134
+        134,
     ],
     "gRecoveryOnFatIdeDiskGuid": [
         3011867574,
@@ -17280,7 +16273,7 @@ PROTOCOLS_GUIDS = {
         89,
         56,
         215,
-        131
+        131,
     ],
     "gRecoveryOnFatFloppyDiskGuid": [
         775761525,
@@ -17293,7 +16286,7 @@ PROTOCOLS_GUIDS = {
         107,
         135,
         0,
-        255
+        255,
     ],
     "gRecoveryOnDataCdGuid": [
         1554776217,
@@ -17306,7 +16299,7 @@ PROTOCOLS_GUIDS = {
         245,
         64,
         10,
-        159
+        159,
     ],
     "gRecoveryOnFatNvmeDiskGuid": [
         3346047615,
@@ -17319,7 +16312,7 @@ PROTOCOLS_GUIDS = {
         151,
         88,
         139,
-        246
+        246,
     ],
     "gEfiSmmLockBoxCommunicationGuid": [
         708640445,
@@ -17332,7 +16325,7 @@ PROTOCOLS_GUIDS = {
         194,
         163,
         225,
-        192
+        192,
     ],
     "gEfiAcpiVariableGuid": [
         2946497895,
@@ -17345,7 +16338,7 @@ PROTOCOLS_GUIDS = {
         94,
         226,
         44,
-        46
+        46,
     ],
     "gEfiAcpiS3ContextGuid": [
         251235642,
@@ -17358,7 +16351,7 @@ PROTOCOLS_GUIDS = {
         62,
         183,
         79,
-        56
+        56,
     ],
     "gEfiBootScriptExecutorVariableGuid": [
         813269388,
@@ -17371,7 +16364,7 @@ PROTOCOLS_GUIDS = {
         108,
         241,
         238,
-        219
+        219,
     ],
     "gEfiBootScriptExecutorContextGuid": [
         2043369668,
@@ -17384,7 +16377,7 @@ PROTOCOLS_GUIDS = {
         125,
         46,
         153,
-        8
+        8,
     ],
     "gUsbKeyboardLayoutPackageGuid": [
         202324803,
@@ -17397,7 +16390,7 @@ PROTOCOLS_GUIDS = {
         111,
         98,
         137,
-        220
+        220,
     ],
     "gUsbKeyboardLayoutKeyGuid": [
         978156156,
@@ -17410,7 +16403,7 @@ PROTOCOLS_GUIDS = {
         227,
         181,
         145,
-        189
+        189,
     ],
     "gHiiResourceSamleFormSetGuid": [
         1330575344,
@@ -17423,7 +16416,7 @@ PROTOCOLS_GUIDS = {
         1,
         35,
         169,
-        159
+        159,
     ],
     "gDriverSampleFormSetGuid": [
         2689214452,
@@ -17436,7 +16429,7 @@ PROTOCOLS_GUIDS = {
         19,
         2,
         17,
-        61
+        61,
     ],
     "gDriverSampleInventoryGuid": [
         3019203696,
@@ -17449,7 +16442,7 @@ PROTOCOLS_GUIDS = {
         87,
         122,
         169,
-        232
+        232,
     ],
     "gEfiIfrRefreshIdOpGuid": [
         4125513177,
@@ -17462,7 +16455,7 @@ PROTOCOLS_GUIDS = {
         142,
         96,
         171,
-        34
+        34,
     ],
     "gPlatformOverridesManagerGuid": [
         2249479805,
@@ -17475,34 +16468,10 @@ PROTOCOLS_GUIDS = {
         12,
         156,
         112,
-        192
+        192,
     ],
-    "gZeroGuid": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-    ],
-    "gMtcVendorGuid": [
-        3950002193,
-        5122,
-        4563,
-        142,
-        119,
-        0,
-        160,
-        201,
-        105,
-        114,
-        59
-    ],
+    "gZeroGuid": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "gMtcVendorGuid": [3950002193, 5122, 4563, 142, 119, 0, 160, 201, 105, 114, 59],
     "gEfiFirmwarePerformanceGuid": [
         3231021338,
         12289,
@@ -17514,7 +16483,7 @@ PROTOCOLS_GUIDS = {
         49,
         159,
         47,
-        164
+        164,
     ],
     "gFirmwarePerformanceS3PointerGuid": [
         231103196,
@@ -17527,7 +16496,7 @@ PROTOCOLS_GUIDS = {
         235,
         158,
         74,
-        49
+        49,
     ],
     "gEventExitBootServicesFailedGuid": [
         1332499719,
@@ -17540,7 +16509,7 @@ PROTOCOLS_GUIDS = {
         98,
         73,
         12,
-        177
+        177,
     ],
     "gConnectConInEventGuid": [
         3679355217,
@@ -17553,7 +16522,7 @@ PROTOCOLS_GUIDS = {
         181,
         209,
         168,
-        215
+        215,
     ],
     "gEdkiiStatusCodeDataTypeVariableGuid": [
         4142820795,
@@ -17566,7 +16535,7 @@ PROTOCOLS_GUIDS = {
         177,
         157,
         132,
-        173
+        173,
     ],
     "gEdkiiMemoryProfileGuid": [
         2182912521,
@@ -17579,7 +16548,7 @@ PROTOCOLS_GUIDS = {
         147,
         161,
         44,
-        254
+        254,
     ],
     "gEdkiiSmmMemoryProfileGuid": [
         3794517194,
@@ -17592,7 +16561,7 @@ PROTOCOLS_GUIDS = {
         232,
         54,
         147,
-        189
+        189,
     ],
     "gEdkiiVarErrorFlagGuid": [
         78872552,
@@ -17605,7 +16574,7 @@ PROTOCOLS_GUIDS = {
         140,
         94,
         137,
-        170
+        170,
     ],
     "gBrotliCustomDecompressGuid": [
         1028857936,
@@ -17618,7 +16587,7 @@ PROTOCOLS_GUIDS = {
         99,
         13,
         90,
-        251
+        251,
     ],
     "gLzmaCustomDecompressGuid": [
         3998111896,
@@ -17631,7 +16600,7 @@ PROTOCOLS_GUIDS = {
         215,
         148,
         3,
-        207
+        207,
     ],
     "gLzmaF86CustomDecompressGuid": [
         3559581373,
@@ -17644,21 +16613,9 @@ PROTOCOLS_GUIDS = {
         166,
         234,
         232,
-        137
+        137,
     ],
-    "gEfiTtyTermGuid": [
-        2106682752,
-        23473,
-        17804,
-        164,
-        143,
-        226,
-        95,
-        221,
-        81,
-        239,
-        148
-    ],
+    "gEfiTtyTermGuid": [2106682752, 23473, 17804, 164, 143, 226, 95, 221, 81, 239, 148],
     "gEdkiiLinuxTermGuid": [
         3828763263,
         63525,
@@ -17670,7 +16627,7 @@ PROTOCOLS_GUIDS = {
         230,
         129,
         124,
-        165
+        165,
     ],
     "gEdkiiXtermR6Guid": [
         4227638635,
@@ -17683,21 +16640,9 @@ PROTOCOLS_GUIDS = {
         151,
         236,
         124,
-        203
+        203,
     ],
-    "gEdkiiVT400Guid": [
-        2387008989,
-        15689,
-        19101,
-        184,
-        117,
-        60,
-        8,
-        111,
-        106,
-        162,
-        189
-    ],
+    "gEdkiiVT400Guid": [2387008989, 15689, 19101, 184, 117, 60, 8, 111, 106, 162, 189],
     "gEdkiiSCOTermGuid": [
         4236105440,
         33084,
@@ -17709,7 +16654,7 @@ PROTOCOLS_GUIDS = {
         73,
         233,
         225,
-        90
+        90,
     ],
     "gEfiIfrBootMaintenanceGuid": [
         3000949905,
@@ -17722,7 +16667,7 @@ PROTOCOLS_GUIDS = {
         12,
         116,
         164,
-        224
+        224,
     ],
     "gEfiIfrFrontPageGuid": [
         3850897912,
@@ -17735,7 +16680,7 @@ PROTOCOLS_GUIDS = {
         220,
         75,
         68,
-        30
+        30,
     ],
     "gRamDiskFormSetGuid": [
         709259615,
@@ -17748,7 +16693,7 @@ PROTOCOLS_GUIDS = {
         154,
         170,
         48,
-        197
+        197,
     ],
     "gEdkiiPiSmmCommunicationRegionTableGuid": [
         1311296080,
@@ -17761,7 +16706,7 @@ PROTOCOLS_GUIDS = {
         101,
         38,
         219,
-        52
+        52,
     ],
     "gEdkiiPiSmmMemoryAttributesTableGuid": [
         1805636599,
@@ -17774,7 +16719,7 @@ PROTOCOLS_GUIDS = {
         102,
         84,
         26,
-        93
+        93,
     ],
     "gSmiHandlerProfileGuid": [
         1226261314,
@@ -17787,7 +16732,7 @@ PROTOCOLS_GUIDS = {
         168,
         83,
         137,
-        245
+        245,
     ],
     "gEdkiiNonDiscoverableAhciDeviceGuid": [
         3352516504,
@@ -17800,7 +16745,7 @@ PROTOCOLS_GUIDS = {
         159,
         2,
         88,
-        75
+        75,
     ],
     "gEdkiiNonDiscoverableAmbaDeviceGuid": [
         2487485241,
@@ -17813,7 +16758,7 @@ PROTOCOLS_GUIDS = {
         15,
         76,
         161,
-        145
+        145,
     ],
     "gEdkiiNonDiscoverableEhciDeviceGuid": [
         3941488149,
@@ -17826,7 +16771,7 @@ PROTOCOLS_GUIDS = {
         86,
         149,
         175,
-        133
+        133,
     ],
     "gEdkiiNonDiscoverableNvmeDeviceGuid": [
         3320993090,
@@ -17839,7 +16784,7 @@ PROTOCOLS_GUIDS = {
         50,
         51,
         179,
-        9
+        9,
     ],
     "gEdkiiNonDiscoverableOhciDeviceGuid": [
         2986345904,
@@ -17852,7 +16797,7 @@ PROTOCOLS_GUIDS = {
         68,
         121,
         231,
-        209
+        209,
     ],
     "gEdkiiNonDiscoverableSdhciDeviceGuid": [
         500291097,
@@ -17865,7 +16810,7 @@ PROTOCOLS_GUIDS = {
         124,
         7,
         183,
-        44
+        44,
     ],
     "gEdkiiNonDiscoverableUfsDeviceGuid": [
         782727442,
@@ -17878,7 +16823,7 @@ PROTOCOLS_GUIDS = {
         10,
         251,
         229,
-        86
+        86,
     ],
     "gEdkiiNonDiscoverableUhciDeviceGuid": [
         2832048290,
@@ -17891,7 +16836,7 @@ PROTOCOLS_GUIDS = {
         204,
         59,
         243,
-        168
+        168,
     ],
     "gEdkiiNonDiscoverableXhciDeviceGuid": [
         2982022085,
@@ -17904,7 +16849,7 @@ PROTOCOLS_GUIDS = {
         66,
         87,
         189,
-        120
+        120,
     ],
     "gEdkiiPlatformHasAcpiGuid": [
         4036389697,
@@ -17917,7 +16862,7 @@ PROTOCOLS_GUIDS = {
         225,
         17,
         150,
-        90
+        90,
     ],
     "gEdkiiFpdtExtendedFirmwarePerformanceGuid": [
         993557501,
@@ -17930,7 +16875,7 @@ PROTOCOLS_GUIDS = {
         108,
         27,
         27,
-        37
+        37,
     ],
     "gEdkiiEndOfS3ResumeGuid": [
         2532649325,
@@ -17943,7 +16888,7 @@ PROTOCOLS_GUIDS = {
         137,
         14,
         12,
-        181
+        181,
     ],
     "gEdkiiS3SmmInitDoneGuid": [
         2409449509,
@@ -17956,7 +16901,7 @@ PROTOCOLS_GUIDS = {
         37,
         121,
         46,
-        246
+        246,
     ],
     "gS3StorageDeviceInitListGuid": [
         823040908,
@@ -17969,7 +16914,7 @@ PROTOCOLS_GUIDS = {
         182,
         23,
         200,
-        239
+        239,
     ],
     "gEdkiiSerialPortLibVendorGuid": [
         3549986123,
@@ -17982,7 +16927,7 @@ PROTOCOLS_GUIDS = {
         235,
         98,
         114,
-        65
+        65,
     ],
     "gEdkiiCapsuleOnDiskNameGuid": [
         2563246671,
@@ -17995,7 +16940,7 @@ PROTOCOLS_GUIDS = {
         97,
         38,
         3,
-        48
+        48,
     ],
     "gPeiAtaControllerPpiGuid": [
         2757648593,
@@ -18008,7 +16953,7 @@ PROTOCOLS_GUIDS = {
         127,
         133,
         144,
-        109
+        109,
     ],
     "gPeiUsbHostControllerPpiGuid": [
         1697331369,
@@ -18021,7 +16966,7 @@ PROTOCOLS_GUIDS = {
         195,
         82,
         252,
-        83
+        83,
     ],
     "gPeiUsb2HostControllerPpiGuid": [
         4275921669,
@@ -18034,7 +16979,7 @@ PROTOCOLS_GUIDS = {
         14,
         51,
         108,
-        34
+        34,
     ],
     "gPeiUsbControllerPpiGuid": [
         1002567390,
@@ -18047,21 +16992,9 @@ PROTOCOLS_GUIDS = {
         60,
         164,
         32,
-        178
+        178,
     ],
-    "gPeiUsbIoPpiGuid": [
-        2083092572,
-        26297,
-        18940,
-        183,
-        151,
-        28,
-        165,
-        85,
-        14,
-        242,
-        131
-    ],
+    "gPeiUsbIoPpiGuid": [2083092572, 26297, 18940, 183, 151, 28, 165, 85, 14, 242, 131],
     "gPeiSecPerformancePpiGuid": [
         248276587,
         18018,
@@ -18073,7 +17006,7 @@ PROTOCOLS_GUIDS = {
         255,
         125,
         164,
-        158
+        158,
     ],
     "gEfiPeiSmmCommunicationPpiGuid": [
         2928885276,
@@ -18086,7 +17019,7 @@ PROTOCOLS_GUIDS = {
         29,
         38,
         5,
-        223
+        223,
     ],
     "gPeiSmmAccessPpiGuid": [
         646919081,
@@ -18099,7 +17032,7 @@ PROTOCOLS_GUIDS = {
         58,
         195,
         46,
-        214
+        214,
     ],
     "gPeiSmmControlPpiGuid": [
         1640400642,
@@ -18112,7 +17045,7 @@ PROTOCOLS_GUIDS = {
         5,
         206,
         116,
-        197
+        197,
     ],
     "gPeiPostScriptTablePpiGuid": [
         2294928134,
@@ -18125,7 +17058,7 @@ PROTOCOLS_GUIDS = {
         190,
         218,
         31,
-        137
+        137,
     ],
     "gPeiSerialPortPpiGuid": [
         1225694597,
@@ -18138,7 +17071,7 @@ PROTOCOLS_GUIDS = {
         169,
         255,
         172,
-        139
+        139,
     ],
     "gEdkiiPeiUfsHostControllerPpiGuid": [
         3696538243,
@@ -18151,21 +17084,9 @@ PROTOCOLS_GUIDS = {
         70,
         154,
         46,
-        198
+        198,
     ],
-    "gPeiIpmiPpiGuid": [
-        2842891313,
-        55656,
-        17015,
-        183,
-        82,
-        163,
-        169,
-        166,
-        174,
-        24,
-        152
-    ],
+    "gPeiIpmiPpiGuid": [2842891313, 55656, 17015, 183, 82, 163, 169, 166, 174, 24, 152],
     "gEdkiiPeiSdMmcHostControllerPpiGuid": [
         3004038893,
         38015,
@@ -18177,7 +17098,7 @@ PROTOCOLS_GUIDS = {
         185,
         22,
         220,
-        36
+        36,
     ],
     "gEdkiiIoMmuPpiGuid": [
         1890627366,
@@ -18190,7 +17111,7 @@ PROTOCOLS_GUIDS = {
         79,
         198,
         20,
-        49
+        49,
     ],
     "gEdkiiPlatformSpecificResetFilterPpiGuid": [
         2359250403,
@@ -18203,7 +17124,7 @@ PROTOCOLS_GUIDS = {
         236,
         214,
         109,
-        232
+        232,
     ],
     "gEdkiiPlatformSpecificResetNotificationPpiGuid": [
         3768530269,
@@ -18216,7 +17137,7 @@ PROTOCOLS_GUIDS = {
         15,
         220,
         247,
-        203
+        203,
     ],
     "gEdkiiPlatformSpecificResetHandlerPpiGuid": [
         1976505518,
@@ -18229,7 +17150,7 @@ PROTOCOLS_GUIDS = {
         167,
         186,
         139,
-        171
+        171,
     ],
     "gEdkiiPeiNvmExpressHostControllerPpiGuid": [
         3403917923,
@@ -18242,7 +17163,7 @@ PROTOCOLS_GUIDS = {
         237,
         222,
         154,
-        173
+        173,
     ],
     "gEdkiiPeiAtaAhciHostControllerPpiGuid": [
         1641886698,
@@ -18255,7 +17176,7 @@ PROTOCOLS_GUIDS = {
         169,
         161,
         162,
-        97
+        97,
     ],
     "gEdkiiPeiStorageSecurityCommandPpiGuid": [
         903744334,
@@ -18268,7 +17189,7 @@ PROTOCOLS_GUIDS = {
         161,
         88,
         187,
-        86
+        86,
     ],
     "gEdkiiPeiAtaPassThruPpiGuid": [
         2707715069,
@@ -18281,7 +17202,7 @@ PROTOCOLS_GUIDS = {
         60,
         115,
         134,
-        9
+        9,
     ],
     "gEdkiiDebugPpiGuid": [
         2577295772,
@@ -18294,7 +17215,7 @@ PROTOCOLS_GUIDS = {
         174,
         92,
         72,
-        117
+        117,
     ],
     "gEdkiiPeiNvmExpressPassThruPpiGuid": [
         1794317100,
@@ -18307,7 +17228,7 @@ PROTOCOLS_GUIDS = {
         54,
         223,
         167,
-        76
+        76,
     ],
     "gEdkiiPeiCapsuleOnDiskPpiGuid": [
         1906960993,
@@ -18320,7 +17241,7 @@ PROTOCOLS_GUIDS = {
         109,
         109,
         103,
-        224
+        224,
     ],
     "gEdkiiPeiBootInCapsuleOnDiskModePpiGuid": [
         2961838564,
@@ -18333,7 +17254,7 @@ PROTOCOLS_GUIDS = {
         6,
         104,
         191,
-        209
+        209,
     ],
     "gEfiLoadPeImageProtocolGuid": [
         1555416950,
@@ -18346,7 +17267,7 @@ PROTOCOLS_GUIDS = {
         8,
         205,
         116,
-        63
+        63,
     ],
     "gEfiPrint2ProtocolGuid": [
         4032394991,
@@ -18359,7 +17280,7 @@ PROTOCOLS_GUIDS = {
         93,
         65,
         229,
-        56
+        56,
     ],
     "gEfiPrint2SProtocolGuid": [
         214061778,
@@ -18372,7 +17293,7 @@ PROTOCOLS_GUIDS = {
         164,
         248,
         31,
-        146
+        146,
     ],
     "gEfiGenericMemTestProtocolGuid": [
         815654897,
@@ -18385,7 +17306,7 @@ PROTOCOLS_GUIDS = {
         229,
         170,
         149,
-        239
+        239,
     ],
     "gEfiDebuggerConfigurationProtocolGuid": [
         1467848092,
@@ -18398,7 +17319,7 @@ PROTOCOLS_GUIDS = {
         250,
         229,
         218,
-        5
+        5,
     ],
     "gEfiFaultTolerantWriteProtocolGuid": [
         1052614274,
@@ -18411,7 +17332,7 @@ PROTOCOLS_GUIDS = {
         252,
         183,
         200,
-        129
+        129,
     ],
     "gEfiSmmFaultTolerantWriteProtocolGuid": [
         946404411,
@@ -18424,7 +17345,7 @@ PROTOCOLS_GUIDS = {
         125,
         225,
         117,
-        77
+        77,
     ],
     "gEfiSwapAddressRangeProtocolGuid": [
         307885581,
@@ -18437,7 +17358,7 @@ PROTOCOLS_GUIDS = {
         93,
         85,
         232,
-        126
+        126,
     ],
     "gEfiSmmSwapAddressRangeProtocolGuid": [
         1740960018,
@@ -18450,7 +17371,7 @@ PROTOCOLS_GUIDS = {
         113,
         124,
         66,
-        40
+        40,
     ],
     "gEfiSmmVariableProtocolGuid": [
         3979531571,
@@ -18463,7 +17384,7 @@ PROTOCOLS_GUIDS = {
         205,
         217,
         152,
-        167
+        167,
     ],
     "gEdkiiVariableLockProtocolGuid": [
         3443329541,
@@ -18476,7 +17397,7 @@ PROTOCOLS_GUIDS = {
         83,
         219,
         118,
-        56
+        56,
     ],
     "gEdkiiVarCheckProtocolGuid": [
         2938352448,
@@ -18489,7 +17410,7 @@ PROTOCOLS_GUIDS = {
         129,
         105,
         178,
-        29
+        29,
     ],
     "gEdkiiSmmVarCheckProtocolGuid": [
         2967008193,
@@ -18502,7 +17423,7 @@ PROTOCOLS_GUIDS = {
         98,
         200,
         196,
-        17
+        17,
     ],
     "gEfiSmmFirmwareVolumeBlockProtocolGuid": [
         3542536257,
@@ -18515,7 +17436,7 @@ PROTOCOLS_GUIDS = {
         232,
         127,
         6,
-        83
+        83,
     ],
     "gEfiDebugMaskProtocolGuid": [
         1284121681,
@@ -18528,7 +17449,7 @@ PROTOCOLS_GUIDS = {
         19,
         37,
         19,
-        65
+        65,
     ],
     "gEfiLockBoxProtocolGuid": [
         3175374201,
@@ -18541,7 +17462,7 @@ PROTOCOLS_GUIDS = {
         32,
         64,
         235,
-        60
+        60,
     ],
     "gEfiFormBrowserExProtocolGuid": [
         527675789,
@@ -18554,7 +17475,7 @@ PROTOCOLS_GUIDS = {
         133,
         93,
         125,
-        164
+        164,
     ],
     "gEdkiiFormBrowserExProtocolGuid": [
         527675789,
@@ -18567,7 +17488,7 @@ PROTOCOLS_GUIDS = {
         133,
         93,
         125,
-        164
+        164,
     ],
     "gEfiEbcVmTestProtocolGuid": [
         2867514621,
@@ -18580,7 +17501,7 @@ PROTOCOLS_GUIDS = {
         31,
         45,
         251,
-        82
+        82,
     ],
     "gEfiEbcSimpleDebuggerProtocolGuid": [
         712167710,
@@ -18593,7 +17514,7 @@ PROTOCOLS_GUIDS = {
         47,
         227,
         99,
-        241
+        241,
     ],
     "gEfiBootLogoProtocolGuid": [
         3454675923,
@@ -18606,7 +17527,7 @@ PROTOCOLS_GUIDS = {
         134,
         6,
         73,
-        144
+        144,
     ],
     "gEdkiiBootLogo2ProtocolGuid": [
         1264435679,
@@ -18619,7 +17540,7 @@ PROTOCOLS_GUIDS = {
         137,
         160,
         11,
-        92
+        92,
     ],
     "gEdkiiFormDisplayEngineProtocolGuid": [
         2612931049,
@@ -18632,7 +17553,7 @@ PROTOCOLS_GUIDS = {
         19,
         116,
         45,
-        46
+        46,
     ],
     "gEdkiiFormBrowserEx2ProtocolGuid": [
         2809185111,
@@ -18645,7 +17566,7 @@ PROTOCOLS_GUIDS = {
         114,
         142,
         85,
-        11
+        11,
     ],
     "gEdkiiUfsHostControllerProtocolGuid": [
         3955235573,
@@ -18658,7 +17579,7 @@ PROTOCOLS_GUIDS = {
         158,
         69,
         155,
-        47
+        47,
     ],
     "gEdkiiUfsHcPlatformProtocolGuid": [
         1025030675,
@@ -18671,7 +17592,7 @@ PROTOCOLS_GUIDS = {
         150,
         83,
         158,
-        216
+        216,
     ],
     "gEsrtManagementProtocolGuid": [
         2738929764,
@@ -18684,7 +17605,7 @@ PROTOCOLS_GUIDS = {
         122,
         38,
         251,
-        176
+        176,
     ],
     "gEdkiiSmmExitBootServicesProtocolGuid": [
         695120920,
@@ -18697,7 +17618,7 @@ PROTOCOLS_GUIDS = {
         175,
         86,
         240,
-        10
+        10,
     ],
     "gEdkiiSmmLegacyBootProtocolGuid": [
         2242423639,
@@ -18710,7 +17631,7 @@ PROTOCOLS_GUIDS = {
         34,
         4,
         112,
-        112
+        112,
     ],
     "gEdkiiSmmReadyToBootProtocolGuid": [
         1845853903,
@@ -18723,7 +17644,7 @@ PROTOCOLS_GUIDS = {
         146,
         29,
         23,
-        228
+        228,
     ],
     "gEdkiiPlatformLogoProtocolGuid": [
         1405954463,
@@ -18736,7 +17657,7 @@ PROTOCOLS_GUIDS = {
         79,
         219,
         48,
-        224
+        224,
     ],
     "gEfiFileExplorerProtocolGuid": [
         738444598,
@@ -18749,7 +17670,7 @@ PROTOCOLS_GUIDS = {
         4,
         254,
         19,
-        99
+        99,
     ],
     "gIpmiProtocolGuid": [
         3687200799,
@@ -18762,7 +17683,7 @@ PROTOCOLS_GUIDS = {
         135,
         184,
         172,
-        191
+        191,
     ],
     "gSmmIpmiProtocolGuid": [
         1365880672,
@@ -18775,7 +17696,7 @@ PROTOCOLS_GUIDS = {
         109,
         24,
         238,
-        38
+        38,
     ],
     "gEfiPs2PolicyProtocolGuid": [
         1307677273,
@@ -18788,7 +17709,7 @@ PROTOCOLS_GUIDS = {
         181,
         120,
         196,
-        24
+        24,
     ],
     "gEdkiiNonDiscoverableDeviceProtocolGuid": [
         223449179,
@@ -18801,7 +17722,7 @@ PROTOCOLS_GUIDS = {
         204,
         141,
         81,
-        74
+        74,
     ],
     "gEdkiiIoMmuProtocolGuid": [
         1318297065,
@@ -18814,7 +17735,7 @@ PROTOCOLS_GUIDS = {
         206,
         81,
         124,
-        30
+        30,
     ],
     "gEdkiiDeviceSecurityProtocolGuid": [
         1567307976,
@@ -18827,7 +17748,7 @@ PROTOCOLS_GUIDS = {
         207,
         167,
         176,
-        13
+        13,
     ],
     "gEdkiiDeviceIdentifierTypePciGuid": [
         621392625,
@@ -18840,7 +17761,7 @@ PROTOCOLS_GUIDS = {
         33,
         251,
         102,
-        73
+        73,
     ],
     "gEdkiiDeviceIdentifierTypeUsbGuid": [
         1939141456,
@@ -18853,7 +17774,7 @@ PROTOCOLS_GUIDS = {
         123,
         18,
         10,
-        197
+        197,
     ],
     "gEdkiiSmmMemoryAttributeProtocolGuid": [
         1773638378,
@@ -18866,7 +17787,7 @@ PROTOCOLS_GUIDS = {
         222,
         53,
         29,
-        254
+        254,
     ],
     "gEdkiiSdMmcOverrideProtocolGuid": [
         3942245313,
@@ -18879,7 +17800,7 @@ PROTOCOLS_GUIDS = {
         76,
         131,
         35,
-        35
+        35,
     ],
     "gEdkiiPlatformSpecificResetFilterProtocolGuid": [
         1767733301,
@@ -18892,7 +17813,7 @@ PROTOCOLS_GUIDS = {
         204,
         231,
         174,
-        122
+        122,
     ],
     "gEdkiiPlatformSpecificResetHandlerProtocolGuid": [
         771144203,
@@ -18905,7 +17826,7 @@ PROTOCOLS_GUIDS = {
         30,
         195,
         243,
-        193
+        193,
     ],
     "gEdkiiFirmwareManagementProgressProtocolGuid": [
         407485858,
@@ -18918,7 +17839,7 @@ PROTOCOLS_GUIDS = {
         60,
         71,
         157,
-        241
+        241,
     ],
     "gEdkiiAtaAtapiPolicyProtocolGuid": [
         3852261225,
@@ -18931,7 +17852,7 @@ PROTOCOLS_GUIDS = {
         159,
         145,
         108,
-        78
+        78,
     ],
     "gEdkiiPeCoffImageEmulatorProtocolGuid": [
         2532598099,
@@ -18944,7 +17865,7 @@ PROTOCOLS_GUIDS = {
         191,
         120,
         234,
-        151
+        151,
     ],
     "gEdkiiPlatformBootManagerProtocolGuid": [
         2853678548,
@@ -18957,7 +17878,7 @@ PROTOCOLS_GUIDS = {
         215,
         251,
         62,
-        89
+        89,
     ],
     "gEfiGlobalVariableGuid": [
         2347032417,
@@ -18970,60 +17891,12 @@ PROTOCOLS_GUIDS = {
         152,
         3,
         43,
-        140
+        140,
     ],
-    "gEfiVT100PlusGuid": [
-        2075051787,
-        22496,
-        19574,
-        142,
-        135,
-        47,
-        158,
-        40,
-        8,
-        131,
-        67
-    ],
-    "gEfiVT100Guid": [
-        3752222821,
-        46105,
-        4563,
-        154,
-        45,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
-    "gEfiPcAnsiGuid": [
-        3770763091,
-        63934,
-        4562,
-        154,
-        12,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
-    "gEfiVTUTF8Guid": [
-        2903875798,
-        35820,
-        19151,
-        160,
-        115,
-        208,
-        29,
-        231,
-        126,
-        45,
-        136
-    ],
+    "gEfiVT100PlusGuid": [2075051787, 22496, 19574, 142, 135, 47, 158, 40, 8, 131, 67],
+    "gEfiVT100Guid": [3752222821, 46105, 4563, 154, 45, 0, 144, 39, 63, 193, 77],
+    "gEfiPcAnsiGuid": [3770763091, 63934, 4562, 154, 12, 0, 144, 39, 63, 193, 77],
+    "gEfiVTUTF8Guid": [2903875798, 35820, 19151, 160, 115, 208, 29, 231, 126, 45, 136],
     "gEfiUartDevicePathGuid": [
         927570589,
         21551,
@@ -19035,7 +17908,7 @@ PROTOCOLS_GUIDS = {
         20,
         32,
         148,
-        228
+        228,
     ],
     "gEfiSasDevicePathGuid": [
         3565673908,
@@ -19048,7 +17921,7 @@ PROTOCOLS_GUIDS = {
         131,
         255,
         202,
-        77
+        77,
     ],
     "gEfiPartTypeLegacyMbrGuid": [
         38661697,
@@ -19061,7 +17934,7 @@ PROTOCOLS_GUIDS = {
         199,
         129,
         243,
-        159
+        159,
     ],
     "gEfiPartTypeSystemPartGuid": [
         3240784680,
@@ -19074,21 +17947,9 @@ PROTOCOLS_GUIDS = {
         201,
         62,
         201,
-        59
+        59,
     ],
-    "gEfiPartTypeUnusedGuid": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-    ],
+    "gEfiPartTypeUnusedGuid": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     "gEfiDebugImageInfoTableGuid": [
         1226124919,
         6874,
@@ -19100,21 +17961,9 @@ PROTOCOLS_GUIDS = {
         254,
         217,
         94,
-        139
+        139,
     ],
-    "gEfiAcpiTableGuid": [
-        2288576625,
-        58609,
-        4563,
-        188,
-        34,
-        0,
-        128,
-        199,
-        60,
-        136,
-        129
-    ],
+    "gEfiAcpiTableGuid": [2288576625, 58609, 4563, 188, 34, 0, 128, 199, 60, 136, 129],
     "gEfiAcpi20TableGuid": [
         2288576625,
         58609,
@@ -19126,47 +17975,11 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
-    "gEfiAcpi10TableGuid": [
-        3952946480,
-        11656,
-        4563,
-        154,
-        22,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
-    "gEfiSmbiosTableGuid": [
-        3952946481,
-        11656,
-        4563,
-        154,
-        22,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
-    "gEfiMpsTableGuid": [
-        3952946479,
-        11656,
-        4563,
-        154,
-        22,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
+    "gEfiAcpi10TableGuid": [3952946480, 11656, 4563, 154, 22, 0, 144, 39, 63, 193, 77],
+    "gEfiSmbiosTableGuid": [3952946481, 11656, 4563, 154, 22, 0, 144, 39, 63, 193, 77],
+    "gEfiMpsTableGuid": [3952946479, 11656, 4563, 154, 22, 0, 144, 39, 63, 193, 77],
     "gEfiAuthenticationChapLocalGuid": [
         3263219518,
         5578,
@@ -19178,7 +17991,7 @@ PROTOCOLS_GUIDS = {
         131,
         255,
         202,
-        77
+        77,
     ],
     "gEfiAuthenticationChapRadiusGuid": [
         3590728528,
@@ -19191,7 +18004,7 @@ PROTOCOLS_GUIDS = {
         131,
         255,
         202,
-        77
+        77,
     ],
     "gEfiFileSystemVolumeLabelInfoIdGuid": [
         3678918611,
@@ -19204,7 +18017,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiFileSystemInfoGuid": [
         156724883,
@@ -19217,21 +18030,9 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
-    "gEfiFileInfoGuid": [
-        156724882,
-        27967,
-        4562,
-        142,
-        57,
-        0,
-        160,
-        201,
-        105,
-        114,
-        59
-    ],
+    "gEfiFileInfoGuid": [156724882, 27967, 4562, 142, 57, 0, 160, 201, 105, 114, 59],
     "gBootObjectAuthorizationParmsetGuid": [
         3990052401,
         1977,
@@ -19243,7 +18044,7 @@ PROTOCOLS_GUIDS = {
         201,
         31,
         173,
-        207
+        207,
     ],
     "gEfiPlatformToDriverConfigurationClpGuid": [
         878627854,
@@ -19256,7 +18057,7 @@ PROTOCOLS_GUIDS = {
         156,
         71,
         51,
-        62
+        62,
     ],
     "gEfiHiiKeyBoardLayoutGuid": [
         345516623,
@@ -19269,7 +18070,7 @@ PROTOCOLS_GUIDS = {
         155,
         194,
         50,
-        223
+        223,
     ],
     "gEfiHashAlgorithmMD5Guid": [
         184010652,
@@ -19282,7 +18083,7 @@ PROTOCOLS_GUIDS = {
         72,
         78,
         74,
-        215
+        215,
     ],
     "gEfiHashAlgorithmSha512Guid": [
         3399759902,
@@ -19295,7 +18096,7 @@ PROTOCOLS_GUIDS = {
         180,
         228,
         33,
-        48
+        48,
     ],
     "gEfiHashAlgorithmSha384Guid": [
         4020855858,
@@ -19308,7 +18109,7 @@ PROTOCOLS_GUIDS = {
         51,
         223,
         119,
-        122
+        122,
     ],
     "gEfiHashAlgorithmSha256Guid": [
         1370118622,
@@ -19321,7 +18122,7 @@ PROTOCOLS_GUIDS = {
         183,
         132,
         46,
-        233
+        233,
     ],
     "gEfiHashAlgorithmSha224Guid": [
         2381322758,
@@ -19334,7 +18135,7 @@ PROTOCOLS_GUIDS = {
         217,
         204,
         244,
-        91
+        91,
     ],
     "gEfiHashAlgorithmSha1Guid": [
         719968271,
@@ -19347,7 +18148,7 @@ PROTOCOLS_GUIDS = {
         87,
         185,
         70,
-        182
+        182,
     ],
     "gEfiEventReadyToBootGuid": [
         2095615923,
@@ -19360,7 +18161,7 @@ PROTOCOLS_GUIDS = {
         222,
         229,
         13,
-        43
+        43,
     ],
     "gEfiEventMemoryMapChangeGuid": [
         2025777446,
@@ -19373,7 +18174,7 @@ PROTOCOLS_GUIDS = {
         46,
         240,
         215,
-        171
+        171,
     ],
     "gEfiEventVirtualAddressChangeGuid": [
         335181464,
@@ -19386,7 +18187,7 @@ PROTOCOLS_GUIDS = {
         252,
         194,
         81,
-        150
+        150,
     ],
     "gEfiEventExitBootServicesGuid": [
         665579605,
@@ -19399,7 +18200,7 @@ PROTOCOLS_GUIDS = {
         55,
         186,
         162,
-        223
+        223,
     ],
     "gEfiDebugPortVariableGuid": [
         3953453266,
@@ -19412,7 +18213,7 @@ PROTOCOLS_GUIDS = {
         186,
         150,
         96,
-        208
+        208,
     ],
     "gEfiDebugPortDevicePathGuid": [
         3953453266,
@@ -19425,7 +18226,7 @@ PROTOCOLS_GUIDS = {
         186,
         150,
         96,
-        208
+        208,
     ],
     "gEfiHiiPlatformSetupFormsetGuid": [
         2466486641,
@@ -19438,7 +18239,7 @@ PROTOCOLS_GUIDS = {
         131,
         38,
         4,
-        14
+        14,
     ],
     "gEfiHiiDriverHealthFormsetGuid": [
         4063216140,
@@ -19451,7 +18252,7 @@ PROTOCOLS_GUIDS = {
         80,
         185,
         93,
-        211
+        211,
     ],
     "gEfiHiiUserCredentialFormsetGuid": [
         863978503,
@@ -19464,7 +18265,7 @@ PROTOCOLS_GUIDS = {
         202,
         48,
         136,
-        205
+        205,
     ],
     "gEfiHiiStandardFormGuid": [
         1003681004,
@@ -19477,7 +18278,7 @@ PROTOCOLS_GUIDS = {
         23,
         66,
         85,
-        98
+        98,
     ],
     "gEfiMemoryOverwriteControlDataGuid": [
         3792255422,
@@ -19490,7 +18291,7 @@ PROTOCOLS_GUIDS = {
         133,
         212,
         152,
-        41
+        41,
     ],
     "gEfiMemoryOverwriteRequestControlLockGuid": [
         3147316431,
@@ -19503,7 +18304,7 @@ PROTOCOLS_GUIDS = {
         190,
         22,
         130,
-        146
+        146,
     ],
     "gEfiCertTypeRsa2048Sha256Guid": [
         2809230356,
@@ -19516,7 +18317,7 @@ PROTOCOLS_GUIDS = {
         18,
         167,
         53,
-        191
+        191,
     ],
     "gEfiEventNotificationTypeCmcGuid": [
         768510897,
@@ -19529,7 +18330,7 @@ PROTOCOLS_GUIDS = {
         235,
         212,
         248,
-        144
+        144,
     ],
     "gEfiEventNotificationTypeCpeGuid": [
         1311322006,
@@ -19542,7 +18343,7 @@ PROTOCOLS_GUIDS = {
         242,
         126,
         190,
-        238
+        238,
     ],
     "gEfiEventNotificationTypeMceGuid": [
         3908399102,
@@ -19555,7 +18356,7 @@ PROTOCOLS_GUIDS = {
         225,
         73,
         19,
-        187
+        187,
     ],
     "gEfiEventNotificationTypePcieGuid": [
         3482566687,
@@ -19568,7 +18369,7 @@ PROTOCOLS_GUIDS = {
         175,
         103,
         193,
-        4
+        4,
     ],
     "gEfiEventNotificationTypeInitGuid": [
         3427951592,
@@ -19581,7 +18382,7 @@ PROTOCOLS_GUIDS = {
         211,
         155,
         201,
-        142
+        142,
     ],
     "gEfiEventNotificationTypeNmiGuid": [
         1538099711,
@@ -19594,7 +18395,7 @@ PROTOCOLS_GUIDS = {
         133,
         214,
         233,
-        138
+        138,
     ],
     "gEfiEventNotificationTypeBootGuid": [
         1029809254,
@@ -19607,7 +18408,7 @@ PROTOCOLS_GUIDS = {
         212,
         100,
         179,
-        143
+        143,
     ],
     "gEfiEventNotificationTypeDmarGuid": [
         1719523217,
@@ -19620,7 +18421,7 @@ PROTOCOLS_GUIDS = {
         114,
         45,
         235,
-        65
+        65,
     ],
     "gEfiProcessorGenericErrorSectionGuid": [
         2557922477,
@@ -19633,7 +18434,7 @@ PROTOCOLS_GUIDS = {
         147,
         196,
         243,
-        219
+        219,
     ],
     "gEfiProcessorSpecificErrorSectionGuid": [
         3695091888,
@@ -19646,7 +18447,7 @@ PROTOCOLS_GUIDS = {
         36,
         43,
         110,
-        29
+        29,
     ],
     "gEfiIa32X64ProcessorErrorSectionGuid": [
         3695091888,
@@ -19659,7 +18460,7 @@ PROTOCOLS_GUIDS = {
         36,
         43,
         110,
-        29
+        29,
     ],
     "gEfiPlatformMemoryErrorSectionGuid": [
         2780565780,
@@ -19672,7 +18473,7 @@ PROTOCOLS_GUIDS = {
         237,
         124,
         131,
-        177
+        177,
     ],
     "gEfiPcieErrorSectionGuid": [
         3650480468,
@@ -19685,7 +18486,7 @@ PROTOCOLS_GUIDS = {
         203,
         60,
         111,
-        53
+        53,
     ],
     "gEfiFirmwareErrorSectionGuid": [
         2166434454,
@@ -19698,7 +18499,7 @@ PROTOCOLS_GUIDS = {
         156,
         142,
         105,
-        237
+        237,
     ],
     "gEfiPciBusErrorSectionGuid": [
         3312793955,
@@ -19711,7 +18512,7 @@ PROTOCOLS_GUIDS = {
         211,
         249,
         201,
-        221
+        221,
     ],
     "gEfiPciDevErrorSectionGuid": [
         3948824197,
@@ -19724,7 +18525,7 @@ PROTOCOLS_GUIDS = {
         139,
         0,
         19,
-        38
+        38,
     ],
     "gEfiDMArGenericErrorSectionGuid": [
         1532100343,
@@ -19737,7 +18538,7 @@ PROTOCOLS_GUIDS = {
         222,
         62,
         44,
-        100
+        100,
     ],
     "gEfiDirectedIoDMArErrorSectionGuid": [
         1903566135,
@@ -19750,7 +18551,7 @@ PROTOCOLS_GUIDS = {
         221,
         147,
         232,
-        207
+        207,
     ],
     "gEfiIommuDMArErrorSectionGuid": [
         57640161,
@@ -19763,7 +18564,7 @@ PROTOCOLS_GUIDS = {
         223,
         170,
         132,
-        236
+        236,
     ],
     "gEfiEventUserProfileChangedGuid": [
         3136415454,
@@ -19776,7 +18577,7 @@ PROTOCOLS_GUIDS = {
         113,
         243,
         246,
-        131
+        131,
     ],
     "gEfiUserCredentialClassUnknownGuid": [
         1559441000,
@@ -19789,7 +18590,7 @@ PROTOCOLS_GUIDS = {
         110,
         3,
         246,
-        168
+        168,
     ],
     "gEfiUserCredentialClassPasswordGuid": [
         4175758732,
@@ -19802,7 +18603,7 @@ PROTOCOLS_GUIDS = {
         58,
         100,
         11,
-        209
+        209,
     ],
     "gEfiUserCredentialClassSmartCardGuid": [
         1594079795,
@@ -19815,7 +18616,7 @@ PROTOCOLS_GUIDS = {
         101,
         123,
         212,
-        84
+        84,
     ],
     "gEfiUserCredentialClassFingerprintGuid": [
         852206111,
@@ -19828,7 +18629,7 @@ PROTOCOLS_GUIDS = {
         105,
         159,
         4,
-        74
+        74,
     ],
     "gEfiUserCredentialClassHandprintGuid": [
         1494740758,
@@ -19841,7 +18642,7 @@ PROTOCOLS_GUIDS = {
         50,
         244,
         216,
-        181
+        181,
     ],
     "gEfiUserCredentialClassSecureCardGuid": [
         2322287235,
@@ -19854,7 +18655,7 @@ PROTOCOLS_GUIDS = {
         108,
         125,
         152,
-        82
+        82,
     ],
     "gEfiUserInfoAccessSetupAdminGuid": [
         2243384839,
@@ -19867,7 +18668,7 @@ PROTOCOLS_GUIDS = {
         95,
         114,
         50,
-        238
+        238,
     ],
     "gEfiUserInfoAccessSetupNormalGuid": [
         498244320,
@@ -19880,7 +18681,7 @@ PROTOCOLS_GUIDS = {
         73,
         100,
         221,
-        226
+        226,
     ],
     "gEfiUserInfoAccessSetupRestrictedGuid": [
         3182657829,
@@ -19893,7 +18694,7 @@ PROTOCOLS_GUIDS = {
         90,
         25,
         10,
-        248
+        248,
     ],
     "gEfiImageSecurityDatabaseGuid": [
         3608785611,
@@ -19906,7 +18707,7 @@ PROTOCOLS_GUIDS = {
         14,
         103,
         101,
-        111
+        111,
     ],
     "gEfiCertSha256Guid": [
         3250853414,
@@ -19919,7 +18720,7 @@ PROTOCOLS_GUIDS = {
         54,
         147,
         67,
-        40
+        40,
     ],
     "gEfiCertRsa2048Guid": [
         1012360936,
@@ -19932,7 +18733,7 @@ PROTOCOLS_GUIDS = {
         110,
         133,
         179,
-        182
+        182,
     ],
     "gEfiCertRsa2048Sha256Guid": [
         3803406736,
@@ -19945,21 +18746,9 @@ PROTOCOLS_GUIDS = {
         187,
         163,
         39,
-        132
+        132,
     ],
-    "gEfiCertSha1Guid": [
-        2188158226,
-        53008,
-        19145,
-        177,
-        135,
-        190,
-        1,
-        73,
-        102,
-        49,
-        189
-    ],
+    "gEfiCertSha1Guid": [2188158226, 53008, 19145, 177, 135, 190, 1, 73, 102, 49, 189],
     "gEfiCertRsa2048Sha1Guid": [
         1744323663,
         34627,
@@ -19971,21 +18760,9 @@ PROTOCOLS_GUIDS = {
         184,
         115,
         96,
-        128
+        128,
     ],
-    "gEfiCertX509Guid": [
-        2780846497,
-        38116,
-        19111,
-        135,
-        181,
-        171,
-        21,
-        92,
-        43,
-        240,
-        114
-    ],
+    "gEfiCertX509Guid": [2780846497, 38116, 19111, 135, 181, 171, 21, 92, 43, 240, 114],
     "gEfiKmsFormatGeneric128Guid": [
         3968482665,
         28127,
@@ -19997,7 +18774,7 @@ PROTOCOLS_GUIDS = {
         252,
         82,
         33,
-        54
+        54,
     ],
     "gEfiKmsFormatGeneric160Guid": [
         2746476280,
@@ -20010,7 +18787,7 @@ PROTOCOLS_GUIDS = {
         51,
         155,
         37,
-        121
+        121,
     ],
     "gEfiKmsFormatGeneric256Guid": [
         1895188371,
@@ -20023,7 +18800,7 @@ PROTOCOLS_GUIDS = {
         242,
         124,
         83,
-        69
+        69,
     ],
     "gEfiKmsFormatGeneric512Guid": [
         2542788675,
@@ -20036,7 +18813,7 @@ PROTOCOLS_GUIDS = {
         228,
         99,
         189,
-        230
+        230,
     ],
     "gEfiKmsFormatGeneric1024Guid": [
         1136528196,
@@ -20049,7 +18826,7 @@ PROTOCOLS_GUIDS = {
         79,
         189,
         126,
-        179
+        179,
     ],
     "gEfiKmsFormatGeneric2048Guid": [
         1074347811,
@@ -20062,7 +18839,7 @@ PROTOCOLS_GUIDS = {
         59,
         25,
         203,
-        190
+        190,
     ],
     "gEfiKmsFormatGeneric3072Guid": [
         3106108691,
@@ -20075,7 +18852,7 @@ PROTOCOLS_GUIDS = {
         86,
         224,
         90,
-        222
+        222,
     ],
     "gEfiKmsFormatMd2128Guid": [
         2025722308,
@@ -20088,7 +18865,7 @@ PROTOCOLS_GUIDS = {
         46,
         197,
         201,
-        120
+        120,
     ],
     "gEfiKmsFormatMdc2128Guid": [
         4155334904,
@@ -20101,7 +18878,7 @@ PROTOCOLS_GUIDS = {
         57,
         158,
         180,
-        199
+        199,
     ],
     "gEfiKmsFormatMd4128Guid": [
         3519117985,
@@ -20114,7 +18891,7 @@ PROTOCOLS_GUIDS = {
         174,
         6,
         103,
-        124
+        124,
     ],
     "gEfiKmsFormatMdc4128Guid": [
         1067776071,
@@ -20127,7 +18904,7 @@ PROTOCOLS_GUIDS = {
         10,
         132,
         123,
-        188
+        188,
     ],
     "gEfiKmsFormatMd5128Guid": [
         3703322210,
@@ -20140,7 +18917,7 @@ PROTOCOLS_GUIDS = {
         29,
         35,
         72,
-        199
+        199,
     ],
     "gEfiKmsFormatMd5sha128Guid": [
         471302711,
@@ -20153,7 +18930,7 @@ PROTOCOLS_GUIDS = {
         142,
         249,
         79,
-        118
+        118,
     ],
     "gEfiKmsFormatSha1160Guid": [
         1161584218,
@@ -20166,7 +18943,7 @@ PROTOCOLS_GUIDS = {
         243,
         163,
         138,
-        194
+        194,
     ],
     "gEfiKmsFormatSha256256Guid": [
         1807021517,
@@ -20179,7 +18956,7 @@ PROTOCOLS_GUIDS = {
         174,
         147,
         95,
-        198
+        198,
     ],
     "gEfiKmsFormatSha512512Guid": [
         790892050,
@@ -20192,7 +18969,7 @@ PROTOCOLS_GUIDS = {
         34,
         215,
         123,
-        231
+        231,
     ],
     "gEfiKmsFormatAesxts128Guid": [
         1198973759,
@@ -20205,7 +18982,7 @@ PROTOCOLS_GUIDS = {
         10,
         250,
         179,
-        139
+        139,
     ],
     "gEfiKmsFormatAesxts256Guid": [
         3699279379,
@@ -20218,7 +18995,7 @@ PROTOCOLS_GUIDS = {
         19,
         87,
         171,
-        226
+        226,
     ],
     "gEfiKmsFormatAescbc128Guid": [
         2699619946,
@@ -20231,7 +19008,7 @@ PROTOCOLS_GUIDS = {
         74,
         202,
         68,
-        162
+        162,
     ],
     "gEfiKmsFormatAescbc256Guid": [
         3622213513,
@@ -20244,7 +19021,7 @@ PROTOCOLS_GUIDS = {
         7,
         165,
         178,
-        220
+        220,
     ],
     "gEfiKmsFormatRsasha11024Guid": [
         1447132141,
@@ -20257,7 +19034,7 @@ PROTOCOLS_GUIDS = {
         187,
         23,
         248,
-        249
+        249,
     ],
     "gEfiKmsFormatRsasha12048Guid": [
         4133767124,
@@ -20270,7 +19047,7 @@ PROTOCOLS_GUIDS = {
         45,
         218,
         5,
-        233
+        233,
     ],
     "gEfiKmsFormatRsasha2562048Guid": [
         2759307027,
@@ -20283,7 +19060,7 @@ PROTOCOLS_GUIDS = {
         190,
         160,
         138,
-        211
+        211,
     ],
     "gEfiKmsFormatRsasha2563072Guid": [
         1309890242,
@@ -20296,7 +19073,7 @@ PROTOCOLS_GUIDS = {
         171,
         219,
         199,
-        213
+        213,
     ],
     "gEfiCertSha224Guid": [
         191779379,
@@ -20309,7 +19086,7 @@ PROTOCOLS_GUIDS = {
         131,
         191,
         200,
-        189
+        189,
     ],
     "gEfiCertSha384Guid": [
         4282274567,
@@ -20322,7 +19099,7 @@ PROTOCOLS_GUIDS = {
         108,
         112,
         30,
-        1
+        1,
     ],
     "gEfiCertSha512Guid": [
         155062190,
@@ -20335,7 +19112,7 @@ PROTOCOLS_GUIDS = {
         43,
         137,
         193,
-        154
+        154,
     ],
     "gEfiCertPkcs7Guid": [
         1253036701,
@@ -20348,7 +19125,7 @@ PROTOCOLS_GUIDS = {
         55,
         86,
         101,
-        167
+        167,
     ],
     "gEfiHashAlgorithmSha1NoPadGuid": [
         616946735,
@@ -20361,7 +19138,7 @@ PROTOCOLS_GUIDS = {
         164,
         159,
         70,
-        59
+        59,
     ],
     "gEfiHashAlgorithmSha256NoPadGuid": [
         2250798378,
@@ -20374,7 +19151,7 @@ PROTOCOLS_GUIDS = {
         21,
         172,
         34,
-        38
+        38,
     ],
     "gEfiFmpCapsuleGuid": [
         1842075117,
@@ -20387,7 +19164,7 @@ PROTOCOLS_GUIDS = {
         25,
         154,
         217,
-        42
+        42,
     ],
     "gEfiCertX509Sha256Guid": [
         1003660434,
@@ -20400,7 +19177,7 @@ PROTOCOLS_GUIDS = {
         142,
         241,
         3,
-        237
+        237,
     ],
     "gEfiCertX509Sha384Guid": [
         1886816110,
@@ -20413,7 +19190,7 @@ PROTOCOLS_GUIDS = {
         73,
         166,
         134,
-        91
+        91,
     ],
     "gEfiCertX509Sha512Guid": [
         1148043107,
@@ -20426,7 +19203,7 @@ PROTOCOLS_GUIDS = {
         210,
         176,
         254,
-        157
+        157,
     ],
     "gEfiRngAlgorithmSp80090Hash256Guid": [
         2813290443,
@@ -20439,7 +19216,7 @@ PROTOCOLS_GUIDS = {
         182,
         41,
         63,
-        150
+        150,
     ],
     "gEfiRngAlgorithmSp80090Hmac256Guid": [
         3306462019,
@@ -20452,7 +19229,7 @@ PROTOCOLS_GUIDS = {
         53,
         211,
         169,
-        231
+        231,
     ],
     "gEfiRngAlgorithmSp80090Ctr256Guid": [
         1156636270,
@@ -20465,7 +19242,7 @@ PROTOCOLS_GUIDS = {
         104,
         133,
         107,
-        158
+        158,
     ],
     "gEfiRngAlgorithmX9313DesGuid": [
         1673820250,
@@ -20478,7 +19255,7 @@ PROTOCOLS_GUIDS = {
         50,
         79,
         85,
-        70
+        70,
     ],
     "gEfiRngAlgorithmX931AesGuid": [
         2899325729,
@@ -20491,7 +19268,7 @@ PROTOCOLS_GUIDS = {
         216,
         136,
         32,
-        201
+        201,
     ],
     "gEfiRngAlgorithmRaw": [
         3828446935,
@@ -20504,7 +19281,7 @@ PROTOCOLS_GUIDS = {
         196,
         182,
         133,
-        97
+        97,
     ],
     "gEfiAdapterInfoMediaStateGuid": [
         3620160007,
@@ -20517,7 +19294,7 @@ PROTOCOLS_GUIDS = {
         6,
         92,
         232,
-        182
+        182,
     ],
     "gEfiAdapterInfoNetworkBootGuid": [
         532490592,
@@ -20530,7 +19307,7 @@ PROTOCOLS_GUIDS = {
         3,
         127,
         179,
-        124
+        124,
     ],
     "gEfiAdapterInfoSanMacAddressGuid": [
         290301423,
@@ -20543,7 +19320,7 @@ PROTOCOLS_GUIDS = {
         181,
         82,
         5,
-        217
+        217,
     ],
     "gEfiCapsuleReportGuid": [
         968264774,
@@ -20556,7 +19333,7 @@ PROTOCOLS_GUIDS = {
         246,
         152,
         33,
-        243
+        243,
     ],
     "gEfiPropertiesTableGuid": [
         2282400931,
@@ -20569,7 +19346,7 @@ PROTOCOLS_GUIDS = {
         52,
         8,
         37,
-        229
+        229,
     ],
     "gEfiSystemResourceTableGuid": [
         2971837027,
@@ -20582,7 +19359,7 @@ PROTOCOLS_GUIDS = {
         176,
         214,
         33,
-        128
+        128,
     ],
     "gEfiAdapterInfoUndiIpv6SupportGuid": [
         1272277987,
@@ -20595,7 +19372,7 @@ PROTOCOLS_GUIDS = {
         32,
         75,
         93,
-        77
+        77,
     ],
     "gEfiRegexSyntaxTypePosixExtendedGuid": [
         1594208783,
@@ -20608,7 +19385,7 @@ PROTOCOLS_GUIDS = {
         241,
         16,
         4,
-        29
+        29,
     ],
     "gEfiRegexSyntaxTypeEcma262Guid": [
         2588359242,
@@ -20621,7 +19398,7 @@ PROTOCOLS_GUIDS = {
         188,
         99,
         155,
-        46
+        46,
     ],
     "gEfiRegexSyntaxTypePerlGuid": [
         1676020305,
@@ -20634,7 +19411,7 @@ PROTOCOLS_GUIDS = {
         220,
         58,
         174,
-        182
+        182,
     ],
     "gEfiPlatformMemory2ErrorSectionGuid": [
         1642857724,
@@ -20647,7 +19424,7 @@ PROTOCOLS_GUIDS = {
         68,
         117,
         11,
-        18
+        18,
     ],
     "gEfiBlockIoCryptoAlgoAesXtsGuid": [
         797424234,
@@ -20660,7 +19437,7 @@ PROTOCOLS_GUIDS = {
         120,
         169,
         123,
-        236
+        236,
     ],
     "gEfiBlockIoCryptoAlgoAesCbcMsBitlockerGuid": [
         1755204706,
@@ -20673,7 +19450,7 @@ PROTOCOLS_GUIDS = {
         24,
         38,
         134,
-        112
+        112,
     ],
     "gEfiPaddingRsassaPkcs1V1P5Guid": [
         2467818532,
@@ -20686,7 +19463,7 @@ PROTOCOLS_GUIDS = {
         32,
         156,
         216,
-        175
+        175,
     ],
     "gEfiPaddingRsassaPssGuid": [
         2065910240,
@@ -20699,21 +19476,9 @@ PROTOCOLS_GUIDS = {
         124,
         158,
         121,
-        95
+        95,
     ],
-    "gEfiPaddingNoneGuid": [
-        908713393,
-        8844,
-        17710,
-        182,
-        22,
-        9,
-        237,
-        49,
-        106,
-        151,
-        0
-    ],
+    "gEfiPaddingNoneGuid": [908713393, 8844, 17710, 182, 22, 9, 237, 49, 106, 151, 0],
     "gEfiPaddingRsaesPkcs1V1P5Guid": [
         3787575465,
         16561,
@@ -20725,7 +19490,7 @@ PROTOCOLS_GUIDS = {
         229,
         41,
         86,
-        49
+        49,
     ],
     "gEfiPaddingRsaesOaepGuid": [
         3253091012,
@@ -20738,7 +19503,7 @@ PROTOCOLS_GUIDS = {
         230,
         168,
         164,
-        91
+        91,
     ],
     "gEfiSmbios3TableGuid": [
         4076672324,
@@ -20751,7 +19516,7 @@ PROTOCOLS_GUIDS = {
         207,
         32,
         227,
-        148
+        148,
     ],
     "gEfiBootManagerPolicyConsoleGuid": [
         3400591692,
@@ -20764,7 +19529,7 @@ PROTOCOLS_GUIDS = {
         86,
         44,
         186,
-        250
+        250,
     ],
     "gEfiBootManagerPolicyNetworkGuid": [
         3493943772,
@@ -20777,7 +19542,7 @@ PROTOCOLS_GUIDS = {
         86,
         44,
         186,
-        250
+        250,
     ],
     "gEfiBootManagerPolicyConnectAllGuid": [
         289087782,
@@ -20790,7 +19555,7 @@ PROTOCOLS_GUIDS = {
         86,
         44,
         186,
-        250
+        250,
     ],
     "gEfiVirtualDiskGuid": [
         2007716698,
@@ -20803,7 +19568,7 @@ PROTOCOLS_GUIDS = {
         129,
         209,
         249,
-        110
+        110,
     ],
     "gEfiVirtualCdGuid": [
         1029356848,
@@ -20816,7 +19581,7 @@ PROTOCOLS_GUIDS = {
         229,
         35,
         196,
-        187
+        187,
     ],
     "gEfiPersistentVirtualDiskGuid": [
         1558840009,
@@ -20829,7 +19594,7 @@ PROTOCOLS_GUIDS = {
         251,
         224,
         150,
-        249
+        249,
     ],
     "gEfiPersistentVirtualCdGuid": [
         134316424,
@@ -20842,7 +19607,7 @@ PROTOCOLS_GUIDS = {
         213,
         61,
         237,
-        61
+        61,
     ],
     "gEfiMemoryAttributesTableGuid": [
         3707408669,
@@ -20855,7 +19620,7 @@ PROTOCOLS_GUIDS = {
         220,
         70,
         18,
-        32
+        32,
     ],
     "gEfiArmProcessorErrorSectionGuid": [
         3785243926,
@@ -20868,7 +19633,7 @@ PROTOCOLS_GUIDS = {
         29,
         93,
         70,
-        176
+        176,
     ],
     "gEfiHiiImageDecoderNameJpegGuid": [
         4025471123,
@@ -20881,7 +19646,7 @@ PROTOCOLS_GUIDS = {
         7,
         0,
         201,
-        8
+        8,
     ],
     "gEfiHiiImageDecoderNamePngGuid": [
         2936406416,
@@ -20894,7 +19659,7 @@ PROTOCOLS_GUIDS = {
         5,
         191,
         170,
-        76
+        76,
     ],
     "gEfiBttAbstractionGuid": [
         409156604,
@@ -20907,7 +19672,7 @@ PROTOCOLS_GUIDS = {
         146,
         130,
         211,
-        248
+        248,
     ],
     "gPeiAprioriFileNameGuid": [
         457559050,
@@ -20920,21 +19685,9 @@ PROTOCOLS_GUIDS = {
         77,
         160,
         230,
-        230
+        230,
     ],
-    "gAprioriGuid": [
-        4233170663,
-        65500,
-        4564,
-        189,
-        65,
-        0,
-        128,
-        199,
-        60,
-        136,
-        129
-    ],
+    "gAprioriGuid": [4233170663, 65500, 4564, 189, 65, 0, 128, 199, 60, 136, 129],
     "gEfiFirmwareFileSystem2Guid": [
         2358044024,
         35389,
@@ -20946,7 +19699,7 @@ PROTOCOLS_GUIDS = {
         133,
         195,
         45,
-        211
+        211,
     ],
     "gEfiFirmwareVolumeTopFileGuid": [
         463472174,
@@ -20959,7 +19712,7 @@ PROTOCOLS_GUIDS = {
         232,
         247,
         143,
-        9
+        9,
     ],
     "gEfiHobMemoryAllocModuleGuid": [
         4175567221,
@@ -20972,7 +19725,7 @@ PROTOCOLS_GUIDS = {
         169,
         198,
         215,
-        122
+        122,
     ],
     "gEfiHobMemoryAllocStackGuid": [
         1322565415,
@@ -20985,7 +19738,7 @@ PROTOCOLS_GUIDS = {
         29,
         0,
         201,
-        189
+        189,
     ],
     "gEfiHobMemoryAllocBspStoreGuid": [
         1447769037,
@@ -20998,7 +19751,7 @@ PROTOCOLS_GUIDS = {
         228,
         60,
         99,
-        34
+        34,
     ],
     "gEfiEventLegacyBootGuid": [
         710349313,
@@ -21011,21 +19764,9 @@ PROTOCOLS_GUIDS = {
         65,
         243,
         47,
-        16
+        16,
     ],
-    "gEfiHobListGuid": [
-        2000286284,
-        37847,
-        4564,
-        154,
-        58,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
+    "gEfiHobListGuid": [2000286284, 37847, 4564, 154, 58, 0, 144, 39, 63, 193, 77],
     "gEfiDxeServicesTableGuid": [
         95237306,
         28418,
@@ -21037,7 +19778,7 @@ PROTOCOLS_GUIDS = {
         57,
         142,
         43,
-        185
+        185,
     ],
     "gEfiMdePkgTokenSpaceGuid": [
         2437606375,
@@ -21050,7 +19791,7 @@ PROTOCOLS_GUIDS = {
         25,
         176,
         58,
-        16
+        16,
     ],
     "gEfiHardwareErrorVariableGuid": [
         1095658461,
@@ -21063,7 +19804,7 @@ PROTOCOLS_GUIDS = {
         2,
         12,
         245,
-        22
+        22,
     ],
     "gEfiEventDxeDispatchGuid": [
         1887560239,
@@ -21076,7 +19817,7 @@ PROTOCOLS_GUIDS = {
         130,
         207,
         136,
-        229
+        229,
     ],
     "gEfiDiskInfoIdeInterfaceGuid": [
         1586794467,
@@ -21089,7 +19830,7 @@ PROTOCOLS_GUIDS = {
         135,
         24,
         141,
-        236
+        236,
     ],
     "gEfiDiskInfoScsiInterfaceGuid": [
         150424490,
@@ -21102,7 +19843,7 @@ PROTOCOLS_GUIDS = {
         15,
         135,
         128,
-        188
+        188,
     ],
     "gEfiDiskInfoUsbInterfaceGuid": [
         3414627698,
@@ -21115,7 +19856,7 @@ PROTOCOLS_GUIDS = {
         175,
         167,
         119,
-        39
+        39,
     ],
     "gEfiDiskInfoAhciInterfaceGuid": [
         2655619378,
@@ -21128,7 +19869,7 @@ PROTOCOLS_GUIDS = {
         120,
         123,
         231,
-        198
+        198,
     ],
     "gEfiStatusCodeDataTypeStringGuid": [
         2463174784,
@@ -21141,7 +19882,7 @@ PROTOCOLS_GUIDS = {
         136,
         56,
         43,
-        10
+        10,
     ],
     "gEfiStatusCodeSpecificDataGuid": [
         861504701,
@@ -21154,7 +19895,7 @@ PROTOCOLS_GUIDS = {
         206,
         95,
         247,
-        166
+        166,
     ],
     "gEfiFirmwareFileSystem3Guid": [
         1416872058,
@@ -21167,7 +19908,7 @@ PROTOCOLS_GUIDS = {
         137,
         231,
         52,
-        154
+        154,
     ],
     "gEfiEndOfDxeEventGroupGuid": [
         47093370,
@@ -21180,7 +19921,7 @@ PROTOCOLS_GUIDS = {
         240,
         71,
         8,
-        128
+        128,
     ],
     "gEfiFirmwareContentsSignedGuid": [
         261982696,
@@ -21193,7 +19934,7 @@ PROTOCOLS_GUIDS = {
         227,
         64,
         35,
-        223
+        223,
     ],
     "gEfiVectorHandoffTableGuid": [
         2574172444,
@@ -21206,7 +19947,7 @@ PROTOCOLS_GUIDS = {
         82,
         144,
         109,
-        239
+        239,
     ],
     "gAdapterInfoPlatformSecurityGuid": [
         1810002631,
@@ -21219,7 +19960,7 @@ PROTOCOLS_GUIDS = {
         44,
         1,
         43,
-        37
+        37,
     ],
     "gEfiDiskInfoNvmeInterfaceGuid": [
         984696448,
@@ -21232,7 +19973,7 @@ PROTOCOLS_GUIDS = {
         0,
         24,
         199,
-        247
+        247,
     ],
     "gEfiGraphicsInfoHobGuid": [
         972434638,
@@ -21245,7 +19986,7 @@ PROTOCOLS_GUIDS = {
         186,
         117,
         58,
-        7
+        7,
     ],
     "gEfiDiskInfoUfsInterfaceGuid": [
         1261447628,
@@ -21258,7 +19999,7 @@ PROTOCOLS_GUIDS = {
         184,
         4,
         65,
-        240
+        240,
     ],
     "gEfiGraphicsDeviceInfoHobGuid": [
         3855297225,
@@ -21271,7 +20012,7 @@ PROTOCOLS_GUIDS = {
         50,
         71,
         141,
-        231
+        231,
     ],
     "gEfiSmmSmramMemoryGuid": [
         1840116177,
@@ -21284,7 +20025,7 @@ PROTOCOLS_GUIDS = {
         253,
         128,
         255,
-        61
+        61,
     ],
     "gEfiDiskInfoSdMmcInterfaceGuid": [
         2381236626,
@@ -21297,7 +20038,7 @@ PROTOCOLS_GUIDS = {
         20,
         36,
         43,
-        157
+        157,
     ],
     "gWindowsUxCapsuleGuid": [
         999063906,
@@ -21310,7 +20051,7 @@ PROTOCOLS_GUIDS = {
         241,
         214,
         86,
-        151
+        151,
     ],
     "gTianoCustomDecompressGuid": [
         2735898797,
@@ -21323,7 +20064,7 @@ PROTOCOLS_GUIDS = {
         76,
         152,
         71,
-        121
+        121,
     ],
     "gEfiIa32X64ErrorTypeCacheCheckGuid": [
         2773942773,
@@ -21336,7 +20077,7 @@ PROTOCOLS_GUIDS = {
         87,
         63,
         173,
-        44
+        44,
     ],
     "gEfiIa32X64ErrorTypeTlbCheckGuid": [
         4228298037,
@@ -21349,7 +20090,7 @@ PROTOCOLS_GUIDS = {
         154,
         219,
         99,
-        195
+        195,
     ],
     "gEfiIa32X64ErrorTypeBusCheckGuid": [
         485750963,
@@ -21362,7 +20103,7 @@ PROTOCOLS_GUIDS = {
         146,
         255,
         166,
-        60
+        60,
     ],
     "gEfiIa32X64ErrorTypeMsCheckGuid": [
         1219198807,
@@ -21375,7 +20116,7 @@ PROTOCOLS_GUIDS = {
         176,
         167,
         67,
-        20
+        20,
     ],
     "gEfiPeiMasterBootModePpiGuid": [
         1946736456,
@@ -21388,7 +20129,7 @@ PROTOCOLS_GUIDS = {
         192,
         146,
         164,
-        16
+        16,
     ],
     "gEfiDxeIplPpiGuid": [
         183029341,
@@ -21401,7 +20142,7 @@ PROTOCOLS_GUIDS = {
         241,
         148,
         247,
-        49
+        49,
     ],
     "gEfiPeiMemoryDiscoveredPpiGuid": [
         4170474557,
@@ -21414,7 +20155,7 @@ PROTOCOLS_GUIDS = {
         216,
         198,
         91,
-        222
+        222,
     ],
     "gEfiPeiBootInRecoveryModePpiGuid": [
         401492330,
@@ -21427,7 +20168,7 @@ PROTOCOLS_GUIDS = {
         114,
         48,
         8,
-        80
+        80,
     ],
     "gEfiEndOfPeiSignalPpiGuid": [
         1616815696,
@@ -21440,7 +20181,7 @@ PROTOCOLS_GUIDS = {
         42,
         182,
         24,
-        198
+        198,
     ],
     "gEfiPeiResetPpiGuid": [
         4013526360,
@@ -21453,7 +20194,7 @@ PROTOCOLS_GUIDS = {
         244,
         254,
         113,
-        47
+        47,
     ],
     "gEfiPeiStatusCodePpiGuid": [
         580399827,
@@ -21466,7 +20207,7 @@ PROTOCOLS_GUIDS = {
         183,
         212,
         84,
-        54
+        54,
     ],
     "gEfiPeiSecurity2PpiGuid": [
         3704667683,
@@ -21479,7 +20220,7 @@ PROTOCOLS_GUIDS = {
         44,
         237,
         78,
-        222
+        222,
     ],
     "gEfiTemporaryRamSupportPpiGuid": [
         3689036457,
@@ -21492,7 +20233,7 @@ PROTOCOLS_GUIDS = {
         241,
         97,
         115,
-        137
+        137,
     ],
     "gEfiPeiCpuIoPpiInstalledGuid": [
         3870236539,
@@ -21505,7 +20246,7 @@ PROTOCOLS_GUIDS = {
         87,
         164,
         66,
-        130
+        130,
     ],
     "gEfiPciCfg2PpiGuid": [
         91899034,
@@ -21518,7 +20259,7 @@ PROTOCOLS_GUIDS = {
         106,
         153,
         187,
-        146
+        146,
     ],
     "gEfiPeiStallPpiGuid": [
         525102992,
@@ -21531,7 +20272,7 @@ PROTOCOLS_GUIDS = {
         241,
         205,
         125,
-        86
+        86,
     ],
     "gEfiPeiReadOnlyVariable2PpiGuid": [
         716730101,
@@ -21544,7 +20285,7 @@ PROTOCOLS_GUIDS = {
         202,
         31,
         225,
-        180
+        180,
     ],
     "gEfiSecPlatformInformationPpiGuid": [
         1871457077,
@@ -21557,7 +20298,7 @@ PROTOCOLS_GUIDS = {
         25,
         214,
         16,
-        119
+        119,
     ],
     "gEfiPeiLoadedImagePpiGuid": [
         3254572104,
@@ -21570,7 +20311,7 @@ PROTOCOLS_GUIDS = {
         1,
         83,
         100,
-        188
+        188,
     ],
     "gEfiPeiSmbus2PpiGuid": [
         2628335143,
@@ -21583,7 +20324,7 @@ PROTOCOLS_GUIDS = {
         97,
         118,
         69,
-        67
+        67,
     ],
     "gEfiPeiFirmwareVolumeInfoPpiGuid": [
         1240314305,
@@ -21596,7 +20337,7 @@ PROTOCOLS_GUIDS = {
         49,
         170,
         187,
-        57
+        57,
     ],
     "gEfiPeiLoadFilePpiGuid": [
         3118509054,
@@ -21609,7 +20350,7 @@ PROTOCOLS_GUIDS = {
         120,
         194,
         120,
-        166
+        166,
     ],
     "gEfiPeiDecompressPpiGuid": [
         439805159,
@@ -21622,34 +20363,10 @@ PROTOCOLS_GUIDS = {
         5,
         118,
         253,
-        215
+        215,
     ],
-    "gPcdPpiGuid": [
-        115874904,
-        19159,
-        17596,
-        131,
-        144,
-        241,
-        2,
-        101,
-        247,
-        36,
-        128
-    ],
-    "gGetPcdInfoPpiGuid": [
-        1300960603,
-        49241,
-        19599,
-        137,
-        38,
-        6,
-        253,
-        67,
-        49,
-        219,
-        138
-    ],
+    "gPcdPpiGuid": [115874904, 19159, 17596, 131, 144, 241, 2, 101, 247, 36, 128],
+    "gGetPcdInfoPpiGuid": [1300960603, 49241, 19599, 137, 38, 6, 253, 67, 49, 219, 138],
     "gEfiPeiRecoveryModulePpiGuid": [
         4218262850,
         24877,
@@ -21661,7 +20378,7 @@ PROTOCOLS_GUIDS = {
         82,
         233,
         61,
-        207
+        207,
     ],
     "gEfiPeiDeviceRecoveryModulePpiGuid": [
         232967717,
@@ -21674,7 +20391,7 @@ PROTOCOLS_GUIDS = {
         38,
         52,
         75,
-        55
+        55,
     ],
     "gEfiPeiVirtualBlockIoPpiGuid": [
         1767738017,
@@ -21687,7 +20404,7 @@ PROTOCOLS_GUIDS = {
         188,
         231,
         153,
-        227
+        227,
     ],
     "gEfiPeiS3Resume2PpiGuid": [
         1834495420,
@@ -21700,7 +20417,7 @@ PROTOCOLS_GUIDS = {
         98,
         39,
         177,
-        71
+        71,
     ],
     "gEfiPeiRscHandlerPpiGuid": [
         6673300,
@@ -21713,21 +20430,9 @@ PROTOCOLS_GUIDS = {
         133,
         121,
         194,
-        81
+        81,
     ],
-    "gEfiPeiPcdPpiGuid": [
-        32722213,
-        19938,
-        9133,
-        63,
-        243,
-        54,
-        53,
-        63,
-        243,
-        35,
-        241
-    ],
+    "gEfiPeiPcdPpiGuid": [32722213, 19938, 9133, 63, 243, 54, 53, 63, 243, 35, 241],
     "gEfiGetPcdInfoPpiGuid": [
         2785831769,
         58457,
@@ -21739,7 +20444,7 @@ PROTOCOLS_GUIDS = {
         156,
         178,
         125,
-        129
+        129,
     ],
     "gEfiTemporaryRamDonePpiGuid": [
         3467339836,
@@ -21752,7 +20457,7 @@ PROTOCOLS_GUIDS = {
         250,
         78,
         156,
-        22
+        22,
     ],
     "gEfiVectorHandoffInfoPpiGuid": [
         1020678836,
@@ -21765,34 +20470,10 @@ PROTOCOLS_GUIDS = {
         151,
         102,
         252,
-        202
+        202,
     ],
-    "gEfiIsaHcPpiGuid": [
-        2370354544,
-        51363,
-        19462,
-        144,
-        27,
-        116,
-        121,
-        70,
-        170,
-        195,
-        88
-    ],
-    "gEfiSioPpiGuid": [
-        597976237,
-        52099,
-        18616,
-        148,
-        171,
-        26,
-        111,
-        239,
-        207,
-        229,
-        34
-    ],
+    "gEfiIsaHcPpiGuid": [2370354544, 51363, 19462, 144, 27, 116, 121, 70, 170, 195, 88],
+    "gEfiSioPpiGuid": [597976237, 52099, 18616, 148, 171, 26, 111, 239, 207, 229, 34],
     "gEfiPeiI2cMasterPpiGuid": [
         3015682971,
         40860,
@@ -21804,7 +20485,7 @@ PROTOCOLS_GUIDS = {
         81,
         252,
         98,
-        128
+        128,
     ],
     "gEfiPeiFirmwareVolumeInfo2PpiGuid": [
         3934036555,
@@ -21817,7 +20498,7 @@ PROTOCOLS_GUIDS = {
         126,
         143,
         155,
-        56
+        56,
     ],
     "gEfiPeiGraphicsPpiGuid": [
         1858933859,
@@ -21830,7 +20511,7 @@ PROTOCOLS_GUIDS = {
         227,
         178,
         22,
-        43
+        43,
     ],
     "gEfiPeiMpServicesPpiGuid": [
         3994424842,
@@ -21843,7 +20524,7 @@ PROTOCOLS_GUIDS = {
         13,
         176,
         37,
-        10
+        10,
     ],
     "gEfiPeiCapsulePpiGuid": [
         986657774,
@@ -21856,21 +20537,9 @@ PROTOCOLS_GUIDS = {
         210,
         225,
         50,
-        61
+        61,
     ],
-    "gPeiCapsulePpiGuid": [
-        986657774,
-        55442,
-        16628,
-        162,
-        252,
-        56,
-        84,
-        210,
-        225,
-        50,
-        61
-    ],
+    "gPeiCapsulePpiGuid": [986657774, 55442, 16628, 162, 252, 56, 84, 210, 225, 50, 61],
     "gEfiPeiReset2PpiGuid": [
         1824806757,
         52452,
@@ -21882,7 +20551,7 @@ PROTOCOLS_GUIDS = {
         170,
         198,
         201,
-        168
+        168,
     ],
     "gEfiPeiVirtualBlockIo2PpiGuid": [
         650907565,
@@ -21895,7 +20564,7 @@ PROTOCOLS_GUIDS = {
         143,
         114,
         97,
-        152
+        152,
     ],
     "gEfiSecPlatformInformation2PpiGuid": [
         2661234507,
@@ -21908,7 +20577,7 @@ PROTOCOLS_GUIDS = {
         238,
         118,
         106,
-        151
+        151,
     ],
     "gEfiSecHobDataPpiGuid": [
         1052618528,
@@ -21921,7 +20590,7 @@ PROTOCOLS_GUIDS = {
         154,
         193,
         183,
-        31
+        31,
     ],
     "gEfiPeiMmAccessPpiGuid": [
         646919081,
@@ -21934,7 +20603,7 @@ PROTOCOLS_GUIDS = {
         58,
         195,
         46,
-        214
+        214,
     ],
     "gEfiPeiMmControlPpiGuid": [
         1640400642,
@@ -21947,7 +20616,7 @@ PROTOCOLS_GUIDS = {
         5,
         206,
         116,
-        197
+        197,
     ],
     "gEfiPeiCoreFvLocationPpiGuid": [
         1384681134,
@@ -21960,21 +20629,9 @@ PROTOCOLS_GUIDS = {
         171,
         160,
         202,
-        244
+        244,
     ],
-    "gPcdProtocolGuid": [
-        296960006,
-        55387,
-        19722,
-        162,
-        144,
-        213,
-        165,
-        113,
-        49,
-        14,
-        247
-    ],
+    "gPcdProtocolGuid": [296960006, 55387, 19722, 162, 144, 213, 165, 113, 49, 14, 247],
     "gGetPcdInfoProtocolGuid": [
         1541672791,
         64104,
@@ -21986,7 +20643,7 @@ PROTOCOLS_GUIDS = {
         252,
         218,
         211,
-        101
+        101,
     ],
     "gEfiBdsArchProtocolGuid": [
         1717452790,
@@ -21999,7 +20656,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiCpuArchProtocolGuid": [
         649776305,
@@ -22012,7 +20669,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "gEfiMetronomeArchProtocolGuid": [
         649776306,
@@ -22025,7 +20682,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "gEfiMonotonicCounterArchProtocolGuid": [
         497643634,
@@ -22038,7 +20695,7 @@ PROTOCOLS_GUIDS = {
         181,
         111,
         255,
-        42
+        42,
     ],
     "gEfiRealTimeClockArchProtocolGuid": [
         667921543,
@@ -22051,7 +20708,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiResetArchProtocolGuid": [
         667921544,
@@ -22064,7 +20721,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiRuntimeArchProtocolGuid": [
         3084891361,
@@ -22077,7 +20734,7 @@ PROTOCOLS_GUIDS = {
         252,
         145,
         183,
-        51
+        51,
     ],
     "gEfiSecurityArchProtocolGuid": [
         2758026211,
@@ -22090,7 +20747,7 @@ PROTOCOLS_GUIDS = {
         169,
         17,
         88,
-        57
+        57,
     ],
     "gEfiSecurityPolicyProtocolGuid": [
         2028261957,
@@ -22103,7 +20760,7 @@ PROTOCOLS_GUIDS = {
         232,
         108,
         252,
-        171
+        171,
     ],
     "gEfiTimerArchProtocolGuid": [
         649776307,
@@ -22116,7 +20773,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "gEfiVariableWriteArchProtocolGuid": [
         1682044952,
@@ -22129,7 +20786,7 @@ PROTOCOLS_GUIDS = {
         49,
         221,
         36,
-        83
+        83,
     ],
     "gEfiVariableArchProtocolGuid": [
         508979426,
@@ -22142,7 +20799,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "gEfiWatchdogTimerArchProtocolGuid": [
         1717452789,
@@ -22155,7 +20812,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiStatusCodeRuntimeProtocolGuid": [
         3534927912,
@@ -22168,7 +20825,7 @@ PROTOCOLS_GUIDS = {
         0,
         96,
         36,
-        240
+        240,
     ],
     "gEfiSmbusHcProtocolGuid": [
         3835507693,
@@ -22181,7 +20838,7 @@ PROTOCOLS_GUIDS = {
         170,
         117,
         28,
-        27
+        27,
     ],
     "gEfiFirmwareVolume2ProtocolGuid": [
         571372470,
@@ -22194,7 +20851,7 @@ PROTOCOLS_GUIDS = {
         177,
         8,
         97,
-        154
+        154,
     ],
     "gEfiFirmwareVolumeBlockProtocolGuid": [
         2405715881,
@@ -22207,7 +20864,7 @@ PROTOCOLS_GUIDS = {
         105,
         142,
         141,
-        164
+        164,
     ],
     "gEfiCapsuleArchProtocolGuid": [
         1347643774,
@@ -22220,7 +20877,7 @@ PROTOCOLS_GUIDS = {
         222,
         238,
         87,
-        84
+        84,
     ],
     "gEfiMpServiceProtocolGuid": [
         1071490565,
@@ -22233,7 +20890,7 @@ PROTOCOLS_GUIDS = {
         83,
         27,
         61,
-        8
+        8,
     ],
     "gEfiPciHostBridgeResourceAllocationProtocolGuid": [
         3481285822,
@@ -22246,7 +20903,7 @@ PROTOCOLS_GUIDS = {
         104,
         58,
         159,
-        190
+        190,
     ],
     "gEfiPciPlatformProtocolGuid": [
         131551872,
@@ -22259,7 +20916,7 @@ PROTOCOLS_GUIDS = {
         226,
         56,
         179,
-        65
+        65,
     ],
     "gEfiPciOverrideProtocolGuid": [
         3048429412,
@@ -22272,7 +20929,7 @@ PROTOCOLS_GUIDS = {
         124,
         27,
         92,
-        235
+        235,
     ],
     "gEfiPciEnumerationCompleteProtocolGuid": [
         818930663,
@@ -22285,7 +20942,7 @@ PROTOCOLS_GUIDS = {
         161,
         179,
         183,
-        147
+        147,
     ],
     "gEfiIncompatiblePciDeviceSupportProtocolGuid": [
         3945002330,
@@ -22298,7 +20955,7 @@ PROTOCOLS_GUIDS = {
         53,
         222,
         3,
-        117
+        117,
     ],
     "gEfiPciHotPlugInitProtocolGuid": [
         2853080001,
@@ -22311,7 +20968,7 @@ PROTOCOLS_GUIDS = {
         22,
         155,
         43,
-        234
+        234,
     ],
     "gEfiPciHotPlugRequestProtocolGuid": [
         432768939,
@@ -22324,7 +20981,7 @@ PROTOCOLS_GUIDS = {
         96,
         84,
         247,
-        157
+        157,
     ],
     "gEfiIdeControllerInitProtocolGuid": [
         2716037202,
@@ -22337,7 +20994,7 @@ PROTOCOLS_GUIDS = {
         85,
         196,
         62,
-        201
+        201,
     ],
     "gEfiDiskInfoProtocolGuid": [
         3560089215,
@@ -22350,7 +21007,7 @@ PROTOCOLS_GUIDS = {
         145,
         132,
         147,
-        39
+        39,
     ],
     "gEfiSmbiosProtocolGuid": [
         56115190,
@@ -22363,7 +21020,7 @@ PROTOCOLS_GUIDS = {
         159,
         74,
         250,
-        247
+        247,
     ],
     "gEfiS3SaveStateProtocolGuid": [
         3898067702,
@@ -22376,7 +21033,7 @@ PROTOCOLS_GUIDS = {
         101,
         251,
         168,
-        135
+        135,
     ],
     "gEfiS3SmmSaveStateProtocolGuid": [
         839581282,
@@ -22389,7 +21046,7 @@ PROTOCOLS_GUIDS = {
         244,
         175,
         1,
-        76
+        76,
     ],
     "gEfiRscHandlerProtocolGuid": [
         2250320182,
@@ -22402,7 +21059,7 @@ PROTOCOLS_GUIDS = {
         252,
         28,
         57,
-        226
+        226,
     ],
     "gEfiSmmRscHandlerProtocolGuid": [
         804429735,
@@ -22415,7 +21072,7 @@ PROTOCOLS_GUIDS = {
         60,
         85,
         79,
-        244
+        244,
     ],
     "gEfiAcpiSdtProtocolGuid": [
         3952543886,
@@ -22428,21 +21085,9 @@ PROTOCOLS_GUIDS = {
         165,
         178,
         14,
-        134
+        134,
     ],
-    "gEfiSioProtocolGuid": [
-        559930648,
-        48464,
-        20459,
-        137,
-        11,
-        88,
-        202,
-        11,
-        71,
-        57,
-        233
-    ],
+    "gEfiSioProtocolGuid": [559930648, 48464, 20459, 137, 11, 88, 202, 11, 71, 57, 233],
     "gEfiSmmCpuIo2ProtocolGuid": [
         843229656,
         52848,
@@ -22454,7 +21099,7 @@ PROTOCOLS_GUIDS = {
         20,
         13,
         228,
-        210
+        210,
     ],
     "gEfiSmmBase2ProtocolGuid": [
         4107059127,
@@ -22467,7 +21112,7 @@ PROTOCOLS_GUIDS = {
         241,
         80,
         193,
-        145
+        145,
     ],
     "gEfiSmmAccess2ProtocolGuid": [
         3262131060,
@@ -22480,7 +21125,7 @@ PROTOCOLS_GUIDS = {
         184,
         156,
         228,
-        172
+        172,
     ],
     "gEfiSmmControl2ProtocolGuid": [
         2218641184,
@@ -22493,7 +21138,7 @@ PROTOCOLS_GUIDS = {
         120,
         243,
         86,
-        27
+        27,
     ],
     "gEfiSmmConfigurationProtocolGuid": [
         653177822,
@@ -22506,7 +21151,7 @@ PROTOCOLS_GUIDS = {
         215,
         218,
         75,
-        167
+        167,
     ],
     "gEfiSmmReadyToLockProtocolGuid": [
         1203239564,
@@ -22519,7 +21164,7 @@ PROTOCOLS_GUIDS = {
         134,
         240,
         210,
-        200
+        200,
     ],
     "gEfiDxeSmmReadyToLockProtocolGuid": [
         1627359588,
@@ -22532,7 +21177,7 @@ PROTOCOLS_GUIDS = {
         233,
         116,
         224,
-        142
+        142,
     ],
     "gEfiSmmCommunicationProtocolGuid": [
         3331250402,
@@ -22545,7 +21190,7 @@ PROTOCOLS_GUIDS = {
         172,
         197,
         195,
-        50
+        50,
     ],
     "gEfiSmmStatusCodeProtocolGuid": [
         1794976631,
@@ -22558,7 +21203,7 @@ PROTOCOLS_GUIDS = {
         57,
         222,
         15,
-        177
+        177,
     ],
     "gEfiSmmCpuProtocolGuid": [
         3946081175,
@@ -22571,7 +21216,7 @@ PROTOCOLS_GUIDS = {
         43,
         179,
         213,
-        105
+        105,
     ],
     "gEfiSmmPciRootBridgeIoProtocolGuid": [
         2344710477,
@@ -22584,7 +21229,7 @@ PROTOCOLS_GUIDS = {
         208,
         109,
         152,
-        234
+        234,
     ],
     "gEfiSmmSwDispatch2ProtocolGuid": [
         413386460,
@@ -22597,7 +21242,7 @@ PROTOCOLS_GUIDS = {
         137,
         249,
         137,
-        153
+        153,
     ],
     "gEfiSmmSxDispatch2ProtocolGuid": [
         1164781657,
@@ -22610,7 +21255,7 @@ PROTOCOLS_GUIDS = {
         216,
         134,
         153,
-        125
+        125,
     ],
     "gEfiSmmPeriodicTimerDispatch2ProtocolGuid": [
         1290548878,
@@ -22623,7 +21268,7 @@ PROTOCOLS_GUIDS = {
         69,
         252,
         138,
-        83
+        83,
     ],
     "gEfiSmmUsbDispatch2ProtocolGuid": [
         4003171728,
@@ -22636,7 +21281,7 @@ PROTOCOLS_GUIDS = {
         141,
         51,
         204,
-        161
+        161,
     ],
     "gEfiSmmGpiDispatch2ProtocolGuid": [
         626420483,
@@ -22649,7 +21294,7 @@ PROTOCOLS_GUIDS = {
         62,
         162,
         67,
-        128
+        128,
     ],
     "gEfiSmmStandbyButtonDispatch2ProtocolGuid": [
         1929430177,
@@ -22662,7 +21307,7 @@ PROTOCOLS_GUIDS = {
         127,
         64,
         88,
-        91
+        91,
     ],
     "gEfiSmmPowerButtonDispatch2ProtocolGuid": [
         454132730,
@@ -22675,7 +21320,7 @@ PROTOCOLS_GUIDS = {
         135,
         85,
         64,
-        157
+        157,
     ],
     "gEfiSmmIoTrapDispatch2ProtocolGuid": [
         1490826893,
@@ -22688,21 +21333,9 @@ PROTOCOLS_GUIDS = {
         65,
         141,
         249,
-        48
+        48,
     ],
-    "gEfiPcdProtocolGuid": [
-        329511158,
-        9802,
-        16112,
-        242,
-        224,
-        222,
-        197,
-        18,
-        52,
-        47,
-        52
-    ],
+    "gEfiPcdProtocolGuid": [329511158, 9802, 16112, 242, 224, 222, 197, 18, 52, 47, 52],
     "gEfiFirmwareVolumeBlock2ProtocolGuid": [
         2405715881,
         59472,
@@ -22714,7 +21347,7 @@ PROTOCOLS_GUIDS = {
         105,
         142,
         141,
-        164
+        164,
     ],
     "gEfiCpuIo2ProtocolGuid": [
         2908877201,
@@ -22727,7 +21360,7 @@ PROTOCOLS_GUIDS = {
         210,
         136,
         198,
-        79
+        79,
     ],
     "gEfiLegacyRegion2ProtocolGuid": [
         1880104623,
@@ -22740,7 +21373,7 @@ PROTOCOLS_GUIDS = {
         111,
         239,
         36,
-        240
+        240,
     ],
     "gEfiSecurity2ArchProtocolGuid": [
         2494246744,
@@ -22753,7 +21386,7 @@ PROTOCOLS_GUIDS = {
         26,
         58,
         14,
-        104
+        104,
     ],
     "gEfiSmmEndOfDxeProtocolGuid": [
         619118658,
@@ -22766,7 +21399,7 @@ PROTOCOLS_GUIDS = {
         170,
         50,
         233,
-        61
+        61,
     ],
     "gEfiIsaHcProtocolGuid": [
         3168465024,
@@ -22779,7 +21412,7 @@ PROTOCOLS_GUIDS = {
         30,
         18,
         142,
-        196
+        196,
     ],
     "gEfiIsaHcServiceBindingProtocolGuid": [
         4208431930,
@@ -22792,7 +21425,7 @@ PROTOCOLS_GUIDS = {
         13,
         43,
         7,
-        129
+        129,
     ],
     "gEfiSioControlProtocolGuid": [
         3105454303,
@@ -22805,7 +21438,7 @@ PROTOCOLS_GUIDS = {
         132,
         85,
         202,
-        39
+        39,
     ],
     "gEfiGetPcdInfoProtocolGuid": [
         4245636216,
@@ -22818,7 +21451,7 @@ PROTOCOLS_GUIDS = {
         69,
         253,
         95,
-        94
+        94,
     ],
     "gEfiI2cMasterProtocolGuid": [
         3446835231,
@@ -22831,7 +21464,7 @@ PROTOCOLS_GUIDS = {
         168,
         17,
         116,
-        98
+        98,
     ],
     "gEfiI2cIoProtocolGuid": [
         3054124651,
@@ -22844,7 +21477,7 @@ PROTOCOLS_GUIDS = {
         6,
         101,
         162,
-        142
+        142,
     ],
     "gEfiI2cEnumerateProtocolGuid": [
         3666663364,
@@ -22857,7 +21490,7 @@ PROTOCOLS_GUIDS = {
         231,
         1,
         137,
-        76
+        76,
     ],
     "gEfiI2cHostProtocolGuid": [
         2779429347,
@@ -22870,7 +21503,7 @@ PROTOCOLS_GUIDS = {
         51,
         133,
         73,
-        72
+        72,
     ],
     "gEfiI2cBusConfigurationManagementProtocolGuid": [
         1438064565,
@@ -22883,7 +21516,7 @@ PROTOCOLS_GUIDS = {
         227,
         212,
         70,
-        107
+        107,
     ],
     "gEfiMmMpProtocolGuid": [
         1565806807,
@@ -22896,7 +21529,7 @@ PROTOCOLS_GUIDS = {
         240,
         96,
         131,
-        7
+        7,
     ],
     "gEfiMmEndOfDxeProtocolGuid": [
         619118658,
@@ -22909,7 +21542,7 @@ PROTOCOLS_GUIDS = {
         170,
         50,
         233,
-        61
+        61,
     ],
     "gEfiMmIoTrapDispatchProtocolGuid": [
         1490826893,
@@ -22922,7 +21555,7 @@ PROTOCOLS_GUIDS = {
         65,
         141,
         249,
-        48
+        48,
     ],
     "gEfiMmPowerButtonDispatchProtocolGuid": [
         454132730,
@@ -22935,7 +21568,7 @@ PROTOCOLS_GUIDS = {
         135,
         85,
         64,
-        157
+        157,
     ],
     "gEfiMmStandbyButtonDispatchProtocolGuid": [
         1929430177,
@@ -22948,7 +21581,7 @@ PROTOCOLS_GUIDS = {
         127,
         64,
         88,
-        91
+        91,
     ],
     "gEfiMmGpiDispatchProtocolGuid": [
         626420483,
@@ -22961,7 +21594,7 @@ PROTOCOLS_GUIDS = {
         62,
         162,
         67,
-        128
+        128,
     ],
     "gEfiMmUsbDispatchProtocolGuid": [
         4003171728,
@@ -22974,7 +21607,7 @@ PROTOCOLS_GUIDS = {
         141,
         51,
         204,
-        161
+        161,
     ],
     "gEfiMmPeriodicTimerDispatchProtocolGuid": [
         1290548878,
@@ -22987,7 +21620,7 @@ PROTOCOLS_GUIDS = {
         69,
         252,
         138,
-        83
+        83,
     ],
     "gEfiMmSxDispatchProtocolGuid": [
         1164781657,
@@ -23000,7 +21633,7 @@ PROTOCOLS_GUIDS = {
         216,
         134,
         153,
-        125
+        125,
     ],
     "gEfiMmSwDispatchProtocolGuid": [
         413386460,
@@ -23013,7 +21646,7 @@ PROTOCOLS_GUIDS = {
         137,
         249,
         137,
-        153
+        153,
     ],
     "gEfiMmPciRootBridgeIoProtocolGuid": [
         2344710477,
@@ -23026,7 +21659,7 @@ PROTOCOLS_GUIDS = {
         208,
         109,
         152,
-        234
+        234,
     ],
     "gEfiMmCpuProtocolGuid": [
         3946081175,
@@ -23039,7 +21672,7 @@ PROTOCOLS_GUIDS = {
         43,
         179,
         213,
-        105
+        105,
     ],
     "gEfiMmStatusCodeProtocolGuid": [
         1794976631,
@@ -23052,7 +21685,7 @@ PROTOCOLS_GUIDS = {
         57,
         222,
         15,
-        177
+        177,
     ],
     "gEfiDxeMmReadyToLockProtocolGuid": [
         1627359588,
@@ -23065,7 +21698,7 @@ PROTOCOLS_GUIDS = {
         233,
         116,
         224,
-        142
+        142,
     ],
     "gEfiMmConfigurationProtocolGuid": [
         653177822,
@@ -23078,7 +21711,7 @@ PROTOCOLS_GUIDS = {
         215,
         218,
         75,
-        167
+        167,
     ],
     "gEfiMmReadyToLockProtocolGuid": [
         1203239564,
@@ -23091,7 +21724,7 @@ PROTOCOLS_GUIDS = {
         134,
         240,
         210,
-        200
+        200,
     ],
     "gEfiMmControlProtocolGuid": [
         2218641184,
@@ -23104,7 +21737,7 @@ PROTOCOLS_GUIDS = {
         120,
         243,
         86,
-        27
+        27,
     ],
     "gEfiMmAccessProtocolGuid": [
         3262131060,
@@ -23117,7 +21750,7 @@ PROTOCOLS_GUIDS = {
         184,
         156,
         228,
-        172
+        172,
     ],
     "gEfiMmBaseProtocolGuid": [
         4107059127,
@@ -23130,7 +21763,7 @@ PROTOCOLS_GUIDS = {
         241,
         80,
         193,
-        145
+        145,
     ],
     "gEfiMmCpuIoProtocolGuid": [
         843229656,
@@ -23143,7 +21776,7 @@ PROTOCOLS_GUIDS = {
         20,
         13,
         228,
-        210
+        210,
     ],
     "gEfiMmRscHandlerProtocolGuid": [
         804429735,
@@ -23156,7 +21789,7 @@ PROTOCOLS_GUIDS = {
         60,
         85,
         79,
-        244
+        244,
     ],
     "gEfiMmCommunicationProtocolGuid": [
         3331250402,
@@ -23169,7 +21802,7 @@ PROTOCOLS_GUIDS = {
         172,
         197,
         195,
-        50
+        50,
     ],
     "gEfiLegacySpiControllerProtocolGuid": [
         957575111,
@@ -23182,7 +21815,7 @@ PROTOCOLS_GUIDS = {
         221,
         181,
         36,
-        252
+        252,
     ],
     "gEfiLegacySpiFlashProtocolGuid": [
         4028362071,
@@ -23195,7 +21828,7 @@ PROTOCOLS_GUIDS = {
         234,
         34,
         130,
-        89
+        89,
     ],
     "gEfiLegacySpiSmmControllerProtocolGuid": [
         1647516536,
@@ -23208,7 +21841,7 @@ PROTOCOLS_GUIDS = {
         254,
         50,
         219,
-        155
+        155,
     ],
     "gEfiLegacySpiSmmFlashProtocolGuid": [
         1580746964,
@@ -23221,7 +21854,7 @@ PROTOCOLS_GUIDS = {
         61,
         79,
         135,
-        159
+        159,
     ],
     "gEfiSpiConfigurationProtocolGuid": [
         2242302950,
@@ -23234,7 +21867,7 @@ PROTOCOLS_GUIDS = {
         74,
         246,
         221,
-        200
+        200,
     ],
     "gEfiSpiHcProtocolGuid": [
         3343801778,
@@ -23247,7 +21880,7 @@ PROTOCOLS_GUIDS = {
         127,
         227,
         0,
-        45
+        45,
     ],
     "gEfiSpiNorFlashProtocolGuid": [
         3044983806,
@@ -23260,7 +21893,7 @@ PROTOCOLS_GUIDS = {
         106,
         135,
         68,
-        75
+        75,
     ],
     "gEfiSpiSmmConfigurationProtocolGuid": [
         2572971722,
@@ -23273,7 +21906,7 @@ PROTOCOLS_GUIDS = {
         156,
         157,
         239,
-        89
+        89,
     ],
     "gEfiSpiSmmHcProtocolGuid": [
         3924828695,
@@ -23286,7 +21919,7 @@ PROTOCOLS_GUIDS = {
         255,
         231,
         62,
-        203
+        203,
     ],
     "gEfiSpiSmmNorFlashProtocolGuid": [
         2863763225,
@@ -23299,7 +21932,7 @@ PROTOCOLS_GUIDS = {
         109,
         102,
         44,
-        154
+        154,
     ],
     "gEfiDebugPortProtocolGuid": [
         3953453266,
@@ -23312,7 +21945,7 @@ PROTOCOLS_GUIDS = {
         186,
         150,
         96,
-        208
+        208,
     ],
     "gEfiDebugSupportProtocolGuid": [
         659904780,
@@ -23325,7 +21958,7 @@ PROTOCOLS_GUIDS = {
         84,
         60,
         218,
-        37
+        37,
     ],
     "gEfiDecompressProtocolGuid": [
         3625024766,
@@ -23338,7 +21971,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiDeviceIoProtocolGuid": [
         2943009553,
@@ -23351,7 +21984,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "gEfiDevicePathProtocolGuid": [
         156724881,
@@ -23364,7 +21997,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "gEfiDevicePathFromTextProtocolGuid": [
         97098273,
@@ -23377,7 +22010,7 @@ PROTOCOLS_GUIDS = {
         51,
         67,
         245,
-        30
+        30,
     ],
     "gEfiDevicePathToTextProtocolGuid": [
         2340699680,
@@ -23390,7 +22023,7 @@ PROTOCOLS_GUIDS = {
         78,
         74,
         127,
-        28
+        28,
     ],
     "gEfiDevicePathUtilitiesProtocolGuid": [
         58310222,
@@ -23403,7 +22036,7 @@ PROTOCOLS_GUIDS = {
         47,
         183,
         114,
-        164
+        164,
     ],
     "gEfiDriverBindingProtocolGuid": [
         413151659,
@@ -23416,7 +22049,7 @@ PROTOCOLS_GUIDS = {
         38,
         30,
         159,
-        113
+        113,
     ],
     "gEfiPlatformDriverOverrideProtocolGuid": [
         1798358840,
@@ -23429,7 +22062,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiDriverFamilyOverrideProtocolGuid": [
         2985169566,
@@ -23442,7 +22075,7 @@ PROTOCOLS_GUIDS = {
         146,
         55,
         102,
-        167
+        167,
     ],
     "gEfiBusSpecificDriverOverrideProtocolGuid": [
         1002549893,
@@ -23455,7 +22088,7 @@ PROTOCOLS_GUIDS = {
         19,
         251,
         50,
-        101
+        101,
     ],
     "gEfiDriverDiagnostics2ProtocolGuid": [
         1295188769,
@@ -23468,7 +22101,7 @@ PROTOCOLS_GUIDS = {
         0,
         23,
         59,
-        99
+        99,
     ],
     "gEfiDriverDiagnosticsProtocolGuid": [
         126128719,
@@ -23481,7 +22114,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiComponentName2ProtocolGuid": [
         1786404095,
@@ -23494,7 +22127,7 @@ PROTOCOLS_GUIDS = {
         48,
         37,
         206,
-        20
+        20,
     ],
     "gEfiComponentNameProtocolGuid": [
         276461356,
@@ -23507,7 +22140,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiDriverConfiguration2ProtocolGuid": [
         3218594845,
@@ -23520,7 +22153,7 @@ PROTOCOLS_GUIDS = {
         187,
         107,
         78,
-        190
+        190,
     ],
     "gEfiDriverConfigurationProtocolGuid": [
         276461355,
@@ -23533,7 +22166,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiPlatformToDriverConfigurationProtocolGuid": [
         1680659856,
@@ -23546,7 +22179,7 @@ PROTOCOLS_GUIDS = {
         7,
         210,
         60,
-        75
+        75,
     ],
     "gEfiDriverSupportedEfiVersionProtocolGuid": [
         1545176929,
@@ -23559,7 +22192,7 @@ PROTOCOLS_GUIDS = {
         121,
         84,
         248,
-        29
+        29,
     ],
     "gEfiSimpleTextInProtocolGuid": [
         947156929,
@@ -23572,7 +22205,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "gEfiSimpleTextInputExProtocolGuid": [
         3718149428,
@@ -23585,7 +22218,7 @@ PROTOCOLS_GUIDS = {
         23,
         166,
         37,
-        170
+        170,
     ],
     "gEfiSimpleTextOutProtocolGuid": [
         947156930,
@@ -23598,7 +22231,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "gEfiSimplePointerProtocolGuid": [
         830966919,
@@ -23611,7 +22244,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiAbsolutePointerProtocolGuid": [
         2371474219,
@@ -23624,7 +22257,7 @@ PROTOCOLS_GUIDS = {
         4,
         153,
         42,
-        67
+        67,
     ],
     "gEfiSerialIoProtocolGuid": [
         3139817327,
@@ -23637,7 +22270,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        253
+        253,
     ],
     "gEfiGraphicsOutputProtocolGuid": [
         2420287966,
@@ -23650,7 +22283,7 @@ PROTOCOLS_GUIDS = {
         208,
         128,
         81,
-        106
+        106,
     ],
     "gEfiEdidDiscoveredProtocolGuid": [
         470562038,
@@ -23663,7 +22296,7 @@ PROTOCOLS_GUIDS = {
         108,
         26,
         102,
-        170
+        170,
     ],
     "gEfiEdidActiveProtocolGuid": [
         3180073046,
@@ -23676,7 +22309,7 @@ PROTOCOLS_GUIDS = {
         127,
         129,
         121,
-        134
+        134,
     ],
     "gEfiEdidOverrideProtocolGuid": [
         1223472177,
@@ -23689,7 +22322,7 @@ PROTOCOLS_GUIDS = {
         254,
         4,
         11,
-        213
+        213,
     ],
     "gEfiUgaIoProtocolGuid": [
         1638192286,
@@ -23702,7 +22335,7 @@ PROTOCOLS_GUIDS = {
         237,
         11,
         7,
-        162
+        162,
     ],
     "gEfiUgaDrawProtocolGuid": [
         2553031051,
@@ -23715,7 +22348,7 @@ PROTOCOLS_GUIDS = {
         104,
         143,
         184,
-        57
+        57,
     ],
     "gEfiLoadedImageProtocolGuid": [
         1528508833,
@@ -23728,7 +22361,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "gEfiLoadedImageDevicePathProtocolGuid": [
         3160544638,
@@ -23741,7 +22374,7 @@ PROTOCOLS_GUIDS = {
         54,
         215,
         80,
-        223
+        223,
     ],
     "gEfiLoadFileProtocolGuid": [
         1458319505,
@@ -23754,7 +22387,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "gEfiLoadFile2ProtocolGuid": [
         1074184385,
@@ -23767,7 +22400,7 @@ PROTOCOLS_GUIDS = {
         135,
         36,
         224,
-        109
+        109,
     ],
     "gEfiSimpleFileSystemProtocolGuid": [
         2521717538,
@@ -23780,7 +22413,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "gEfiTapeIoProtocolGuid": [
         513009203,
@@ -23793,7 +22426,7 @@ PROTOCOLS_GUIDS = {
         236,
         38,
         109,
-        24
+        24,
     ],
     "gEfiDiskIoProtocolGuid": [
         3459535217,
@@ -23806,7 +22439,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "gEfiBlockIoProtocolGuid": [
         2521717537,
@@ -23819,7 +22452,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "gEfiUnicodeCollationProtocolGuid": [
         495308159,
@@ -23832,7 +22465,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiUnicodeCollation2ProtocolGuid": [
         2764526076,
@@ -23845,7 +22478,7 @@ PROTOCOLS_GUIDS = {
         207,
         99,
         243,
-        73
+        73,
     ],
     "gEfiPciRootBridgeIoProtocolGuid": [
         795901627,
@@ -23858,7 +22491,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiPciIoProtocolGuid": [
         1291170304,
@@ -23871,7 +22504,7 @@ PROTOCOLS_GUIDS = {
         63,
         80,
         2,
-        154
+        154,
     ],
     "gEfiScsiIoProtocolGuid": [
         2469349350,
@@ -23884,7 +22517,7 @@ PROTOCOLS_GUIDS = {
         75,
         19,
         143,
-        133
+        133,
     ],
     "gEfiExtScsiPassThruProtocolGuid": [
         339441202,
@@ -23897,7 +22530,7 @@ PROTOCOLS_GUIDS = {
         165,
         185,
         191,
-        254
+        254,
     ],
     "gEfiScsiPassThruProtocolGuid": [
         2778632143,
@@ -23910,7 +22543,7 @@ PROTOCOLS_GUIDS = {
         46,
         202,
         168,
-        119
+        119,
     ],
     "gEfiIScsiInitiatorNameProtocolGuid": [
         1496467781,
@@ -23923,7 +22556,7 @@ PROTOCOLS_GUIDS = {
         57,
         223,
         7,
-        12
+        12,
     ],
     "gEfiUsb2HcProtocolGuid": [
         1047810598,
@@ -23936,7 +22569,7 @@ PROTOCOLS_GUIDS = {
         14,
         139,
         162,
-        188
+        188,
     ],
     "gEfiUsbHcProtocolGuid": [
         4110979686,
@@ -23949,7 +22582,7 @@ PROTOCOLS_GUIDS = {
         138,
         115,
         181,
-        25
+        25,
     ],
     "gEfiUsbIoProtocolGuid": [
         724527318,
@@ -23962,7 +22595,7 @@ PROTOCOLS_GUIDS = {
         11,
         27,
         91,
-        117
+        117,
     ],
     "gEfiAcpiTableProtocolGuid": [
         4292897757,
@@ -23975,21 +22608,9 @@ PROTOCOLS_GUIDS = {
         126,
         197,
         39,
-        92
+        92,
     ],
-    "gEfiEbcProtocolGuid": [
-        330067409,
-        29648,
-        4564,
-        176,
-        107,
-        0,
-        170,
-        0,
-        189,
-        109,
-        231
-    ],
+    "gEfiEbcProtocolGuid": [330067409, 29648, 4564, 176, 107, 0, 170, 0, 189, 109, 231],
     "gEfiSimpleNetworkProtocolGuid": [
         2711106233,
         44069,
@@ -24001,7 +22622,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiNetworkInterfaceIdentifierProtocolGuid_31": [
         449762662,
@@ -24014,7 +22635,7 @@ PROTOCOLS_GUIDS = {
         31,
         151,
         122,
-        137
+        137,
     ],
     "gEfiNetworkInterfaceIdentifierProtocolGuid": [
         3783606733,
@@ -24027,7 +22648,7 @@ PROTOCOLS_GUIDS = {
         138,
         121,
         178,
-        41
+        41,
     ],
     "gEfiPxeBaseCodeCallbackProtocolGuid": [
         610126369,
@@ -24040,7 +22661,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "gEfiPxeBaseCodeProtocolGuid": [
         63235587,
@@ -24053,21 +22674,9 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
-    "gEfiBisProtocolGuid": [
-        191146672,
-        21545,
-        4564,
-        152,
-        22,
-        0,
-        160,
-        201,
-        31,
-        173,
-        207
-    ],
+    "gEfiBisProtocolGuid": [191146672, 21545, 4564, 152, 22, 0, 160, 201, 31, 173, 207],
     "gEfiManagedNetworkServiceBindingProtocolGuid": [
         4084201328,
         42977,
@@ -24079,7 +22688,7 @@ PROTOCOLS_GUIDS = {
         242,
         113,
         244,
-        76
+        76,
     ],
     "gEfiManagedNetworkProtocolGuid": [
         2058566289,
@@ -24092,7 +22701,7 @@ PROTOCOLS_GUIDS = {
         51,
         211,
         159,
-        22
+        22,
     ],
     "gEfiArpServiceBindingProtocolGuid": [
         4098621678,
@@ -24105,7 +22714,7 @@ PROTOCOLS_GUIDS = {
         62,
         8,
         0,
-        163
+        163,
     ],
     "gEfiArpProtocolGuid": [
         4105447355,
@@ -24118,7 +22727,7 @@ PROTOCOLS_GUIDS = {
         22,
         171,
         97,
-        156
+        156,
     ],
     "gEfiDhcp4ServiceBindingProtocolGuid": [
         2644130264,
@@ -24131,7 +22740,7 @@ PROTOCOLS_GUIDS = {
         75,
         225,
         19,
-        128
+        128,
     ],
     "gEfiDhcp4ProtocolGuid": [
         2317457176,
@@ -24144,7 +22753,7 @@ PROTOCOLS_GUIDS = {
         75,
         218,
         158,
-        86
+        86,
     ],
     "gEfiTcp4ServiceBindingProtocolGuid": [
         7472741,
@@ -24157,7 +22766,7 @@ PROTOCOLS_GUIDS = {
         58,
         28,
         124,
-        201
+        201,
     ],
     "gEfiTcp4ProtocolGuid": [
         1699941319,
@@ -24170,7 +22779,7 @@ PROTOCOLS_GUIDS = {
         199,
         236,
         43,
-        98
+        98,
     ],
     "gEfiIp4ServiceBindingProtocolGuid": [
         3306623463,
@@ -24183,7 +22792,7 @@ PROTOCOLS_GUIDS = {
         142,
         241,
         255,
-        228
+        228,
     ],
     "gEfiIp4ProtocolGuid": [
         1104760018,
@@ -24196,7 +22805,7 @@ PROTOCOLS_GUIDS = {
         19,
         52,
         170,
-        221
+        221,
     ],
     "gEfiIp4ConfigProtocolGuid": [
         999664177,
@@ -24209,7 +22818,7 @@ PROTOCOLS_GUIDS = {
         8,
         146,
         224,
-        94
+        94,
     ],
     "gEfiUdp4ServiceBindingProtocolGuid": [
         2213549156,
@@ -24222,7 +22831,7 @@ PROTOCOLS_GUIDS = {
         5,
         216,
         233,
-        230
+        230,
     ],
     "gEfiUdp4ProtocolGuid": [
         987356969,
@@ -24235,7 +22844,7 @@ PROTOCOLS_GUIDS = {
         231,
         14,
         80,
-        243
+        243,
     ],
     "gEfiMtftp4ServiceBindingProtocolGuid": [
         803733694,
@@ -24248,7 +22857,7 @@ PROTOCOLS_GUIDS = {
         136,
         225,
         131,
-        63
+        63,
     ],
     "gEfiMtftp4ProtocolGuid": [
         2015657047,
@@ -24261,7 +22870,7 @@ PROTOCOLS_GUIDS = {
         169,
         166,
         31,
-        107
+        107,
     ],
     "gEfiAuthenticationInfoProtocolGuid": [
         1987172816,
@@ -24274,7 +22883,7 @@ PROTOCOLS_GUIDS = {
         242,
         31,
         11,
-        199
+        199,
     ],
     "gEfiHashServiceBindingProtocolGuid": [
         1116216472,
@@ -24287,7 +22896,7 @@ PROTOCOLS_GUIDS = {
         134,
         103,
         216,
-        205
+        205,
     ],
     "gEfiHashProtocolGuid": [
         3306703154,
@@ -24300,7 +22909,7 @@ PROTOCOLS_GUIDS = {
         218,
         156,
         20,
-        53
+        53,
     ],
     "gEfiTcgProtocolGuid": [
         4114708845,
@@ -24313,7 +22922,7 @@ PROTOCOLS_GUIDS = {
         246,
         27,
         156,
-        221
+        221,
     ],
     "gEfiTrEEProtocolGuid": [
         1618966124,
@@ -24326,7 +22935,7 @@ PROTOCOLS_GUIDS = {
         109,
         178,
         114,
-        15
+        15,
     ],
     "gEfiTcg2ProtocolGuid": [
         1618966124,
@@ -24339,7 +22948,7 @@ PROTOCOLS_GUIDS = {
         109,
         178,
         114,
-        15
+        15,
     ],
     "gEfiTcg2FinalEventsTableGuid": [
         506384534,
@@ -24352,7 +22961,7 @@ PROTOCOLS_GUIDS = {
         190,
         248,
         35,
-        37
+        37,
     ],
     "gEfiFormBrowser2ProtocolGuid": [
         3117728608,
@@ -24365,7 +22974,7 @@ PROTOCOLS_GUIDS = {
         54,
         152,
         34,
-        88
+        88,
     ],
     "gEfiHiiStringProtocolGuid": [
         265906548,
@@ -24378,7 +22987,7 @@ PROTOCOLS_GUIDS = {
         119,
         80,
         50,
-        42
+        42,
     ],
     "gEfiHiiImageProtocolGuid": [
         832979050,
@@ -24391,7 +23000,7 @@ PROTOCOLS_GUIDS = {
         137,
         196,
         9,
-        32
+        32,
     ],
     "gEfiHiiConfigRoutingProtocolGuid": [
         1484681943,
@@ -24404,7 +23013,7 @@ PROTOCOLS_GUIDS = {
         31,
         193,
         161,
-        15
+        15,
     ],
     "gEfiHiiDatabaseProtocolGuid": [
         4020224370,
@@ -24417,7 +23026,7 @@ PROTOCOLS_GUIDS = {
         252,
         65,
         96,
-        66
+        66,
     ],
     "gEfiHiiFontProtocolGuid": [
         3922347893,
@@ -24430,7 +23039,7 @@ PROTOCOLS_GUIDS = {
         90,
         8,
         67,
-        36
+        36,
     ],
     "gEfiHiiConfigAccessProtocolGuid": [
         856508166,
@@ -24443,7 +23052,7 @@ PROTOCOLS_GUIDS = {
         168,
         213,
         67,
-        133
+        133,
     ],
     "gEfiHiiPackageListProtocolGuid": [
         1780410211,
@@ -24456,7 +23065,7 @@ PROTOCOLS_GUIDS = {
         226,
         171,
         86,
-        252
+        252,
     ],
     "gEfiIp6ServiceBindingProtocolGuid": [
         3968032211,
@@ -24469,7 +23078,7 @@ PROTOCOLS_GUIDS = {
         195,
         225,
         51,
-        136
+        136,
     ],
     "gEfiIp6ProtocolGuid": [
         747067861,
@@ -24482,7 +23091,7 @@ PROTOCOLS_GUIDS = {
         16,
         25,
         87,
-        226
+        226,
     ],
     "gEfiIp6ConfigProtocolGuid": [
         2474632481,
@@ -24495,7 +23104,7 @@ PROTOCOLS_GUIDS = {
         217,
         10,
         211,
-        26
+        26,
     ],
     "gEfiMtftp6ServiceBindingProtocolGuid": [
         3648393203,
@@ -24508,7 +23117,7 @@ PROTOCOLS_GUIDS = {
         250,
         250,
         66,
-        35
+        35,
     ],
     "gEfiMtftp6ProtocolGuid": [
         3205134522,
@@ -24521,7 +23130,7 @@ PROTOCOLS_GUIDS = {
         78,
         171,
         106,
-        81
+        81,
     ],
     "gEfiDhcp6ServiceBindingProtocolGuid": [
         2679744673,
@@ -24534,7 +23143,7 @@ PROTOCOLS_GUIDS = {
         182,
         196,
         122,
-        213
+        213,
     ],
     "gEfiDhcp6ProtocolGuid": [
         2278079191,
@@ -24547,7 +23156,7 @@ PROTOCOLS_GUIDS = {
         57,
         95,
         93,
-        91
+        91,
     ],
     "gEfiUdp6ServiceBindingProtocolGuid": [
         1726826273,
@@ -24560,7 +23169,7 @@ PROTOCOLS_GUIDS = {
         211,
         154,
         114,
-        84
+        84,
     ],
     "gEfiUdp6ProtocolGuid": [
         1335134229,
@@ -24573,7 +23182,7 @@ PROTOCOLS_GUIDS = {
         96,
         179,
         73,
-        85
+        85,
     ],
     "gEfiTcp6ServiceBindingProtocolGuid": [
         3961580409,
@@ -24586,7 +23195,7 @@ PROTOCOLS_GUIDS = {
         204,
         22,
         214,
-        100
+        100,
     ],
     "gEfiTcp6ProtocolGuid": [
         1189365845,
@@ -24599,7 +23208,7 @@ PROTOCOLS_GUIDS = {
         185,
         68,
         125,
-        119
+        119,
     ],
     "gEfiVlanConfigProtocolGuid": [
         2653149032,
@@ -24612,7 +23221,7 @@ PROTOCOLS_GUIDS = {
         186,
         134,
         67,
-        116
+        116,
     ],
     "gEfiEapProtocolGuid": [
         1570739931,
@@ -24625,7 +23234,7 @@ PROTOCOLS_GUIDS = {
         135,
         205,
         119,
-        98
+        98,
     ],
     "gEfiEapManagementProtocolGuid": [
         3143820899,
@@ -24638,7 +23247,7 @@ PROTOCOLS_GUIDS = {
         54,
         35,
         162,
-        69
+        69,
     ],
     "gEfiFtp4ServiceBindingProtocolGuid": [
         262859953,
@@ -24651,7 +23260,7 @@ PROTOCOLS_GUIDS = {
         188,
         191,
         77,
-        175
+        175,
     ],
     "gEfiFtp4ProtocolGuid": [
         3946022950,
@@ -24664,7 +23273,7 @@ PROTOCOLS_GUIDS = {
         76,
         117,
         123,
-        9
+        9,
     ],
     "gEfiIpSecConfigProtocolGuid": [
         3462289705,
@@ -24677,7 +23286,7 @@ PROTOCOLS_GUIDS = {
         249,
         78,
         191,
-        207
+        207,
     ],
     "gEfiDriverHealthProtocolGuid": [
         710099472,
@@ -24690,7 +23299,7 @@ PROTOCOLS_GUIDS = {
         1,
         162,
         177,
-        39
+        39,
     ],
     "gEfiDeferredImageLoadProtocolGuid": [
         361053564,
@@ -24703,7 +23312,7 @@ PROTOCOLS_GUIDS = {
         91,
         143,
         135,
-        44
+        44,
     ],
     "gEfiUserCredentialProtocolGuid": [
         1911447188,
@@ -24716,7 +23325,7 @@ PROTOCOLS_GUIDS = {
         134,
         207,
         230,
-        190
+        190,
     ],
     "gEfiUserManagerProtocolGuid": [
         1876275212,
@@ -24729,7 +23338,7 @@ PROTOCOLS_GUIDS = {
         207,
         28,
         177,
-        254
+        254,
     ],
     "gEfiAtaPassThruProtocolGuid": [
         490596336,
@@ -24742,7 +23351,7 @@ PROTOCOLS_GUIDS = {
         78,
         25,
         164,
-        111
+        111,
     ],
     "gEfiFirmwareManagementProtocolGuid": [
         2261219943,
@@ -24755,7 +23364,7 @@ PROTOCOLS_GUIDS = {
         77,
         6,
         133,
-        199
+        199,
     ],
     "gEfiIpSecProtocolGuid": [
         3753084663,
@@ -24768,7 +23377,7 @@ PROTOCOLS_GUIDS = {
         208,
         138,
         94,
-        18
+        18,
     ],
     "gEfiIpSec2ProtocolGuid": [
         2744622692,
@@ -24781,7 +23390,7 @@ PROTOCOLS_GUIDS = {
         184,
         253,
         9,
-        119
+        119,
     ],
     "gEfiKmsProtocolGuid": [
         3963262861,
@@ -24794,7 +23403,7 @@ PROTOCOLS_GUIDS = {
         28,
         200,
         248,
-        17
+        17,
     ],
     "gEfiBlockIo2ProtocolGuid": [
         2809865330,
@@ -24807,7 +23416,7 @@ PROTOCOLS_GUIDS = {
         226,
         123,
         188,
-        193
+        193,
     ],
     "gEfiStorageSecurityCommandProtocolGuid": [
         3364555629,
@@ -24820,7 +23429,7 @@ PROTOCOLS_GUIDS = {
         75,
         76,
         58,
-        120
+        120,
     ],
     "gEfiUserCredential2ProtocolGuid": [
         3918191363,
@@ -24833,7 +23442,7 @@ PROTOCOLS_GUIDS = {
         17,
         76,
         188,
-        229
+        229,
     ],
     "gEfiDiskIo2ProtocolGuid": [
         354193070,
@@ -24846,7 +23455,7 @@ PROTOCOLS_GUIDS = {
         25,
         79,
         106,
-        136
+        136,
     ],
     "gEfiTimestampProtocolGuid": [
         2948587073,
@@ -24859,21 +23468,9 @@ PROTOCOLS_GUIDS = {
         35,
         110,
         84,
-        149
+        149,
     ],
-    "gEfiRngProtocolGuid": [
-        827505829,
-        60126,
-        17213,
-        134,
-        46,
-        192,
-        28,
-        220,
-        41,
-        31,
-        68
-    ],
+    "gEfiRngProtocolGuid": [827505829, 60126, 17213, 134, 46, 192, 28, 220, 41, 31, 68],
     "gEfiAdapterInformationProtocolGuid": [
         3856471043,
         54818,
@@ -24885,7 +23482,7 @@ PROTOCOLS_GUIDS = {
         23,
         245,
         232,
-        2
+        2,
     ],
     "gEfiNvmExpressPassThruProtocolGuid": [
         1388806930,
@@ -24898,7 +23495,7 @@ PROTOCOLS_GUIDS = {
         165,
         227,
         136,
-        165
+        165,
     ],
     "gEfiHash2ServiceBindingProtocolGuid": [
         3666046861,
@@ -24911,7 +23508,7 @@ PROTOCOLS_GUIDS = {
         225,
         96,
         119,
-        234
+        234,
     ],
     "gEfiHash2ProtocolGuid": [
         1437718324,
@@ -24924,7 +23521,7 @@ PROTOCOLS_GUIDS = {
         251,
         14,
         48,
-        91
+        91,
     ],
     "gEfiBlockIoCryptoProtocolGuid": [
         2684653754,
@@ -24937,7 +23534,7 @@ PROTOCOLS_GUIDS = {
         151,
         38,
         161,
-        232
+        232,
     ],
     "gEfiSmartCardReaderProtocolGuid": [
         709696223,
@@ -24950,7 +23547,7 @@ PROTOCOLS_GUIDS = {
         226,
         56,
         0,
-        96
+        96,
     ],
     "gEfiSmartCardEdgeProtocolGuid": [
         3541562011,
@@ -24963,7 +23560,7 @@ PROTOCOLS_GUIDS = {
         84,
         220,
         25,
-        140
+        140,
     ],
     "gEfiUsbFunctionIoProtocolGuid": [
         852661818,
@@ -24976,7 +23573,7 @@ PROTOCOLS_GUIDS = {
         197,
         88,
         3,
-        204
+        204,
     ],
     "gEfiBluetoothHcProtocolGuid": [
         3012756849,
@@ -24989,7 +23586,7 @@ PROTOCOLS_GUIDS = {
         36,
         46,
         106,
-        67
+        67,
     ],
     "gEfiBluetoothIoServiceBindingProtocolGuid": [
         948074707,
@@ -25002,7 +23599,7 @@ PROTOCOLS_GUIDS = {
         253,
         105,
         245,
-        171
+        171,
     ],
     "gEfiBluetoothIoProtocolGuid": [
         1181946846,
@@ -25015,7 +23612,7 @@ PROTOCOLS_GUIDS = {
         137,
         132,
         93,
-        181
+        181,
     ],
     "gEfiBluetoothConfigProtocolGuid": [
         1654000883,
@@ -25028,7 +23625,7 @@ PROTOCOLS_GUIDS = {
         189,
         25,
         27,
-        75
+        75,
     ],
     "gEfiRegularExpressionProtocolGuid": [
         3019349402,
@@ -25041,7 +23638,7 @@ PROTOCOLS_GUIDS = {
         223,
         82,
         76,
-        230
+        230,
     ],
     "gEfiBootManagerPolicyProtocolGuid": [
         4276063756,
@@ -25054,7 +23651,7 @@ PROTOCOLS_GUIDS = {
         86,
         44,
         186,
-        250
+        250,
     ],
     "gEfiConfigKeywordHandlerProtocolGuid": [
         176926165,
@@ -25067,7 +23664,7 @@ PROTOCOLS_GUIDS = {
         14,
         218,
         165,
-        150
+        150,
     ],
     "gEfiWiFiProtocolGuid": [
         228940745,
@@ -25080,7 +23677,7 @@ PROTOCOLS_GUIDS = {
         241,
         138,
         77,
-        69
+        69,
     ],
     "gEfiEapManagement2ProtocolGuid": [
         1586743367,
@@ -25093,7 +23690,7 @@ PROTOCOLS_GUIDS = {
         201,
         207,
         127,
-        32
+        32,
     ],
     "gEfiEapConfigurationProtocolGuid": [
         3853880763,
@@ -25106,7 +23703,7 @@ PROTOCOLS_GUIDS = {
         75,
         124,
         200,
-        219
+        219,
     ],
     "gEfiPkcs7VerifyProtocolGuid": [
         1200136114,
@@ -25119,7 +23716,7 @@ PROTOCOLS_GUIDS = {
         68,
         223,
         112,
-        214
+        214,
     ],
     "gEfiIp4Config2ProtocolGuid": [
         1531211473,
@@ -25132,7 +23729,7 @@ PROTOCOLS_GUIDS = {
         236,
         163,
         96,
-        128
+        128,
     ],
     "gEfiDns4ServiceBindingProtocolGuid": [
         3055923590,
@@ -25145,7 +23742,7 @@ PROTOCOLS_GUIDS = {
         220,
         111,
         82,
-        180
+        180,
     ],
     "gEfiDns4ProtocolGuid": [
         2923243724,
@@ -25158,7 +23755,7 @@ PROTOCOLS_GUIDS = {
         90,
         63,
         20,
-        1
+        1,
     ],
     "gEfiDns6ServiceBindingProtocolGuid": [
         2132166600,
@@ -25171,7 +23768,7 @@ PROTOCOLS_GUIDS = {
         241,
         156,
         209,
-        158
+        158,
     ],
     "gEfiDns6ProtocolGuid": [
         3392650271,
@@ -25184,7 +23781,7 @@ PROTOCOLS_GUIDS = {
         216,
         80,
         106,
-        23
+        23,
     ],
     "gEfiHttpServiceBindingProtocolGuid": [
         3184060079,
@@ -25197,7 +23794,7 @@ PROTOCOLS_GUIDS = {
         231,
         93,
         174,
-        28
+        28,
     ],
     "gEfiHttpProtocolGuid": [
         2052698779,
@@ -25210,7 +23807,7 @@ PROTOCOLS_GUIDS = {
         13,
         242,
         91,
-        91
+        91,
     ],
     "gEfiHttpUtilitiesProtocolGuid": [
         1043710307,
@@ -25223,7 +23820,7 @@ PROTOCOLS_GUIDS = {
         157,
         216,
         107,
-        50
+        50,
     ],
     "gEfiTlsServiceBindingProtocolGuid": [
         2502735765,
@@ -25236,7 +23833,7 @@ PROTOCOLS_GUIDS = {
         134,
         214,
         171,
-        141
+        141,
     ],
     "gEfiTlsProtocolGuid": [
         13276575,
@@ -25249,7 +23846,7 @@ PROTOCOLS_GUIDS = {
         71,
         81,
         67,
-        144
+        144,
     ],
     "gEfiTlsConfigurationProtocolGuid": [
         377683524,
@@ -25262,7 +23859,7 @@ PROTOCOLS_GUIDS = {
         124,
         163,
         146,
-        45
+        45,
     ],
     "gEfiRestProtocolGuid": [
         229935670,
@@ -25275,7 +23872,7 @@ PROTOCOLS_GUIDS = {
         190,
         58,
         102,
-        11
+        11,
     ],
     "gEfiSupplicantServiceBindingProtocolGuid": [
         1170004366,
@@ -25288,7 +23885,7 @@ PROTOCOLS_GUIDS = {
         7,
         72,
         88,
-        152
+        152,
     ],
     "gEfiSupplicantProtocolGuid": [
         1425851454,
@@ -25301,7 +23898,7 @@ PROTOCOLS_GUIDS = {
         36,
         5,
         30,
-        158
+        158,
     ],
     "gEfiWiFi2ProtocolGuid": [
         454015423,
@@ -25314,7 +23911,7 @@ PROTOCOLS_GUIDS = {
         104,
         27,
         246,
-        59
+        59,
     ],
     "gEfiRamDiskProtocolGuid": [
         2872615135,
@@ -25327,7 +23924,7 @@ PROTOCOLS_GUIDS = {
         86,
         20,
         132,
-        73
+        73,
     ],
     "gEfiHiiImageDecoderProtocolGuid": [
         2657546833,
@@ -25340,7 +23937,7 @@ PROTOCOLS_GUIDS = {
         37,
         40,
         24,
-        234
+        234,
     ],
     "gEfiHiiImageExProtocolGuid": [
         437404134,
@@ -25353,7 +23950,7 @@ PROTOCOLS_GUIDS = {
         57,
         224,
         101,
-        70
+        70,
     ],
     "gEfiSdMmcPassThruProtocolGuid": [
         1903096025,
@@ -25366,7 +23963,7 @@ PROTOCOLS_GUIDS = {
         211,
         154,
         142,
-        112
+        112,
     ],
     "gEfiEraseBlockProtocolGuid": [
         2510924094,
@@ -25379,7 +23976,7 @@ PROTOCOLS_GUIDS = {
         231,
         114,
         217,
-        135
+        135,
     ],
     "gEfiBluetoothAttributeProtocolGuid": [
         2307428585,
@@ -25392,7 +23989,7 @@ PROTOCOLS_GUIDS = {
         120,
         19,
         224,
-        172
+        172,
     ],
     "gEfiBluetoothAttributeServiceBindingProtocolGuid": [
         1446610554,
@@ -25405,7 +24002,7 @@ PROTOCOLS_GUIDS = {
         189,
         192,
         187,
-        187
+        187,
     ],
     "gEfiBluetoothLeConfigProtocolGuid": [
         2406931032,
@@ -25418,7 +24015,7 @@ PROTOCOLS_GUIDS = {
         81,
         91,
         28,
-        232
+        232,
     ],
     "gEfiUfsDeviceConfigProtocolGuid": [
         3088841392,
@@ -25431,7 +24028,7 @@ PROTOCOLS_GUIDS = {
         134,
         54,
         22,
-        100
+        100,
     ],
     "gEfiHttpBootCallbackProtocolGuid": [
         3122901777,
@@ -25444,7 +24041,7 @@ PROTOCOLS_GUIDS = {
         177,
         214,
         82,
-        153
+        153,
     ],
     "gEfiResetNotificationProtocolGuid": [
         2644724448,
@@ -25457,7 +24054,7 @@ PROTOCOLS_GUIDS = {
         34,
         108,
         68,
-        190
+        190,
     ],
     "gEfiPartitionInfoProtocolGuid": [
         2364732972,
@@ -25470,7 +24067,7 @@ PROTOCOLS_GUIDS = {
         196,
         33,
         161,
-        160
+        160,
     ],
     "gEfiHiiPopupProtocolGuid": [
         1125248448,
@@ -25483,7 +24080,7 @@ PROTOCOLS_GUIDS = {
         169,
         82,
         252,
-        204
+        204,
     ],
     "gEfiNvdimmLabelProtocolGuid": [
         3557518208,
@@ -25496,7 +24093,7 @@ PROTOCOLS_GUIDS = {
         22,
         145,
         128,
-        88
+        88,
     ],
     "gEfiShellProtocolGuid": [
         1661128712,
@@ -25509,7 +24106,7 @@ PROTOCOLS_GUIDS = {
         254,
         245,
         218,
-        78
+        78,
     ],
     "gEfiShellParametersProtocolGuid": [
         1966027062,
@@ -25522,7 +24119,7 @@ PROTOCOLS_GUIDS = {
         104,
         18,
         244,
-        202
+        202,
     ],
     "gEfiShellDynamicCommandProtocolGuid": [
         1014104297,
@@ -25535,7 +24132,7 @@ PROTOCOLS_GUIDS = {
         172,
         138,
         39,
-        195
+        195,
     ],
     "gEfiNetworkPkgTokenSpaceGuid": [
         1088447666,
@@ -25548,34 +24145,10 @@ PROTOCOLS_GUIDS = {
         30,
         26,
         35,
-        16
+        16,
     ],
-    "gIp6ConfigNvDataGuid": [
-        49193223,
-        39131,
-        16398,
-        152,
-        48,
-        70,
-        10,
-        21,
-        66,
-        215,
-        153
-    ],
-    "gIScsiConfigGuid": [
-        1262999062,
-        43222,
-        17746,
-        157,
-        68,
-        204,
-        173,
-        46,
-        15,
-        76,
-        249
-    ],
+    "gIp6ConfigNvDataGuid": [49193223, 39131, 16398, 152, 48, 70, 10, 21, 66, 215, 153],
+    "gIScsiConfigGuid": [1262999062, 43222, 17746, 157, 68, 204, 173, 46, 15, 76, 249],
     "gHttpBootConfigGuid": [
         1293965370,
         30565,
@@ -25587,7 +24160,7 @@ PROTOCOLS_GUIDS = {
         116,
         238,
         62,
-        197
+        197,
     ],
     "gTlsAuthConfigGuid": [
         2968184056,
@@ -25600,7 +24173,7 @@ PROTOCOLS_GUIDS = {
         170,
         15,
         101,
-        223
+        223,
     ],
     "gEfiTlsCaCertificateGuid": [
         4246946000,
@@ -25613,7 +24186,7 @@ PROTOCOLS_GUIDS = {
         18,
         180,
         142,
-        174
+        174,
     ],
     "gEdkiiHttpTlsCipherListGuid": [
         1188934677,
@@ -25626,21 +24199,9 @@ PROTOCOLS_GUIDS = {
         152,
         231,
         211,
-        134
+        134,
     ],
-    "gWifiConfigGuid": [
-        2677330727,
-        2840,
-        16965,
-        143,
-        242,
-        131,
-        46,
-        48,
-        13,
-        44,
-        239
-    ],
+    "gWifiConfigGuid": [2677330727, 2840, 16965, 143, 242, 131, 46, 48, 13, 44, 239],
     "gIp4Config2NvDataGuid": [
         2610177863,
         5454,
@@ -25652,7 +24213,7 @@ PROTOCOLS_GUIDS = {
         0,
         200,
         181,
-        59
+        59,
     ],
     "gVlanConfigFormSetGuid": [
         3617453744,
@@ -25665,7 +24226,7 @@ PROTOCOLS_GUIDS = {
         59,
         207,
         95,
-        168
+        168,
     ],
     "gIp4IScsiConfigGuid": [
         1683418465,
@@ -25678,7 +24239,7 @@ PROTOCOLS_GUIDS = {
         214,
         43,
         120,
-        252
+        252,
     ],
     "gIScsiCHAPAuthInfoGuid": [
         2020524204,
@@ -25691,7 +24252,7 @@ PROTOCOLS_GUIDS = {
         10,
         72,
         55,
-        151
+        151,
     ],
     "gEfiDpcProtocolGuid": [
         1208978153,
@@ -25704,7 +24265,7 @@ PROTOCOLS_GUIDS = {
         186,
         97,
         152,
-        6
+        6,
     ],
     "gUefiOvmfPkgTokenSpaceGuid": [
         2478544559,
@@ -25717,21 +24278,9 @@ PROTOCOLS_GUIDS = {
         116,
         86,
         66,
-        54
+        54,
     ],
-    "gEfiXenInfoGuid": [
-        3551817531,
-        54337,
-        4676,
-        154,
-        18,
-        0,
-        18,
-        39,
-        63,
-        193,
-        77
-    ],
+    "gEfiXenInfoGuid": [3551817531, 54337, 4676, 154, 18, 0, 18, 39, 63, 193, 77],
     "gOvmfPkKek1AppPrefixGuid": [
         1311921773,
         36510,
@@ -25743,7 +24292,7 @@ PROTOCOLS_GUIDS = {
         113,
         95,
         151,
-        39
+        39,
     ],
     "gOvmfPlatformConfigGuid": [
         1916126492,
@@ -25756,7 +24305,7 @@ PROTOCOLS_GUIDS = {
         74,
         99,
         4,
-        177
+        177,
     ],
     "gVirtioMmioTransportGuid": [
         2206059166,
@@ -25769,21 +24318,9 @@ PROTOCOLS_GUIDS = {
         14,
         35,
         209,
-        226
+        226,
     ],
-    "gQemuRamfbGuid": [
-        1433674657,
-        25515,
-        16492,
-        190,
-        126,
-        145,
-        205,
-        188,
-        8,
-        196,
-        87
-    ],
+    "gQemuRamfbGuid": [1433674657, 25515, 16492, 190, 126, 145, 205, 188, 8, 196, 87],
     "gXenBusRootDeviceGuid": [
         2805081119,
         14397,
@@ -25795,7 +24332,7 @@ PROTOCOLS_GUIDS = {
         131,
         117,
         137,
-        215
+        215,
     ],
     "gRootBridgesConnectedEventGroupGuid": [
         614651503,
@@ -25808,7 +24345,7 @@ PROTOCOLS_GUIDS = {
         71,
         151,
         238,
-        105
+        105,
     ],
     "gMicrosoftVendorGuid": [
         2012912317,
@@ -25821,7 +24358,7 @@ PROTOCOLS_GUIDS = {
         231,
         143,
         120,
-        75
+        75,
     ],
     "gEfiLegacyBiosGuid": [
         774915244,
@@ -25834,7 +24371,7 @@ PROTOCOLS_GUIDS = {
         175,
         105,
         95,
-        80
+        80,
     ],
     "gEfiLegacyDevOrderVariableGuid": [
         2774562011,
@@ -25847,7 +24384,7 @@ PROTOCOLS_GUIDS = {
         221,
         142,
         150,
-        82
+        82,
     ],
     "gVirtioDeviceProtocolGuid": [
         4203872272,
@@ -25860,7 +24397,7 @@ PROTOCOLS_GUIDS = {
         87,
         159,
         22,
-        10
+        10,
     ],
     "gXenBusProtocolGuid": [
         1027383952,
@@ -25873,21 +24410,9 @@ PROTOCOLS_GUIDS = {
         111,
         125,
         101,
-        230
+        230,
     ],
-    "gXenIoProtocolGuid": [
-        1861929039,
-        2736,
-        18247,
-        129,
-        190,
-        133,
-        85,
-        98,
-        89,
-        4,
-        73
-    ],
+    "gXenIoProtocolGuid": [1861929039, 2736, 18247, 129, 190, 133, 85, 98, 89, 4, 73],
     "gIoMmuAbsentProtocolGuid": [
         4168572240,
         35517,
@@ -25899,7 +24424,7 @@ PROTOCOLS_GUIDS = {
         81,
         246,
         200,
-        220
+        220,
     ],
     "gEfiLegacy8259ProtocolGuid": [
         942808506,
@@ -25912,7 +24437,7 @@ PROTOCOLS_GUIDS = {
         85,
         234,
         237,
-        193
+        193,
     ],
     "gEfiFirmwareVolumeProtocolGuid": [
         949974303,
@@ -25925,7 +24450,7 @@ PROTOCOLS_GUIDS = {
         84,
         189,
         39,
-        248
+        248,
     ],
     "gEfiIsaAcpiProtocolGuid": [
         1688769244,
@@ -25938,7 +24463,7 @@ PROTOCOLS_GUIDS = {
         252,
         24,
         51,
-        85
+        85,
     ],
     "gEfiIsaIoProtocolGuid": [
         2128788804,
@@ -25951,7 +24476,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiLegacyBiosProtocolGuid": [
         3684310589,
@@ -25964,7 +24489,7 @@ PROTOCOLS_GUIDS = {
         127,
         219,
         46,
-        45
+        45,
     ],
     "gEfiLegacyBiosPlatformProtocolGuid": [
         2016827555,
@@ -25977,7 +24502,7 @@ PROTOCOLS_GUIDS = {
         7,
         156,
         12,
-        180
+        180,
     ],
     "gEfiLegacyInterruptProtocolGuid": [
         835606845,
@@ -25990,7 +24515,7 @@ PROTOCOLS_GUIDS = {
         31,
         41,
         102,
-        190
+        190,
     ],
     "gEfiVgaMiniPortProtocolGuid": [
         3346225711,
@@ -26003,7 +24528,7 @@ PROTOCOLS_GUIDS = {
         140,
         139,
         134,
-        179
+        179,
     ],
     "gPcAtChipsetPkgTokenSpaceGuid": [
         845866787,
@@ -26016,7 +24541,7 @@ PROTOCOLS_GUIDS = {
         60,
         220,
         193,
-        177
+        177,
     ],
     "gEfiSecurityPkgTokenSpaceGuid": [
         222278006,
@@ -26029,7 +24554,7 @@ PROTOCOLS_GUIDS = {
         198,
         79,
         234,
-        186
+        186,
     ],
     "gEfiSecureBootEnableDisableGuid": [
         4037217223,
@@ -26042,7 +24567,7 @@ PROTOCOLS_GUIDS = {
         9,
         201,
         58,
-        68
+        68,
     ],
     "gEfiCustomModeEnableGuid": [
         3229019148,
@@ -26055,34 +24580,10 @@ PROTOCOLS_GUIDS = {
         92,
         68,
         139,
-        159
+        159,
     ],
-    "gEfiVendorKeysNvGuid": [
-        2423514336,
-        24812,
-        19310,
-        153,
-        3,
-        76,
-        34,
-        60,
-        38,
-        15,
-        60
-    ],
-    "gEfiCertDbGuid": [
-        3653166446,
-        30172,
-        18905,
-        180,
-        215,
-        181,
-        52,
-        33,
-        15,
-        99,
-        122
-    ],
+    "gEfiVendorKeysNvGuid": [2423514336, 24812, 19310, 153, 3, 76, 34, 60, 38, 15, 60],
+    "gEfiCertDbGuid": [3653166446, 30172, 18905, 180, 215, 181, 52, 33, 15, 99, 122],
     "gTcgEventEntryHobGuid": [
         731904850,
         6931,
@@ -26094,7 +24595,7 @@ PROTOCOLS_GUIDS = {
         13,
         239,
         146,
-        168
+        168,
     ],
     "gTcgEvent2EntryHobGuid": [
         3530301982,
@@ -26107,7 +24608,7 @@ PROTOCOLS_GUIDS = {
         69,
         0,
         65,
-        63
+        63,
     ],
     "gTpmErrorHobGuid": [
         4015621273,
@@ -26120,7 +24621,7 @@ PROTOCOLS_GUIDS = {
         125,
         206,
         130,
-        196
+        196,
     ],
     "gTpm2StartupLocalityHobGuid": [
         60272841,
@@ -26133,7 +24634,7 @@ PROTOCOLS_GUIDS = {
         101,
         39,
         9,
-        41
+        41,
     ],
     "gTcg800155PlatformIdEventHobGuid": [
         3804478569,
@@ -26146,7 +24647,7 @@ PROTOCOLS_GUIDS = {
         169,
         194,
         94,
-        214
+        214,
     ],
     "gMeasuredFvHobGuid": [
         2989886274,
@@ -26159,7 +24660,7 @@ PROTOCOLS_GUIDS = {
         107,
         171,
         16,
-        96
+        96,
     ],
     "gEfiPhysicalPresenceGuid": [
         258251185,
@@ -26172,7 +24673,7 @@ PROTOCOLS_GUIDS = {
         129,
         92,
         108,
-        188
+        188,
     ],
     "gEfiTcg2PhysicalPresenceGuid": [
         2931410369,
@@ -26185,7 +24686,7 @@ PROTOCOLS_GUIDS = {
         219,
         45,
         60,
-        84
+        84,
     ],
     "gUserIdentifyManagerGuid": [
         1020083672,
@@ -26198,7 +24699,7 @@ PROTOCOLS_GUIDS = {
         205,
         130,
         179,
-        196
+        196,
     ],
     "gTcgConfigFormSetGuid": [
         2969108964,
@@ -26211,7 +24712,7 @@ PROTOCOLS_GUIDS = {
         11,
         222,
         111,
-        181
+        181,
     ],
     "gTcg2ConfigFormSetGuid": [
         1664734343,
@@ -26224,7 +24725,7 @@ PROTOCOLS_GUIDS = {
         37,
         215,
         64,
-        188
+        188,
     ],
     "gSecureBootConfigFormSetGuid": [
         1571770533,
@@ -26237,21 +24738,9 @@ PROTOCOLS_GUIDS = {
         169,
         207,
         92,
-        20
+        20,
     ],
-    "gEfiTpmDeviceInstanceNoneGuid": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-    ],
+    "gEfiTpmDeviceInstanceNoneGuid": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     "gEfiTpmDeviceInstanceTpm12Guid": [
         2332157366,
         20249,
@@ -26263,7 +24752,7 @@ PROTOCOLS_GUIDS = {
         103,
         27,
         144,
-        204
+        204,
     ],
     "gEfiTpmDeviceInstanceTpm20DtpmGuid": [
         678163034,
@@ -26276,7 +24765,7 @@ PROTOCOLS_GUIDS = {
         117,
         139,
         115,
-        23
+        23,
     ],
     "gEfiTpmDeviceSelectedGuid": [
         2134989011,
@@ -26289,7 +24778,7 @@ PROTOCOLS_GUIDS = {
         200,
         247,
         157,
-        170
+        170,
     ],
     "gOpalExtraInfoVariableGuid": [
         1151511901,
@@ -26302,7 +24791,7 @@ PROTOCOLS_GUIDS = {
         11,
         251,
         240,
-        125
+        125,
     ],
     "gPeiLockPhysicalPresencePpiGuid": [
         4019908581,
@@ -26315,7 +24804,7 @@ PROTOCOLS_GUIDS = {
         90,
         187,
         154,
-        13
+        13,
     ],
     "gPeiTpmInitializedPpiGuid": [
         3923447128,
@@ -26328,7 +24817,7 @@ PROTOCOLS_GUIDS = {
         232,
         108,
         123,
-        65
+        65,
     ],
     "gPeiTpmInitializationDonePpiGuid": [
         2687553813,
@@ -26341,7 +24830,7 @@ PROTOCOLS_GUIDS = {
         136,
         61,
         124,
-        204
+        204,
     ],
     "gEfiPeiFirmwareVolumeInfoMeasurementExcludedPpiGuid": [
         1845850105,
@@ -26354,7 +24843,7 @@ PROTOCOLS_GUIDS = {
         245,
         206,
         234,
-        174
+        174,
     ],
     "gEdkiiPeiFirmwareVolumeInfoPrehashedFvPpiGuid": [
         1021437489,
@@ -26367,7 +24856,7 @@ PROTOCOLS_GUIDS = {
         199,
         193,
         73,
-        75
+        75,
     ],
     "gEdkiiPeiFirmwareVolumeInfoStoredHashFvPpiGuid": [
         2136886833,
@@ -26380,7 +24869,7 @@ PROTOCOLS_GUIDS = {
         91,
         194,
         246,
-        29
+        29,
     ],
     "gEfiShellEnvironment2ExtGuid": [
         3535898166,
@@ -26393,7 +24882,7 @@ PROTOCOLS_GUIDS = {
         95,
         212,
         44,
-        135
+        135,
     ],
     "gEfiShellPkgTokenSpaceGuid": [
         387879304,
@@ -26406,7 +24895,7 @@ PROTOCOLS_GUIDS = {
         45,
         185,
         64,
-        205
+        205,
     ],
     "gShellVariableGuid": [
         361623386,
@@ -26419,34 +24908,10 @@ PROTOCOLS_GUIDS = {
         146,
         192,
         121,
-        210
+        210,
     ],
-    "gShellMapGuid": [
-        1361518099,
-        32227,
-        17327,
-        139,
-        194,
-        113,
-        173,
-        59,
-        130,
-        67,
-        37
-    ],
-    "gShellAliasGuid": [
-        5495254,
-        9817,
-        17817,
-        162,
-        107,
-        239,
-        69,
-        54,
-        230,
-        49,
-        169
-    ],
+    "gShellMapGuid": [1361518099, 32227, 17327, 139, 194, 113, 173, 59, 130, 67, 37],
+    "gShellAliasGuid": [5495254, 9817, 17817, 162, 107, 239, 69, 54, 230, 49, 169],
     "gHandleParsingHiiGuid": [
         3096876599,
         33246,
@@ -26458,7 +24923,7 @@ PROTOCOLS_GUIDS = {
         137,
         19,
         242,
-        246
+        246,
     ],
     "gShellDebug1HiiGuid": [
         636616874,
@@ -26471,7 +24936,7 @@ PROTOCOLS_GUIDS = {
         98,
         210,
         46,
-        111
+        111,
     ],
     "gShellDriver1HiiGuid": [
         183547714,
@@ -26484,7 +24949,7 @@ PROTOCOLS_GUIDS = {
         127,
         47,
         232,
-        232
+        232,
     ],
     "gShellInstall1HiiGuid": [
         2102873428,
@@ -26497,7 +24962,7 @@ PROTOCOLS_GUIDS = {
         219,
         122,
         211,
-        238
+        238,
     ],
     "gShellLevel1HiiGuid": [
         3737508516,
@@ -26510,7 +24975,7 @@ PROTOCOLS_GUIDS = {
         228,
         241,
         219,
-        49
+        49,
     ],
     "gShellLevel2HiiGuid": [
         4183456972,
@@ -26523,7 +24988,7 @@ PROTOCOLS_GUIDS = {
         97,
         149,
         11,
-        174
+        174,
     ],
     "gShellLevel3HiiGuid": [
         1128551821,
@@ -26536,7 +25001,7 @@ PROTOCOLS_GUIDS = {
         232,
         214,
         151,
-        79
+        79,
     ],
     "gShellNetwork1HiiGuid": [
         4090692027,
@@ -26549,7 +25014,7 @@ PROTOCOLS_GUIDS = {
         156,
         98,
         55,
-        174
+        174,
     ],
     "gShellNetwork2HiiGuid": [
         24425141,
@@ -26562,7 +25027,7 @@ PROTOCOLS_GUIDS = {
         248,
         214,
         234,
-        55
+        55,
     ],
     "gShellTftpHiiGuid": [
         1938461460,
@@ -26575,7 +25040,7 @@ PROTOCOLS_GUIDS = {
         241,
         178,
         14,
-        212
+        212,
     ],
     "gShellBcfgHiiGuid": [
         1600086109,
@@ -26588,7 +25053,7 @@ PROTOCOLS_GUIDS = {
         218,
         180,
         162,
-        182
+        182,
     ],
     "gShellAcpiViewHiiGuid": [
         3666660852,
@@ -26601,7 +25066,7 @@ PROTOCOLS_GUIDS = {
         94,
         36,
         147,
-        42
+        42,
     ],
     "gUefiShellFileGuid": [
         2080679299,
@@ -26614,7 +25079,7 @@ PROTOCOLS_GUIDS = {
         104,
         208,
         180,
-        209
+        209,
     ],
     "gEfiShellEnvironment2Guid": [
         1204269601,
@@ -26627,7 +25092,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "gEfiShellInterfaceGuid": [
         1204269603,
@@ -26640,7 +25105,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "gEfiSignedCapsulePkgTokenSpaceGuid": [
         3790299439,
@@ -26653,7 +25118,7 @@ PROTOCOLS_GUIDS = {
         68,
         136,
         21,
-        105
+        105,
     ],
     "gEdkiiSystemFirmwareImageDescriptorFileGuid": [
         2427631686,
@@ -26666,7 +25131,7 @@ PROTOCOLS_GUIDS = {
         168,
         225,
         16,
-        172
+        172,
     ],
     "gEdkiiSystemFmpCapsuleConfigFileGuid": [
         2166437587,
@@ -26679,7 +25144,7 @@ PROTOCOLS_GUIDS = {
         155,
         247,
         143,
-        110
+        110,
     ],
     "gEdkiiSystemFmpCapsuleDriverFvFileGuid": [
         3461853543,
@@ -26692,7 +25157,7 @@ PROTOCOLS_GUIDS = {
         235,
         120,
         29,
-        64
+        64,
     ],
     "gEfiDebugAgentGuid": [
         2254068379,
@@ -26705,7 +25170,7 @@ PROTOCOLS_GUIDS = {
         190,
         132,
         75,
-        226
+        226,
     ],
     "gEfiSourceLevelDebugPkgTokenSpaceGuid": [
         2254068395,
@@ -26718,7 +25183,7 @@ PROTOCOLS_GUIDS = {
         190,
         132,
         75,
-        226
+        226,
     ],
     "gStandaloneMmPkgTokenSpaceGuid": [
         419329586,
@@ -26731,7 +25196,7 @@ PROTOCOLS_GUIDS = {
         92,
         89,
         19,
-        189
+        189,
     ],
     "gMpInformationHobGuid": [
         3123966301,
@@ -26744,21 +25209,9 @@ PROTOCOLS_GUIDS = {
         146,
         212,
         87,
-        227
+        227,
     ],
-    "gMmFvDispatchGuid": [
-        3059127500,
-        2531,
-        19515,
-        181,
-        205,
-        5,
-        244,
-        77,
-        60,
-        219,
-        255
-    ],
+    "gMmFvDispatchGuid": [3059127500, 2531, 19515, 181, 205, 5, 244, 77, 60, 219, 255],
     "gMmCoreDataHobGuid": [
         2707472281,
         10916,
@@ -26770,7 +25223,7 @@ PROTOCOLS_GUIDS = {
         177,
         45,
         243,
-        118
+        118,
     ],
     "gEfiMmPeiMmramMemoryReserveGuid": [
         117700882,
@@ -26783,7 +25236,7 @@ PROTOCOLS_GUIDS = {
         37,
         37,
         197,
-        146
+        146,
     ],
     "gEfiStandaloneMmNonSecureBufferGuid": [
         4026832867,
@@ -26796,7 +25249,7 @@ PROTOCOLS_GUIDS = {
         233,
         55,
         33,
-        197
+        197,
     ],
     "gEfiArmTfCpuDriverEpDescriptorGuid": [
         1858852257,
@@ -26809,7 +25262,7 @@ PROTOCOLS_GUIDS = {
         197,
         71,
         10,
-        81
+        81,
     ],
     "gUefiCpuPkgTokenSpaceGuid": [
         2886057779,
@@ -26822,21 +25275,9 @@ PROTOCOLS_GUIDS = {
         232,
         15,
         92,
-        176
+        176,
     ],
-    "gMsegSmramGuid": [
-        1476574436,
-        61166,
-        20019,
-        161,
-        48,
-        235,
-        173,
-        39,
-        240,
-        228,
-        57
-    ],
+    "gMsegSmramGuid": [1476574436, 61166, 20019, 161, 48, 235, 173, 39, 240, 228, 57],
     "gEdkiiCpuFeaturesSetDoneGuid": [
         2820965838,
         44395,
@@ -26848,7 +25289,7 @@ PROTOCOLS_GUIDS = {
         140,
         158,
         126,
-        55
+        55,
     ],
     "gEdkiiCpuFeaturesInitDoneGuid": [
         3346807361,
@@ -26861,7 +25302,7 @@ PROTOCOLS_GUIDS = {
         40,
         6,
         40,
-        229
+        229,
     ],
     "gEdkiiMicrocodePatchHobGuid": [
         3514364189,
@@ -26874,7 +25315,7 @@ PROTOCOLS_GUIDS = {
         42,
         196,
         40,
-        67
+        67,
     ],
     "gEfiSmmCpuServiceProtocolGuid": [
         488647851,
@@ -26887,7 +25328,7 @@ PROTOCOLS_GUIDS = {
         192,
         211,
         211,
-        53
+        53,
     ],
     "gEfiSmMonitorInitProtocolGuid": [
         579810381,
@@ -26900,7 +25341,7 @@ PROTOCOLS_GUIDS = {
         11,
         27,
         20,
-        130
+        130,
     ],
     "gEdkiiPeiMpServices2PpiGuid": [
         1555680061,
@@ -26913,7 +25354,7 @@ PROTOCOLS_GUIDS = {
         105,
         186,
         207,
-        186
+        186,
     ],
     "gUefiPayloadPkgTokenSpaceGuid": [
         30484458,
@@ -26926,21 +25367,9 @@ PROTOCOLS_GUIDS = {
         0,
         147,
         248,
-        157
-    ],
-    "gBmpImageGuid": [
-        2274017996,
-        21315,
-        18162,
-        181,
-        99,
-        81,
-        248,
         157,
-        175,
-        86,
-        186
     ],
+    "gBmpImageGuid": [2274017996, 21315, 18162, 181, 99, 81, 248, 157, 175, 86, 186],
     "gUefiSystemTableInfoGuid": [
         382248656,
         65162,
@@ -26952,7 +25381,7 @@ PROTOCOLS_GUIDS = {
         196,
         41,
         4,
-        51
+        51,
     ],
     "gUefiAcpiBoardInfoGuid": [
         181654299,
@@ -26965,7 +25394,7 @@ PROTOCOLS_GUIDS = {
         16,
         6,
         217,
-        15
+        15,
     ],
     "gUefiSerialPortInfoGuid": [
         1818784510,
@@ -26978,7 +25407,7 @@ PROTOCOLS_GUIDS = {
         98,
         222,
         135,
-        241
+        241,
     ],
     "gLoaderMemoryMapInfoGuid": [
         2717873188,
@@ -26991,7 +25420,7 @@ PROTOCOLS_GUIDS = {
         87,
         209,
         40,
-        50
+        50,
     ],
     "gEfiPayLoadHobBasePpiGuid": [
         3689036449,
@@ -27004,7 +25433,7 @@ PROTOCOLS_GUIDS = {
         241,
         97,
         115,
-        137
+        137,
     ],
     "gPlatformGOPPolicyGuid": [
         3962475291,
@@ -27017,21 +25446,9 @@ PROTOCOLS_GUIDS = {
         139,
         237,
         60,
-        93
+        93,
     ],
-    "ACPI_TABLE_GUID": [
-        3952946480,
-        11656,
-        4563,
-        154,
-        22,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
+    "ACPI_TABLE_GUID": [3952946480, 11656, 4563, 154, 22, 0, 144, 39, 63, 193, 77],
     "APPLE_REMOVABLE_MEDIA_PROTOCOL_GUID": [
         782857274,
         9177,
@@ -27043,7 +25460,7 @@ PROTOCOLS_GUIDS = {
         170,
         25,
         87,
-        136
+        136,
     ],
     "ARM_GLOBAL_VARIABLE_PPI_GUID": [
         2870745110,
@@ -27056,7 +25473,7 @@ PROTOCOLS_GUIDS = {
         146,
         83,
         226,
-        231
+        231,
     ],
     "ARM_HOB_GLOBAL_VARIABLE_GUID": [
         3273997456,
@@ -27069,7 +25486,7 @@ PROTOCOLS_GUIDS = {
         19,
         119,
         143,
-        201
+        201,
     ],
     "ARM_MP_CORE_INFO_GUID": [
         2767062824,
@@ -27082,7 +25499,7 @@ PROTOCOLS_GUIDS = {
         216,
         87,
         232,
-        52
+        52,
     ],
     "ARM_MP_CORE_INFO_PPI_GUID": [
         1749535860,
@@ -27095,7 +25512,7 @@ PROTOCOLS_GUIDS = {
         231,
         84,
         168,
-        252
+        252,
     ],
     "BDS_LIB_STRING_PACKAGE_GUID": [
         994941731,
@@ -27108,7 +25525,7 @@ PROTOCOLS_GUIDS = {
         148,
         88,
         108,
-        114
+        114,
     ],
     "BLOCKIO_VENDOR_GUID": [
         3476159173,
@@ -27121,7 +25538,7 @@ PROTOCOLS_GUIDS = {
         201,
         62,
         201,
-        59
+        59,
     ],
     "BLOCK_MMIO_PROTOCOL_GUID": [
         1800768739,
@@ -27134,7 +25551,7 @@ PROTOCOLS_GUIDS = {
         114,
         173,
         190,
-        132
+        132,
     ],
     "BOOT_MAINT_FORMSET_GUID": [
         1679964103,
@@ -27147,7 +25564,7 @@ PROTOCOLS_GUIDS = {
         204,
         242,
         122,
-        34
+        34,
     ],
     "BOOT_MANAGER_FORMSET_GUID": [
         2222703614,
@@ -27160,7 +25577,7 @@ PROTOCOLS_GUIDS = {
         65,
         46,
         153,
-        59
+        59,
     ],
     "CONNECT_CONIN_EVENT_GUID": [
         3679355217,
@@ -27173,7 +25590,7 @@ PROTOCOLS_GUIDS = {
         181,
         209,
         168,
-        215
+        215,
     ],
     "DEVICE_MANAGER_FORMSET_GUID": [
         1052748006,
@@ -27186,21 +25603,9 @@ PROTOCOLS_GUIDS = {
         38,
         15,
         28,
-        39
+        39,
     ],
-    "DP_HII_GUID": [
-        3951243225,
-        37001,
-        18584,
-        131,
-        201,
-        65,
-        97,
-        143,
-        92,
-        72,
-        185
-    ],
+    "DP_HII_GUID": [3951243225, 37001, 18584, 131, 201, 65, 97, 143, 92, 72, 185],
     "DRIVER_HEALTH_FORMSET_GUID": [
         4151183984,
         46573,
@@ -27212,7 +25617,7 @@ PROTOCOLS_GUIDS = {
         75,
         241,
         110,
-        52
+        52,
     ],
     "DRIVER_SAMPLE_FORMSET_GUID": [
         2689214452,
@@ -27225,7 +25630,7 @@ PROTOCOLS_GUIDS = {
         19,
         2,
         17,
-        61
+        61,
     ],
     "DRIVER_SAMPLE_INVENTORY_GUID": [
         3019203696,
@@ -27238,7 +25643,7 @@ PROTOCOLS_GUIDS = {
         87,
         122,
         169,
-        232
+        232,
     ],
     "DUET_CONSOLEOUT_CONFIG_GUID": [
         3977578260,
@@ -27251,7 +25656,7 @@ PROTOCOLS_GUIDS = {
         47,
         213,
         206,
-        162
+        162,
     ],
     "DXE_CORE_FILE_NAME_GUID": [
         3600993151,
@@ -27264,7 +25669,7 @@ PROTOCOLS_GUIDS = {
         167,
         51,
         112,
-        10
+        10,
     ],
     "DXE_SERVICES_TABLE_GUID": [
         95237306,
@@ -27277,7 +25682,7 @@ PROTOCOLS_GUIDS = {
         57,
         142,
         43,
-        185
+        185,
     ],
     "EBL_ADD_COMMAND_PROTOCOL_GUID": [
         2933531688,
@@ -27290,7 +25695,7 @@ PROTOCOLS_GUIDS = {
         40,
         251,
         184,
-        41
+        41,
     ],
     "ECP_PEI_PCI_CFG_PPI_GUID": [
         2968409044,
@@ -27303,7 +25708,7 @@ PROTOCOLS_GUIDS = {
         250,
         239,
         170,
-        148
+        148,
     ],
     "EFI_ACPI_S3_CONTEXT_GUID": [
         251235642,
@@ -27316,7 +25721,7 @@ PROTOCOLS_GUIDS = {
         62,
         183,
         79,
-        56
+        56,
     ],
     "EFI_ACPI_VARIABLE_COMPATIBILITY_GUID": [
         3223341214,
@@ -27329,7 +25734,7 @@ PROTOCOLS_GUIDS = {
         252,
         17,
         211,
-        106
+        106,
     ],
     "EFI_ATA_PASS_THRU_PROTOCOL_GUID": [
         490596336,
@@ -27342,7 +25747,7 @@ PROTOCOLS_GUIDS = {
         78,
         25,
         164,
-        111
+        111,
     ],
     "EFI_AUTHENTICATED_VARIABLE_GUID": [
         2868063352,
@@ -27355,7 +25760,7 @@ PROTOCOLS_GUIDS = {
         78,
         195,
         119,
-        146
+        146,
     ],
     "EFI_AUTHENTICATION_CHAP_LOCAL_GUID": [
         3263219518,
@@ -27368,7 +25773,7 @@ PROTOCOLS_GUIDS = {
         131,
         255,
         202,
-        77
+        77,
     ],
     "EFI_AUTHENTICATION_CHAP_RADIUS_GUID": [
         3590728528,
@@ -27381,7 +25786,7 @@ PROTOCOLS_GUIDS = {
         131,
         255,
         202,
-        77
+        77,
     ],
     "EFI_BLOCK_IO2_PROTOCOL_GUID": [
         2809865330,
@@ -27394,7 +25799,7 @@ PROTOCOLS_GUIDS = {
         226,
         123,
         188,
-        193
+        193,
     ],
     "EFI_BOOT_LOGO_PROTOCOL_GUID": [
         3454675923,
@@ -27407,7 +25812,7 @@ PROTOCOLS_GUIDS = {
         134,
         6,
         73,
-        144
+        144,
     ],
     "EFI_BOOT_SCRIPT_EXECUTOR_CONTEXT_GUID": [
         2043369668,
@@ -27420,7 +25825,7 @@ PROTOCOLS_GUIDS = {
         125,
         46,
         153,
-        8
+        8,
     ],
     "EFI_BOOT_SCRIPT_EXECUTOR_VARIABLE_GUID": [
         813269388,
@@ -27433,7 +25838,7 @@ PROTOCOLS_GUIDS = {
         108,
         241,
         238,
-        219
+        219,
     ],
     "EFI_CERT_SHA224_GUID": [
         191779379,
@@ -27446,7 +25851,7 @@ PROTOCOLS_GUIDS = {
         131,
         191,
         200,
-        189
+        189,
     ],
     "EFI_CERT_SHA384_GUID": [
         4282274567,
@@ -27459,7 +25864,7 @@ PROTOCOLS_GUIDS = {
         108,
         112,
         30,
-        1
+        1,
     ],
     "EFI_CERT_SHA512_GUID": [
         155062190,
@@ -27472,7 +25877,7 @@ PROTOCOLS_GUIDS = {
         43,
         137,
         193,
-        154
+        154,
     ],
     "EFI_CERT_X509_GUID": [
         2780846497,
@@ -27485,7 +25890,7 @@ PROTOCOLS_GUIDS = {
         92,
         43,
         240,
-        114
+        114,
     ],
     "EFI_CONSOLE_CONTROL_PROTOCOL_GUID": [
         4096751490,
@@ -27498,7 +25903,7 @@ PROTOCOLS_GUIDS = {
         67,
         4,
         247,
-        33
+        33,
     ],
     "EFI_CRC32_GUIDED_SECTION_EXTRACTION_GUID": [
         4229680560,
@@ -27511,7 +25916,7 @@ PROTOCOLS_GUIDS = {
         13,
         157,
         208,
-        131
+        131,
     ],
     "EFI_DATA_HUB_STATUS_CODE_RECORD_GUID": [
         3498305868,
@@ -27524,7 +25929,7 @@ PROTOCOLS_GUIDS = {
         90,
         223,
         106,
-        42
+        42,
     ],
     "EFI_DEBUG_AGENT_GUID": [
         2254068379,
@@ -27537,7 +25942,7 @@ PROTOCOLS_GUIDS = {
         190,
         132,
         75,
-        226
+        226,
     ],
     "EFI_DEBUG_SERIAL_IO_PROTOCOL_GUID": [
         3867401295,
@@ -27550,7 +25955,7 @@ PROTOCOLS_GUIDS = {
         70,
         148,
         124,
-        108
+        108,
     ],
     "EFI_DEBUG_SUPPORT_PERIODIC_CALLBACK_PROTOCOL_GUID": [
         2504450172,
@@ -27563,7 +25968,7 @@ PROTOCOLS_GUIDS = {
         16,
         134,
         240,
-        68
+        68,
     ],
     "EFI_DEFAULT_BMP_LOGO_GUID": [
         2075298713,
@@ -27576,7 +25981,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_DHCP6_PROTOCOL_GUID": [
         2278079191,
@@ -27589,7 +25994,7 @@ PROTOCOLS_GUIDS = {
         57,
         95,
         93,
-        91
+        91,
     ],
     "EFI_DHCP6_SERVICE_BINDING_PROTOCOL_GUID": [
         2679744673,
@@ -27602,7 +26007,7 @@ PROTOCOLS_GUIDS = {
         182,
         196,
         122,
-        213
+        213,
     ],
     "EFI_DPC_PROTOCOL_GUID": [
         1208978153,
@@ -27615,7 +26020,7 @@ PROTOCOLS_GUIDS = {
         186,
         97,
         152,
-        6
+        6,
     ],
     "EFI_EAP_MANAGEMENT_PROTOCOL_GUID": [
         3143820899,
@@ -27628,7 +26033,7 @@ PROTOCOLS_GUIDS = {
         54,
         35,
         162,
-        69
+        69,
     ],
     "EFI_EAP_PROTOCOL_GUID": [
         1570739931,
@@ -27641,7 +26046,7 @@ PROTOCOLS_GUIDS = {
         135,
         205,
         119,
-        98
+        98,
     ],
     "EFI_EBC_SIMPLE_DEBUGGER_PROTOCOL_GUID": [
         712167710,
@@ -27654,7 +26059,7 @@ PROTOCOLS_GUIDS = {
         47,
         227,
         99,
-        241
+        241,
     ],
     "EFI_EBC_VM_TEST_PROTOCOL_GUID": [
         2867514621,
@@ -27667,7 +26072,7 @@ PROTOCOLS_GUIDS = {
         31,
         45,
         251,
-        82
+        82,
     ],
     "EFI_EMU_PHYSICAL_DISK_GUID": [
         4072289050,
@@ -27680,7 +26085,7 @@ PROTOCOLS_GUIDS = {
         208,
         43,
         24,
-        53
+        53,
     ],
     "EFI_EMU_SYSTEM_CONFIG_GUID": [
         2622469398,
@@ -27693,7 +26098,7 @@ PROTOCOLS_GUIDS = {
         182,
         152,
         103,
-        50
+        50,
     ],
     "EFI_EMU_VIRTUAL_DISK_GUID": [
         4072289050,
@@ -27706,7 +26111,7 @@ PROTOCOLS_GUIDS = {
         208,
         43,
         24,
-        53
+        53,
     ],
     "EFI_END_OF_DXE_EVENT_GROUP_GUID": [
         47093370,
@@ -27719,7 +26124,7 @@ PROTOCOLS_GUIDS = {
         240,
         71,
         8,
-        128
+        128,
     ],
     "EFI_ERROR_SECTION_DIRECTED_IO_DMAR_GUID": [
         1903566135,
@@ -27732,7 +26137,7 @@ PROTOCOLS_GUIDS = {
         221,
         147,
         232,
-        207
+        207,
     ],
     "EFI_ERROR_SECTION_DMAR_GENERIC_GUID": [
         1532100343,
@@ -27745,7 +26150,7 @@ PROTOCOLS_GUIDS = {
         222,
         62,
         44,
-        100
+        100,
     ],
     "EFI_ERROR_SECTION_FW_ERROR_RECORD_GUID": [
         2166434454,
@@ -27758,7 +26163,7 @@ PROTOCOLS_GUIDS = {
         156,
         142,
         105,
-        237
+        237,
     ],
     "EFI_ERROR_SECTION_IOMMU_DMAR_GUID": [
         57640161,
@@ -27771,7 +26176,7 @@ PROTOCOLS_GUIDS = {
         223,
         170,
         132,
-        236
+        236,
     ],
     "EFI_ERROR_SECTION_PCIE_GUID": [
         3650480468,
@@ -27784,7 +26189,7 @@ PROTOCOLS_GUIDS = {
         203,
         60,
         111,
-        53
+        53,
     ],
     "EFI_ERROR_SECTION_PCI_DEVICE_GUID": [
         3948824197,
@@ -27797,7 +26202,7 @@ PROTOCOLS_GUIDS = {
         139,
         0,
         19,
-        38
+        38,
     ],
     "EFI_ERROR_SECTION_PCI_PCIX_BUS_GUID": [
         3312793955,
@@ -27810,7 +26215,7 @@ PROTOCOLS_GUIDS = {
         211,
         249,
         201,
-        221
+        221,
     ],
     "EFI_ERROR_SECTION_PLATFORM_MEMORY_GUID": [
         2780565780,
@@ -27823,7 +26228,7 @@ PROTOCOLS_GUIDS = {
         237,
         124,
         131,
-        177
+        177,
     ],
     "EFI_ERROR_SECTION_PROCESSOR_GENERIC_GUID": [
         2557922477,
@@ -27836,7 +26241,7 @@ PROTOCOLS_GUIDS = {
         147,
         196,
         243,
-        219
+        219,
     ],
     "EFI_ERROR_SECTION_PROCESSOR_SPECIFIC_GUID": [
         3695091888,
@@ -27849,7 +26254,7 @@ PROTOCOLS_GUIDS = {
         36,
         43,
         110,
-        29
+        29,
     ],
     "EFI_EVENT_GROUP_DXE_DISPATCH_GUID": [
         1887560239,
@@ -27862,7 +26267,7 @@ PROTOCOLS_GUIDS = {
         130,
         207,
         136,
-        229
+        229,
     ],
     "EFI_EVENT_NOTIFICATION_TYEP_BOOT_GUID": [
         1029809254,
@@ -27875,7 +26280,7 @@ PROTOCOLS_GUIDS = {
         212,
         100,
         179,
-        143
+        143,
     ],
     "EFI_EVENT_NOTIFICATION_TYEP_CMC_GUID": [
         768510897,
@@ -27888,7 +26293,7 @@ PROTOCOLS_GUIDS = {
         235,
         212,
         248,
-        144
+        144,
     ],
     "EFI_EVENT_NOTIFICATION_TYEP_CPE_GUID": [
         1311322006,
@@ -27901,7 +26306,7 @@ PROTOCOLS_GUIDS = {
         242,
         126,
         190,
-        238
+        238,
     ],
     "EFI_EVENT_NOTIFICATION_TYEP_DMAR_GUID": [
         1719523217,
@@ -27914,7 +26319,7 @@ PROTOCOLS_GUIDS = {
         114,
         45,
         235,
-        65
+        65,
     ],
     "EFI_EVENT_NOTIFICATION_TYEP_INIT_GUID": [
         3427951592,
@@ -27927,7 +26332,7 @@ PROTOCOLS_GUIDS = {
         211,
         155,
         201,
-        142
+        142,
     ],
     "EFI_EVENT_NOTIFICATION_TYEP_MCE_GUID": [
         3908399102,
@@ -27940,7 +26345,7 @@ PROTOCOLS_GUIDS = {
         225,
         73,
         19,
-        187
+        187,
     ],
     "EFI_EVENT_NOTIFICATION_TYEP_NMI_GUID": [
         1538099711,
@@ -27953,7 +26358,7 @@ PROTOCOLS_GUIDS = {
         133,
         214,
         233,
-        138
+        138,
     ],
     "EFI_EVENT_NOTIFICATION_TYEP_PCIE_GUID": [
         3482566687,
@@ -27966,7 +26371,7 @@ PROTOCOLS_GUIDS = {
         175,
         103,
         193,
-        4
+        4,
     ],
     "EFI_FIRMWARE_CONTENTS_SIGNED_GUID": [
         261982696,
@@ -27979,7 +26384,7 @@ PROTOCOLS_GUIDS = {
         227,
         64,
         35,
-        223
+        223,
     ],
     "EFI_FIRMWARE_FILE_SYSTEM3_GUID": [
         1416872058,
@@ -27992,7 +26397,7 @@ PROTOCOLS_GUIDS = {
         137,
         231,
         52,
-        154
+        154,
     ],
     "EFI_FIRMWARE_MANAGEMENT_PROTOCOL_GUID": [
         2261219943,
@@ -28005,7 +26410,7 @@ PROTOCOLS_GUIDS = {
         77,
         6,
         133,
-        199
+        199,
     ],
     "EFI_FIRMWARE_PERFORMANCE_GUID": [
         3231021338,
@@ -28018,7 +26423,7 @@ PROTOCOLS_GUIDS = {
         49,
         159,
         47,
-        164
+        164,
     ],
     "EFI_FORM_BROWSER_COMPATIBILITY_PROTOCOL_GUID": [
         263702610,
@@ -28031,7 +26436,7 @@ PROTOCOLS_GUIDS = {
         27,
         28,
         225,
-        26
+        26,
     ],
     "EFI_FTP4_PROTOCOL_GUID": [
         3946022950,
@@ -28044,7 +26449,7 @@ PROTOCOLS_GUIDS = {
         76,
         117,
         123,
-        9
+        9,
     ],
     "EFI_FTP4_SERVICE_BINDING_PROTOCOL_GUID": [
         262859953,
@@ -28057,7 +26462,7 @@ PROTOCOLS_GUIDS = {
         188,
         191,
         77,
-        175
+        175,
     ],
     "EFI_HASH_ALGORITHM_SHA1_NOPAD_GUID": [
         616946735,
@@ -28070,7 +26475,7 @@ PROTOCOLS_GUIDS = {
         164,
         159,
         70,
-        59
+        59,
     ],
     "EFI_HASH_ALGORITHM_SHA256_NOPAD_GUID": [
         2250798378,
@@ -28083,7 +26488,7 @@ PROTOCOLS_GUIDS = {
         21,
         172,
         34,
-        38
+        38,
     ],
     "EFI_HII_COMPATIBILITY_PROTOCOL_GUID": [
         1430441185,
@@ -28096,7 +26501,7 @@ PROTOCOLS_GUIDS = {
         119,
         211,
         153,
-        251
+        251,
     ],
     "EFI_HII_STANDARD_FORM_GUID": [
         1003681004,
@@ -28109,7 +26514,7 @@ PROTOCOLS_GUIDS = {
         23,
         66,
         85,
-        98
+        98,
     ],
     "EFI_IA32_X64_ERROR_TYPE_BUS_CHECK_GUID": [
         485750963,
@@ -28122,7 +26527,7 @@ PROTOCOLS_GUIDS = {
         146,
         255,
         166,
-        60
+        60,
     ],
     "EFI_IA32_X64_ERROR_TYPE_CACHE_CHECK_GUID": [
         2773942773,
@@ -28135,7 +26540,7 @@ PROTOCOLS_GUIDS = {
         87,
         63,
         173,
-        44
+        44,
     ],
     "EFI_IA32_X64_ERROR_TYPE_MS_CHECK_GUID": [
         1219198807,
@@ -28148,7 +26553,7 @@ PROTOCOLS_GUIDS = {
         176,
         167,
         67,
-        20
+        20,
     ],
     "EFI_IA32_X64_ERROR_TYPE_TLB_CHECK_GUID": [
         4228298037,
@@ -28161,7 +26566,7 @@ PROTOCOLS_GUIDS = {
         154,
         219,
         99,
-        195
+        195,
     ],
     "EFI_IFR_FRAMEWORK_GUID": [
         835345690,
@@ -28174,7 +26579,7 @@ PROTOCOLS_GUIDS = {
         43,
         23,
         140,
-        215
+        215,
     ],
     "EFI_IFR_REFRESH_ID_OP_GUID": [
         4125513177,
@@ -28187,7 +26592,7 @@ PROTOCOLS_GUIDS = {
         142,
         96,
         171,
-        34
+        34,
     ],
     "EFI_IP6_CONFIG_PROTOCOL_GUID": [
         2474632481,
@@ -28200,7 +26605,7 @@ PROTOCOLS_GUIDS = {
         217,
         10,
         211,
-        26
+        26,
     ],
     "EFI_IP6_PROTOCOL_GUID": [
         747067861,
@@ -28213,7 +26618,7 @@ PROTOCOLS_GUIDS = {
         16,
         25,
         87,
-        226
+        226,
     ],
     "EFI_IP6_SERVICE_BINDING_PROTOCOL_GUID": [
         3968032211,
@@ -28226,7 +26631,7 @@ PROTOCOLS_GUIDS = {
         195,
         225,
         51,
-        136
+        136,
     ],
     "EFI_IPSEC2_PROTOCOL_GUID": [
         2744622692,
@@ -28239,7 +26644,7 @@ PROTOCOLS_GUIDS = {
         184,
         253,
         9,
-        119
+        119,
     ],
     "EFI_IPSEC_CONFIG_PROTOCOL_GUID": [
         3462289705,
@@ -28252,7 +26657,7 @@ PROTOCOLS_GUIDS = {
         249,
         78,
         191,
-        207
+        207,
     ],
     "EFI_IPSEC_PROTOCOL_GUID": [
         3753084663,
@@ -28265,7 +26670,7 @@ PROTOCOLS_GUIDS = {
         208,
         138,
         94,
-        18
+        18,
     ],
     "EFI_KMS_FORMAT_AESCBC_128_GUID": [
         2699619946,
@@ -28278,7 +26683,7 @@ PROTOCOLS_GUIDS = {
         74,
         202,
         68,
-        162
+        162,
     ],
     "EFI_KMS_FORMAT_AESCBC_256_GUID": [
         3622213513,
@@ -28291,7 +26696,7 @@ PROTOCOLS_GUIDS = {
         7,
         165,
         178,
-        220
+        220,
     ],
     "EFI_KMS_FORMAT_AESXTS_128_GUID": [
         1198973759,
@@ -28304,7 +26709,7 @@ PROTOCOLS_GUIDS = {
         10,
         250,
         179,
-        139
+        139,
     ],
     "EFI_KMS_FORMAT_AESXTS_256_GUID": [
         3699279379,
@@ -28317,7 +26722,7 @@ PROTOCOLS_GUIDS = {
         19,
         87,
         171,
-        226
+        226,
     ],
     "EFI_KMS_FORMAT_GENERIC_1024_GUID": [
         1136528196,
@@ -28330,7 +26735,7 @@ PROTOCOLS_GUIDS = {
         79,
         189,
         126,
-        179
+        179,
     ],
     "EFI_KMS_FORMAT_GENERIC_128_GUID": [
         3968482665,
@@ -28343,7 +26748,7 @@ PROTOCOLS_GUIDS = {
         252,
         82,
         33,
-        54
+        54,
     ],
     "EFI_KMS_FORMAT_GENERIC_160_GUID": [
         2746476280,
@@ -28356,7 +26761,7 @@ PROTOCOLS_GUIDS = {
         51,
         155,
         37,
-        121
+        121,
     ],
     "EFI_KMS_FORMAT_GENERIC_2048_GUID": [
         1074347811,
@@ -28369,7 +26774,7 @@ PROTOCOLS_GUIDS = {
         59,
         25,
         203,
-        190
+        190,
     ],
     "EFI_KMS_FORMAT_GENERIC_256_GUID": [
         1895188371,
@@ -28382,7 +26787,7 @@ PROTOCOLS_GUIDS = {
         242,
         124,
         83,
-        69
+        69,
     ],
     "EFI_KMS_FORMAT_GENERIC_3072_GUID": [
         3106108691,
@@ -28395,7 +26800,7 @@ PROTOCOLS_GUIDS = {
         86,
         224,
         90,
-        222
+        222,
     ],
     "EFI_KMS_FORMAT_GENERIC_512_GUID": [
         2542788675,
@@ -28408,7 +26813,7 @@ PROTOCOLS_GUIDS = {
         228,
         99,
         189,
-        230
+        230,
     ],
     "EFI_KMS_FORMAT_MD2_128_GUID": [
         2025722308,
@@ -28421,7 +26826,7 @@ PROTOCOLS_GUIDS = {
         46,
         197,
         201,
-        120
+        120,
     ],
     "EFI_KMS_FORMAT_MD4_128_GUID": [
         3519117985,
@@ -28434,7 +26839,7 @@ PROTOCOLS_GUIDS = {
         174,
         6,
         103,
-        124
+        124,
     ],
     "EFI_KMS_FORMAT_MD5SHA_128_GUID": [
         471302711,
@@ -28447,7 +26852,7 @@ PROTOCOLS_GUIDS = {
         142,
         249,
         79,
-        118
+        118,
     ],
     "EFI_KMS_FORMAT_MD5_128_GUID": [
         3703322210,
@@ -28460,7 +26865,7 @@ PROTOCOLS_GUIDS = {
         29,
         35,
         72,
-        199
+        199,
     ],
     "EFI_KMS_FORMAT_MDC2_128_GUID": [
         4155334904,
@@ -28473,7 +26878,7 @@ PROTOCOLS_GUIDS = {
         57,
         158,
         180,
-        199
+        199,
     ],
     "EFI_KMS_FORMAT_MDC4_128_GUID": [
         1067776071,
@@ -28486,7 +26891,7 @@ PROTOCOLS_GUIDS = {
         10,
         132,
         123,
-        188
+        188,
     ],
     "EFI_KMS_FORMAT_RSASHA1_1024_GUID": [
         1447132141,
@@ -28499,7 +26904,7 @@ PROTOCOLS_GUIDS = {
         187,
         23,
         248,
-        249
+        249,
     ],
     "EFI_KMS_FORMAT_RSASHA1_2048_GUID": [
         4133767124,
@@ -28512,7 +26917,7 @@ PROTOCOLS_GUIDS = {
         45,
         218,
         5,
-        233
+        233,
     ],
     "EFI_KMS_FORMAT_RSASHA256_2048_GUID": [
         2759307027,
@@ -28525,7 +26930,7 @@ PROTOCOLS_GUIDS = {
         190,
         160,
         138,
-        211
+        211,
     ],
     "EFI_KMS_FORMAT_SHA1_160_GUID": [
         1161584218,
@@ -28538,7 +26943,7 @@ PROTOCOLS_GUIDS = {
         243,
         163,
         138,
-        194
+        194,
     ],
     "EFI_KMS_FORMAT_SHA256_256_GUID": [
         1807021517,
@@ -28551,7 +26956,7 @@ PROTOCOLS_GUIDS = {
         174,
         147,
         95,
-        198
+        198,
     ],
     "EFI_KMS_FORMAT_SHA512_512_GUID": [
         790892050,
@@ -28564,7 +26969,7 @@ PROTOCOLS_GUIDS = {
         34,
         215,
         123,
-        231
+        231,
     ],
     "EFI_KMS_PROTOCOL_GUID": [
         3963262861,
@@ -28577,7 +26982,7 @@ PROTOCOLS_GUIDS = {
         28,
         200,
         248,
-        17
+        17,
     ],
     "EFI_LEGACY_DEV_ORDER_VARIABLE_GUID": [
         2774562011,
@@ -28590,7 +26995,7 @@ PROTOCOLS_GUIDS = {
         221,
         142,
         150,
-        82
+        82,
     ],
     "EFI_LEGACY_REGION2_PROTOCOL_GUID": [
         1880104623,
@@ -28603,7 +27008,7 @@ PROTOCOLS_GUIDS = {
         111,
         239,
         36,
-        240
+        240,
     ],
     "EFI_LEGACY_REGION_PROTOCOL_GUID": [
         264831290,
@@ -28616,7 +27021,7 @@ PROTOCOLS_GUIDS = {
         144,
         166,
         96,
-        155
+        155,
     ],
     "EFI_LOAD_FILE_PROTOCOL_GUID": [
         1458319505,
@@ -28629,7 +27034,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "EFI_LOAD_FIXED_ADDRESS_CONFIGURATION_TABLE_GUID": [
         749243219,
@@ -28642,7 +27047,7 @@ PROTOCOLS_GUIDS = {
         186,
         226,
         75,
-        9
+        9,
     ],
     "EFI_LOCK_BOX_PROTOCOL_GUID": [
         3175374201,
@@ -28655,7 +27060,7 @@ PROTOCOLS_GUIDS = {
         32,
         64,
         235,
-        60
+        60,
     ],
     "EFI_MEASURED_FV_HOB_GUID": [
         2989886274,
@@ -28668,7 +27073,7 @@ PROTOCOLS_GUIDS = {
         107,
         171,
         16,
-        96
+        96,
     ],
     "EFI_MEMORY_TYPE_INFORMATION_GUID": [
         1276707999,
@@ -28681,7 +27086,7 @@ PROTOCOLS_GUIDS = {
         168,
         63,
         253,
-        250
+        250,
     ],
     "EFI_MMC_HOST_PROTOCOL_GUID": [
         1046027264,
@@ -28694,7 +27099,7 @@ PROTOCOLS_GUIDS = {
         165,
         213,
         197,
-        27
+        27,
     ],
     "EFI_MONOTONIC_COUNTER_ARCH_PROTOCOL_GUID": [
         497643634,
@@ -28707,7 +27112,7 @@ PROTOCOLS_GUIDS = {
         181,
         111,
         255,
-        42
+        42,
     ],
     "EFI_MTFTP6_PROTOCOL_GUID": [
         3205134522,
@@ -28720,7 +27125,7 @@ PROTOCOLS_GUIDS = {
         78,
         171,
         106,
-        81
+        81,
     ],
     "EFI_MTFTP6_SERVICE_BINDING_PROTOCOL_GUID": [
         3648393203,
@@ -28733,7 +27138,7 @@ PROTOCOLS_GUIDS = {
         250,
         250,
         66,
-        35
+        35,
     ],
     "EFI_NIC_IP4_CONFIG_NVDATA_GUID": [
         165000511,
@@ -28746,7 +27151,7 @@ PROTOCOLS_GUIDS = {
         211,
         92,
         14,
-        5
+        5,
     ],
     "EFI_NT_LOAD_AS_DLL_PPI_GUID": [
         3435478891,
@@ -28759,7 +27164,7 @@ PROTOCOLS_GUIDS = {
         156,
         2,
         180,
-        227
+        227,
     ],
     "EFI_PCD_PROTOCOL_GUID": [
         329511158,
@@ -28772,7 +27177,7 @@ PROTOCOLS_GUIDS = {
         18,
         52,
         47,
-        52
+        52,
     ],
     "EFI_PCI_ENUMERATION_COMPLETE_GUID": [
         818930663,
@@ -28785,7 +27190,7 @@ PROTOCOLS_GUIDS = {
         161,
         179,
         183,
-        147
+        147,
     ],
     "EFI_PCI_HOST_BRIDGE_RESOURCE_ALLOCATION_PROTOCOL_GUID": [
         3481285822,
@@ -28798,7 +27203,7 @@ PROTOCOLS_GUIDS = {
         104,
         58,
         159,
-        190
+        190,
     ],
     "EFI_PCI_HOTPLUG_REQUEST_PROTOCOL_GUID": [
         432768939,
@@ -28811,7 +27216,7 @@ PROTOCOLS_GUIDS = {
         96,
         84,
         247,
-        157
+        157,
     ],
     "EFI_PCI_OVERRIDE_GUID": [
         3048429412,
@@ -28824,7 +27229,7 @@ PROTOCOLS_GUIDS = {
         124,
         27,
         92,
-        235
+        235,
     ],
     "EFI_PEI_BOOT_SCRIPT_EXECUTER_PPI_GUID": [
         2882807957,
@@ -28837,7 +27242,7 @@ PROTOCOLS_GUIDS = {
         24,
         11,
         251,
-        255
+        255,
     ],
     "EFI_PEI_FIND_FV_PPI_GUID": [
         907429906,
@@ -28850,21 +27255,9 @@ PROTOCOLS_GUIDS = {
         60,
         119,
         0,
-        170
+        170,
     ],
-    "EFI_PEI_PCD_PPI_GUID": [
-        32722213,
-        19938,
-        9133,
-        63,
-        243,
-        54,
-        53,
-        63,
-        243,
-        35,
-        241
-    ],
+    "EFI_PEI_PCD_PPI_GUID": [32722213, 19938, 9133, 63, 243, 54, 53, 63, 243, 35, 241],
     "EFI_PEI_PERMANENT_MEMORY_INSTALLED_PPI_GUID": [
         4170474557,
         50249,
@@ -28876,7 +27269,7 @@ PROTOCOLS_GUIDS = {
         216,
         198,
         91,
-        222
+        222,
     ],
     "EFI_PEI_READ_ONLY_VARIABLE_ACCESS_PPI_GUID": [
         1021087942,
@@ -28889,7 +27282,7 @@ PROTOCOLS_GUIDS = {
         221,
         120,
         185,
-        250
+        250,
     ],
     "EFI_PEI_RECOVERY_BLOCK_IO_PPI_GUID": [
         1767738017,
@@ -28902,7 +27295,7 @@ PROTOCOLS_GUIDS = {
         188,
         231,
         153,
-        227
+        227,
     ],
     "EFI_PEI_S3_RESUME_PPI_GUID": [
         1143393458,
@@ -28915,7 +27308,7 @@ PROTOCOLS_GUIDS = {
         176,
         37,
         183,
-        16
+        16,
     ],
     "EFI_PEI_SECURITY_PPI_GUID": [
         327681646,
@@ -28928,7 +27321,7 @@ PROTOCOLS_GUIDS = {
         58,
         149,
         138,
-        41
+        41,
     ],
     "EFI_PEI_SMBUS2_PPI_GUID": [
         2628335143,
@@ -28941,7 +27334,7 @@ PROTOCOLS_GUIDS = {
         97,
         118,
         69,
-        67
+        67,
     ],
     "EFI_PEI_SMBUS_PPI_GUID": [
         2882807957,
@@ -28954,7 +27347,7 @@ PROTOCOLS_GUIDS = {
         24,
         11,
         251,
-        218
+        218,
     ],
     "EFI_PEI_SMM_COMMUNICATION_PPI_GUID": [
         2928885276,
@@ -28967,7 +27360,7 @@ PROTOCOLS_GUIDS = {
         29,
         38,
         5,
-        223
+        223,
     ],
     "EFI_PEI_TEMPORARY_RAM_DONE_PPI_GUID": [
         3467339836,
@@ -28980,7 +27373,7 @@ PROTOCOLS_GUIDS = {
         250,
         78,
         156,
-        22
+        22,
     ],
     "EFI_PEI_VECTOR_HANDOFF_INFO_PPI_GUID": [
         1020678836,
@@ -28993,7 +27386,7 @@ PROTOCOLS_GUIDS = {
         151,
         102,
         252,
-        202
+        202,
     ],
     "EFI_PHYSICAL_PRESENCE_DATA_GUID": [
         258251185,
@@ -29006,7 +27399,7 @@ PROTOCOLS_GUIDS = {
         129,
         92,
         108,
-        188
+        188,
     ],
     "EFI_PRINT2_PROTOCOL_GUID": [
         4032394991,
@@ -29019,7 +27412,7 @@ PROTOCOLS_GUIDS = {
         93,
         65,
         229,
-        56
+        56,
     ],
     "EFI_RSC_HANDLER_PROTOCOL_GUID": [
         2250320182,
@@ -29032,7 +27425,7 @@ PROTOCOLS_GUIDS = {
         252,
         28,
         57,
-        226
+        226,
     ],
     "EFI_RUNTIME_ARCH_PROTOCOL_GUID": [
         3084891361,
@@ -29045,7 +27438,7 @@ PROTOCOLS_GUIDS = {
         252,
         145,
         183,
-        51
+        51,
     ],
     "EFI_RUNTIME_CRYPT_PROTOCOL_GUID": [
         3779550732,
@@ -29058,7 +27451,7 @@ PROTOCOLS_GUIDS = {
         44,
         45,
         157,
-        134
+        134,
     ],
     "EFI_SAL_MCA_INIT_PMI_PROTOCOL_GUID": [
         3054356200,
@@ -29071,7 +27464,7 @@ PROTOCOLS_GUIDS = {
         201,
         68,
         160,
-        91
+        91,
     ],
     "EFI_SAS_DEVICE_PATH_GUID": [
         3565673908,
@@ -29084,7 +27477,7 @@ PROTOCOLS_GUIDS = {
         131,
         255,
         202,
-        77
+        77,
     ],
     "EFI_SCSI_BUS_PROTOCOL_GUID": [
         1382097213,
@@ -29097,7 +27490,7 @@ PROTOCOLS_GUIDS = {
         247,
         164,
         202,
-        23
+        23,
     ],
     "EFI_SECURITY2_ARCH_PROTOCOL_GUID": [
         2494246744,
@@ -29110,7 +27503,7 @@ PROTOCOLS_GUIDS = {
         26,
         58,
         14,
-        104
+        104,
     ],
     "EFI_SE_EXT_SIGNATURE_GUID": [
         3535898166,
@@ -29123,7 +27516,7 @@ PROTOCOLS_GUIDS = {
         95,
         212,
         44,
-        135
+        135,
     ],
     "EFI_SHELLPKG_TOKEN_SPACE_GUID": [
         387879304,
@@ -29136,7 +27529,7 @@ PROTOCOLS_GUIDS = {
         45,
         185,
         64,
-        205
+        205,
     ],
     "EFI_SHELL_PARAMETERS_PROTOCOL_GUID": [
         1966027062,
@@ -29149,7 +27542,7 @@ PROTOCOLS_GUIDS = {
         104,
         18,
         244,
-        202
+        202,
     ],
     "EFI_SHELL_PROTOCOL_GUID": [
         1661128712,
@@ -29162,7 +27555,7 @@ PROTOCOLS_GUIDS = {
         254,
         245,
         218,
-        78
+        78,
     ],
     "EFI_SIMPLE_POINTER_PROTOCOL_GUID": [
         830966919,
@@ -29175,7 +27568,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL_GUID": [
         947156930,
@@ -29188,7 +27581,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "EFI_SMM_ACCESS2_PROTOCOL_GUID": [
         3262131060,
@@ -29201,7 +27594,7 @@ PROTOCOLS_GUIDS = {
         184,
         156,
         228,
-        172
+        172,
     ],
     "EFI_SMM_BASE2_PROTOCOL_GUID": [
         4107059127,
@@ -29214,7 +27607,7 @@ PROTOCOLS_GUIDS = {
         241,
         80,
         193,
-        145
+        145,
     ],
     "EFI_SMM_BASE_HELPER_READY_PROTOCOL_GUID": [
         2433600007,
@@ -29227,7 +27620,7 @@ PROTOCOLS_GUIDS = {
         243,
         21,
         67,
-        83
+        83,
     ],
     "EFI_SMM_CONFIGURATION_PROTOCOL_GUID": [
         653177822,
@@ -29240,7 +27633,7 @@ PROTOCOLS_GUIDS = {
         215,
         218,
         75,
-        167
+        167,
     ],
     "EFI_SMM_CONTROL2_PROTOCOL_GUID": [
         2218641184,
@@ -29253,7 +27646,7 @@ PROTOCOLS_GUIDS = {
         120,
         243,
         86,
-        27
+        27,
     ],
     "EFI_SMM_END_OF_DXE_PROTOCOL_GUID": [
         619118658,
@@ -29266,7 +27659,7 @@ PROTOCOLS_GUIDS = {
         170,
         50,
         233,
-        61
+        61,
     ],
     "EFI_SMM_FAULT_TOLERANT_WRITE_PROTOCOL_GUID": [
         946404411,
@@ -29279,7 +27672,7 @@ PROTOCOLS_GUIDS = {
         125,
         225,
         117,
-        77
+        77,
     ],
     "EFI_SMM_FIRMWARE_VOLUME_BLOCK_PROTOCOL_GUID": [
         3542536257,
@@ -29292,7 +27685,7 @@ PROTOCOLS_GUIDS = {
         232,
         127,
         6,
-        83
+        83,
     ],
     "EFI_SMM_LOCK_BOX_COMMUNICATION_GUID": [
         708640445,
@@ -29305,7 +27698,7 @@ PROTOCOLS_GUIDS = {
         194,
         163,
         225,
-        192
+        192,
     ],
     "EFI_SMM_SWAP_ADDRESS_RANGE_PROTOCOL_GUID": [
         1740960018,
@@ -29318,7 +27711,7 @@ PROTOCOLS_GUIDS = {
         113,
         124,
         66,
-        40
+        40,
     ],
     "EFI_SMM_SX_DISPATCH_PROTOCOL_GUID": [
         352080574,
@@ -29331,7 +27724,7 @@ PROTOCOLS_GUIDS = {
         62,
         34,
         10,
-        232
+        232,
     ],
     "EFI_SMM_VARIABLE_WRITE_GUID": [
         2478446630,
@@ -29344,7 +27737,7 @@ PROTOCOLS_GUIDS = {
         170,
         59,
         189,
-        243
+        243,
     ],
     "EFI_STATUS_CODE_RUNTIME_PROTOCOL_GUID": [
         3534927912,
@@ -29357,7 +27750,7 @@ PROTOCOLS_GUIDS = {
         0,
         96,
         36,
-        240
+        240,
     ],
     "EFI_TCG_EVENT_HOB_GUID": [
         774915244,
@@ -29370,7 +27763,7 @@ PROTOCOLS_GUIDS = {
         175,
         105,
         95,
-        80
+        80,
     ],
     "EFI_TCP6_PROTOCOL_GUID": [
         1189365845,
@@ -29383,7 +27776,7 @@ PROTOCOLS_GUIDS = {
         185,
         68,
         125,
-        119
+        119,
     ],
     "EFI_TCP6_SERVICE_BINDING_PROTOCOL_GUID": [
         3961580409,
@@ -29396,7 +27789,7 @@ PROTOCOLS_GUIDS = {
         204,
         22,
         214,
-        100
+        100,
     ],
     "EFI_TSC_FREQUENCY_GUID": [
         3685132259,
@@ -29409,7 +27802,7 @@ PROTOCOLS_GUIDS = {
         219,
         126,
         86,
-        135
+        135,
     ],
     "EFI_UART_DEVICE_PATH_GUID": [
         927570589,
@@ -29422,7 +27815,7 @@ PROTOCOLS_GUIDS = {
         20,
         32,
         148,
-        228
+        228,
     ],
     "EFI_UDP6_PROTOCOL_GUID": [
         1335134229,
@@ -29435,7 +27828,7 @@ PROTOCOLS_GUIDS = {
         96,
         179,
         73,
-        85
+        85,
     ],
     "EFI_UDP6_SERVICE_BINDING_PROTOCOL_GUID": [
         1726826273,
@@ -29448,21 +27841,9 @@ PROTOCOLS_GUIDS = {
         211,
         154,
         114,
-        84
+        84,
     ],
-    "EFI_UNIX_CONSOLE_GUID": [
-        4073479430,
-        35205,
-        4571,
-        187,
-        25,
-        0,
-        64,
-        208,
-        43,
-        24,
-        53
-    ],
+    "EFI_UNIX_CONSOLE_GUID": [4073479430, 35205, 4571, 187, 25, 0, 64, 208, 43, 24, 53],
     "EFI_UNIX_CPU_MODEL_GUID": [
         4073960240,
         35205,
@@ -29474,7 +27855,7 @@ PROTOCOLS_GUIDS = {
         208,
         43,
         24,
-        53
+        53,
     ],
     "EFI_UNIX_CPU_SPEED_GUID": [
         4074196570,
@@ -29487,7 +27868,7 @@ PROTOCOLS_GUIDS = {
         208,
         43,
         24,
-        53
+        53,
     ],
     "EFI_UNIX_FILE_SYSTEM_GUID": [
         4072762270,
@@ -29500,21 +27881,9 @@ PROTOCOLS_GUIDS = {
         208,
         43,
         24,
-        53
+        53,
     ],
-    "EFI_UNIX_GOP_GUID": [
-        3134064578,
-        35207,
-        4571,
-        165,
-        154,
-        0,
-        64,
-        208,
-        43,
-        24,
-        53
-    ],
+    "EFI_UNIX_GOP_GUID": [3134064578, 35207, 4571, 165, 154, 0, 64, 208, 43, 24, 53],
     "EFI_UNIX_IO_PROTOCOL_GUID": [
         4074913620,
         35205,
@@ -29526,21 +27895,9 @@ PROTOCOLS_GUIDS = {
         208,
         43,
         24,
-        53
+        53,
     ],
-    "EFI_UNIX_MEMORY_GUID": [
-        4073719500,
-        35205,
-        4571,
-        164,
-        114,
-        0,
-        64,
-        208,
-        43,
-        24,
-        53
-    ],
+    "EFI_UNIX_MEMORY_GUID": [4073719500, 35205, 4571, 164, 114, 0, 64, 208, 43, 24, 53],
     "EFI_UNIX_NETWORK_GUID": [
         135660468,
         3869,
@@ -29552,7 +27909,7 @@ PROTOCOLS_GUIDS = {
         94,
         9,
         161,
-        166
+        166,
     ],
     "EFI_UNIX_PHYSICAL_DISKS_GUID": [
         4072524950,
@@ -29565,7 +27922,7 @@ PROTOCOLS_GUIDS = {
         208,
         43,
         24,
-        53
+        53,
     ],
     "EFI_UNIX_SERIAL_PORT_GUID": [
         1832546941,
@@ -29578,7 +27935,7 @@ PROTOCOLS_GUIDS = {
         134,
         20,
         144,
-        243
+        243,
     ],
     "EFI_UNIX_THUNK_PROTOCOL_GUID": [
         4075391080,
@@ -29591,21 +27948,9 @@ PROTOCOLS_GUIDS = {
         208,
         43,
         24,
-        53
+        53,
     ],
-    "EFI_UNIX_UGA_GUID": [
-        4073240590,
-        35205,
-        4571,
-        147,
-        241,
-        0,
-        64,
-        208,
-        43,
-        24,
-        53
-    ],
+    "EFI_UNIX_UGA_GUID": [4073240590, 35205, 4571, 147, 241, 0, 64, 208, 43, 24, 53],
     "EFI_UNIX_UGA_IO_PROTOCOL_GUID": [
         4075152070,
         35205,
@@ -29617,7 +27962,7 @@ PROTOCOLS_GUIDS = {
         208,
         43,
         24,
-        53
+        53,
     ],
     "EFI_UNIX_VIRTUAL_DISKS_GUID": [
         4072289050,
@@ -29630,7 +27975,7 @@ PROTOCOLS_GUIDS = {
         208,
         43,
         24,
-        53
+        53,
     ],
     "EFI_UPDATE_DATA_FILE_GUID": [
         675259118,
@@ -29643,7 +27988,7 @@ PROTOCOLS_GUIDS = {
         179,
         111,
         11,
-        126
+        126,
     ],
     "EFI_USB_BUS_PROTOCOL_GUID": [
         724527308,
@@ -29656,7 +28001,7 @@ PROTOCOLS_GUIDS = {
         11,
         27,
         91,
-        117
+        117,
     ],
     "EFI_USER_CREDENTIAL2_PROTOCOL_GUID": [
         3918191363,
@@ -29669,7 +28014,7 @@ PROTOCOLS_GUIDS = {
         17,
         76,
         188,
-        229
+        229,
     ],
     "EFI_UXIX_SYSTEM_CONFIG_GUID": [
         928950646,
@@ -29682,7 +28027,7 @@ PROTOCOLS_GUIDS = {
         179,
         36,
         177,
-        60
+        60,
     ],
     "EFI_VARIABLE_GUID": [
         3721344534,
@@ -29695,7 +28040,7 @@ PROTOCOLS_GUIDS = {
         112,
         127,
         254,
-        125
+        125,
     ],
     "EFI_VARIABLE_INDEX_TABLE_GUID": [
         2365438152,
@@ -29708,7 +28053,7 @@ PROTOCOLS_GUIDS = {
         124,
         201,
         139,
-        124
+        124,
     ],
     "EFI_VLAN_CONFIG_PROTOCOL_GUID": [
         2653149032,
@@ -29721,7 +28066,7 @@ PROTOCOLS_GUIDS = {
         186,
         134,
         67,
-        116
+        116,
     ],
     "EFI_WIN_NT_CONSOLE_GUID": [
         3128125228,
@@ -29734,7 +28079,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "EFI_WIN_NT_CPU_MODEL_GUID": [
         3202987726,
@@ -29747,7 +28092,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "EFI_WIN_NT_CPU_SPEED_GUID": [
         3572666453,
@@ -29760,7 +28105,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "EFI_WIN_NT_FILE_SYSTEM_GUID": [
         211134773,
@@ -29773,7 +28118,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "EFI_WIN_NT_GOP_GUID": [
         1309796693,
@@ -29786,7 +28131,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "EFI_WIN_NT_IO_PROTOCOL_GUID": [
         2532002518,
@@ -29799,7 +28144,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "EFI_WIN_NT_MEMORY_GUID": [
         2567186706,
@@ -29812,7 +28157,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "EFI_WIN_NT_PASS_THROUGH_GUID": [
         3429256888,
@@ -29825,7 +28170,7 @@ PROTOCOLS_GUIDS = {
         86,
         188,
         227,
-        110
+        110,
     ],
     "EFI_WIN_NT_PHYSICAL_DISKS_GUID": [
         211134767,
@@ -29838,7 +28183,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "EFI_WIN_NT_SYSTEM_CONFIG_GUID": [
         3007836231,
@@ -29851,7 +28196,7 @@ PROTOCOLS_GUIDS = {
         183,
         229,
         56,
-        88
+        88,
     ],
     "EFI_WIN_NT_UGA_GUID": [
         2871299737,
@@ -29864,7 +28209,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "EFI_WIN_NT_VIRTUAL_DISKS_GUID": [
         211134760,
@@ -29877,21 +28222,9 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
-    "EFI_XEN_INFO_GUID": [
-        3551817531,
-        54337,
-        4676,
-        154,
-        18,
-        0,
-        18,
-        39,
-        63,
-        193,
-        77
-    ],
+    "EFI_XEN_INFO_GUID": [3551817531, 54337, 4676, 154, 18, 0, 18, 39, 63, 193, 77],
     "EMBEDDED_DEVICE_PROTOCOL_GUID": [
         3209403664,
         5100,
@@ -29903,7 +28236,7 @@ PROTOCOLS_GUIDS = {
         113,
         143,
         39,
-        222
+        222,
     ],
     "EMBEDDED_EXTERNAL_DEVICE_PROTOCOL_GUID": [
         1935641700,
@@ -29916,7 +28249,7 @@ PROTOCOLS_GUIDS = {
         208,
         90,
         84,
-        6
+        6,
     ],
     "EMU_BLOCK_IO_PROTOCOL_GUID": [
         1753785518,
@@ -29929,7 +28262,7 @@ PROTOCOLS_GUIDS = {
         218,
         230,
         160,
-        48
+        48,
     ],
     "EMU_GRAPHICS_WINDOW_PROTOCOL_GUID": [
         821899626,
@@ -29942,7 +28275,7 @@ PROTOCOLS_GUIDS = {
         51,
         216,
         202,
-        193
+        193,
     ],
     "EMU_IO_THUNK_PROTOCO_GUID": [
         1160997110,
@@ -29955,7 +28288,7 @@ PROTOCOLS_GUIDS = {
         183,
         255,
         169,
-        38
+        38,
     ],
     "EMU_SNP_PROTOCOL_GUID": [
         4250910292,
@@ -29968,21 +28301,9 @@ PROTOCOLS_GUIDS = {
         165,
         253,
         5,
-        33
+        33,
     ],
-    "EMU_THUNK_PPI_GUID": [
-        3109599116,
-        7486,
-        60992,
-        139,
-        244,
-        240,
-        99,
-        45,
-        6,
-        57,
-        22
-    ],
+    "EMU_THUNK_PPI_GUID": [3109599116, 7486, 60992, 139, 244, 240, 99, 45, 6, 57, 22],
     "EMU_THUNK_PROTOCOL_GUID": [
         1559440907,
         36575,
@@ -29994,7 +28315,7 @@ PROTOCOLS_GUIDS = {
         94,
         153,
         236,
-        28
+        28,
     ],
     "EXTENDED_SAL_BOOT_SERVICE_PROTOCOL_GUID": [
         3725519268,
@@ -30007,21 +28328,9 @@ PROTOCOLS_GUIDS = {
         214,
         156,
         58,
-        247
+        247,
     ],
-    "FFS_GUID": [
-        2886057779,
-        39258,
-        20180,
-        170,
-        184,
-        239,
-        122,
-        232,
-        15,
-        92,
-        176
-    ],
+    "FFS_GUID": [2886057779, 39258, 20180, 170, 184, 239, 122, 232, 15, 92, 176],
     "FILE_EXPLORE_FORMSET_GUID": [
         523068385,
         65213,
@@ -30033,21 +28342,9 @@ PROTOCOLS_GUIDS = {
         28,
         239,
         156,
-        91
+        91,
     ],
-    "FILE_GUID": [
-        3419595989,
-        28776,
-        20469,
-        180,
-        98,
-        152,
-        34,
-        180,
-        173,
-        141,
-        96
-    ],
+    "FILE_GUID": [3419595989, 28776, 20469, 180, 98, 152, 34, 180, 173, 141, 96],
     "FORM_BROWSER_EXTENSION_PROTOCOL_GUID": [
         527675789,
         17968,
@@ -30059,7 +28356,7 @@ PROTOCOLS_GUIDS = {
         133,
         93,
         125,
-        164
+        164,
     ],
     "FRAMEWORK_BDS_FRONTPAGE_FORMSET_GUID": [
         2651599036,
@@ -30072,7 +28369,7 @@ PROTOCOLS_GUIDS = {
         155,
         133,
         93,
-        190
+        190,
     ],
     "FRAMEWORK_EFI_MP_SERVICES_PROTOCOL_GUID": [
         4080165351,
@@ -30085,7 +28382,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "FRONT_PAGE_FORMSET_GUID": [
         2651599036,
@@ -30098,7 +28395,7 @@ PROTOCOLS_GUIDS = {
         155,
         133,
         93,
-        190
+        190,
     ],
     "HANDLE_PARSING_HII_GUID": [
         3096876599,
@@ -30111,7 +28408,7 @@ PROTOCOLS_GUIDS = {
         137,
         19,
         242,
-        246
+        246,
     ],
     "HD_BOOT_DEVICE_PATH_VARIABLE_GUID": [
         4206356961,
@@ -30124,7 +28421,7 @@ PROTOCOLS_GUIDS = {
         144,
         108,
         182,
-        222
+        222,
     ],
     "HII_RESOURCE_SAMPLE_FORM_SET_GUID": [
         1330575344,
@@ -30137,21 +28434,9 @@ PROTOCOLS_GUIDS = {
         1,
         35,
         169,
-        159
+        159,
     ],
-    "HOB_LIST_GUID": [
-        2000286284,
-        37847,
-        4564,
-        154,
-        58,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
+    "HOB_LIST_GUID": [2000286284, 37847, 4564, 154, 58, 0, 144, 39, 63, 193, 77],
     "IDLE_LOOP_EVENT_GUID": [
         1015884108,
         24515,
@@ -30163,7 +28448,7 @@ PROTOCOLS_GUIDS = {
         50,
         41,
         94,
-        108
+        108,
     ],
     "INTEL_FRAMEWORK_MODULEPKG_TOKEN_SPACE_GUID": [
         3547353105,
@@ -30176,7 +28461,7 @@ PROTOCOLS_GUIDS = {
         48,
         55,
         140,
-        21
+        21,
     ],
     "IP4_ISCSI_CONFIG_GUID": [
         1683418465,
@@ -30189,7 +28474,7 @@ PROTOCOLS_GUIDS = {
         214,
         43,
         120,
-        252
+        252,
     ],
     "IP6_CONFIG_NVDATA_GUID": [
         49193223,
@@ -30202,7 +28487,7 @@ PROTOCOLS_GUIDS = {
         21,
         66,
         215,
-        153
+        153,
     ],
     "ISCSI_CHAP_AUTH_INFO_GUID": [
         2020524204,
@@ -30215,21 +28500,9 @@ PROTOCOLS_GUIDS = {
         10,
         72,
         55,
-        151
+        151,
     ],
-    "ISCSI_CONFIG_GUID": [
-        1262999062,
-        43222,
-        17746,
-        157,
-        68,
-        204,
-        173,
-        46,
-        15,
-        76,
-        249
-    ],
+    "ISCSI_CONFIG_GUID": [1262999062, 43222, 17746, 157, 68, 204, 173, 46, 15, 76, 249],
     "ISCSI_V4_PRIVATE_GUID": [
         4198293068,
         34754,
@@ -30241,7 +28514,7 @@ PROTOCOLS_GUIDS = {
         150,
         200,
         140,
-        88
+        88,
     ],
     "ISCSI_V6_PRIVATE_GUID": [
         683550693,
@@ -30254,7 +28527,7 @@ PROTOCOLS_GUIDS = {
         195,
         116,
         77,
-        133
+        133,
     ],
     "LAST_ENUM_LANGUAGE_GUID": [
         244077659,
@@ -30267,7 +28540,7 @@ PROTOCOLS_GUIDS = {
         161,
         60,
         10,
-        163
+        163,
     ],
     "LDR_MEMORY_DESCRIPTOR_GUID": [
         1996609509,
@@ -30280,7 +28553,7 @@ PROTOCOLS_GUIDS = {
         171,
         138,
         222,
-        96
+        96,
     ],
     "LOCAL_EFI_WIN_NT_BUS_DRIVER_IO_PROTOCOL_GUID": [
         2532002518,
@@ -30293,7 +28566,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "LOCAL_EFI_WIN_NT_SERIAL_PORT_GUID": [
         211134781,
@@ -30306,7 +28579,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "LOCAL_EFI_WIN_NT_THUNK_PROTOCOL_GUID": [
         1489311921,
@@ -30319,7 +28592,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "LZMAF86_CUSTOM_DECOMPRESS_GUID": [
         3559581373,
@@ -30332,7 +28605,7 @@ PROTOCOLS_GUIDS = {
         166,
         234,
         232,
-        137
+        137,
     ],
     "LZMA_CUSTOM_DECOMPRESS_GUID": [
         3998111896,
@@ -30345,7 +28618,7 @@ PROTOCOLS_GUIDS = {
         215,
         148,
         3,
-        207
+        207,
     ],
     "MDEMODULEPKG_TOKEN_SPACE_GUID": [
         2712662089,
@@ -30358,7 +28631,7 @@ PROTOCOLS_GUIDS = {
         76,
         183,
         43,
-        188
+        188,
     ],
     "MDEPKG_TOKEN_SPACE_GUID": [
         2437606375,
@@ -30371,7 +28644,7 @@ PROTOCOLS_GUIDS = {
         25,
         176,
         58,
-        16
+        16,
     ],
     "MEMORY_STATUS_CODE_RECORD_GUID": [
         101498918,
@@ -30384,47 +28657,11 @@ PROTOCOLS_GUIDS = {
         239,
         0,
         165,
-        2
+        2,
     ],
-    "MTC_VENDOR_GUID": [
-        3950002193,
-        5122,
-        4563,
-        142,
-        119,
-        0,
-        160,
-        201,
-        105,
-        114,
-        59
-    ],
-    "MY_GUID": [
-        305419896,
-        43707,
-        52445,
-        238,
-        255,
-        17,
-        34,
-        51,
-        68,
-        85,
-        102
-    ],
-    "NT_FWH_PPI_GUID": [
-        1316393615,
-        20653,
-        17204,
-        176,
-        107,
-        168,
-        66,
-        19,
-        16,
-        138,
-        87
-    ],
+    "MTC_VENDOR_GUID": [3950002193, 5122, 4563, 142, 119, 0, 160, 201, 105, 114, 59],
+    "MY_GUID": [305419896, 43707, 52445, 238, 255, 17, 34, 51, 68, 85, 102],
+    "NT_FWH_PPI_GUID": [1316393615, 20653, 17204, 176, 107, 168, 66, 19, 16, 138, 87],
     "PCATCHIPSET_TOKEN_SPACE_GUID": [
         845866787,
         44594,
@@ -30436,7 +28673,7 @@ PROTOCOLS_GUIDS = {
         60,
         220,
         193,
-        177
+        177,
     ],
     "PCD_DATABASE_HOB_GUID": [
         3928583570,
@@ -30449,21 +28686,9 @@ PROTOCOLS_GUIDS = {
         224,
         169,
         18,
-        104
+        104,
     ],
-    "PCD_PPI_GUID": [
-        115874904,
-        19159,
-        17596,
-        131,
-        144,
-        241,
-        2,
-        101,
-        247,
-        36,
-        128
-    ],
+    "PCD_PPI_GUID": [115874904, 19159, 17596, 131, 144, 241, 2, 101, 247, 36, 128],
     "PCD_PROTOCOL_GUID": [
         296960006,
         55387,
@@ -30475,7 +28700,7 @@ PROTOCOLS_GUIDS = {
         113,
         49,
         14,
-        247
+        247,
     ],
     "PE32_IMAGE_PROTOCOL_GUID": [
         1555416950,
@@ -30488,7 +28713,7 @@ PROTOCOLS_GUIDS = {
         8,
         205,
         116,
-        63
+        63,
     ],
     "PEI_LOCK_PHYSICAL_PRESENCE_PPI_GUID": [
         4019908581,
@@ -30501,21 +28726,9 @@ PROTOCOLS_GUIDS = {
         90,
         187,
         154,
-        13
+        13,
     ],
-    "PEI_NT_THUNK_GUID": [
-        2562884069,
-        63750,
-        17373,
-        169,
-        43,
-        176,
-        3,
-        191,
-        39,
-        101,
-        218
-    ],
+    "PEI_NT_THUNK_GUID": [2562884069, 63750, 17373, 169, 43, 176, 3, 191, 39, 101, 218],
     "PEI_NT_THUNK_PPI_GUID": [
         2562884069,
         63750,
@@ -30527,7 +28740,7 @@ PROTOCOLS_GUIDS = {
         191,
         39,
         101,
-        218
+        218,
     ],
     "PEI_OPERATOR_PRESENCE_PPI_GUID": [
         547829644,
@@ -30540,7 +28753,7 @@ PROTOCOLS_GUIDS = {
         238,
         27,
         63,
-        159
+        159,
     ],
     "PEI_SEC_PERFORMANCE_PPI_GUID": [
         248276587,
@@ -30553,7 +28766,7 @@ PROTOCOLS_GUIDS = {
         255,
         125,
         164,
-        158
+        158,
     ],
     "PEI_UNIX_AUTOSCAN_PPI_GUID": [
         4075633940,
@@ -30566,7 +28779,7 @@ PROTOCOLS_GUIDS = {
         208,
         43,
         24,
-        53
+        53,
     ],
     "PEI_UNIX_THUNK_PPI_GUID": [
         4076351730,
@@ -30579,7 +28792,7 @@ PROTOCOLS_GUIDS = {
         208,
         43,
         24,
-        53
+        53,
     ],
     "PEI_USB2_HOST_CONTROLLER_PPI_GUID": [
         2815467489,
@@ -30592,7 +28805,7 @@ PROTOCOLS_GUIDS = {
         91,
         25,
         173,
-        228
+        228,
     ],
     "PEI_USB_HOST_CONTROLLER_PPI_GUID": [
         1697331369,
@@ -30605,7 +28818,7 @@ PROTOCOLS_GUIDS = {
         195,
         82,
         252,
-        83
+        83,
     ],
     "PEI_USB_IO_PPI_GUID": [
         2083092572,
@@ -30618,7 +28831,7 @@ PROTOCOLS_GUIDS = {
         85,
         14,
         242,
-        131
+        131,
     ],
     "PERFORMANCEPKG_TOKEN_SPACE_GUID": [
         1720927983,
@@ -30631,7 +28844,7 @@ PROTOCOLS_GUIDS = {
         45,
         63,
         239,
-        125
+        125,
     ],
     "PERFORMANCE_EX_PROTOCOL_GUID": [
         514333676,
@@ -30644,7 +28857,7 @@ PROTOCOLS_GUIDS = {
         206,
         47,
         192,
-        34
+        34,
     ],
     "PERFORMANCE_PROTOCOL_GUID": [
         1991687674,
@@ -30657,7 +28870,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         217,
-        55
+        55,
     ],
     "PE_COFF_LOADER_PROTOCOL_GUID": [
         3005421467,
@@ -30670,7 +28883,7 @@ PROTOCOLS_GUIDS = {
         145,
         250,
         17,
-        171
+        171,
     ],
     "PLAT_OVER_MNGR_GUID": [
         2249479805,
@@ -30683,7 +28896,7 @@ PROTOCOLS_GUIDS = {
         12,
         156,
         112,
-        192
+        192,
     ],
     "PRE_PI_EXTRACT_GUIDED_SECTION_DATA_GUID": [
         945461292,
@@ -30696,7 +28909,7 @@ PROTOCOLS_GUIDS = {
         2,
         92,
         139,
-        107
+        107,
     ],
     "PWD_CREDENTIAL_PROVIDER_GUID": [
         2025450635,
@@ -30709,7 +28922,7 @@ PROTOCOLS_GUIDS = {
         193,
         187,
         0,
-        206
+        206,
     ],
     "RECOVERY_ON_DATA_CD_GUID": [
         1554776217,
@@ -30722,7 +28935,7 @@ PROTOCOLS_GUIDS = {
         245,
         64,
         10,
-        159
+        159,
     ],
     "RECOVERY_ON_FAT_FLOPPY_DISK_GUID": [
         775761525,
@@ -30735,7 +28948,7 @@ PROTOCOLS_GUIDS = {
         107,
         135,
         0,
-        255
+        255,
     ],
     "RECOVERY_ON_FAT_IDE_DISK_GUID": [
         3011867574,
@@ -30748,7 +28961,7 @@ PROTOCOLS_GUIDS = {
         89,
         56,
         215,
-        131
+        131,
     ],
     "RECOVERY_ON_FAT_USB_DISK_GUID": [
         268160537,
@@ -30761,7 +28974,7 @@ PROTOCOLS_GUIDS = {
         174,
         46,
         177,
-        134
+        134,
     ],
     "SAL_SYSTEM_TABLE_GUID": [
         3952946482,
@@ -30774,7 +28987,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "SECUREBOOT_CONFIG_FORM_SET_GUID": [
         1571770533,
@@ -30787,7 +29000,7 @@ PROTOCOLS_GUIDS = {
         169,
         207,
         92,
-        20
+        20,
     ],
     "SECURITYPKG_TOKEN_SPACE_GUID": [
         222278006,
@@ -30800,7 +29013,7 @@ PROTOCOLS_GUIDS = {
         198,
         79,
         234,
-        186
+        186,
     ],
     "SHELLPKG_SHELL_ENV2_EXT_GUID": [
         3535898166,
@@ -30813,7 +29026,7 @@ PROTOCOLS_GUIDS = {
         95,
         212,
         44,
-        135
+        135,
     ],
     "SHELL_ALIAS_VARIABLE_GUID": [
         5495254,
@@ -30826,7 +29039,7 @@ PROTOCOLS_GUIDS = {
         54,
         230,
         49,
-        169
+        169,
     ],
     "SHELL_DEBUG1_HII_GUID": [
         636616874,
@@ -30839,7 +29052,7 @@ PROTOCOLS_GUIDS = {
         98,
         210,
         46,
-        111
+        111,
     ],
     "SHELL_DRIVER1_HII_GUID": [
         183547714,
@@ -30852,7 +29065,7 @@ PROTOCOLS_GUIDS = {
         127,
         47,
         232,
-        232
+        232,
     ],
     "SHELL_ENVIRONMENT_PROTOCOL_GUID": [
         1204269601,
@@ -30865,7 +29078,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "SHELL_INSTALL1_HII_GUID": [
         2102873428,
@@ -30878,7 +29091,7 @@ PROTOCOLS_GUIDS = {
         219,
         122,
         211,
-        238
+        238,
     ],
     "SHELL_INTERFACE_PROTOCOL_GUID": [
         1204269603,
@@ -30891,7 +29104,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "SHELL_LEVEL1_HII_GUID": [
         3737508516,
@@ -30904,7 +29117,7 @@ PROTOCOLS_GUIDS = {
         228,
         241,
         219,
-        49
+        49,
     ],
     "SHELL_LEVEL2_HII_GUID": [
         4183456972,
@@ -30917,7 +29130,7 @@ PROTOCOLS_GUIDS = {
         97,
         149,
         11,
-        174
+        174,
     ],
     "SHELL_LEVEL3_HII_GUID": [
         1128551821,
@@ -30930,21 +29143,9 @@ PROTOCOLS_GUIDS = {
         232,
         214,
         151,
-        79
+        79,
     ],
-    "SHELL_MAP_GUID": [
-        1361518099,
-        32227,
-        17327,
-        139,
-        194,
-        113,
-        173,
-        59,
-        130,
-        67,
-        37
-    ],
+    "SHELL_MAP_GUID": [1361518099, 32227, 17327, 139, 194, 113, 173, 59, 130, 67, 37],
     "SHELL_NETWORK1_HII_GUID": [
         4090692027,
         62629,
@@ -30956,7 +29157,7 @@ PROTOCOLS_GUIDS = {
         156,
         98,
         55,
-        174
+        174,
     ],
     "SHELL_VARIABLE_GUID": [
         361623386,
@@ -30969,21 +29170,9 @@ PROTOCOLS_GUIDS = {
         146,
         192,
         121,
-        210
+        210,
     ],
-    "SMBIOS_TABLE_GUID": [
-        3952946481,
-        11656,
-        4563,
-        154,
-        22,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
+    "SMBIOS_TABLE_GUID": [3952946481, 11656, 4563, 154, 22, 0, 144, 39, 63, 193, 77],
     "SMM_PERFORMANCE_EX_PROTOCOL_GUID": [
         2468331592,
         50973,
@@ -30995,7 +29184,7 @@ PROTOCOLS_GUIDS = {
         48,
         227,
         14,
-        229
+        229,
     ],
     "SMM_PERFORMANCE_PROTOCOL_GUID": [
         4167443050,
@@ -31008,7 +29197,7 @@ PROTOCOLS_GUIDS = {
         165,
         124,
         88,
-        142
+        142,
     ],
     "STATUS_CODE_CALLBACK_GUID": [
         3875620236,
@@ -31021,7 +29210,7 @@ PROTOCOLS_GUIDS = {
         148,
         159,
         121,
-        39
+        39,
     ],
     "SYSTEM_ROM_FILE_GUID": [
         357020915,
@@ -31034,7 +29223,7 @@ PROTOCOLS_GUIDS = {
         214,
         71,
         171,
-        26
+        26,
     ],
     "TCG_CONFIG_FORM_SET_GUID": [
         2969108964,
@@ -31047,7 +29236,7 @@ PROTOCOLS_GUIDS = {
         11,
         222,
         111,
-        181
+        181,
     ],
     "TIANO_CUSTOM_DECOMPRESS_GUID": [
         2735898797,
@@ -31060,21 +29249,9 @@ PROTOCOLS_GUIDS = {
         76,
         152,
         71,
-        121
+        121,
     ],
-    "UNIX_FWH_PPI_GUID": [
-        4075871280,
-        35205,
-        4571,
-        161,
-        91,
-        0,
-        64,
-        208,
-        43,
-        24,
-        53
-    ],
+    "UNIX_FWH_PPI_GUID": [4075871280, 35205, 4571, 161, 91, 0, 64, 208, 43, 24, 53],
     "UNIX_PEI_LOAD_FILE_GUID": [
         4076111720,
         35205,
@@ -31086,7 +29263,7 @@ PROTOCOLS_GUIDS = {
         208,
         43,
         24,
-        53
+        53,
     ],
     "USB_CREDENTIAL_PROVIDER_GUID": [
         3498352337,
@@ -31099,7 +29276,7 @@ PROTOCOLS_GUIDS = {
         226,
         128,
         183,
-        169
+        169,
     ],
     "USB_KEYBOARD_LAYOUT_PACKAGE_GUID": [
         202324803,
@@ -31112,7 +29289,7 @@ PROTOCOLS_GUIDS = {
         111,
         98,
         137,
-        220
+        220,
     ],
     "USER_IDENTIFY_MANAGER_GUID": [
         1020083672,
@@ -31125,7 +29302,7 @@ PROTOCOLS_GUIDS = {
         205,
         130,
         179,
-        196
+        196,
     ],
     "USER_PROFILE_MANAGER_GUID": [
         3277793068,
@@ -31138,7 +29315,7 @@ PROTOCOLS_GUIDS = {
         102,
         138,
         140,
-        254
+        254,
     ],
     "VIRTUAL_UNCACHED_PAGES_PROTOCOL_GUID": [
         2909084797,
@@ -31151,7 +29328,7 @@ PROTOCOLS_GUIDS = {
         205,
         174,
         135,
-        178
+        178,
     ],
     "VLAN_CONFIG_FORM_SET_GUID": [
         3617453744,
@@ -31164,7 +29341,7 @@ PROTOCOLS_GUIDS = {
         59,
         207,
         95,
-        168
+        168,
     ],
     "LENOVO_SYSTEM_USB_SWITCH_DXE_GUID": [
         1293931,
@@ -31177,7 +29354,7 @@ PROTOCOLS_GUIDS = {
         215,
         177,
         225,
-        204
+        204,
     ],
     "LENOVO_SYSTEM_SCSI_BUS_DXE_GUID": [
         23579844,
@@ -31190,7 +29367,7 @@ PROTOCOLS_GUIDS = {
         183,
         205,
         206,
-        139
+        139,
     ],
     "LENOVO_SYSTEM_AHCI_BUS_DXE_GUID": [
         23579844,
@@ -31203,7 +29380,7 @@ PROTOCOLS_GUIDS = {
         183,
         205,
         206,
-        140
+        140,
     ],
     "LENOVO_MNP_DXE_BIN_GUID": [
         39567303,
@@ -31216,7 +29393,7 @@ PROTOCOLS_GUIDS = {
         161,
         174,
         175,
-        74
+        74,
     ],
     "LENOVO_ISSC_SMM_GUID": [
         62871161,
@@ -31229,7 +29406,7 @@ PROTOCOLS_GUIDS = {
         29,
         167,
         103,
-        200
+        200,
     ],
     "LENOVO_EC_IO_SMM_GUID": [
         65788747,
@@ -31242,7 +29419,7 @@ PROTOCOLS_GUIDS = {
         168,
         134,
         87,
-        7
+        7,
     ],
     "LENOVO_EN25_QH32_FLASH_PART_DXE_GUID": [
         85592951,
@@ -31255,7 +29432,7 @@ PROTOCOLS_GUIDS = {
         194,
         150,
         214,
-        230
+        230,
     ],
     "LENOVO_MTM_FORMAT_SMM_GUID": [
         104351088,
@@ -31268,7 +29445,7 @@ PROTOCOLS_GUIDS = {
         227,
         204,
         177,
-        159
+        159,
     ],
     "LENOVO_DXE_RICOH_INIT_GUID": [
         110529390,
@@ -31281,7 +29458,7 @@ PROTOCOLS_GUIDS = {
         35,
         84,
         221,
-        117
+        117,
     ],
     "LENOVO_SECURITY_VARIABLE_DXE_GUID": [
         115245642,
@@ -31294,7 +29471,7 @@ PROTOCOLS_GUIDS = {
         254,
         245,
         177,
-        9
+        9,
     ],
     "LENOVO_IBEX_PEAK_FLASH_CONTROLLER_DXE_GUID": [
         119797899,
@@ -31307,7 +29484,7 @@ PROTOCOLS_GUIDS = {
         59,
         67,
         54,
-        152
+        152,
     ],
     "LENOVO_BOARD_INFO_SMM_GUID": [
         124839840,
@@ -31320,7 +29497,7 @@ PROTOCOLS_GUIDS = {
         133,
         8,
         5,
-        86
+        86,
     ],
     "LENOVO_SYSTEM_METRONOME_DXE_GUID": [
         128529162,
@@ -31333,7 +29510,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "LENOVO_SLP2_DXE_GUID": [
         142514016,
@@ -31346,7 +29523,7 @@ PROTOCOLS_GUIDS = {
         43,
         33,
         76,
-        199
+        199,
     ],
     "LENOVO_CRYPT_SERVICE_SMM_GUID": [
         150721327,
@@ -31359,7 +29536,7 @@ PROTOCOLS_GUIDS = {
         97,
         247,
         51,
-        51
+        51,
     ],
     "LENOVO_SYSTEM_SCSI_DISK_DXE_GUID": [
         174514978,
@@ -31372,7 +29549,7 @@ PROTOCOLS_GUIDS = {
         44,
         236,
         202,
-        53
+        53,
     ],
     "LENOVO_SYSTEM_USB_SWITCH_SMM_GUID": [
         191532512,
@@ -31385,7 +29562,7 @@ PROTOCOLS_GUIDS = {
         161,
         138,
         109,
-        64
+        64,
     ],
     "LENOVO_EC_FW_UPDATE_DXE_GUID": [
         205090762,
@@ -31398,7 +29575,7 @@ PROTOCOLS_GUIDS = {
         69,
         68,
         189,
-        183
+        183,
     ],
     "LENOVO_SETUP_UNDER_OS_DXE_GUID": [
         224691302,
@@ -31411,7 +29588,7 @@ PROTOCOLS_GUIDS = {
         170,
         37,
         117,
-        192
+        192,
     ],
     "LENOVO_BDS_CTRL_GUID": [
         266426805,
@@ -31424,7 +29601,7 @@ PROTOCOLS_GUIDS = {
         242,
         131,
         18,
-        82
+        82,
     ],
     "LENOVO_SYSTEM_FIRMWARE_DEVICE_DXE_GUID": [
         269784614,
@@ -31437,7 +29614,7 @@ PROTOCOLS_GUIDS = {
         184,
         18,
         19,
-        2
+        2,
     ],
     "LENOVO_EC_IO_DXE_GUID": [
         290235916,
@@ -31450,7 +29627,7 @@ PROTOCOLS_GUIDS = {
         34,
         72,
         225,
-        250
+        250,
     ],
     "LENOVO_SYSTEM_SMM_AHCI_ASPI_LEGACY_RT_GUID": [
         306851450,
@@ -31463,7 +29640,7 @@ PROTOCOLS_GUIDS = {
         144,
         76,
         160,
-        167
+        167,
     ],
     "LENOVO_BOOT_MENU_DXE_GUID": [
         308966957,
@@ -31476,21 +29653,9 @@ PROTOCOLS_GUIDS = {
         127,
         87,
         248,
-        80
+        80,
     ],
-    "LENOVO_FP_PBA_GUID": [
-        317155615,
-        7918,
-        20180,
-        135,
-        147,
-        105,
-        226,
-        128,
-        29,
-        96,
-        42
-    ],
+    "LENOVO_FP_PBA_GUID": [317155615, 7918, 20180, 135, 147, 105, 226, 128, 29, 96, 42],
     "LENOVO_SYSTEM_EBC_DXE_GUID": [
         330067408,
         29648,
@@ -31502,7 +29667,7 @@ PROTOCOLS_GUIDS = {
         0,
         189,
         109,
-        231
+        231,
     ],
     "LENOVO_SYSTEM_SMM_SERVICES_SMM_GUID": [
         352631419,
@@ -31515,7 +29680,7 @@ PROTOCOLS_GUIDS = {
         167,
         4,
         67,
-        118
+        118,
     ],
     "LENOVO_EC_SERVICE_GUID": [
         365429572,
@@ -31528,7 +29693,7 @@ PROTOCOLS_GUIDS = {
         2,
         122,
         239,
-        22
+        22,
     ],
     "LENOVO_SECURE_FLASH_VERIFY_SMM_GUID": [
         366827126,
@@ -31541,7 +29706,7 @@ PROTOCOLS_GUIDS = {
         45,
         216,
         147,
-        235
+        235,
     ],
     "LENOVO_EN25_QH128_FLASH_PART_SMM_GUID": [
         386766184,
@@ -31554,7 +29719,7 @@ PROTOCOLS_GUIDS = {
         121,
         191,
         190,
-        98
+        98,
     ],
     "LENOVO_COMPUTRACE_SMI_SERVICES_GUID": [
         408391285,
@@ -31567,7 +29732,7 @@ PROTOCOLS_GUIDS = {
         168,
         113,
         228,
-        77
+        77,
     ],
     "LENOVO_SMM_VIDEO_INT10_GUID": [
         431419749,
@@ -31580,7 +29745,7 @@ PROTOCOLS_GUIDS = {
         202,
         135,
         224,
-        36
+        36,
     ],
     "LENOVO_TCP_DXE_BIN_GUID": [
         444482664,
@@ -31593,7 +29758,7 @@ PROTOCOLS_GUIDS = {
         94,
         183,
         98,
-        43
+        43,
     ],
     "LENOVO_SYSTEM_BOOT_SCRIPT_SAVE_DXE_GUID": [
         476786607,
@@ -31606,21 +29771,9 @@ PROTOCOLS_GUIDS = {
         180,
         194,
         243,
-        209
+        209,
     ],
-    "LENOVO_EAIA_DXE_GUID": [
-        488641077,
-        12096,
-        20412,
-        134,
-        80,
-        133,
-        2,
-        9,
-        45,
-        98,
-        171
-    ],
+    "LENOVO_EAIA_DXE_GUID": [488641077, 12096, 20412, 134, 80, 133, 2, 9, 45, 98, 171],
     "LENOVO_SYSTEM_PS2_MOUSE_DXE_GUID": [
         539634446,
         39473,
@@ -31632,7 +29785,7 @@ PROTOCOLS_GUIDS = {
         223,
         21,
         36,
-        57
+        57,
     ],
     "LENOVO_SMART_CARD_DETECT_DXE_GUID": [
         582945669,
@@ -31645,7 +29798,7 @@ PROTOCOLS_GUIDS = {
         207,
         204,
         167,
-        135
+        135,
     ],
     "LENOVO_PLATFORM_FLASH_DXE_GUID": [
         590885754,
@@ -31658,7 +29811,7 @@ PROTOCOLS_GUIDS = {
         251,
         148,
         223,
-        244
+        244,
     ],
     "LENOVO_MX25_L3206_EFLASH_PART_SMM_GUID": [
         596469069,
@@ -31671,7 +29824,7 @@ PROTOCOLS_GUIDS = {
         32,
         134,
         37,
-        195
+        195,
     ],
     "LENOVO_TPM_ENABLER_DXE_GUID": [
         601439914,
@@ -31684,7 +29837,7 @@ PROTOCOLS_GUIDS = {
         223,
         118,
         45,
-        228
+        228,
     ],
     "LENOVO_SYSTEM_USB_SUPPORT_POLICY_SMM_GUID": [
         604377783,
@@ -31697,7 +29850,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        76
+        76,
     ],
     "LENOVO_SYSTEM_USB_BUS_DXE_GUID": [
         604377783,
@@ -31710,7 +29863,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "LENOVO_SYSTEM_USB_SUPPORT_POLICY_DXE_GUID": [
         604377783,
@@ -31723,7 +29876,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        78
+        78,
     ],
     "LENOVO_SMM_OEMINT15_GUID": [
         607947914,
@@ -31736,7 +29889,7 @@ PROTOCOLS_GUIDS = {
         88,
         49,
         48,
-        236
+        236,
     ],
     "LENOVO_SYSTEM_STATUS_CODE_GENERIC_RT_GUID": [
         611294986,
@@ -31749,7 +29902,7 @@ PROTOCOLS_GUIDS = {
         220,
         77,
         232,
-        6
+        6,
     ],
     "LENOVO_CRYPT_SERVICE_GUID": [
         626323294,
@@ -31762,7 +29915,7 @@ PROTOCOLS_GUIDS = {
         177,
         232,
         124,
-        45
+        45,
     ],
     "LENOVO_TCG_SERVICES_DXE_GUID": [
         636784743,
@@ -31775,7 +29928,7 @@ PROTOCOLS_GUIDS = {
         140,
         72,
         136,
-        54
+        54,
     ],
     "LENOVO_FDISK_OEM_GUID": [
         652065439,
@@ -31788,7 +29941,7 @@ PROTOCOLS_GUIDS = {
         228,
         208,
         27,
-        14
+        14,
     ],
     "LENOVO_PCH_SPI_SMM_GUID": [
         670339451,
@@ -31801,7 +29954,7 @@ PROTOCOLS_GUIDS = {
         22,
         140,
         191,
-        13
+        13,
     ],
     "LENOVO_IVB_GOP_DRIVER_GUID": [
         682992732,
@@ -31814,7 +29967,7 @@ PROTOCOLS_GUIDS = {
         244,
         45,
         220,
-        1
+        1,
     ],
     "LENOVO_SYSTEM_STATUS_CODE_PORT80_RT_GUID": [
         698459927,
@@ -31827,7 +29980,7 @@ PROTOCOLS_GUIDS = {
         95,
         247,
         9,
-        66
+        66,
     ],
     "LENOVO_W25_Q64_FLASH_PART_DXE_GUID": [
         708977825,
@@ -31840,7 +29993,7 @@ PROTOCOLS_GUIDS = {
         192,
         241,
         209,
-        128
+        128,
     ],
     "LENOVO_SYSTEM_USB_MEMORY_MANAGER_SMM_GUID": [
         717954629,
@@ -31853,7 +30006,7 @@ PROTOCOLS_GUIDS = {
         215,
         135,
         210,
-        45
+        45,
     ],
     "LENOVO_SYSTEM_ACPI_S3_SAVE_DXE_GUID": [
         736024197,
@@ -31866,7 +30019,7 @@ PROTOCOLS_GUIDS = {
         43,
         121,
         31,
-        179
+        179,
     ],
     "LENOVO_SA_LATE_INIT_SMM_GUID": [
         756954652,
@@ -31879,7 +30032,7 @@ PROTOCOLS_GUIDS = {
         81,
         250,
         189,
-        199
+        199,
     ],
     "LENOVO_SYSTEM_USB_MOUSE_DXE_GUID": [
         758014634,
@@ -31892,7 +30045,7 @@ PROTOCOLS_GUIDS = {
         252,
         113,
         61,
-        254
+        254,
     ],
     "LENOVO_SYSTEM_USB_KB_DXE_GUID": [
         758014671,
@@ -31905,7 +30058,7 @@ PROTOCOLS_GUIDS = {
         252,
         113,
         61,
-        254
+        254,
     ],
     "LENOVO_PLATFORM_DXE_GUID": [
         762263487,
@@ -31918,7 +30071,7 @@ PROTOCOLS_GUIDS = {
         252,
         243,
         15,
-        185
+        185,
     ],
     "LENOVO_PCH_BIOS_WRITE_PROTECT_GUID": [
         786963147,
@@ -31931,7 +30084,7 @@ PROTOCOLS_GUIDS = {
         209,
         108,
         74,
-        168
+        168,
     ],
     "LENOVO_TP_ACPI_NVS_INIT_DXE_GUID": [
         807013315,
@@ -31944,7 +30097,7 @@ PROTOCOLS_GUIDS = {
         95,
         145,
         231,
-        184
+        184,
     ],
     "LENOVO_SNB_GOP_DRIVER_GUID": [
         823145156,
@@ -31957,7 +30110,7 @@ PROTOCOLS_GUIDS = {
         253,
         31,
         231,
-        9
+        9,
     ],
     "LENOVO_SYSTEM_USB_DATABASE_SMM_GUID": [
         828477649,
@@ -31970,7 +30123,7 @@ PROTOCOLS_GUIDS = {
         47,
         58,
         30,
-        193
+        193,
     ],
     "LENOVO_SYSTEM_FORM_BROWSER_CORE_DXE_GUID": [
         843328777,
@@ -31983,7 +30136,7 @@ PROTOCOLS_GUIDS = {
         106,
         203,
         4,
-        137
+        137,
     ],
     "LENOVO_BIOS_EXTENSION_LOADER_GUID": [
         851560952,
@@ -31996,7 +30149,7 @@ PROTOCOLS_GUIDS = {
         159,
         35,
         16,
-        17
+        17,
     ],
     "LENOVO_SYSTEM_HII_DATABASE_DXE_GUID": [
         881610082,
@@ -32009,7 +30162,7 @@ PROTOCOLS_GUIDS = {
         177,
         196,
         120,
-        59
+        59,
     ],
     "LENOVO_ATP_DXE_GUID": [
         886382265,
@@ -32022,7 +30175,7 @@ PROTOCOLS_GUIDS = {
         86,
         232,
         149,
-        246
+        246,
     ],
     "LENOVO_DXE_MAIN_GUID": [
         901290186,
@@ -32035,7 +30188,7 @@ PROTOCOLS_GUIDS = {
         53,
         204,
         73,
-        183
+        183,
     ],
     "LENOVO_SYSTEM_SPLASH_DXE_GUID": [
         923302804,
@@ -32048,7 +30201,7 @@ PROTOCOLS_GUIDS = {
         223,
         221,
         6,
-        225
+        225,
     ],
     "LENOVO_SYSTEM_IMAGE_DISPLAY_DXE_GUID": [
         924820664,
@@ -32061,7 +30214,7 @@ PROTOCOLS_GUIDS = {
         189,
         44,
         223,
-        10
+        10,
     ],
     "LENOVO_SYSTEM_RTC_RT_GUID": [
         932019045,
@@ -32074,7 +30227,7 @@ PROTOCOLS_GUIDS = {
         38,
         168,
         51,
-        225
+        225,
     ],
     "LENOVO_SYSTEM_IDE_ATA_ATAPI_PASS_THRU_DXE_GUID": [
         933285920,
@@ -32087,7 +30240,7 @@ PROTOCOLS_GUIDS = {
         32,
         12,
         154,
-        102
+        102,
     ],
     "LENOVO_SETUP_MAIN_DXE_GUID": [
         934268757,
@@ -32100,7 +30253,7 @@ PROTOCOLS_GUIDS = {
         145,
         101,
         197,
-        107
+        107,
     ],
     "LENOVO_ME_PCI_UPDATE_GUID": [
         937281513,
@@ -32113,7 +30266,7 @@ PROTOCOLS_GUIDS = {
         209,
         37,
         39,
-        179
+        179,
     ],
     "LENOVO_PHX_GOP_DXE_GUID": [
         938270500,
@@ -32126,7 +30279,7 @@ PROTOCOLS_GUIDS = {
         139,
         254,
         103,
-        66
+        66,
     ],
     "LENOVO_MX25_L64_XFLASH_PART_DXE_GUID": [
         949109979,
@@ -32139,7 +30292,7 @@ PROTOCOLS_GUIDS = {
         90,
         50,
         93,
-        137
+        137,
     ],
     "LENOVO_AOAC_SMM_GUID": [
         975891559,
@@ -32152,7 +30305,7 @@ PROTOCOLS_GUIDS = {
         156,
         158,
         127,
-        8
+        8,
     ],
     "LENOVO_SYSTEM_HII_IMAGE_DISPLAY_DXE_GUID": [
         1007992985,
@@ -32165,7 +30318,7 @@ PROTOCOLS_GUIDS = {
         210,
         195,
         167,
-        153
+        153,
     ],
     "LENOVO_SYSTEM_PS2_KEYBOARD_DXE_GUID": [
         1036526454,
@@ -32178,7 +30331,7 @@ PROTOCOLS_GUIDS = {
         65,
         127,
         44,
-        56
+        56,
     ],
     "LENOVO_REBOOT_CP_GUID": [
         1039934815,
@@ -32191,7 +30344,7 @@ PROTOCOLS_GUIDS = {
         83,
         55,
         104,
-        219
+        219,
     ],
     "LENOVO_SYSTEM_CRYPT_SVC_RT_GUID": [
         1044688137,
@@ -32204,7 +30357,7 @@ PROTOCOLS_GUIDS = {
         5,
         54,
         71,
-        74
+        74,
     ],
     "LENOVO_PLATFORM_PCI_DXE_GUID": [
         1064784879,
@@ -32217,7 +30370,7 @@ PROTOCOLS_GUIDS = {
         255,
         16,
         56,
-        182
+        182,
     ],
     "LENOVO_FIT_DIAGNOSTICS_LOADER_GUID": [
         1065247067,
@@ -32230,7 +30383,7 @@ PROTOCOLS_GUIDS = {
         52,
         149,
         133,
-        96
+        96,
     ],
     "LENOVO_IBEX_PEAK_GLOBAL_SMI_CONTROL_GUID": [
         1069045413,
@@ -32243,7 +30396,7 @@ PROTOCOLS_GUIDS = {
         79,
         163,
         91,
-        250
+        250,
     ],
     "LENOVO_VPRO_IDER_ASF_BOOT_GUID": [
         1075081700,
@@ -32256,7 +30409,7 @@ PROTOCOLS_GUIDS = {
         36,
         35,
         5,
-        103
+        103,
     ],
     "LENOVO_SYSTEM_CON_SPLITTER_DXE_GUID": [
         1083104492,
@@ -32269,7 +30422,7 @@ PROTOCOLS_GUIDS = {
         78,
         61,
         226,
-        129
+        129,
     ],
     "LENOVO_I_FFS_SMM_GUID": [
         1125591121,
@@ -32282,7 +30435,7 @@ PROTOCOLS_GUIDS = {
         43,
         177,
         123,
-        136
+        136,
     ],
     "LENOVO_SYSTEM_PARTITION_DXE_GUID": [
         1136210482,
@@ -32295,7 +30448,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "LENOVO_MAIL_BOX_DXE_GUID": [
         1136369323,
@@ -32308,7 +30461,7 @@ PROTOCOLS_GUIDS = {
         249,
         198,
         234,
-        227
+        227,
     ],
     "LENOVO_VARIABLE_INIT_SMM_GUID": [
         1154448672,
@@ -32321,7 +30474,7 @@ PROTOCOLS_GUIDS = {
         95,
         92,
         232,
-        139
+        139,
     ],
     "LENOVO_SYSTEM_AHCI_ATA_ATAPI_PASS_THRU_DXE_GUID": [
         1156724112,
@@ -32334,7 +30487,7 @@ PROTOCOLS_GUIDS = {
         32,
         12,
         154,
-        102
+        102,
     ],
     "LENOVO_COMPUTRACE_LOADER_DXE_GUID": [
         1166658547,
@@ -32347,7 +30500,7 @@ PROTOCOLS_GUIDS = {
         60,
         105,
         86,
-        42
+        42,
     ],
     "LENOVO_SYSTEM_CMOS_SMM_GUID": [
         1188605149,
@@ -32360,7 +30513,7 @@ PROTOCOLS_GUIDS = {
         37,
         171,
         79,
-        153
+        153,
     ],
     "LENOVO_MISC_GA_IO_DXE_GUID": [
         1246898131,
@@ -32373,7 +30526,7 @@ PROTOCOLS_GUIDS = {
         68,
         108,
         92,
-        108
+        108,
     ],
     "LENOVO_AT24_RF08_EEPROM_SMM_GUID": [
         1265312161,
@@ -32386,7 +30539,7 @@ PROTOCOLS_GUIDS = {
         99,
         161,
         217,
-        42
+        42,
     ],
     "LENOVO_SECURITY_SMI_DISPATCH_GUID": [
         1283265896,
@@ -32399,7 +30552,7 @@ PROTOCOLS_GUIDS = {
         249,
         96,
         12,
-        204
+        204,
     ],
     "LENOVO_SYSTEM_PPIS_NEEDED_BY_DXE_CORE_GUID": [
         1295505986,
@@ -32412,7 +30565,7 @@ PROTOCOLS_GUIDS = {
         29,
         180,
         113,
-        59
+        59,
     ],
     "LENOVO_SYSTEM_ERROR_LOG_SMM_GUID": [
         1298314729,
@@ -32425,7 +30578,7 @@ PROTOCOLS_GUIDS = {
         146,
         29,
         154,
-        209
+        209,
     ],
     "LENOVO_VPRO_HII_DXE_GUID": [
         1322172828,
@@ -32438,7 +30591,7 @@ PROTOCOLS_GUIDS = {
         44,
         197,
         223,
-        193
+        193,
     ],
     "LENOVO_COMPUTRACE_ENABLER_DXE_GUID": [
         1325158874,
@@ -32451,7 +30604,7 @@ PROTOCOLS_GUIDS = {
         199,
         245,
         205,
-        239
+        239,
     ],
     "LENOVO_EN25_QH64_FLASH_PART_SMM_GUID": [
         1344002362,
@@ -32464,7 +30617,7 @@ PROTOCOLS_GUIDS = {
         223,
         151,
         85,
-        55
+        55,
     ],
     "LENOVO_PCH_EMULATE_KBC_GUID": [
         1359302880,
@@ -32477,7 +30630,7 @@ PROTOCOLS_GUIDS = {
         61,
         24,
         231,
-        5
+        5,
     ],
     "LENOVO_SYSTEM_SMBIOS_EVENT_LOG_DXE_GUID": [
         1360175786,
@@ -32490,7 +30643,7 @@ PROTOCOLS_GUIDS = {
         230,
         137,
         186,
-        159
+        159,
     ],
     "LENOVO_HPM_SMM_GUID": [
         1364927051,
@@ -32503,7 +30656,7 @@ PROTOCOLS_GUIDS = {
         88,
         244,
         184,
-        152
+        152,
     ],
     "LENOVO_SYSTEM_CRC32_SECTION_EXTRACT_DXE_GUID": [
         1372189708,
@@ -32516,7 +30669,7 @@ PROTOCOLS_GUIDS = {
         255,
         175,
         249,
-        250
+        250,
     ],
     "LENOVO_SYSTEM_CON_PLATFORM_DXE_GUID": [
         1372386201,
@@ -32529,7 +30682,7 @@ PROTOCOLS_GUIDS = {
         248,
         77,
         69,
-        106
+        106,
     ],
     "LENOVO_PLATFORM_S3_SAVE_DXE_GUID": [
         1372895948,
@@ -32542,7 +30695,7 @@ PROTOCOLS_GUIDS = {
         115,
         237,
         147,
-        140
+        140,
     ],
     "LENOVO_TDT_AM_GUID": [
         1376754776,
@@ -32555,7 +30708,7 @@ PROTOCOLS_GUIDS = {
         109,
         143,
         222,
-        119
+        119,
     ],
     "LENOVO_ARP_DXE_BIN_GUID": [
         1386037139,
@@ -32568,7 +30721,7 @@ PROTOCOLS_GUIDS = {
         169,
         213,
         1,
-        19
+        19,
     ],
     "LENOVO_HPM_DXE_GUID": [
         1402833581,
@@ -32581,7 +30734,7 @@ PROTOCOLS_GUIDS = {
         109,
         21,
         1,
-        182
+        182,
     ],
     "LENOVO_SYSTEM_DATA_HUB_DXE_GUID": [
         1404879183,
@@ -32594,7 +30747,7 @@ PROTOCOLS_GUIDS = {
         212,
         204,
         24,
-        96
+        96,
     ],
     "LENOVO_SYSTEM_FLASH_COMMUNICATION_DXE_GUID": [
         1416286869,
@@ -32607,7 +30760,7 @@ PROTOCOLS_GUIDS = {
         208,
         75,
         65,
-        205
+        205,
     ],
     "LENOVO_SYSTEM_FIRMWARE_DEVICE_SMM_GUID": [
         1422077119,
@@ -32620,7 +30773,7 @@ PROTOCOLS_GUIDS = {
         227,
         34,
         85,
-        223
+        223,
     ],
     "LENOVO_DRIVE_ERASE_DXE_GUID": [
         1426260946,
@@ -32633,7 +30786,7 @@ PROTOCOLS_GUIDS = {
         16,
         225,
         153,
-        233
+        233,
     ],
     "LENOVO_SMM_BASE_RUNTIME_GUID": [
         1431459674,
@@ -32646,7 +30799,7 @@ PROTOCOLS_GUIDS = {
         115,
         81,
         180,
-        158
+        158,
     ],
     "LENOVO_DRIVE_ERASE_SMM_GUID": [
         1442418698,
@@ -32659,7 +30812,7 @@ PROTOCOLS_GUIDS = {
         127,
         175,
         174,
-        51
+        51,
     ],
     "LENOVO_PRIOR_BOOT_GUID": [
         1475642899,
@@ -32672,7 +30825,7 @@ PROTOCOLS_GUIDS = {
         197,
         51,
         181,
-        184
+        184,
     ],
     "LENOVO_DISK_CONTROLLER_SMBIOS_GUID": [
         1514093521,
@@ -32685,7 +30838,7 @@ PROTOCOLS_GUIDS = {
         27,
         137,
         139,
-        0
+        0,
     ],
     "LENOVO_DXE_REALTEK_CRC_INIT_GUID": [
         1534379841,
@@ -32698,7 +30851,7 @@ PROTOCOLS_GUIDS = {
         171,
         67,
         104,
-        253
+        253,
     ],
     "LENOVO_PLATFORM_CSM_DXE_GUID": [
         1541268997,
@@ -32711,7 +30864,7 @@ PROTOCOLS_GUIDS = {
         67,
         78,
         187,
-        228
+        228,
     ],
     "LENOVO_SECURE_ERROR_MANAGER_DXE_GUID": [
         1541333558,
@@ -32724,7 +30877,7 @@ PROTOCOLS_GUIDS = {
         12,
         95,
         41,
-        86
+        86,
     ],
     "LENOVO_IP6_DXE_BIN_GUID": [
         1542305228,
@@ -32737,7 +30890,7 @@ PROTOCOLS_GUIDS = {
         201,
         181,
         79,
-        44
+        44,
     ],
     "LENOVO_SETUP_RESTART_DXE_GUID": [
         1567984635,
@@ -32750,7 +30903,7 @@ PROTOCOLS_GUIDS = {
         140,
         230,
         81,
-        99
+        99,
     ],
     "LENOVO_SYSTEM_IMAGE_DECODER_DXE_GUID": [
         1600508442,
@@ -32763,7 +30916,7 @@ PROTOCOLS_GUIDS = {
         159,
         226,
         197,
-        152
+        152,
     ],
     "LENOVO_SETUP_CONFIG_DXE_GUID": [
         1607003872,
@@ -32776,7 +30929,7 @@ PROTOCOLS_GUIDS = {
         212,
         200,
         123,
-        180
+        180,
     ],
     "LENOVO_SMBIOS_COMPATI_INFO_GUID": [
         1616789944,
@@ -32789,7 +30942,7 @@ PROTOCOLS_GUIDS = {
         133,
         38,
         231,
-        141
+        141,
     ],
     "LENOVO_SYSTEM_KBC_INIT_DXE_GUID": [
         1628708000,
@@ -32802,7 +30955,7 @@ PROTOCOLS_GUIDS = {
         224,
         160,
         148,
-        102
+        102,
     ],
     "LENOVO_REMOTE_CONFIG_UPDATE_DXE_GUID": [
         1646126790,
@@ -32815,7 +30968,7 @@ PROTOCOLS_GUIDS = {
         118,
         154,
         10,
-        212
+        212,
     ],
     "LENOVO_CPU_INIT_DXE_GUID": [
         1657893323,
@@ -32828,7 +30981,7 @@ PROTOCOLS_GUIDS = {
         167,
         151,
         168,
-        222
+        222,
     ],
     "LENOVO_CPU_INIT_PHNX_DXE_GUID": [
         1665371246,
@@ -32841,7 +30994,7 @@ PROTOCOLS_GUIDS = {
         69,
         123,
         227,
-        51
+        51,
     ],
     "LENOVO_SYSTEM_VARIABLE_SMM_GUID": [
         1696885307,
@@ -32854,7 +31007,7 @@ PROTOCOLS_GUIDS = {
         51,
         241,
         48,
-        176
+        176,
     ],
     "LENOVO_SETUP_UNDER_OS_SMM_GUID": [
         1705451568,
@@ -32867,7 +31020,7 @@ PROTOCOLS_GUIDS = {
         47,
         197,
         109,
-        231
+        231,
     ],
     "LENOVO_RN_RCONFIG_GUID": [
         1717387104,
@@ -32880,7 +31033,7 @@ PROTOCOLS_GUIDS = {
         238,
         233,
         241,
-        181
+        181,
     ],
     "LENOVO_VARIABLE_DXE_GUID": [
         1726926656,
@@ -32893,7 +31046,7 @@ PROTOCOLS_GUIDS = {
         248,
         216,
         167,
-        26
+        26,
     ],
     "LENOVO_MISC_GA_IO_SMM_GUID": [
         1739578975,
@@ -32906,7 +31059,7 @@ PROTOCOLS_GUIDS = {
         57,
         7,
         219,
-        241
+        241,
     ],
     "LENOVO_W25_Q32_FLASH_PART_DXE_GUID": [
         1757163669,
@@ -32919,7 +31072,7 @@ PROTOCOLS_GUIDS = {
         110,
         202,
         123,
-        187
+        187,
     ],
     "LENOVO_SYSTEM_IDE_BUS_DXE_GUID": [
         1778224711,
@@ -32932,7 +31085,7 @@ PROTOCOLS_GUIDS = {
         206,
         178,
         178,
-        178
+        178,
     ],
     "LENOVO_OEM_MILESTONE_GUID": [
         1784844030,
@@ -32945,7 +31098,7 @@ PROTOCOLS_GUIDS = {
         189,
         241,
         140,
-        200
+        200,
     ],
     "LENOVO_SETUP_SECURITY_DXE_GUID": [
         1786453126,
@@ -32958,7 +31111,7 @@ PROTOCOLS_GUIDS = {
         64,
         141,
         94,
-        215
+        215,
     ],
     "LENOVO_SECURE_KEY_DXE_GUID": [
         1787443551,
@@ -32971,7 +31124,7 @@ PROTOCOLS_GUIDS = {
         80,
         212,
         37,
-        248
+        248,
     ],
     "LENOVO_UDP4_DXE_BIN_GUID": [
         1835623339,
@@ -32984,7 +31137,7 @@ PROTOCOLS_GUIDS = {
         229,
         214,
         175,
-        43
+        43,
     ],
     "LENOVO_N25_Q064_FLASH_PART_SMM_GUID": [
         1848830710,
@@ -32997,7 +31150,7 @@ PROTOCOLS_GUIDS = {
         218,
         129,
         223,
-        118
+        118,
     ],
     "LENOVO_SMBIOS_VPRO_GUID": [
         1850878195,
@@ -33010,7 +31163,7 @@ PROTOCOLS_GUIDS = {
         97,
         181,
         34,
-        172
+        172,
     ],
     "LENOVO_W25_Q64_FLASH_PART_SMM_GUID": [
         1852721781,
@@ -33023,7 +31176,7 @@ PROTOCOLS_GUIDS = {
         67,
         184,
         125,
-        34
+        34,
     ],
     "LENOVO_SYSTEM_ISA_KBC_DXE_GUID": [
         1852769708,
@@ -33036,7 +31189,7 @@ PROTOCOLS_GUIDS = {
         109,
         117,
         102,
-        197
+        197,
     ],
     "LENOVO_PLATFORM_FLASH_SMM_GUID": [
         1886133772,
@@ -33049,7 +31202,7 @@ PROTOCOLS_GUIDS = {
         236,
         118,
         47,
-        53
+        53,
     ],
     "LENOVO_PI_SAVE_STATE_ACCESS_GUID": [
         1887124590,
@@ -33062,7 +31215,7 @@ PROTOCOLS_GUIDS = {
         76,
         27,
         63,
-        56
+        56,
     ],
     "LENOVO_SYSTEM_ACPI_SUPPORT_DXE_GUID": [
         1903824554,
@@ -33075,7 +31228,7 @@ PROTOCOLS_GUIDS = {
         121,
         76,
         166,
-        49
+        49,
     ],
     "LENOVO_SYSTEM_SETUP2_DXE_GUID": [
         1914473318,
@@ -33088,7 +31241,7 @@ PROTOCOLS_GUIDS = {
         196,
         106,
         176,
-        185
+        185,
     ],
     "LENOVO_SYSTEM_IDE_ATA_ATAPI_PASS_THRU_SMM_GUID": [
         1938925920,
@@ -33101,7 +31254,7 @@ PROTOCOLS_GUIDS = {
         32,
         12,
         154,
-        102
+        102,
     ],
     "LENOVO_SYSTEM_BOOT_MANAGER_DXE_GUID": [
         1943712527,
@@ -33114,7 +31267,7 @@ PROTOCOLS_GUIDS = {
         225,
         108,
         62,
-        222
+        222,
     ],
     "LENOVO_BLOCK_POWER_BUTTON_DXE_GUID": [
         1956648660,
@@ -33127,7 +31280,7 @@ PROTOCOLS_GUIDS = {
         51,
         214,
         81,
-        37
+        37,
     ],
     "LENOVO_SYSTEM_ACPI_NUMA_DXE_GUID": [
         1972041895,
@@ -33140,7 +31293,7 @@ PROTOCOLS_GUIDS = {
         31,
         151,
         199,
-        111
+        111,
     ],
     "LENOVO_SYSTEM_ACPI_TABLE_LOADER_DXE_GUID": [
         2002878155,
@@ -33153,7 +31306,7 @@ PROTOCOLS_GUIDS = {
         69,
         98,
         77,
-        122
+        122,
     ],
     "LENOVO_DIGITAL_THERMAL_SENSOR_SMM_GUID": [
         2007367838,
@@ -33166,7 +31319,7 @@ PROTOCOLS_GUIDS = {
         1,
         160,
         34,
-        221
+        221,
     ],
     "LENOVO_SYSTEM_FIXED_BUS_NUMBERS_DXE_GUID": [
         2030029397,
@@ -33179,7 +31332,7 @@ PROTOCOLS_GUIDS = {
         139,
         211,
         190,
-        56
+        56,
     ],
     "LENOVO_SYSTEM_VARIABLE_DXE_GUID": [
         2034024096,
@@ -33192,7 +31345,7 @@ PROTOCOLS_GUIDS = {
         12,
         183,
         81,
-        150
+        150,
     ],
     "LENOVO_SYSTEM_SW_SMI_ALLOCATOR_RT_GUID": [
         2034634970,
@@ -33205,7 +31358,7 @@ PROTOCOLS_GUIDS = {
         33,
         58,
         105,
-        120
+        120,
     ],
     "LENOVO_SYSTEM8259_INTERRUPT_CONTROLLER_DXE_GUID": [
         2043298312,
@@ -33218,7 +31371,7 @@ PROTOCOLS_GUIDS = {
         106,
         129,
         72,
-        78
+        78,
     ],
     "LENOVO_WMA_POLICY_DXE_GUID": [
         2044784087,
@@ -33231,7 +31384,7 @@ PROTOCOLS_GUIDS = {
         22,
         158,
         82,
-        22
+        22,
     ],
     "LENOVO_LAN_UEFI_GUID": [
         2046361940,
@@ -33244,7 +31397,7 @@ PROTOCOLS_GUIDS = {
         195,
         46,
         10,
-        44
+        44,
     ],
     "LENOVO_POP_MANAGER_DXE_GUID": [
         2070879654,
@@ -33257,7 +31410,7 @@ PROTOCOLS_GUIDS = {
         225,
         68,
         42,
-        161
+        161,
     ],
     "LENOVO_SYSTEM_USB_MEMORY_MANAGER_DXE_GUID": [
         2078746034,
@@ -33270,7 +31423,7 @@ PROTOCOLS_GUIDS = {
         86,
         182,
         89,
-        113
+        113,
     ],
     "LENOVO_ATP_SMI_SERVICES_GUID": [
         2091593354,
@@ -33283,7 +31436,7 @@ PROTOCOLS_GUIDS = {
         77,
         3,
         204,
-        159
+        159,
     ],
     "LENOVO_MODULES_SMM_THUNK_SMM_GUID": [
         2121356880,
@@ -33296,7 +31449,7 @@ PROTOCOLS_GUIDS = {
         252,
         116,
         43,
-        197
+        197,
     ],
     "LENOVO_VPRO_PET_ALERT_GUID": [
         2124901688,
@@ -33309,7 +31462,7 @@ PROTOCOLS_GUIDS = {
         238,
         43,
         133,
-        177
+        177,
     ],
     "LENOVO_SMM_RELOC_DXE_GUID": [
         2146267886,
@@ -33322,7 +31475,7 @@ PROTOCOLS_GUIDS = {
         24,
         100,
         223,
-        175
+        175,
     ],
     "LENOVO_IGD_CUSTOMIZE_GUID": [
         2167621142,
@@ -33335,7 +31488,7 @@ PROTOCOLS_GUIDS = {
         230,
         28,
         115,
-        246
+        246,
     ],
     "LENOVO_SETUP_DATE_TIME_DXE_GUID": [
         2182649437,
@@ -33348,7 +31501,7 @@ PROTOCOLS_GUIDS = {
         82,
         39,
         7,
-        67
+        67,
     ],
     "LENOVO_TRANSLATE_SERVICE_GUID": [
         2188103510,
@@ -33361,7 +31514,7 @@ PROTOCOLS_GUIDS = {
         10,
         18,
         26,
-        189
+        189,
     ],
     "LENOVO_ME_CONFIG_GUID": [
         2191033376,
@@ -33374,7 +31527,7 @@ PROTOCOLS_GUIDS = {
         72,
         221,
         25,
-        99
+        99,
     ],
     "LENOVO_SYSTEM_OEM_ACTIVATION_DXE_GUID": [
         2233099093,
@@ -33387,7 +31540,7 @@ PROTOCOLS_GUIDS = {
         40,
         26,
         149,
-        211
+        211,
     ],
     "LENOVO_SYSTEM_PCI_ISA_BUS_DXE_GUID": [
         2253066494,
@@ -33400,7 +31553,7 @@ PROTOCOLS_GUIDS = {
         78,
         220,
         0,
-        80
+        80,
     ],
     "LENOVO_LEGACY_BIOS_MISC_SMM_GUID": [
         2263362243,
@@ -33413,7 +31566,7 @@ PROTOCOLS_GUIDS = {
         199,
         179,
         204,
-        211
+        211,
     ],
     "LENOVO_INIT_ME_POLICY_GUID": [
         2279811321,
@@ -33426,7 +31579,7 @@ PROTOCOLS_GUIDS = {
         167,
         122,
         93,
-        155
+        155,
     ],
     "LENOVO_SETUP_AUTOMATION_SMM_GUID": [
         2282586559,
@@ -33439,7 +31592,7 @@ PROTOCOLS_GUIDS = {
         71,
         254,
         173,
-        26
+        26,
     ],
     "LENOVO_N25_Q064_FLASH_PART_DXE_GUID": [
         2288700192,
@@ -33452,7 +31605,7 @@ PROTOCOLS_GUIDS = {
         227,
         126,
         218,
-        71
+        71,
     ],
     "LENOVO_HDP_MANAGER_SMM_GUID": [
         2299999890,
@@ -33465,7 +31618,7 @@ PROTOCOLS_GUIDS = {
         130,
         221,
         235,
-        170
+        170,
     ],
     "LENOVO_SYSTEM_XHCI_RESET_SYSTEM_GUID": [
         2388413418,
@@ -33478,7 +31631,7 @@ PROTOCOLS_GUIDS = {
         218,
         1,
         230,
-        40
+        40,
     ],
     "LENOVO_NATIONAL_LPC_PC87393_GUID": [
         2392276867,
@@ -33491,7 +31644,7 @@ PROTOCOLS_GUIDS = {
         90,
         109,
         138,
-        30
+        30,
     ],
     "LENOVO_SYSTEM_ENGLISH_DXE_GUID": [
         2401693450,
@@ -33504,7 +31657,7 @@ PROTOCOLS_GUIDS = {
         183,
         0,
         255,
-        172
+        172,
     ],
     "LENOVO_ABSOLUTE_COMPUTRACE_INSTALLER_WIN8_GUID": [
         2414800113,
@@ -33517,7 +31670,7 @@ PROTOCOLS_GUIDS = {
         86,
         107,
         53,
-        103
+        103,
     ],
     "LENOVO_WMA_PCI_DXE_GUID": [
         2430603523,
@@ -33530,21 +31683,9 @@ PROTOCOLS_GUIDS = {
         139,
         245,
         83,
-        178
+        178,
     ],
-    "LENOVO_DPTF_GUID": [
-        2441787952,
-        15757,
-        19381,
-        184,
-        73,
-        69,
-        204,
-        79,
-        199,
-        222,
-        124
-    ],
+    "LENOVO_DPTF_GUID": [2441787952, 15757, 19381, 184, 73, 69, 204, 79, 199, 222, 124],
     "LENOVO_SYSTEM_ISA_SERIAL_DXE_GUID": [
         2478309379,
         40883,
@@ -33556,7 +31697,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "LENOVO_SYSTEM_PCI_BUS_DXE_GUID": [
         2478309380,
@@ -33569,7 +31710,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "LENOVO_DHCP4_DXE_BIN_GUID": [
         2490582808,
@@ -33582,7 +31723,7 @@ PROTOCOLS_GUIDS = {
         90,
         230,
         162,
-        173
+        173,
     ],
     "LENOVO_SYSTEM_XHCI_DXE_GUID": [
         2492998332,
@@ -33595,7 +31736,7 @@ PROTOCOLS_GUIDS = {
         129,
         52,
         45,
-        225
+        225,
     ],
     "LENOVO_DXE_CMOS_INIT_GUID": [
         2512357037,
@@ -33608,7 +31749,7 @@ PROTOCOLS_GUIDS = {
         28,
         46,
         5,
-        250
+        250,
     ],
     "LENOVO_TCG_SERVICES_SMM_GUID": [
         2512409029,
@@ -33621,7 +31762,7 @@ PROTOCOLS_GUIDS = {
         17,
         63,
         8,
-        46
+        46,
     ],
     "LENOVO_DHCP6_DXE_BIN_GUID": [
         2514708125,
@@ -33634,7 +31775,7 @@ PROTOCOLS_GUIDS = {
         27,
         105,
         216,
-        158
+        158,
     ],
     "LENOVO_SYSTEM_ENHANCED_FAT_DXE_GUID": [
         2517989630,
@@ -33647,7 +31788,7 @@ PROTOCOLS_GUIDS = {
         5,
         205,
         43,
-        31
+        31,
     ],
     "LENOVO_SYSTEM_NULL_MEMORY_TEST_DXE_GUID": [
         2528493618,
@@ -33660,7 +31801,7 @@ PROTOCOLS_GUIDS = {
         207,
         68,
         141,
-        14
+        14,
     ],
     "LENOVO_SMM_CF9_TRAP_GUID": [
         2534382554,
@@ -33673,7 +31814,7 @@ PROTOCOLS_GUIDS = {
         150,
         99,
         206,
-        17
+        17,
     ],
     "LENOVO_MTFTP6_DXE_BIN_GUID": [
         2582657945,
@@ -33686,7 +31827,7 @@ PROTOCOLS_GUIDS = {
         208,
         255,
         228,
-        30
+        30,
     ],
     "LENOVO_PLATFORM_RESET_RUNTIME_DXE_GUID": [
         2593820971,
@@ -33699,7 +31840,7 @@ PROTOCOLS_GUIDS = {
         133,
         162,
         157,
-        33
+        33,
     ],
     "LENOVO_SYSTEM_DEVICE_PATH_DXE_GUID": [
         2607288270,
@@ -33712,7 +31853,7 @@ PROTOCOLS_GUIDS = {
         153,
         0,
         52,
-        67
+        67,
     ],
     "LENOVO_SMM_CORE_DISPATCHER_GUID": [
         2630180221,
@@ -33725,21 +31866,9 @@ PROTOCOLS_GUIDS = {
         174,
         166,
         5,
-        43
+        43,
     ],
-    "LENOVO_MEBX_GUID": [
-        2633859116,
-        2465,
-        17366,
-        130,
-        23,
-        170,
-        73,
-        193,
-        249,
-        13,
-        44
-    ],
+    "LENOVO_MEBX_GUID": [2633859116, 2465, 17366, 130, 23, 170, 73, 193, 249, 13, 44],
     "LENOVO_EN25_QH128_FLASH_PART_DXE_GUID": [
         2639791502,
         51421,
@@ -33751,7 +31880,7 @@ PROTOCOLS_GUIDS = {
         146,
         53,
         72,
-        21
+        21,
     ],
     "LENOVO_ISSC_DXE_GUID": [
         2640230712,
@@ -33764,7 +31893,7 @@ PROTOCOLS_GUIDS = {
         59,
         235,
         170,
-        1
+        1,
     ],
     "LENOVO_SYSTEM_TERMINAL_DXE_GUID": [
         2659596550,
@@ -33777,7 +31906,7 @@ PROTOCOLS_GUIDS = {
         255,
         35,
         127,
-        198
+        198,
     ],
     "LENOVO_SYSTEM_CAPSULE_RT_GUID": [
         2661670671,
@@ -33790,7 +31919,7 @@ PROTOCOLS_GUIDS = {
         82,
         180,
         124,
-        62
+        62,
     ],
     "LENOVO_PCH_CONFIG_GUID": [
         2678257669,
@@ -33803,7 +31932,7 @@ PROTOCOLS_GUIDS = {
         165,
         223,
         9,
-        249
+        249,
     ],
     "LENOVO_IP4_DXE_BIN_GUID": [
         2679218675,
@@ -33816,7 +31945,7 @@ PROTOCOLS_GUIDS = {
         187,
         1,
         95,
-        255
+        255,
     ],
     "LENOVO_SYSTEM_USB_MASS_STORAGE_DXE_GUID": [
         2679420071,
@@ -33829,7 +31958,7 @@ PROTOCOLS_GUIDS = {
         103,
         17,
         248,
-        62
+        62,
     ],
     "LENOVO_SYSTEM_ERROR_LOG_DXE_GUID": [
         2711009863,
@@ -33842,7 +31971,7 @@ PROTOCOLS_GUIDS = {
         77,
         215,
         237,
-        122
+        122,
     ],
     "LENOVO_DPC_DXE_BIN_GUID": [
         2719021427,
@@ -33855,7 +31984,7 @@ PROTOCOLS_GUIDS = {
         230,
         201,
         234,
-        186
+        186,
     ],
     "LENOVO_SNP_DXE_BIN_GUID": [
         2733913834,
@@ -33868,7 +31997,7 @@ PROTOCOLS_GUIDS = {
         96,
         111,
         246,
-        112
+        112,
     ],
     "LENOVO_SECURE_UPDATE_DXE_GUID": [
         2761067649,
@@ -33881,7 +32010,7 @@ PROTOCOLS_GUIDS = {
         188,
         63,
         225,
-        245
+        245,
     ],
     "LENOVO_OEM_HOOK_SMM_GUID": [
         2763630598,
@@ -33894,7 +32023,7 @@ PROTOCOLS_GUIDS = {
         125,
         192,
         250,
-        244
+        244,
     ],
     "LENOVO_PLATFORM_SETUP_DXE_GUID": [
         2767360156,
@@ -33907,7 +32036,7 @@ PROTOCOLS_GUIDS = {
         9,
         35,
         4,
-        154
+        154,
     ],
     "LENOVO_MX25_L3206_EFLASH_PART_DXE_GUID": [
         2768044243,
@@ -33920,7 +32049,7 @@ PROTOCOLS_GUIDS = {
         135,
         166,
         244,
-        225
+        225,
     ],
     "LENOVO_SYSTEM_ACPI_TABLES_DXE_GUID": [
         2791868560,
@@ -33933,7 +32062,7 @@ PROTOCOLS_GUIDS = {
         134,
         238,
         197,
-        171
+        171,
     ],
     "LENOVO_SM_BIOS_HOLE_GUID": [
         2795618352,
@@ -33946,7 +32075,7 @@ PROTOCOLS_GUIDS = {
         29,
         46,
         51,
-        242
+        242,
     ],
     "LENOVO_SYSTEM_DIAGNOSTIC_SPLASH_SCREEN_APP_GUID": [
         2816006566,
@@ -33959,7 +32088,7 @@ PROTOCOLS_GUIDS = {
         89,
         167,
         163,
-        128
+        128,
     ],
     "LENOVO_PCI_EXPRESS_GUID": [
         2828978400,
@@ -33972,7 +32101,7 @@ PROTOCOLS_GUIDS = {
         165,
         41,
         92,
-        222
+        222,
     ],
     "LENOVO_SYSTEM_SECURE_BOOT_DXE_GUID": [
         2840226543,
@@ -33985,7 +32114,7 @@ PROTOCOLS_GUIDS = {
         31,
         230,
         42,
-        218
+        218,
     ],
     "LENOVO_PROMPT_SERVICE_GUID": [
         2855807077,
@@ -33998,7 +32127,7 @@ PROTOCOLS_GUIDS = {
         77,
         243,
         76,
-        231
+        231,
     ],
     "LENOVO_SYSTEM_FORM_BROWSER_SIMPLE_TEXT_VIEW_LAYOUT_DXE_GUID": [
         2866782636,
@@ -34011,7 +32140,7 @@ PROTOCOLS_GUIDS = {
         216,
         73,
         247,
-        144
+        144,
     ],
     "LENOVO_SMM_RELOC_PEIM_GUID": [
         2880917328,
@@ -34024,7 +32153,7 @@ PROTOCOLS_GUIDS = {
         114,
         151,
         126,
-        250
+        250,
     ],
     "LENOVO_SYSTEM_FRAMEWORK_HII_DATABASE_DXE_GUID": [
         2889102779,
@@ -34037,7 +32166,7 @@ PROTOCOLS_GUIDS = {
         96,
         111,
         246,
-        113
+        113,
     ],
     "LENOVO_INIT_VPRO_POLICY_GUID": [
         2891520473,
@@ -34050,7 +32179,7 @@ PROTOCOLS_GUIDS = {
         237,
         168,
         142,
-        210
+        210,
     ],
     "LENOVO_VARIABLE_INIT_DXE_GUID": [
         2892033439,
@@ -34063,7 +32192,7 @@ PROTOCOLS_GUIDS = {
         52,
         106,
         0,
-        186
+        186,
     ],
     "LENOVO_VPRO_MEBX_HOTKEY_GUID": [
         2893010282,
@@ -34076,7 +32205,7 @@ PROTOCOLS_GUIDS = {
         147,
         129,
         26,
-        40
+        40,
     ],
     "LENOVO_EN25_QH64_FLASH_PART_DXE_GUID": [
         2896228620,
@@ -34089,7 +32218,7 @@ PROTOCOLS_GUIDS = {
         151,
         245,
         225,
-        236
+        236,
     ],
     "LENOVO_PCH_PCIE_SMM_GUID": [
         2897128058,
@@ -34102,7 +32231,7 @@ PROTOCOLS_GUIDS = {
         18,
         234,
         14,
-        85
+        85,
     ],
     "LENOVO_SYSTEM_MONOTONIC_COUNTER_RT_GUID": [
         2908783218,
@@ -34115,7 +32244,7 @@ PROTOCOLS_GUIDS = {
         183,
         136,
         134,
-        82
+        82,
     ],
     "LENOVO_INCOMPATIBLE_PCI_DEVICE_GUID": [
         2909832542,
@@ -34128,7 +32257,7 @@ PROTOCOLS_GUIDS = {
         42,
         148,
         158,
-        163
+        163,
     ],
     "LENOVO_PCH_RESET_GUID": [
         2941907701,
@@ -34141,7 +32270,7 @@ PROTOCOLS_GUIDS = {
         84,
         90,
         248,
-        17
+        17,
     ],
     "LENOVO_AOAC_DXE_GUID": [
         2996974341,
@@ -34154,7 +32283,7 @@ PROTOCOLS_GUIDS = {
         72,
         196,
         30,
-        171
+        171,
     ],
     "LENOVO_SYSTEM_AHCI_BUS_SMM_GUID": [
         3005214816,
@@ -34167,7 +32296,7 @@ PROTOCOLS_GUIDS = {
         32,
         12,
         154,
-        102
+        102,
     ],
     "LENOVO_SYSTEM_RUNTIME_DXE_GUID": [
         3053582532,
@@ -34180,7 +32309,7 @@ PROTOCOLS_GUIDS = {
         108,
         180,
         12,
-        238
+        238,
     ],
     "LENOVO_MEBX_SETUP_BROWSER_GUID": [
         3056532411,
@@ -34193,7 +32322,7 @@ PROTOCOLS_GUIDS = {
         142,
         130,
         138,
-        128
+        128,
     ],
     "LENOVO_OS_OPT_DEFAULT_DXE_GUID": [
         3057565518,
@@ -34206,7 +32335,7 @@ PROTOCOLS_GUIDS = {
         166,
         6,
         142,
-        132
+        132,
     ],
     "LENOVO_SOUND_SERVICE_GUID": [
         3059315134,
@@ -34219,7 +32348,7 @@ PROTOCOLS_GUIDS = {
         141,
         180,
         171,
-        211
+        211,
     ],
     "LENOVO_I_FFS_DXE_GUID": [
         3065588063,
@@ -34232,7 +32361,7 @@ PROTOCOLS_GUIDS = {
         70,
         242,
         23,
-        58
+        58,
     ],
     "LENOVO_SYSTEM_SMM_COMMUNICATION_SMM_GUID": [
         3075191674,
@@ -34245,7 +32374,7 @@ PROTOCOLS_GUIDS = {
         154,
         190,
         107,
-        153
+        153,
     ],
     "LENOVO_USER_MANAGER_DXE_GUID": [
         3097946053,
@@ -34258,7 +32387,7 @@ PROTOCOLS_GUIDS = {
         223,
         31,
         16,
-        181
+        181,
     ],
     "LENOVO_UEFI_PXE_BC_DXE_BIN_GUID": [
         3109986266,
@@ -34271,7 +32400,7 @@ PROTOCOLS_GUIDS = {
         7,
         172,
         94,
-        58
+        58,
     ],
     "LENOVO_BOARD_INFO_DXE_GUID": [
         3114529140,
@@ -34284,7 +32413,7 @@ PROTOCOLS_GUIDS = {
         94,
         180,
         195,
-        222
+        222,
     ],
     "LENOVO_SYSTEM_FLASH_COMMUNICATION_SMM_GUID": [
         3117071003,
@@ -34297,7 +32426,7 @@ PROTOCOLS_GUIDS = {
         248,
         123,
         129,
-        203
+        203,
     ],
     "LENOVO_SMBIOS_TCG_DXE_GUID": [
         3120117304,
@@ -34310,7 +32439,7 @@ PROTOCOLS_GUIDS = {
         82,
         170,
         11,
-        137
+        137,
     ],
     "LENOVO_CPU_IO_GUID": [
         3135723935,
@@ -34323,7 +32452,7 @@ PROTOCOLS_GUIDS = {
         122,
         169,
         26,
-        166
+        166,
     ],
     "LENOVO_OS_OPT_DEFAULT_SMM_GUID": [
         3136301472,
@@ -34336,7 +32465,7 @@ PROTOCOLS_GUIDS = {
         23,
         123,
         230,
-        184
+        184,
     ],
     "LENOVO_SYSTEM_AHCI_ATA_ATAPI_PASS_THRU_SMM_GUID": [
         3166018704,
@@ -34349,7 +32478,7 @@ PROTOCOLS_GUIDS = {
         32,
         12,
         154,
-        102
+        102,
     ],
     "LENOVO_SYSTEM_ERROR_MENU_DXE_GUID": [
         3177658028,
@@ -34362,7 +32491,7 @@ PROTOCOLS_GUIDS = {
         74,
         137,
         159,
-        34
+        34,
     ],
     "LENOVO_SYSTEM_EHCI_DXE_GUID": [
         3187557134,
@@ -34375,7 +32504,7 @@ PROTOCOLS_GUIDS = {
         101,
         148,
         119,
-        126
+        126,
     ],
     "LENOVO_STATUS_CODE_ME_DEBUG_DXE_GUID": [
         3212038847,
@@ -34388,7 +32517,7 @@ PROTOCOLS_GUIDS = {
         66,
         0,
         116,
-        179
+        179,
     ],
     "LENOVO_SYSTEM_TEXT_CONSOLE_VGA_DXE_GUID": [
         3213488397,
@@ -34401,7 +32530,7 @@ PROTOCOLS_GUIDS = {
         177,
         180,
         164,
-        7
+        7,
     ],
     "LENOVO_MAIL_BOX_SMM_GUID": [
         3220075714,
@@ -34414,7 +32543,7 @@ PROTOCOLS_GUIDS = {
         136,
         30,
         73,
-        238
+        238,
     ],
     "LENOVO_SMM_FDISK_OEM_GUID": [
         3229404412,
@@ -34427,7 +32556,7 @@ PROTOCOLS_GUIDS = {
         192,
         82,
         38,
-        41
+        41,
     ],
     "LENOVO_SYSTEM_STATUS_CODE_PORT80_SMM_GUID": [
         3234851723,
@@ -34440,7 +32569,7 @@ PROTOCOLS_GUIDS = {
         124,
         155,
         65,
-        109
+        109,
     ],
     "LENOVO_PCH_SPI_RUNTIME_GUID": [
         3247752938,
@@ -34453,7 +32582,7 @@ PROTOCOLS_GUIDS = {
         113,
         71,
         75,
-        32
+        32,
     ],
     "LENOVO_SMM_ASL_SMI_GUID": [
         3287170800,
@@ -34466,7 +32595,7 @@ PROTOCOLS_GUIDS = {
         60,
         70,
         200,
-        53
+        53,
     ],
     "LENOVO_VARIABLE_DEFAULT_GUID": [
         3332108939,
@@ -34479,7 +32608,7 @@ PROTOCOLS_GUIDS = {
         219,
         15,
         77,
-        18
+        18,
     ],
     "LENOVO_PCH_S3_SUPPORT_GUID": [
         3354040199,
@@ -34492,7 +32621,7 @@ PROTOCOLS_GUIDS = {
         135,
         57,
         31,
-        141
+        141,
     ],
     "LENOVO_SVP_MANAGER_DXE_GUID": [
         3356403955,
@@ -34505,7 +32634,7 @@ PROTOCOLS_GUIDS = {
         212,
         199,
         78,
-        67
+        67,
     ],
     "LENOVO_SYSTEM_DIAGNOSTIC_SUMMARY_SCREEN_DXE_GUID": [
         3358136790,
@@ -34518,7 +32647,7 @@ PROTOCOLS_GUIDS = {
         51,
         105,
         208,
-        243
+        243,
     ],
     "LENOVO_SYSTEM_ACCELERATOR_KEY_DXE_GUID": [
         3365425629,
@@ -34531,7 +32660,7 @@ PROTOCOLS_GUIDS = {
         166,
         8,
         251,
-        169
+        169,
     ],
     "LENOVO_SYSTEM_FLASH_UPDATE_DRIVER_DXE_GUID": [
         3366653774,
@@ -34544,7 +32673,7 @@ PROTOCOLS_GUIDS = {
         48,
         213,
         3,
-        164
+        164,
     ],
     "LENOVO_SMAPI_SMM_GUID": [
         3380087232,
@@ -34557,7 +32686,7 @@ PROTOCOLS_GUIDS = {
         122,
         103,
         207,
-        84
+        84,
     ],
     "LENOVO_SYSTEM_DISK_IO_DXE_GUID": [
         3391494694,
@@ -34570,7 +32699,7 @@ PROTOCOLS_GUIDS = {
         177,
         174,
         58,
-        2
+        2,
     ],
     "LENOVO_SYSTEM_DATA_HUB_STD_ERR_DXE_GUID": [
         3394327302,
@@ -34583,7 +32712,7 @@ PROTOCOLS_GUIDS = {
         85,
         255,
         104,
-        102
+        102,
     ],
     "LENOVO_SYSTEM_KEY_DESC_DXE_GUID": [
         3397046003,
@@ -34596,7 +32725,7 @@ PROTOCOLS_GUIDS = {
         216,
         175,
         210,
-        237
+        237,
     ],
     "LENOVO_HDP_MANAGER_DXE_GUID": [
         3398903232,
@@ -34609,7 +32738,7 @@ PROTOCOLS_GUIDS = {
         176,
         59,
         143,
-        17
+        17,
     ],
     "LENOVO_PLATFORM_SMM_GUID": [
         3413361625,
@@ -34622,7 +32751,7 @@ PROTOCOLS_GUIDS = {
         229,
         38,
         64,
-        146
+        146,
     ],
     "LENOVO_EN25_QH32_FLASH_PART_SMM_GUID": [
         3419028872,
@@ -34635,7 +32764,7 @@ PROTOCOLS_GUIDS = {
         135,
         197,
         141,
-        64
+        64,
     ],
     "LENOVO_VIDEO_INIT_DXE_GUID": [
         3430002758,
@@ -34648,7 +32777,7 @@ PROTOCOLS_GUIDS = {
         132,
         91,
         205,
-        138
+        138,
     ],
     "LENOVO_SYSTEM_FONT_DXE_GUID": [
         3431257893,
@@ -34661,7 +32790,7 @@ PROTOCOLS_GUIDS = {
         241,
         253,
         57,
-        2
+        2,
     ],
     "LENOVO_SYSTEM_SETUP_ADVANCED_DXE_GUID": [
         3433812521,
@@ -34674,7 +32803,7 @@ PROTOCOLS_GUIDS = {
         113,
         249,
         236,
-        229
+        229,
     ],
     "LENOVO_SYSTEM_GRAPHICS_CONSOLE_DXE_GUID": [
         3435858984,
@@ -34687,7 +32816,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "LENOVO_SYSTEM_SM_BIOS_SMM_GUID": [
         3448945081,
@@ -34700,7 +32829,7 @@ PROTOCOLS_GUIDS = {
         125,
         142,
         74,
-        254
+        254,
     ],
     "LENOVO_SYSTEM_BUS_ISA_RTC_SMM_GUID": [
         3451918622,
@@ -34713,7 +32842,7 @@ PROTOCOLS_GUIDS = {
         54,
         133,
         165,
-        17
+        17,
     ],
     "LENOVO_SYSTEM_ACPI_SMI_SERVICES_DXE2_GUID": [
         3482740983,
@@ -34726,7 +32855,7 @@ PROTOCOLS_GUIDS = {
         148,
         238,
         199,
-        252
+        252,
     ],
     "LENOVO_PLATFORM_HII_ADVANCED_DXE_GUID": [
         3488584900,
@@ -34739,7 +32868,7 @@ PROTOCOLS_GUIDS = {
         69,
         157,
         250,
-        134
+        134,
     ],
     "LENOVO_VARIABLE_SMM_GUID": [
         3575212162,
@@ -34752,7 +32881,7 @@ PROTOCOLS_GUIDS = {
         59,
         105,
         6,
-        231
+        231,
     ],
     "LENOVO_SYSTEM_FORM_BROWSER_SIMPLE_TEXT_VIEW_DXE_GUID": [
         3599230073,
@@ -34765,7 +32894,7 @@ PROTOCOLS_GUIDS = {
         246,
         129,
         157,
-        241
+        241,
     ],
     "LENOVO_N25_Q032_FLASH_PART_SMM_GUID": [
         3599366343,
@@ -34778,7 +32907,7 @@ PROTOCOLS_GUIDS = {
         102,
         199,
         126,
-        175
+        175,
     ],
     "LENOVO_MFG_BENCH_EVENT_DXE_GUID": [
         3627644895,
@@ -34791,7 +32920,7 @@ PROTOCOLS_GUIDS = {
         141,
         79,
         167,
-        183
+        183,
     ],
     "LENOVO_UDP6_DXE_BIN_GUID": [
         3641886652,
@@ -34804,7 +32933,7 @@ PROTOCOLS_GUIDS = {
         8,
         60,
         123,
-        14
+        14,
     ],
     "LENOVO_SYSTEM_STATUS_CODE_GENERIC_SMM_GUID": [
         3663567235,
@@ -34817,7 +32946,7 @@ PROTOCOLS_GUIDS = {
         106,
         121,
         128,
-        48
+        48,
     ],
     "LENOVO_MX25_L64_XFLASH_PART_SMM_GUID": [
         3679301914,
@@ -34830,7 +32959,7 @@ PROTOCOLS_GUIDS = {
         68,
         134,
         162,
-        27
+        27,
     ],
     "LENOVO_MTFTP4_DXE_BIN_GUID": [
         3694543288,
@@ -34843,7 +32972,7 @@ PROTOCOLS_GUIDS = {
         42,
         3,
         69,
-        75
+        75,
     ],
     "LENOVO_I_FFS_DXE_POLICY_INIT_GUID": [
         3719565990,
@@ -34856,7 +32985,7 @@ PROTOCOLS_GUIDS = {
         18,
         112,
         33,
-        156
+        156,
     ],
     "LENOVO_WMA_USB_DXE_GUID": [
         3769480574,
@@ -34869,7 +32998,7 @@ PROTOCOLS_GUIDS = {
         116,
         162,
         108,
-        131
+        131,
     ],
     "LENOVO_SYSTEM_SCSI_OPROM_PASS_THRU_DXE_GUID": [
         3786228562,
@@ -34882,7 +33011,7 @@ PROTOCOLS_GUIDS = {
         176,
         51,
         131,
-        163
+        163,
     ],
     "LENOVO_PASSWORD_CP_GUID": [
         3841094362,
@@ -34895,7 +33024,7 @@ PROTOCOLS_GUIDS = {
         150,
         207,
         28,
-        108
+        108,
     ],
     "LENOVO_SYSTEM_DIAGNOSTIC_SPLASH_SCREEN_DXE_GUID": [
         3855662044,
@@ -34908,7 +33037,7 @@ PROTOCOLS_GUIDS = {
         240,
         161,
         205,
-        158
+        158,
     ],
     "LENOVO_IBEX_PEAK_FLASH_CONTROLLER_SMM_GUID": [
         3897225109,
@@ -34921,7 +33050,7 @@ PROTOCOLS_GUIDS = {
         28,
         103,
         160,
-        177
+        177,
     ],
     "LENOVO_SMM_SLEEP_EVENT_GUID": [
         3906732218,
@@ -34934,7 +33063,7 @@ PROTOCOLS_GUIDS = {
         84,
         54,
         172,
-        129
+        129,
     ],
     "LENOVO_AT24_RF08_EEPROM_DXE_GUID": [
         3914184057,
@@ -34947,7 +33076,7 @@ PROTOCOLS_GUIDS = {
         174,
         124,
         20,
-        226
+        226,
     ],
     "LENOVO_KBD_CONFIG_GUID": [
         3920933158,
@@ -34960,7 +33089,7 @@ PROTOCOLS_GUIDS = {
         139,
         60,
         27,
-        12
+        12,
     ],
     "LENOVO_SYSTEM_LEGACY_BIOS_DXE_GUID": [
         3928933378,
@@ -34973,7 +33102,7 @@ PROTOCOLS_GUIDS = {
         224,
         55,
         99,
-        18
+        18,
     ],
     "LENOVO_VPRO_CIRA_HOT_KEY_GUID": [
         3936260833,
@@ -34986,21 +33115,9 @@ PROTOCOLS_GUIDS = {
         177,
         231,
         123,
-        16
+        16,
     ],
-    "LENOVO_OEM_HOOK_GUID": [
-        3937366281,
-        60461,
-        18992,
-        191,
-        79,
-        98,
-        20,
-        8,
-        99,
-        14,
-        76
-    ],
+    "LENOVO_OEM_HOOK_GUID": [3937366281, 60461, 18992, 191, 79, 98, 20, 8, 99, 14, 76],
     "LENOVO_SYSTEM_SMBIOS_DXE_GUID": [
         3941964814,
         48454,
@@ -35012,7 +33129,7 @@ PROTOCOLS_GUIDS = {
         109,
         26,
         146,
-        125
+        125,
     ],
     "LENOVO_SECURE_KEY_SMM_GUID": [
         3949915124,
@@ -35025,7 +33142,7 @@ PROTOCOLS_GUIDS = {
         108,
         87,
         155,
-        52
+        52,
     ],
     "LENOVO_ME_CON_OUT_READY_GUID": [
         3965343067,
@@ -35038,7 +33155,7 @@ PROTOCOLS_GUIDS = {
         104,
         185,
         91,
-        56
+        56,
     ],
     "LENOVO_FINGERPRINT_CP_GUID": [
         3996187942,
@@ -35051,7 +33168,7 @@ PROTOCOLS_GUIDS = {
         48,
         220,
         156,
-        219
+        219,
     ],
     "LENOVO_SYSTEM_SMM_USB_LEGACY_SMM_GUID": [
         4013146774,
@@ -35064,7 +33181,7 @@ PROTOCOLS_GUIDS = {
         153,
         112,
         44,
-        132
+        132,
     ],
     "LENOVO_SYSTEM_WATCHDOG_TIMER_DXE_GUID": [
         4036613759,
@@ -35077,7 +33194,7 @@ PROTOCOLS_GUIDS = {
         14,
         178,
         183,
-        216
+        216,
     ],
     "LENOVO_N25_Q032_FLASH_PART_DXE_GUID": [
         4055748295,
@@ -35090,7 +33207,7 @@ PROTOCOLS_GUIDS = {
         68,
         7,
         96,
-        38
+        38,
     ],
     "LENOVO_SYSTEM_SECURITY_STUB_DXE_GUID": [
         4059018531,
@@ -35103,7 +33220,7 @@ PROTOCOLS_GUIDS = {
         169,
         102,
         40,
-        250
+        250,
     ],
     "LENOVO_SVP_MANAGER_SMM_GUID": [
         4100820646,
@@ -35116,7 +33233,7 @@ PROTOCOLS_GUIDS = {
         234,
         11,
         105,
-        47
+        47,
     ],
     "LENOVO_STARTUP_MENU_DXE_GUID": [
         4100908788,
@@ -35129,7 +33246,7 @@ PROTOCOLS_GUIDS = {
         108,
         60,
         132,
-        121
+        121,
     ],
     "LENOVO_PLATFORM_S3_SAVE_SMM_GUID": [
         4121718871,
@@ -35142,7 +33259,7 @@ PROTOCOLS_GUIDS = {
         114,
         35,
         239,
-        176
+        176,
     ],
     "LENOVO_SYSTEM_CMOS_DXE_GUID": [
         4131563991,
@@ -35155,7 +33272,7 @@ PROTOCOLS_GUIDS = {
         81,
         172,
         147,
-        248
+        248,
     ],
     "LENOVO_FINGERPRINT_SMM_GUID": [
         4148614015,
@@ -35168,7 +33285,7 @@ PROTOCOLS_GUIDS = {
         95,
         16,
         224,
-        48
+        48,
     ],
     "LENOVO_POWER_MANAGEMENT2_GUID": [
         4151515980,
@@ -35181,7 +33298,7 @@ PROTOCOLS_GUIDS = {
         211,
         158,
         206,
-        88
+        88,
     ],
     "LENOVO_W25_Q32_FLASH_PART_SMM_GUID": [
         4174016692,
@@ -35194,7 +33311,7 @@ PROTOCOLS_GUIDS = {
         105,
         100,
         74,
-        195
+        195,
     ],
     "LENOVO_SYSTEM_USB_DATABASE_DXE_GUID": [
         4182180003,
@@ -35207,7 +33324,7 @@ PROTOCOLS_GUIDS = {
         128,
         183,
         46,
-        59
+        59,
     ],
     "LENOVO_TCG_SMM_GUID": [
         4182377611,
@@ -35220,7 +33337,7 @@ PROTOCOLS_GUIDS = {
         166,
         211,
         205,
-        206
+        206,
     ],
     "LENOVO_SLP2_SMM_GUID": [
         4199507776,
@@ -35233,7 +33350,7 @@ PROTOCOLS_GUIDS = {
         20,
         124,
         2,
-        25
+        25,
     ],
     "LENOVO_FIT_DIAGNOSTICS_GUID": [
         4222873731,
@@ -35246,7 +33363,7 @@ PROTOCOLS_GUIDS = {
         84,
         16,
         15,
-        32
+        32,
     ],
     "LENOVO_SYSTEM_SECURE_FLASH_SLEEP_TRAP_SMM_GUID": [
         4242832462,
@@ -35259,7 +33376,7 @@ PROTOCOLS_GUIDS = {
         9,
         150,
         141,
-        2
+        2,
     ],
     "LENOVO_TXT_DXE_GUID": [
         4287725090,
@@ -35272,7 +33389,7 @@ PROTOCOLS_GUIDS = {
         204,
         221,
         165,
-        211
+        211,
     ],
     "LENOVO_EAIA_PEI_GUID": [
         512609513,
@@ -35285,7 +33402,7 @@ PROTOCOLS_GUIDS = {
         40,
         181,
         28,
-        238
+        238,
     ],
     "LENOVO_PLATFORM_STAGE2_PEI_GUID": [
         591261847,
@@ -35298,7 +33415,7 @@ PROTOCOLS_GUIDS = {
         194,
         178,
         13,
-        34
+        34,
     ],
     "LENOVO_MISC_GA_IO_PEIM_GUID": [
         913773309,
@@ -35311,21 +33428,9 @@ PROTOCOLS_GUIDS = {
         129,
         170,
         204,
-        8
+        8,
     ],
-    "LENOVO_PEI_MAIN_GUID": [
-        1388337940,
-        2968,
-        18796,
-        188,
-        59,
-        4,
-        181,
-        2,
-        17,
-        214,
-        128
-    ],
+    "LENOVO_PEI_MAIN_GUID": [1388337940, 2968, 18796, 188, 59, 4, 181, 2, 17, 214, 128],
     "LENOVO_PLATFORM_STAGE1_PEI_GUID": [
         1402489962,
         6986,
@@ -35337,7 +33442,7 @@ PROTOCOLS_GUIDS = {
         91,
         200,
         178,
-        120
+        120,
     ],
     "LENOVO_FLASH_PROTECT_PEI_GUID": [
         1403787592,
@@ -35350,7 +33455,7 @@ PROTOCOLS_GUIDS = {
         242,
         245,
         119,
-        111
+        111,
     ],
     "LENOVO_SYSTEM_ACPI_TABLES_PEI_GUID": [
         1436701486,
@@ -35363,7 +33468,7 @@ PROTOCOLS_GUIDS = {
         255,
         91,
         180,
-        215
+        215,
     ],
     "LENOVO_OEM_SEC_PEI_GUID": [
         1495331846,
@@ -35376,7 +33481,7 @@ PROTOCOLS_GUIDS = {
         49,
         72,
         28,
-        201
+        201,
     ],
     "LENOVO_SYSTEM_USB_BOT_PEI_GUID": [
         2214699078,
@@ -35389,7 +33494,7 @@ PROTOCOLS_GUIDS = {
         180,
         3,
         85,
-        227
+        227,
     ],
     "LENOVO_SYSTEM_BOOT_MODE_PEI_GUID": [
         2251331032,
@@ -35402,7 +33507,7 @@ PROTOCOLS_GUIDS = {
         174,
         153,
         54,
-        253
+        253,
     ],
     "LENOVO_PEI_CPU_IO_GUID": [
         2323165447,
@@ -35415,7 +33520,7 @@ PROTOCOLS_GUIDS = {
         19,
         203,
         133,
-        36
+        36,
     ],
     "LENOVO_SYSTEM_S3_RESUME_PEI_GUID": [
         2345590231,
@@ -35428,7 +33533,7 @@ PROTOCOLS_GUIDS = {
         102,
         201,
         63,
-        254
+        254,
     ],
     "LENOVO_VIDEO_INIT_PEIM_GUID": [
         2630869420,
@@ -35441,7 +33546,7 @@ PROTOCOLS_GUIDS = {
         112,
         20,
         213,
-        89
+        89,
     ],
     "LENOVO_AT24_RF08_EEPROM_PEI_GUID": [
         2648253477,
@@ -35454,7 +33559,7 @@ PROTOCOLS_GUIDS = {
         205,
         32,
         200,
-        115
+        115,
     ],
     "LENOVO_POST_VALIDATOR_PEI_GUID": [
         3116595505,
@@ -35467,7 +33572,7 @@ PROTOCOLS_GUIDS = {
         188,
         3,
         24,
-        135
+        135,
     ],
     "LENOVO_SYSTEM_FV_FILE_LOADER_GUID": [
         3257022987,
@@ -35480,7 +33585,7 @@ PROTOCOLS_GUIDS = {
         196,
         233,
         144,
-        240
+        240,
     ],
     "LENOVO_MAIL_BOX_PEI_GUID": [
         3272721920,
@@ -35493,7 +33598,7 @@ PROTOCOLS_GUIDS = {
         227,
         65,
         81,
-        88
+        88,
     ],
     "LENOVO_EC_IO_PEIM_GUID": [
         3279067084,
@@ -35506,7 +33611,7 @@ PROTOCOLS_GUIDS = {
         40,
         24,
         70,
-        32
+        32,
     ],
     "LENOVO_MODULE_S3_RESUME_PEIM_GUID": [
         3350021305,
@@ -35519,7 +33624,7 @@ PROTOCOLS_GUIDS = {
         38,
         43,
         185,
-        46
+        46,
     ],
     "LENOVO_CPU_S3_PEIM_GUID": [
         3362176369,
@@ -35532,7 +33637,7 @@ PROTOCOLS_GUIDS = {
         131,
         13,
         143,
-        154
+        154,
     ],
     "LENOVO_USER_MANAGER_PEI_GUID": [
         3759193290,
@@ -35545,7 +33650,7 @@ PROTOCOLS_GUIDS = {
         100,
         168,
         92,
-        137
+        137,
     ],
     "LENOVO_PROTECT_PBPEI_GUID": [
         3930240486,
@@ -35558,7 +33663,7 @@ PROTOCOLS_GUIDS = {
         166,
         172,
         253,
-        1
+        1,
     ],
     "LENOVO_ISSC_PEI_GUID": [
         3972789634,
@@ -35571,7 +33676,7 @@ PROTOCOLS_GUIDS = {
         64,
         179,
         229,
-        94
+        94,
     ],
     "LENOVO_PLATFORM_STAGE0_PEI_GUID": [
         3981613134,
@@ -35584,7 +33689,7 @@ PROTOCOLS_GUIDS = {
         50,
         1,
         245,
-        30
+        30,
     ],
     "gAppPkgTokenSpaceGuid": [
         3890343846,
@@ -35597,7 +33702,7 @@ PROTOCOLS_GUIDS = {
         189,
         114,
         192,
-        153
+        153,
     ],
     "gArmJunoTokenSpaceGuid": [
         2702473760,
@@ -35610,7 +33715,7 @@ PROTOCOLS_GUIDS = {
         17,
         200,
         228,
-        164
+        164,
     ],
     "gVirtualUncachedPagesProtocolGuid": [
         2909084797,
@@ -35623,7 +33728,7 @@ PROTOCOLS_GUIDS = {
         205,
         174,
         135,
-        178
+        178,
     ],
     "gVariableRuntimeDxeFileGuid": [
         3419595989,
@@ -35636,7 +33741,7 @@ PROTOCOLS_GUIDS = {
         180,
         173,
         141,
-        96
+        96,
     ],
     "gArmGlobalVariableGuid": [
         3273997456,
@@ -35649,7 +33754,7 @@ PROTOCOLS_GUIDS = {
         19,
         119,
         143,
-        201
+        201,
     ],
     "gArmBootMonFsFileInfoGuid": [
         1105357724,
@@ -35662,7 +33767,7 @@ PROTOCOLS_GUIDS = {
         163,
         91,
         96,
-        214
+        214,
     ],
     "gArmPlatformUpdateFdtEventGuid": [
         2952663387,
@@ -35675,7 +33780,7 @@ PROTOCOLS_GUIDS = {
         218,
         83,
         174,
-        183
+        183,
     ],
     "gArmGlobalVariablePpiGuid": [
         2870745110,
@@ -35688,7 +33793,7 @@ PROTOCOLS_GUIDS = {
         146,
         83,
         226,
-        231
+        231,
     ],
     "gArmRealViewEbPkgTokenSpaceGuid": [
         1146583565,
@@ -35701,7 +33806,7 @@ PROTOCOLS_GUIDS = {
         230,
         13,
         90,
-        79
+        79,
     ],
     "gArmVExpressTokenSpaceGuid": [
         2617945812,
@@ -35714,7 +33819,7 @@ PROTOCOLS_GUIDS = {
         56,
         20,
         206,
-        118
+        118,
     ],
     "gArmVirtualizationTokenSpaceGuid": [
         191847591,
@@ -35727,7 +33832,7 @@ PROTOCOLS_GUIDS = {
         91,
         128,
         99,
-        102
+        102,
     ],
     "gBeagleBoardTokenSpaceGuid": [
         1748303429,
@@ -35740,7 +33845,7 @@ PROTOCOLS_GUIDS = {
         183,
         168,
         113,
-        226
+        226,
     ],
     "gEfiRuntimeCryptProtocolGuid": [
         3779550732,
@@ -35753,7 +33858,7 @@ PROTOCOLS_GUIDS = {
         44,
         45,
         157,
-        134
+        134,
     ],
     "gEfiPciExpressBaseAddressGuid": [
         913823017,
@@ -35766,7 +33871,7 @@ PROTOCOLS_GUIDS = {
         224,
         29,
         203,
-        176
+        176,
     ],
     "gEfiAcpiDescriptionGuid": [
         1013551511,
@@ -35779,7 +33884,7 @@ PROTOCOLS_GUIDS = {
         227,
         72,
         29,
-        201
+        201,
     ],
     "gEfiFlashMapHobGuid": [
         2962352082,
@@ -35792,7 +33897,7 @@ PROTOCOLS_GUIDS = {
         184,
         197,
         84,
-        89
+        89,
     ],
     "gEfiPciOptionRomTableGuid": [
         1952605711,
@@ -35805,7 +33910,7 @@ PROTOCOLS_GUIDS = {
         121,
         19,
         131,
-        28
+        28,
     ],
     "gDuetConsoleOutConfigGuid": [
         3977578260,
@@ -35818,7 +33923,7 @@ PROTOCOLS_GUIDS = {
         47,
         213,
         206,
-        162
+        162,
     ],
     "gDxeCoreFileNameGuid": [
         3600993151,
@@ -35831,7 +33936,7 @@ PROTOCOLS_GUIDS = {
         167,
         51,
         112,
-        10
+        10,
     ],
     "gLdrMemoryDescriptorGuid": [
         1996609509,
@@ -35844,7 +33949,7 @@ PROTOCOLS_GUIDS = {
         171,
         138,
         222,
-        96
+        96,
     ],
     "gEfiSmmBaseThunkCommunicationGuid": [
         1701356502,
@@ -35857,7 +33962,7 @@ PROTOCOLS_GUIDS = {
         99,
         20,
         19,
-        10
+        10,
     ],
     "gEfiBootStateGuid": [
         1622534457,
@@ -35870,7 +33975,7 @@ PROTOCOLS_GUIDS = {
         212,
         91,
         192,
-        227
+        227,
     ],
     "gEfiEdkCompatibilityPkgTokenSpaceGuid": [
         592761632,
@@ -35883,7 +33988,7 @@ PROTOCOLS_GUIDS = {
         225,
         67,
         70,
-        62
+        62,
     ],
     "gFrameworkBdsFrontPageFormsetGuid": [
         2651599036,
@@ -35896,7 +34001,7 @@ PROTOCOLS_GUIDS = {
         155,
         133,
         93,
-        190
+        190,
     ],
     "gEcpPeiPciCfgPpiGuid": [
         2968409044,
@@ -35909,7 +34014,7 @@ PROTOCOLS_GUIDS = {
         250,
         239,
         170,
-        148
+        148,
     ],
     "gEfiPrintProtocolGuid": [
         3744302734,
@@ -35922,7 +34027,7 @@ PROTOCOLS_GUIDS = {
         93,
         19,
         67,
-        208
+        208,
     ],
     "gEfiSmmBaseHelperReadyProtocolGuid": [
         2433600007,
@@ -35935,7 +34040,7 @@ PROTOCOLS_GUIDS = {
         243,
         21,
         67,
-        83
+        83,
     ],
     "gEfiDebugSupportPeriodicCallbackProtocolGuid": [
         2504450172,
@@ -35948,7 +34053,7 @@ PROTOCOLS_GUIDS = {
         16,
         134,
         240,
-        68
+        68,
     ],
     "gEfiEblAddCommandProtocolGuid": [
         2933531688,
@@ -35961,7 +34066,7 @@ PROTOCOLS_GUIDS = {
         40,
         251,
         184,
-        41
+        41,
     ],
     "gEfiIntelFrameworkModulePkgTokenSpaceGuid": [
         3547353105,
@@ -35974,7 +34079,7 @@ PROTOCOLS_GUIDS = {
         48,
         55,
         140,
-        21
+        21,
     ],
     "gEfiDataHubStatusCodeRecordGuid": [
         3498305868,
@@ -35987,7 +34092,7 @@ PROTOCOLS_GUIDS = {
         90,
         223,
         106,
-        42
+        42,
     ],
     "gEfiAcpiVariableCompatiblityGuid": [
         3223341214,
@@ -36000,7 +34105,7 @@ PROTOCOLS_GUIDS = {
         252,
         17,
         211,
-        106
+        106,
     ],
     "gEfiUpdateDataFileGuid": [
         675259118,
@@ -36013,21 +34118,9 @@ PROTOCOLS_GUIDS = {
         179,
         111,
         11,
-        126
+        126,
     ],
-    "gBlockIoVendorGuid": [
-        3476159173,
-        49742,
-        4562,
-        133,
-        243,
-        0,
-        160,
-        201,
-        62,
-        201,
-        59
-    ],
+    "gBlockIoVendorGuid": [3476159173, 49742, 4562, 133, 243, 0, 160, 201, 62, 201, 59],
     "gFrontPageFormSetGuid": [
         2651599036,
         16134,
@@ -36039,7 +34132,7 @@ PROTOCOLS_GUIDS = {
         155,
         133,
         93,
-        190
+        190,
     ],
     "gBootManagerFormSetGuid": [
         2222703614,
@@ -36052,7 +34145,7 @@ PROTOCOLS_GUIDS = {
         65,
         46,
         153,
-        59
+        59,
     ],
     "gDeviceManagerFormSetGuid": [
         1052748006,
@@ -36065,7 +34158,7 @@ PROTOCOLS_GUIDS = {
         38,
         15,
         28,
-        39
+        39,
     ],
     "gDriverHealthFormSetGuid": [
         4151183984,
@@ -36078,7 +34171,7 @@ PROTOCOLS_GUIDS = {
         75,
         241,
         110,
-        52
+        52,
     ],
     "gBootMaintFormSetGuid": [
         1679964103,
@@ -36091,7 +34184,7 @@ PROTOCOLS_GUIDS = {
         204,
         242,
         122,
-        34
+        34,
     ],
     "gFileExploreFormSetGuid": [
         523068385,
@@ -36104,7 +34197,7 @@ PROTOCOLS_GUIDS = {
         28,
         239,
         156,
-        91
+        91,
     ],
     "gBdsLibStringPackageGuid": [
         994941731,
@@ -36117,21 +34210,9 @@ PROTOCOLS_GUIDS = {
         148,
         88,
         108,
-        114
+        114,
     ],
-    "gLastEnumLangGuid": [
-        244077659,
-        41710,
-        18189,
-        142,
-        38,
-        189,
-        161,
-        161,
-        60,
-        10,
-        163
-    ],
+    "gLastEnumLangGuid": [244077659, 41710, 18189, 142, 38, 189, 161, 161, 60, 10, 163],
     "gHdBootDevicePathVariablGuid": [
         4206356961,
         14813,
@@ -36143,7 +34224,7 @@ PROTOCOLS_GUIDS = {
         144,
         108,
         182,
-        222
+        222,
     ],
     "gEfiOEMBadgingProtocolGuid": [
         386798528,
@@ -36156,7 +34237,7 @@ PROTOCOLS_GUIDS = {
         198,
         248,
         135,
-        188
+        188,
     ],
     "gExitPmAuthProtocolGuid": [
         3498615827,
@@ -36169,7 +34250,7 @@ PROTOCOLS_GUIDS = {
         182,
         92,
         65,
-        179
+        179,
     ],
     "gEfiCacheSubClassGuid": [
         2130711463,
@@ -36182,7 +34263,7 @@ PROTOCOLS_GUIDS = {
         95,
         220,
         130,
-        157
+        157,
     ],
     "gEfiMemorySubClassGuid": [
         1318014651,
@@ -36195,7 +34276,7 @@ PROTOCOLS_GUIDS = {
         73,
         35,
         80,
-        151
+        151,
     ],
     "gEfiMiscSubClassGuid": [
         1998881970,
@@ -36208,7 +34289,7 @@ PROTOCOLS_GUIDS = {
         248,
         28,
         88,
-        129
+        129,
     ],
     "gEfiProcessorSubClassGuid": [
         654175102,
@@ -36221,21 +34302,9 @@ PROTOCOLS_GUIDS = {
         60,
         228,
         140,
-        167
+        167,
     ],
-    "gEfiCapsuleGuid": [
-        996574909,
-        3446,
-        16432,
-        183,
-        14,
-        181,
-        81,
-        158,
-        47,
-        197,
-        160
-    ],
+    "gEfiCapsuleGuid": [996574909, 3446, 16432, 183, 14, 181, 81, 158, 47, 197, 160],
     "gEfiConfigFileNameGuid": [
         2562250139,
         59578,
@@ -36247,7 +34316,7 @@ PROTOCOLS_GUIDS = {
         57,
         47,
         30,
-        219
+        219,
     ],
     "gEfiSmmPeiSmramMemoryReserveGuid": [
         1840116177,
@@ -36260,7 +34329,7 @@ PROTOCOLS_GUIDS = {
         253,
         128,
         255,
-        61
+        61,
     ],
     "gSmmCommunicateHeaderGuid": [
         4079543148,
@@ -36273,7 +34342,7 @@ PROTOCOLS_GUIDS = {
         149,
         52,
         205,
-        117
+        117,
     ],
     "gEfiFirmwareFileSystemGuid": [
         2056475865,
@@ -36286,7 +34355,7 @@ PROTOCOLS_GUIDS = {
         23,
         216,
         144,
-        223
+        223,
     ],
     "gEfiPeiIdeBlockIoPpiGuid": [
         2521717538,
@@ -36299,7 +34368,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "gEfiPei144FloppyBlockIoPpiGuid": [
         3664270781,
@@ -36312,7 +34381,7 @@ PROTOCOLS_GUIDS = {
         253,
         54,
         14,
-        34
+        34,
     ],
     "gEfiPeiBootScriptExecuterPpiGuid": [
         2882807957,
@@ -36325,7 +34394,7 @@ PROTOCOLS_GUIDS = {
         24,
         11,
         251,
-        255
+        255,
     ],
     "gEfiPeiSecurityPpiGuid": [
         327681646,
@@ -36338,7 +34407,7 @@ PROTOCOLS_GUIDS = {
         58,
         149,
         138,
-        41
+        41,
     ],
     "gEfiPeiSmbusPpiGuid": [
         2882807957,
@@ -36351,7 +34420,7 @@ PROTOCOLS_GUIDS = {
         24,
         11,
         251,
-        218
+        218,
     ],
     "gEfiPciCfgPpiInServiceTableGuid": [
         3790793632,
@@ -36364,7 +34433,7 @@ PROTOCOLS_GUIDS = {
         33,
         100,
         42,
-        144
+        144,
     ],
     "gEfiPeiReadOnlyVariablePpiGuid": [
         1021087942,
@@ -36377,7 +34446,7 @@ PROTOCOLS_GUIDS = {
         221,
         120,
         185,
-        250
+        250,
     ],
     "gEfiPeiSectionExtractionPpiGuid": [
         1334436360,
@@ -36390,7 +34459,7 @@ PROTOCOLS_GUIDS = {
         79,
         126,
         54,
-        215
+        215,
     ],
     "gEfiPeiFvFileLoaderPpiGuid": [
         2115964293,
@@ -36403,21 +34472,9 @@ PROTOCOLS_GUIDS = {
         153,
         106,
         72,
-        168
+        168,
     ],
-    "gEfiFindFvPpiGuid": [
-        907429906,
-        40995,
-        17637,
-        189,
-        133,
-        5,
-        191,
-        60,
-        119,
-        0,
-        170
-    ],
+    "gEfiFindFvPpiGuid": [907429906, 40995, 17637, 189, 133, 5, 191, 60, 119, 0, 170],
     "gEfiPeiS3ResumePpiGuid": [
         1143393458,
         59012,
@@ -36429,7 +34486,7 @@ PROTOCOLS_GUIDS = {
         176,
         37,
         183,
-        16
+        16,
     ],
     "gEfiAcpiS3SaveProtocolGuid": [
         308227553,
@@ -36442,7 +34499,7 @@ PROTOCOLS_GUIDS = {
         53,
         138,
         141,
-        56
+        56,
     ],
     "gEfiAcpiSupportProtocolGuid": [
         3690962261,
@@ -36455,7 +34512,7 @@ PROTOCOLS_GUIDS = {
         61,
         192,
         36,
-        29
+        29,
     ],
     "gEfiBootScriptSaveProtocolGuid": [
         1192105257,
@@ -36468,7 +34525,7 @@ PROTOCOLS_GUIDS = {
         109,
         41,
         249,
-        178
+        178,
     ],
     "gEfiLegacyRegionProtocolGuid": [
         264831290,
@@ -36481,7 +34538,7 @@ PROTOCOLS_GUIDS = {
         144,
         166,
         96,
-        155
+        155,
     ],
     "gEfiCpuIoProtocolGuid": [
         2960336166,
@@ -36494,7 +34551,7 @@ PROTOCOLS_GUIDS = {
         176,
         106,
         172,
-        69
+        69,
     ],
     "gEfiDataHubProtocolGuid": [
         2927677473,
@@ -36507,7 +34564,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "gEfiSectionExtractionProtocolGuid": [
         1150246308,
@@ -36520,7 +34577,7 @@ PROTOCOLS_GUIDS = {
         65,
         146,
         33,
-        93
+        93,
     ],
     "gEfiHiiProtocolGuid": [
         3618464622,
@@ -36533,7 +34590,7 @@ PROTOCOLS_GUIDS = {
         137,
         121,
         128,
-        225
+        225,
     ],
     "gEfiHiiCompatibilityProtocolGuid": [
         1430441185,
@@ -36546,7 +34603,7 @@ PROTOCOLS_GUIDS = {
         119,
         211,
         153,
-        251
+        251,
     ],
     "gFrameworkEfiMpServiceProtocolGuid": [
         4080165351,
@@ -36559,7 +34616,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "gEfiSmmBaseProtocolGuid": [
         328242509,
@@ -36572,7 +34629,7 @@ PROTOCOLS_GUIDS = {
         194,
         23,
         218,
-        168
+        168,
     ],
     "gEfiSmmAccessProtocolGuid": [
         932317530,
@@ -36585,7 +34642,7 @@ PROTOCOLS_GUIDS = {
         101,
         90,
         23,
-        241
+        241,
     ],
     "gEfiSmmControlProtocolGuid": [
         2366825009,
@@ -36598,7 +34655,7 @@ PROTOCOLS_GUIDS = {
         167,
         231,
         178,
-        229
+        229,
     ],
     "gEfiSmmSwDispatchProtocolGuid": [
         3846289267,
@@ -36611,7 +34668,7 @@ PROTOCOLS_GUIDS = {
         54,
         83,
         248,
-        191
+        191,
     ],
     "gEfiSmmSxDispatchProtocolGuid": [
         352080574,
@@ -36624,7 +34681,7 @@ PROTOCOLS_GUIDS = {
         62,
         34,
         10,
-        232
+        232,
     ],
     "gEfiSmmPeriodicTimerDispatchProtocolGuid": [
         2630484988,
@@ -36637,7 +34694,7 @@ PROTOCOLS_GUIDS = {
         71,
         155,
         222,
-        85
+        85,
     ],
     "gEfiSmmUsbDispatchProtocolGuid": [
         2690347005,
@@ -36650,7 +34707,7 @@ PROTOCOLS_GUIDS = {
         182,
         60,
         243,
-        243
+        243,
     ],
     "gEfiSmmGpiDispatchProtocolGuid": [
         3765717889,
@@ -36663,7 +34720,7 @@ PROTOCOLS_GUIDS = {
         94,
         112,
         57,
-        218
+        218,
     ],
     "gEfiSmmStandbyButtonDispatchProtocolGuid": [
         2023119768,
@@ -36676,7 +34733,7 @@ PROTOCOLS_GUIDS = {
         78,
         73,
         138,
-        152
+        152,
     ],
     "gEfiSmmPowerButtonDispatchProtocolGuid": [
         3070881696,
@@ -36689,7 +34746,7 @@ PROTOCOLS_GUIDS = {
         231,
         168,
         238,
-        86
+        86,
     ],
     "gEfiSmmIchnDispatchProtocolGuid": [
         3305845310,
@@ -36702,21 +34759,9 @@ PROTOCOLS_GUIDS = {
         106,
         16,
         133,
-        204
+        204,
     ],
-    "gEfiSmmCpuIoGuid": [
-        1598265867,
-        17880,
-        18050,
-        164,
-        244,
-        240,
-        87,
-        107,
-        81,
-        52,
-        65
-    ],
+    "gEfiSmmCpuIoGuid": [1598265867, 17880, 18050, 164, 244, 240, 87, 107, 81, 52, 65],
     "gEfiFormCallbackProtocolGuid": [
         4091827261,
         53045,
@@ -36728,7 +34773,7 @@ PROTOCOLS_GUIDS = {
         52,
         77,
         252,
-        84
+        84,
     ],
     "gEfiFormBrowserProtocolGuid": [
         3852546878,
@@ -36741,7 +34786,7 @@ PROTOCOLS_GUIDS = {
         239,
         19,
         52,
-        67
+        67,
     ],
     "gEfiFormBrowserCompatibilityProtocolGuid": [
         263702610,
@@ -36754,7 +34799,7 @@ PROTOCOLS_GUIDS = {
         27,
         28,
         225,
-        26
+        26,
     ],
     "gFramerworkEfiFirmwareVolumeBlockProtocolGuid": [
         3727211609,
@@ -36767,7 +34812,7 @@ PROTOCOLS_GUIDS = {
         173,
         181,
         141,
-        161
+        161,
     ],
     "gEfiSmmCpuSaveStateProtocolGuid": [
         569574061,
@@ -36780,7 +34825,7 @@ PROTOCOLS_GUIDS = {
         0,
         64,
         58,
-        29
+        29,
     ],
     "gIntelFspPkgTokenSpaceGuid": [
         2202799199,
@@ -36793,7 +34838,7 @@ PROTOCOLS_GUIDS = {
         233,
         230,
         197,
-        145
+        145,
     ],
     "gFspBootLoaderTemporaryMemoryGuid": [
         3150967916,
@@ -36806,7 +34851,7 @@ PROTOCOLS_GUIDS = {
         243,
         179,
         246,
-        78
+        78,
     ],
     "gFspReservedMemoryResourceHobTsegGuid": [
         3493360764,
@@ -36819,7 +34864,7 @@ PROTOCOLS_GUIDS = {
         153,
         164,
         125,
-        85
+        85,
     ],
     "gFspReservedMemoryResourceHobGfxGuid": [
         2625387175,
@@ -36832,7 +34877,7 @@ PROTOCOLS_GUIDS = {
         243,
         230,
         42,
-        7
+        7,
     ],
     "gFspReservedMemoryResourceHobMiscGuid": [
         14070091,
@@ -36845,7 +34890,7 @@ PROTOCOLS_GUIDS = {
         106,
         42,
         27,
-        0
+        0,
     ],
     "gFspWrapperTokenSpaceGuid": [
         734119754,
@@ -36858,7 +34903,7 @@ PROTOCOLS_GUIDS = {
         116,
         101,
         34,
-        93
+        93,
     ],
     "gFspInitDonePpiGuid": [
         4126082532,
@@ -36871,7 +34916,7 @@ PROTOCOLS_GUIDS = {
         48,
         17,
         224,
-        56
+        56,
     ],
     "gEfiNicIp4ConfigVariableGuid": [
         3633595731,
@@ -36884,7 +34929,7 @@ PROTOCOLS_GUIDS = {
         124,
         251,
         38,
-        123
+        123,
     ],
     "gNicIp4ConfigNvDataGuid": [
         165000511,
@@ -36897,7 +34942,7 @@ PROTOCOLS_GUIDS = {
         211,
         92,
         14,
-        5
+        5,
     ],
     "gEfiSalSystemTableGuid": [
         3952946482,
@@ -36910,7 +34955,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiSalMcaInitPmiProtocolGuid": [
         3054356200,
@@ -36923,7 +34968,7 @@ PROTOCOLS_GUIDS = {
         201,
         68,
         160,
-        91
+        91,
     ],
     "gEfiExtendedSalBootServiceProtocolGuid": [
         3725519268,
@@ -36936,7 +34981,7 @@ PROTOCOLS_GUIDS = {
         214,
         156,
         58,
-        247
+        247,
     ],
     "gEfiExtendedSalBaseIoServicesProtocolGuid": [
         1525301941,
@@ -36949,7 +34994,7 @@ PROTOCOLS_GUIDS = {
         37,
         117,
         101,
-        166
+        166,
     ],
     "gEfiExtendedSalStallServicesProtocolGuid": [
         1403358470,
@@ -36962,7 +35007,7 @@ PROTOCOLS_GUIDS = {
         128,
         101,
         65,
-        112
+        112,
     ],
     "gEfiExtendedSalRtcServicesProtocolGuid": [
         2123867248,
@@ -36975,7 +35020,7 @@ PROTOCOLS_GUIDS = {
         210,
         123,
         162,
-        150
+        150,
     ],
     "gEfiExtendedSalVariableServicesProtocolGuid": [
         1321954387,
@@ -36988,7 +35033,7 @@ PROTOCOLS_GUIDS = {
         73,
         110,
         131,
-        120
+        120,
     ],
     "gEfiExtendedSalMtcServicesProtocolGuid": [
         2308635928,
@@ -37001,7 +35046,7 @@ PROTOCOLS_GUIDS = {
         126,
         205,
         244,
-        84
+        84,
     ],
     "gEfiExtendedSalResetServicesProtocolGuid": [
         2097256848,
@@ -37014,7 +35059,7 @@ PROTOCOLS_GUIDS = {
         152,
         103,
         106,
-        160
+        160,
     ],
     "gEfiExtendedSalStatusCodeServicesProtocolGuid": [
         14407965,
@@ -37027,7 +35072,7 @@ PROTOCOLS_GUIDS = {
         132,
         55,
         180,
-        79
+        79,
     ],
     "gEfiExtendedSalFvBlockServicesProtocolGuid": [
         2720472561,
@@ -37040,7 +35085,7 @@ PROTOCOLS_GUIDS = {
         23,
         47,
         7,
-        26
+        26,
     ],
     "gEfiExtendedSalMpServicesProtocolGuid": [
         1769832866,
@@ -37053,7 +35098,7 @@ PROTOCOLS_GUIDS = {
         59,
         97,
         138,
-        63
+        63,
     ],
     "gEfiExtendedSalPalServicesProtocolGuid": [
         3788348705,
@@ -37066,7 +35111,7 @@ PROTOCOLS_GUIDS = {
         109,
         150,
         30,
-        87
+        87,
     ],
     "gEfiExtendedSalBaseServicesProtocolGuid": [
         3655989766,
@@ -37079,7 +35124,7 @@ PROTOCOLS_GUIDS = {
         90,
         51,
         148,
-        248
+        248,
     ],
     "gEfiExtendedSalMcaServicesProtocolGuid": [
         710480168,
@@ -37092,7 +35137,7 @@ PROTOCOLS_GUIDS = {
         59,
         104,
         45,
-        187
+        187,
     ],
     "gEfiExtendedSalPciServicesProtocolGuid": [
         2758482481,
@@ -37105,7 +35150,7 @@ PROTOCOLS_GUIDS = {
         89,
         220,
         48,
-        99
+        99,
     ],
     "gEfiExtendedSalCacheServicesProtocolGuid": [
         249336980,
@@ -37118,7 +35163,7 @@ PROTOCOLS_GUIDS = {
         82,
         19,
         241,
-        136
+        136,
     ],
     "gEfiExtendedSalMcaLogServicesProtocolGuid": [
         3409959022,
@@ -37131,7 +35176,7 @@ PROTOCOLS_GUIDS = {
         163,
         162,
         171,
-        122
+        122,
     ],
     "gEfiWinNtPassThroughGuid": [
         3429256888,
@@ -37144,7 +35189,7 @@ PROTOCOLS_GUIDS = {
         86,
         188,
         227,
-        110
+        110,
     ],
     "gEfiWinNtConsoleGuid": [
         3128125228,
@@ -37157,34 +35202,10 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
-    "gEfiWinNtUgaGuid": [
-        2871299737,
-        44001,
-        4564,
-        189,
-        13,
-        0,
-        128,
-        199,
-        60,
-        136,
-        129
-    ],
-    "gEfiWinNtGopGuid": [
-        1309796693,
-        52426,
-        4564,
-        189,
-        13,
-        0,
-        128,
-        199,
-        60,
-        136,
-        129
-    ],
+    "gEfiWinNtUgaGuid": [2871299737, 44001, 4564, 189, 13, 0, 128, 199, 60, 136, 129],
+    "gEfiWinNtGopGuid": [1309796693, 52426, 4564, 189, 13, 0, 128, 199, 60, 136, 129],
     "gEfiWinNtSerialPortGuid": [
         211134781,
         40966,
@@ -37196,7 +35217,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "gEfiWinNtFileSystemGuid": [
         211134773,
@@ -37209,7 +35230,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "gEfiWinNtPhysicalDisksGuid": [
         211134767,
@@ -37222,7 +35243,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "gEfiWinNtVirtualDisksGuid": [
         211134760,
@@ -37235,7 +35256,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "gEfiNt32PkgTokenSpaceGuid": [
         226076229,
@@ -37248,7 +35269,7 @@ PROTOCOLS_GUIDS = {
         152,
         43,
         50,
-        180
+        180,
     ],
     "gEfiWinNtSystemConfigGuid": [
         3007836231,
@@ -37261,7 +35282,7 @@ PROTOCOLS_GUIDS = {
         183,
         229,
         56,
-        88
+        88,
     ],
     "gPeiNtThunkPpiGuid": [
         2562884069,
@@ -37274,7 +35295,7 @@ PROTOCOLS_GUIDS = {
         191,
         39,
         101,
-        218
+        218,
     ],
     "gPeiNtAutoScanPpiGuid": [
         231618637,
@@ -37287,7 +35308,7 @@ PROTOCOLS_GUIDS = {
         182,
         77,
         42,
-        169
+        169,
     ],
     "gNtPeiLoadFilePpiGuid": [
         4245448171,
@@ -37300,21 +35321,9 @@ PROTOCOLS_GUIDS = {
         239,
         19,
         186,
-        194
+        194,
     ],
-    "gNtFwhPpiGuid": [
-        1316393615,
-        20653,
-        17204,
-        176,
-        107,
-        168,
-        66,
-        19,
-        16,
-        138,
-        87
-    ],
+    "gNtFwhPpiGuid": [1316393615, 20653, 17204, 176, 107, 168, 66, 19, 16, 138, 87],
     "gWinNtBusDriverGuid": [
         68810114,
         1573,
@@ -37326,7 +35335,7 @@ PROTOCOLS_GUIDS = {
         150,
         92,
         149,
-        188
+        188,
     ],
     "gEfiWinNtThunkProtocolGuid": [
         1489311921,
@@ -37339,7 +35348,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "gEfiWinNtIoProtocolGuid": [
         2532002518,
@@ -37352,7 +35361,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "gOmap35xxTokenSpaceGuid": [
         615553726,
@@ -37365,7 +35374,7 @@ PROTOCOLS_GUIDS = {
         44,
         57,
         35,
-        39
+        39,
     ],
     "gOptionRomPkgTokenSpaceGuid": [
         507718031,
@@ -37378,7 +35387,7 @@ PROTOCOLS_GUIDS = {
         70,
         53,
         199,
-        40
+        40,
     ],
     "gBlockMmioProtocolGuid": [
         1800768739,
@@ -37391,7 +35400,7 @@ PROTOCOLS_GUIDS = {
         114,
         173,
         190,
-        132
+        132,
     ],
     "gPerformancePkgTokenSpaceGuid": [
         1720927983,
@@ -37404,7 +35413,7 @@ PROTOCOLS_GUIDS = {
         45,
         63,
         239,
-        125
+        125,
     ],
     "gEfiTscFrequencyGuid": [
         3685132259,
@@ -37417,34 +35426,10 @@ PROTOCOLS_GUIDS = {
         219,
         126,
         86,
-        135
+        135,
     ],
-    "gAcpi10TableGuid": [
-        3952946480,
-        11656,
-        4563,
-        154,
-        22,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
-    "gAcpiTableGuid": [
-        3952946480,
-        11656,
-        4563,
-        154,
-        22,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
+    "gAcpi10TableGuid": [3952946480, 11656, 4563, 154, 22, 0, 144, 39, 63, 193, 77],
+    "gAcpiTableGuid": [3952946480, 11656, 4563, 154, 22, 0, 144, 39, 63, 193, 77],
     "gPeiCapsuleOnDataCdGuid": [
         1554776217,
         3529,
@@ -37456,7 +35441,7 @@ PROTOCOLS_GUIDS = {
         245,
         64,
         10,
-        159
+        159,
     ],
     "gPeiCapsuleOnFatFloppyDiskGuid": [
         775761525,
@@ -37469,7 +35454,7 @@ PROTOCOLS_GUIDS = {
         107,
         135,
         0,
-        255
+        255,
     ],
     "gPeiCapsuleOnFatIdeDiskGuid": [
         3011867574,
@@ -37482,7 +35467,7 @@ PROTOCOLS_GUIDS = {
         89,
         56,
         215,
-        131
+        131,
     ],
     "gPeiCapsuleOnFatUsbDiskGuid": [
         268160537,
@@ -37495,7 +35480,7 @@ PROTOCOLS_GUIDS = {
         174,
         46,
         177,
-        134
+        134,
     ],
     "gDxeDebugportExtProtocolGuid": [
         832866191,
@@ -37508,7 +35493,7 @@ PROTOCOLS_GUIDS = {
         65,
         164,
         75,
-        27
+        27,
     ],
     "gDxeDebugCmdProtocolGuid": [
         3392879184,
@@ -37521,7 +35506,7 @@ PROTOCOLS_GUIDS = {
         239,
         145,
         125,
-        80
+        80,
     ],
     "gDxeDebugDispatchProtocolGuid": [
         807072841,
@@ -37534,7 +35519,7 @@ PROTOCOLS_GUIDS = {
         114,
         93,
         55,
-        75
+        75,
     ],
     "gEfiAlertStandardFormatProtocolGuid": [
         3432228619,
@@ -37547,7 +35532,7 @@ PROTOCOLS_GUIDS = {
         30,
         254,
         214,
-        226
+        226,
     ],
     "gEfiDebugportProtocolGuid": [
         3953453266,
@@ -37560,7 +35545,7 @@ PROTOCOLS_GUIDS = {
         186,
         150,
         96,
-        208
+        208,
     ],
     "gEfiMpServicesProtocolGuid": [
         4080165351,
@@ -37573,7 +35558,7 @@ PROTOCOLS_GUIDS = {
         199,
         60,
         136,
-        129
+        129,
     ],
     "gEfiPeiPeCoffLoaderGuid": [
         3625024767,
@@ -37586,7 +35571,7 @@ PROTOCOLS_GUIDS = {
         39,
         63,
         193,
-        77
+        77,
     ],
     "gEfiSimpleTextInputProtocolGuid": [
         947156929,
@@ -37599,7 +35584,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "gEfiSimpleTextOutputProtocolGuid": [
         947156930,
@@ -37612,7 +35597,7 @@ PROTOCOLS_GUIDS = {
         201,
         105,
         114,
-        59
+        59,
     ],
     "gEfiTcgPrivateInterfaceGuid": [
         2049459050,
@@ -37625,21 +35610,9 @@ PROTOCOLS_GUIDS = {
         127,
         100,
         62,
-        2
+        2,
     ],
-    "gMpsTableGuid": [
-        3952946479,
-        11656,
-        4563,
-        154,
-        22,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
+    "gMpsTableGuid": [3952946479, 11656, 4563, 154, 22, 0, 144, 39, 63, 193, 77],
     "gPdmWindowButtonGuid": [
         1600511963,
         44064,
@@ -37651,7 +35624,7 @@ PROTOCOLS_GUIDS = {
         129,
         160,
         234,
-        126
+        126,
     ],
     "gPdmWindowSpinGuid": [
         1622310426,
@@ -37664,7 +35637,7 @@ PROTOCOLS_GUIDS = {
         167,
         30,
         68,
-        171
+        171,
     ],
     "gPeiCachePpiGuid": [
         3243450458,
@@ -37677,7 +35650,7 @@ PROTOCOLS_GUIDS = {
         188,
         197,
         200,
-        162
+        162,
     ],
     "gPeiDebugDispatchPpiGuid": [
         3379788064,
@@ -37690,7 +35663,7 @@ PROTOCOLS_GUIDS = {
         37,
         27,
         103,
-        67
+        67,
     ],
     "gPeiPostBootScriptTablePpiGuid": [
         2294928134,
@@ -37703,7 +35676,7 @@ PROTOCOLS_GUIDS = {
         190,
         218,
         31,
-        137
+        137,
     ],
     "gPeiSmbusPolicyPpiGuid": [
         1672930357,
@@ -37716,7 +35689,7 @@ PROTOCOLS_GUIDS = {
         160,
         254,
         26,
-        108
+        108,
     ],
     "gPhoenixDesktopMessageProtocolGuid": [
         2279421241,
@@ -37729,7 +35702,7 @@ PROTOCOLS_GUIDS = {
         197,
         11,
         2,
-        27
+        27,
     ],
     "gPhoenixDesktopWindowProtocolGuid": [
         1878968205,
@@ -37742,7 +35715,7 @@ PROTOCOLS_GUIDS = {
         160,
         128,
         193,
-        63
+        63,
     ],
     "gPhoenixGdiProtocolGuid": [
         1062892722,
@@ -37755,7 +35728,7 @@ PROTOCOLS_GUIDS = {
         245,
         249,
         203,
-        43
+        43,
     ],
     "gPhoenixSmmCoreServicesProtocolGuid": [
         394159041,
@@ -37768,7 +35741,7 @@ PROTOCOLS_GUIDS = {
         185,
         254,
         64,
-        146
+        146,
     ],
     "gPhoenixEfiSmmSwSmiProtocolGuid": [
         4278527235,
@@ -37781,7 +35754,7 @@ PROTOCOLS_GUIDS = {
         206,
         177,
         12,
-        163
+        163,
     ],
     "gPhoenixSmmWatchdogTimerProtocolGuid": [
         1876835064,
@@ -37794,34 +35767,10 @@ PROTOCOLS_GUIDS = {
         65,
         243,
         146,
-        64
+        64,
     ],
-    "gSalSystemTableGuid": [
-        3952946482,
-        11656,
-        4563,
-        154,
-        22,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
-    "gSctIsaHcPpiGuid": [
-        2370354544,
-        51363,
-        19462,
-        144,
-        27,
-        116,
-        121,
-        70,
-        170,
-        195,
-        88
-    ],
+    "gSalSystemTableGuid": [3952946482, 11656, 4563, 154, 22, 0, 144, 39, 63, 193, 77],
+    "gSctIsaHcPpiGuid": [2370354544, 51363, 19462, 144, 27, 116, 121, 70, 170, 195, 88],
     "gSctIsaHcProtocolGuid": [
         1605137248,
         54514,
@@ -37833,21 +35782,9 @@ PROTOCOLS_GUIDS = {
         94,
         103,
         8,
-        137
+        137,
     ],
-    "gSmbiosTableGuid": [
-        3952946481,
-        11656,
-        4563,
-        154,
-        22,
-        0,
-        144,
-        39,
-        63,
-        193,
-        77
-    ],
+    "gSmbiosTableGuid": [3952946481, 11656, 4563, 154, 22, 0, 144, 39, 63, 193, 77],
     "gPeiSpeakerInterfacePpiGuid": [
         816588638,
         47920,
@@ -37859,7 +35796,7 @@ PROTOCOLS_GUIDS = {
         50,
         44,
         137,
-        192
+        192,
     ],
     "gPeiMfgMemoryTestPpiGuid": [
         2871610002,
@@ -37872,7 +35809,7 @@ PROTOCOLS_GUIDS = {
         237,
         77,
         182,
-        61
+        61,
     ],
     "gPeiSha256HashPpiGuid": [
         2500729115,
@@ -37885,7 +35822,7 @@ PROTOCOLS_GUIDS = {
         27,
         3,
         243,
-        92
+        92,
     ],
     "gEfiPlatformBootModeGuid": [
         3464779524,
@@ -37898,7 +35835,7 @@ PROTOCOLS_GUIDS = {
         80,
         119,
         87,
-        147
+        147,
     ],
     "gEfiPlatformInfoGuid": [
         506121281,
@@ -37911,7 +35848,7 @@ PROTOCOLS_GUIDS = {
         195,
         78,
         8,
-        123
+        123,
     ],
     "gEfiMemoryConfigDataGuid": [
         2161890608,
@@ -37924,7 +35861,7 @@ PROTOCOLS_GUIDS = {
         101,
         83,
         40,
-        49
+        49,
     ],
     "gPlatformModuleTokenSpaceGuid": [
         1775320048,
@@ -37937,7 +35874,7 @@ PROTOCOLS_GUIDS = {
         197,
         206,
         59,
-        192
+        192,
     ],
     "gEfiSerialPortTokenSpaceGuid": [
         1605182345,
@@ -37950,7 +35887,7 @@ PROTOCOLS_GUIDS = {
         182,
         174,
         163,
-        63
+        63,
     ],
     "gEfiIchTokenSpaceGuid": [
         3817607651,
@@ -37963,7 +35900,7 @@ PROTOCOLS_GUIDS = {
         105,
         61,
         185,
-        255
+        255,
     ],
     "gEfiPchTokenSpaceGuid": [
         2309075576,
@@ -37976,7 +35913,7 @@ PROTOCOLS_GUIDS = {
         215,
         196,
         121,
-        19
+        19,
     ],
     "gEfiSioVariableGuid": [
         1443624330,
@@ -37989,7 +35926,7 @@ PROTOCOLS_GUIDS = {
         162,
         97,
         224,
-        49
+        49,
     ],
     "gProcessorProducerGuid": [
         468740842,
@@ -38002,21 +35939,9 @@ PROTOCOLS_GUIDS = {
         9,
         86,
         45,
-        48
+        48,
     ],
-    "gEfiPowerOnHobGuid": [
-        73967105,
-        50485,
-        18173,
-        169,
-        93,
-        187,
-        171,
-        153,
-        27,
-        23,
-        140
-    ],
+    "gEfiPowerOnHobGuid": [73967105, 50485, 18173, 169, 93, 187, 171, 153, 27, 23, 140],
     "gEfiPlatformCpuInfoGuid": [
         3147594423,
         47321,
@@ -38028,21 +35953,9 @@ PROTOCOLS_GUIDS = {
         65,
         226,
         23,
-        188
+        188,
     ],
-    "gEfiBiosIdGuid": [
-        3286461705,
-        33428,
-        19351,
-        168,
-        87,
-        213,
-        40,
-        143,
-        227,
-        62,
-        40
-    ],
+    "gEfiBiosIdGuid": [3286461705, 33428, 19351, 168, 87, 213, 40, 143, 227, 62, 40],
     "gEfiBoardFeaturesGuid": [
         2495211694,
         34935,
@@ -38054,47 +35967,11 @@ PROTOCOLS_GUIDS = {
         75,
         130,
         206,
-        211
+        211,
     ],
-    "gItkDataVarGuid": [
-        940732989,
-        32328,
-        20009,
-        188,
-        39,
-        245,
-        163,
-        154,
-        201,
-        78,
-        241
-    ],
-    "gDmiDataGuid": [
-        1894083678,
-        10252,
-        17584,
-        164,
-        151,
-        9,
-        104,
-        26,
-        188,
-        55,
-        94
-    ],
-    "gIdccDataHubGuid": [
-        2022579615,
-        7851,
-        18386,
-        162,
-        243,
-        120,
-        202,
-        232,
-        125,
-        96,
-        18
-    ],
+    "gItkDataVarGuid": [940732989, 32328, 20009, 188, 39, 245, 163, 154, 201, 78, 241],
+    "gDmiDataGuid": [1894083678, 10252, 17584, 164, 151, 9, 104, 26, 188, 55, 94],
+    "gIdccDataHubGuid": [2022579615, 7851, 18386, 162, 243, 120, 202, 232, 125, 96, 18],
     "gEfiSetupVariableGuid": [
         3968325187,
         60324,
@@ -38106,7 +35983,7 @@ PROTOCOLS_GUIDS = {
         54,
         178,
         13,
-        169
+        169,
     ],
     "gMfgModeVariableGuid": [
         4011130232,
@@ -38119,7 +35996,7 @@ PROTOCOLS_GUIDS = {
         71,
         224,
         23,
-        145
+        145,
     ],
     "gEfiAcpiTableStorageGuid": [
         2117553701,
@@ -38132,7 +36009,7 @@ PROTOCOLS_GUIDS = {
         35,
         198,
         6,
-        205
+        205,
     ],
     "gACPIOSFRMfgStringVariableGuid": [
         1914913299,
@@ -38145,7 +36022,7 @@ PROTOCOLS_GUIDS = {
         193,
         7,
         251,
-        205
+        205,
     ],
     "gACPIOSFRRefDataBlockVariableGuid": [
         1914913299,
@@ -38158,7 +36035,7 @@ PROTOCOLS_GUIDS = {
         193,
         7,
         251,
-        205
+        205,
     ],
     "gACPIOSFRModelStringVariableGuid": [
         3390819033,
@@ -38171,7 +36048,7 @@ PROTOCOLS_GUIDS = {
         199,
         246,
         135,
-        244
+        244,
     ],
     "gEfiPciLanInfoGuid": [
         228201511,
@@ -38184,7 +36061,7 @@ PROTOCOLS_GUIDS = {
         31,
         215,
         34,
-        186
+        186,
     ],
     "gEfiNormalSetupGuid": [
         3968325187,
@@ -38197,21 +36074,9 @@ PROTOCOLS_GUIDS = {
         54,
         178,
         13,
-        169
+        169,
     ],
-    "gFirmwareIdGuid": [
-        1582668835,
-        8106,
-        19169,
-        141,
-        74,
-        198,
-        207,
-        2,
-        108,
-        118,
-        111
-    ],
+    "gFirmwareIdGuid": [1582668835, 8106, 19169, 141, 74, 198, 207, 2, 108, 118, 111],
     "gOsSelectionVariableGuid": [
         2256813910,
         26461,
@@ -38223,7 +36088,7 @@ PROTOCOLS_GUIDS = {
         131,
         114,
         241,
-        3
+        3,
     ],
     "gEfiActiveBiosProtocolGuid": [
         3955109147,
@@ -38236,7 +36101,7 @@ PROTOCOLS_GUIDS = {
         227,
         150,
         212,
-        26
+        26,
     ],
     "gEfiPlatformCpuProtocolGuid": [
         3173436873,
@@ -38249,7 +36114,7 @@ PROTOCOLS_GUIDS = {
         173,
         206,
         72,
-        18
+        18,
     ],
     "gDxePchPlatformPolicyProtocolGuid": [
         1258382761,
@@ -38262,7 +36127,7 @@ PROTOCOLS_GUIDS = {
         156,
         46,
         48,
-        213
+        213,
     ],
     "gEfiTpmMpDriverProtocolGuid": [
         3725991166,
@@ -38275,7 +36140,7 @@ PROTOCOLS_GUIDS = {
         240,
         115,
         82,
-        18
+        18,
     ],
     "gEfiLpcWpce791PolicyProtocolGuid": [
         2871782959,
@@ -38288,21 +36153,9 @@ PROTOCOLS_GUIDS = {
         119,
         79,
         253,
-        13
+        13,
     ],
-    "gUsbPolicyGuid": [
-        4128748376,
-        4815,
-        16714,
-        160,
-        105,
-        96,
-        103,
-        123,
-        218,
-        19,
-        180
-    ],
+    "gUsbPolicyGuid": [4128748376, 4815, 16714, 160, 105, 96, 103, 123, 218, 19, 180],
     "gEfiSpeakerInterfaceProtocolGuid": [
         1074480246,
         12417,
@@ -38314,7 +36167,7 @@ PROTOCOLS_GUIDS = {
         41,
         69,
         195,
-        185
+        185,
     ],
     "gDxeVlvPlatformPolicyGuid": [
         1537968314,
@@ -38327,7 +36180,7 @@ PROTOCOLS_GUIDS = {
         246,
         136,
         28,
-        214
+        214,
     ],
     "gEfiSmbiosSlotPopulationGuid": [
         4017878998,
@@ -38340,7 +36193,7 @@ PROTOCOLS_GUIDS = {
         209,
         204,
         73,
-        192
+        192,
     ],
     "gObservableProtocolGuid": [
         3794257186,
@@ -38353,7 +36206,7 @@ PROTOCOLS_GUIDS = {
         87,
         15,
         152,
-        233
+        233,
     ],
     "gEfiCk505ClockPlatformInfoGuid": [
         1011375780,
@@ -38366,7 +36219,7 @@ PROTOCOLS_GUIDS = {
         110,
         169,
         107,
-        78
+        78,
     ],
     "gEfiLpcWpc83627PolicyProtocolGuid": [
         3555509607,
@@ -38379,7 +36232,7 @@ PROTOCOLS_GUIDS = {
         162,
         79,
         75,
-        93
+        93,
     ],
     "gEfiTcoResetProtocolGuid": [
         2795999586,
@@ -38392,7 +36245,7 @@ PROTOCOLS_GUIDS = {
         48,
         100,
         239,
-        179
+        179,
     ],
     "gEfiWatchdogTimerDriverProtocolGuid": [
         3585109270,
@@ -38405,7 +36258,7 @@ PROTOCOLS_GUIDS = {
         64,
         114,
         132,
-        23
+        23,
     ],
     "gEfiPlatformIdeInitProtocolGuid": [
         930899619,
@@ -38418,7 +36271,7 @@ PROTOCOLS_GUIDS = {
         130,
         86,
         158,
-        59
+        59,
     ],
     "gEnhancedSpeedstepProtocolGuid": [
         2443304399,
@@ -38431,7 +36284,7 @@ PROTOCOLS_GUIDS = {
         63,
         26,
         120,
-        111
+        111,
     ],
     "gEfiGopDisplayBrightnessProtocolGuid": [
         1878146845,
@@ -38444,7 +36297,7 @@ PROTOCOLS_GUIDS = {
         178,
         238,
         166,
-        167
+        167,
     ],
     "gEfiUsbKeyboardConnectGuid": [
         2912699265,
@@ -38457,7 +36310,7 @@ PROTOCOLS_GUIDS = {
         124,
         70,
         93,
-        82
+        82,
     ],
     "gEfiMmioDeviceProtocolGuid": [
         608723494,
@@ -38470,7 +36323,7 @@ PROTOCOLS_GUIDS = {
         158,
         86,
         222,
-        160
+        160,
     ],
     "gEfiI2cBusConfigurationManagementProtocol2Guid": [
         1963139093,
@@ -38483,7 +36336,7 @@ PROTOCOLS_GUIDS = {
         171,
         164,
         113,
-        5
+        5,
     ],
     "gEfiI2cAcpiProtocolGuid": [
         4077660437,
@@ -38496,7 +36349,7 @@ PROTOCOLS_GUIDS = {
         188,
         231,
         182,
-        160
+        160,
     ],
     "gEfiI2cMasterProtocol2Guid": [
         1468805466,
@@ -38509,7 +36362,7 @@ PROTOCOLS_GUIDS = {
         64,
         208,
         16,
-        188
+        188,
     ],
     "gEfiI2cHostProtocol2Guid": [
         1890722223,
@@ -38522,7 +36375,7 @@ PROTOCOLS_GUIDS = {
         35,
         169,
         86,
-        217
+        217,
     ],
     "gEfiI2cBusProtocolGuid": [
         2678174245,
@@ -38535,7 +36388,7 @@ PROTOCOLS_GUIDS = {
         182,
         115,
         210,
-        64
+        64,
     ],
     "gEfiI2cSlaveProtocolGuid": [
         4072771854,
@@ -38548,7 +36401,7 @@ PROTOCOLS_GUIDS = {
         9,
         106,
         121,
-        240
+        240,
     ],
     "gEfiSpiAcpiProtocolGuid": [
         2672404601,
@@ -38561,7 +36414,7 @@ PROTOCOLS_GUIDS = {
         243,
         48,
         16,
-        163
+        163,
     ],
     "gEfiSpiHostProtocolGuid": [
         2501600741,
@@ -38574,7 +36427,7 @@ PROTOCOLS_GUIDS = {
         31,
         74,
         240,
-        51
+        51,
     ],
     "gEfiSpiBusProtocolGuid": [
         326840388,
@@ -38587,7 +36440,7 @@ PROTOCOLS_GUIDS = {
         37,
         5,
         193,
-        128
+        128,
     ],
     "gLpssDummyProtocolGuid": [
         2941043042,
@@ -38600,7 +36453,7 @@ PROTOCOLS_GUIDS = {
         193,
         205,
         50,
-        243
+        243,
     ],
     "gEfiSpiProtocolGuid": [
         290910150,
@@ -38613,7 +36466,7 @@ PROTOCOLS_GUIDS = {
         46,
         131,
         195,
-        19
+        19,
     ],
     "gEfiGpioOperationProtocolGuid": [
         954072719,
@@ -38626,7 +36479,7 @@ PROTOCOLS_GUIDS = {
         145,
         132,
         101,
-        176
+        176,
     ],
     "gEfiEsrtOperationProtocolGuid": [
         1162455879,
@@ -38639,7 +36492,7 @@ PROTOCOLS_GUIDS = {
         16,
         173,
         128,
-        86
+        86,
     ],
     "gEfiFwDisplayCapsuleGuid": [
         999063906,
@@ -38652,7 +36505,7 @@ PROTOCOLS_GUIDS = {
         241,
         214,
         86,
-        151
+        151,
     ],
     "gEfiFirmwareClassGuid": [
         2971837026,
@@ -38665,21 +36518,9 @@ PROTOCOLS_GUIDS = {
         192,
         97,
         66,
-        144
+        144,
     ],
-    "gEfiDFUVerGuid": [
-        231160557,
-        52214,
-        18981,
-        166,
-        141,
-        89,
-        200,
-        15,
-        68,
-        199,
-        195
-    ],
+    "gEfiDFUVerGuid": [231160557, 52214, 18981, 166, 141, 89, 200, 15, 68, 199, 195],
     "gEfiEsrtTableGuid": [
         2971837027,
         13921,
@@ -38691,7 +36532,7 @@ PROTOCOLS_GUIDS = {
         176,
         214,
         33,
-        128
+        128,
     ],
     "gEfiCapsuleCrashLogVarGuid": [
         4093580392,
@@ -38704,7 +36545,7 @@ PROTOCOLS_GUIDS = {
         144,
         5,
         70,
-        80
+        80,
     ],
     "gEfiCapsuleCrashGuid": [
         236792178,
@@ -38717,7 +36558,7 @@ PROTOCOLS_GUIDS = {
         171,
         12,
         56,
-        254
+        254,
     ],
     "gPwdCredentialProviderGuid": [
         2025450635,
@@ -38730,7 +36571,7 @@ PROTOCOLS_GUIDS = {
         193,
         187,
         0,
-        206
+        206,
     ],
     "gUsbCredentialProviderGuid": [
         3498352337,
@@ -38743,7 +36584,7 @@ PROTOCOLS_GUIDS = {
         226,
         128,
         183,
-        169
+        169,
     ],
     "gUserProfileManagerGuid": [
         3277793068,
@@ -38756,7 +36597,7 @@ PROTOCOLS_GUIDS = {
         102,
         138,
         140,
-        254
+        254,
     ],
     "gEfiTrEEPhysicalPresenceGuid": [
         4064691138,
@@ -38769,7 +36610,7 @@ PROTOCOLS_GUIDS = {
         87,
         156,
         45,
-        91
+        91,
     ],
     "gTrEEConfigFormSetGuid": [
         3310043743,
@@ -38782,7 +36623,7 @@ PROTOCOLS_GUIDS = {
         60,
         75,
         100,
-        28
+        28,
     ],
     "gStdLibTokenSpaceGuid": [
         1148541424,
@@ -38795,7 +36636,7 @@ PROTOCOLS_GUIDS = {
         101,
         64,
         84,
-        194
+        194,
     ],
     "gEfiSocketProtocolGuid": [
         1491529059,
@@ -38808,7 +36649,7 @@ PROTOCOLS_GUIDS = {
         237,
         107,
         101,
-        175
+        175,
     ],
     "gEfiSocketServiceBindingProtocolGuid": [
         2326715178,
@@ -38821,7 +36662,7 @@ PROTOCOLS_GUIDS = {
         150,
         66,
         63,
-        42
+        42,
     ],
     "gVlvPolicyPpiGuid": [
         2105848514,
@@ -38834,7 +36675,7 @@ PROTOCOLS_GUIDS = {
         50,
         211,
         166,
-        163
+        163,
     ],
     "gVlvMmioPolicyPpiGuid": [
         3882336127,
@@ -38847,21 +36688,9 @@ PROTOCOLS_GUIDS = {
         76,
         167,
         175,
-        210
+        210,
     ],
-    "gSeCfTPMPpiGuid": [
-        283274737,
-        34677,
-        20193,
-        181,
-        10,
-        58,
-        232,
-        40,
-        147,
-        112,
-        58
-    ],
+    "gSeCfTPMPpiGuid": [283274737, 34677, 20193, 181, 10, 58, 232, 40, 147, 112, 58],
     "gPchUsbPolicyPpiGuid": [
         3224044915,
         11086,
@@ -38873,21 +36702,9 @@ PROTOCOLS_GUIDS = {
         123,
         80,
         68,
-        44
+        44,
     ],
-    "gPchInitPpiGuid": [
-        166365514,
-        48653,
-        16944,
-        160,
-        3,
-        237,
-        198,
-        147,
-        180,
-        142,
-        149
-    ],
+    "gPchInitPpiGuid": [166365514, 48653, 16944, 160, 3, 237, 198, 147, 180, 142, 149],
     "gPchPlatformPolicyPpiGuid": [
         355747443,
         54117,
@@ -38899,21 +36716,9 @@ PROTOCOLS_GUIDS = {
         204,
         7,
         97,
-        29
+        29,
     ],
-    "gPeiSpiPpiGuid": [
-        2743888024,
-        11100,
-        20470,
-        147,
-        38,
-        46,
-        99,
-        33,
-        46,
-        86,
-        194
-    ],
+    "gPeiSpiPpiGuid": [2743888024, 11100, 20470, 147, 38, 46, 99, 33, 46, 86, 194],
     "gVlvPeiInitPpiGuid": [
         166365457,
         48653,
@@ -38925,21 +36730,9 @@ PROTOCOLS_GUIDS = {
         147,
         180,
         142,
-        17
+        17,
     ],
-    "gSeCUmaPpiGuid": [
-        3419956855,
-        13871,
-        19460,
-        148,
-        89,
-        167,
-        65,
-        50,
-        110,
-        5,
-        207
-    ],
+    "gSeCUmaPpiGuid": [3419956855, 13871, 19460, 148, 89, 167, 65, 50, 110, 5, 207],
     "gPeiSeCPlatformPolicyPpiGuid": [
         2061749943,
         12002,
@@ -38951,21 +36744,9 @@ PROTOCOLS_GUIDS = {
         188,
         131,
         202,
-        191
+        191,
     ],
-    "gPeiHeciPpiGuid": [
-        3993937937,
-        64473,
-        18295,
-        185,
-        90,
-        186,
-        79,
-        113,
-        16,
-        31,
-        116
-    ],
+    "gPeiHeciPpiGuid": [3993937937, 64473, 18295, 185, 90, 186, 79, 113, 16, 31, 116],
     "gPeiSdhcPpiGuid": [
         4109344122,
         39109,
@@ -38977,7 +36758,7 @@ PROTOCOLS_GUIDS = {
         114,
         101,
         190,
-        12
+        12,
     ],
     "gPeiBlockIoPpiGuid": [
         3160385104,
@@ -38990,7 +36771,7 @@ PROTOCOLS_GUIDS = {
         7,
         248,
         71,
-        223
+        223,
     ],
     "gSeCfTPMPolicyPpiGuid": [
         1339144777,
@@ -39003,21 +36784,9 @@ PROTOCOLS_GUIDS = {
         122,
         115,
         47,
-        208
+        208,
     ],
-    "gPchPeiInitPpiGuid": [
-        2897820424,
-        23772,
-        19087,
-        147,
-        212,
-        6,
-        227,
-        66,
-        223,
-        24,
-        46
-    ],
+    "gPchPeiInitPpiGuid": [2897820424, 23772, 19087, 147, 212, 6, 227, 66, 223, 24, 46],
     "gEfiGlobalNvsAreaProtocolGuid": [
         122560072,
         33074,
@@ -39029,7 +36798,7 @@ PROTOCOLS_GUIDS = {
         173,
         154,
         102,
-        220
+        220,
     ],
     "gPpmPlatformPolicyProtocolGuid": [
         3719036588,
@@ -39042,7 +36811,7 @@ PROTOCOLS_GUIDS = {
         174,
         216,
         38,
-        94
+        94,
     ],
     "gMemInfoProtocolGuid": [
         1864431560,
@@ -39055,7 +36824,7 @@ PROTOCOLS_GUIDS = {
         240,
         196,
         150,
-        174
+        174,
     ],
     "gEfiSdHostIoProtocolGuid": [
         3057618631,
@@ -39068,7 +36837,7 @@ PROTOCOLS_GUIDS = {
         243,
         101,
         204,
-        81
+        81,
     ],
     "gEfiSmmSpiProtocolGuid": [
         3641125941,
@@ -39081,7 +36850,7 @@ PROTOCOLS_GUIDS = {
         14,
         42,
         130,
-        133
+        133,
     ],
     "gEfiSmmIchnDispatchExProtocolGuid": [
         958414939,
@@ -39094,7 +36863,7 @@ PROTOCOLS_GUIDS = {
         138,
         111,
         247,
-        54
+        54,
     ],
     "gEfiPchS3SupportProtocolGuid": [
         3800551947,
@@ -39107,7 +36876,7 @@ PROTOCOLS_GUIDS = {
         99,
         147,
         106,
-        4
+        4,
     ],
     "gPchResetProtocolGuid": [
         3680721196,
@@ -39120,7 +36889,7 @@ PROTOCOLS_GUIDS = {
         52,
         89,
         138,
-        90
+        90,
     ],
     "gPchResetCallbackProtocolGuid": [
         976421035,
@@ -39133,7 +36902,7 @@ PROTOCOLS_GUIDS = {
         193,
         53,
         98,
-        192
+        192,
     ],
     "gEfiPchInfoProtocolGuid": [
         3542025216,
@@ -39146,7 +36915,7 @@ PROTOCOLS_GUIDS = {
         136,
         59,
         64,
-        43
+        43,
     ],
     "gEfiPchExtendedResetProtocolGuid": [
         4038851744,
@@ -39159,7 +36928,7 @@ PROTOCOLS_GUIDS = {
         184,
         158,
         83,
-        57
+        57,
     ],
     "gDxeIchPlatformPolicyProtocolGuid": [
         4128748376,
@@ -39172,7 +36941,7 @@ PROTOCOLS_GUIDS = {
         123,
         218,
         19,
-        179
+        179,
     ],
     "gEfiIchInfoProtocolGuid": [
         3542025216,
@@ -39185,7 +36954,7 @@ PROTOCOLS_GUIDS = {
         136,
         59,
         64,
-        43
+        43,
     ],
     "gEfiSmmIoTrapDispatchProtocolGuid": [
         1490826893,
@@ -39198,7 +36967,7 @@ PROTOCOLS_GUIDS = {
         65,
         141,
         249,
-        48
+        48,
     ],
     "gEfiSmmSmbusProtocolGuid": [
         1927544980,
@@ -39211,7 +36980,7 @@ PROTOCOLS_GUIDS = {
         74,
         158,
         156,
-        12
+        12,
     ],
     "gIgdOpRegionProtocolGuid": [
         3452296671,
@@ -39224,7 +36993,7 @@ PROTOCOLS_GUIDS = {
         73,
         13,
         185,
-        211
+        211,
     ],
     "gEfiHeciProtocolGuid": [
         3484629008,
@@ -39237,7 +37006,7 @@ PROTOCOLS_GUIDS = {
         190,
         7,
         246,
-        232
+        232,
     ],
     "gPlatformSeCHookProtocolGuid": [
         3159508846,
@@ -39250,7 +37019,7 @@ PROTOCOLS_GUIDS = {
         72,
         120,
         170,
-        194
+        194,
     ],
     "gEfiSeCRcInfoProtocolGuid": [
         301727227,
@@ -39263,7 +37032,7 @@ PROTOCOLS_GUIDS = {
         110,
         220,
         203,
-        154
+        154,
     ],
     "gEfiTdtProtocolGuid": [
         200736871,
@@ -39276,7 +37045,7 @@ PROTOCOLS_GUIDS = {
         145,
         198,
         20,
-        17
+        17,
     ],
     "gDxePlatformSeCPolicyGuid": [
         4173328404,
@@ -39289,7 +37058,7 @@ PROTOCOLS_GUIDS = {
         115,
         141,
         190,
-        237
+        237,
     ],
     "gEfiEmmcCardInfoProtocolGuid": [
         515791545,
@@ -39302,7 +37071,7 @@ PROTOCOLS_GUIDS = {
         252,
         229,
         222,
-        221
+        221,
     ],
     "gEfiTdtOperationProtocolGuid": [
         4247788452,
@@ -39315,21 +37084,9 @@ PROTOCOLS_GUIDS = {
         171,
         221,
         42,
-        145
+        145,
     ],
-    "gEfiDFUResultGuid": [
-        346539119,
-        48130,
-        16455,
-        159,
-        24,
-        165,
-        215,
-        37,
-        216,
-        189,
-        25
-    ],
+    "gEfiDFUResultGuid": [346539119, 48130, 16455, 159, 24, 165, 215, 37, 216, 189, 25],
     "gEfiCPTokenSpaceGuid": [
         2441220558,
         41426,
@@ -39341,7 +37098,7 @@ PROTOCOLS_GUIDS = {
         191,
         68,
         80,
-        14
+        14,
     ],
     "gEfiSmbusArpMapGuid": [
         1887168574,
@@ -39354,7 +37111,7 @@ PROTOCOLS_GUIDS = {
         58,
         160,
         184,
-        226
+        226,
     ],
     "gEfiVLVTokenSpaceGuid": [
         3393530984,
@@ -39367,7 +37124,7 @@ PROTOCOLS_GUIDS = {
         43,
         49,
         41,
-        70
+        70,
     ],
     "gSataControllerDriverGuid": [
         3146948009,
@@ -39380,7 +37137,7 @@ PROTOCOLS_GUIDS = {
         63,
         35,
         218,
-        85
+        85,
     ],
     "gDxePchPolicyUpdateProtocolGuid": [
         444702281,
@@ -39393,7 +37150,7 @@ PROTOCOLS_GUIDS = {
         210,
         129,
         10,
-        56
+        56,
     ],
     "gPowerManagementAcpiTableStorageGuid": [
         370926999,
@@ -39406,7 +37163,7 @@ PROTOCOLS_GUIDS = {
         171,
         84,
         238,
-        218
+        218,
     ],
     "gPchInitVariableGuid": [
         3871536906,
@@ -39419,7 +37176,7 @@ PROTOCOLS_GUIDS = {
         137,
         225,
         23,
-        235
+        235,
     ],
     "gVlvRefCodePkgTokenSpaceGuid": [
         2239139402,
@@ -39432,7 +37189,7 @@ PROTOCOLS_GUIDS = {
         133,
         181,
         223,
-        204
+        204,
     ],
     "gSeCPlatformReadyToBootGuid": [
         66974065,
@@ -39445,7 +37202,7 @@ PROTOCOLS_GUIDS = {
         211,
         56,
         250,
-        116
+        116,
     ],
     "gAmtReadyToBootGuid": [
         1085315930,
@@ -39458,7 +37215,7 @@ PROTOCOLS_GUIDS = {
         75,
         117,
         77,
-        5
+        5,
     ],
     "gEfiVlv2VariableGuid": [
         280652734,
@@ -39471,8 +37228,10 @@ PROTOCOLS_GUIDS = {
         217,
         189,
         96,
-        229
-    ]
+        229,
+    ],
 }
 
-GUID_TO_NAME = dict([(get_guid_str(PROTOCOLS_GUIDS[p]), p) for p in PROTOCOLS_GUIDS.keys()])
+GUID_TO_NAME = dict(
+    [(get_guid_str(PROTOCOLS_GUIDS[p]), p) for p in PROTOCOLS_GUIDS.keys()]
+)
