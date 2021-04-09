@@ -236,7 +236,7 @@ class r2_uefi_analyzer:
                         and (esil[-3] == "[8]")
                         and (esil[-4] == "+")
                     ):
-                        if ("ptr" in insn) and (insn["ptr"] == self.g_bs):
+                        if ("ptr" in insn) and (insn["ptr"] == self.g_rt):
                             g_rt_found = True
                     if not g_rt_found:
                         insn_index += 1
