@@ -9,3 +9,7 @@ __email__ = "yegor@binarly.io"
 __version__ = "1.0.0"
 
 from .uefi_analyzer import r2_uefi_analyzer
+
+__all__ = [
+    "r2_uefi_analyzer",
+]
