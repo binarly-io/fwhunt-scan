@@ -30,8 +30,8 @@ uefi_r2_analyzer.py analyze-image <image_path> -o out.json
 ### From code
 
 ```python
-from uefi_r2.uefi_analyzer import r2_uefi_analyzer
+from uefi_r2.uefi_analyzer import UefiAnalyzer
 
 ...
-summary = r2_uefi_analyzer.r2_get_summary(image_path, debug=True)
+summary = UefiAnalyzer.r2_get_summary(image_path, debug=True)
 ```
