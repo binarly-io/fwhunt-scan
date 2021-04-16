@@ -1,6 +1,6 @@
 # uefi_r2: tools for analyzing UEFI firmware using radare2
 #
-# pylint: disable=too-many-nested-blocks,invalid-name,superfluous-parens
+# pylint: disable=too-many-nested-blocks,superfluous-parens
 # pylint: disable=missing-class-docstring,missing-function-docstring,missing-module-docstring
 # pylint: disable=too-few-public-methods,too-many-arguments,too-many-instance-attributes
 
@@ -11,7 +11,7 @@ from typing import List, Dict, Any, Optional
 
 import click
 import r2pipe
-from uefi_r2.uefi_protocols import GUID_FROM_BYTES, r2_uefi_guid
+from uefi_r2.uefi_protocols import GUID_FROM_BYTES, UefiGuid
 from uefi_r2.uefi_tables import (
     BS_PROTOCOLS_INFO_X64,
     OFFSET_TO_SERVICE,
@@ -20,13 +20,13 @@ from uefi_r2.uefi_tables import (
 )
 
 
-class r2_uefi_service:
+class UefiService:
     def __init__(self, name: str, address: int) -> None:
         self.name: str = name
         self.address: int = address
 
 
-class r2_uefi_protocol(r2_uefi_guid):
+class UefiProtocol(UefiGuid):
     def __init__(
         self, name: str, address: int, value: str, guid_address: int, service: str
     ) -> None:
@@ -39,7 +39,7 @@ class r2_uefi_protocol(r2_uefi_guid):
         self.value = value
 
 
-class r2_uefi_protocol_guid(r2_uefi_guid):
+class UefiProtocolGuid(UefiGuid):
     def __init__(self, name: str, address: int, value: str) -> None:
         self.address: int = address
 
@@ -48,7 +48,7 @@ class r2_uefi_protocol_guid(r2_uefi_guid):
         self.value = value
 
 
-class r2_uefi_analyzer:
+class UefiAnalyzer:
     def __init__(self, image_path: Optional[str] = None, debug: bool = False):
         """UEFI analyzer initialization"""
 
@@ -63,13 +63,13 @@ class r2_uefi_analyzer:
         # name
         self.r2_name = click.style("uefi_r2", fg="green", bold=True)
         # list of boot services
-        self.bs_list: List[r2_uefi_service] = []
-        self.bs_prot: List[r2_uefi_service] = []
+        self.bs_list: List[UefiService] = []
+        self.bs_prot: List[UefiService] = []
         # list of runtime services
-        self.rt_list: List[r2_uefi_service] = []
+        self.rt_list: List[UefiService] = []
         # list of protocols
-        self.protocols: List[r2_uefi_protocol] = []
-        self.p_guids: List[r2_uefi_protocol_guid] = []
+        self.protocols: List[UefiProtocol] = []
+        self.p_guids: List[UefiProtocolGuid] = []
 
         # private???
         self.r2_info: List[Any] = []
@@ -179,7 +179,7 @@ class r2_uefi_analyzer:
                                     service_offset = g_bs_area_insn["ptr"]
                                     if service_offset in EFI_BOOT_SERVICES_X64:
                                         self.bs_list.append(
-                                            r2_uefi_service(
+                                            UefiService(
                                                 address=g_bs_area_insn["offset"],
                                                 name=EFI_BOOT_SERVICES_X64[
                                                     service_offset
@@ -215,7 +215,7 @@ class r2_uefi_analyzer:
                                     if bs.address == insn["offset"]:
                                         new = False
                                         break
-                                bs = r2_uefi_service(address=insn["offset"], name=name)
+                                bs = UefiService(address=insn["offset"], name=name)
                                 if new:
                                     self.bs_list.append(bs)
                                 self.bs_prot.append(bs)
@@ -263,7 +263,7 @@ class r2_uefi_analyzer:
                                 service_offset = g_rt_area_insn["ptr"]
                                 if service_offset in EFI_RUNTIME_SERVICES_X64:
                                     self.rt_list.append(
-                                        r2_uefi_service(
+                                        UefiService(
                                             address=g_rt_area_insn["offset"],
                                             name=EFI_RUNTIME_SERVICES_X64[
                                                 service_offset
@@ -296,13 +296,13 @@ class r2_uefi_analyzer:
                             # look up in known list
                             guid = GUID_FROM_BYTES.get(p_guid_b)
                             if not guid:
-                                guid = r2_uefi_guid(
+                                guid = UefiGuid(
                                     value=str(uuid.UUID(bytes_le=p_guid_b)),
                                     name="proprietary_protocol",
                                 )
 
                             self.protocols.append(
-                                r2_uefi_protocol(
+                                UefiProtocol(
                                     name=guid.name,
                                     value=guid.value,
                                     guid_address=p_guid_addr,
@@ -330,7 +330,7 @@ class r2_uefi_analyzer:
                     if guid.value in ["00000000-0000-0000-0000000000000000"]:
                         continue
                     self.p_guids.append(
-                        r2_uefi_protocol_guid(
+                        UefiProtocolGuid(
                             address=section["vaddr"] + i,
                             name=guid.name,
                             value=guid.value,
