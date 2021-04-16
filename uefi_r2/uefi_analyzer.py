@@ -1,13 +1,16 @@
-# uefi_r2: tools for analyzing UEFI firmware using radare2
+# SPDX-License-Identifier: GPL-3.0+
 #
-# pylint: disable=too-many-nested-blocks,superfluous-parens
-# pylint: disable=missing-class-docstring,missing-function-docstring,missing-module-docstring
+# pylint: disable=too-many-nested-blocks,invalid-name
 # pylint: disable=too-few-public-methods,too-many-arguments,too-many-instance-attributes
+
+"""
+Tools for analyzing UEFI firmware using radare2
+"""
 
 import json
 import uuid
 
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 
 import click
 import r2pipe
@@ -21,82 +24,114 @@ from uefi_r2.uefi_tables import (
 
 
 class UefiService:
+    """ a UEFI service """
+
     def __init__(self, name: str, address: int) -> None:
         self.name: str = name
         self.address: int = address
 
 
 class UefiProtocol(UefiGuid):
+    """ a UEFI protocol """
+
     def __init__(
         self, name: str, address: int, value: str, guid_address: int, service: str
     ) -> None:
+        super().__init__(name=name, value=value)
         self.address: int = address
         self.guid_address: int = guid_address
         self.service: str = service
 
-        # superclass
-        self.name = name
-        self.value = value
+    @property
+    def __dict__(self):
+        val = super().__dict__
+        if self.address:
+            val["address"] = self.address
+        if self.guid_address:
+            val["guid_address"] = self.guid_address
+        if self.service:
+            val["service"] = self.service
+        return val
 
 
 class UefiProtocolGuid(UefiGuid):
+    """ a UEFI protocol GUID """
+
     def __init__(self, name: str, address: int, value: str) -> None:
+        super().__init__(name=name, value=value)
         self.address: int = address
 
-        # superclass
-        self.name = name
-        self.value = value
+    @property
+    def __dict__(self):
+        val = super().__dict__
+        if self.address:
+            val["address"] = self.address
+        return val
 
 
 class UefiAnalyzer:
+    """ helper object to analyze the EFI binary and provide properties """
+
     def __init__(self, image_path: Optional[str] = None, debug: bool = False):
         """UEFI analyzer initialization"""
 
         # init r2
-        self.r2_image_path = image_path
         if image_path:
-            self.r2 = r2pipe.open(image_path, flags=["-2"])
+            self._r2 = r2pipe.open(image_path, flags=["-2"])
             # analyze image
-            self.r2.cmd("aaa")
+            self._r2.cmd("aaa")
         # debug
-        self.r2_debug = debug
+        self._debug = debug
         # name
-        self.r2_name = click.style("uefi_r2", fg="green", bold=True)
-        # list of boot services
-        self.bs_list: List[UefiService] = []
-        self.bs_prot: List[UefiService] = []
-        # list of runtime services
-        self.rt_list: List[UefiService] = []
-        # list of protocols
-        self.protocols: List[UefiProtocol] = []
-        self.p_guids: List[UefiProtocolGuid] = []
+        self._name = click.style("uefi_r2", fg="green", bold=True)
 
-        # private???
-        self.r2_info: List[Any] = []
-        self.r2_strings: List[Any] = []
-        self.r2_sections: List[Any] = []
-        self.r2_functions: List[Any] = []
-        self.g_bs: int = 0
-        self.g_rt: int = 0
+        # private cache
+        self._bs_list_g_bs: Optional[List[UefiService]] = None
+        self._bs_list_prot: Optional[List[UefiService]] = None
+        self._bs_prot: Optional[List[UefiService]] = None
+        self._rt_list: Optional[List[UefiService]] = None
+        self._protocols: Optional[List[UefiProtocol]] = None
+        self._protocol_guids: Optional[List[UefiProtocolGuid]] = None
+        self._info: Optional[List[Any]] = None
+        self._strings: Optional[List[Any]] = None
+        self._sections: Optional[List[Any]] = None
+        self._functions: Optional[List[Any]] = None
+        self._g_bs: Optional[int] = None
+        self._g_rt: Optional[int] = None
 
-    def r2_get_common_properties(self) -> None:
-        """Get common image properties (parsed header, strings, sections, functions)"""
+    @property
+    def info(self) -> List[Any]:
+        """Get common image properties (parsed header)"""
+        if self._info is None:
+            self._info = self._r2.cmdj("ij")
+        return self._info
 
-        # get common info
-        self.r2_info = self.r2.cmdj("ij")
-        # get strings
-        self.r2_strings = self.r2.cmdj("izzzj")
-        # get sections
-        self.r2_sections = self.r2.cmdj("iSj")
-        # get functions
-        self.r2_functions = self.r2.cmdj("aflj")
+    @property
+    def strings(self) -> List[Any]:
+        """Get common image properties (strings)"""
+        if self._strings is None:
+            self._strings = self._r2.cmdj("izzzj")
+        return self._strings
 
-    def r2_get_g_bs_x64(self) -> bool:
-        """Find BootServices table global address"""
+    @property
+    def sections(self) -> List[Any]:
+        """Get common image properties (sections)"""
+        if self._sections is None:
+            self._sections = self._r2.cmdj("iSj")
+        return self._sections
 
-        for func in self.r2_functions:
+    @property
+    def functions(self) -> List[Any]:
+        """Get common image properties (functions)"""
+        if self._functions is None:
+            self._functions = self._r2.cmdj("aflj")
+        return self._functions
+
+    def _get_g_bs_x64(self) -> int:
+
+        for func in self.functions:
             func_addr = func["offset"]
-            func_insns = self.r2.cmdj("pdfj @{:#x}".format(func_addr))
+            func_insns = self._r2.cmdj("pdfj @{:#x}".format(func_addr))
             g_bs_reg = None
             for insn in func_insns["ops"]:
                 if "esil" in insn:
@@ -111,16 +146,21 @@ class UefiAnalyzer:
                     if g_bs_reg:
                         if (esil[0] == g_bs_reg) and (esil[-1] == "=[8]"):
                             if "ptr" in insn:
-                                self.g_bs = insn["ptr"]
-                                return True
-        return False
+                                return insn["ptr"]
+        return 0
 
-    def r2_get_g_rt_x64(self) -> bool:
-        """Find RuntimeServices table global address"""
+    @property
+    def g_bs(self) -> int:
+        """Find BootServices table global address"""
+        if self._g_bs is None:
+            self._g_bs = self._get_g_bs_x64()
+        return self._g_bs
 
-        for func in self.r2_functions:
+    def _get_g_rt_x64(self) -> int:
+
+        for func in self.functions:
             func_addr = func["offset"]
-            func_insns = self.r2.cmdj("pdfj @{:#x}".format(func_addr))
+            func_insns = self._r2.cmdj("pdfj @{:#x}".format(func_addr))
             g_rt_reg = None
             for insn in func_insns["ops"]:
                 if "esil" in insn:
@@ -135,16 +175,22 @@ class UefiAnalyzer:
                     if g_rt_reg:
                         if (esil[0] == g_rt_reg) and (esil[-1] == "=[8]"):
                             if "ptr" in insn:
-                                self.g_rt = insn["ptr"]
-                                return True
-        return False
+                                return insn["ptr"]
+        return 0
 
-    def r2_get_boot_services_g_bs_x64(self) -> bool:
-        """Find boot services using g_bs"""
+    @property
+    def g_rt(self) -> int:
+        """Find RuntimeServices table global address"""
+        if self._g_rt is None:
+            self._g_rt = self._get_g_rt_x64()
+        return self._g_rt
 
-        for func in self.r2_functions:
+    def _get_boot_services_g_bs_x64(self) -> List[UefiService]:
+
+        bs_list = []
+        for func in self.functions:
             func_addr = func["offset"]
-            func_insns = self.r2.cmdj("pdfj @{:#x}".format(func_addr))
+            func_insns = self._r2.cmdj("pdfj @{:#x}".format(func_addr))
             insn_index = 0
             for insn in func_insns["ops"]:
                 # find "mov rax, qword [g_bs]" instruction
@@ -178,7 +224,7 @@ class UefiAnalyzer:
                                 if "ptr" in g_bs_area_insn:
                                     service_offset = g_bs_area_insn["ptr"]
                                     if service_offset in EFI_BOOT_SERVICES_X64:
-                                        self.bs_list.append(
+                                        bs_list.append(
                                             UefiService(
                                                 address=g_bs_area_insn["offset"],
                                                 name=EFI_BOOT_SERVICES_X64[
@@ -188,14 +234,17 @@ class UefiAnalyzer:
                                         )
                                         break
                     insn_index += 1
-        return True
+        return bs_list
 
-    def r2_get_boot_services_prot_x64(self) -> bool:
-        """Find boot service that work with protocols"""
+    def _get_boot_services_prot_x64(
+        self,
+    ) -> Tuple[List[UefiService], List[UefiService]]:
 
-        for func in self.r2_functions:
+        bs_list: List[UefiService] = []
+        bs_prot: List[UefiService] = []
+        for func in self.functions:
             func_addr = func["offset"]
-            func_insns = self.r2.cmdj("pdfj @{:#x}".format(func_addr))
+            func_insns = self._r2.cmdj("pdfj @{:#x}".format(func_addr))
             for insn in func_insns["ops"]:
                 if "esil" in insn:
                     esil = insn["esil"].split(",")
@@ -211,25 +260,41 @@ class UefiAnalyzer:
                                 name = OFFSET_TO_SERVICE[service_offset]
                                 # found boot service that work with protocol
                                 new = True
-                                for bs in self.bs_list:
+                                for bs in bs_list:
                                     if bs.address == insn["offset"]:
                                         new = False
                                         break
                                 bs = UefiService(address=insn["offset"], name=name)
                                 if new:
-                                    self.bs_list.append(bs)
-                                self.bs_prot.append(bs)
+                                    bs_list.append(bs)
+                                bs_prot.append(bs)
                                 break
-        return True
+        return bs_list, bs_prot
 
-    def r2_get_runtime_services_x64(self) -> bool:
-        """Find all runtime services"""
+    @property
+    def boot_services(self) -> List[UefiService]:
+        """Find boot services using g_bs"""
+        if self._bs_list_g_bs is None:
+            self._bs_list_g_bs = self._get_boot_services_g_bs_x64()
+        if self._bs_list_prot is None:
+            self._bs_list_prot, self._bs_prot = self._get_boot_services_prot_x64()
+        return self._bs_list_g_bs + self._bs_list_prot
 
+    @property
+    def boot_services_protocols(self) -> List[Any]:
+        """Find boot service that work with protocols"""
+        if self._bs_prot is None:
+            self._bs_list_prot, self._bs_prot = self._get_boot_services_prot_x64()
+        return self._bs_prot
+
+    def _get_runtime_services_x64(self) -> List[UefiService]:
+
+        rt_list: List[UefiService] = []
         if not self.g_rt:
-            return False
-        for func in self.r2_functions:
+            return rt_list
+        for func in self.functions:
             func_addr = func["offset"]
-            func_insns = self.r2.cmdj("pdfj @{:#x}".format(func_addr))
+            func_insns = self._r2.cmdj("pdfj @{:#x}".format(func_addr))
             insn_index = 0
             for insn in func_insns["ops"]:
                 # find "mov rax, qword [g_rt]" instruction
@@ -262,7 +327,7 @@ class UefiAnalyzer:
                             if "ptr" in g_rt_area_insn:
                                 service_offset = g_rt_area_insn["ptr"]
                                 if service_offset in EFI_RUNTIME_SERVICES_X64:
-                                    self.rt_list.append(
+                                    rt_list.append(
                                         UefiService(
                                             address=g_rt_area_insn["offset"],
                                             name=EFI_RUNTIME_SERVICES_X64[
@@ -272,13 +337,20 @@ class UefiAnalyzer:
                                     )
                                     break
                     insn_index += 1
-        return True
+        return rt_list
 
-    def r2_get_protocols_x64(self) -> bool:
-        """Find proprietary protocols"""
+    @property
+    def runtime_services(self) -> List[UefiService]:
+        """Find all runtime services"""
+        if self._rt_list is None:
+            self._rt_list = self._get_runtime_services_x64()
+        return self._rt_list
 
-        for bs in self.bs_prot:
-            block_insns = self.r2.cmdj("pdbj @{:#x}".format(bs.address))
+    def _get_protocols_x64(self) -> List[UefiProtocol]:
+
+        protocols = []
+        for bs in self.boot_services_protocols:
+            block_insns = self._r2.cmdj("pdbj @{:#x}".format(bs.address))
             for insn in block_insns:
                 if "esil" in insn:
                     esil = insn["esil"].split(",")
@@ -290,8 +362,8 @@ class UefiAnalyzer:
                     ):
                         if "ptr" in insn:
                             p_guid_addr = insn["ptr"]
-                            self.r2.cmd("s {:#x}".format(p_guid_addr))
-                            p_guid_b = bytes(self.r2.cmdj("xj 16"))
+                            self._r2.cmd("s {:#x}".format(p_guid_addr))
+                            p_guid_b = bytes(self._r2.cmdj("xj 16"))
 
                             # look up in known list
                             guid = GUID_FROM_BYTES.get(p_guid_b)
@@ -301,7 +373,7 @@ class UefiAnalyzer:
                                     name="proprietary_protocol",
                                 )
 
-                            self.protocols.append(
+                            protocols.append(
                                 UefiProtocol(
                                     name=guid.name,
                                     value=guid.value,
@@ -310,16 +382,23 @@ class UefiAnalyzer:
                                     service=bs.name,
                                 )
                             )
-        return True
+        return protocols
 
-    def r2_get_p_guids(self) -> bool:
-        """Find protocols guids"""
+    @property
+    def protocols(self) -> List[UefiProtocol]:
+        """Find proprietary protocols"""
+        if self._protocols is None:
+            self._protocols = self._get_protocols_x64()
+        return self._protocols
 
+    def _get_protocol_guids(self) -> List[UefiProtocolGuid]:
+
+        protocol_guids = []
         target_sections = [".data"]
-        for section in self.r2_sections:
+        for section in self.sections:
             if section["name"] in target_sections:
-                self.r2.cmd("s {:#x}".format(section["vaddr"]))
-                section_data = bytes(self.r2.cmdj("xj {:#d}".format(section["vsize"])))
+                self._r2.cmd("s {:#x}".format(section["vaddr"]))
+                section_data = bytes(self._r2.cmdj("xj {:#d}".format(section["vsize"])))
 
                 # find guids in section data:
                 for i in range(len(section_data) - 15):
@@ -329,74 +408,74 @@ class UefiAnalyzer:
                         continue
                     if guid.value in ["00000000-0000-0000-0000000000000000"]:
                         continue
-                    self.p_guids.append(
+                    protocol_guids.append(
                         UefiProtocolGuid(
                             address=section["vaddr"] + i,
                             name=guid.name,
                             value=guid.value,
                         )
                     )
-        return True
+        return protocol_guids
+
+    @property
+    def protocol_guids(self) -> List[UefiProtocolGuid]:
+        """Find protocols guids"""
+        if self._protocol_guids is None:
+            self._protocol_guids = self._get_protocol_guids()
+        return self._protocol_guids
 
     @classmethod
-    def r2_get_summary(cls, image_path: str, debug: bool = False) -> Dict[str, str]:
+    def get_summary(cls, image_path: str, debug: bool = False) -> Dict[str, str]:
         """Collect all the information in a JSON object"""
 
         self = cls(image_path, debug)
         summary = {}
 
-        self.r2_get_common_properties()
-        summary["info"] = str(self.r2_info)
-        if self.r2_debug:
-            print(
-                "{} r2_info:\n{}".format(
-                    self.r2_name, json.dumps(self.r2_info, indent=4)
-                )
-            )
+        summary["info"] = str(self.info)
+        if self._debug:
+            print("{} _info:\n{}".format(self._name, json.dumps(self.info, indent=4)))
 
-        self.r2_get_g_bs_x64()
-        self.r2_get_g_rt_x64()
         summary["g_bs"] = str(self.g_bs)
-        if self.r2_debug:
-            print("{} g_bs: 0x{:x}".format(self.r2_name, self.g_bs))
+        if self._debug:
+            print("{} g_bs: 0x{:x}".format(self._name, self.g_bs))
         summary["g_rt"] = str(self.g_rt)
-        if self.r2_debug:
-            print("{} g_rt: 0x{:x}".format(self.r2_name, self.g_rt))
+        if self._debug:
+            print("{} g_rt: 0x{:x}".format(self._name, self.g_rt))
 
-        self.r2_get_boot_services_g_bs_x64()
-        self.r2_get_boot_services_prot_x64()
-        summary["bs_list"] = str(self.bs_list)
-        if self.r2_debug:
+        summary["bs_list"] = str(self.boot_services)
+        if self._debug:
             print(
                 "{} boot services:\n{}".format(
-                    self.r2_name, json.dumps(self.bs_list, indent=4, default=vars)
+                    self._name, json.dumps(self.boot_services, indent=4, default=vars)
                 )
             )
 
-        self.r2_get_runtime_services_x64()
-        summary["rt_list"] = str(self.rt_list)
-        if self.r2_debug:
+        summary["rt_list"] = str(self.runtime_services)
+        if self._debug:
             print(
                 "{} runtime services:\n{}".format(
-                    self.r2_name, json.dumps(self.rt_list, indent=4, default=vars)
+                    self._name,
+                    json.dumps(self.runtime_services, indent=4, default=vars),
                 )
             )
 
-        self.r2_get_p_guids()
-        summary["p_guids"] = str(self.p_guids)
-        if self.r2_debug:
+        summary["p_guids"] = str(self.protocol_guids)
+        if self._debug:
             print(
                 "{} guids:\n{}".format(
-                    self.r2_name, json.dumps(self.p_guids, indent=4, default=vars)
+                    self._name,
+                    json.dumps(
+                        self.protocol_guids, indent=4, default=lambda x: x.__dict__
+                    ),
                 )
             )
 
-        self.r2_get_protocols_x64()
         summary["protocols"] = str(self.protocols)
-        if self.r2_debug:
+        if self._debug:
             print(
                 "{} protocols:\n{}".format(
-                    self.r2_name, json.dumps(self.protocols, indent=4, default=vars)
+                    self._name,
+                    json.dumps(self.protocols, indent=4, default=lambda x: x.__dict__),
                 )
             )
 
@@ -405,45 +484,36 @@ class UefiAnalyzer:
         return summary
 
     @classmethod
-    def r2_get_protocols_info(
-        cls, image_path: str, debug: bool = False
-    ) -> Dict[str, str]:
+    def get_protocols_info(cls, image_path: str, debug: bool = False) -> Dict[str, str]:
+        """Collect all the information in a JSON object"""
 
         self = cls(image_path, debug)
         summary = {}
-
-        self.r2_get_common_properties()
-        summary["info"] = str(self.r2_info)
-
-        self.r2_get_g_bs_x64()
+        summary["info"] = str(self.info)
         summary["g_bs"] = str(self.g_bs)
-        if self.r2_debug:
-            print("{} g_bs: 0x{:x}".format(self.r2_name, self.g_bs))
-
-        self.r2_get_boot_services_prot_x64()
-        summary["bs_list"] = str(self.bs_list)
-        if self.r2_debug:
+        if self._debug:
+            print("{} g_bs: 0x{:x}".format(self._name, self.g_bs))
+        summary["bs_list"] = str(self.boot_services)
+        if self._debug:
             print(
                 "{} boot services:\n{}".format(
-                    self.r2_name, json.dumps(self.bs_list, indent=4)
+                    self._name, json.dumps(self.boot_services, indent=4)
                 )
             )
-
-        self.r2_get_protocols_x64()
         summary["protocols"] = str(self.protocols)
-        if self.r2_debug:
+        if self._debug:
             print(
                 "{} protocols:\n{}".format(
-                    self.r2_name, json.dumps(self.protocols, indent=4)
+                    self._name, json.dumps(self.protocols, indent=4)
                 )
             )
-
         self.close()
 
         return summary
 
     def close(self) -> None:
-        self.r2.quit()
+        """Quits the r2 instance, releasing resources """
+        self._r2.quit()
 
     def __exit__(self, exception_type, exception_value, traceback):
-        self.r2.quit()
+        self._r2.quit()

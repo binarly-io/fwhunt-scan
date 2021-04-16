@@ -1,8 +1,10 @@
-# uefi_r2: tools for analyzing UEFI firmware using radare2
-#
 # SPDX-License-Identifier: GPL-3.0+
 #
-# pylint: disable=missing-module-docstring
+# pylint: disable=consider-using-dict-comprehension
+
+"""
+Tools for analyzing UEFI firmware using radare2
+"""
 
 EFI_BOOT_SERVICES_X64 = {
     0x00000018: "RaiseTPL",

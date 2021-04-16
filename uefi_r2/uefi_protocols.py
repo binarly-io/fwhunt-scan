@@ -1,14 +1,18 @@
-# uefi_r2: tools for analyzing UEFI firmware using radare2
-#
 # SPDX-License-Identifier: GPL-3.0+
 #
-# pylint: disable=missing-module-docstring,too-many-lines
+# pylint: disable=too-many-lines,consider-using-dict-comprehension
+
+"""
+Tools for analyzing UEFI firmware using radare2
+"""
 
 import uuid
 from typing import Dict
 
 
 class UefiGuid:
+    """ a UEFI GUID """
+
     def __init__(self, value: str, name: str) -> None:
         self.value: str = value
         self.name: str = name
@@ -20,6 +24,10 @@ class UefiGuid:
         if not self._bytes:
             self._bytes = uuid.UUID(self.value).bytes_le
         return self._bytes
+
+    @property
+    def __dict__(self):
+        return {"value": self.value, "name": self.name}
 
     def __str__(self):
         return "{} ({})".format(self.value, self.name)
