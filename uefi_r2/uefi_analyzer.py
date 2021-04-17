@@ -48,6 +48,13 @@ class UefiProtocolGuid(UefiGuid):
         self.value = value
 
 
+class NvramVariable:
+    def __init__(self, name: str, guid: str, service: UefiService) -> None:
+        self.name: str = name
+        self.guid: str = guid
+        self.service: UefiService = service
+
+
 class UefiAnalyzer:
     def __init__(self, image_path: Optional[str] = None, debug: bool = False):
         """UEFI analyzer initialization"""
@@ -58,6 +65,8 @@ class UefiAnalyzer:
             self.r2 = r2pipe.open(image_path, flags=["-2"])
             # analyze image
             self.r2.cmd("aaa")
+            # set asm.esil variable value
+            self.r2.cmd("e asm.esil = true")
         # debug
         self.r2_debug = debug
         # name
@@ -70,12 +79,13 @@ class UefiAnalyzer:
         # list of protocols
         self.protocols: List[UefiProtocol] = []
         self.p_guids: List[UefiProtocolGuid] = []
+        # list of NVRAM variables
+        self.nvram_vars: List[NvramVariable] = []
 
-        # private???
         self.r2_info: List[Any] = []
         self.r2_strings: List[Any] = []
-        self.r2_sections: List[Any] = []
-        self.r2_functions: List[Any] = []
+        self._r2_sections: List[Any] = []
+        self._r2_functions: List[Any] = []
         self.g_bs: int = 0
         self.g_rt: int = 0
 
@@ -87,14 +97,14 @@ class UefiAnalyzer:
         # get strings
         self.r2_strings = self.r2.cmdj("izzzj")
         # get sections
-        self.r2_sections = self.r2.cmdj("iSj")
+        self._r2_sections = self.r2.cmdj("iSj")
         # get functions
-        self.r2_functions = self.r2.cmdj("aflj")
+        self._r2_functions = self.r2.cmdj("aflj")
 
     def r2_get_g_bs_x64(self) -> bool:
         """Find BootServices table global address"""
 
-        for func in self.r2_functions:
+        for func in self._r2_functions:
             func_addr = func["offset"]
             func_insns = self.r2.cmdj("pdfj @{:#x}".format(func_addr))
             g_bs_reg = None
@@ -118,7 +128,7 @@ class UefiAnalyzer:
     def r2_get_g_rt_x64(self) -> bool:
         """Find RuntimeServices table global address"""
 
-        for func in self.r2_functions:
+        for func in self._r2_functions:
             func_addr = func["offset"]
             func_insns = self.r2.cmdj("pdfj @{:#x}".format(func_addr))
             g_rt_reg = None
@@ -142,7 +152,7 @@ class UefiAnalyzer:
     def r2_get_boot_services_g_bs_x64(self) -> bool:
         """Find boot services using g_bs"""
 
-        for func in self.r2_functions:
+        for func in self._r2_functions:
             func_addr = func["offset"]
             func_insns = self.r2.cmdj("pdfj @{:#x}".format(func_addr))
             insn_index = 0
@@ -193,7 +203,7 @@ class UefiAnalyzer:
     def r2_get_boot_services_prot_x64(self) -> bool:
         """Find boot service that work with protocols"""
 
-        for func in self.r2_functions:
+        for func in self._r2_functions:
             func_addr = func["offset"]
             func_insns = self.r2.cmdj("pdfj @{:#x}".format(func_addr))
             for insn in func_insns["ops"]:
@@ -227,7 +237,7 @@ class UefiAnalyzer:
 
         if not self.g_rt:
             return False
-        for func in self.r2_functions:
+        for func in self._r2_functions:
             func_addr = func["offset"]
             func_insns = self.r2.cmdj("pdfj @{:#x}".format(func_addr))
             insn_index = 0
@@ -288,38 +298,43 @@ class UefiAnalyzer:
                         and (esil[-2] == BS_PROTOCOLS_INFO_X64[bs.name]["reg"])
                         and (esil[-3] == "+")
                     ):
-                        if "ptr" in insn:
-                            p_guid_addr = insn["ptr"]
-                            self.r2.cmd("s {:#x}".format(p_guid_addr))
-                            p_guid_b = bytes(self.r2.cmdj("xj 16"))
+                        if not "ptr" in insn:
+                            continue
+                        p_guid_addr = insn["ptr"]
+                        p_guid_b = bytes(
+                            self.r2.cmdj("xj 16 @{:#x}".format(p_guid_addr))
+                        )
 
-                            # look up in known list
-                            guid = GUID_FROM_BYTES.get(p_guid_b)
-                            if not guid:
-                                guid = UefiGuid(
-                                    value=str(uuid.UUID(bytes_le=p_guid_b)),
-                                    name="proprietary_protocol",
-                                )
-
-                            self.protocols.append(
-                                UefiProtocol(
-                                    name=guid.name,
-                                    value=guid.value,
-                                    guid_address=p_guid_addr,
-                                    address=insn["offset"],
-                                    service=bs.name,
-                                )
+                        # look up in known list
+                        guid = GUID_FROM_BYTES.get(p_guid_b)
+                        if not guid:
+                            guid = UefiGuid(
+                                value=str(uuid.UUID(bytes_le=p_guid_b)),
+                                name="proprietary_protocol",
                             )
+
+                        self.protocols.append(
+                            UefiProtocol(
+                                name=guid.name,
+                                value=guid.value,
+                                guid_address=p_guid_addr,
+                                address=insn["offset"],
+                                service=bs.name,
+                            )
+                        )
         return True
 
     def r2_get_p_guids(self) -> bool:
         """Find protocols guids"""
 
         target_sections = [".data"]
-        for section in self.r2_sections:
+        for section in self._r2_sections:
             if section["name"] in target_sections:
-                self.r2.cmd("s {:#x}".format(section["vaddr"]))
-                section_data = bytes(self.r2.cmdj("xj {:#d}".format(section["vsize"])))
+                section_data = bytes(
+                    self.r2.cmdj(
+                        "xj {:#d} @{:#x}".format(section["vsize"], section["vaddr"])
+                    )
+                )
 
                 # find guids in section data:
                 for i in range(len(section_data) - 15):
@@ -336,6 +351,46 @@ class UefiAnalyzer:
                             value=guid.value,
                         )
                     )
+        return True
+
+    def r2_get_nvram_vars_x64(self) -> bool:
+        """Find NVRAM variables passed to GetVariable and SetVariable services"""
+
+        for service in self.rt_list:
+            if service.name in ["GetVariable", "SetVariable"]:
+                # disassemble 8 instructions backward
+                block_insns = self.r2.cmdj("pdj -8 @{:#x}".format(service.address))
+                name: str = str()
+                p_guid_b: bytes = bytes()
+                for index in range(len(block_insns) - 2, -1, -1):
+                    if not "refs" in block_insns[index]:
+                        continue
+                    if len(block_insns[index]["refs"]) > 1:
+                        continue
+                    ref_addr = block_insns[index]["refs"][0]["addr"]
+                    if not "esil" in block_insns[index]:
+                        continue
+                    esil = block_insns[index]["esil"].split(",")
+                    if (
+                        (esil[-1] == "=")
+                        and (esil[-2] == "rcx")
+                        and (esil[-3] == "+")
+                        and (esil[-4] == "rip")
+                    ):
+                        name = self.r2.cmd("psw @{:#x}".format(ref_addr))[:-1]
+                    if (
+                        (esil[-1] == "=")
+                        and (esil[-2] == "rdx")
+                        and (esil[-3] == "+")
+                        and (esil[-4] == "rip")
+                    ):
+                        p_guid_b = bytes(self.r2.cmdj("xj 16 @{:#x}".format(ref_addr)))
+                    if name and p_guid_b:
+                        guid = str(uuid.UUID(bytes_le=p_guid_b))
+                        self.nvram_vars.append(
+                            NvramVariable(name=name, guid=guid, service=service)
+                        )
+                        break
         return True
 
     @classmethod
@@ -397,6 +452,15 @@ class UefiAnalyzer:
             print(
                 "{} protocols:\n{}".format(
                     self.r2_name, json.dumps(self.protocols, indent=4, default=vars)
+                )
+            )
+
+        self.r2_get_nvram_vars_x64()
+        summary["nvram_vars"] = str(self.nvram_vars)
+        if self.r2_debug:
+            print(
+                "{} nvram_vars:\n{}".format(
+                    self.r2_name, json.dumps(self.nvram_vars, indent=4, default=vars)
                 )
             )
 
