@@ -77,10 +77,26 @@ class UefiProtocolGuid(UefiGuid):
 
 
 class NvramVariable:
+    """ a UEFI NVRAM variable """
+
     def __init__(self, name: str, guid: str, service: UefiService) -> None:
         self.name: str = name
         self.guid: str = guid
         self.service: UefiService = service
+
+    @property
+    def __dict__(self):
+        val = {}
+        if self.name:
+            val["name"] = self.name
+        if self.guid:
+            val["guid"] = self.guid
+        if self.service:
+            val["service"] = {
+                "name": self.service.name,
+                "address": self.service.address,
+            }
+        return val
 
 
 class UefiAnalyzer:
@@ -102,6 +118,7 @@ class UefiAnalyzer:
         self._rt_list: Optional[List[UefiService]] = None
         self._protocols: Optional[List[UefiProtocol]] = None
         self._protocol_guids: Optional[List[UefiProtocolGuid]] = None
+        self._nvram_vars: Optional[List[NvramVariable]] = None
         self._info: Optional[List[Any]] = None
         self._strings: Optional[List[Any]] = None
         self._sections: Optional[List[Any]] = None
@@ -434,13 +451,13 @@ class UefiAnalyzer:
             self._protocol_guids = self._get_protocol_guids()
         return self._protocol_guids
 
-    def r2_get_nvram_vars_x64(self) -> bool:
-        """Find NVRAM variables passed to GetVariable and SetVariable services"""
+    def r2_get_nvram_vars_x64(self) -> List[NvramVariable]:
 
-        for service in self.rt_list:
+        nvram_vars = []
+        for service in self.runtime_services:
             if service.name in ["GetVariable", "SetVariable"]:
                 # disassemble 8 instructions backward
-                block_insns = self.r2.cmdj("pdj -8 @{:#x}".format(service.address))
+                block_insns = self._r2.cmdj("pdj -8 @{:#x}".format(service.address))
                 name: str = str()
                 p_guid_b: bytes = bytes()
                 for index in range(len(block_insns) - 2, -1, -1):
@@ -458,21 +475,28 @@ class UefiAnalyzer:
                         and (esil[-3] == "+")
                         and (esil[-4] == "rip")
                     ):
-                        name = self.r2.cmd("psw @{:#x}".format(ref_addr))[:-1]
+                        name = self._r2.cmd("psw @{:#x}".format(ref_addr))[:-1]
                     if (
                         (esil[-1] == "=")
                         and (esil[-2] == "rdx")
                         and (esil[-3] == "+")
                         and (esil[-4] == "rip")
                     ):
-                        p_guid_b = bytes(self.r2.cmdj("xj 16 @{:#x}".format(ref_addr)))
+                        p_guid_b = bytes(self._r2.cmdj("xj 16 @{:#x}".format(ref_addr)))
                     if name and p_guid_b:
                         guid = str(uuid.UUID(bytes_le=p_guid_b))
-                        self.nvram_vars.append(
+                        nvram_vars.append(
                             NvramVariable(name=name, guid=guid, service=service)
                         )
                         break
-        return True
+        return nvram_vars
+
+    @property
+    def nvram_vars(self) -> List[UefiService]:
+        """Find NVRAM variables passed to GetVariable and SetVariable services"""
+        if self._nvram_vars is None:
+            self._nvram_vars = self.r2_get_nvram_vars_x64()
+        return self._nvram_vars
 
     @classmethod
     def get_summary(cls, image_path: str) -> Dict[str, Any]:
@@ -488,6 +512,7 @@ class UefiAnalyzer:
         summary["rt_list"] = [x.__dict__ for x in self.runtime_services]
         summary["p_guids"] = [x.__dict__ for x in self.protocol_guids]
         summary["protocols"] = [x.__dict__ for x in self.protocols]
+        summary["nvram_vars"] = [x.__dict__ for x in self.nvram_vars]
         self.close()
         return summary
 
