@@ -483,7 +483,9 @@ class UefiAnalyzer:
                         and (esil[-4] == "rip")
                     ):
                         p_guid_b = bytes(self._r2.cmdj("xj 16 @{:#x}".format(ref_addr)))
-                    if name and p_guid_b:
+                    if not name:
+                        name = "Unknown"
+                    if p_guid_b:
                         guid = str(uuid.UUID(bytes_le=p_guid_b))
                         nvram_vars.append(
                             NvramVariable(name=name, guid=guid, service=service)
