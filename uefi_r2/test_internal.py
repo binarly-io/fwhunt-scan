@@ -1,4 +1,10 @@
 #!/usr/bin/env python
+#
+# SPDX-License-Identifier: GPL-3.0+
+
+"""
+Simple self tests for uefi_r2
+"""
 
 import unittest
 
@@ -6,7 +12,10 @@ from .uefi_protocols import PROTOCOLS_GUIDS, GUID_FROM_VALUE
 
 
 class TestInternal(unittest.TestCase):
-    def test_convert(self):
+    """ internal tests of privaet API """
+
+    def test_guid_convert(self):
+        """ convert to GUID by index and value """
 
         self.assertEqual(
             PROTOCOLS_GUIDS[144].value,

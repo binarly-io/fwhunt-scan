@@ -28,10 +28,12 @@ def analyze_image(image_path: str, out: str) -> bool:
         print('{} check image path'.format(
             click.style('ERROR', fg='red', bold=True)))
         return False
-    summary = UefiAnalyzer.r2_get_summary(image_path, debug=True)
+    summary = UefiAnalyzer.get_summary(image_path)
     if out:
         with open(out, 'w') as f:
             json.dump(summary, f, indent=4)
+    else:
+        print(json.dumps(summary, indent=4))
     return True
 
 
