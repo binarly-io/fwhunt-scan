@@ -76,6 +76,13 @@ class UefiProtocolGuid(UefiGuid):
         return val
 
 
+class NvramVariable:
+    def __init__(self, name: str, guid: str, service: UefiService) -> None:
+        self.name: str = name
+        self.guid: str = guid
+        self.service: UefiService = service
+
+
 class UefiAnalyzer:
     """ helper object to analyze the EFI binary and provide properties """
 
@@ -426,6 +433,46 @@ class UefiAnalyzer:
         if self._protocol_guids is None:
             self._protocol_guids = self._get_protocol_guids()
         return self._protocol_guids
+
+    def r2_get_nvram_vars_x64(self) -> bool:
+        """Find NVRAM variables passed to GetVariable and SetVariable services"""
+
+        for service in self.rt_list:
+            if service.name in ["GetVariable", "SetVariable"]:
+                # disassemble 8 instructions backward
+                block_insns = self.r2.cmdj("pdj -8 @{:#x}".format(service.address))
+                name: str = str()
+                p_guid_b: bytes = bytes()
+                for index in range(len(block_insns) - 2, -1, -1):
+                    if not "refs" in block_insns[index]:
+                        continue
+                    if len(block_insns[index]["refs"]) > 1:
+                        continue
+                    ref_addr = block_insns[index]["refs"][0]["addr"]
+                    if not "esil" in block_insns[index]:
+                        continue
+                    esil = block_insns[index]["esil"].split(",")
+                    if (
+                        (esil[-1] == "=")
+                        and (esil[-2] == "rcx")
+                        and (esil[-3] == "+")
+                        and (esil[-4] == "rip")
+                    ):
+                        name = self.r2.cmd("psw @{:#x}".format(ref_addr))[:-1]
+                    if (
+                        (esil[-1] == "=")
+                        and (esil[-2] == "rdx")
+                        and (esil[-3] == "+")
+                        and (esil[-4] == "rip")
+                    ):
+                        p_guid_b = bytes(self.r2.cmdj("xj 16 @{:#x}".format(ref_addr)))
+                    if name and p_guid_b:
+                        guid = str(uuid.UUID(bytes_le=p_guid_b))
+                        self.nvram_vars.append(
+                            NvramVariable(name=name, guid=guid, service=service)
+                        )
+                        break
+        return True
 
     @classmethod
     def get_summary(cls, image_path: str) -> Dict[str, Any]:
