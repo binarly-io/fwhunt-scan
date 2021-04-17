@@ -7,12 +7,10 @@
 Tools for analyzing UEFI firmware using radare2
 """
 
-import json
 import uuid
 
 from typing import List, Dict, Any, Optional, Tuple
 
-import click
 import r2pipe
 from uefi_r2.uefi_protocols import GUID_FROM_BYTES, UefiGuid
 from uefi_r2.uefi_tables import (
@@ -29,6 +27,15 @@ class UefiService:
     def __init__(self, name: str, address: int) -> None:
         self.name: str = name
         self.address: int = address
+
+    @property
+    def __dict__(self):
+        val = {}
+        if self.name:
+            val["name"] = self.name
+        if self.address:
+            val["address"] = self.address
+        return val
 
 
 class UefiProtocol(UefiGuid):
@@ -72,7 +79,7 @@ class UefiProtocolGuid(UefiGuid):
 class UefiAnalyzer:
     """ helper object to analyze the EFI binary and provide properties """
 
-    def __init__(self, image_path: Optional[str] = None, debug: bool = False):
+    def __init__(self, image_path: Optional[str] = None):
         """UEFI analyzer initialization"""
 
         # init r2
@@ -80,10 +87,6 @@ class UefiAnalyzer:
             self._r2 = r2pipe.open(image_path, flags=["-2"])
             # analyze image
             self._r2.cmd("aaa")
-        # debug
-        self._debug = debug
-        # name
-        self._name = click.style("uefi_r2", fg="green", bold=True)
 
         # private cache
         self._bs_list_g_bs: Optional[List[UefiService]] = None
@@ -425,90 +428,34 @@ class UefiAnalyzer:
         return self._protocol_guids
 
     @classmethod
-    def get_summary(cls, image_path: str, debug: bool = False) -> Dict[str, str]:
+    def get_summary(cls, image_path: str) -> Dict[str, Any]:
         """Collect all the information in a JSON object"""
 
-        self = cls(image_path, debug)
+        self = cls(image_path)
         summary = {}
-
-        summary["info"] = str(self.info)
-        if self._debug:
-            print("{} _info:\n{}".format(self._name, json.dumps(self.info, indent=4)))
-
+        for key in self.info:
+            summary[key] = self.info[key]
         summary["g_bs"] = str(self.g_bs)
-        if self._debug:
-            print("{} g_bs: 0x{:x}".format(self._name, self.g_bs))
         summary["g_rt"] = str(self.g_rt)
-        if self._debug:
-            print("{} g_rt: 0x{:x}".format(self._name, self.g_rt))
-
-        summary["bs_list"] = str(self.boot_services)
-        if self._debug:
-            print(
-                "{} boot services:\n{}".format(
-                    self._name, json.dumps(self.boot_services, indent=4, default=vars)
-                )
-            )
-
-        summary["rt_list"] = str(self.runtime_services)
-        if self._debug:
-            print(
-                "{} runtime services:\n{}".format(
-                    self._name,
-                    json.dumps(self.runtime_services, indent=4, default=vars),
-                )
-            )
-
-        summary["p_guids"] = str(self.protocol_guids)
-        if self._debug:
-            print(
-                "{} guids:\n{}".format(
-                    self._name,
-                    json.dumps(
-                        self.protocol_guids, indent=4, default=lambda x: x.__dict__
-                    ),
-                )
-            )
-
-        summary["protocols"] = str(self.protocols)
-        if self._debug:
-            print(
-                "{} protocols:\n{}".format(
-                    self._name,
-                    json.dumps(self.protocols, indent=4, default=lambda x: x.__dict__),
-                )
-            )
-
+        summary["bs_list"] = [x.__dict__ for x in self.boot_services]
+        summary["rt_list"] = [x.__dict__ for x in self.runtime_services]
+        summary["p_guids"] = [x.__dict__ for x in self.protocol_guids]
+        summary["protocols"] = [x.__dict__ for x in self.protocols]
         self.close()
-
         return summary
 
     @classmethod
-    def get_protocols_info(cls, image_path: str, debug: bool = False) -> Dict[str, str]:
+    def get_protocols_info(cls, image_path: str) -> Dict[str, Any]:
         """Collect all the information in a JSON object"""
 
-        self = cls(image_path, debug)
+        self = cls(image_path)
         summary = {}
-        summary["info"] = str(self.info)
+        for key in self.info:
+            summary[key] = self.info[key]
         summary["g_bs"] = str(self.g_bs)
-        if self._debug:
-            print("{} g_bs: 0x{:x}".format(self._name, self.g_bs))
-        summary["bs_list"] = str(self.boot_services)
-        if self._debug:
-            print(
-                "{} boot services:\n{}".format(
-                    self._name, json.dumps(self.boot_services, indent=4)
-                )
-            )
-        summary["protocols"] = str(self.protocols)
-        if self._debug:
-            print(
-                "{} protocols:\n{}".format(
-                    self._name, json.dumps(self.protocols, indent=4)
-                )
-            )
+        summary["bs_list"] = [x.__dict__ for x in self.boot_services]
+        summary["protocols"] = [x.__dict__ for x in self.protocols]
         self.close()
-
         return summary
 
     def close(self) -> None:
