@@ -102,12 +102,14 @@ class NvramVariable:
 class UefiAnalyzer:
     """ helper object to analyze the EFI binary and provide properties """
 
-    def __init__(self, image_path: Optional[str] = None):
+    def __init__(
+        self, image_path: Optional[str] = None, radare2home: Optional[str] = None
+    ):
         """UEFI analyzer initialization"""
 
         # init r2
         if image_path:
-            self._r2 = r2pipe.open(image_path, flags=["-2"])
+            self._r2 = r2pipe.open(image_path, flags=["-2"], radare2home=radare2home)
             # analyze image
             self._r2.cmd("aaa")
 
