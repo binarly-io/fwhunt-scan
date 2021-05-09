@@ -22,7 +22,7 @@ from uefi_r2.uefi_tables import (
 
 
 class UefiService:
-    """ a UEFI service """
+    """a UEFI service"""
 
     def __init__(self, name: str, address: int) -> None:
         self.name: str = name
@@ -39,7 +39,7 @@ class UefiService:
 
 
 class UefiProtocol(UefiGuid):
-    """ a UEFI protocol """
+    """a UEFI protocol"""
 
     def __init__(
         self, name: str, address: int, value: str, guid_address: int, service: str
@@ -62,7 +62,7 @@ class UefiProtocol(UefiGuid):
 
 
 class UefiProtocolGuid(UefiGuid):
-    """ a UEFI protocol GUID """
+    """a UEFI protocol GUID"""
 
     def __init__(self, name: str, address: int, value: str) -> None:
         super().__init__(name=name, value=value)
@@ -77,7 +77,7 @@ class UefiProtocolGuid(UefiGuid):
 
 
 class NvramVariable:
-    """ a UEFI NVRAM variable """
+    """a UEFI NVRAM variable"""
 
     def __init__(self, name: str, guid: str, service: UefiService) -> None:
         self.name: str = name
@@ -100,7 +100,7 @@ class NvramVariable:
 
 
 class UefiAnalyzer:
-    """ helper object to analyze the EFI binary and provide properties """
+    """helper object to analyze the EFI binary and provide properties"""
 
     def __init__(
         self, image_path: Optional[str] = None, radare2home: Optional[str] = None
@@ -398,7 +398,7 @@ class UefiAnalyzer:
                             guid = GUID_FROM_BYTES.get(p_guid_b)
                             if not guid:
                                 guid = UefiGuid(
-                                    value=str(uuid.UUID(bytes_le=p_guid_b)),
+                                    value=str(uuid.UUID(bytes_le=p_guid_b)).upper(),
                                     name="proprietary_protocol",
                                 )
 
@@ -488,7 +488,7 @@ class UefiAnalyzer:
                     if not name:
                         name = "Unknown"
                     if p_guid_b:
-                        guid = str(uuid.UUID(bytes_le=p_guid_b))
+                        guid = str(uuid.UUID(bytes_le=p_guid_b)).upper()
                         nvram_vars.append(
                             NvramVariable(name=name, guid=guid, service=service)
                         )
@@ -496,7 +496,7 @@ class UefiAnalyzer:
         return nvram_vars
 
     @property
-    def nvram_vars(self) -> List[UefiService]:
+    def nvram_vars(self) -> List[NvramVariable]:
         """Find NVRAM variables passed to GetVariable and SetVariable services"""
         if self._nvram_vars is None:
             self._nvram_vars = self.r2_get_nvram_vars_x64()
@@ -535,7 +535,7 @@ class UefiAnalyzer:
         return summary
 
     def close(self) -> None:
-        """Quits the r2 instance, releasing resources """
+        """Quits the r2 instance, releasing resources"""
         self._r2.quit()
 
     def __exit__(self, exception_type, exception_value, traceback):
