@@ -24,7 +24,8 @@ python setup.py install
 ### With script
 
 ```
-uefi_r2_analyzer.py analyze-image <image_path> -o out.json
+./uefi_r2_analyzer.py analyze-image {image_path} -o out.json
+./uefi_r2_analyzer.py scan --rule {rule_path} {image_path}
 ```
 
 ### From code
@@ -34,4 +35,15 @@ from uefi_r2.uefi_analyzer import UefiAnalyzer
 
 ...
 summary = UefiAnalyzer.r2_get_summary(image_path, debug=True)
+```
+
+```python
+from uefi_r2.uefi_analyzer import UefiAnalyzer
+from uefi_r2.uefi_scanner import UefiRule, UefiScanner
+
+...
+uefi_analyzer = UefiAnalyzer(image_path)
+uefi_rule = UefiRule(rule)
+scanner = UefiScanner(uefi_analyzer, uefi_rule)
+result = scanner.result
 ```

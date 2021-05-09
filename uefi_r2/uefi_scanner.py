@@ -44,7 +44,8 @@ class UefiRule:
     def __str__(self):
         return json.dumps(self._uefi_rule, indent=2)
 
-    def get_nvram_vars(self) -> List[NvramVariable]:
+    def _get_nvram_vars(self) -> List[NvramVariable]:
+
         nvram_vars = list()
         if not "nvram" in self._uefi_rule:
             return nvram_vars
@@ -70,11 +71,13 @@ class UefiRule:
     @property
     def nvram_vars(self) -> List[NvramVariable]:
         """Get NVRAM variables from rule"""
+
         if self._nvram_vars is None:
-            self._nvram_vars = self.get_nvram_vars()
+            self._nvram_vars = self._get_nvram_vars()
         return self._nvram_vars
 
-    def get_protocols(self) -> List[UefiProtocol]:
+    def _get_protocols(self) -> List[UefiProtocol]:
+
         protocols = list()
         if not "protocols" in self._uefi_rule:
             return protocols
@@ -107,7 +110,7 @@ class UefiRule:
         """Get protocols from rule"""
 
         if self._protocols is None:
-            self._protocols = self.get_protocols()
+            self._protocols = self._get_protocols()
         return self._protocols
 
     @property
@@ -115,10 +118,10 @@ class UefiRule:
         """Get NVRAM variables from rule"""
 
         if self._nvram_vars is None:
-            self._nvram_vars = self.get_nvram_vars()
+            self._nvram_vars = self._get_nvram_vars()
         return self._nvram_vars
 
-    def get_protocol_guids(self) -> List[UefiProtocolGuid]:
+    def _get_protocol_guids(self) -> List[UefiProtocolGuid]:
 
         protocol_guids = list()
         if not "guids" in self._uefi_rule:
@@ -144,10 +147,10 @@ class UefiRule:
 
     @property
     def protocol_guids(self) -> List[UefiProtocolGuid]:
-
         """Get GUIDs from rule"""
+
         if self._protocol_guids is None:
-            self._protocol_guids = self.get_protocol_guids()
+            self._protocol_guids = self._get_protocol_guids()
         return self._protocol_guids
 
 
@@ -159,7 +162,8 @@ class UefiScanner:
         self._uefi_rule: UefiRule = uefi_rule
         self._result: bool = None
 
-    def get_result(self):
+    def _get_result(self):
+
         # compare nvram
         for nvram_rule in self._uefi_rule.nvram_vars:
             nvram_matched = False
@@ -201,8 +205,8 @@ class UefiScanner:
 
     @property
     def result(self) -> bool:
-
         """Get scanning result"""
+
         if self._result is None:
-            self._result = self.get_result()
+            self._result = self._get_result()
         return self._result
