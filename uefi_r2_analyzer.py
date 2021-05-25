@@ -62,6 +62,7 @@ def scan(image_path: str, rule: str) -> bool:
     print(f"{prefix} nvram: {[x.__dict__ for x in uefi_rule.nvram_vars]}")
     print(f"{prefix} protocols: {[x.__dict__ for x in uefi_rule.protocols]}")
     print(f"{prefix} guids: {[x.__dict__ for x in uefi_rule.protocol_guids]}")
+    print(f"{prefix} esil: {uefi_rule.esil_rules}")
 
     scanner = UefiScanner(uefi_analyzer, uefi_rule)
     prefix = click.style("Scanner result", fg="green")
