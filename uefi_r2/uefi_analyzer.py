@@ -125,6 +125,7 @@ class UefiAnalyzer:
         self._strings: Optional[List[Any]] = None
         self._sections: Optional[List[Any]] = None
         self._functions: Optional[List[Any]] = None
+        self._insns: Optional[List[Any]] = None
         self._g_bs: Optional[int] = None
         self._g_rt: Optional[int] = None
 
@@ -155,6 +156,23 @@ class UefiAnalyzer:
         if self._functions is None:
             self._functions = self._r2.cmdj("aflj")
         return self._functions
+
+    def _get_insns(self) -> List[Any]:
+
+        insns = list()
+        target_sections = [".text"]
+        for section in self.sections:
+            if section["name"] in target_sections:
+                self._r2.cmd("s @{:#x}".format(section["vaddr"]))
+                insns = self._r2.cmdj("pDj {:#x}".format(section["vsize"]))
+        return insns
+
+    @property
+    def insns(self) -> List[Any]:
+        """Get instructions"""
+        if self._insns is None:
+            self._insns = self._get_insns()
+        return self._insns
 
     def _get_g_bs_x64(self) -> int:
 

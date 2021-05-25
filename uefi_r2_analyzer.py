@@ -47,7 +47,7 @@ def scan(image_path: str, rule: str) -> bool:
     if not os.path.isfile(image_path):
         print("{} check image path".format(click.style("ERROR", fg="red", bold=True)))
         return False
-    if not os.path.isfile(rule):
+    if not (rule and os.path.isfile(rule)):
         print("{} check rule path".format(click.style("ERROR", fg="red", bold=True)))
         return False
 

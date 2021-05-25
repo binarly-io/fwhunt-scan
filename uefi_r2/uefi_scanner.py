@@ -184,20 +184,19 @@ class UefiScanner:
         return True
 
     def _check_rule(self, esil_rule: List[List[str]]) -> bool:
-        print(f"Current rule: {esil_rule}")
-        for func in self._uefi_analyzer.functions:
-            func_addr = func["offset"]
-            func_insns = self._uefi_analyzer._r2.cmdj("pdfj @{:#x}".format(func_addr))
-            ops = func_insns["ops"]
-            for i in range(len(ops) - len(esil_rule) + 1):
-                counter_item = 0
-                for j in range(len(esil_rule)):
-                    x, y = esil_rule[j].split(","), ops[i + j]["esil"].split(",")
-                    if not self._compare(x, y):
-                        continue
-                    counter_item += 1
-                if counter_item == len(esil_rule):
-                    return True
+
+        ops = self._uefi_analyzer.insns
+        for i in range(len(ops) - len(esil_rule) + 1):
+            counter_item = 0
+            for j in range(len(esil_rule)):
+                if not "esil" in ops[i + j]:
+                    continue
+                x, y = esil_rule[j].split(","), ops[i + j]["esil"].split(",")
+                if not self._compare(x, y):
+                    continue
+                counter_item += 1
+            if counter_item == len(esil_rule):
+                return True
         return False
 
     def _esil_scanner(self):
