@@ -43,6 +43,30 @@ class UefiRule:
     def __str__(self):
         return json.dumps(self._uefi_rule, indent=2)
 
+    @property
+    def name(self) -> Optional[str]:
+        """Get rule name from the metadata block"""
+        try:
+            return self._uefi_rule["meta"]["name"]
+        except KeyError:
+            return None
+
+    @property
+    def namespace(self) -> Optional[str]:
+        """Get rule namespace from the metadata block"""
+        try:
+            return self._uefi_rule["meta"]["namespace"]
+        except KeyError:
+            return None
+
+    @property
+    def description(self) -> Optional[str]:
+        """Get rule description URL from the metadata block"""
+        try:
+            return self._uefi_rule["meta"]["description"]
+        except KeyError:
+            return None
+
     def _get_nvram_vars(self) -> List[NvramVariable]:
 
         nvram_vars: List[NvramVariable] = list()

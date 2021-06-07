@@ -64,7 +64,7 @@ def scan(image_path: str, rule: str) -> bool:
 
     scanner = UefiScanner(uefi_analyzer, uefi_rule)
     prefix = click.style("Scanner result", fg="green")
-    print(f"{prefix} {scanner.result}")
+    print(f"{prefix} {uefi_rule.name} {scanner.result}")
 
     return True
 
