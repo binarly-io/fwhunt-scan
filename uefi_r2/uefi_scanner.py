@@ -6,7 +6,6 @@ Tools for analyzing UEFI firmware using radare2
 
 import json
 import os
-import uuid
 from typing import Any, Dict, List, Optional
 
 import yaml
@@ -46,8 +45,8 @@ class UefiRule:
 
     def _get_nvram_vars(self) -> List[NvramVariable]:
 
-        nvram_vars = list()
-        if not "nvram" in self._uefi_rule:
+        nvram_vars: List[NvramVariable] = list()
+        if "nvram" not in self._uefi_rule:
             return nvram_vars
         for nvrams in self._uefi_rule["nvram"]:
             for num in nvrams:
@@ -62,7 +61,7 @@ class UefiRule:
                         element_guid = obj["guid"]
                     if "service" in obj:
                         element_service = obj["service"][0]["name"]
-                service = UefiService(name=element_service, address=None)
+                service = UefiService(name=element_service, address=0x0)
                 nvram_vars.append(
                     NvramVariable(name=element_name, guid=element_guid, service=service)
                 )
@@ -78,8 +77,8 @@ class UefiRule:
 
     def _get_protocols(self) -> List[UefiProtocol]:
 
-        protocols = list()
-        if not "protocols" in self._uefi_rule:
+        protocols: List[UefiProtocol] = list()
+        if "protocols" not in self._uefi_rule:
             return protocols
         for protocols_list in self._uefi_rule["protocols"]:
             for num in protocols_list:
@@ -99,8 +98,8 @@ class UefiRule:
                         name=element_name,
                         value=element_value,
                         service=element_service,
-                        address=None,
-                        guid_address=None,
+                        address=0x0,
+                        guid_address=0x0,
                     )
                 )
         return protocols
@@ -113,18 +112,10 @@ class UefiRule:
             self._protocols = self._get_protocols()
         return self._protocols
 
-    @property
-    def nvram_vars(self) -> List[NvramVariable]:
-        """Get NVRAM variables from rule"""
-
-        if self._nvram_vars is None:
-            self._nvram_vars = self._get_nvram_vars()
-        return self._nvram_vars
-
     def _get_protocol_guids(self) -> List[UefiProtocolGuid]:
 
-        protocol_guids = list()
-        if not "guids" in self._uefi_rule:
+        protocol_guids: List[UefiProtocolGuid] = list()
+        if "guids" not in self._uefi_rule:
             return protocol_guids
         for guids_list in self._uefi_rule["guids"]:
             for num in guids_list:
@@ -140,7 +131,7 @@ class UefiRule:
                     UefiProtocolGuid(
                         name=element_name,
                         value=element_value,
-                        address=None,
+                        address=0x0,
                     )
                 )
         return protocol_guids
@@ -160,9 +151,9 @@ class UefiScanner:
     def __init__(self, uefi_analyzer: UefiAnalyzer, uefi_rule: UefiRule):
         self._uefi_analyzer: UefiAnalyzer = uefi_analyzer
         self._uefi_rule: UefiRule = uefi_rule
-        self._result: bool = None
+        self._result: Optional[bool] = None
 
-    def _get_result(self):
+    def _get_result(self) -> bool:
 
         # compare nvram
         for nvram_rule in self._uefi_rule.nvram_vars:

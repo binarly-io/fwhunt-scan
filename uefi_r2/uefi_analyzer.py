@@ -463,12 +463,12 @@ class UefiAnalyzer:
                 name: str = str()
                 p_guid_b: bytes = bytes()
                 for index in range(len(block_insns) - 2, -1, -1):
-                    if not "refs" in block_insns[index]:
+                    if "refs" not in block_insns[index]:
                         continue
                     if len(block_insns[index]["refs"]) > 1:
                         continue
                     ref_addr = block_insns[index]["refs"][0]["addr"]
-                    if not "esil" in block_insns[index]:
+                    if "esil" not in block_insns[index]:
                         continue
                     esil = block_insns[index]["esil"].split(",")
                     if (
