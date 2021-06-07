@@ -120,6 +120,7 @@ class UefiAnalyzer:
         self._bs_prot: Optional[List[UefiService]] = None
         self._rt_list: Optional[List[UefiService]] = None
         self._pei_services: Optional[List[UefiService]] = None
+        self._ppi_list: Optional[List[UefiProtocol]] = None
         self._protocols: Optional[List[UefiProtocol]] = None
         self._protocol_guids: Optional[List[UefiProtocolGuid]] = None
         self._nvram_vars: Optional[List[NvramVariable]] = None
@@ -131,8 +132,8 @@ class UefiAnalyzer:
         self._g_bs: Optional[int] = None
         self._g_rt: Optional[int] = None
 
-    def _number_of_args(self, addr: int) -> int:
-        """Get number of arguments for specified service call"""
+    def _pei_service_args_num(self, addr: int) -> int:
+        """Get number of arguments for specified PEI service call"""
         args_num = 0
         self._r2.cmd("s @{:#x}".format(addr))
         res = self._r2.cmdj("pdbj")
@@ -566,7 +567,7 @@ class UefiAnalyzer:
                         continue
                     service = EFI_PEI_SERVICES_X86[offset]
                     # found potential pei service, compare number of arguments
-                    arg_num = self._number_of_args(insn["offset"])
+                    arg_num = self._pei_service_args_num(insn["offset"])
                     if arg_num != service["arg_num"]:
                         continue
                     pei_list.append(
@@ -581,6 +582,51 @@ class UefiAnalyzer:
             self._pei_services = self._get_pei_services()
         return self._pei_services
 
+    def _get_ppi_list(self) -> List[UefiProtocol]:
+
+        ppi_list: List[UefiProtocol] = []
+        for pei_service in self.pei_services:
+            if pei_service.name != "LocatePpi":
+                continue
+            block_insns = self._r2.cmdj("pdj -8 @{:#x}".format(pei_service.address))
+            for index in range(len(block_insns) - 1, -1, -1):
+                esil = block_insns[index]["esil"].split(",")
+                if not (esil[-1] == "-=" and esil[-2] == "esp" and esil[-3] == "4"):
+                    continue
+                try:
+                    guid_addr = int(esil[0])
+                except ValueError:
+                    continue
+                if guid_addr < self.info["bin"]["baddr"]:
+                    continue
+                self._r2.cmd("s {:#x}".format(guid_addr))
+                p_guid_b = bytes(self._r2.cmdj("xj 16"))
+                # look up in known list
+                guid = GUID_FROM_BYTES.get(p_guid_b)
+                if not guid:
+                    guid = UefiGuid(
+                        value=str(uuid.UUID(bytes_le=p_guid_b)).upper(),
+                        name="proprietary_ppi",
+                    )
+                ppi_list.append(
+                    UefiProtocol(
+                        name=guid.name,
+                        value=guid.value,
+                        guid_address=guid_addr,
+                        address=block_insns[index]["offset"],
+                        service=pei_service.name,
+                    )
+                )
+
+        return ppi_list
+
+    @property
+    def ppi_list(self) -> List[UefiProtocol]:
+        """Find all PPIs"""
+        if self._ppi_list is None:
+            self._ppi_list = self._get_ppi_list()
+        return self._ppi_list
+
     @classmethod
     def get_summary(cls, image_path: str) -> Dict[str, Any]:
         """Collect all the information in a JSON object"""
@@ -591,6 +637,7 @@ class UefiAnalyzer:
             summary[key] = self.info[key]
         if self.info["bin"]["arch"] == "x86" and self.info["bin"]["bits"] == 32:
             summary["pei_list"] = [x.__dict__ for x in self.pei_services]
+            summary["ppi_list"] = [x.__dict__ for x in self.ppi_list]
             summary["p_guids"] = [x.__dict__ for x in self.protocol_guids]
         elif self.info["bin"]["arch"] == "x86" and self.info["bin"]["bits"] == 64:
             summary["g_bs"] = str(self.g_bs)
