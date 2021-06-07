@@ -8,16 +8,17 @@ Tools for analyzing UEFI firmware using radare2
 """
 
 import uuid
-
-from typing import List, Dict, Any, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import r2pipe
+
 from uefi_r2.uefi_protocols import GUID_FROM_BYTES, UefiGuid
 from uefi_r2.uefi_tables import (
     BS_PROTOCOLS_INFO_X64,
-    OFFSET_TO_SERVICE,
     EFI_BOOT_SERVICES_X64,
+    EFI_PEI_SERVICES_X86,
     EFI_RUNTIME_SERVICES_X64,
+    OFFSET_TO_SERVICE,
 )
 
 
@@ -111,13 +112,14 @@ class UefiAnalyzer:
         if image_path:
             self._r2 = r2pipe.open(image_path, flags=["-2"], radare2home=radare2home)
             # analyze image
-            self._r2.cmd("aaa")
+            self._r2.cmd("aaaa")
 
         # private cache
         self._bs_list_g_bs: Optional[List[UefiService]] = None
         self._bs_list_prot: Optional[List[UefiService]] = None
         self._bs_prot: Optional[List[UefiService]] = None
         self._rt_list: Optional[List[UefiService]] = None
+        self._pei_services: Optional[List[UefiService]] = None
         self._protocols: Optional[List[UefiProtocol]] = None
         self._protocol_guids: Optional[List[UefiProtocolGuid]] = None
         self._nvram_vars: Optional[List[NvramVariable]] = None
@@ -128,6 +130,34 @@ class UefiAnalyzer:
         self._insns: Optional[List[Any]] = None
         self._g_bs: Optional[int] = None
         self._g_rt: Optional[int] = None
+
+    def _number_of_args(self, addr: int) -> int:
+        """Get number of arguments for specified service call"""
+        args_num = 0
+        self._r2.cmd("s @{:#x}".format(addr))
+        res = self._r2.cmdj("pdbj")
+        if not res:
+            return 0
+        # find current call in block
+        for index in range(len(res)):
+            if res[index]["offset"] == addr:
+                break
+        # get number of arguments
+        for i in range(index, 0, -1):
+            esil = res[i]["esil"].split(",")
+            if esil[-3] == "4" and esil[-2] == "esp" and esil[-1] == "-=":
+                args_num += 1
+            if (
+                len(esil) == 4
+                and esil[-1] == "="
+                and esil[-2] == "eax"
+                and esil[-3] == "[4]"
+            ):
+                args_num = 0
+                break
+            if esil[-1] == "=" and esil[-1] == "eip":
+                break
+        return args_num
 
     @property
     def info(self) -> List[Any]:
@@ -242,45 +272,42 @@ class UefiAnalyzer:
             for insn in func_insns["ops"]:
                 # find "mov rax, qword [g_bs]" instruction
                 g_bs_found = False
-                if "esil" in insn:
-                    esil = insn["esil"].split(",")
-                    if (
-                        (insn["type"] == "mov")
-                        and (esil[-1] == "=")
-                        and (esil[-3] == "[8]")
-                        and (esil[-4] == "+")
-                    ):
-                        if ("ptr" in insn) and (insn["ptr"] == self.g_bs):
-                            g_bs_found = True
-                    if not g_bs_found:
-                        insn_index += 1
-                        continue
-                    # if current instriction is "mov rax, qword [g_bs]"
-                    for g_bs_area_insn in func_insns["ops"][
-                        insn_index : insn_index + 0x10
-                    ]:
-                        if "esil" in g_bs_area_insn.keys():
-                            g_bs_area_esil = g_bs_area_insn["esil"].split(",")
-                            if (
-                                (g_bs_area_insn["type"] == "ucall")
-                                and (g_bs_area_esil[1] == "rax")
-                                and (g_bs_area_esil[2] == "+")
-                                and (g_bs_area_esil[3] == "[8]")
-                                and (g_bs_area_esil[-1] == "=")
-                            ):
-                                if "ptr" in g_bs_area_insn:
-                                    service_offset = g_bs_area_insn["ptr"]
-                                    if service_offset in EFI_BOOT_SERVICES_X64:
-                                        bs_list.append(
-                                            UefiService(
-                                                address=g_bs_area_insn["offset"],
-                                                name=EFI_BOOT_SERVICES_X64[
-                                                    service_offset
-                                                ],
-                                            )
-                                        )
-                                        break
+                if not "esil" in insn:
+                    continue
+                esil = insn["esil"].split(",")
+                if (
+                    (insn["type"] == "mov")
+                    and (esil[-1] == "=")
+                    and (esil[-3] == "[8]")
+                    and (esil[-4] == "+")
+                ):
+                    if ("ptr" in insn) and (insn["ptr"] == self.g_bs):
+                        g_bs_found = True
+                if not g_bs_found:
                     insn_index += 1
+                    continue
+                # if current instriction is "mov rax, qword [g_bs]"
+                for g_bs_area_insn in func_insns["ops"][insn_index : insn_index + 0x10]:
+                    if "esil" in g_bs_area_insn.keys():
+                        g_bs_area_esil = g_bs_area_insn["esil"].split(",")
+                        if (
+                            (g_bs_area_insn["type"] == "ucall")
+                            and (g_bs_area_esil[1] == "rax")
+                            and (g_bs_area_esil[2] == "+")
+                            and (g_bs_area_esil[3] == "[8]")
+                            and (g_bs_area_esil[-1] == "=")
+                        ):
+                            if "ptr" in g_bs_area_insn:
+                                service_offset = g_bs_area_insn["ptr"]
+                                if service_offset in EFI_BOOT_SERVICES_X64:
+                                    bs_list.append(
+                                        UefiService(
+                                            address=g_bs_area_insn["offset"],
+                                            name=EFI_BOOT_SERVICES_X64[service_offset],
+                                        )
+                                    )
+                                    break
+                insn_index += 1
         return bs_list
 
     def _get_boot_services_prot_x64(
@@ -520,6 +547,40 @@ class UefiAnalyzer:
             self._nvram_vars = self.r2_get_nvram_vars_x64()
         return self._nvram_vars
 
+    def _get_pei_services(self) -> List[UefiService]:
+
+        pei_list: List[UefiService] = []
+        for func in self.functions:
+            func_addr = func["offset"]
+            func_insns = self._r2.cmdj("pdfj @{:#x}".format(func_addr))
+            for insn in func_insns["ops"]:
+                if not "esil" in insn:
+                    continue
+                esil = insn["esil"].split(",")
+                if esil[-1] == "=" and esil[-2] == "eip":
+                    try:
+                        offset = int(esil[0], 16)
+                    except ValueError:
+                        continue
+                    if not offset in EFI_PEI_SERVICES_X86.keys():
+                        continue
+                    service = EFI_PEI_SERVICES_X86[offset]
+                    # found potential pei service, compare number of arguments
+                    arg_num = self._number_of_args(insn["offset"])
+                    if arg_num != service["arg_num"]:
+                        continue
+                    pei_list.append(
+                        UefiService(address=insn["offset"], name=service["name"])
+                    )
+        return pei_list
+
+    @property
+    def pei_services(self) -> List[UefiService]:
+        """Find all PEI services"""
+        if self._pei_services is None:
+            self._pei_services = self._get_pei_services()
+        return self._pei_services
+
     @classmethod
     def get_summary(cls, image_path: str) -> Dict[str, Any]:
         """Collect all the information in a JSON object"""
@@ -528,13 +589,17 @@ class UefiAnalyzer:
         summary = {}
         for key in self.info:
             summary[key] = self.info[key]
-        summary["g_bs"] = str(self.g_bs)
-        summary["g_rt"] = str(self.g_rt)
-        summary["bs_list"] = [x.__dict__ for x in self.boot_services]
-        summary["rt_list"] = [x.__dict__ for x in self.runtime_services]
-        summary["p_guids"] = [x.__dict__ for x in self.protocol_guids]
-        summary["protocols"] = [x.__dict__ for x in self.protocols]
-        summary["nvram_vars"] = [x.__dict__ for x in self.nvram_vars]
+        if self.info["bin"]["arch"] == "x86" and self.info["bin"]["bits"] == 32:
+            summary["pei_list"] = [x.__dict__ for x in self.pei_services]
+            summary["p_guids"] = [x.__dict__ for x in self.protocol_guids]
+        elif self.info["bin"]["arch"] == "x86" and self.info["bin"]["bits"] == 64:
+            summary["g_bs"] = str(self.g_bs)
+            summary["g_rt"] = str(self.g_rt)
+            summary["bs_list"] = [x.__dict__ for x in self.boot_services]
+            summary["rt_list"] = [x.__dict__ for x in self.runtime_services]
+            summary["p_guids"] = [x.__dict__ for x in self.protocol_guids]
+            summary["protocols"] = [x.__dict__ for x in self.protocols]
+            summary["nvram_vars"] = [x.__dict__ for x in self.nvram_vars]
         self.close()
         return summary
 
