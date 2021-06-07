@@ -11,8 +11,7 @@ import os
 
 import click
 
-from uefi_r2.uefi_analyzer import UefiAnalyzer
-from uefi_r2.uefi_scanner import UefiRule, UefiScanner
+from uefi_r2 import UefiAnalyzer, UefiRule, UefiScanner
 
 
 @click.group()
