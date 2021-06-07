@@ -8,7 +8,7 @@ Tools for analyzing UEFI firmware using radare2
 """
 
 import uuid
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Protocol, Tuple
 
 import r2pipe
 
@@ -588,7 +588,7 @@ class UefiAnalyzer:
         for pei_service in self.pei_services:
             if pei_service.name != "LocatePpi":
                 continue
-            block_insns = self._r2.cmdj("pdj -8 @{:#x}".format(pei_service.address))
+            block_insns = self._r2.cmdj("pdj -16 @{:#x}".format(pei_service.address))
             for index in range(len(block_insns) - 1, -1, -1):
                 esil = block_insns[index]["esil"].split(",")
                 if not (esil[-1] == "-=" and esil[-2] == "esp" and esil[-3] == "4"):
@@ -608,15 +608,15 @@ class UefiAnalyzer:
                         value=str(uuid.UUID(bytes_le=p_guid_b)).upper(),
                         name="proprietary_ppi",
                     )
-                ppi_list.append(
-                    UefiProtocol(
-                        name=guid.name,
-                        value=guid.value,
-                        guid_address=guid_addr,
-                        address=block_insns[index]["offset"],
-                        service=pei_service.name,
-                    )
+                ppi = UefiProtocol(
+                    name=guid.name,
+                    value=guid.value,
+                    guid_address=guid_addr,
+                    address=block_insns[index]["offset"],
+                    service=pei_service.name,
                 )
+                if not ppi in ppi_list:
+                    ppi_list.append(ppi)
 
         return ppi_list
 
