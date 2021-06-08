@@ -13,6 +13,7 @@ import click
 
 from uefi_r2.uefi_analyzer import UefiAnalyzer
 from uefi_r2.uefi_scanner import UefiRule, UefiScanner
+from uefi_r2.uefi_te import TerseExecutableParser
 
 
 @click.group()
@@ -35,6 +36,18 @@ def analyze_image(image_path: str, out: str) -> bool:
             json.dump(summary, f, indent=4)
     else:
         print(json.dumps(summary, indent=4))
+    return True
+
+
+@click.command()
+@click.argument("image_path")
+def parse_te(image_path: str) -> bool:
+    """Parse input TE file."""
+
+    if not os.path.isfile(image_path):
+        print("{} check image path".format(click.style("ERROR", fg="red", bold=True)))
+        return False
+    print(TerseExecutableParser(image_path))
     return True
 
 
@@ -72,6 +85,7 @@ def scan(image_path: str, rule: str) -> bool:
 
 
 cli.add_command(analyze_image)
+cli.add_command(parse_te)
 cli.add_command(scan)
 
 if __name__ == "__main__":

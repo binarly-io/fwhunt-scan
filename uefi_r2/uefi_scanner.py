@@ -47,7 +47,7 @@ class UefiRule:
     def _get_nvram_vars(self) -> List[NvramVariable]:
 
         nvram_vars = list()
-        if not "nvram" in self._uefi_rule:
+        if "nvram" not in self._uefi_rule:
             return nvram_vars
         for nvrams in self._uefi_rule["nvram"]:
             for num in nvrams:
@@ -79,7 +79,7 @@ class UefiRule:
     def _get_protocols(self) -> List[UefiProtocol]:
 
         protocols = list()
-        if not "protocols" in self._uefi_rule:
+        if "protocols" not in self._uefi_rule:
             return protocols
         for protocols_list in self._uefi_rule["protocols"]:
             for num in protocols_list:
@@ -116,7 +116,7 @@ class UefiRule:
     def _get_protocol_guids(self) -> List[UefiProtocolGuid]:
 
         protocol_guids = list()
-        if not "guids" in self._uefi_rule:
+        if "guids" not in self._uefi_rule:
             return protocol_guids
         for guids_list in self._uefi_rule["guids"]:
             for num in guids_list:
@@ -148,7 +148,7 @@ class UefiRule:
     def _get_esil_rules(self) -> List[List[str]]:
 
         esil_rules = list()
-        if not "esil" in self._uefi_rule:
+        if "esil" not in self._uefi_rule:
             return esil_rules
         for esil_list in self._uefi_rule["esil"]:
             for num in esil_list:
@@ -189,7 +189,7 @@ class UefiScanner:
         for i in range(len(ops) - len(esil_rule) + 1):
             counter_item = 0
             for j in range(len(esil_rule)):
-                if not "esil" in ops[i + j]:
+                if "esil" not in ops[i + j]:
                     continue
                 x, y = esil_rule[j].split(","), ops[i + j]["esil"].split(",")
                 if not self._compare(x, y):

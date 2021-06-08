@@ -8,7 +8,7 @@ Tools for analyzing UEFI firmware using radare2
 """
 
 import uuid
-from typing import Any, Dict, List, Optional, Protocol, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import r2pipe
 
@@ -20,6 +20,7 @@ from uefi_r2.uefi_tables import (
     EFI_RUNTIME_SERVICES_X64,
     OFFSET_TO_SERVICE,
 )
+from uefi_r2.uefi_te import TerseExecutableError, TerseExecutableParser
 
 
 class UefiService:
@@ -31,7 +32,7 @@ class UefiService:
 
     @property
     def __dict__(self):
-        val = {}
+        val = dict()
         if self.name:
             val["name"] = self.name
         if self.address:
@@ -87,7 +88,7 @@ class NvramVariable:
 
     @property
     def __dict__(self):
-        val = {}
+        val = dict()
         if self.name:
             val["name"] = self.name
         if self.guid:
@@ -113,6 +114,11 @@ class UefiAnalyzer:
             self._r2 = r2pipe.open(image_path, flags=["-2"], radare2home=radare2home)
             # analyze image
             self._r2.cmd("aaaa")
+            # init TE parser object if file have Terse Executable format
+            try:
+                self._te: TerseExecutableParser = TerseExecutableParser(image_path)
+            except TerseExecutableError:
+                self._te: TerseExecutableParser = None
 
         # private cache
         self._bs_list_g_bs: Optional[List[UefiService]] = None
@@ -132,7 +138,26 @@ class UefiAnalyzer:
         self._g_bs: Optional[int] = None
         self._g_rt: Optional[int] = None
 
-    def _pei_service_args_num(self, addr: int) -> int:
+    def _section_paddr(self, section_name: str):
+        for section in self.sections:
+            if section["name"] == section_name:
+                return section["paddr"]
+        return 0
+
+    def _correct_addr(self, addr: int) -> int:
+        if not self._te:
+            return addr
+        offset = self._te.image_base + self._te.base_of_code - self._section_paddr(".text")
+        return (addr + offset)
+
+    def _wrong_addr(self, addr: int) -> int:
+        if not self._te:
+            return addr
+        offset = self._te.image_base + self._te.base_of_code - self._section_paddr(".text")
+        return (addr - offset)
+
+
+    def _pei_service_args_num(self, reg: str, addr: int) -> int:
         """Get number of arguments for specified PEI service call"""
         args_num = 0
         self._r2.cmd("s @{:#x}".format(addr))
@@ -144,21 +169,18 @@ class UefiAnalyzer:
             if res[index]["offset"] == addr:
                 break
         # get number of arguments
-        for i in range(index, 0, -1):
+        for i in range(index, -1, -1):
             esil = res[i]["esil"].split(",")
             if esil[-3] == "4" and esil[-2] == "esp" and esil[-1] == "-=":
                 args_num += 1
             if (
                 len(esil) == 4
                 and esil[-1] == "="
-                and esil[-2] == "eax"
+                and esil[-2] == reg
                 and esil[-3] == "[4]"
             ):
-                args_num = 0
-                break
-            if esil[-1] == "=" and esil[-1] == "eip":
-                break
-        return args_num
+                return args_num
+        return 0
 
     @property
     def info(self) -> List[Any]:
@@ -221,10 +243,10 @@ class UefiAnalyzer:
                         and (esil[-1] == "=")
                     ):
                         g_bs_reg = esil[-2]
-                    if g_bs_reg:
-                        if (esil[0] == g_bs_reg) and (esil[-1] == "=[8]"):
-                            if "ptr" in insn:
-                                return insn["ptr"]
+                    if not g_bs_reg:
+                        continue
+                    if (esil[0] == g_bs_reg) and (esil[-1] == "=[8]") and ("ptr" in insn):
+                        return insn["ptr"]
         return 0
 
     @property
@@ -250,10 +272,10 @@ class UefiAnalyzer:
                         and (esil[-1] == "=")
                     ):
                         g_rt_reg = esil[-2]
-                    if g_rt_reg:
-                        if (esil[0] == g_rt_reg) and (esil[-1] == "=[8]"):
-                            if "ptr" in insn:
-                                return insn["ptr"]
+                    if not g_rt_reg:
+                        continue
+                    if (esil[0] == g_rt_reg) and (esil[-1] == "=[8]") and ("ptr" in insn):
+                        return insn["ptr"]
         return 0
 
     @property
@@ -265,7 +287,7 @@ class UefiAnalyzer:
 
     def _get_boot_services_g_bs_x64(self) -> List[UefiService]:
 
-        bs_list = []
+        bs_list = list()
         for func in self.functions:
             func_addr = func["offset"]
             func_insns = self._r2.cmdj("pdfj @{:#x}".format(func_addr))
@@ -273,7 +295,7 @@ class UefiAnalyzer:
             for insn in func_insns["ops"]:
                 # find "mov rax, qword [g_bs]" instruction
                 g_bs_found = False
-                if not "esil" in insn:
+                if "esil" not in insn:
                     continue
                 esil = insn["esil"].split(",")
                 if (
@@ -289,25 +311,28 @@ class UefiAnalyzer:
                     continue
                 # if current instriction is "mov rax, qword [g_bs]"
                 for g_bs_area_insn in func_insns["ops"][insn_index : insn_index + 0x10]:
-                    if "esil" in g_bs_area_insn.keys():
-                        g_bs_area_esil = g_bs_area_insn["esil"].split(",")
-                        if (
-                            (g_bs_area_insn["type"] == "ucall")
-                            and (g_bs_area_esil[1] == "rax")
-                            and (g_bs_area_esil[2] == "+")
-                            and (g_bs_area_esil[3] == "[8]")
-                            and (g_bs_area_esil[-1] == "=")
-                        ):
-                            if "ptr" in g_bs_area_insn:
-                                service_offset = g_bs_area_insn["ptr"]
-                                if service_offset in EFI_BOOT_SERVICES_X64:
-                                    bs_list.append(
-                                        UefiService(
-                                            address=g_bs_area_insn["offset"],
-                                            name=EFI_BOOT_SERVICES_X64[service_offset],
-                                        )
-                                    )
-                                    break
+                    if "esil" not in g_bs_area_insn.keys():
+                        continue
+                    g_bs_area_esil = g_bs_area_insn["esil"].split(",")
+                    if not (
+                        (g_bs_area_insn["type"] == "ucall")
+                        and (g_bs_area_esil[1] == "rax")
+                        and (g_bs_area_esil[2] == "+")
+                        and (g_bs_area_esil[3] == "[8]")
+                        and (g_bs_area_esil[-1] == "=")
+                    ):
+                        continue
+                    if "ptr" not in g_bs_area_insn:
+                        continue
+                    service_offset = g_bs_area_insn["ptr"]
+                    if service_offset in EFI_BOOT_SERVICES_X64:
+                        bs_list.append(
+                            UefiService(
+                                address=g_bs_area_insn["offset"],
+                                name=EFI_BOOT_SERVICES_X64[service_offset],
+                            )
+                        )
+                        break
                 insn_index += 1
         return bs_list
 
@@ -315,35 +340,37 @@ class UefiAnalyzer:
         self,
     ) -> Tuple[List[UefiService], List[UefiService]]:
 
-        bs_list: List[UefiService] = []
-        bs_prot: List[UefiService] = []
+        bs_list: List[UefiService] = list()
+        bs_prot: List[UefiService] = list()
         for func in self.functions:
             func_addr = func["offset"]
             func_insns = self._r2.cmdj("pdfj @{:#x}".format(func_addr))
             for insn in func_insns["ops"]:
                 if "esil" in insn:
                     esil = insn["esil"].split(",")
-                    if (
+                    if not (
                         (insn["type"] == "ucall")
                         and (esil[1] == "rax")
                         and (esil[2] == "+")
                         and (esil[3] == "[8]")
                     ):
-                        if "ptr" in insn:
-                            service_offset = insn["ptr"]
-                            if service_offset in OFFSET_TO_SERVICE:
-                                name = OFFSET_TO_SERVICE[service_offset]
-                                # found boot service that work with protocol
-                                new = True
-                                for bs in bs_list:
-                                    if bs.address == insn["offset"]:
-                                        new = False
-                                        break
-                                bs = UefiService(address=insn["offset"], name=name)
-                                if new:
-                                    bs_list.append(bs)
-                                bs_prot.append(bs)
+                        continue
+                    if "ptr" not in insn:
+                        continue
+                    service_offset = insn["ptr"]
+                    if service_offset in OFFSET_TO_SERVICE:
+                        name = OFFSET_TO_SERVICE[service_offset]
+                        # found boot service that work with protocol
+                        new = True
+                        for bs in bs_list:
+                            if bs.address == insn["offset"]:
+                                new = False
                                 break
+                        bs = UefiService(address=insn["offset"], name=name)
+                        if new:
+                            bs_list.append(bs)
+                        bs_prot.append(bs)
+                        break
         return bs_list, bs_prot
 
     @property
@@ -364,7 +391,7 @@ class UefiAnalyzer:
 
     def _get_runtime_services_x64(self) -> List[UefiService]:
 
-        rt_list: List[UefiService] = []
+        rt_list: List[UefiService] = list()
         if not self.g_rt:
             return rt_list
         for func in self.functions:
@@ -392,25 +419,27 @@ class UefiAnalyzer:
                         insn_index : insn_index + 0x10
                     ]:
                         g_rt_area_esil = g_rt_area_insn["esil"].split(",")
-                        if (
+                        if not (
                             (g_rt_area_insn["type"] == "ucall")
                             and (g_rt_area_esil[1] == "rax")
                             and (g_rt_area_esil[2] == "+")
                             and (g_rt_area_esil[3] == "[8]")
                             and (g_rt_area_esil[-1] == "=")
                         ):
-                            if "ptr" in g_rt_area_insn:
-                                service_offset = g_rt_area_insn["ptr"]
-                                if service_offset in EFI_RUNTIME_SERVICES_X64:
-                                    rt_list.append(
-                                        UefiService(
-                                            address=g_rt_area_insn["offset"],
-                                            name=EFI_RUNTIME_SERVICES_X64[
-                                                service_offset
-                                            ],
-                                        )
-                                    )
-                                    break
+                            continue
+                        if "ptr" not in g_rt_area_insn:
+                            continue
+                        service_offset = g_rt_area_insn["ptr"]
+                        if service_offset in EFI_RUNTIME_SERVICES_X64:
+                            rt_list.append(
+                                UefiService(
+                                    address=g_rt_area_insn["offset"],
+                                    name=EFI_RUNTIME_SERVICES_X64[
+                                        service_offset
+                                    ],
+                                )
+                            )
+                            break
                     insn_index += 1
         return rt_list
 
@@ -423,40 +452,42 @@ class UefiAnalyzer:
 
     def _get_protocols_x64(self) -> List[UefiProtocol]:
 
-        protocols = []
+        protocols = list()
         for bs in self.boot_services_protocols:
             block_insns = self._r2.cmdj("pdbj @{:#x}".format(bs.address))
             for insn in block_insns:
                 if "esil" in insn:
                     esil = insn["esil"].split(",")
-                    if (
+                    if not (
                         (insn["type"] == "lea")
                         and (esil[-1] == "=")
                         and (esil[-2] == BS_PROTOCOLS_INFO_X64[bs.name]["reg"])
                         and (esil[-3] == "+")
                     ):
-                        if "ptr" in insn:
-                            p_guid_addr = insn["ptr"]
-                            self._r2.cmd("s {:#x}".format(p_guid_addr))
-                            p_guid_b = bytes(self._r2.cmdj("xj 16"))
+                        continue
+                    if "ptr" not in insn:
+                        continue
+                    p_guid_addr = insn["ptr"]
+                    self._r2.cmd("s {:#x}".format(p_guid_addr))
+                    p_guid_b = bytes(self._r2.cmdj("xj 16"))
 
-                            # look up in known list
-                            guid = GUID_FROM_BYTES.get(p_guid_b)
-                            if not guid:
-                                guid = UefiGuid(
-                                    value=str(uuid.UUID(bytes_le=p_guid_b)).upper(),
-                                    name="proprietary_protocol",
-                                )
+                    # look up in known list
+                    guid = GUID_FROM_BYTES.get(p_guid_b)
+                    if not guid:
+                        guid = UefiGuid(
+                            value=str(uuid.UUID(bytes_le=p_guid_b)).upper(),
+                            name="proprietary_protocol",
+                        )
 
-                            protocols.append(
-                                UefiProtocol(
-                                    name=guid.name,
-                                    value=guid.value,
-                                    guid_address=p_guid_addr,
-                                    address=insn["offset"],
-                                    service=bs.name,
-                                )
-                            )
+                    protocols.append(
+                        UefiProtocol(
+                            name=guid.name,
+                            value=guid.value,
+                            guid_address=p_guid_addr,
+                            address=insn["offset"],
+                            service=bs.name,
+                        )
+                    )
         return protocols
 
     @property
@@ -468,7 +499,7 @@ class UefiAnalyzer:
 
     def _get_protocol_guids(self) -> List[UefiProtocolGuid]:
 
-        protocol_guids = []
+        protocol_guids = list()
         target_sections = [".data"]
         for section in self.sections:
             if section["name"] in target_sections:
@@ -501,7 +532,7 @@ class UefiAnalyzer:
 
     def r2_get_nvram_vars_x64(self) -> List[NvramVariable]:
 
-        nvram_vars = []
+        nvram_vars = list()
         for service in self.runtime_services:
             if service.name in ["GetVariable", "SetVariable"]:
                 # disassemble 8 instructions backward
@@ -509,12 +540,12 @@ class UefiAnalyzer:
                 name: str = str()
                 p_guid_b: bytes = bytes()
                 for index in range(len(block_insns) - 2, -1, -1):
-                    if not "refs" in block_insns[index]:
+                    if "refs" not in block_insns[index]:
                         continue
                     if len(block_insns[index]["refs"]) > 1:
                         continue
                     ref_addr = block_insns[index]["refs"][0]["addr"]
-                    if not "esil" in block_insns[index]:
+                    if "esil" not in block_insns[index]:
                         continue
                     esil = block_insns[index]["esil"].split(",")
                     if (
@@ -550,12 +581,12 @@ class UefiAnalyzer:
 
     def _get_pei_services(self) -> List[UefiService]:
 
-        pei_list: List[UefiService] = []
+        pei_list: List[UefiService] = list()
         for func in self.functions:
             func_addr = func["offset"]
             func_insns = self._r2.cmdj("pdfj @{:#x}".format(func_addr))
             for insn in func_insns["ops"]:
-                if not "esil" in insn:
+                if "esil" not in insn:
                     continue
                 esil = insn["esil"].split(",")
                 if esil[-1] == "=" and esil[-2] == "eip":
@@ -563,13 +594,15 @@ class UefiAnalyzer:
                         offset = int(esil[0], 16)
                     except ValueError:
                         continue
-                    if not offset in EFI_PEI_SERVICES_X86.keys():
+                    if offset not in EFI_PEI_SERVICES_X86.keys():
                         continue
+                    reg = esil[1]
                     service = EFI_PEI_SERVICES_X86[offset]
                     # found potential pei service, compare number of arguments
-                    arg_num = self._pei_service_args_num(insn["offset"])
-                    if arg_num != service["arg_num"]:
+                    arg_num = self._pei_service_args_num(reg, insn["offset"])
+                    if arg_num < service["arg_num"]:
                         continue
+                    # wrong addresses in r2 in case of TE
                     pei_list.append(
                         UefiService(address=insn["offset"], name=service["name"])
                     )
@@ -584,7 +617,7 @@ class UefiAnalyzer:
 
     def _get_ppi_list(self) -> List[UefiProtocol]:
 
-        ppi_list: List[UefiProtocol] = []
+        ppi_list: List[UefiProtocol] = list()
         for pei_service in self.pei_services:
             if pei_service.name != "LocatePpi":
                 continue
@@ -593,13 +626,14 @@ class UefiAnalyzer:
                 esil = block_insns[index]["esil"].split(",")
                 if not (esil[-1] == "-=" and esil[-2] == "esp" and esil[-3] == "4"):
                     continue
-                try:
-                    guid_addr = int(esil[0])
-                except ValueError:
+                if "ptr" not in block_insns[index]:
                     continue
-                if guid_addr < self.info["bin"]["baddr"]:
+                p_guid_addr = block_insns[index]["ptr"]
+                if p_guid_addr < self._info["bin"]["baddr"]:
                     continue
-                self._r2.cmd("s {:#x}".format(guid_addr))
+                # wrong addresses in r2 in case of TE
+                p_guid_addr = self._wrong_addr(p_guid_addr)
+                self._r2.cmd("s {:#x}".format(p_guid_addr))
                 p_guid_b = bytes(self._r2.cmdj("xj 16"))
                 # look up in known list
                 guid = GUID_FROM_BYTES.get(p_guid_b)
@@ -611,7 +645,7 @@ class UefiAnalyzer:
                 ppi = UefiProtocol(
                     name=guid.name,
                     value=guid.value,
-                    guid_address=guid_addr,
+                    guid_address=p_guid_addr,
                     address=block_insns[index]["offset"],
                     service=pei_service.name,
                 )
@@ -632,21 +666,23 @@ class UefiAnalyzer:
         """Collect all the information in a JSON object"""
 
         self = cls(image_path)
-        summary = {}
+        summary = dict()
         for key in self.info:
             summary[key] = self.info[key]
+
         if self.info["bin"]["arch"] == "x86" and self.info["bin"]["bits"] == 32:
             summary["pei_list"] = [x.__dict__ for x in self.pei_services]
             summary["ppi_list"] = [x.__dict__ for x in self.ppi_list]
-            summary["p_guids"] = [x.__dict__ for x in self.protocol_guids]
+
         elif self.info["bin"]["arch"] == "x86" and self.info["bin"]["bits"] == 64:
             summary["g_bs"] = str(self.g_bs)
             summary["g_rt"] = str(self.g_rt)
             summary["bs_list"] = [x.__dict__ for x in self.boot_services]
             summary["rt_list"] = [x.__dict__ for x in self.runtime_services]
-            summary["p_guids"] = [x.__dict__ for x in self.protocol_guids]
             summary["protocols"] = [x.__dict__ for x in self.protocols]
             summary["nvram_vars"] = [x.__dict__ for x in self.nvram_vars]
+
+        summary["p_guids"] = [x.__dict__ for x in self.protocol_guids]
         self.close()
         return summary
 
@@ -655,7 +691,7 @@ class UefiAnalyzer:
         """Collect all the information in a JSON object"""
 
         self = cls(image_path)
-        summary = {}
+        summary = dict()
         for key in self.info:
             summary[key] = self.info[key]
         summary["g_bs"] = str(self.g_bs)
