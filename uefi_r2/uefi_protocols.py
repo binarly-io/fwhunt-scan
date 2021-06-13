@@ -11,7 +11,7 @@ from typing import Dict
 
 
 class UefiGuid:
-    """ a UEFI GUID """
+    """a UEFI GUID"""
 
     def __init__(self, value: str, name: str) -> None:
         self.value: str = value
@@ -2433,1774 +2433,2221 @@ PROTOCOLS_GUIDS = [
     UefiGuid("FB8415B7-EA7E-4E6D-9381005C3BD1DAD7", name="DELL_EC_CONFIG_PEI_GUID"),
     UefiGuid("FD236AE7-0791-48C4-B29E29BDEEE1A811", name="DELL_SA_INIT_PEIM_GUID"),
     UefiGuid("FD236AE7-0791-48C4-B29E29BDEEE1A838", name="DELL_PCH_INIT_PEIM_GUID"),
-    UefiGuid("BB11ECFE-820F-4968-BBA6F76AFE302596", name="gArmTokenSpaceGuid"),
-    UefiGuid("A4EE0728-E5D7-4AC5-B21E658ED857E834", name="gArmMpCoreInfoGuid"),
-    UefiGuid("D7E5ABE9-33AB-418E-9F9172DAE2BA8E2F", name="gArmScmiBaseProtocolGuid"),
-    UefiGuid("91CE67A8-E0AA-4012-B99FB6FCF3048EAA", name="gArmScmiClockProtocolGuid"),
-    UefiGuid("B8D8CAF2-9E94-462C-A8346C99FC05EFCF", name="gArmScmiClock2ProtocolGuid"),
+    UefiGuid("BB11ECFE-820F-4968-BBA6F76AFE302596", name="ARM_TOKEN_SPACE_GUID"),
+    UefiGuid("A4EE0728-E5D7-4AC5-B21E658ED857E834", name="ARM_MP_CORE_INFO_GUID"),
+    UefiGuid("D7E5ABE9-33AB-418E-9F9172DAE2BA8E2F", name="ARM_SCMI_BASE_PROTOCOL_GUID"),
     UefiGuid(
-        "09B8BA84-3DD3-49A6-A05A3134A5F07BAD", name="gArmScmiPerformanceProtocolGuid"
+        "91CE67A8-E0AA-4012-B99FB6FCF3048EAA", name="ARM_SCMI_CLOCK_PROTOCOL_GUID"
     ),
-    UefiGuid("6847CC74-E9EC-4F8F-A29DAB44E754A8FC", name="gArmMpCoreInfoPpiGuid"),
-    UefiGuid("9C0AAED4-74C5-4043-B417A3223814CE76", name="gArmPlatformTokenSpaceGuid"),
-    UefiGuid("0B6F5CA7-4F53-445A-B76E2E365B806366", name="gArmVirtTokenSpaceGuid"),
-    UefiGuid("B199DEA9-FD5C-4A84-80822F4170780305", name="gEarlyPL011BaseAddressGuid"),
-    UefiGuid("50BEA1E5-A2C5-46E9-9B3A59596516B00A", name="gArmVirtVariableGuid"),
-    UefiGuid("E11FACA0-4710-4C8E-A7A201BAA2591B4C", name="gFdtClientProtocolGuid"),
+    UefiGuid(
+        "B8D8CAF2-9E94-462C-A8346C99FC05EFCF", name="ARM_SCMI_CLOCK2_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "09B8BA84-3DD3-49A6-A05A3134A5F07BAD", name="ARM_SCMI_PERFORMANCE_PROTOCOL_GUID"
+    ),
+    UefiGuid("6847CC74-E9EC-4F8F-A29DAB44E754A8FC", name="ARM_MP_CORE_INFO_PPI_GUID"),
+    UefiGuid(
+        "9C0AAED4-74C5-4043-B417A3223814CE76", name="ARM_PLATFORM_TOKEN_SPACE_GUID"
+    ),
+    UefiGuid("0B6F5CA7-4F53-445A-B76E2E365B806366", name="ARM_VIRT_TOKEN_SPACE_GUID"),
+    UefiGuid(
+        "B199DEA9-FD5C-4A84-80822F4170780305", name="EARLY_P_L011_BASE_ADDRESS_GUID"
+    ),
+    UefiGuid("50BEA1E5-A2C5-46E9-9B3A59596516B00A", name="ARM_VIRT_VARIABLE_GUID"),
+    UefiGuid("E11FACA0-4710-4C8E-A7A201BAA2591B4C", name="FDT_CLIENT_PROTOCOL_GUID"),
     UefiGuid(
         "D85A4835-5A82-4894-AC02706F43D5978E",
-        name="gEdkiiConfigurationManagerProtocolGuid",
+        name="EDKII_CONFIGURATION_MANAGER_PROTOCOL_GUID",
     ),
     UefiGuid(
         "91D1E327-FE5A-49B8-AB650ECE2DDB45EC",
-        name="gEdkiiDynamicTableFactoryProtocolGuid",
+        name="EDKII_DYNAMIC_TABLE_FACTORY_PROTOCOL_GUID",
     ),
-    UefiGuid("E0D8CA17-4276-4386-BB7948CB813D3C4F", name="gEmbeddedTokenSpaceGuid"),
-    UefiGuid("B1B621D5-F19C-41A5-830BD9152C69AAE0", name="gFdtTableGuid"),
-    UefiGuid("16958446-19B7-480B-B0477485AD3F716D", name="gFdtHobGuid"),
-    UefiGuid("25A4FD4A-9703-4BA9-A190B7C84EFB3E57", name="gFdtVariableGuid"),
+    UefiGuid("E0D8CA17-4276-4386-BB7948CB813D3C4F", name="EMBEDDED_TOKEN_SPACE_GUID"),
+    UefiGuid("B1B621D5-F19C-41A5-830BD9152C69AAE0", name="FDT_TABLE_GUID"),
+    UefiGuid("16958446-19B7-480B-B0477485AD3F716D", name="FDT_HOB_GUID"),
+    UefiGuid("25A4FD4A-9703-4BA9-A190B7C84EFB3E57", name="FDT_VARIABLE_GUID"),
     UefiGuid(
-        "7EBB920D-1AAF-46D9-B2AF541E1DCE148B", name="gEdkiiPlatformHasDeviceTreeGuid"
+        "7EBB920D-1AAF-46D9-B2AF541E1DCE148B",
+        name="EDKII_PLATFORM_HAS_DEVICE_TREE_GUID",
     ),
-    UefiGuid("2B7A240D-D5AD-4FD6-BE1CDFA4415F5526", name="gDtPlatformFormSetGuid"),
+    UefiGuid("2B7A240D-D5AD-4FD6-BE1CDFA4415F5526", name="DT_PLATFORM_FORM_SET_GUID"),
     UefiGuid(
-        "25462CDA-221F-47DF-AC1D259CFAA4E326", name="gDtPlatformDefaultDtbFileGuid"
+        "25462CDA-221F-47DF-AC1D259CFAA4E326", name="DT_PLATFORM_DEFAULT_DTB_FILE_GUID"
     ),
-    UefiGuid("2D2358B4-E96C-484D-B2DD7C2EDFC7D56F", name="gConsolePrefFormSetGuid"),
+    UefiGuid("2D2358B4-E96C-484D-B2DD7C2EDFC7D56F", name="CONSOLE_PREF_FORM_SET_GUID"),
     UefiGuid(
-        "D1A86E3F-0707-4C35-83CDDC2C29C891A3", name="gEdkiiNvVarStoreFormattedGuid"
-    ),
-    UefiGuid(
-        "2890B3EA-053D-1643-AD0CD64808DA3FF1", name="gHardwareInterruptProtocolGuid"
+        "D1A86E3F-0707-4C35-83CDDC2C29C891A3", name="EDKII_NV_VAR_STORE_FORMATTED_GUID"
     ),
     UefiGuid(
-        "32898322-2DA1-474A-BAAAF3F7CF569470", name="gHardwareInterrupt2ProtocolGuid"
+        "2890B3EA-053D-1643-AD0CD64808DA3FF1", name="HARDWARE_INTERRUPT_PROTOCOL_GUID"
     ),
-    UefiGuid("BF4B9D10-13EC-43DD-8880E90B718F27DE", name="gEmbeddedDeviceGuid"),
+    UefiGuid(
+        "32898322-2DA1-474A-BAAAF3F7CF569470", name="HARDWARE_INTERRUPT2_PROTOCOL_GUID"
+    ),
+    UefiGuid("BF4B9D10-13EC-43DD-8880E90B718F27DE", name="EMBEDDED_DEVICE_GUID"),
     UefiGuid(
         "735F8C64-D696-44D0-BDF2447FD05A5406",
-        name="gEmbeddedExternalDeviceProtocolGuid",
+        name="EMBEDDED_EXTERNAL_DEVICE_PROTOCOL_GUID",
     ),
-    UefiGuid("17A0A3D7-C0A5-4635-BBD5072187DFE2EE", name="gEmbeddedGpioProtocolGuid"),
-    UefiGuid("B323179B-97FB-477E-B0FED88591FA11AB", name="gPeCoffLoaderProtocolGuid"),
-    UefiGuid("3E591C00-9E4A-11DF-92440002A5D5C51B", name="gEfiMmcHostProtocolGuid"),
+    UefiGuid("17A0A3D7-C0A5-4635-BBD5072187DFE2EE", name="EMBEDDED_GPIO_PROTOCOL_GUID"),
+    UefiGuid(
+        "B323179B-97FB-477E-B0FED88591FA11AB", name="PE_COFF_LOADER_PROTOCOL_GUID"
+    ),
+    UefiGuid("3E591C00-9E4A-11DF-92440002A5D5C51B", name="EFI_MMC_HOST_PROTOCOL_GUID"),
     UefiGuid(
         "74BD9FE0-8902-11E3-B9D3F72238FC9A31",
-        name="gAndroidFastbootTransportProtocolGuid",
+        name="ANDROID_FASTBOOT_TRANSPORT_PROTOCOL_GUID",
     ),
     UefiGuid(
         "524685A0-89A0-11E3-9D4DBFA9F6A40308",
-        name="gAndroidFastbootPlatformProtocolGuid",
+        name="ANDROID_FASTBOOT_PLATFORM_PROTOCOL_GUID",
     ),
-    UefiGuid("021BD2CA-51D2-11E3-8E56B75417C70B44", name="gUsbDeviceProtocolGuid"),
+    UefiGuid("021BD2CA-51D2-11E3-8E56B75417C70B44", name="USB_DEVICE_PROTOCOL_GUID"),
     UefiGuid(
-        "7197C8A7-6559-4C93-93D58A84F988798B", name="gPlatformBootManagerProtocolGuid"
+        "7197C8A7-6559-4C93-93D58A84F988798B",
+        name="PLATFORM_BOOT_MANAGER_PROTOCOL_GUID",
     ),
-    UefiGuid("52CE9845-5AF4-43E2-BAFD230812547AC2", name="gPlatformGpioProtocolGuid"),
+    UefiGuid("52CE9845-5AF4-43E2-BAFD230812547AC2", name="PLATFORM_GPIO_PROTOCOL_GUID"),
     UefiGuid(
         "0E3606D2-1DC3-4E6F-BE65394982A26547",
-        name="gPlatformVirtualKeyboardProtocolGuid",
+        name="PLATFORM_VIRTUAL_KEYBOARD_PROTOCOL_GUID",
     ),
-    UefiGuid("9859BB19-407C-4F8B-BCE1F8DA6565F4A5", name="gAndroidBootImgProtocolGuid"),
-    UefiGuid("21C3B115-4E0B-470C-85C7E105A575C97B", name="gEdkiiEmbeddedGpioPpiGuid"),
-    UefiGuid("5CF32E0B-8EDF-2E44-9CDA93205E99EC1C", name="gEmuThunkProtocolGuid"),
-    UefiGuid("453368F6-7C85-434A-A98A72D1B7FFA926", name="gEmuIoThunkProtocolGuid"),
     UefiGuid(
-        "30FD316A-6728-2E41-A6900D1333D8CAC1", name="gEmuGraphicsWindowProtocolGuid"
+        "9859BB19-407C-4F8B-BCE1F8DA6565F4A5", name="ANDROID_BOOT_IMG_PROTOCOL_GUID"
     ),
-    UefiGuid("3B1E4B7C-09D8-944F-A4081309EB8B4427", name="gEmuThreadThunkProtocolGuid"),
-    UefiGuid("6888A4AE-AFCE-E84B-9102F7B9DAE6A030", name="gEmuBlockIoProtocolGuid"),
-    UefiGuid("FD5FBE54-8C35-B345-8A0F7AC8A5FD0521", name="gEmuSnpProtocolGuid"),
-    UefiGuid("E113F896-75CF-F640-817FC85A79E8AE67", name="gEmuThunkPpiGuid"),
-    UefiGuid("4F792E68-E8C8-794E-B1D83703F3F2D5A5", name="gEmulatorPkgTokenSpaceGuid"),
-    UefiGuid("F8626165-6CEB-924A-BAFCF13AB9D65728", name="gEmuSystemConfigGuid"),
-    UefiGuid("F2BA331A-8985-11DB-A4060040D02B1835", name="gEmuVirtualDisksGuid"),
-    UefiGuid("F2BDCC96-8985-11DB-87190040D02B1835", name="gEmuPhysicalDisksGuid"),
-    UefiGuid("40B2D964-FE11-40DC-82832EFBDA295356", name="gFmpDevicePkgTokenSpaceGuid"),
+    UefiGuid(
+        "21C3B115-4E0B-470C-85C7E105A575C97B", name="EDKII_EMBEDDED_GPIO_PPI_GUID"
+    ),
+    UefiGuid("5CF32E0B-8EDF-2E44-9CDA93205E99EC1C", name="EMU_THUNK_PROTOCOL_GUID"),
+    UefiGuid("453368F6-7C85-434A-A98A72D1B7FFA926", name="EMU_IO_THUNK_PROTOCOL_GUID"),
+    UefiGuid(
+        "30FD316A-6728-2E41-A6900D1333D8CAC1", name="EMU_GRAPHICS_WINDOW_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "3B1E4B7C-09D8-944F-A4081309EB8B4427", name="EMU_THREAD_THUNK_PROTOCOL_GUID"
+    ),
+    UefiGuid("6888A4AE-AFCE-E84B-9102F7B9DAE6A030", name="EMU_BLOCK_IO_PROTOCOL_GUID"),
+    UefiGuid("FD5FBE54-8C35-B345-8A0F7AC8A5FD0521", name="EMU_SNP_PROTOCOL_GUID"),
+    UefiGuid("E113F896-75CF-F640-817FC85A79E8AE67", name="EMU_THUNK_PPI_GUID"),
+    UefiGuid(
+        "4F792E68-E8C8-794E-B1D83703F3F2D5A5", name="EMULATOR_PKG_TOKEN_SPACE_GUID"
+    ),
+    UefiGuid("F8626165-6CEB-924A-BAFCF13AB9D65728", name="EMU_SYSTEM_CONFIG_GUID"),
+    UefiGuid("F2BA331A-8985-11DB-A4060040D02B1835", name="EMU_VIRTUAL_DISKS_GUID"),
+    UefiGuid("F2BDCC96-8985-11DB-87190040D02B1835", name="EMU_PHYSICAL_DISKS_GUID"),
+    UefiGuid(
+        "40B2D964-FE11-40DC-82832EFBDA295356", name="FMP_DEVICE_PKG_TOKEN_SPACE_GUID"
+    ),
     UefiGuid(
         "487784C5-6299-4BA6-B0965CC5277CF757",
-        name="gEdkiiCapsuleUpdatePolicyProtocolGuid",
+        name="EDKII_CAPSULE_UPDATE_POLICY_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "CD167C1E-6E0B-42B3-82F6E3E906199810", name="gFspReadyForNotifyPhasePpiGuid"
+        "CD167C1E-6E0B-42B3-82F6E3E906199810",
+        name="FSP_READY_FOR_NOTIFY_PHASE_PPI_GUID",
     ),
-    UefiGuid("A1EEAB87-C859-479D-89B51461F4061A3E", name="gFspInApiModePpiGuid"),
-    UefiGuid("824D5A3A-AF92-4C0C-9F1919526DCA4ABB", name="gFspmArchConfigPpiGuid"),
-    UefiGuid("BC1CFBDB-7E50-42BE-B48722E0A90CB052", name="gFspTempRamExitPpiGuid"),
-    UefiGuid("ED6E0531-F715-4A3D-9B12C1CA5EF698A2", name="gIntelFsp2PkgTokenSpaceGuid"),
-    UefiGuid("912740BE-2284-4734-B97184B027353F0C", name="gFspHeaderFileGuid"),
+    UefiGuid("A1EEAB87-C859-479D-89B51461F4061A3E", name="FSP_IN_API_MODE_PPI_GUID"),
+    UefiGuid("824D5A3A-AF92-4C0C-9F1919526DCA4ABB", name="FSPM_ARCH_CONFIG_PPI_GUID"),
+    UefiGuid("BC1CFBDB-7E50-42BE-B48722E0A90CB052", name="FSP_TEMP_RAM_EXIT_PPI_GUID"),
     UefiGuid(
-        "69A79759-1373-4367-A6C4C7F59EFD986E", name="gFspReservedMemoryResourceHobGuid"
+        "ED6E0531-F715-4A3D-9B12C1CA5EF698A2", name="INTEL_FSP2_PKG_TOKEN_SPACE_GUID"
     ),
+    UefiGuid("912740BE-2284-4734-B97184B027353F0C", name="FSP_HEADER_FILE_GUID"),
     UefiGuid(
-        "721ACF02-4D77-4C2A-B3DC270B7BA9E4B0", name="gFspNonVolatileStorageHobGuid"
-    ),
-    UefiGuid("73FF4F56-AA8E-4451-B31636353667AD44", name="gFspBootLoaderTolumHobGuid"),
-    UefiGuid("56ED21B6-BA23-429E-8932376D8E182EE3", name="gFspPerformanceDataGuid"),
-    UefiGuid("BD44F629-EAE7-4198-87F139FAB0FD717E", name="gFspEventEndOfFirmwareGuid"),
-    UefiGuid(
-        "A34CF082-0F50-4F0D-898A3D39302BC51E", name="gIntelFsp2WrapperTokenSpaceGuid"
-    ),
-    UefiGuid("C9122295-56ED-4D4E-06A6508D894D3E40", name="gFspApiPerformanceGuid"),
-    UefiGuid("6D86FB36-BA90-472C-B5833FBED3FB209A", name="gFspHobGuid"),
-    UefiGuid("4EB6E09C-D256-4E1E-B50A874BD284B3DE", name="gFspSiliconInitDonePpiGuid"),
-    UefiGuid("2F3962B2-57C5-44EC-9EFCA69FD302032B", name="gTopOfTemporaryRamPpiGuid"),
-    UefiGuid("C4A58D6D-3677-49CB-A00A9470765FB55E", name="gAddPerfRecordProtocolGuid"),
-    UefiGuid(
-        "A1AFF049-FDEB-442A-B32013AB4CB72BBC", name="gEfiMdeModulePkgTokenSpaceGuid"
-    ),
-    UefiGuid("EA296D92-0B69-423C-8C2833B4E0A91268", name="gPcdDataBaseHobGuid"),
-    UefiGuid("3C7D193C-682C-4C14-A68F552DEA4F437E", name="gPcdDataBaseSignatureGuid"),
-    UefiGuid("0F0B1735-87A0-4193-B266538C38AF48CE", name="gEfiIfrTianoGuid"),
-    UefiGuid("82DDD68B-9163-4187-9B2720A8FD60A71D", name="gEdkiiIfrBitVarstoreGuid"),
-    UefiGuid("31CA5D1A-D511-4931-B782AE6B2B178CD7", name="gEfiIfrFrameworkGuid"),
-    UefiGuid("FFF12B8D-7696-4C8B-A9852747075B4F50", name="gEfiSystemNvDataFvGuid"),
-    UefiGuid(
-        "9E58292B-7C68-497D-A0CE6500FD9F1B95", name="gEdkiiWorkingBlockSignatureGuid"
+        "69A79759-1373-4367-A6C4C7F59EFD986E",
+        name="FSP_RESERVED_MEMORY_RESOURCE_HOB_GUID",
     ),
     UefiGuid(
-        "1D3E9CB8-43AF-490B-830A3516AA532047", name="gEdkiiFaultTolerantWriteGuid"
+        "721ACF02-4D77-4C2A-B3DC270B7BA9E4B0", name="FSP_NON_VOLATILE_STORAGE_HOB_GUID"
     ),
-    UefiGuid("D3B36F2C-D551-11D4-9A460090273FC14D", name="gEfiConsoleOutDeviceGuid"),
-    UefiGuid("D3B36F2B-D551-11D4-9A460090273FC14D", name="gEfiConsoleInDeviceGuid"),
     UefiGuid(
-        "4C19049F-4137-4DD3-9C108B97A83FFDFA", name="gEfiMemoryTypeInformationGuid"
+        "73FF4F56-AA8E-4451-B31636353667AD44", name="FSP_BOOT_LOADER_TOLUM_HOB_GUID"
     ),
-    UefiGuid("711C703F-C285-4B10-A3B036ECBD3C8BE2", name="gEfiCapsuleVendorGuid"),
-    UefiGuid("D3B36F2D-D551-11D4-9A460090273FC14D", name="gEfiStandardErrorDeviceGuid"),
-    UefiGuid("DDCF3616-3275-4164-98B6FE85707FFE7D", name="gEfiVariableGuid"),
+    UefiGuid("56ED21B6-BA23-429E-8932376D8E182EE3", name="FSP_PERFORMANCE_DATA_GUID"),
     UefiGuid(
-        "AAF32C78-947B-439A-A1802E144EC37792", name="gEfiAuthenticatedVariableGuid"
+        "BD44F629-EAE7-4198-87F139FAB0FD717E", name="FSP_EVENT_END_OF_FIRMWARE_GUID"
     ),
-    UefiGuid("8CFDB8C8-D6B2-40F3-8E9702307CC98B7C", name="gEfiVariableIndexTableGuid"),
-    UefiGuid("93BA1826-DFFB-45DD-82A7E7DCAA3BBDF3", name="gSmmVariableWriteGuid"),
-    UefiGuid("76B6BDFA-2ACD-4462-9E3FCB58C969D937", name="gPerformanceProtocolGuid"),
-    UefiGuid("F866226A-EAA5-4F5A-A90A6CFBA57C588E", name="gSmmPerformanceProtocolGuid"),
-    UefiGuid("1EA81BEC-F01A-4D98-A2014A61CE2FC022", name="gPerformanceExProtocolGuid"),
     UefiGuid(
-        "931FC048-C71D-4455-8930470630E30EE5", name="gSmmPerformanceExProtocolGuid"
+        "A34CF082-0F50-4F0D-898A3D39302BC51E",
+        name="INTEL_FSP2_WRAPPER_TOKEN_SPACE_GUID",
+    ),
+    UefiGuid("C9122295-56ED-4D4E-06A6508D894D3E40", name="FSP_API_PERFORMANCE_GUID"),
+    UefiGuid("6D86FB36-BA90-472C-B5833FBED3FB209A", name="FSP_HOB_GUID"),
+    UefiGuid(
+        "4EB6E09C-D256-4E1E-B50A874BD284B3DE", name="FSP_SILICON_INIT_DONE_PPI_GUID"
+    ),
+    UefiGuid(
+        "2F3962B2-57C5-44EC-9EFCA69FD302032B", name="TOP_OF_TEMPORARY_RAM_PPI_GUID"
+    ),
+    UefiGuid(
+        "C4A58D6D-3677-49CB-A00A9470765FB55E", name="ADD_PERF_RECORD_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "A1AFF049-FDEB-442A-B32013AB4CB72BBC",
+        name="EFI_MDE_MODULE_PKG_TOKEN_SPACE_GUID",
+    ),
+    UefiGuid("EA296D92-0B69-423C-8C2833B4E0A91268", name="PCD_DATA_BASE_HOB_GUID"),
+    UefiGuid(
+        "3C7D193C-682C-4C14-A68F552DEA4F437E", name="PCD_DATA_BASE_SIGNATURE_GUID"
+    ),
+    UefiGuid("0F0B1735-87A0-4193-B266538C38AF48CE", name="EFI_IFR_TIANO_GUID"),
+    UefiGuid("82DDD68B-9163-4187-9B2720A8FD60A71D", name="EDKII_IFR_BIT_VARSTORE_GUID"),
+    UefiGuid("31CA5D1A-D511-4931-B782AE6B2B178CD7", name="EFI_IFR_FRAMEWORK_GUID"),
+    UefiGuid("FFF12B8D-7696-4C8B-A9852747075B4F50", name="EFI_SYSTEM_NV_DATA_FV_GUID"),
+    UefiGuid(
+        "9E58292B-7C68-497D-A0CE6500FD9F1B95", name="EDKII_WORKING_BLOCK_SIGNATURE_GUID"
+    ),
+    UefiGuid(
+        "1D3E9CB8-43AF-490B-830A3516AA532047", name="EDKII_FAULT_TOLERANT_WRITE_GUID"
+    ),
+    UefiGuid("D3B36F2C-D551-11D4-9A460090273FC14D", name="EFI_CONSOLE_OUT_DEVICE_GUID"),
+    UefiGuid("D3B36F2B-D551-11D4-9A460090273FC14D", name="EFI_CONSOLE_IN_DEVICE_GUID"),
+    UefiGuid(
+        "4C19049F-4137-4DD3-9C108B97A83FFDFA", name="EFI_MEMORY_TYPE_INFORMATION_GUID"
+    ),
+    UefiGuid("711C703F-C285-4B10-A3B036ECBD3C8BE2", name="EFI_CAPSULE_VENDOR_GUID"),
+    UefiGuid(
+        "D3B36F2D-D551-11D4-9A460090273FC14D", name="EFI_STANDARD_ERROR_DEVICE_GUID"
+    ),
+    UefiGuid("DDCF3616-3275-4164-98B6FE85707FFE7D", name="EFI_VARIABLE_GUID"),
+    UefiGuid(
+        "AAF32C78-947B-439A-A1802E144EC37792", name="EFI_AUTHENTICATED_VARIABLE_GUID"
+    ),
+    UefiGuid(
+        "8CFDB8C8-D6B2-40F3-8E9702307CC98B7C", name="EFI_VARIABLE_INDEX_TABLE_GUID"
+    ),
+    UefiGuid("93BA1826-DFFB-45DD-82A7E7DCAA3BBDF3", name="SMM_VARIABLE_WRITE_GUID"),
+    UefiGuid("76B6BDFA-2ACD-4462-9E3FCB58C969D937", name="PERFORMANCE_PROTOCOL_GUID"),
+    UefiGuid(
+        "F866226A-EAA5-4F5A-A90A6CFBA57C588E", name="SMM_PERFORMANCE_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "1EA81BEC-F01A-4D98-A2014A61CE2FC022", name="PERFORMANCE_EX_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "931FC048-C71D-4455-8930470630E30EE5", name="SMM_PERFORMANCE_EX_PROTOCOL_GUID"
     ),
     UefiGuid(
         "C85D06BE-5F75-48CE-A80F1236BA3B87B1",
-        name="gEdkiiPerformanceMeasurementProtocolGuid",
+        name="EDKII_PERFORMANCE_MEASUREMENT_PROTOCOL_GUID",
     ),
     UefiGuid(
         "D56B6D73-1A7B-4015-9BB47B071729ED24",
-        name="gEdkiiSmmPerformanceMeasurementProtocolGuid",
+        name="EDKII_SMM_PERFORMANCE_MEASUREMENT_PROTOCOL_GUID",
     ),
     UefiGuid(
         "FC1BCDB0-7D31-49AA-936AA4600D9DD083",
-        name="gEfiCrc32GuidedSectionExtractionGuid",
+        name="EFI_CRC32_GUIDED_SECTION_EXTRACTION_GUID",
     ),
-    UefiGuid("E701458C-4900-4CA5-B7723D37949F7927", name="gStatusCodeCallbackGuid"),
-    UefiGuid("060CC026-4C0D-4DDA-8F41595FEF00A502", name="gMemoryStatusCodeRecordGuid"),
+    UefiGuid("E701458C-4900-4CA5-B7723D37949F7927", name="STATUS_CODE_CALLBACK_GUID"),
     UefiGuid(
-        "9A4E9246-D553-11D5-87E200062945C3B9", name="gEfiStatusCodeDataTypeDebugGuid"
+        "060CC026-4C0D-4DDA-8F41595FEF00A502", name="MEMORY_STATUS_CODE_RECORD_GUID"
+    ),
+    UefiGuid(
+        "9A4E9246-D553-11D5-87E200062945C3B9",
+        name="EFI_STATUS_CODE_DATA_TYPE_DEBUG_GUID",
     ),
     UefiGuid(
         "2CA88B53-D296-4080-A4A5CAD9BAE24B09",
-        name="gLoadFixedAddressConfigurationTableGuid",
+        name="LOAD_FIXED_ADDRESS_CONFIGURATION_TABLE_GUID",
     ),
-    UefiGuid("59D1C24F-50F1-401A-B101F33E0DAED443", name="gEfiGenericVariableGuid"),
-    UefiGuid("3C8D294C-5FC3-4451-BB31C4C032295E6C", name="gIdleLoopEventGuid"),
-    UefiGuid("0FFBCE19-324C-4690-A00998C6AE2EB186", name="gRecoveryOnFatUsbDiskGuid"),
-    UefiGuid("B38573B6-6200-4AC5-B51D82E65938D783", name="gRecoveryOnFatIdeDiskGuid"),
+    UefiGuid("59D1C24F-50F1-401A-B101F33E0DAED443", name="EFI_GENERIC_VARIABLE_GUID"),
+    UefiGuid("3C8D294C-5FC3-4451-BB31C4C032295E6C", name="IDLE_LOOP_EVENT_GUID"),
     UefiGuid(
-        "2E3D2E75-9B2E-412D-B4B170416B8700FF", name="gRecoveryOnFatFloppyDiskGuid"
-    ),
-    UefiGuid("5CAC0099-0DC9-48E5-8068BB95F5400A9F", name="gRecoveryOnDataCdGuid"),
-    UefiGuid("C770A27F-956A-497A-8548E06197588BF6", name="gRecoveryOnFatNvmeDiskGuid"),
-    UefiGuid(
-        "2A3CFEBD-27E8-4D0A-8B79D688C2A3E1C0", name="gEfiSmmLockBoxCommunicationGuid"
-    ),
-    UefiGuid("AF9FFD67-EC10-488A-9DFC6CBF5EE22C2E", name="gEfiAcpiVariableGuid"),
-    UefiGuid("0EF98D3A-3E33-497A-A40177BE3EB74F38", name="gEfiAcpiS3ContextGuid"),
-    UefiGuid(
-        "3079818C-46D4-4A73-AEF3E3E46CF1EEDB", name="gEfiBootScriptExecutorVariableGuid"
+        "0FFBCE19-324C-4690-A00998C6AE2EB186", name="RECOVERY_ON_FAT_USB_DISK_GUID"
     ),
     UefiGuid(
-        "79CB58C4-AC51-442F-AFD798E47D2E9908", name="gEfiBootScriptExecutorContextGuid"
+        "B38573B6-6200-4AC5-B51D82E65938D783", name="RECOVERY_ON_FAT_IDE_DISK_GUID"
     ),
     UefiGuid(
-        "0C0F3B43-44DE-4907-B478225F6F6289DC", name="gUsbKeyboardLayoutPackageGuid"
+        "2E3D2E75-9B2E-412D-B4B170416B8700FF", name="RECOVERY_ON_FAT_FLOPPY_DISK_GUID"
     ),
-    UefiGuid("3A4D7A7C-018A-4B42-81B3DC10E3B591BD", name="gUsbKeyboardLayoutKeyGuid"),
+    UefiGuid("5CAC0099-0DC9-48E5-8068BB95F5400A9F", name="RECOVERY_ON_DATA_CD_GUID"),
     UefiGuid(
-        "4F4EF7F0-AA29-4CE9-BA41643E0123A99F", name="gHiiResourceSamleFormSetGuid"
-    ),
-    UefiGuid("A04A27F4-DF00-4D42-B55239511302113D", name="gDriverSampleFormSetGuid"),
-    UefiGuid("B3F56470-6141-4621-8F19704E577AA9E8", name="gDriverSampleInventoryGuid"),
-    UefiGuid("F5E655D9-02A6-46F2-9E76B8BE8E60AB22", name="gEfiIfrRefreshIdOpGuid"),
-    UefiGuid(
-        "8614567D-35BE-4415-8D88BD7D0C9C70C0", name="gPlatformOverridesManagerGuid"
-    ),
-    UefiGuid("00000000-0000-0000-0000000000000000", name="gZeroGuid"),
-    UefiGuid("EB704011-1402-11D3-8E7700A0C969723B", name="gMtcVendorGuid"),
-    UefiGuid("C095791A-3001-47B2-80C9EAC7319F2FA4", name="gEfiFirmwarePerformanceGuid"),
-    UefiGuid(
-        "0DC65ADC-A973-4130-8DF02ADBEB9E4A31", name="gFirmwarePerformanceS3PointerGuid"
+        "C770A27F-956A-497A-8548E06197588BF6", name="RECOVERY_ON_FAT_NVME_DISK_GUID"
     ),
     UefiGuid(
-        "4F6C5507-232F-4787-B95E72F862490CB1", name="gEventExitBootServicesFailedGuid"
+        "2A3CFEBD-27E8-4D0A-8B79D688C2A3E1C0",
+        name="EFI_SMM_LOCK_BOX_COMMUNICATION_GUID",
     ),
-    UefiGuid("DB4E8151-57ED-4BED-88336751B5D1A8D7", name="gConnectConInEventGuid"),
+    UefiGuid("AF9FFD67-EC10-488A-9DFC6CBF5EE22C2E", name="EFI_ACPI_VARIABLE_GUID"),
+    UefiGuid("0EF98D3A-3E33-497A-A40177BE3EB74F38", name="EFI_ACPI_S3_CONTEXT_GUID"),
+    UefiGuid(
+        "3079818C-46D4-4A73-AEF3E3E46CF1EEDB",
+        name="EFI_BOOT_SCRIPT_EXECUTOR_VARIABLE_GUID",
+    ),
+    UefiGuid(
+        "79CB58C4-AC51-442F-AFD798E47D2E9908",
+        name="EFI_BOOT_SCRIPT_EXECUTOR_CONTEXT_GUID",
+    ),
+    UefiGuid(
+        "0C0F3B43-44DE-4907-B478225F6F6289DC", name="USB_KEYBOARD_LAYOUT_PACKAGE_GUID"
+    ),
+    UefiGuid(
+        "3A4D7A7C-018A-4B42-81B3DC10E3B591BD", name="USB_KEYBOARD_LAYOUT_KEY_GUID"
+    ),
+    UefiGuid(
+        "4F4EF7F0-AA29-4CE9-BA41643E0123A99F", name="HII_RESOURCE_SAMLE_FORM_SET_GUID"
+    ),
+    UefiGuid("A04A27F4-DF00-4D42-B55239511302113D", name="DRIVER_SAMPLE_FORM_SET_GUID"),
+    UefiGuid(
+        "B3F56470-6141-4621-8F19704E577AA9E8", name="DRIVER_SAMPLE_INVENTORY_GUID"
+    ),
+    UefiGuid("F5E655D9-02A6-46F2-9E76B8BE8E60AB22", name="EFI_IFR_REFRESH_ID_OP_GUID"),
+    UefiGuid(
+        "8614567D-35BE-4415-8D88BD7D0C9C70C0", name="PLATFORM_OVERRIDES_MANAGER_GUID"
+    ),
+    UefiGuid("00000000-0000-0000-0000000000000000", name="ZERO_GUID"),
+    UefiGuid("EB704011-1402-11D3-8E7700A0C969723B", name="MTC_VENDOR_GUID"),
+    UefiGuid(
+        "C095791A-3001-47B2-80C9EAC7319F2FA4", name="EFI_FIRMWARE_PERFORMANCE_GUID"
+    ),
+    UefiGuid(
+        "0DC65ADC-A973-4130-8DF02ADBEB9E4A31",
+        name="FIRMWARE_PERFORMANCE_S3_POINTER_GUID",
+    ),
+    UefiGuid(
+        "4F6C5507-232F-4787-B95E72F862490CB1",
+        name="EVENT_EXIT_BOOT_SERVICES_FAILED_GUID",
+    ),
+    UefiGuid("DB4E8151-57ED-4BED-88336751B5D1A8D7", name="CONNECT_CON_IN_EVENT_GUID"),
     UefiGuid(
         "F6EE6DBB-D67F-4EA0-8B966A71B19D84AD",
-        name="gEdkiiStatusCodeDataTypeVariableGuid",
+        name="EDKII_STATUS_CODE_DATA_TYPE_VARIABLE_GUID",
     ),
-    UefiGuid("821C9A09-541A-40F6-9F430AD193A12CFE", name="gEdkiiMemoryProfileGuid"),
-    UefiGuid("E22BBCCA-516A-46A8-80E26745E83693BD", name="gEdkiiSmmMemoryProfileGuid"),
-    UefiGuid("04B37FE8-F6AE-480B-BDD537D98C5E89AA", name="gEdkiiVarErrorFlagGuid"),
-    UefiGuid("3D532050-5CDA-4FD0-879E0F7F630D5AFB", name="gBrotliCustomDecompressGuid"),
-    UefiGuid("EE4E5898-3914-4259-9D6EDC7BD79403CF", name="gLzmaCustomDecompressGuid"),
+    UefiGuid("821C9A09-541A-40F6-9F430AD193A12CFE", name="EDKII_MEMORY_PROFILE_GUID"),
     UefiGuid(
-        "D42AE6BD-1352-4BFB-909ACA72A6EAE889", name="gLzmaF86CustomDecompressGuid"
+        "E22BBCCA-516A-46A8-80E26745E83693BD", name="EDKII_SMM_MEMORY_PROFILE_GUID"
     ),
-    UefiGuid("7D916D80-5BB1-458C-A48FE25FDD51EF94", name="gEfiTtyTermGuid"),
-    UefiGuid("E4364A7F-F825-430E-9D3A9C9BE6817CA5", name="gEdkiiLinuxTermGuid"),
-    UefiGuid("FBFCA56B-BB36-4B78-AAABBE1B97EC7CCB", name="gEdkiiXtermR6Guid"),
-    UefiGuid("8E46DDDD-3D49-4A9D-B8753C086F6AA2BD", name="gEdkiiVT400Guid"),
-    UefiGuid("FC7DD6E0-813C-434D-B4DA3BD649E9E15A", name="gEdkiiSCOTermGuid"),
-    UefiGuid("B2DEDC91-D59F-48D2-898A12490C74A4E0", name="gEfiIfrBootMaintenanceGuid"),
-    UefiGuid("E58809F8-FBC1-48E2-883AA30FDC4B441E", name="gEfiIfrFrontPageGuid"),
-    UefiGuid("2A46715F-3581-4A55-8E732B769AAA30C5", name="gRamDiskFormSetGuid"),
+    UefiGuid("04B37FE8-F6AE-480B-BDD537D98C5E89AA", name="EDKII_VAR_ERROR_FLAG_GUID"),
+    UefiGuid(
+        "3D532050-5CDA-4FD0-879E0F7F630D5AFB", name="BROTLI_CUSTOM_DECOMPRESS_GUID"
+    ),
+    UefiGuid("EE4E5898-3914-4259-9D6EDC7BD79403CF", name="LZMA_CUSTOM_DECOMPRESS_GUID"),
+    UefiGuid(
+        "D42AE6BD-1352-4BFB-909ACA72A6EAE889", name="LZMA_F86_CUSTOM_DECOMPRESS_GUID"
+    ),
+    UefiGuid("7D916D80-5BB1-458C-A48FE25FDD51EF94", name="EFI_TTY_TERM_GUID"),
+    UefiGuid("E4364A7F-F825-430E-9D3A9C9BE6817CA5", name="EDKII_LINUX_TERM_GUID"),
+    UefiGuid("FBFCA56B-BB36-4B78-AAABBE1B97EC7CCB", name="EDKII_XTERM_R6_GUID"),
+    UefiGuid("8E46DDDD-3D49-4A9D-B8753C086F6AA2BD", name="EDKII_V_T400_GUID"),
+    UefiGuid("FC7DD6E0-813C-434D-B4DA3BD649E9E15A", name="EDKII_S_C_O_TERM_GUID"),
+    UefiGuid(
+        "B2DEDC91-D59F-48D2-898A12490C74A4E0", name="EFI_IFR_BOOT_MAINTENANCE_GUID"
+    ),
+    UefiGuid("E58809F8-FBC1-48E2-883AA30FDC4B441E", name="EFI_IFR_FRONT_PAGE_GUID"),
+    UefiGuid("2A46715F-3581-4A55-8E732B769AAA30C5", name="RAM_DISK_FORM_SET_GUID"),
     UefiGuid(
         "4E28CA50-D582-44AC-A11FE3D56526DB34",
-        name="gEdkiiPiSmmCommunicationRegionTableGuid",
+        name="EDKII_PI_SMM_COMMUNICATION_REGION_TABLE_GUID",
     ),
     UefiGuid(
         "6B9FD3F7-16DF-45E8-BD39B94A66541A5D",
-        name="gEdkiiPiSmmMemoryAttributesTableGuid",
+        name="EDKII_PI_SMM_MEMORY_ATTRIBUTES_TABLE_GUID",
     ),
-    UefiGuid("49174342-7108-409B-8BBE65FDA85389F5", name="gSmiHandlerProfileGuid"),
+    UefiGuid("49174342-7108-409B-8BBE65FDA85389F5", name="SMI_HANDLER_PROFILE_GUID"),
     UefiGuid(
         "C7D35798-E4D2-4A93-B14554889F02584B",
-        name="gEdkiiNonDiscoverableAhciDeviceGuid",
+        name="EDKII_NON_DISCOVERABLE_AHCI_DEVICE_GUID",
     ),
     UefiGuid(
         "94440339-CC93-4506-B4C6EE8D0F4CA191",
-        name="gEdkiiNonDiscoverableAmbaDeviceGuid",
+        name="EDKII_NON_DISCOVERABLE_AMBA_DEVICE_GUID",
     ),
     UefiGuid(
         "EAEE5615-0CFD-45FC-8769A0D85695AF85",
-        name="gEdkiiNonDiscoverableEhciDeviceGuid",
+        name="EDKII_NON_DISCOVERABLE_EHCI_DEVICE_GUID",
     ),
     UefiGuid(
         "C5F25542-2A79-4A26-81BB4EA63233B309",
-        name="gEdkiiNonDiscoverableNvmeDeviceGuid",
+        name="EDKII_NON_DISCOVERABLE_NVME_DEVICE_GUID",
     ),
     UefiGuid(
         "B20005B0-BB2D-496F-869C230B4479E7D1",
-        name="gEdkiiNonDiscoverableOhciDeviceGuid",
+        name="EDKII_NON_DISCOVERABLE_OHCI_DEVICE_GUID",
     ),
     UefiGuid(
         "1DD1D619-F9B8-463E-8681D1DC7C07B72C",
-        name="gEdkiiNonDiscoverableSdhciDeviceGuid",
+        name="EDKII_NON_DISCOVERABLE_SDHCI_DEVICE_GUID",
     ),
     UefiGuid(
-        "2EA77912-80A8-4947-BE69CDD00AFBE556", name="gEdkiiNonDiscoverableUfsDeviceGuid"
+        "2EA77912-80A8-4947-BE69CDD00AFBE556",
+        name="EDKII_NON_DISCOVERABLE_UFS_DEVICE_GUID",
     ),
     UefiGuid(
         "A8CDA0A2-4F37-4A1B-8E108EF3CC3BF3A8",
-        name="gEdkiiNonDiscoverableUhciDeviceGuid",
+        name="EDKII_NON_DISCOVERABLE_UHCI_DEVICE_GUID",
     ),
     UefiGuid(
         "B1BE0BC5-6C28-442D-AA37151B4257BD78",
-        name="gEdkiiNonDiscoverableXhciDeviceGuid",
+        name="EDKII_NON_DISCOVERABLE_XHCI_DEVICE_GUID",
     ),
-    UefiGuid("F0966B41-C23F-41B9-96040FF7E111965A", name="gEdkiiPlatformHasAcpiGuid"),
+    UefiGuid(
+        "F0966B41-C23F-41B9-96040FF7E111965A", name="EDKII_PLATFORM_HAS_ACPI_GUID"
+    ),
     UefiGuid(
         "3B387BFD-7ABC-4CF2-A0CAB6A16C1B1B25",
-        name="gEdkiiFpdtExtendedFirmwarePerformanceGuid",
+        name="EDKII_FPDT_EXTENDED_FIRMWARE_PERFORMANCE_GUID",
     ),
-    UefiGuid("96F5296D-05F7-4F3C-8467E456890E0CB5", name="gEdkiiEndOfS3ResumeGuid"),
-    UefiGuid("8F9D4825-797D-48FC-8471845025792EF6", name="gEdkiiS3SmmInitDoneGuid"),
+    UefiGuid("96F5296D-05F7-4F3C-8467E456890E0CB5", name="EDKII_END_OF_S3_RESUME_GUID"),
+    UefiGuid("8F9D4825-797D-48FC-8471845025792EF6", name="EDKII_S3_SMM_INIT_DONE_GUID"),
     UefiGuid(
-        "310E9B8C-CF90-421E-8E9B9EEFB617C8EF", name="gS3StorageDeviceInitListGuid"
-    ),
-    UefiGuid(
-        "D3987D4B-971A-435F-8CAF4967EB627241", name="gEdkiiSerialPortLibVendorGuid"
-    ),
-    UefiGuid("98C80A4F-E16B-4D11-939AABE561260330", name="gEdkiiCapsuleOnDiskNameGuid"),
-    UefiGuid("A45E60D1-C719-44AA-B07AAA777F85906D", name="gPeiAtaControllerPpiGuid"),
-    UefiGuid(
-        "652B38A9-77F4-453F-89D5E7BDC352FC53", name="gPeiUsbHostControllerPpiGuid"
+        "310E9B8C-CF90-421E-8E9B9EEFB617C8EF", name="S3_STORAGE_DEVICE_INIT_LIST_GUID"
     ),
     UefiGuid(
-        "FEDD6305-E2D7-4ED5-9FAADA080E336C22", name="gPeiUsb2HostControllerPpiGuid"
+        "D3987D4B-971A-435F-8CAF4967EB627241", name="EDKII_SERIAL_PORT_LIB_VENDOR_GUID"
     ),
-    UefiGuid("3BC1F6DE-693E-4547-A30021823CA420B2", name="gPeiUsbControllerPpiGuid"),
-    UefiGuid("7C29785C-66B9-49FC-B7971CA5550EF283", name="gPeiUsbIoPpiGuid"),
-    UefiGuid("0ECC666B-4662-47F9-9DD5D096FF7DA49E", name="gPeiSecPerformancePpiGuid"),
     UefiGuid(
-        "AE933E1C-CC47-4E38-8F0EE2F61D2605DF", name="gEfiPeiSmmCommunicationPpiGuid"
+        "98C80A4F-E16B-4D11-939AABE561260330", name="EDKII_CAPSULE_ON_DISK_NAME_GUID"
     ),
-    UefiGuid("268F33A9-CCCD-48BE-881786053AC32ED6", name="gPeiSmmAccessPpiGuid"),
-    UefiGuid("61C68702-4D7E-4F43-8DEFA74305CE74C5", name="gPeiSmmControlPpiGuid"),
-    UefiGuid("88C9D306-0900-4EB5-82603E2DBEDA1F89", name="gPeiPostScriptTablePpiGuid"),
-    UefiGuid("490E9D85-8AEF-4193-8E56F734A9FFAC8B", name="gPeiSerialPortPpiGuid"),
+    UefiGuid("A45E60D1-C719-44AA-B07AAA777F85906D", name="PEI_ATA_CONTROLLER_PPI_GUID"),
     UefiGuid(
-        "DC54B283-1A77-4CD6-83BBFDDA469A2EC6", name="gEdkiiPeiUfsHostControllerPpiGuid"
+        "652B38A9-77F4-453F-89D5E7BDC352FC53", name="PEI_USB_HOST_CONTROLLER_PPI_GUID"
     ),
-    UefiGuid("A9731431-D968-4277-B752A3A9A6AE1898", name="gPeiIpmiPpiGuid"),
+    UefiGuid(
+        "FEDD6305-E2D7-4ED5-9FAADA080E336C22", name="PEI_USB2_HOST_CONTROLLER_PPI_GUID"
+    ),
+    UefiGuid("3BC1F6DE-693E-4547-A30021823CA420B2", name="PEI_USB_CONTROLLER_PPI_GUID"),
+    UefiGuid("7C29785C-66B9-49FC-B7971CA5550EF283", name="PEI_USB_IO_PPI_GUID"),
+    UefiGuid(
+        "0ECC666B-4662-47F9-9DD5D096FF7DA49E", name="PEI_SEC_PERFORMANCE_PPI_GUID"
+    ),
+    UefiGuid(
+        "AE933E1C-CC47-4E38-8F0EE2F61D2605DF", name="EFI_PEI_SMM_COMMUNICATION_PPI_GUID"
+    ),
+    UefiGuid("268F33A9-CCCD-48BE-881786053AC32ED6", name="PEI_SMM_ACCESS_PPI_GUID"),
+    UefiGuid("61C68702-4D7E-4F43-8DEFA74305CE74C5", name="PEI_SMM_CONTROL_PPI_GUID"),
+    UefiGuid(
+        "88C9D306-0900-4EB5-82603E2DBEDA1F89", name="PEI_POST_SCRIPT_TABLE_PPI_GUID"
+    ),
+    UefiGuid("490E9D85-8AEF-4193-8E56F734A9FFAC8B", name="PEI_SERIAL_PORT_PPI_GUID"),
+    UefiGuid(
+        "DC54B283-1A77-4CD6-83BBFDDA469A2EC6",
+        name="EDKII_PEI_UFS_HOST_CONTROLLER_PPI_GUID",
+    ),
+    UefiGuid("A9731431-D968-4277-B752A3A9A6AE1898", name="PEI_IPMI_PPI_GUID"),
     UefiGuid(
         "B30DFEED-947F-4396-B15ADFBDB916DC24",
-        name="gEdkiiPeiSdMmcHostControllerPpiGuid",
+        name="EDKII_PEI_SD_MMC_HOST_CONTROLLER_PPI_GUID",
     ),
-    UefiGuid("70B0AF26-F847-4BB6-AAB9CDE84FC61431", name="gEdkiiIoMmuPpiGuid"),
+    UefiGuid("70B0AF26-F847-4BB6-AAB9CDE84FC61431", name="EDKII_IO_MMU_PPI_GUID"),
     UefiGuid(
         "8C9F4DE3-7B90-47EF-9308287CECD66DE8",
-        name="gEdkiiPlatformSpecificResetFilterPpiGuid",
+        name="EDKII_PLATFORM_SPECIFIC_RESET_FILTER_PPI_GUID",
     ),
     UefiGuid(
         "E09F355D-DAE8-4910-B14A92780FDCF7CB",
-        name="gEdkiiPlatformSpecificResetNotificationPpiGuid",
+        name="EDKII_PLATFORM_SPECIFIC_RESET_NOTIFICATION_PPI_GUID",
     ),
     UefiGuid(
         "75CF14AE-3441-49DC-AA10BB35A7BA8BAB",
-        name="gEdkiiPlatformSpecificResetHandlerPpiGuid",
+        name="EDKII_PLATFORM_SPECIFIC_RESET_HANDLER_PPI_GUID",
     ),
     UefiGuid(
         "CAE3AA63-676F-4DA3-BD506CC5EDDE9AAD",
-        name="gEdkiiPeiNvmExpressHostControllerPpiGuid",
+        name="EDKII_PEI_NVM_EXPRESS_HOST_CONTROLLER_PPI_GUID",
     ),
     UefiGuid(
         "61DD33EA-421F-4CC0-8929FFEEA9A1A261",
-        name="gEdkiiPeiAtaAhciHostControllerPpiGuid",
+        name="EDKII_PEI_ATA_AHCI_HOST_CONTROLLER_PPI_GUID",
     ),
     UefiGuid(
         "35DE0B4E-30FB-46C3-BD841FDBA158BB56",
-        name="gEdkiiPeiStorageSecurityCommandPpiGuid",
-    ),
-    UefiGuid("A16473FD-D474-4C89-AEC790B83C738609", name="gEdkiiPeiAtaPassThruPpiGuid"),
-    UefiGuid("999E699C-B013-475E-B17BF3A8AE5C4875", name="gEdkiiDebugPpiGuid"),
-    UefiGuid(
-        "6AF31B2C-03BE-46C1-B12DEA4A36DFA74C", name="gEdkiiPeiNvmExpressPassThruPpiGuid"
+        name="EDKII_PEI_STORAGE_SECURITY_COMMAND_PPI_GUID",
     ),
     UefiGuid(
-        "71A9EA61-5A35-4A5D-ACEF9CF86D6D67E0", name="gEdkiiPeiCapsuleOnDiskPpiGuid"
+        "A16473FD-D474-4C89-AEC790B83C738609", name="EDKII_PEI_ATA_PASS_THRU_PPI_GUID"
+    ),
+    UefiGuid("999E699C-B013-475E-B17BF3A8AE5C4875", name="EDKII_DEBUG_PPI_GUID"),
+    UefiGuid(
+        "6AF31B2C-03BE-46C1-B12DEA4A36DFA74C",
+        name="EDKII_PEI_NVM_EXPRESS_PASS_THRU_PPI_GUID",
+    ),
+    UefiGuid(
+        "71A9EA61-5A35-4A5D-ACEF9CF86D6D67E0", name="EDKII_PEI_CAPSULE_ON_DISK_PPI_GUID"
     ),
     UefiGuid(
         "B08A11E4-E2B7-4B75-B515AF610668BFD1",
-        name="gEdkiiPeiBootInCapsuleOnDiskModePpiGuid",
+        name="EDKII_PEI_BOOT_IN_CAPSULE_ON_DISK_MODE_PPI_GUID",
     ),
-    UefiGuid("5CB5C776-60D5-45EE-883C452708CD743F", name="gEfiLoadPeImageProtocolGuid"),
-    UefiGuid("F05976EF-83F1-4F3D-8619F7595D41E538", name="gEfiPrint2ProtocolGuid"),
-    UefiGuid("0CC252D2-C106-4661-B5BD3147A4F81F92", name="gEfiPrint2SProtocolGuid"),
     UefiGuid(
-        "309DE7F1-7F5E-4ACE-B49C531BE5AA95EF", name="gEfiGenericMemTestProtocolGuid"
+        "5CB5C776-60D5-45EE-883C452708CD743F", name="EFI_LOAD_PE_IMAGE_PROTOCOL_GUID"
+    ),
+    UefiGuid("F05976EF-83F1-4F3D-8619F7595D41E538", name="EFI_PRINT2_PROTOCOL_GUID"),
+    UefiGuid("0CC252D2-C106-4661-B5BD3147A4F81F92", name="EFI_PRINT2_S_PROTOCOL_GUID"),
+    UefiGuid(
+        "309DE7F1-7F5E-4ACE-B49C531BE5AA95EF", name="EFI_GENERIC_MEM_TEST_PROTOCOL_GUID"
     ),
     UefiGuid(
         "577D959C-E967-4546-8620C778FAE5DA05",
-        name="gEfiDebuggerConfigurationProtocolGuid",
+        name="EFI_DEBUGGER_CONFIGURATION_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "3EBD9E82-2C78-4DE6-97868D4BFCB7C881", name="gEfiFaultTolerantWriteProtocolGuid"
+        "3EBD9E82-2C78-4DE6-97868D4BFCB7C881",
+        name="EFI_FAULT_TOLERANT_WRITE_PROTOCOL_GUID",
     ),
     UefiGuid(
         "3868FC3B-7E45-43A7-906C4BA47DE1754D",
-        name="gEfiSmmFaultTolerantWriteProtocolGuid",
+        name="EFI_SMM_FAULT_TOLERANT_WRITE_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "1259F60D-B754-468E-A7894DB85D55E87E", name="gEfiSwapAddressRangeProtocolGuid"
+        "1259F60D-B754-468E-A7894DB85D55E87E",
+        name="EFI_SWAP_ADDRESS_RANGE_PROTOCOL_GUID",
     ),
     UefiGuid(
         "67C4F112-3385-4E55-9C5BC05B717C4228",
-        name="gEfiSmmSwapAddressRangeProtocolGuid",
+        name="EFI_SMM_SWAP_ADDRESS_RANGE_PROTOCOL_GUID",
     ),
-    UefiGuid("ED32D533-99E6-4209-9CC02D72CDD998A7", name="gEfiSmmVariableProtocolGuid"),
     UefiGuid(
-        "CD3D0A05-9E24-437C-A8911EE053DB7638", name="gEdkiiVariableLockProtocolGuid"
+        "ED32D533-99E6-4209-9CC02D72CDD998A7", name="EFI_SMM_VARIABLE_PROTOCOL_GUID"
     ),
-    UefiGuid("AF23B340-97B4-4685-8D4FA3F28169B21D", name="gEdkiiVarCheckProtocolGuid"),
     UefiGuid(
-        "B0D8F3C1-B7DE-4C11-BC892FB562C8C411", name="gEdkiiSmmVarCheckProtocolGuid"
+        "CD3D0A05-9E24-437C-A8911EE053DB7638", name="EDKII_VARIABLE_LOCK_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "AF23B340-97B4-4685-8D4FA3F28169B21D", name="EDKII_VAR_CHECK_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "B0D8F3C1-B7DE-4C11-BC892FB562C8C411", name="EDKII_SMM_VAR_CHECK_PROTOCOL_GUID"
     ),
     UefiGuid(
         "D326D041-BD31-4C01-B5A8628BE87F0653",
-        name="gEfiSmmFirmwareVolumeBlockProtocolGuid",
-    ),
-    UefiGuid("4C8A2451-C207-405B-969499EA13251341", name="gEfiDebugMaskProtocolGuid"),
-    UefiGuid("BD445D79-B7AD-4F04-9AD829BD2040EB3C", name="gEfiLockBoxProtocolGuid"),
-    UefiGuid(
-        "1F73B18D-4630-43C1-A1DE6F80855D7DA4", name="gEfiFormBrowserExProtocolGuid"
+        name="EFI_SMM_FIRMWARE_VOLUME_BLOCK_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "1F73B18D-4630-43C1-A1DE6F80855D7DA4", name="gEdkiiFormBrowserExProtocolGuid"
+        "4C8A2451-C207-405B-969499EA13251341", name="EFI_DEBUG_MASK_PROTOCOL_GUID"
     ),
-    UefiGuid("AAEACCFD-F27B-4C17-B61075CA1F2DFB52", name="gEfiEbcVmTestProtocolGuid"),
+    UefiGuid("BD445D79-B7AD-4F04-9AD829BD2040EB3C", name="EFI_LOCK_BOX_PROTOCOL_GUID"),
     UefiGuid(
-        "2A72D11E-7376-40F6-9C6823FA2FE363F1", name="gEfiEbcSimpleDebuggerProtocolGuid"
+        "1F73B18D-4630-43C1-A1DE6F80855D7DA4", name="EFI_FORM_BROWSER_EX_PROTOCOL_GUID"
     ),
-    UefiGuid("CDEA2BD3-FC25-4C1C-B97CB31186064990", name="gEfiBootLogoProtocolGuid"),
-    UefiGuid("4B5DC1DF-1EAA-48B2-A7E9EAC489A00B5C", name="gEdkiiBootLogo2ProtocolGuid"),
+    UefiGuid(
+        "1F73B18D-4630-43C1-A1DE6F80855D7DA4",
+        name="EDKII_FORM_BROWSER_EX_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "AAEACCFD-F27B-4C17-B61075CA1F2DFB52", name="EFI_EBC_VM_TEST_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "2A72D11E-7376-40F6-9C6823FA2FE363F1",
+        name="EFI_EBC_SIMPLE_DEBUGGER_PROTOCOL_GUID",
+    ),
+    UefiGuid("CDEA2BD3-FC25-4C1C-B97CB31186064990", name="EFI_BOOT_LOGO_PROTOCOL_GUID"),
+    UefiGuid(
+        "4B5DC1DF-1EAA-48B2-A7E9EAC489A00B5C", name="EDKII_BOOT_LOGO2_PROTOCOL_GUID"
+    ),
     UefiGuid(
         "9BBE29E9-FDA1-41EC-AD52452213742D2E",
-        name="gEdkiiFormDisplayEngineProtocolGuid",
+        name="EDKII_FORM_DISPLAY_ENGINE_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "A770C357-B693-4E6D-A6CFD21C728E550B", name="gEdkiiFormBrowserEx2ProtocolGuid"
+        "A770C357-B693-4E6D-A6CFD21C728E550B",
+        name="EDKII_FORM_BROWSER_EX2_PROTOCOL_GUID",
     ),
     UefiGuid(
         "EBC01AF5-07A9-489E-B7CEDC089E459B2F",
-        name="gEdkiiUfsHostControllerProtocolGuid",
+        name="EDKII_UFS_HOST_CONTROLLER_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "3D18BA13-D9B1-4DD4-B916D30796539ED8", name="gEdkiiUfsHcPlatformProtocolGuid"
+        "3D18BA13-D9B1-4DD4-B916D30796539ED8",
+        name="EDKII_UFS_HC_PLATFORM_PROTOCOL_GUID",
     ),
-    UefiGuid("A340C064-723C-4A9C-A4DDD5B47A26FBB0", name="gEsrtManagementProtocolGuid"),
+    UefiGuid(
+        "A340C064-723C-4A9C-A4DDD5B47A26FBB0", name="ESRT_MANAGEMENT_PROTOCOL_GUID"
+    ),
     UefiGuid(
         "296EB418-C4C8-4E05-AB5939E8AF56F00A",
-        name="gEdkiiSmmExitBootServicesProtocolGuid",
+        name="EDKII_SMM_EXIT_BOOT_SERVICES_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "85A8AB57-0644-4110-850F981322047070", name="gEdkiiSmmLegacyBootProtocolGuid"
+        "85A8AB57-0644-4110-850F981322047070",
+        name="EDKII_SMM_LEGACY_BOOT_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "6E057ECF-FA99-4F39-95BC59F9921D17E4", name="gEdkiiSmmReadyToBootProtocolGuid"
+        "6E057ECF-FA99-4F39-95BC59F9921D17E4",
+        name="EDKII_SMM_READY_TO_BOOT_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "53CD299F-2BC1-40C0-8C0723F64FDB30E0", name="gEdkiiPlatformLogoProtocolGuid"
+        "53CD299F-2BC1-40C0-8C0723F64FDB30E0", name="EDKII_PLATFORM_LOGO_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "2C03C536-4594-4515-9E7AD3D204FE1363", name="gEfiFileExplorerProtocolGuid"
+        "2C03C536-4594-4515-9E7AD3D204FE1363", name="EFI_FILE_EXPLORER_PROTOCOL_GUID"
     ),
-    UefiGuid("DBC6381F-5554-4D14-8FFD76D787B8ACBF", name="gIpmiProtocolGuid"),
-    UefiGuid("5169AF60-8C5A-4243-B3E956C56D18EE26", name="gSmmIpmiProtocolGuid"),
-    UefiGuid("4DF19259-DC71-4D46-BEF1357BB578C418", name="gEfiPs2PolicyProtocolGuid"),
+    UefiGuid("DBC6381F-5554-4D14-8FFD76D787B8ACBF", name="IPMI_PROTOCOL_GUID"),
+    UefiGuid("5169AF60-8C5A-4243-B3E956C56D18EE26", name="SMM_IPMI_PROTOCOL_GUID"),
+    UefiGuid(
+        "4DF19259-DC71-4D46-BEF1357BB578C418", name="EFI_PS2_POLICY_PROTOCOL_GUID"
+    ),
     UefiGuid(
         "0D51905B-B77E-452A-A2C0ECA0CC8D514A",
-        name="gEdkiiNonDiscoverableDeviceProtocolGuid",
+        name="EDKII_NON_DISCOVERABLE_DEVICE_PROTOCOL_GUID",
     ),
-    UefiGuid("4E939DE9-D948-4B0F-88EDE6E1CE517C1E", name="gEdkiiIoMmuProtocolGuid"),
+    UefiGuid("4E939DE9-D948-4B0F-88EDE6E1CE517C1E", name="EDKII_IO_MMU_PROTOCOL_GUID"),
     UefiGuid(
-        "5D6B38C8-5510-4458-B48D9581CFA7B00D", name="gEdkiiDeviceSecurityProtocolGuid"
-    ),
-    UefiGuid(
-        "2509B2F1-A022-4CCA-AF70F9D321FB6649", name="gEdkiiDeviceIdentifierTypePciGuid"
+        "5D6B38C8-5510-4458-B48D9581CFA7B00D",
+        name="EDKII_DEVICE_SECURITY_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "7394F350-394D-488C-BB750CAB7B120AC5", name="gEdkiiDeviceIdentifierTypeUsbGuid"
+        "2509B2F1-A022-4CCA-AF70F9D321FB6649",
+        name="EDKII_DEVICE_IDENTIFIER_TYPE_PCI_GUID",
+    ),
+    UefiGuid(
+        "7394F350-394D-488C-BB750CAB7B120AC5",
+        name="EDKII_DEVICE_IDENTIFIER_TYPE_USB_GUID",
     ),
     UefiGuid(
         "69B792EA-39CE-402D-A2A6F721DE351DFE",
-        name="gEdkiiSmmMemoryAttributeProtocolGuid",
+        name="EDKII_SMM_MEMORY_ATTRIBUTE_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "EAF9E3C1-C9CD-46DB-A5E55A124C832323", name="gEdkiiSdMmcOverrideProtocolGuid"
+        "EAF9E3C1-C9CD-46DB-A5E55A124C832323",
+        name="EDKII_SD_MMC_OVERRIDE_PROTOCOL_GUID",
     ),
     UefiGuid(
         "695D7835-8D47-4C11-AB22FA8ACCE7AE7A",
-        name="gEdkiiPlatformSpecificResetFilterProtocolGuid",
+        name="EDKII_PLATFORM_SPECIFIC_RESET_FILTER_PROTOCOL_GUID",
     ),
     UefiGuid(
         "2DF6BA0B-7092-440D-BD04FB091EC3F3C1",
-        name="gEdkiiPlatformSpecificResetHandlerProtocolGuid",
+        name="EDKII_PLATFORM_SPECIFIC_RESET_HANDLER_PROTOCOL_GUID",
     ),
     UefiGuid(
         "1849BDA2-6952-4E86-A1DB559A3C479DF1",
-        name="gEdkiiFirmwareManagementProgressProtocolGuid",
+        name="EDKII_FIRMWARE_MANAGEMENT_PROGRESS_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "E59CD769-5083-4F26-90946C919F916C4E", name="gEdkiiAtaAtapiPolicyProtocolGuid"
+        "E59CD769-5083-4F26-90946C919F916C4E",
+        name="EDKII_ATA_ATAPI_POLICY_PROTOCOL_GUID",
     ),
     UefiGuid(
         "96F46153-97A7-4793-ACC1FA19BF78EA97",
-        name="gEdkiiPeCoffImageEmulatorProtocolGuid",
+        name="EDKII_PE_COFF_IMAGE_EMULATOR_PROTOCOL_GUID",
     ),
     UefiGuid(
         "AA17ADD4-756C-460D-94B84388D7FB3E59",
-        name="gEdkiiPlatformBootManagerProtocolGuid",
+        name="EDKII_PLATFORM_BOOT_MANAGER_PROTOCOL_GUID",
     ),
-    UefiGuid("8BE4DF61-93CA-11D2-AA0D00E098032B8C", name="gEfiGlobalVariableGuid"),
-    UefiGuid("7BAEC70B-57E0-4C76-8E872F9E28088343", name="gEfiVT100PlusGuid"),
-    UefiGuid("DFA66065-B419-11D3-9A2D0090273FC14D", name="gEfiVT100Guid"),
-    UefiGuid("E0C14753-F9BE-11D2-9A0C0090273FC14D", name="gEfiPcAnsiGuid"),
-    UefiGuid("AD15A0D6-8BEC-4ACF-A073D01DE77E2D88", name="gEfiVTUTF8Guid"),
-    UefiGuid("37499A9D-542F-4C89-A02635DA142094E4", name="gEfiUartDevicePathGuid"),
-    UefiGuid("D487DDB4-008B-11D9-AFDC001083FFCA4D", name="gEfiSasDevicePathGuid"),
-    UefiGuid("024DEE41-33E7-11D3-9D690008C781F39F", name="gEfiPartTypeLegacyMbrGuid"),
-    UefiGuid("C12A7328-F81F-11D2-BA4B00A0C93EC93B", name="gEfiPartTypeSystemPartGuid"),
-    UefiGuid("00000000-0000-0000-0000000000000000", name="gEfiPartTypeUnusedGuid"),
-    UefiGuid("49152E77-1ADA-4764-B7A27AFEFED95E8B", name="gEfiDebugImageInfoTableGuid"),
-    UefiGuid("8868E871-E4F1-11D3-BC220080C73C8881", name="gEfiAcpiTableGuid"),
-    UefiGuid("8868E871-E4F1-11D3-BC220080C73C8881", name="gEfiAcpi20TableGuid"),
-    UefiGuid("EB9D2D30-2D88-11D3-9A160090273FC14D", name="gEfiAcpi10TableGuid"),
-    UefiGuid("EB9D2D31-2D88-11D3-9A160090273FC14D", name="gEfiSmbiosTableGuid"),
-    UefiGuid("EB9D2D2F-2D88-11D3-9A160090273FC14D", name="gEfiMpsTableGuid"),
+    UefiGuid("8BE4DF61-93CA-11D2-AA0D00E098032B8C", name="EFI_GLOBAL_VARIABLE_GUID"),
+    UefiGuid("7BAEC70B-57E0-4C76-8E872F9E28088343", name="EFI_V_T100_PLUS_GUID"),
+    UefiGuid("DFA66065-B419-11D3-9A2D0090273FC14D", name="EFI_V_T100_GUID"),
+    UefiGuid("E0C14753-F9BE-11D2-9A0C0090273FC14D", name="EFI_PC_ANSI_GUID"),
+    UefiGuid("AD15A0D6-8BEC-4ACF-A073D01DE77E2D88", name="EFI_V_T_U_T_F8_GUID"),
+    UefiGuid("37499A9D-542F-4C89-A02635DA142094E4", name="EFI_UART_DEVICE_PATH_GUID"),
+    UefiGuid("D487DDB4-008B-11D9-AFDC001083FFCA4D", name="EFI_SAS_DEVICE_PATH_GUID"),
     UefiGuid(
-        "C280C73E-15CA-11DA-B0CA001083FFCA4D", name="gEfiAuthenticationChapLocalGuid"
+        "024DEE41-33E7-11D3-9D690008C781F39F", name="EFI_PART_TYPE_LEGACY_MBR_GUID"
     ),
     UefiGuid(
-        "D6062B50-15CA-11DA-9219001083FFCA4D", name="gEfiAuthenticationChapRadiusGuid"
+        "C12A7328-F81F-11D2-BA4B00A0C93EC93B", name="EFI_PART_TYPE_SYSTEM_PART_GUID"
+    ),
+    UefiGuid("00000000-0000-0000-0000000000000000", name="EFI_PART_TYPE_UNUSED_GUID"),
+    UefiGuid(
+        "49152E77-1ADA-4764-B7A27AFEFED95E8B", name="EFI_DEBUG_IMAGE_INFO_TABLE_GUID"
+    ),
+    UefiGuid("8868E871-E4F1-11D3-BC220080C73C8881", name="EFI_ACPI_TABLE_GUID"),
+    UefiGuid("8868E871-E4F1-11D3-BC220080C73C8881", name="EFI_ACPI20_TABLE_GUID"),
+    UefiGuid("EB9D2D30-2D88-11D3-9A160090273FC14D", name="EFI_ACPI10_TABLE_GUID"),
+    UefiGuid("EB9D2D31-2D88-11D3-9A160090273FC14D", name="EFI_SMBIOS_TABLE_GUID"),
+    UefiGuid("EB9D2D2F-2D88-11D3-9A160090273FC14D", name="EFI_MPS_TABLE_GUID"),
+    UefiGuid(
+        "C280C73E-15CA-11DA-B0CA001083FFCA4D", name="EFI_AUTHENTICATION_CHAP_LOCAL_GUID"
+    ),
+    UefiGuid(
+        "D6062B50-15CA-11DA-9219001083FFCA4D",
+        name="EFI_AUTHENTICATION_CHAP_RADIUS_GUID",
     ),
     UefiGuid(
         "DB47D7D3-FE81-11D3-9A350090273FC14D",
-        name="gEfiFileSystemVolumeLabelInfoIdGuid",
+        name="EFI_FILE_SYSTEM_VOLUME_LABEL_INFO_ID_GUID",
     ),
-    UefiGuid("09576E93-6D3F-11D2-8E3900A0C969723B", name="gEfiFileSystemInfoGuid"),
-    UefiGuid("09576E92-6D3F-11D2-8E3900A0C969723B", name="gEfiFileInfoGuid"),
+    UefiGuid("09576E93-6D3F-11D2-8E3900A0C969723B", name="EFI_FILE_SYSTEM_INFO_GUID"),
+    UefiGuid("09576E92-6D3F-11D2-8E3900A0C969723B", name="EFI_FILE_INFO_GUID"),
     UefiGuid(
         "EDD35E31-07B9-11D2-83A300A0C91FADCF",
-        name="gBootObjectAuthorizationParmsetGuid",
+        name="BOOT_OBJECT_AUTHORIZATION_PARMSET_GUID",
     ),
     UefiGuid(
         "345ECC0E-0CB6-4B75-BB571B129C47333E",
-        name="gEfiPlatformToDriverConfigurationClpGuid",
-    ),
-    UefiGuid("14982A4F-B0ED-45B8-A8115A7A9BC232DF", name="gEfiHiiKeyBoardLayoutGuid"),
-    UefiGuid("0AF7C79C-65B5-4319-B0AE44EC484E4AD7", name="gEfiHashAlgorithmMD5Guid"),
-    UefiGuid("CAA4381E-750C-4770-B8707A23B4E42130", name="gEfiHashAlgorithmSha512Guid"),
-    UefiGuid("EFA96432-DE33-4DD2-AEE6328C33DF777A", name="gEfiHashAlgorithmSha384Guid"),
-    UefiGuid("51AA59DE-FDF2-4EA3-BC63875FB7842EE9", name="gEfiHashAlgorithmSha256Guid"),
-    UefiGuid("8DF01A06-9BD5-4BF7-B021DB4FD9CCF45B", name="gEfiHashAlgorithmSha224Guid"),
-    UefiGuid("2AE9D80F-3FB2-4095-B7B1E93157B946B6", name="gEfiHashAlgorithmSha1Guid"),
-    UefiGuid("7CE88FB3-4BD7-4679-87A8A8D8DEE50D2B", name="gEfiEventReadyToBootGuid"),
-    UefiGuid(
-        "78BEE926-692F-48FD-9EDB01422EF0D7AB", name="gEfiEventMemoryMapChangeGuid"
+        name="EFI_PLATFORM_TO_DRIVER_CONFIGURATION_CLP_GUID",
     ),
     UefiGuid(
-        "13FA7698-C831-49C7-87EA8F43FCC25196", name="gEfiEventVirtualAddressChangeGuid"
+        "14982A4F-B0ED-45B8-A8115A7A9BC232DF", name="EFI_HII_KEY_BOARD_LAYOUT_GUID"
     ),
     UefiGuid(
-        "27ABF055-B1B8-4C26-8048748F37BAA2DF", name="gEfiEventExitBootServicesGuid"
-    ),
-    UefiGuid("EBA4E8D2-3858-41EC-A2812647BA9660D0", name="gEfiDebugPortVariableGuid"),
-    UefiGuid("EBA4E8D2-3858-41EC-A2812647BA9660D0", name="gEfiDebugPortDevicePathGuid"),
-    UefiGuid(
-        "93039971-8545-4B04-B45E32EB8326040E", name="gEfiHiiPlatformSetupFormsetGuid"
+        "0AF7C79C-65B5-4319-B0AE44EC484E4AD7", name="EFI_HASH_ALGORITHM_M_D5_GUID"
     ),
     UefiGuid(
-        "F22FC20C-8CF4-45EB-8E06AD4E50B95DD3", name="gEfiHiiDriverHealthFormsetGuid"
+        "CAA4381E-750C-4770-B8707A23B4E42130", name="EFI_HASH_ALGORITHM_SHA512_GUID"
     ),
     UefiGuid(
-        "337F4407-5AEE-4B83-B2A74EADCA3088CD", name="gEfiHiiUserCredentialFormsetGuid"
+        "EFA96432-DE33-4DD2-AEE6328C33DF777A", name="EFI_HASH_ALGORITHM_SHA384_GUID"
     ),
-    UefiGuid("3BD2F4EC-E524-46E4-A9D8510117425562", name="gEfiHiiStandardFormGuid"),
     UefiGuid(
-        "E20939BE-32D4-41BE-A150897F85D49829", name="gEfiMemoryOverwriteControlDataGuid"
+        "51AA59DE-FDF2-4EA3-BC63875FB7842EE9", name="EFI_HASH_ALGORITHM_SHA256_GUID"
+    ),
+    UefiGuid(
+        "8DF01A06-9BD5-4BF7-B021DB4FD9CCF45B", name="EFI_HASH_ALGORITHM_SHA224_GUID"
+    ),
+    UefiGuid(
+        "2AE9D80F-3FB2-4095-B7B1E93157B946B6", name="EFI_HASH_ALGORITHM_SHA1_GUID"
+    ),
+    UefiGuid(
+        "7CE88FB3-4BD7-4679-87A8A8D8DEE50D2B", name="EFI_EVENT_READY_TO_BOOT_GUID"
+    ),
+    UefiGuid(
+        "78BEE926-692F-48FD-9EDB01422EF0D7AB", name="EFI_EVENT_MEMORY_MAP_CHANGE_GUID"
+    ),
+    UefiGuid(
+        "13FA7698-C831-49C7-87EA8F43FCC25196",
+        name="EFI_EVENT_VIRTUAL_ADDRESS_CHANGE_GUID",
+    ),
+    UefiGuid(
+        "27ABF055-B1B8-4C26-8048748F37BAA2DF", name="EFI_EVENT_EXIT_BOOT_SERVICES_GUID"
+    ),
+    UefiGuid(
+        "EBA4E8D2-3858-41EC-A2812647BA9660D0", name="EFI_DEBUG_PORT_VARIABLE_GUID"
+    ),
+    UefiGuid(
+        "EBA4E8D2-3858-41EC-A2812647BA9660D0", name="EFI_DEBUG_PORT_DEVICE_PATH_GUID"
+    ),
+    UefiGuid(
+        "93039971-8545-4B04-B45E32EB8326040E",
+        name="EFI_HII_PLATFORM_SETUP_FORMSET_GUID",
+    ),
+    UefiGuid(
+        "F22FC20C-8CF4-45EB-8E06AD4E50B95DD3", name="EFI_HII_DRIVER_HEALTH_FORMSET_GUID"
+    ),
+    UefiGuid(
+        "337F4407-5AEE-4B83-B2A74EADCA3088CD",
+        name="EFI_HII_USER_CREDENTIAL_FORMSET_GUID",
+    ),
+    UefiGuid("3BD2F4EC-E524-46E4-A9D8510117425562", name="EFI_HII_STANDARD_FORM_GUID"),
+    UefiGuid(
+        "E20939BE-32D4-41BE-A150897F85D49829",
+        name="EFI_MEMORY_OVERWRITE_CONTROL_DATA_GUID",
     ),
     UefiGuid(
         "BB983CCF-151D-40E1-A07B4A17BE168292",
-        name="gEfiMemoryOverwriteRequestControlLockGuid",
+        name="EFI_MEMORY_OVERWRITE_REQUEST_CONTROL_LOCK_GUID",
     ),
     UefiGuid(
-        "A7717414-C616-4977-9420844712A735BF", name="gEfiCertTypeRsa2048Sha256Guid"
+        "A7717414-C616-4977-9420844712A735BF", name="EFI_CERT_TYPE_RSA2048_SHA256_GUID"
     ),
     UefiGuid(
-        "2DCE8BB1-BDD7-450E-B9AD9CF4EBD4F890", name="gEfiEventNotificationTypeCmcGuid"
+        "2DCE8BB1-BDD7-450E-B9AD9CF4EBD4F890",
+        name="EFI_EVENT_NOTIFICATION_TYPE_CMC_GUID",
     ),
     UefiGuid(
-        "4E292F96-D843-4A55-A8C2D481F27EBEEE", name="gEfiEventNotificationTypeCpeGuid"
+        "4E292F96-D843-4A55-A8C2D481F27EBEEE",
+        name="EFI_EVENT_NOTIFICATION_TYPE_CPE_GUID",
     ),
     UefiGuid(
-        "E8F56FFE-919C-4CC5-BA8865ABE14913BB", name="gEfiEventNotificationTypeMceGuid"
+        "E8F56FFE-919C-4CC5-BA8865ABE14913BB",
+        name="EFI_EVENT_NOTIFICATION_TYPE_MCE_GUID",
     ),
     UefiGuid(
-        "CF93C01F-1A16-4DFC-B8BC9C4DAF67C104", name="gEfiEventNotificationTypePcieGuid"
+        "CF93C01F-1A16-4DFC-B8BC9C4DAF67C104",
+        name="EFI_EVENT_NOTIFICATION_TYPE_PCIE_GUID",
     ),
     UefiGuid(
-        "CC5263E8-9308-454A-89D0340BD39BC98E", name="gEfiEventNotificationTypeInitGuid"
+        "CC5263E8-9308-454A-89D0340BD39BC98E",
+        name="EFI_EVENT_NOTIFICATION_TYPE_INIT_GUID",
     ),
     UefiGuid(
-        "5BAD89FF-B7E6-42C9-814ACF2485D6E98A", name="gEfiEventNotificationTypeNmiGuid"
+        "5BAD89FF-B7E6-42C9-814ACF2485D6E98A",
+        name="EFI_EVENT_NOTIFICATION_TYPE_NMI_GUID",
     ),
     UefiGuid(
-        "3D61A466-AB40-409A-A698F362D464B38F", name="gEfiEventNotificationTypeBootGuid"
+        "3D61A466-AB40-409A-A698F362D464B38F",
+        name="EFI_EVENT_NOTIFICATION_TYPE_BOOT_GUID",
     ),
     UefiGuid(
-        "667DD791-C6B3-4C27-8A6B0F8E722DEB41", name="gEfiEventNotificationTypeDmarGuid"
+        "667DD791-C6B3-4C27-8A6B0F8E722DEB41",
+        name="EFI_EVENT_NOTIFICATION_TYPE_DMAR_GUID",
     ),
     UefiGuid(
         "9876CCAD-47B4-4BDB-B65E16F193C4F3DB",
-        name="gEfiProcessorGenericErrorSectionGuid",
+        name="EFI_PROCESSOR_GENERIC_ERROR_SECTION_GUID",
     ),
     UefiGuid(
         "DC3EA0B0-A144-4797-B95B53FA242B6E1D",
-        name="gEfiProcessorSpecificErrorSectionGuid",
+        name="EFI_PROCESSOR_SPECIFIC_ERROR_SECTION_GUID",
     ),
     UefiGuid(
         "DC3EA0B0-A144-4797-B95B53FA242B6E1D",
-        name="gEfiIa32X64ProcessorErrorSectionGuid",
+        name="EFI_IA32_X64_PROCESSOR_ERROR_SECTION_GUID",
     ),
     UefiGuid(
-        "A5BC1114-6F64-4EDE-B8633E83ED7C83B1", name="gEfiPlatformMemoryErrorSectionGuid"
+        "A5BC1114-6F64-4EDE-B8633E83ED7C83B1",
+        name="EFI_PLATFORM_MEMORY_ERROR_SECTION_GUID",
     ),
-    UefiGuid("D995E954-BBC1-430F-AD91B44DCB3C6F35", name="gEfiPcieErrorSectionGuid"),
+    UefiGuid("D995E954-BBC1-430F-AD91B44DCB3C6F35", name="EFI_PCIE_ERROR_SECTION_GUID"),
     UefiGuid(
-        "81212A96-09ED-4996-94718D729C8E69ED", name="gEfiFirmwareErrorSectionGuid"
-    ),
-    UefiGuid("C5753963-3B84-4095-BF78EDDAD3F9C9DD", name="gEfiPciBusErrorSectionGuid"),
-    UefiGuid("EB5E4685-CA66-4769-B6A226068B001326", name="gEfiPciDevErrorSectionGuid"),
-    UefiGuid(
-        "5B51FEF7-C79D-4434-8F1BAA62DE3E2C64", name="gEfiDMArGenericErrorSectionGuid"
+        "81212A96-09ED-4996-94718D729C8E69ED", name="EFI_FIRMWARE_ERROR_SECTION_GUID"
     ),
     UefiGuid(
-        "71761D37-32B2-45CD-A7D0B0FEDD93E8CF", name="gEfiDirectedIoDMArErrorSectionGuid"
+        "C5753963-3B84-4095-BF78EDDAD3F9C9DD", name="EFI_PCI_BUS_ERROR_SECTION_GUID"
     ),
     UefiGuid(
-        "036F84E1-7F37-428C-A79E575FDFAA84EC", name="gEfiIommuDMArErrorSectionGuid"
+        "EB5E4685-CA66-4769-B6A226068B001326", name="EFI_PCI_DEV_ERROR_SECTION_GUID"
     ),
     UefiGuid(
-        "BAF1E6DE-209E-4ADB-8D96FD8B71F3F683", name="gEfiEventUserProfileChangedGuid"
+        "5B51FEF7-C79D-4434-8F1BAA62DE3E2C64",
+        name="EFI_D_M_AR_GENERIC_ERROR_SECTION_GUID",
     ),
     UefiGuid(
-        "5CF32E68-7660-449B-80E67EA36E03F6A8", name="gEfiUserCredentialClassUnknownGuid"
+        "71761D37-32B2-45CD-A7D0B0FEDD93E8CF",
+        name="EFI_DIRECTED_IO_D_M_AR_ERROR_SECTION_GUID",
+    ),
+    UefiGuid(
+        "036F84E1-7F37-428C-A79E575FDFAA84EC",
+        name="EFI_IOMMU_D_M_AR_ERROR_SECTION_GUID",
+    ),
+    UefiGuid(
+        "BAF1E6DE-209E-4ADB-8D96FD8B71F3F683",
+        name="EFI_EVENT_USER_PROFILE_CHANGED_GUID",
+    ),
+    UefiGuid(
+        "5CF32E68-7660-449B-80E67EA36E03F6A8",
+        name="EFI_USER_CREDENTIAL_CLASS_UNKNOWN_GUID",
     ),
     UefiGuid(
         "F8E5058C-CCB6-4714-B2203F7E3A640BD1",
-        name="gEfiUserCredentialClassPasswordGuid",
+        name="EFI_USER_CREDENTIAL_CLASS_PASSWORD_GUID",
     ),
     UefiGuid(
         "5F03BA33-8C6B-4C24-AA2E14A2657BD454",
-        name="gEfiUserCredentialClassSmartCardGuid",
+        name="EFI_USER_CREDENTIAL_CLASS_SMART_CARD_GUID",
     ),
     UefiGuid(
         "32CBA21F-F308-4CBC-9AB5F5A3699F044A",
-        name="gEfiUserCredentialClassFingerprintGuid",
+        name="EFI_USER_CREDENTIAL_CLASS_FINGERPRINT_GUID",
     ),
     UefiGuid(
         "5917EF16-F723-4BB9-A64BD8C532F4D8B5",
-        name="gEfiUserCredentialClassHandprintGuid",
+        name="EFI_USER_CREDENTIAL_CLASS_HANDPRINT_GUID",
     ),
     UefiGuid(
         "8A6B4A83-42FE-45D2-A2EF46F06C7D9852",
-        name="gEfiUserCredentialClassSecureCardGuid",
+        name="EFI_USER_CREDENTIAL_CLASS_SECURE_CARD_GUID",
     ),
     UefiGuid(
-        "85B75607-F7CE-471E-B7E42AEA5F7232EE", name="gEfiUserInfoAccessSetupAdminGuid"
+        "85B75607-F7CE-471E-B7E42AEA5F7232EE",
+        name="EFI_USER_INFO_ACCESS_SETUP_ADMIN_GUID",
     ),
     UefiGuid(
-        "1DB29AE0-9DCB-43BC-8D875DA14964DDE2", name="gEfiUserInfoAccessSetupNormalGuid"
+        "1DB29AE0-9DCB-43BC-8D875DA14964DDE2",
+        name="EFI_USER_INFO_ACCESS_SETUP_NORMAL_GUID",
     ),
     UefiGuid(
         "BDB38125-4D63-49F4-821261CF5A190AF8",
-        name="gEfiUserInfoAccessSetupRestrictedGuid",
+        name="EFI_USER_INFO_ACCESS_SETUP_RESTRICTED_GUID",
     ),
     UefiGuid(
-        "D719B2CB-3D3A-4596-A3BCDAD00E67656F", name="gEfiImageSecurityDatabaseGuid"
+        "D719B2CB-3D3A-4596-A3BCDAD00E67656F", name="EFI_IMAGE_SECURITY_DATABASE_GUID"
     ),
-    UefiGuid("C1C41626-504C-4092-ACA941F936934328", name="gEfiCertSha256Guid"),
-    UefiGuid("3C5766E8-269C-4E34-AA14ED776E85B3B6", name="gEfiCertRsa2048Guid"),
-    UefiGuid("E2B36190-879B-4A3D-AD8DF2E7BBA32784", name="gEfiCertRsa2048Sha256Guid"),
-    UefiGuid("826CA512-CF10-4AC9-B187BE01496631BD", name="gEfiCertSha1Guid"),
-    UefiGuid("67F8444F-8743-48F1-A3281EAAB8736080", name="gEfiCertRsa2048Sha1Guid"),
-    UefiGuid("A5C059A1-94E4-4AA7-87B5AB155C2BF072", name="gEfiCertX509Guid"),
-    UefiGuid("EC8A3D69-6DDF-4108-94767337FC522136", name="gEfiKmsFormatGeneric128Guid"),
-    UefiGuid("A3B3E6F8-EFCA-4BC1-88FBCB87339B2579", name="gEfiKmsFormatGeneric160Guid"),
-    UefiGuid("70F64793-C323-4261-AC2CD876F27C5345", name="gEfiKmsFormatGeneric256Guid"),
-    UefiGuid("978FE043-D7AF-422E-8A922B48E463BDE6", name="gEfiKmsFormatGeneric512Guid"),
+    UefiGuid("C1C41626-504C-4092-ACA941F936934328", name="EFI_CERT_SHA256_GUID"),
+    UefiGuid("3C5766E8-269C-4E34-AA14ED776E85B3B6", name="EFI_CERT_RSA2048_GUID"),
     UefiGuid(
-        "43BE0B44-874B-4EAD-B09C241A4FBD7EB3", name="gEfiKmsFormatGeneric1024Guid"
+        "E2B36190-879B-4A3D-AD8DF2E7BBA32784", name="EFI_CERT_RSA2048_SHA256_GUID"
+    ),
+    UefiGuid("826CA512-CF10-4AC9-B187BE01496631BD", name="EFI_CERT_SHA1_GUID"),
+    UefiGuid("67F8444F-8743-48F1-A3281EAAB8736080", name="EFI_CERT_RSA2048_SHA1_GUID"),
+    UefiGuid("A5C059A1-94E4-4AA7-87B5AB155C2BF072", name="EFI_CERT_X509_GUID"),
+    UefiGuid(
+        "EC8A3D69-6DDF-4108-94767337FC522136", name="EFI_KMS_FORMAT_GENERIC128_GUID"
     ),
     UefiGuid(
-        "40093F23-630C-4626-9C4840373B19CBBE", name="gEfiKmsFormatGeneric2048Guid"
+        "A3B3E6F8-EFCA-4BC1-88FBCB87339B2579", name="EFI_KMS_FORMAT_GENERIC160_GUID"
     ),
     UefiGuid(
-        "B9237513-6C44-4411-A99021E556E05ADE", name="gEfiKmsFormatGeneric3072Guid"
-    ),
-    UefiGuid("78BE11C4-EE44-4A22-9F0503852EC5C978", name="gEfiKmsFormatMd2128Guid"),
-    UefiGuid("F7AD60F8-EFA8-44A3-9113231F399EB4C7", name="gEfiKmsFormatMdc2128Guid"),
-    UefiGuid("D1C17AA1-CAC5-400F-BE17E2A2AE06677C", name="gEfiKmsFormatMd4128Guid"),
-    UefiGuid("3FA4F847-D8EB-4DF4-BD49103A0A847BBC", name="gEfiKmsFormatMdc4128Guid"),
-    UefiGuid("DCBC3662-9CDA-4B52-A04C82EB1D2348C7", name="gEfiKmsFormatMd5128Guid"),
-    UefiGuid("1C178237-6897-459E-9D3667CE8EF94F76", name="gEfiKmsFormatMd5sha128Guid"),
-    UefiGuid("453C5E5A-482D-43F0-87C95941F3A38AC2", name="gEfiKmsFormatSha1160Guid"),
-    UefiGuid("6BB4F5CD-8022-448D-BC6D771BAE935FC6", name="gEfiKmsFormatSha256256Guid"),
-    UefiGuid("2F240E12-E14D-475C-83B0EFFF22D77BE7", name="gEfiKmsFormatSha512512Guid"),
-    UefiGuid("4776E33F-DB47-479A-A25FA1CD0AFAB38B", name="gEfiKmsFormatAesxts128Guid"),
-    UefiGuid("DC7E8613-C4BB-4DB0-846213511357ABE2", name="gEfiKmsFormatAesxts256Guid"),
-    UefiGuid("A0E8EE6A-0E92-44D4-861B0EAA4ACA44A2", name="gEfiKmsFormatAescbc128Guid"),
-    UefiGuid("D7E69789-1F68-45E8-96EF3B6407A5B2DC", name="gEfiKmsFormatAescbc256Guid"),
-    UefiGuid(
-        "56417BED-6BBE-4882-86A03AE8BB17F8F9", name="gEfiKmsFormatRsasha11024Guid"
+        "70F64793-C323-4261-AC2CD876F27C5345", name="EFI_KMS_FORMAT_GENERIC256_GUID"
     ),
     UefiGuid(
-        "F66447D4-75A6-463E-A819077F2DDA05E9", name="gEfiKmsFormatRsasha12048Guid"
+        "978FE043-D7AF-422E-8A922B48E463BDE6", name="EFI_KMS_FORMAT_GENERIC512_GUID"
     ),
     UefiGuid(
-        "A477AF13-877D-4060-BAA125D1BEA08AD3", name="gEfiKmsFormatRsasha2562048Guid"
+        "43BE0B44-874B-4EAD-B09C241A4FBD7EB3", name="EFI_KMS_FORMAT_GENERIC1024_GUID"
     ),
     UefiGuid(
-        "4E1356C2-0EED-463F-81479933ABDBC7D5", name="gEfiKmsFormatRsasha2563072Guid"
-    ),
-    UefiGuid("0B6E5233-A65C-44C9-9407D9AB83BFC8BD", name="gEfiCertSha224Guid"),
-    UefiGuid("FF3E5307-9FD0-48C9-85F18AD56C701E01", name="gEfiCertSha384Guid"),
-    UefiGuid("093E0FAE-A6C4-4F50-9F1BD41E2B89C19A", name="gEfiCertSha512Guid"),
-    UefiGuid("4AAFD29D-68DF-49EE-8AA9347D375665A7", name="gEfiCertPkcs7Guid"),
-    UefiGuid(
-        "24C5DC2F-53E2-40CA-9ED6A5D9A49F463B", name="gEfiHashAlgorithmSha1NoPadGuid"
+        "40093F23-630C-4626-9C4840373B19CBBE", name="EFI_KMS_FORMAT_GENERIC2048_GUID"
     ),
     UefiGuid(
-        "8628752A-6CB7-4814-96FC24A815AC2226", name="gEfiHashAlgorithmSha256NoPadGuid"
+        "B9237513-6C44-4411-A99021E556E05ADE", name="EFI_KMS_FORMAT_GENERIC3072_GUID"
     ),
-    UefiGuid("6DCBD5ED-E82D-4C44-BDA17194199AD92A", name="gEfiFmpCapsuleGuid"),
-    UefiGuid("3BD2A492-96C0-4079-B420FCF98EF103ED", name="gEfiCertX509Sha256Guid"),
-    UefiGuid("7076876E-80C2-4EE6-AAD228B349A6865B", name="gEfiCertX509Sha384Guid"),
-    UefiGuid("446DBF63-2502-4CDA-BCFA2465D2B0FE9D", name="gEfiCertX509Sha512Guid"),
+    UefiGuid("78BE11C4-EE44-4A22-9F0503852EC5C978", name="EFI_KMS_FORMAT_MD2128_GUID"),
+    UefiGuid("F7AD60F8-EFA8-44A3-9113231F399EB4C7", name="EFI_KMS_FORMAT_MDC2128_GUID"),
+    UefiGuid("D1C17AA1-CAC5-400F-BE17E2A2AE06677C", name="EFI_KMS_FORMAT_MD4128_GUID"),
+    UefiGuid("3FA4F847-D8EB-4DF4-BD49103A0A847BBC", name="EFI_KMS_FORMAT_MDC4128_GUID"),
+    UefiGuid("DCBC3662-9CDA-4B52-A04C82EB1D2348C7", name="EFI_KMS_FORMAT_MD5128_GUID"),
     UefiGuid(
-        "A7AF67CB-603B-4D42-BA2170BFB6293F96", name="gEfiRngAlgorithmSp80090Hash256Guid"
+        "1C178237-6897-459E-9D3667CE8EF94F76", name="EFI_KMS_FORMAT_MD5SHA128_GUID"
     ),
+    UefiGuid("453C5E5A-482D-43F0-87C95941F3A38AC2", name="EFI_KMS_FORMAT_SHA1160_GUID"),
     UefiGuid(
-        "C5149B43-AE85-4F53-9982B94335D3A9E7", name="gEfiRngAlgorithmSp80090Hmac256Guid"
-    ),
-    UefiGuid(
-        "44F0DE6E-4D8C-4045-A8C74DD168856B9E", name="gEfiRngAlgorithmSp80090Ctr256Guid"
-    ),
-    UefiGuid(
-        "63C4785A-CA34-4012-A3C80B6A324F5546", name="gEfiRngAlgorithmX9313DesGuid"
-    ),
-    UefiGuid("ACD03321-777E-4D3D-B1C820CFD88820C9", name="gEfiRngAlgorithmX931AesGuid"),
-    UefiGuid("E43176D7-B6E8-4827-B7847FFDC4B68561", name="gEfiRngAlgorithmRaw"),
-    UefiGuid(
-        "D7C74207-A831-4A26-B1F5D193065CE8B6", name="gEfiAdapterInfoMediaStateGuid"
+        "6BB4F5CD-8022-448D-BC6D771BAE935FC6", name="EFI_KMS_FORMAT_SHA256256_GUID"
     ),
     UefiGuid(
-        "1FBD2960-4130-41E5-94ACD2CF037FB37C", name="gEfiAdapterInfoNetworkBootGuid"
+        "2F240E12-E14D-475C-83B0EFFF22D77BE7", name="EFI_KMS_FORMAT_SHA512512_GUID"
     ),
     UefiGuid(
-        "114DA5EF-2CF1-4E12-9BBBC470B55205D9", name="gEfiAdapterInfoSanMacAddressGuid"
+        "4776E33F-DB47-479A-A25FA1CD0AFAB38B", name="EFI_KMS_FORMAT_AESXTS128_GUID"
     ),
-    UefiGuid("39B68C46-F7FB-441B-B6EC16B0F69821F3", name="gEfiCapsuleReportGuid"),
-    UefiGuid("880AACA3-4ADC-4A04-9079B747340825E5", name="gEfiPropertiesTableGuid"),
-    UefiGuid("B122A263-3661-4F68-992978F8B0D62180", name="gEfiSystemResourceTableGuid"),
     UefiGuid(
-        "4BD56BE3-4975-4D8A-A0ADC491204B5D4D", name="gEfiAdapterInfoUndiIpv6SupportGuid"
+        "DC7E8613-C4BB-4DB0-846213511357ABE2", name="EFI_KMS_FORMAT_AESXTS256_GUID"
+    ),
+    UefiGuid(
+        "A0E8EE6A-0E92-44D4-861B0EAA4ACA44A2", name="EFI_KMS_FORMAT_AESCBC128_GUID"
+    ),
+    UefiGuid(
+        "D7E69789-1F68-45E8-96EF3B6407A5B2DC", name="EFI_KMS_FORMAT_AESCBC256_GUID"
+    ),
+    UefiGuid(
+        "56417BED-6BBE-4882-86A03AE8BB17F8F9", name="EFI_KMS_FORMAT_RSASHA11024_GUID"
+    ),
+    UefiGuid(
+        "F66447D4-75A6-463E-A819077F2DDA05E9", name="EFI_KMS_FORMAT_RSASHA12048_GUID"
+    ),
+    UefiGuid(
+        "A477AF13-877D-4060-BAA125D1BEA08AD3", name="EFI_KMS_FORMAT_RSASHA2562048_GUID"
+    ),
+    UefiGuid(
+        "4E1356C2-0EED-463F-81479933ABDBC7D5", name="EFI_KMS_FORMAT_RSASHA2563072_GUID"
+    ),
+    UefiGuid("0B6E5233-A65C-44C9-9407D9AB83BFC8BD", name="EFI_CERT_SHA224_GUID"),
+    UefiGuid("FF3E5307-9FD0-48C9-85F18AD56C701E01", name="EFI_CERT_SHA384_GUID"),
+    UefiGuid("093E0FAE-A6C4-4F50-9F1BD41E2B89C19A", name="EFI_CERT_SHA512_GUID"),
+    UefiGuid("4AAFD29D-68DF-49EE-8AA9347D375665A7", name="EFI_CERT_PKCS7_GUID"),
+    UefiGuid(
+        "24C5DC2F-53E2-40CA-9ED6A5D9A49F463B",
+        name="EFI_HASH_ALGORITHM_SHA1_NO_PAD_GUID",
+    ),
+    UefiGuid(
+        "8628752A-6CB7-4814-96FC24A815AC2226",
+        name="EFI_HASH_ALGORITHM_SHA256_NO_PAD_GUID",
+    ),
+    UefiGuid("6DCBD5ED-E82D-4C44-BDA17194199AD92A", name="EFI_FMP_CAPSULE_GUID"),
+    UefiGuid("3BD2A492-96C0-4079-B420FCF98EF103ED", name="EFI_CERT_X509_SHA256_GUID"),
+    UefiGuid("7076876E-80C2-4EE6-AAD228B349A6865B", name="EFI_CERT_X509_SHA384_GUID"),
+    UefiGuid("446DBF63-2502-4CDA-BCFA2465D2B0FE9D", name="EFI_CERT_X509_SHA512_GUID"),
+    UefiGuid(
+        "A7AF67CB-603B-4D42-BA2170BFB6293F96",
+        name="EFI_RNG_ALGORITHM_SP80090_HASH256_GUID",
+    ),
+    UefiGuid(
+        "C5149B43-AE85-4F53-9982B94335D3A9E7",
+        name="EFI_RNG_ALGORITHM_SP80090_HMAC256_GUID",
+    ),
+    UefiGuid(
+        "44F0DE6E-4D8C-4045-A8C74DD168856B9E",
+        name="EFI_RNG_ALGORITHM_SP80090_CTR256_GUID",
+    ),
+    UefiGuid(
+        "63C4785A-CA34-4012-A3C80B6A324F5546", name="EFI_RNG_ALGORITHM_X9313_DES_GUID"
+    ),
+    UefiGuid(
+        "ACD03321-777E-4D3D-B1C820CFD88820C9", name="EFI_RNG_ALGORITHM_X931_AES_GUID"
+    ),
+    UefiGuid("E43176D7-B6E8-4827-B7847FFDC4B68561", name="EFI_RNG_ALGORITHM_RAW"),
+    UefiGuid(
+        "D7C74207-A831-4A26-B1F5D193065CE8B6", name="EFI_ADAPTER_INFO_MEDIA_STATE_GUID"
+    ),
+    UefiGuid(
+        "1FBD2960-4130-41E5-94ACD2CF037FB37C", name="EFI_ADAPTER_INFO_NETWORK_BOOT_GUID"
+    ),
+    UefiGuid(
+        "114DA5EF-2CF1-4E12-9BBBC470B55205D9",
+        name="EFI_ADAPTER_INFO_SAN_MAC_ADDRESS_GUID",
+    ),
+    UefiGuid("39B68C46-F7FB-441B-B6EC16B0F69821F3", name="EFI_CAPSULE_REPORT_GUID"),
+    UefiGuid("880AACA3-4ADC-4A04-9079B747340825E5", name="EFI_PROPERTIES_TABLE_GUID"),
+    UefiGuid(
+        "B122A263-3661-4F68-992978F8B0D62180", name="EFI_SYSTEM_RESOURCE_TABLE_GUID"
+    ),
+    UefiGuid(
+        "4BD56BE3-4975-4D8A-A0ADC491204B5D4D",
+        name="EFI_ADAPTER_INFO_UNDI_IPV6_SUPPORT_GUID",
     ),
     UefiGuid(
         "5F05B20F-4A56-C231-FA0BA7B1F110041D",
-        name="gEfiRegexSyntaxTypePosixExtendedGuid",
+        name="EFI_REGEX_SYNTAX_TYPE_POSIX_EXTENDED_GUID",
     ),
     UefiGuid(
-        "9A473A4A-4CEB-B95A-415E5BA0BC639B2E", name="gEfiRegexSyntaxTypeEcma262Guid"
+        "9A473A4A-4CEB-B95A-415E5BA0BC639B2E", name="EFI_REGEX_SYNTAX_TYPE_ECMA262_GUID"
     ),
-    UefiGuid("63E60A51-497D-D427-C4A5B8ABDC3AAEB6", name="gEfiRegexSyntaxTypePerlGuid"),
+    UefiGuid(
+        "63E60A51-497D-D427-C4A5B8ABDC3AAEB6", name="EFI_REGEX_SYNTAX_TYPE_PERL_GUID"
+    ),
     UefiGuid(
         "61EC04FC-48E6-D813-25C98DAA44750B12",
-        name="gEfiPlatformMemory2ErrorSectionGuid",
+        name="EFI_PLATFORM_MEMORY2_ERROR_SECTION_GUID",
     ),
     UefiGuid(
-        "2F87BA6A-5C04-4385-A780F3BF78A97BEC", name="gEfiBlockIoCryptoAlgoAesXtsGuid"
+        "2F87BA6A-5C04-4385-A780F3BF78A97BEC",
+        name="EFI_BLOCK_IO_CRYPTO_ALGO_AES_XTS_GUID",
     ),
     UefiGuid(
         "689E4C62-70BF-4CF3-88BB33B318268670",
-        name="gEfiBlockIoCryptoAlgoAesCbcMsBitlockerGuid",
+        name="EFI_BLOCK_IO_CRYPTO_ALGO_AES_CBC_MS_BITLOCKER_GUID",
     ),
     UefiGuid(
-        "9317EC24-7CB0-4D0E-8B322ED9209CD8AF", name="gEfiPaddingRsassaPkcs1V1P5Guid"
+        "9317EC24-7CB0-4D0E-8B322ED9209CD8AF",
+        name="EFI_PADDING_RSASSA_PKCS1_V1_P5_GUID",
     ),
-    UefiGuid("7B2349E0-522D-4F8E-B92769D97C9E795F", name="gEfiPaddingRsassaPssGuid"),
-    UefiGuid("3629DDB1-228C-452E-B61609ED316A9700", name="gEfiPaddingNoneGuid"),
+    UefiGuid("7B2349E0-522D-4F8E-B92769D97C9E795F", name="EFI_PADDING_RSASSA_PSS_GUID"),
+    UefiGuid("3629DDB1-228C-452E-B61609ED316A9700", name="EFI_PADDING_NONE_GUID"),
     UefiGuid(
-        "E1C1D0A9-40B1-4632-BDCCD9D6E5295631", name="gEfiPaddingRsaesPkcs1V1P5Guid"
+        "E1C1D0A9-40B1-4632-BDCCD9D6E5295631", name="EFI_PADDING_RSAES_PKCS1_V1_P5_GUID"
     ),
-    UefiGuid("C1E63AC4-D0CF-4CE6-835BEED0E6A8A45B", name="gEfiPaddingRsaesOaepGuid"),
-    UefiGuid("F2FD1544-9794-4A2C-992EE5BBCF20E394", name="gEfiSmbios3TableGuid"),
+    UefiGuid("C1E63AC4-D0CF-4CE6-835BEED0E6A8A45B", name="EFI_PADDING_RSAES_OAEP_GUID"),
+    UefiGuid("F2FD1544-9794-4A2C-992EE5BBCF20E394", name="EFI_SMBIOS3_TABLE_GUID"),
     UefiGuid(
-        "CAB0E94C-E15F-11E3-918DB8E8562CBAFA", name="gEfiBootManagerPolicyConsoleGuid"
+        "CAB0E94C-E15F-11E3-918DB8E8562CBAFA",
+        name="EFI_BOOT_MANAGER_POLICY_CONSOLE_GUID",
     ),
     UefiGuid(
-        "D04159DC-E15F-11E3-B261B8E8562CBAFA", name="gEfiBootManagerPolicyNetworkGuid"
+        "D04159DC-E15F-11E3-B261B8E8562CBAFA",
+        name="EFI_BOOT_MANAGER_POLICY_NETWORK_GUID",
     ),
     UefiGuid(
         "113B2126-FC8A-11E3-BD6CB8E8562CBAFA",
-        name="gEfiBootManagerPolicyConnectAllGuid",
+        name="EFI_BOOT_MANAGER_POLICY_CONNECT_ALL_GUID",
     ),
-    UefiGuid("77AB535A-45FC-624B-5560F7B281D1F96E", name="gEfiVirtualDiskGuid"),
-    UefiGuid("3D5ABD30-4175-87CE-6D64D2ADE523C4BB", name="gEfiVirtualCdGuid"),
+    UefiGuid("77AB535A-45FC-624B-5560F7B281D1F96E", name="EFI_VIRTUAL_DISK_GUID"),
+    UefiGuid("3D5ABD30-4175-87CE-6D64D2ADE523C4BB", name="EFI_VIRTUAL_CD_GUID"),
     UefiGuid(
-        "5CEA02C9-4D07-69D3-269F4496FBE096F9", name="gEfiPersistentVirtualDiskGuid"
-    ),
-    UefiGuid("08018188-42CD-BB48-100F5387D53DED3D", name="gEfiPersistentVirtualCdGuid"),
-    UefiGuid(
-        "DCFA911D-26EB-469F-A22038B7DC461220", name="gEfiMemoryAttributesTableGuid"
+        "5CEA02C9-4D07-69D3-269F4496FBE096F9", name="EFI_PERSISTENT_VIRTUAL_DISK_GUID"
     ),
     UefiGuid(
-        "E19E3D16-BC11-11E4-9CAAC2051D5D46B0", name="gEfiArmProcessorErrorSectionGuid"
+        "08018188-42CD-BB48-100F5387D53DED3D", name="EFI_PERSISTENT_VIRTUAL_CD_GUID"
     ),
     UefiGuid(
-        "EFEFD093-0D9B-46EB-A85648350700C908", name="gEfiHiiImageDecoderNameJpegGuid"
+        "DCFA911D-26EB-469F-A22038B7DC461220", name="EFI_MEMORY_ATTRIBUTES_TABLE_GUID"
     ),
     UefiGuid(
-        "AF060190-5E3A-4025-AFBDE1F905BFAA4C", name="gEfiHiiImageDecoderNamePngGuid"
-    ),
-    UefiGuid("18633BFC-1735-4217-8AC917239282D3F8", name="gEfiBttAbstractionGuid"),
-    UefiGuid("1B45CC0A-156A-428A-AF6249864DA0E6E6", name="gPeiAprioriFileNameGuid"),
-    UefiGuid("FC510EE7-FFDC-11D4-BD410080C73C8881", name="gAprioriGuid"),
-    UefiGuid("8C8CE578-8A3D-4F1C-9935896185C32DD3", name="gEfiFirmwareFileSystem2Guid"),
-    UefiGuid(
-        "1BA0062E-C779-4582-8566336AE8F78F09", name="gEfiFirmwareVolumeTopFileGuid"
+        "E19E3D16-BC11-11E4-9CAAC2051D5D46B0",
+        name="EFI_ARM_PROCESSOR_ERROR_SECTION_GUID",
     ),
     UefiGuid(
-        "F8E21975-0899-4F58-A4BE5525A9C6D77A", name="gEfiHobMemoryAllocModuleGuid"
-    ),
-    UefiGuid("4ED4BF27-4092-42E9-807D527B1D00C9BD", name="gEfiHobMemoryAllocStackGuid"),
-    UefiGuid(
-        "564B33CD-C92A-4593-90BF2473E43C6322", name="gEfiHobMemoryAllocBspStoreGuid"
-    ),
-    UefiGuid("2A571201-4966-47F6-8B86F31E41F32F10", name="gEfiEventLegacyBootGuid"),
-    UefiGuid("7739F24C-93D7-11D4-9A3A0090273FC14D", name="gEfiHobListGuid"),
-    UefiGuid("05AD34BA-6F02-4214-952E4DA0398E2BB9", name="gEfiDxeServicesTableGuid"),
-    UefiGuid("914AEBE7-4635-459B-AA1C11E219B03A10", name="gEfiMdePkgTokenSpaceGuid"),
-    UefiGuid(
-        "414E6BDD-E47B-47CC-B244BB61020CF516", name="gEfiHardwareErrorVariableGuid"
-    ),
-    UefiGuid("7081E22F-CAC6-4053-9468675782CF88E5", name="gEfiEventDxeDispatchGuid"),
-    UefiGuid(
-        "5E948FE3-26D3-42B5-AF17610287188DEC", name="gEfiDiskInfoIdeInterfaceGuid"
+        "EFEFD093-0D9B-46EB-A85648350700C908",
+        name="EFI_HII_IMAGE_DECODER_NAME_JPEG_GUID",
     ),
     UefiGuid(
-        "08F74BAA-EA36-41D9-952121A70F8780BC", name="gEfiDiskInfoScsiInterfaceGuid"
+        "AF060190-5E3A-4025-AFBDE1F905BFAA4C",
+        name="EFI_HII_IMAGE_DECODER_NAME_PNG_GUID",
+    ),
+    UefiGuid("18633BFC-1735-4217-8AC917239282D3F8", name="EFI_BTT_ABSTRACTION_GUID"),
+    UefiGuid("1B45CC0A-156A-428A-AF6249864DA0E6E6", name="PEI_APRIORI_FILE_NAME_GUID"),
+    UefiGuid("FC510EE7-FFDC-11D4-BD410080C73C8881", name="APRIORI_GUID"),
+    UefiGuid(
+        "8C8CE578-8A3D-4F1C-9935896185C32DD3", name="EFI_FIRMWARE_FILE_SYSTEM2_GUID"
     ),
     UefiGuid(
-        "CB871572-C11A-47B5-B492675EAFA77727", name="gEfiDiskInfoUsbInterfaceGuid"
+        "1BA0062E-C779-4582-8566336AE8F78F09", name="EFI_FIRMWARE_VOLUME_TOP_FILE_GUID"
     ),
     UefiGuid(
-        "9E498932-4ABC-45AF-A34D0247787BE7C6", name="gEfiDiskInfoAhciInterfaceGuid"
+        "F8E21975-0899-4F58-A4BE5525A9C6D77A", name="EFI_HOB_MEMORY_ALLOC_MODULE_GUID"
     ),
     UefiGuid(
-        "92D11080-496F-4D95-BE7E037488382B0A", name="gEfiStatusCodeDataTypeStringGuid"
+        "4ED4BF27-4092-42E9-807D527B1D00C9BD", name="EFI_HOB_MEMORY_ALLOC_STACK_GUID"
     ),
     UefiGuid(
-        "335984BD-E805-409A-B8F8D27ECE5FF7A6", name="gEfiStatusCodeSpecificDataGuid"
+        "564B33CD-C92A-4593-90BF2473E43C6322",
+        name="EFI_HOB_MEMORY_ALLOC_BSP_STORE_GUID",
     ),
-    UefiGuid("5473C07A-3DCB-4DCA-BD6F1E9689E7349A", name="gEfiFirmwareFileSystem3Guid"),
-    UefiGuid("02CE967A-DD7E-4FFC-9EE7810CF0470880", name="gEfiEndOfDxeEventGroupGuid"),
+    UefiGuid("2A571201-4966-47F6-8B86F31E41F32F10", name="EFI_EVENT_LEGACY_BOOT_GUID"),
+    UefiGuid("7739F24C-93D7-11D4-9A3A0090273FC14D", name="EFI_HOB_LIST_GUID"),
+    UefiGuid("05AD34BA-6F02-4214-952E4DA0398E2BB9", name="EFI_DXE_SERVICES_TABLE_GUID"),
     UefiGuid(
-        "0F9D89E8-9259-4F76-A5AF0C89E34023DF", name="gEfiFirmwareContentsSignedGuid"
-    ),
-    UefiGuid("996EC11C-5397-4E73-B58F827E52906DEF", name="gEfiVectorHandoffTableGuid"),
-    UefiGuid(
-        "6BE272C7-1320-4CCD-9017D4612C012B25", name="gAdapterInfoPlatformSecurityGuid"
+        "914AEBE7-4635-459B-AA1C11E219B03A10", name="EFI_MDE_PKG_TOKEN_SPACE_GUID"
     ),
     UefiGuid(
-        "3AB14680-5D3F-4A4D-BCDCCC380018C7F7", name="gEfiDiskInfoNvmeInterfaceGuid"
+        "414E6BDD-E47B-47CC-B244BB61020CF516", name="EFI_HARDWARE_ERROR_VARIABLE_GUID"
     ),
-    UefiGuid("39F62CCE-6825-4669-BB56541ABA753A07", name="gEfiGraphicsInfoHobGuid"),
+    UefiGuid("7081E22F-CAC6-4053-9468675782CF88E5", name="EFI_EVENT_DXE_DISPATCH_GUID"),
     UefiGuid(
-        "4B3029CC-6B98-47FB-BC9676DCB80441F0", name="gEfiDiskInfoUfsInterfaceGuid"
-    ),
-    UefiGuid(
-        "E5CB2AC9-D35D-4430-936E1DE332478DE7", name="gEfiGraphicsDeviceInfoHobGuid"
-    ),
-    UefiGuid("6DADF1D1-D4CC-4910-BB6E82B1FD80FF3D", name="gEfiSmmSmramMemoryGuid"),
-    UefiGuid(
-        "8DEEC992-D39C-4A5C-AB6B986E14242B9D", name="gEfiDiskInfoSdMmcInterfaceGuid"
-    ),
-    UefiGuid("3B8C8162-188C-46A4-AEC9BE43F1D65697", name="gWindowsUxCapsuleGuid"),
-    UefiGuid("A31280AD-481E-41B6-95E8127F4C984779", name="gTianoCustomDecompressGuid"),
-    UefiGuid(
-        "A55701F5-E3EF-43DE-AC72249B573FAD2C", name="gEfiIa32X64ErrorTypeCacheCheckGuid"
+        "5E948FE3-26D3-42B5-AF17610287188DEC", name="EFI_DISK_INFO_IDE_INTERFACE_GUID"
     ),
     UefiGuid(
-        "FC06B535-5E1F-4562-9F250A3B9ADB63C3", name="gEfiIa32X64ErrorTypeTlbCheckGuid"
+        "08F74BAA-EA36-41D9-952121A70F8780BC", name="EFI_DISK_INFO_SCSI_INTERFACE_GUID"
     ),
     UefiGuid(
-        "1CF3F8B3-C5B1-49A2-AA595EEF92FFA63C", name="gEfiIa32X64ErrorTypeBusCheckGuid"
+        "CB871572-C11A-47B5-B492675EAFA77727", name="EFI_DISK_INFO_USB_INTERFACE_GUID"
     ),
     UefiGuid(
-        "48AB7F57-DC34-4F6C-A7D3B0B5B0A74314", name="gEfiIa32X64ErrorTypeMsCheckGuid"
+        "9E498932-4ABC-45AF-A34D0247787BE7C6", name="EFI_DISK_INFO_AHCI_INTERFACE_GUID"
     ),
     UefiGuid(
-        "7408D748-FC8C-4EE6-9288C4BEC092A410", name="gEfiPeiMasterBootModePpiGuid"
-    ),
-    UefiGuid("0AE8CE5D-E448-4437-A8D7EBF5F194F731", name="gEfiDxeIplPpiGuid"),
-    UefiGuid(
-        "F894643D-C449-42D1-8EA885BDD8C65BDE", name="gEfiPeiMemoryDiscoveredPpiGuid"
+        "92D11080-496F-4D95-BE7E037488382B0A",
+        name="EFI_STATUS_CODE_DATA_TYPE_STRING_GUID",
     ),
     UefiGuid(
-        "17EE496A-D8E4-4B9A-94D1CE8272300850", name="gEfiPeiBootInRecoveryModePpiGuid"
-    ),
-    UefiGuid("605EA650-C65C-42E1-BA8091A52AB618C6", name="gEfiEndOfPeiSignalPpiGuid"),
-    UefiGuid("EF398D58-9DFD-4103-BF9478C6F4FE712F", name="gEfiPeiResetPpiGuid"),
-    UefiGuid("229832D3-7A30-4B36-B827F40CB7D45436", name="gEfiPeiStatusCodePpiGuid"),
-    UefiGuid("DCD0BE23-9586-40F4-B64306522CED4EDE", name="gEfiPeiSecurity2PpiGuid"),
-    UefiGuid(
-        "DBE23AA9-A345-4B97-85B6B226F1617389", name="gEfiTemporaryRamSupportPpiGuid"
+        "335984BD-E805-409A-B8F8D27ECE5FF7A6", name="EFI_STATUS_CODE_SPECIFIC_DATA_GUID"
     ),
     UefiGuid(
-        "E6AF1F7B-FC3F-46DA-A828A3B457A44282", name="gEfiPeiCpuIoPpiInstalledGuid"
-    ),
-    UefiGuid("057A449A-1FDC-4C06-BFC9F53F6A99BB92", name="gEfiPciCfg2PpiGuid"),
-    UefiGuid("1F4C6F90-B06B-48D8-A201BAE5F1CD7D56", name="gEfiPeiStallPpiGuid"),
-    UefiGuid(
-        "2AB86EF5-ECB5-4134-B5563854CA1FE1B4", name="gEfiPeiReadOnlyVariable2PpiGuid"
+        "5473C07A-3DCB-4DCA-BD6F1E9689E7349A", name="EFI_FIRMWARE_FILE_SYSTEM3_GUID"
     ),
     UefiGuid(
-        "6F8C2B35-FEF4-448D-8256E11B19D61077", name="gEfiSecPlatformInformationPpiGuid"
-    ),
-    UefiGuid("C1FCD448-6300-4458-B86428DF015364BC", name="gEfiPeiLoadedImagePpiGuid"),
-    UefiGuid("9CA93627-B65B-4324-A202C0B461764543", name="gEfiPeiSmbus2PpiGuid"),
-    UefiGuid(
-        "49EDB1C1-BF21-4761-BB12EB0031AABB39", name="gEfiPeiFirmwareVolumeInfoPpiGuid"
-    ),
-    UefiGuid("B9E0ABFE-5979-4914-977F6DEE78C278A6", name="gEfiPeiLoadFilePpiGuid"),
-    UefiGuid("1A36E4E7-FAB6-476A-8E75695A0576FDD7", name="gEfiPeiDecompressPpiGuid"),
-    UefiGuid("06E81C58-4AD7-44BC-8390F10265F72480", name="gPcdPpiGuid"),
-    UefiGuid("4D8B155B-C059-4C8F-892606FD4331DB8A", name="gGetPcdInfoPpiGuid"),
-    UefiGuid(
-        "FB6D9542-612D-4F45-872F5CFF52E93DCF", name="gEfiPeiRecoveryModulePpiGuid"
+        "02CE967A-DD7E-4FFC-9EE7810CF0470880", name="EFI_END_OF_DXE_EVENT_GROUP_GUID"
     ),
     UefiGuid(
-        "0DE2CE25-446A-45A7-BFC937DA26344B37", name="gEfiPeiDeviceRecoveryModulePpiGuid"
+        "0F9D89E8-9259-4F76-A5AF0C89E34023DF", name="EFI_FIRMWARE_CONTENTS_SIGNED_GUID"
     ),
     UefiGuid(
-        "695D8AA1-42EE-4C46-805C6EA6BCE799E3", name="gEfiPeiVirtualBlockIoPpiGuid"
-    ),
-    UefiGuid("6D582DBC-DB85-4514-8FCC5ADF6227B147", name="gEfiPeiS3Resume2PpiGuid"),
-    UefiGuid("0065D394-9951-4144-82A30AFC8579C251", name="gEfiPeiRscHandlerPpiGuid"),
-    UefiGuid("01F34D25-4DE2-23AD-3FF336353FF323F1", name="gEfiPeiPcdPpiGuid"),
-    UefiGuid("A60C6B59-E459-425D-9C690BCC9CB27D81", name="gEfiGetPcdInfoPpiGuid"),
-    UefiGuid("CEAB683C-EC56-4A2D-A9064053FA4E9C16", name="gEfiTemporaryRamDonePpiGuid"),
-    UefiGuid(
-        "3CD652B4-6D33-4DCE-89DB83DF9766FCCA", name="gEfiVectorHandoffInfoPpiGuid"
-    ),
-    UefiGuid("8D48BD70-C8A3-4C06-901B747946AAC358", name="gEfiIsaHcPpiGuid"),
-    UefiGuid("23A464AD-CB83-48B8-94AB1A6FEFCFE522", name="gEfiSioPpiGuid"),
-    UefiGuid("B3BFAB9B-9F9C-4E8B-AD377F8C51FC6280", name="gEfiPeiI2cMasterPpiGuid"),
-    UefiGuid(
-        "EA7CA24B-DED5-4DAD-A389BF827E8F9B38", name="gEfiPeiFirmwareVolumeInfo2PpiGuid"
-    ),
-    UefiGuid("6ECD1463-4A4A-461B-AF5F5A33E3B2162B", name="gEfiPeiGraphicsPpiGuid"),
-    UefiGuid("EE16160A-E8BE-47A6-820AC6900DB0250A", name="gEfiPeiMpServicesPpiGuid"),
-    UefiGuid("3ACF33EE-D892-40F4-A2FC3854D2E1323D", name="gEfiPeiCapsulePpiGuid"),
-    UefiGuid("3ACF33EE-D892-40F4-A2FC3854D2E1323D", name="gPeiCapsulePpiGuid"),
-    UefiGuid("6CC45765-CCE4-42FD-BC56011AAAC6C9A8", name="gEfiPeiReset2PpiGuid"),
-    UefiGuid(
-        "26CC0FAD-BEB3-478A-91B20C188F726198", name="gEfiPeiVirtualBlockIo2PpiGuid"
+        "996EC11C-5397-4E73-B58F827E52906DEF", name="EFI_VECTOR_HANDOFF_TABLE_GUID"
     ),
     UefiGuid(
-        "9E9F374B-8F16-4230-98245846EE766A97", name="gEfiSecPlatformInformation2PpiGuid"
+        "6BE272C7-1320-4CCD-9017D4612C012B25",
+        name="ADAPTER_INFO_PLATFORM_SECURITY_GUID",
     ),
-    UefiGuid("3EBDAF20-6667-40D8-B4EEF5999AC1B71F", name="gEfiSecHobDataPpiGuid"),
-    UefiGuid("268F33A9-CCCD-48BE-881786053AC32ED6", name="gEfiPeiMmAccessPpiGuid"),
-    UefiGuid("61C68702-4D7E-4F43-8DEFA74305CE74C5", name="gEfiPeiMmControlPpiGuid"),
     UefiGuid(
-        "52888EAE-5B10-47D0-A87FB822ABA0CAF4", name="gEfiPeiCoreFvLocationPpiGuid"
+        "3AB14680-5D3F-4A4D-BCDCCC380018C7F7", name="EFI_DISK_INFO_NVME_INTERFACE_GUID"
     ),
-    UefiGuid("11B34006-D85B-4D0A-A290D5A571310EF7", name="gPcdProtocolGuid"),
-    UefiGuid("5BE40F57-FA68-4610-BBBFE9C5FCDAD365", name="gGetPcdInfoProtocolGuid"),
-    UefiGuid("665E3FF6-46CC-11D4-9A380090273FC14D", name="gEfiBdsArchProtocolGuid"),
-    UefiGuid("26BACCB1-6F42-11D4-BCE70080C73C8881", name="gEfiCpuArchProtocolGuid"),
+    UefiGuid("39F62CCE-6825-4669-BB56541ABA753A07", name="EFI_GRAPHICS_INFO_HOB_GUID"),
     UefiGuid(
-        "26BACCB2-6F42-11D4-BCE70080C73C8881", name="gEfiMetronomeArchProtocolGuid"
+        "4B3029CC-6B98-47FB-BC9676DCB80441F0", name="EFI_DISK_INFO_UFS_INTERFACE_GUID"
+    ),
+    UefiGuid(
+        "E5CB2AC9-D35D-4430-936E1DE332478DE7", name="EFI_GRAPHICS_DEVICE_INFO_HOB_GUID"
+    ),
+    UefiGuid("6DADF1D1-D4CC-4910-BB6E82B1FD80FF3D", name="EFI_SMM_SMRAM_MEMORY_GUID"),
+    UefiGuid(
+        "8DEEC992-D39C-4A5C-AB6B986E14242B9D",
+        name="EFI_DISK_INFO_SD_MMC_INTERFACE_GUID",
+    ),
+    UefiGuid("3B8C8162-188C-46A4-AEC9BE43F1D65697", name="WINDOWS_UX_CAPSULE_GUID"),
+    UefiGuid(
+        "A31280AD-481E-41B6-95E8127F4C984779", name="TIANO_CUSTOM_DECOMPRESS_GUID"
+    ),
+    UefiGuid(
+        "A55701F5-E3EF-43DE-AC72249B573FAD2C",
+        name="EFI_IA32_X64_ERROR_TYPE_CACHE_CHECK_GUID",
+    ),
+    UefiGuid(
+        "FC06B535-5E1F-4562-9F250A3B9ADB63C3",
+        name="EFI_IA32_X64_ERROR_TYPE_TLB_CHECK_GUID",
+    ),
+    UefiGuid(
+        "1CF3F8B3-C5B1-49A2-AA595EEF92FFA63C",
+        name="EFI_IA32_X64_ERROR_TYPE_BUS_CHECK_GUID",
+    ),
+    UefiGuid(
+        "48AB7F57-DC34-4F6C-A7D3B0B5B0A74314",
+        name="EFI_IA32_X64_ERROR_TYPE_MS_CHECK_GUID",
+    ),
+    UefiGuid(
+        "7408D748-FC8C-4EE6-9288C4BEC092A410", name="EFI_PEI_MASTER_BOOT_MODE_PPI_GUID"
+    ),
+    UefiGuid("0AE8CE5D-E448-4437-A8D7EBF5F194F731", name="EFI_DXE_IPL_PPI_GUID"),
+    UefiGuid(
+        "F894643D-C449-42D1-8EA885BDD8C65BDE", name="EFI_PEI_MEMORY_DISCOVERED_PPI_GUID"
+    ),
+    UefiGuid(
+        "17EE496A-D8E4-4B9A-94D1CE8272300850",
+        name="EFI_PEI_BOOT_IN_RECOVERY_MODE_PPI_GUID",
+    ),
+    UefiGuid(
+        "605EA650-C65C-42E1-BA8091A52AB618C6", name="EFI_END_OF_PEI_SIGNAL_PPI_GUID"
+    ),
+    UefiGuid("EF398D58-9DFD-4103-BF9478C6F4FE712F", name="EFI_PEI_RESET_PPI_GUID"),
+    UefiGuid(
+        "229832D3-7A30-4B36-B827F40CB7D45436", name="EFI_PEI_STATUS_CODE_PPI_GUID"
+    ),
+    UefiGuid("DCD0BE23-9586-40F4-B64306522CED4EDE", name="EFI_PEI_SECURITY2_PPI_GUID"),
+    UefiGuid(
+        "DBE23AA9-A345-4B97-85B6B226F1617389", name="EFI_TEMPORARY_RAM_SUPPORT_PPI_GUID"
+    ),
+    UefiGuid(
+        "E6AF1F7B-FC3F-46DA-A828A3B457A44282", name="EFI_PEI_CPU_IO_PPI_INSTALLED_GUID"
+    ),
+    UefiGuid("057A449A-1FDC-4C06-BFC9F53F6A99BB92", name="EFI_PCI_CFG2_PPI_GUID"),
+    UefiGuid("1F4C6F90-B06B-48D8-A201BAE5F1CD7D56", name="EFI_PEI_STALL_PPI_GUID"),
+    UefiGuid(
+        "2AB86EF5-ECB5-4134-B5563854CA1FE1B4",
+        name="EFI_PEI_READ_ONLY_VARIABLE2_PPI_GUID",
+    ),
+    UefiGuid(
+        "6F8C2B35-FEF4-448D-8256E11B19D61077",
+        name="EFI_SEC_PLATFORM_INFORMATION_PPI_GUID",
+    ),
+    UefiGuid(
+        "C1FCD448-6300-4458-B86428DF015364BC", name="EFI_PEI_LOADED_IMAGE_PPI_GUID"
+    ),
+    UefiGuid("9CA93627-B65B-4324-A202C0B461764543", name="EFI_PEI_SMBUS2_PPI_GUID"),
+    UefiGuid(
+        "49EDB1C1-BF21-4761-BB12EB0031AABB39",
+        name="EFI_PEI_FIRMWARE_VOLUME_INFO_PPI_GUID",
+    ),
+    UefiGuid("B9E0ABFE-5979-4914-977F6DEE78C278A6", name="EFI_PEI_LOAD_FILE_PPI_GUID"),
+    UefiGuid("1A36E4E7-FAB6-476A-8E75695A0576FDD7", name="EFI_PEI_DECOMPRESS_PPI_GUID"),
+    UefiGuid("06E81C58-4AD7-44BC-8390F10265F72480", name="PCD_PPI_GUID"),
+    UefiGuid("4D8B155B-C059-4C8F-892606FD4331DB8A", name="GET_PCD_INFO_PPI_GUID"),
+    UefiGuid(
+        "FB6D9542-612D-4F45-872F5CFF52E93DCF", name="EFI_PEI_RECOVERY_MODULE_PPI_GUID"
+    ),
+    UefiGuid(
+        "0DE2CE25-446A-45A7-BFC937DA26344B37",
+        name="EFI_PEI_DEVICE_RECOVERY_MODULE_PPI_GUID",
+    ),
+    UefiGuid(
+        "695D8AA1-42EE-4C46-805C6EA6BCE799E3", name="EFI_PEI_VIRTUAL_BLOCK_IO_PPI_GUID"
+    ),
+    UefiGuid("6D582DBC-DB85-4514-8FCC5ADF6227B147", name="EFI_PEI_S3_RESUME2_PPI_GUID"),
+    UefiGuid(
+        "0065D394-9951-4144-82A30AFC8579C251", name="EFI_PEI_RSC_HANDLER_PPI_GUID"
+    ),
+    UefiGuid("01F34D25-4DE2-23AD-3FF336353FF323F1", name="EFI_PEI_PCD_PPI_GUID"),
+    UefiGuid("A60C6B59-E459-425D-9C690BCC9CB27D81", name="EFI_GET_PCD_INFO_PPI_GUID"),
+    UefiGuid(
+        "CEAB683C-EC56-4A2D-A9064053FA4E9C16", name="EFI_TEMPORARY_RAM_DONE_PPI_GUID"
+    ),
+    UefiGuid(
+        "3CD652B4-6D33-4DCE-89DB83DF9766FCCA", name="EFI_VECTOR_HANDOFF_INFO_PPI_GUID"
+    ),
+    UefiGuid("8D48BD70-C8A3-4C06-901B747946AAC358", name="EFI_ISA_HC_PPI_GUID"),
+    UefiGuid("23A464AD-CB83-48B8-94AB1A6FEFCFE522", name="EFI_SIO_PPI_GUID"),
+    UefiGuid("B3BFAB9B-9F9C-4E8B-AD377F8C51FC6280", name="EFI_PEI_I2C_MASTER_PPI_GUID"),
+    UefiGuid(
+        "EA7CA24B-DED5-4DAD-A389BF827E8F9B38",
+        name="EFI_PEI_FIRMWARE_VOLUME_INFO2_PPI_GUID",
+    ),
+    UefiGuid("6ECD1463-4A4A-461B-AF5F5A33E3B2162B", name="EFI_PEI_GRAPHICS_PPI_GUID"),
+    UefiGuid(
+        "EE16160A-E8BE-47A6-820AC6900DB0250A", name="EFI_PEI_MP_SERVICES_PPI_GUID"
+    ),
+    UefiGuid("3ACF33EE-D892-40F4-A2FC3854D2E1323D", name="EFI_PEI_CAPSULE_PPI_GUID"),
+    UefiGuid("3ACF33EE-D892-40F4-A2FC3854D2E1323D", name="PEI_CAPSULE_PPI_GUID"),
+    UefiGuid("6CC45765-CCE4-42FD-BC56011AAAC6C9A8", name="EFI_PEI_RESET2_PPI_GUID"),
+    UefiGuid(
+        "26CC0FAD-BEB3-478A-91B20C188F726198", name="EFI_PEI_VIRTUAL_BLOCK_IO2_PPI_GUID"
+    ),
+    UefiGuid(
+        "9E9F374B-8F16-4230-98245846EE766A97",
+        name="EFI_SEC_PLATFORM_INFORMATION2_PPI_GUID",
+    ),
+    UefiGuid("3EBDAF20-6667-40D8-B4EEF5999AC1B71F", name="EFI_SEC_HOB_DATA_PPI_GUID"),
+    UefiGuid("268F33A9-CCCD-48BE-881786053AC32ED6", name="EFI_PEI_MM_ACCESS_PPI_GUID"),
+    UefiGuid("61C68702-4D7E-4F43-8DEFA74305CE74C5", name="EFI_PEI_MM_CONTROL_PPI_GUID"),
+    UefiGuid(
+        "52888EAE-5B10-47D0-A87FB822ABA0CAF4", name="EFI_PEI_CORE_FV_LOCATION_PPI_GUID"
+    ),
+    UefiGuid("11B34006-D85B-4D0A-A290D5A571310EF7", name="PCD_PROTOCOL_GUID"),
+    UefiGuid("5BE40F57-FA68-4610-BBBFE9C5FCDAD365", name="GET_PCD_INFO_PROTOCOL_GUID"),
+    UefiGuid("665E3FF6-46CC-11D4-9A380090273FC14D", name="EFI_BDS_ARCH_PROTOCOL_GUID"),
+    UefiGuid("26BACCB1-6F42-11D4-BCE70080C73C8881", name="EFI_CPU_ARCH_PROTOCOL_GUID"),
+    UefiGuid(
+        "26BACCB2-6F42-11D4-BCE70080C73C8881", name="EFI_METRONOME_ARCH_PROTOCOL_GUID"
     ),
     UefiGuid(
         "1DA97072-BDDC-4B30-99F172A0B56FFF2A",
-        name="gEfiMonotonicCounterArchProtocolGuid",
+        name="EFI_MONOTONIC_COUNTER_ARCH_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "27CFAC87-46CC-11D4-9A380090273FC14D", name="gEfiRealTimeClockArchProtocolGuid"
-    ),
-    UefiGuid("27CFAC88-46CC-11D4-9A380090273FC14D", name="gEfiResetArchProtocolGuid"),
-    UefiGuid("B7DFB4E1-052F-449F-87BE9818FC91B733", name="gEfiRuntimeArchProtocolGuid"),
-    UefiGuid(
-        "A46423E3-4617-49F1-B9FFD1BFA9115839", name="gEfiSecurityArchProtocolGuid"
+        "27CFAC87-46CC-11D4-9A380090273FC14D",
+        name="EFI_REAL_TIME_CLOCK_ARCH_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "78E4D245-CD4D-4A05-A2BA4743E86CFCAB", name="gEfiSecurityPolicyProtocolGuid"
-    ),
-    UefiGuid("26BACCB3-6F42-11D4-BCE70080C73C8881", name="gEfiTimerArchProtocolGuid"),
-    UefiGuid(
-        "6441F818-6362-4E44-B5707DBA31DD2453", name="gEfiVariableWriteArchProtocolGuid"
+        "27CFAC88-46CC-11D4-9A380090273FC14D", name="EFI_RESET_ARCH_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "1E5668E2-8481-11D4-BCF10080C73C8881", name="gEfiVariableArchProtocolGuid"
+        "B7DFB4E1-052F-449F-87BE9818FC91B733", name="EFI_RUNTIME_ARCH_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "665E3FF5-46CC-11D4-9A380090273FC14D", name="gEfiWatchdogTimerArchProtocolGuid"
+        "A46423E3-4617-49F1-B9FFD1BFA9115839", name="EFI_SECURITY_ARCH_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "D2B2B828-0826-48A7-B3DF983C006024F0", name="gEfiStatusCodeRuntimeProtocolGuid"
+        "78E4D245-CD4D-4A05-A2BA4743E86CFCAB", name="EFI_SECURITY_POLICY_PROTOCOL_GUID"
     ),
-    UefiGuid("E49D33ED-513D-4634-B6986F55AA751C1B", name="gEfiSmbusHcProtocolGuid"),
     UefiGuid(
-        "220E73B6-6BDB-4413-8405B974B108619A", name="gEfiFirmwareVolume2ProtocolGuid"
+        "26BACCB3-6F42-11D4-BCE70080C73C8881", name="EFI_TIMER_ARCH_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "6441F818-6362-4E44-B5707DBA31DD2453",
+        name="EFI_VARIABLE_WRITE_ARCH_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "1E5668E2-8481-11D4-BCF10080C73C8881", name="EFI_VARIABLE_ARCH_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "665E3FF5-46CC-11D4-9A380090273FC14D",
+        name="EFI_WATCHDOG_TIMER_ARCH_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "D2B2B828-0826-48A7-B3DF983C006024F0",
+        name="EFI_STATUS_CODE_RUNTIME_PROTOCOL_GUID",
+    ),
+    UefiGuid("E49D33ED-513D-4634-B6986F55AA751C1B", name="EFI_SMBUS_HC_PROTOCOL_GUID"),
+    UefiGuid(
+        "220E73B6-6BDB-4413-8405B974B108619A", name="EFI_FIRMWARE_VOLUME2_PROTOCOL_GUID"
     ),
     UefiGuid(
         "8F644FA9-E850-4DB1-9CE20B44698E8DA4",
-        name="gEfiFirmwareVolumeBlockProtocolGuid",
+        name="EFI_FIRMWARE_VOLUME_BLOCK_PROTOCOL_GUID",
     ),
-    UefiGuid("5053697E-2CBC-4819-90D90580DEEE5754", name="gEfiCapsuleArchProtocolGuid"),
-    UefiGuid("3FDDA605-A76E-4F46-AD2912F4531B3D08", name="gEfiMpServiceProtocolGuid"),
+    UefiGuid(
+        "5053697E-2CBC-4819-90D90580DEEE5754", name="EFI_CAPSULE_ARCH_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "3FDDA605-A76E-4F46-AD2912F4531B3D08", name="EFI_MP_SERVICE_PROTOCOL_GUID"
+    ),
     UefiGuid(
         "CF8034BE-6768-4D8B-B7397CCE683A9FBE",
-        name="gEfiPciHostBridgeResourceAllocationProtocolGuid",
+        name="EFI_PCI_HOST_BRIDGE_RESOURCE_ALLOCATION_PROTOCOL_GUID",
     ),
-    UefiGuid("07D75280-27D4-4D69-90D05643E238B341", name="gEfiPciPlatformProtocolGuid"),
-    UefiGuid("B5B35764-460C-4A06-99FC77A17C1B5CEB", name="gEfiPciOverrideProtocolGuid"),
+    UefiGuid(
+        "07D75280-27D4-4D69-90D05643E238B341", name="EFI_PCI_PLATFORM_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "B5B35764-460C-4A06-99FC77A17C1B5CEB", name="EFI_PCI_OVERRIDE_PROTOCOL_GUID"
+    ),
     UefiGuid(
         "30CFE3E7-3DE1-4586-BE20DEABA1B3B793",
-        name="gEfiPciEnumerationCompleteProtocolGuid",
+        name="EFI_PCI_ENUMERATION_COMPLETE_PROTOCOL_GUID",
     ),
     UefiGuid(
         "EB23F55A-7863-4AC2-8D3D956535DE0375",
-        name="gEfiIncompatiblePciDeviceSupportProtocolGuid",
+        name="EFI_INCOMPATIBLE_PCI_DEVICE_SUPPORT_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "AA0E8BC1-DABC-46B0-A84437B8169B2BEA", name="gEfiPciHotPlugInitProtocolGuid"
+        "AA0E8BC1-DABC-46B0-A84437B8169B2BEA",
+        name="EFI_PCI_HOT_PLUG_INIT_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "19CB87AB-2CB9-4665-8360DDCF6054F79D", name="gEfiPciHotPlugRequestProtocolGuid"
+        "19CB87AB-2CB9-4665-8360DDCF6054F79D",
+        name="EFI_PCI_HOT_PLUG_REQUEST_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "A1E37052-80D9-4E65-A3173E9A55C43EC9", name="gEfiIdeControllerInitProtocolGuid"
+        "A1E37052-80D9-4E65-A3173E9A55C43EC9",
+        name="EFI_IDE_CONTROLLER_INIT_PROTOCOL_GUID",
     ),
-    UefiGuid("D432A67F-14DC-484B-B3BB3F0291849327", name="gEfiDiskInfoProtocolGuid"),
-    UefiGuid("03583FF6-CB36-4940-947EB9B39F4AFAF7", name="gEfiSmbiosProtocolGuid"),
-    UefiGuid("E857CAF6-C046-45DC-BE3FEE0765FBA887", name="gEfiS3SaveStateProtocolGuid"),
+    UefiGuid("D432A67F-14DC-484B-B3BB3F0291849327", name="EFI_DISK_INFO_PROTOCOL_GUID"),
+    UefiGuid("03583FF6-CB36-4940-947EB9B39F4AFAF7", name="EFI_SMBIOS_PROTOCOL_GUID"),
     UefiGuid(
-        "320AFE62-E593-49CB-A9F1D4C2F4AF014C", name="gEfiS3SmmSaveStateProtocolGuid"
-    ),
-    UefiGuid("86212936-0E76-41C8-A03A2AF2FC1C39E2", name="gEfiRscHandlerProtocolGuid"),
-    UefiGuid(
-        "2FF29FA7-5E80-4ED9-B380017D3C554FF4", name="gEfiSmmRscHandlerProtocolGuid"
-    ),
-    UefiGuid("EB97088E-CFDF-49C6-BE4BD906A5B20E86", name="gEfiAcpiSdtProtocolGuid"),
-    UefiGuid("215FDD18-BD50-4FEB-890B58CA0B4739E9", name="gEfiSioProtocolGuid"),
-    UefiGuid("3242A9D8-CE70-4AA0-955D5E7B140DE4D2", name="gEfiSmmCpuIo2ProtocolGuid"),
-    UefiGuid("F4CCBFB7-F6E0-47FD-9DD410A8F150C191", name="gEfiSmmBase2ProtocolGuid"),
-    UefiGuid("C2702B74-800C-4131-87468FB5B89CE4AC", name="gEfiSmmAccess2ProtocolGuid"),
-    UefiGuid("843DC720-AB1E-42CB-93578A0078F3561B", name="gEfiSmmControl2ProtocolGuid"),
-    UefiGuid(
-        "26EEB3DE-B689-492E-80F0BE8BD7DA4BA7", name="gEfiSmmConfigurationProtocolGuid"
+        "E857CAF6-C046-45DC-BE3FEE0765FBA887", name="EFI_S3_SAVE_STATE_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "47B7FA8C-F4BD-4AF6-8200333086F0D2C8", name="gEfiSmmReadyToLockProtocolGuid"
+        "320AFE62-E593-49CB-A9F1D4C2F4AF014C",
+        name="EFI_S3_SMM_SAVE_STATE_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "60FF8964-E906-41D0-AFEDF241E974E08E", name="gEfiDxeSmmReadyToLockProtocolGuid"
+        "86212936-0E76-41C8-A03A2AF2FC1C39E2", name="EFI_RSC_HANDLER_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "C68ED8E2-9DC6-4CBD-9D94DB65ACC5C332", name="gEfiSmmCommunicationProtocolGuid"
+        "2FF29FA7-5E80-4ED9-B380017D3C554FF4", name="EFI_SMM_RSC_HANDLER_PROTOCOL_GUID"
+    ),
+    UefiGuid("EB97088E-CFDF-49C6-BE4BD906A5B20E86", name="EFI_ACPI_SDT_PROTOCOL_GUID"),
+    UefiGuid("215FDD18-BD50-4FEB-890B58CA0B4739E9", name="EFI_SIO_PROTOCOL_GUID"),
+    UefiGuid(
+        "3242A9D8-CE70-4AA0-955D5E7B140DE4D2", name="EFI_SMM_CPU_IO2_PROTOCOL_GUID"
+    ),
+    UefiGuid("F4CCBFB7-F6E0-47FD-9DD410A8F150C191", name="EFI_SMM_BASE2_PROTOCOL_GUID"),
+    UefiGuid(
+        "C2702B74-800C-4131-87468FB5B89CE4AC", name="EFI_SMM_ACCESS2_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "6AFD2B77-98C1-4ACD-A6F98A9439DE0FB1", name="gEfiSmmStatusCodeProtocolGuid"
-    ),
-    UefiGuid("EB346B97-975F-4A9F-8B22F8E92BB3D569", name="gEfiSmmCpuProtocolGuid"),
-    UefiGuid(
-        "8BC1714D-FFCB-41C3-89DC6C74D06D98EA", name="gEfiSmmPciRootBridgeIoProtocolGuid"
+        "843DC720-AB1E-42CB-93578A0078F3561B", name="EFI_SMM_CONTROL2_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "18A3C6DC-5EEA-48C8-A1C1B53389F98999", name="gEfiSmmSwDispatch2ProtocolGuid"
+        "26EEB3DE-B689-492E-80F0BE8BD7DA4BA7",
+        name="EFI_SMM_CONFIGURATION_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "456D2859-A84B-4E47-A2EE3276D886997D", name="gEfiSmmSxDispatch2ProtocolGuid"
+        "47B7FA8C-F4BD-4AF6-8200333086F0D2C8",
+        name="EFI_SMM_READY_TO_LOCK_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "60FF8964-E906-41D0-AFEDF241E974E08E",
+        name="EFI_DXE_SMM_READY_TO_LOCK_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "C68ED8E2-9DC6-4CBD-9D94DB65ACC5C332",
+        name="EFI_SMM_COMMUNICATION_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "6AFD2B77-98C1-4ACD-A6F98A9439DE0FB1", name="EFI_SMM_STATUS_CODE_PROTOCOL_GUID"
+    ),
+    UefiGuid("EB346B97-975F-4A9F-8B22F8E92BB3D569", name="EFI_SMM_CPU_PROTOCOL_GUID"),
+    UefiGuid(
+        "8BC1714D-FFCB-41C3-89DC6C74D06D98EA",
+        name="EFI_SMM_PCI_ROOT_BRIDGE_IO_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "18A3C6DC-5EEA-48C8-A1C1B53389F98999", name="EFI_SMM_SW_DISPATCH2_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "456D2859-A84B-4E47-A2EE3276D886997D", name="EFI_SMM_SX_DISPATCH2_PROTOCOL_GUID"
     ),
     UefiGuid(
         "4CEC368E-8E8E-4D71-8BE1958C45FC8A53",
-        name="gEfiSmmPeriodicTimerDispatch2ProtocolGuid",
+        name="EFI_SMM_PERIODIC_TIMER_DISPATCH2_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "EE9B8D90-C5A6-40A2-BDE252558D33CCA1", name="gEfiSmmUsbDispatch2ProtocolGuid"
+        "EE9B8D90-C5A6-40A2-BDE252558D33CCA1",
+        name="EFI_SMM_USB_DISPATCH2_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "25566B03-B577-4CBF-958CED663EA24380", name="gEfiSmmGpiDispatch2ProtocolGuid"
+        "25566B03-B577-4CBF-958CED663EA24380",
+        name="EFI_SMM_GPI_DISPATCH2_PROTOCOL_GUID",
     ),
     UefiGuid(
         "7300C4A1-43F2-4017-A51BC81A7F40585B",
-        name="gEfiSmmStandbyButtonDispatch2ProtocolGuid",
+        name="EFI_SMM_STANDBY_BUTTON_DISPATCH2_PROTOCOL_GUID",
     ),
     UefiGuid(
         "1B1183FA-1823-46A7-88729C578755409D",
-        name="gEfiSmmPowerButtonDispatch2ProtocolGuid",
+        name="EFI_SMM_POWER_BUTTON_DISPATCH2_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "58DC368D-7BFA-4E77-ABBC0E29418DF930", name="gEfiSmmIoTrapDispatch2ProtocolGuid"
+        "58DC368D-7BFA-4E77-ABBC0E29418DF930",
+        name="EFI_SMM_IO_TRAP_DISPATCH2_PROTOCOL_GUID",
     ),
-    UefiGuid("13A3F0F6-264A-3EF0-F2E0DEC512342F34", name="gEfiPcdProtocolGuid"),
+    UefiGuid("13A3F0F6-264A-3EF0-F2E0DEC512342F34", name="EFI_PCD_PROTOCOL_GUID"),
     UefiGuid(
         "8F644FA9-E850-4DB1-9CE20B44698E8DA4",
-        name="gEfiFirmwareVolumeBlock2ProtocolGuid",
+        name="EFI_FIRMWARE_VOLUME_BLOCK2_PROTOCOL_GUID",
     ),
-    UefiGuid("AD61F191-AE5F-4C0E-B9FAE869D288C64F", name="gEfiCpuIo2ProtocolGuid"),
+    UefiGuid("AD61F191-AE5F-4C0E-B9FAE869D288C64F", name="EFI_CPU_IO2_PROTOCOL_GUID"),
     UefiGuid(
-        "70101EAF-0085-440C-B3568EE36FEF24F0", name="gEfiLegacyRegion2ProtocolGuid"
+        "70101EAF-0085-440C-B3568EE36FEF24F0", name="EFI_LEGACY_REGION2_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "94AB2F58-1438-4EF1-915218941A3A0E68", name="gEfiSecurity2ArchProtocolGuid"
+        "94AB2F58-1438-4EF1-915218941A3A0E68", name="EFI_SECURITY2_ARCH_PROTOCOL_GUID"
     ),
-    UefiGuid("24E70042-D5C5-4260-8C390AD3AA32E93D", name="gEfiSmmEndOfDxeProtocolGuid"),
-    UefiGuid("BCDAF080-1BDE-4E22-AE6A43541E128EC4", name="gEfiIsaHcProtocolGuid"),
+    UefiGuid(
+        "24E70042-D5C5-4260-8C390AD3AA32E93D", name="EFI_SMM_END_OF_DXE_PROTOCOL_GUID"
+    ),
+    UefiGuid("BCDAF080-1BDE-4E22-AE6A43541E128EC4", name="EFI_ISA_HC_PROTOCOL_GUID"),
     UefiGuid(
         "FAD7933A-6C21-4234-A4340A8A0D2B0781",
-        name="gEfiIsaHcServiceBindingProtocolGuid",
+        name="EFI_ISA_HC_SERVICE_BINDING_PROTOCOL_GUID",
     ),
-    UefiGuid("B91978DF-9FC1-427D-BB054C828455CA27", name="gEfiSioControlProtocolGuid"),
-    UefiGuid("FD0F4478-0EFD-461D-BA2DE58C45FD5F5E", name="gEfiGetPcdInfoProtocolGuid"),
-    UefiGuid("CD72881F-45B5-4FEB-98C8313DA8117462", name="gEfiI2cMasterProtocolGuid"),
-    UefiGuid("B60A3E6B-18C4-46E5-A29AC9A10665A28E", name="gEfiI2cIoProtocolGuid"),
     UefiGuid(
-        "DA8CD7C4-1C00-49E2-803E5214E701894C", name="gEfiI2cEnumerateProtocolGuid"
+        "B91978DF-9FC1-427D-BB054C828455CA27", name="EFI_SIO_CONTROL_PROTOCOL_GUID"
     ),
-    UefiGuid("A5AAB9E3-C727-48CD-8BBF427233854948", name="gEfiI2cHostProtocolGuid"),
+    UefiGuid(
+        "FD0F4478-0EFD-461D-BA2DE58C45FD5F5E", name="EFI_GET_PCD_INFO_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "CD72881F-45B5-4FEB-98C8313DA8117462", name="EFI_I2C_MASTER_PROTOCOL_GUID"
+    ),
+    UefiGuid("B60A3E6B-18C4-46E5-A29AC9A10665A28E", name="EFI_I2C_IO_PROTOCOL_GUID"),
+    UefiGuid(
+        "DA8CD7C4-1C00-49E2-803E5214E701894C", name="EFI_I2C_ENUMERATE_PROTOCOL_GUID"
+    ),
+    UefiGuid("A5AAB9E3-C727-48CD-8BBF427233854948", name="EFI_I2C_HOST_PROTOCOL_GUID"),
     UefiGuid(
         "55B71FB5-17C6-410E-B5BD5FA2E3D4466B",
-        name="gEfiI2cBusConfigurationManagementProtocolGuid",
+        name="EFI_I2C_BUS_CONFIGURATION_MANAGEMENT_PROTOCOL_GUID",
     ),
-    UefiGuid("5D5450D7-990C-4180-A8038E63F0608307", name="gEfiMmMpProtocolGuid"),
-    UefiGuid("24E70042-D5C5-4260-8C390AD3AA32E93D", name="gEfiMmEndOfDxeProtocolGuid"),
+    UefiGuid("5D5450D7-990C-4180-A8038E63F0608307", name="EFI_MM_MP_PROTOCOL_GUID"),
     UefiGuid(
-        "58DC368D-7BFA-4E77-ABBC0E29418DF930", name="gEfiMmIoTrapDispatchProtocolGuid"
+        "24E70042-D5C5-4260-8C390AD3AA32E93D", name="EFI_MM_END_OF_DXE_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "58DC368D-7BFA-4E77-ABBC0E29418DF930",
+        name="EFI_MM_IO_TRAP_DISPATCH_PROTOCOL_GUID",
     ),
     UefiGuid(
         "1B1183FA-1823-46A7-88729C578755409D",
-        name="gEfiMmPowerButtonDispatchProtocolGuid",
+        name="EFI_MM_POWER_BUTTON_DISPATCH_PROTOCOL_GUID",
     ),
     UefiGuid(
         "7300C4A1-43F2-4017-A51BC81A7F40585B",
-        name="gEfiMmStandbyButtonDispatchProtocolGuid",
+        name="EFI_MM_STANDBY_BUTTON_DISPATCH_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "25566B03-B577-4CBF-958CED663EA24380", name="gEfiMmGpiDispatchProtocolGuid"
+        "25566B03-B577-4CBF-958CED663EA24380", name="EFI_MM_GPI_DISPATCH_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "EE9B8D90-C5A6-40A2-BDE252558D33CCA1", name="gEfiMmUsbDispatchProtocolGuid"
+        "EE9B8D90-C5A6-40A2-BDE252558D33CCA1", name="EFI_MM_USB_DISPATCH_PROTOCOL_GUID"
     ),
     UefiGuid(
         "4CEC368E-8E8E-4D71-8BE1958C45FC8A53",
-        name="gEfiMmPeriodicTimerDispatchProtocolGuid",
+        name="EFI_MM_PERIODIC_TIMER_DISPATCH_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "456D2859-A84B-4E47-A2EE3276D886997D", name="gEfiMmSxDispatchProtocolGuid"
+        "456D2859-A84B-4E47-A2EE3276D886997D", name="EFI_MM_SX_DISPATCH_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "18A3C6DC-5EEA-48C8-A1C1B53389F98999", name="gEfiMmSwDispatchProtocolGuid"
+        "18A3C6DC-5EEA-48C8-A1C1B53389F98999", name="EFI_MM_SW_DISPATCH_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "8BC1714D-FFCB-41C3-89DC6C74D06D98EA", name="gEfiMmPciRootBridgeIoProtocolGuid"
+        "8BC1714D-FFCB-41C3-89DC6C74D06D98EA",
+        name="EFI_MM_PCI_ROOT_BRIDGE_IO_PROTOCOL_GUID",
     ),
-    UefiGuid("EB346B97-975F-4A9F-8B22F8E92BB3D569", name="gEfiMmCpuProtocolGuid"),
+    UefiGuid("EB346B97-975F-4A9F-8B22F8E92BB3D569", name="EFI_MM_CPU_PROTOCOL_GUID"),
     UefiGuid(
-        "6AFD2B77-98C1-4ACD-A6F98A9439DE0FB1", name="gEfiMmStatusCodeProtocolGuid"
-    ),
-    UefiGuid(
-        "60FF8964-E906-41D0-AFEDF241E974E08E", name="gEfiDxeMmReadyToLockProtocolGuid"
+        "6AFD2B77-98C1-4ACD-A6F98A9439DE0FB1", name="EFI_MM_STATUS_CODE_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "26EEB3DE-B689-492E-80F0BE8BD7DA4BA7", name="gEfiMmConfigurationProtocolGuid"
+        "60FF8964-E906-41D0-AFEDF241E974E08E",
+        name="EFI_DXE_MM_READY_TO_LOCK_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "47B7FA8C-F4BD-4AF6-8200333086F0D2C8", name="gEfiMmReadyToLockProtocolGuid"
-    ),
-    UefiGuid("843DC720-AB1E-42CB-93578A0078F3561B", name="gEfiMmControlProtocolGuid"),
-    UefiGuid("C2702B74-800C-4131-87468FB5B89CE4AC", name="gEfiMmAccessProtocolGuid"),
-    UefiGuid("F4CCBFB7-F6E0-47FD-9DD410A8F150C191", name="gEfiMmBaseProtocolGuid"),
-    UefiGuid("3242A9D8-CE70-4AA0-955D5E7B140DE4D2", name="gEfiMmCpuIoProtocolGuid"),
-    UefiGuid(
-        "2FF29FA7-5E80-4ED9-B380017D3C554FF4", name="gEfiMmRscHandlerProtocolGuid"
+        "26EEB3DE-B689-492E-80F0BE8BD7DA4BA7", name="EFI_MM_CONFIGURATION_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "C68ED8E2-9DC6-4CBD-9D94DB65ACC5C332", name="gEfiMmCommunicationProtocolGuid"
+        "47B7FA8C-F4BD-4AF6-8200333086F0D2C8", name="EFI_MM_READY_TO_LOCK_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "843DC720-AB1E-42CB-93578A0078F3561B", name="EFI_MM_CONTROL_PROTOCOL_GUID"
+    ),
+    UefiGuid("C2702B74-800C-4131-87468FB5B89CE4AC", name="EFI_MM_ACCESS_PROTOCOL_GUID"),
+    UefiGuid("F4CCBFB7-F6E0-47FD-9DD410A8F150C191", name="EFI_MM_BASE_PROTOCOL_GUID"),
+    UefiGuid("3242A9D8-CE70-4AA0-955D5E7B140DE4D2", name="EFI_MM_CPU_IO_PROTOCOL_GUID"),
+    UefiGuid(
+        "2FF29FA7-5E80-4ED9-B380017D3C554FF4", name="EFI_MM_RSC_HANDLER_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "C68ED8E2-9DC6-4CBD-9D94DB65ACC5C332", name="EFI_MM_COMMUNICATION_PROTOCOL_GUID"
     ),
     UefiGuid(
         "39136FC7-1A11-49DE-BF350E78DDB524FC",
-        name="gEfiLegacySpiControllerProtocolGuid",
+        name="EFI_LEGACY_SPI_CONTROLLER_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "F01BED57-04BC-4F3F-9660D6F2EA228259", name="gEfiLegacySpiFlashProtocolGuid"
+        "F01BED57-04BC-4F3F-9660D6F2EA228259", name="EFI_LEGACY_SPI_FLASH_PROTOCOL_GUID"
     ),
     UefiGuid(
         "62331B78-D8D0-4C8C-8CCBD27DFE32DB9B",
-        name="gEfiLegacySpiSmmControllerProtocolGuid",
+        name="EFI_LEGACY_SPI_SMM_CONTROLLER_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "5E3848D4-0DB5-4FC0-97293F353D4F879F", name="gEfiLegacySpiSmmFlashProtocolGuid"
+        "5E3848D4-0DB5-4FC0-97293F353D4F879F",
+        name="EFI_LEGACY_SPI_SMM_FLASH_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "85A6D3E6-B65B-4AFC-B38FC6D54AF6DDC8", name="gEfiSpiConfigurationProtocolGuid"
+        "85A6D3E6-B65B-4AFC-B38FC6D54AF6DDC8",
+        name="EFI_SPI_CONFIGURATION_PROTOCOL_GUID",
     ),
-    UefiGuid("C74E5DB2-FA96-4AE2-B39915977FE3002D", name="gEfiSpiHcProtocolGuid"),
-    UefiGuid("B57EC3FE-F833-4BA6-85782A7D6A87444B", name="gEfiSpiNorFlashProtocolGuid"),
+    UefiGuid("C74E5DB2-FA96-4AE2-B39915977FE3002D", name="EFI_SPI_HC_PROTOCOL_GUID"),
+    UefiGuid(
+        "B57EC3FE-F833-4BA6-85782A7D6A87444B", name="EFI_SPI_NOR_FLASH_PROTOCOL_GUID"
+    ),
     UefiGuid(
         "995C6ECA-171B-45FD-A3AAFD4C9C9DEF59",
-        name="gEfiSpiSmmConfigurationProtocolGuid",
-    ),
-    UefiGuid("E9F02217-2093-4470-8A545C2CFFE73ECB", name="gEfiSpiSmmHcProtocolGuid"),
-    UefiGuid(
-        "AAB18F19-FE14-4666-860487FF6D662C9A", name="gEfiSpiSmmNorFlashProtocolGuid"
-    ),
-    UefiGuid("EBA4E8D2-3858-41EC-A2812647BA9660D0", name="gEfiDebugPortProtocolGuid"),
-    UefiGuid(
-        "2755590C-6F3C-42FA-9EA4A3BA543CDA25", name="gEfiDebugSupportProtocolGuid"
-    ),
-    UefiGuid("D8117CFE-94A6-11D4-9A3A0090273FC14D", name="gEfiDecompressProtocolGuid"),
-    UefiGuid("AF6AC311-84C3-11D2-8E3C00A0C969723B", name="gEfiDeviceIoProtocolGuid"),
-    UefiGuid("09576E91-6D3F-11D2-8E3900A0C969723B", name="gEfiDevicePathProtocolGuid"),
-    UefiGuid(
-        "05C99A21-C70F-4AD2-8A5F35DF3343F51E", name="gEfiDevicePathFromTextProtocolGuid"
+        name="EFI_SPI_SMM_CONFIGURATION_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "8B843E20-8132-4852-90CC551A4E4A7F1C", name="gEfiDevicePathToTextProtocolGuid"
+        "E9F02217-2093-4470-8A545C2CFFE73ECB", name="EFI_SPI_SMM_HC_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "AAB18F19-FE14-4666-860487FF6D662C9A",
+        name="EFI_SPI_SMM_NOR_FLASH_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "EBA4E8D2-3858-41EC-A2812647BA9660D0", name="EFI_DEBUG_PORT_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "2755590C-6F3C-42FA-9EA4A3BA543CDA25", name="EFI_DEBUG_SUPPORT_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "D8117CFE-94A6-11D4-9A3A0090273FC14D", name="EFI_DECOMPRESS_PROTOCOL_GUID"
+    ),
+    UefiGuid("AF6AC311-84C3-11D2-8E3C00A0C969723B", name="EFI_DEVICE_IO_PROTOCOL_GUID"),
+    UefiGuid(
+        "09576E91-6D3F-11D2-8E3900A0C969723B", name="EFI_DEVICE_PATH_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "05C99A21-C70F-4AD2-8A5F35DF3343F51E",
+        name="EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "8B843E20-8132-4852-90CC551A4E4A7F1C",
+        name="EFI_DEVICE_PATH_TO_TEXT_PROTOCOL_GUID",
     ),
     UefiGuid(
         "0379BE4E-D706-437D-B037EDB82FB772A4",
-        name="gEfiDevicePathUtilitiesProtocolGuid",
+        name="EFI_DEVICE_PATH_UTILITIES_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "18A031AB-B443-4D1A-A5C00C09261E9F71", name="gEfiDriverBindingProtocolGuid"
+        "18A031AB-B443-4D1A-A5C00C09261E9F71", name="EFI_DRIVER_BINDING_PROTOCOL_GUID"
     ),
     UefiGuid(
         "6B30C738-A391-11D4-9A3B0090273FC14D",
-        name="gEfiPlatformDriverOverrideProtocolGuid",
+        name="EFI_PLATFORM_DRIVER_OVERRIDE_PROTOCOL_GUID",
     ),
     UefiGuid(
         "B1EE129E-DA36-4181-91F804A4923766A7",
-        name="gEfiDriverFamilyOverrideProtocolGuid",
+        name="EFI_DRIVER_FAMILY_OVERRIDE_PROTOCOL_GUID",
     ),
     UefiGuid(
         "3BC1B285-8A15-4A82-AABF4D7D13FB3265",
-        name="gEfiBusSpecificDriverOverrideProtocolGuid",
+        name="EFI_BUS_SPECIFIC_DRIVER_OVERRIDE_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "4D330321-025F-4AAC-90D85ED900173B63", name="gEfiDriverDiagnostics2ProtocolGuid"
+        "4D330321-025F-4AAC-90D85ED900173B63",
+        name="EFI_DRIVER_DIAGNOSTICS2_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "0784924F-E296-11D4-9A490090273FC14D", name="gEfiDriverDiagnosticsProtocolGuid"
+        "0784924F-E296-11D4-9A490090273FC14D",
+        name="EFI_DRIVER_DIAGNOSTICS_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "6A7A5CFF-E8D9-4F70-BADA75AB3025CE14", name="gEfiComponentName2ProtocolGuid"
+        "6A7A5CFF-E8D9-4F70-BADA75AB3025CE14", name="EFI_COMPONENT_NAME2_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "107A772C-D5E1-11D4-9A460090273FC14D", name="gEfiComponentNameProtocolGuid"
+        "107A772C-D5E1-11D4-9A460090273FC14D", name="EFI_COMPONENT_NAME_PROTOCOL_GUID"
     ),
     UefiGuid(
         "BFD7DC1D-24F1-40D9-82E72E09BB6B4EBE",
-        name="gEfiDriverConfiguration2ProtocolGuid",
+        name="EFI_DRIVER_CONFIGURATION2_PROTOCOL_GUID",
     ),
     UefiGuid(
         "107A772B-D5E1-11D4-9A460090273FC14D",
-        name="gEfiDriverConfigurationProtocolGuid",
+        name="EFI_DRIVER_CONFIGURATION_PROTOCOL_GUID",
     ),
     UefiGuid(
         "642CD590-8059-4C0A-A958C5EC07D23C4B",
-        name="gEfiPlatformToDriverConfigurationProtocolGuid",
+        name="EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL_GUID",
     ),
     UefiGuid(
         "5C198761-16A8-4E69-972C89D67954F81D",
-        name="gEfiDriverSupportedEfiVersionProtocolGuid",
+        name="EFI_DRIVER_SUPPORTED_EFI_VERSION_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "387477C1-69C7-11D2-8E3900A0C969723B", name="gEfiSimpleTextInProtocolGuid"
+        "387477C1-69C7-11D2-8E3900A0C969723B", name="EFI_SIMPLE_TEXT_IN_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "DD9E7534-7762-4698-8C14F58517A625AA", name="gEfiSimpleTextInputExProtocolGuid"
+        "DD9E7534-7762-4698-8C14F58517A625AA",
+        name="EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "387477C2-69C7-11D2-8E3900A0C969723B", name="gEfiSimpleTextOutProtocolGuid"
+        "387477C2-69C7-11D2-8E3900A0C969723B", name="EFI_SIMPLE_TEXT_OUT_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "31878C87-0B75-11D5-9A4F0090273FC14D", name="gEfiSimplePointerProtocolGuid"
+        "31878C87-0B75-11D5-9A4F0090273FC14D", name="EFI_SIMPLE_POINTER_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "8D59D32B-C655-4AE9-9B15F25904992A43", name="gEfiAbsolutePointerProtocolGuid"
+        "8D59D32B-C655-4AE9-9B15F25904992A43", name="EFI_ABSOLUTE_POINTER_PROTOCOL_GUID"
     ),
-    UefiGuid("BB25CF6F-F1D4-11D2-9A0C0090273FC1FD", name="gEfiSerialIoProtocolGuid"),
+    UefiGuid("BB25CF6F-F1D4-11D2-9A0C0090273FC1FD", name="EFI_SERIAL_IO_PROTOCOL_GUID"),
     UefiGuid(
-        "9042A9DE-23DC-4A38-96FB7ADED080516A", name="gEfiGraphicsOutputProtocolGuid"
+        "9042A9DE-23DC-4A38-96FB7ADED080516A", name="EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "1C0C34F6-D380-41FA-A0498AD06C1A66AA", name="gEfiEdidDiscoveredProtocolGuid"
+        "1C0C34F6-D380-41FA-A0498AD06C1A66AA", name="EFI_EDID_DISCOVERED_PROTOCOL_GUID"
     ),
-    UefiGuid("BD8C1056-9F36-44EC-92A8A6337F817986", name="gEfiEdidActiveProtocolGuid"),
     UefiGuid(
-        "48ECB431-FB72-45C0-A922F458FE040BD5", name="gEfiEdidOverrideProtocolGuid"
+        "BD8C1056-9F36-44EC-92A8A6337F817986", name="EFI_EDID_ACTIVE_PROTOCOL_GUID"
     ),
-    UefiGuid("61A4D49E-6F68-4F1B-B922A86EED0B07A2", name="gEfiUgaIoProtocolGuid"),
-    UefiGuid("982C298B-F4FA-41CB-B83877AA688FB839", name="gEfiUgaDrawProtocolGuid"),
-    UefiGuid("5B1B31A1-9562-11D2-8E3F00A0C969723B", name="gEfiLoadedImageProtocolGuid"),
+    UefiGuid(
+        "48ECB431-FB72-45C0-A922F458FE040BD5", name="EFI_EDID_OVERRIDE_PROTOCOL_GUID"
+    ),
+    UefiGuid("61A4D49E-6F68-4F1B-B922A86EED0B07A2", name="EFI_UGA_IO_PROTOCOL_GUID"),
+    UefiGuid("982C298B-F4FA-41CB-B83877AA688FB839", name="EFI_UGA_DRAW_PROTOCOL_GUID"),
+    UefiGuid(
+        "5B1B31A1-9562-11D2-8E3F00A0C969723B", name="EFI_LOADED_IMAGE_PROTOCOL_GUID"
+    ),
     UefiGuid(
         "BC62157E-3E33-4FEC-99202D3B36D750DF",
-        name="gEfiLoadedImageDevicePathProtocolGuid",
+        name="EFI_LOADED_IMAGE_DEVICE_PATH_PROTOCOL_GUID",
     ),
-    UefiGuid("56EC3091-954C-11D2-8E3F00A0C969723B", name="gEfiLoadFileProtocolGuid"),
-    UefiGuid("4006C0C1-FCB3-403E-996D4A6C8724E06D", name="gEfiLoadFile2ProtocolGuid"),
+    UefiGuid("56EC3091-954C-11D2-8E3F00A0C969723B", name="EFI_LOAD_FILE_PROTOCOL_GUID"),
     UefiGuid(
-        "964E5B22-6459-11D2-8E3900A0C969723B", name="gEfiSimpleFileSystemProtocolGuid"
-    ),
-    UefiGuid("1E93E633-D65A-459E-AB8493D9EC266D18", name="gEfiTapeIoProtocolGuid"),
-    UefiGuid("CE345171-BA0B-11D2-8E4F00A0C969723B", name="gEfiDiskIoProtocolGuid"),
-    UefiGuid("964E5B21-6459-11D2-8E3900A0C969723B", name="gEfiBlockIoProtocolGuid"),
-    UefiGuid(
-        "1D85CD7F-F43D-11D2-9A0C0090273FC14D", name="gEfiUnicodeCollationProtocolGuid"
+        "4006C0C1-FCB3-403E-996D4A6C8724E06D", name="EFI_LOAD_FILE2_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "A4C751FC-23AE-4C3E-92E94964CF63F349", name="gEfiUnicodeCollation2ProtocolGuid"
+        "964E5B22-6459-11D2-8E3900A0C969723B",
+        name="EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID",
+    ),
+    UefiGuid("1E93E633-D65A-459E-AB8493D9EC266D18", name="EFI_TAPE_IO_PROTOCOL_GUID"),
+    UefiGuid("CE345171-BA0B-11D2-8E4F00A0C969723B", name="EFI_DISK_IO_PROTOCOL_GUID"),
+    UefiGuid("964E5B21-6459-11D2-8E3900A0C969723B", name="EFI_BLOCK_IO_PROTOCOL_GUID"),
+    UefiGuid(
+        "1D85CD7F-F43D-11D2-9A0C0090273FC14D",
+        name="EFI_UNICODE_COLLATION_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "2F707EBB-4A1A-11D4-9A380090273FC14D", name="gEfiPciRootBridgeIoProtocolGuid"
-    ),
-    UefiGuid("4CF5B200-68B8-4CA5-9EECB23E3F50029A", name="gEfiPciIoProtocolGuid"),
-    UefiGuid("932F47E6-2362-4002-803E3CD54B138F85", name="gEfiScsiIoProtocolGuid"),
-    UefiGuid(
-        "143B7632-B81B-4CB7-ABD3B625A5B9BFFE", name="gEfiExtScsiPassThruProtocolGuid"
+        "A4C751FC-23AE-4C3E-92E94964CF63F349",
+        name="EFI_UNICODE_COLLATION2_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "A59E8FCF-BDA0-43BB-90B1D3732ECAA877", name="gEfiScsiPassThruProtocolGuid"
+        "2F707EBB-4A1A-11D4-9A380090273FC14D",
+        name="EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL_GUID",
+    ),
+    UefiGuid("4CF5B200-68B8-4CA5-9EECB23E3F50029A", name="EFI_PCI_IO_PROTOCOL_GUID"),
+    UefiGuid("932F47E6-2362-4002-803E3CD54B138F85", name="EFI_SCSI_IO_PROTOCOL_GUID"),
+    UefiGuid(
+        "143B7632-B81B-4CB7-ABD3B625A5B9BFFE",
+        name="EFI_EXT_SCSI_PASS_THRU_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "59324945-EC44-4C0D-B1CD9DB139DF070C", name="gEfiIScsiInitiatorNameProtocolGuid"
+        "A59E8FCF-BDA0-43BB-90B1D3732ECAA877", name="EFI_SCSI_PASS_THRU_PROTOCOL_GUID"
     ),
-    UefiGuid("3E745226-9818-45B6-A2ACD7CD0E8BA2BC", name="gEfiUsb2HcProtocolGuid"),
-    UefiGuid("F5089266-1AA0-4953-97D8562F8A73B519", name="gEfiUsbHcProtocolGuid"),
-    UefiGuid("2B2F68D6-0CD2-44CF-8E8BBBA20B1B5B75", name="gEfiUsbIoProtocolGuid"),
-    UefiGuid("FFE06BDD-6107-46A6-7BB25A9C7EC5275C", name="gEfiAcpiTableProtocolGuid"),
-    UefiGuid("13AC6DD1-73D0-11D4-B06B00AA00BD6DE7", name="gEfiEbcProtocolGuid"),
     UefiGuid(
-        "A19832B9-AC25-11D3-9A2D0090273FC14D", name="gEfiSimpleNetworkProtocolGuid"
+        "59324945-EC44-4C0D-B1CD9DB139DF070C",
+        name="EFI_I_SCSI_INITIATOR_NAME_PROTOCOL_GUID",
+    ),
+    UefiGuid("3E745226-9818-45B6-A2ACD7CD0E8BA2BC", name="EFI_USB2_HC_PROTOCOL_GUID"),
+    UefiGuid("F5089266-1AA0-4953-97D8562F8A73B519", name="EFI_USB_HC_PROTOCOL_GUID"),
+    UefiGuid("2B2F68D6-0CD2-44CF-8E8BBBA20B1B5B75", name="EFI_USB_IO_PROTOCOL_GUID"),
+    UefiGuid(
+        "FFE06BDD-6107-46A6-7BB25A9C7EC5275C", name="EFI_ACPI_TABLE_PROTOCOL_GUID"
+    ),
+    UefiGuid("13AC6DD1-73D0-11D4-B06B00AA00BD6DE7", name="EFI_EBC_PROTOCOL_GUID"),
+    UefiGuid(
+        "A19832B9-AC25-11D3-9A2D0090273FC14D", name="EFI_SIMPLE_NETWORK_PROTOCOL_GUID"
     ),
     UefiGuid(
         "1ACED566-76ED-4218-BC81767F1F977A89",
-        name="gEfiNetworkInterfaceIdentifierProtocolGuid_31",
+        name="EFI_NETWORK_INTERFACE_IDENTIFIER_PROTOCOL_GUID_31",
     ),
     UefiGuid(
         "E18541CD-F755-4F73-928D643C8A79B229",
-        name="gEfiNetworkInterfaceIdentifierProtocolGuid",
+        name="EFI_NETWORK_INTERFACE_IDENTIFIER_PROTOCOL_GUID",
     ),
     UefiGuid(
         "245DCA21-FB7B-11D3-8F0100A0C969723B",
-        name="gEfiPxeBaseCodeCallbackProtocolGuid",
+        name="EFI_PXE_BASE_CODE_CALLBACK_PROTOCOL_GUID",
     ),
-    UefiGuid("03C4E603-AC28-11D3-9A2D0090273FC14D", name="gEfiPxeBaseCodeProtocolGuid"),
-    UefiGuid("0B64AAB0-5429-11D4-981600A0C91FADCF", name="gEfiBisProtocolGuid"),
+    UefiGuid(
+        "03C4E603-AC28-11D3-9A2D0090273FC14D", name="EFI_PXE_BASE_CODE_PROTOCOL_GUID"
+    ),
+    UefiGuid("0B64AAB0-5429-11D4-981600A0C91FADCF", name="EFI_BIS_PROTOCOL_GUID"),
     UefiGuid(
         "F36FF770-A7E1-42CF-9ED256F0F271F44C",
-        name="gEfiManagedNetworkServiceBindingProtocolGuid",
+        name="EFI_MANAGED_NETWORK_SERVICE_BINDING_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "7AB33A91-ACE5-4326-B572E7EE33D39F16", name="gEfiManagedNetworkProtocolGuid"
+        "7AB33A91-ACE5-4326-B572E7EE33D39F16", name="EFI_MANAGED_NETWORK_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "F44C00EE-1F2C-4A00-AA091C9F3E0800A3", name="gEfiArpServiceBindingProtocolGuid"
+        "F44C00EE-1F2C-4A00-AA091C9F3E0800A3",
+        name="EFI_ARP_SERVICE_BINDING_PROTOCOL_GUID",
     ),
-    UefiGuid("F4B427BB-BA21-4F16-BC4E43E416AB619C", name="gEfiArpProtocolGuid"),
+    UefiGuid("F4B427BB-BA21-4F16-BC4E43E416AB619C", name="EFI_ARP_PROTOCOL_GUID"),
     UefiGuid(
         "9D9A39D8-BD42-4A73-A4D58EE94BE11380",
-        name="gEfiDhcp4ServiceBindingProtocolGuid",
+        name="EFI_DHCP4_SERVICE_BINDING_PROTOCOL_GUID",
     ),
-    UefiGuid("8A219718-4EF5-4761-91C8C0F04BDA9E56", name="gEfiDhcp4ProtocolGuid"),
+    UefiGuid("8A219718-4EF5-4761-91C8C0F04BDA9E56", name="EFI_DHCP4_PROTOCOL_GUID"),
     UefiGuid(
-        "00720665-67EB-4A99-BAF7D3C33A1C7CC9", name="gEfiTcp4ServiceBindingProtocolGuid"
+        "00720665-67EB-4A99-BAF7D3C33A1C7CC9",
+        name="EFI_TCP4_SERVICE_BINDING_PROTOCOL_GUID",
     ),
-    UefiGuid("65530BC7-A359-410F-B0105AADC7EC2B62", name="gEfiTcp4ProtocolGuid"),
+    UefiGuid("65530BC7-A359-410F-B0105AADC7EC2B62", name="EFI_TCP4_PROTOCOL_GUID"),
     UefiGuid(
-        "C51711E7-B4BF-404A-BFB80A048EF1FFE4", name="gEfiIp4ServiceBindingProtocolGuid"
+        "C51711E7-B4BF-404A-BFB80A048EF1FFE4",
+        name="EFI_IP4_SERVICE_BINDING_PROTOCOL_GUID",
     ),
-    UefiGuid("41D94CD2-35B6-455A-8258D4E51334AADD", name="gEfiIp4ProtocolGuid"),
-    UefiGuid("3B95AA31-3793-434B-8667C8070892E05E", name="gEfiIp4ConfigProtocolGuid"),
+    UefiGuid("41D94CD2-35B6-455A-8258D4E51334AADD", name="EFI_IP4_PROTOCOL_GUID"),
     UefiGuid(
-        "83F01464-99BD-45E5-B383AF6305D8E9E6", name="gEfiUdp4ServiceBindingProtocolGuid"
+        "3B95AA31-3793-434B-8667C8070892E05E", name="EFI_IP4_CONFIG_PROTOCOL_GUID"
     ),
-    UefiGuid("3AD9DF29-4501-478D-B1F87F7FE70E50F3", name="gEfiUdp4ProtocolGuid"),
+    UefiGuid(
+        "83F01464-99BD-45E5-B383AF6305D8E9E6",
+        name="EFI_UDP4_SERVICE_BINDING_PROTOCOL_GUID",
+    ),
+    UefiGuid("3AD9DF29-4501-478D-B1F87F7FE70E50F3", name="EFI_UDP4_PROTOCOL_GUID"),
     UefiGuid(
         "2FE800BE-8F01-4AA6-946BD71388E1833F",
-        name="gEfiMtftp4ServiceBindingProtocolGuid",
+        name="EFI_MTFTP4_SERVICE_BINDING_PROTOCOL_GUID",
     ),
-    UefiGuid("78247C57-63DB-4708-99C2A8B4A9A61F6B", name="gEfiMtftp4ProtocolGuid"),
+    UefiGuid("78247C57-63DB-4708-99C2A8B4A9A61F6B", name="EFI_MTFTP4_PROTOCOL_GUID"),
     UefiGuid(
-        "7671D9D0-53DB-4173-AA692327F21F0BC7", name="gEfiAuthenticationInfoProtocolGuid"
-    ),
-    UefiGuid(
-        "42881C98-A4F3-44B0-A39DDFA18667D8CD", name="gEfiHashServiceBindingProtocolGuid"
-    ),
-    UefiGuid("C5184932-DBA5-46DB-A5BACC0BDA9C1435", name="gEfiHashProtocolGuid"),
-    UefiGuid("F541796D-A62E-4954-A7759584F61B9CDD", name="gEfiTcgProtocolGuid"),
-    UefiGuid("607F766C-7455-42BE-930BE4D76DB2720F", name="gEfiTrEEProtocolGuid"),
-    UefiGuid("607F766C-7455-42BE-930BE4D76DB2720F", name="gEfiTcg2ProtocolGuid"),
-    UefiGuid(
-        "1E2ED096-30E2-4254-BD89863BBEF82325", name="gEfiTcg2FinalEventsTableGuid"
+        "7671D9D0-53DB-4173-AA692327F21F0BC7",
+        name="EFI_AUTHENTICATION_INFO_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "B9D4C360-BCFB-4F9B-929853C136982258", name="gEfiFormBrowser2ProtocolGuid"
+        "42881C98-A4F3-44B0-A39DDFA18667D8CD",
+        name="EFI_HASH_SERVICE_BINDING_PROTOCOL_GUID",
     ),
-    UefiGuid("0FD96974-23AA-4CDC-B9CB98D17750322A", name="gEfiHiiStringProtocolGuid"),
-    UefiGuid("31A6406A-6BDF-4E46-B2A2EBAA89C40920", name="gEfiHiiImageProtocolGuid"),
+    UefiGuid("C5184932-DBA5-46DB-A5BACC0BDA9C1435", name="EFI_HASH_PROTOCOL_GUID"),
+    UefiGuid("F541796D-A62E-4954-A7759584F61B9CDD", name="EFI_TCG_PROTOCOL_GUID"),
+    UefiGuid("607F766C-7455-42BE-930BE4D76DB2720F", name="EFI_TR_E_E_PROTOCOL_GUID"),
+    UefiGuid("607F766C-7455-42BE-930BE4D76DB2720F", name="EFI_TCG2_PROTOCOL_GUID"),
     UefiGuid(
-        "587E72D7-CC50-4F79-8209CA291FC1A10F", name="gEfiHiiConfigRoutingProtocolGuid"
-    ),
-    UefiGuid("EF9FC172-A1B2-4693-B3276D32FC416042", name="gEfiHiiDatabaseProtocolGuid"),
-    UefiGuid("E9CA4775-8657-47FC-97E77ED65A084324", name="gEfiHiiFontProtocolGuid"),
-    UefiGuid(
-        "330D4706-F2A0-4E4F-A369B66FA8D54385", name="gEfiHiiConfigAccessProtocolGuid"
+        "1E2ED096-30E2-4254-BD89863BBEF82325", name="EFI_TCG2_FINAL_EVENTS_TABLE_GUID"
     ),
     UefiGuid(
-        "6A1EE763-D47A-43B4-AABEEF1DE2AB56FC", name="gEfiHiiPackageListProtocolGuid"
+        "B9D4C360-BCFB-4F9B-929853C136982258", name="EFI_FORM_BROWSER2_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "EC835DD3-FE0F-617B-A621B350C3E13388", name="gEfiIp6ServiceBindingProtocolGuid"
+        "0FD96974-23AA-4CDC-B9CB98D17750322A", name="EFI_HII_STRING_PROTOCOL_GUID"
     ),
-    UefiGuid("2C8759D5-5C2D-66EF-925FB66C101957E2", name="gEfiIp6ProtocolGuid"),
-    UefiGuid("937FE521-95AE-4D1A-892948BCD90AD31A", name="gEfiIp6ConfigProtocolGuid"),
+    UefiGuid("31A6406A-6BDF-4E46-B2A2EBAA89C40920", name="EFI_HII_IMAGE_PROTOCOL_GUID"),
+    UefiGuid(
+        "587E72D7-CC50-4F79-8209CA291FC1A10F",
+        name="EFI_HII_CONFIG_ROUTING_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "EF9FC172-A1B2-4693-B3276D32FC416042", name="EFI_HII_DATABASE_PROTOCOL_GUID"
+    ),
+    UefiGuid("E9CA4775-8657-47FC-97E77ED65A084324", name="EFI_HII_FONT_PROTOCOL_GUID"),
+    UefiGuid(
+        "330D4706-F2A0-4E4F-A369B66FA8D54385",
+        name="EFI_HII_CONFIG_ACCESS_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "6A1EE763-D47A-43B4-AABEEF1DE2AB56FC", name="EFI_HII_PACKAGE_LIST_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "EC835DD3-FE0F-617B-A621B350C3E13388",
+        name="EFI_IP6_SERVICE_BINDING_PROTOCOL_GUID",
+    ),
+    UefiGuid("2C8759D5-5C2D-66EF-925FB66C101957E2", name="EFI_IP6_PROTOCOL_GUID"),
+    UefiGuid(
+        "937FE521-95AE-4D1A-892948BCD90AD31A", name="EFI_IP6_CONFIG_PROTOCOL_GUID"
+    ),
     UefiGuid(
         "D9760FF3-3CCA-4267-80F97527FAFA4223",
-        name="gEfiMtftp6ServiceBindingProtocolGuid",
+        name="EFI_MTFTP6_SERVICE_BINDING_PROTOCOL_GUID",
     ),
-    UefiGuid("BF0A78BA-EC29-49CF-A1C97AE54EAB6A51", name="gEfiMtftp6ProtocolGuid"),
+    UefiGuid("BF0A78BA-EC29-49CF-A1C97AE54EAB6A51", name="EFI_MTFTP6_PROTOCOL_GUID"),
     UefiGuid(
         "9FB9A8A1-2F4A-43A6-889CD0F7B6C47AD5",
-        name="gEfiDhcp6ServiceBindingProtocolGuid",
+        name="EFI_DHCP6_SERVICE_BINDING_PROTOCOL_GUID",
     ),
-    UefiGuid("87C8BAD7-0595-4053-8297DEDE395F5D5B", name="gEfiDhcp6ProtocolGuid"),
+    UefiGuid("87C8BAD7-0595-4053-8297DEDE395F5D5B", name="EFI_DHCP6_PROTOCOL_GUID"),
     UefiGuid(
-        "66ED4721-3C98-4D3E-81E3D03DD39A7254", name="gEfiUdp6ServiceBindingProtocolGuid"
+        "66ED4721-3C98-4D3E-81E3D03DD39A7254",
+        name="EFI_UDP6_SERVICE_BINDING_PROTOCOL_GUID",
     ),
-    UefiGuid("4F948815-B4B9-43CB-8A3390E060B34955", name="gEfiUdp6ProtocolGuid"),
+    UefiGuid("4F948815-B4B9-43CB-8A3390E060B34955", name="EFI_UDP6_PROTOCOL_GUID"),
     UefiGuid(
-        "EC20EB79-6C1A-4664-9A0DD2E4CC16D664", name="gEfiTcp6ServiceBindingProtocolGuid"
+        "EC20EB79-6C1A-4664-9A0DD2E4CC16D664",
+        name="EFI_TCP6_SERVICE_BINDING_PROTOCOL_GUID",
     ),
-    UefiGuid("46E44855-BD60-4AB7-AB0DA679B9447D77", name="gEfiTcp6ProtocolGuid"),
-    UefiGuid("9E23D768-D2F3-4366-9FC33A7ABA864374", name="gEfiVlanConfigProtocolGuid"),
-    UefiGuid("5D9F96DB-E731-4CAA-A00D72E187CD7762", name="gEfiEapProtocolGuid"),
+    UefiGuid("46E44855-BD60-4AB7-AB0DA679B9447D77", name="EFI_TCP6_PROTOCOL_GUID"),
     UefiGuid(
-        "BB62E663-625D-40B2-A088BBE83623A245", name="gEfiEapManagementProtocolGuid"
+        "9E23D768-D2F3-4366-9FC33A7ABA864374", name="EFI_VLAN_CONFIG_PROTOCOL_GUID"
     ),
+    UefiGuid("5D9F96DB-E731-4CAA-A00D72E187CD7762", name="EFI_EAP_PROTOCOL_GUID"),
     UefiGuid(
-        "0FAAECB1-226E-4782-AACE7DB9BCBF4DAF", name="gEfiFtp4ServiceBindingProtocolGuid"
-    ),
-    UefiGuid("EB338826-681B-4295-B3562B364C757B09", name="gEfiFtp4ProtocolGuid"),
-    UefiGuid("CE5E5929-C7A3-4602-AD9EC9DAF94EBFCF", name="gEfiIpSecConfigProtocolGuid"),
-    UefiGuid(
-        "2A534210-9280-41D8-AE79CADA01A2B127", name="gEfiDriverHealthProtocolGuid"
+        "BB62E663-625D-40B2-A088BBE83623A245", name="EFI_EAP_MANAGEMENT_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "15853D7C-3DDF-43E0-A1CBEBF85B8F872C", name="gEfiDeferredImageLoadProtocolGuid"
+        "0FAAECB1-226E-4782-AACE7DB9BCBF4DAF",
+        name="EFI_FTP4_SERVICE_BINDING_PROTOCOL_GUID",
+    ),
+    UefiGuid("EB338826-681B-4295-B3562B364C757B09", name="EFI_FTP4_PROTOCOL_GUID"),
+    UefiGuid(
+        "CE5E5929-C7A3-4602-AD9EC9DAF94EBFCF", name="EFI_IP_SEC_CONFIG_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "71EE5E94-65B9-45D5-821A3A4D86CFE6BE", name="gEfiUserCredentialProtocolGuid"
+        "2A534210-9280-41D8-AE79CADA01A2B127", name="EFI_DRIVER_HEALTH_PROTOCOL_GUID"
     ),
-    UefiGuid("6FD5B00C-D426-4283-98876CF5CF1CB1FE", name="gEfiUserManagerProtocolGuid"),
-    UefiGuid("1D3DE7F0-0807-424F-AA6911A54E19A46F", name="gEfiAtaPassThruProtocolGuid"),
     UefiGuid(
-        "86C77A67-0B97-4633-A18749104D0685C7", name="gEfiFirmwareManagementProtocolGuid"
+        "15853D7C-3DDF-43E0-A1CBEBF85B8F872C",
+        name="EFI_DEFERRED_IMAGE_LOAD_PROTOCOL_GUID",
     ),
-    UefiGuid("DFB386F7-E100-43AD-9C9AED90D08A5E12", name="gEfiIpSecProtocolGuid"),
-    UefiGuid("A3979E64-ACE8-4DDC-BC074D66B8FD0977", name="gEfiIpSec2ProtocolGuid"),
-    UefiGuid("EC3A978D-7C4E-48FA-9ABE6AD91CC8F811", name="gEfiKmsProtocolGuid"),
-    UefiGuid("A77B2472-E282-4E9F-A245C2C0E27BBCC1", name="gEfiBlockIo2ProtocolGuid"),
+    UefiGuid(
+        "71EE5E94-65B9-45D5-821A3A4D86CFE6BE", name="EFI_USER_CREDENTIAL_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "6FD5B00C-D426-4283-98876CF5CF1CB1FE", name="EFI_USER_MANAGER_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "1D3DE7F0-0807-424F-AA6911A54E19A46F", name="EFI_ATA_PASS_THRU_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "86C77A67-0B97-4633-A18749104D0685C7",
+        name="EFI_FIRMWARE_MANAGEMENT_PROTOCOL_GUID",
+    ),
+    UefiGuid("DFB386F7-E100-43AD-9C9AED90D08A5E12", name="EFI_IP_SEC_PROTOCOL_GUID"),
+    UefiGuid("A3979E64-ACE8-4DDC-BC074D66B8FD0977", name="EFI_IP_SEC2_PROTOCOL_GUID"),
+    UefiGuid("EC3A978D-7C4E-48FA-9ABE6AD91CC8F811", name="EFI_KMS_PROTOCOL_GUID"),
+    UefiGuid("A77B2472-E282-4E9F-A245C2C0E27BBCC1", name="EFI_BLOCK_IO2_PROTOCOL_GUID"),
     UefiGuid(
         "C88B0B6D-0DFC-49A7-9CB449074B4C3A78",
-        name="gEfiStorageSecurityCommandProtocolGuid",
+        name="EFI_STORAGE_SECURITY_COMMAND_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "E98ADB03-B8B9-4AF8-BA2026E9114CBCE5", name="gEfiUserCredential2ProtocolGuid"
+        "E98ADB03-B8B9-4AF8-BA2026E9114CBCE5", name="EFI_USER_CREDENTIAL2_PROTOCOL_GUID"
     ),
-    UefiGuid("151C8EAE-7F2C-472C-9E549828194F6A88", name="gEfiDiskIo2ProtocolGuid"),
-    UefiGuid("AFBFDE41-2E6E-4262-BA6562B9236E5495", name="gEfiTimestampProtocolGuid"),
-    UefiGuid("3152BCA5-EADE-433D-862EC01CDC291F44", name="gEfiRngProtocolGuid"),
+    UefiGuid("151C8EAE-7F2C-472C-9E549828194F6A88", name="EFI_DISK_IO2_PROTOCOL_GUID"),
+    UefiGuid("AFBFDE41-2E6E-4262-BA6562B9236E5495", name="EFI_TIMESTAMP_PROTOCOL_GUID"),
+    UefiGuid("3152BCA5-EADE-433D-862EC01CDC291F44", name="EFI_RNG_PROTOCOL_GUID"),
     UefiGuid(
-        "E5DD1403-D622-C24E-8488C71B17F5E802", name="gEfiAdapterInformationProtocolGuid"
+        "E5DD1403-D622-C24E-8488C71B17F5E802",
+        name="EFI_ADAPTER_INFORMATION_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "52C78312-8EDC-4233-98F21A1AA5E388A5", name="gEfiNvmExpressPassThruProtocolGuid"
+        "52C78312-8EDC-4233-98F21A1AA5E388A5",
+        name="EFI_NVM_EXPRESS_PASS_THRU_PROTOCOL_GUID",
     ),
     UefiGuid(
         "DA836F8D-217F-4CA0-99C21CA4E16077EA",
-        name="gEfiHash2ServiceBindingProtocolGuid",
+        name="EFI_HASH2_SERVICE_BINDING_PROTOCOL_GUID",
     ),
-    UefiGuid("55B1D734-C5E1-49DB-9647B16AFB0E305B", name="gEfiHash2ProtocolGuid"),
+    UefiGuid("55B1D734-C5E1-49DB-9647B16AFB0E305B", name="EFI_HASH2_PROTOCOL_GUID"),
     UefiGuid(
-        "A00490BA-3F1A-4B4C-AB904FA99726A1E8", name="gEfiBlockIoCryptoProtocolGuid"
-    ),
-    UefiGuid(
-        "2A4D1ADF-21DC-4B81-A42F8B8EE2380060", name="gEfiSmartCardReaderProtocolGuid"
+        "A00490BA-3F1A-4B4C-AB904FA99726A1E8", name="EFI_BLOCK_IO_CRYPTO_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "D317F29B-A325-4712-9BF1C61954DC198C", name="gEfiSmartCardEdgeProtocolGuid"
+        "2A4D1ADF-21DC-4B81-A42F8B8EE2380060",
+        name="EFI_SMART_CARD_READER_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "32D2963A-FE5D-4F30-B6336E5DC55803CC", name="gEfiUsbFunctionIoProtocolGuid"
+        "D317F29B-A325-4712-9BF1C61954DC198C", name="EFI_SMART_CARD_EDGE_PROTOCOL_GUID"
     ),
-    UefiGuid("B3930571-BEBA-4FC5-92039427242E6A43", name="gEfiBluetoothHcProtocolGuid"),
+    UefiGuid(
+        "32D2963A-FE5D-4F30-B6336E5DC55803CC", name="EFI_USB_FUNCTION_IO_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "B3930571-BEBA-4FC5-92039427242E6A43", name="EFI_BLUETOOTH_HC_PROTOCOL_GUID"
+    ),
     UefiGuid(
         "388278D3-7B85-42F0-ABA9FB4BFD69F5AB",
-        name="gEfiBluetoothIoServiceBindingProtocolGuid",
-    ),
-    UefiGuid("467313DE-4E30-43F1-943E323F89845DB5", name="gEfiBluetoothIoProtocolGuid"),
-    UefiGuid(
-        "62960CF3-40FF-4263-A77CDFDEBD191B4B", name="gEfiBluetoothConfigProtocolGuid"
+        name="EFI_BLUETOOTH_IO_SERVICE_BINDING_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "B3F79D9A-436C-DC11-B052CD85DF524CE6", name="gEfiRegularExpressionProtocolGuid"
+        "467313DE-4E30-43F1-943E323F89845DB5", name="EFI_BLUETOOTH_IO_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "FEDF8E0C-E147-11E3-9903B8E8562CBAFA", name="gEfiBootManagerPolicyProtocolGuid"
+        "62960CF3-40FF-4263-A77CDFDEBD191B4B", name="EFI_BLUETOOTH_CONFIG_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "B3F79D9A-436C-DC11-B052CD85DF524CE6",
+        name="EFI_REGULAR_EXPRESSION_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "FEDF8E0C-E147-11E3-9903B8E8562CBAFA",
+        name="EFI_BOOT_MANAGER_POLICY_PROTOCOL_GUID",
     ),
     UefiGuid(
         "0A8BADD5-03B8-4D19-B1287B8F0EDAA596",
-        name="gEfiConfigKeywordHandlerProtocolGuid",
+        name="EFI_CONFIG_KEYWORD_HANDLER_PROTOCOL_GUID",
     ),
-    UefiGuid("0DA55BC9-45F8-4BB4-87195224F18A4D45", name="gEfiWiFiProtocolGuid"),
+    UefiGuid("0DA55BC9-45F8-4BB4-87195224F18A4D45", name="EFI_WI_FI_PROTOCOL_GUID"),
     UefiGuid(
-        "5E93C847-456D-40B3-A6B478B0C9CF7F20", name="gEfiEapManagement2ProtocolGuid"
-    ),
-    UefiGuid(
-        "E5B58DBB-7688-44B4-97BF5F1D4B7CC8DB", name="gEfiEapConfigurationProtocolGuid"
-    ),
-    UefiGuid("47889FB2-D671-4FAB-A0CADF0E44DF70D6", name="gEfiPkcs7VerifyProtocolGuid"),
-    UefiGuid("5B446ED1-E30B-4FAA-871A3654ECA36080", name="gEfiIp4Config2ProtocolGuid"),
-    UefiGuid(
-        "B625B186-E063-44F7-89056A74DC6F52B4", name="gEfiDns4ServiceBindingProtocolGuid"
-    ),
-    UefiGuid("AE3D28CC-E05B-4FA1-A0117EB55A3F1401", name="gEfiDns4ProtocolGuid"),
-    UefiGuid(
-        "7F1647C8-B76E-44B2-A565F70FF19CD19E", name="gEfiDns6ServiceBindingProtocolGuid"
-    ),
-    UefiGuid("CA37BC1F-A327-4AE9-828A8C40D8506A17", name="gEfiDns6ProtocolGuid"),
-    UefiGuid(
-        "BDC8E6AF-D9BC-4379-A72AE0C4E75DAE1C", name="gEfiHttpServiceBindingProtocolGuid"
-    ),
-    UefiGuid("7A59B29B-910B-4171-8242A85A0DF25B5B", name="gEfiHttpProtocolGuid"),
-    UefiGuid(
-        "3E35C163-4074-45DD-431E23989DD86B32", name="gEfiHttpUtilitiesProtocolGuid"
+        "5E93C847-456D-40B3-A6B478B0C9CF7F20", name="EFI_EAP_MANAGEMENT2_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "952CB795-FF36-48CF-A2494DF486D6AB8D", name="gEfiTlsServiceBindingProtocolGuid"
+        "E5B58DBB-7688-44B4-97BF5F1D4B7CC8DB",
+        name="EFI_EAP_CONFIGURATION_PROTOCOL_GUID",
     ),
-    UefiGuid("00CA959F-6CFA-4DB1-95BCE46C47514390", name="gEfiTlsProtocolGuid"),
     UefiGuid(
-        "1682FE44-BD7A-4407-B7C7DCA37CA3922D", name="gEfiTlsConfigurationProtocolGuid"
+        "47889FB2-D671-4FAB-A0CADF0E44DF70D6", name="EFI_PKCS7_VERIFY_PROTOCOL_GUID"
     ),
-    UefiGuid("0DB48A36-4E54-EA9C-9B091EA5BE3A660B", name="gEfiRestProtocolGuid"),
+    UefiGuid(
+        "5B446ED1-E30B-4FAA-871A3654ECA36080", name="EFI_IP4_CONFIG2_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "B625B186-E063-44F7-89056A74DC6F52B4",
+        name="EFI_DNS4_SERVICE_BINDING_PROTOCOL_GUID",
+    ),
+    UefiGuid("AE3D28CC-E05B-4FA1-A0117EB55A3F1401", name="EFI_DNS4_PROTOCOL_GUID"),
+    UefiGuid(
+        "7F1647C8-B76E-44B2-A565F70FF19CD19E",
+        name="EFI_DNS6_SERVICE_BINDING_PROTOCOL_GUID",
+    ),
+    UefiGuid("CA37BC1F-A327-4AE9-828A8C40D8506A17", name="EFI_DNS6_PROTOCOL_GUID"),
+    UefiGuid(
+        "BDC8E6AF-D9BC-4379-A72AE0C4E75DAE1C",
+        name="EFI_HTTP_SERVICE_BINDING_PROTOCOL_GUID",
+    ),
+    UefiGuid("7A59B29B-910B-4171-8242A85A0DF25B5B", name="EFI_HTTP_PROTOCOL_GUID"),
+    UefiGuid(
+        "3E35C163-4074-45DD-431E23989DD86B32", name="EFI_HTTP_UTILITIES_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "952CB795-FF36-48CF-A2494DF486D6AB8D",
+        name="EFI_TLS_SERVICE_BINDING_PROTOCOL_GUID",
+    ),
+    UefiGuid("00CA959F-6CFA-4DB1-95BCE46C47514390", name="EFI_TLS_PROTOCOL_GUID"),
+    UefiGuid(
+        "1682FE44-BD7A-4407-B7C7DCA37CA3922D",
+        name="EFI_TLS_CONFIGURATION_PROTOCOL_GUID",
+    ),
+    UefiGuid("0DB48A36-4E54-EA9C-9B091EA5BE3A660B", name="EFI_REST_PROTOCOL_GUID"),
     UefiGuid(
         "45BCD98E-59AD-4174-9546344A07485898",
-        name="gEfiSupplicantServiceBindingProtocolGuid",
+        name="EFI_SUPPLICANT_SERVICE_BINDING_PROTOCOL_GUID",
     ),
-    UefiGuid("54FCC43E-AA89-4333-9A85CDEA24051E9E", name="gEfiSupplicantProtocolGuid"),
-    UefiGuid("1B0FB9BF-699D-4FDD-A7C32546681BF63B", name="gEfiWiFi2ProtocolGuid"),
-    UefiGuid("AB38A0DF-6873-44A9-87E6D4EB56148449", name="gEfiRamDiskProtocolGuid"),
     UefiGuid(
-        "9E66F251-727C-418C-BFD6C2B4252818EA", name="gEfiHiiImageDecoderProtocolGuid"
+        "54FCC43E-AA89-4333-9A85CDEA24051E9E", name="EFI_SUPPLICANT_PROTOCOL_GUID"
     ),
-    UefiGuid("1A1241E6-8F19-41A9-BC0EE8EF39E06546", name="gEfiHiiImageExProtocolGuid"),
+    UefiGuid("1B0FB9BF-699D-4FDD-A7C32546681BF63B", name="EFI_WI_FI2_PROTOCOL_GUID"),
+    UefiGuid("AB38A0DF-6873-44A9-87E6D4EB56148449", name="EFI_RAM_DISK_PROTOCOL_GUID"),
     UefiGuid(
-        "716EF0D9-FF83-4F69-81E9518BD39A8E70", name="gEfiSdMmcPassThruProtocolGuid"
+        "9E66F251-727C-418C-BFD6C2B4252818EA",
+        name="EFI_HII_IMAGE_DECODER_PROTOCOL_GUID",
     ),
-    UefiGuid("95A9A93E-A86E-4926-AAEF9918E772D987", name="gEfiEraseBlockProtocolGuid"),
     UefiGuid(
-        "898890E9-84B2-4F3A-8C58D8577813E0AC", name="gEfiBluetoothAttributeProtocolGuid"
+        "1A1241E6-8F19-41A9-BC0EE8EF39E06546", name="EFI_HII_IMAGE_EX_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "716EF0D9-FF83-4F69-81E9518BD39A8E70", name="EFI_SD_MMC_PASS_THRU_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "95A9A93E-A86E-4926-AAEF9918E772D987", name="EFI_ERASE_BLOCK_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "898890E9-84B2-4F3A-8C58D8577813E0AC",
+        name="EFI_BLUETOOTH_ATTRIBUTE_PROTOCOL_GUID",
     ),
     UefiGuid(
         "5639867A-8C8E-408D-AC2F4B61BDC0BBBB",
-        name="gEfiBluetoothAttributeServiceBindingProtocolGuid",
+        name="EFI_BLUETOOTH_ATTRIBUTE_SERVICE_BINDING_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "8F76DA58-1F99-4275-A4EC4756515B1CE8", name="gEfiBluetoothLeConfigProtocolGuid"
+        "8F76DA58-1F99-4275-A4EC4756515B1CE8",
+        name="EFI_BLUETOOTH_LE_CONFIG_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "B81BFAB0-0EB3-4CF9-84657FA986361664", name="gEfiUfsDeviceConfigProtocolGuid"
+        "B81BFAB0-0EB3-4CF9-84657FA986361664",
+        name="EFI_UFS_DEVICE_CONFIG_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "BA23B311-343D-11E6-91855820B1D65299", name="gEfiHttpBootCallbackProtocolGuid"
+        "BA23B311-343D-11E6-91855820B1D65299",
+        name="EFI_HTTP_BOOT_CALLBACK_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "9DA34AE0-EAF9-4BBF-8EC3FD60226C44BE", name="gEfiResetNotificationProtocolGuid"
+        "9DA34AE0-EAF9-4BBF-8EC3FD60226C44BE",
+        name="EFI_RESET_NOTIFICATION_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "8CF2F62C-BC9B-4821-808DEC9EC421A1A0", name="gEfiPartitionInfoProtocolGuid"
+        "8CF2F62C-BC9B-4821-808DEC9EC421A1A0", name="EFI_PARTITION_INFO_PROTOCOL_GUID"
     ),
-    UefiGuid("4311EDC0-6054-46D4-9E40893EA952FCCC", name="gEfiHiiPopupProtocolGuid"),
-    UefiGuid("D40B6B80-97D5-4282-BB1D223A16918058", name="gEfiNvdimmLabelProtocolGuid"),
-    UefiGuid("6302D008-7F9B-4F30-87AC60C9FEF5DA4E", name="gEfiShellProtocolGuid"),
+    UefiGuid("4311EDC0-6054-46D4-9E40893EA952FCCC", name="EFI_HII_POPUP_PROTOCOL_GUID"),
     UefiGuid(
-        "752F3136-4E16-4FDC-A22AE5F46812F4CA", name="gEfiShellParametersProtocolGuid"
+        "D40B6B80-97D5-4282-BB1D223A16918058", name="EFI_NVDIMM_LABEL_PROTOCOL_GUID"
+    ),
+    UefiGuid("6302D008-7F9B-4F30-87AC60C9FEF5DA4E", name="EFI_SHELL_PROTOCOL_GUID"),
+    UefiGuid(
+        "752F3136-4E16-4FDC-A22AE5F46812F4CA", name="EFI_SHELL_PARAMETERS_PROTOCOL_GUID"
     ),
     UefiGuid(
         "3C7200E9-005F-4EA4-87DEA3DFAC8A27C3",
-        name="gEfiShellDynamicCommandProtocolGuid",
+        name="EFI_SHELL_DYNAMIC_COMMAND_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "40E064B2-0AE0-48B1-A07DF8CF1E1A2310", name="gEfiNetworkPkgTokenSpaceGuid"
+        "40E064B2-0AE0-48B1-A07DF8CF1E1A2310", name="EFI_NETWORK_PKG_TOKEN_SPACE_GUID"
     ),
-    UefiGuid("02EEA107-98DB-400E-9830460A1542D799", name="gIp6ConfigNvDataGuid"),
-    UefiGuid("4B47D616-A8D6-4552-9D44CCAD2E0F4CF9", name="gIScsiConfigGuid"),
-    UefiGuid("4D20583A-7765-4E7A-8A67DCDE74EE3EC5", name="gHttpBootConfigGuid"),
-    UefiGuid("B0EAE4F8-9A04-4C6D-A748793DAA0F65DF", name="gTlsAuthConfigGuid"),
-    UefiGuid("FD2340D0-3DAB-4349-A6C73B4F12B48EAE", name="gEfiTlsCaCertificateGuid"),
-    UefiGuid("46DDB415-5244-49C7-9374F0E298E7D386", name="gEdkiiHttpTlsCipherListGuid"),
-    UefiGuid("9F94D327-0B18-4245-8FF2832E300D2CEF", name="gWifiConfigGuid"),
-    UefiGuid("9B942747-154E-4D29-A436BF7100C8B53B", name="gIp4Config2NvDataGuid"),
-    UefiGuid("D79DF6B0-EF44-43BD-979743E93BCF5FA8", name="gVlanConfigFormSetGuid"),
-    UefiGuid("6456ED61-3579-41C9-8A260A0BD62B78FC", name="gIp4IScsiConfigGuid"),
-    UefiGuid("786EC0AC-65AE-4D1B-B1370D110A483797", name="gIScsiCHAPAuthInfoGuid"),
-    UefiGuid("480F8AE9-0C46-4AA9-BC89DB9FBA619806", name="gEfiDpcProtocolGuid"),
-    UefiGuid("93BB96AF-B9F2-4EB8-9462E0BA74564236", name="gUefiOvmfPkgTokenSpaceGuid"),
-    UefiGuid("D3B46F3B-D441-1244-9A120012273FC14D", name="gEfiXenInfoGuid"),
-    UefiGuid("4E32566D-8E9E-4F52-81D35BB9715F9727", name="gOvmfPkKek1AppPrefixGuid"),
-    UefiGuid("7235C51C-0C80-4CAB-87AC3B084A6304B1", name="gOvmfPlatformConfigGuid"),
-    UefiGuid("837DCA9E-E874-4D82-B29A23FE0E23D1E2", name="gVirtioMmioTransportGuid"),
-    UefiGuid("557423A1-63AB-406C-BE7E91CDBC08C457", name="gQemuRamfbGuid"),
-    UefiGuid("A732241F-383D-4D9C-8AE18E09837589D7", name="gXenBusRootDeviceGuid"),
+    UefiGuid("02EEA107-98DB-400E-9830460A1542D799", name="IP6_CONFIG_NV_DATA_GUID"),
+    UefiGuid("4B47D616-A8D6-4552-9D44CCAD2E0F4CF9", name="I_SCSI_CONFIG_GUID"),
+    UefiGuid("4D20583A-7765-4E7A-8A67DCDE74EE3EC5", name="HTTP_BOOT_CONFIG_GUID"),
+    UefiGuid("B0EAE4F8-9A04-4C6D-A748793DAA0F65DF", name="TLS_AUTH_CONFIG_GUID"),
+    UefiGuid("FD2340D0-3DAB-4349-A6C73B4F12B48EAE", name="EFI_TLS_CA_CERTIFICATE_GUID"),
+    UefiGuid(
+        "46DDB415-5244-49C7-9374F0E298E7D386", name="EDKII_HTTP_TLS_CIPHER_LIST_GUID"
+    ),
+    UefiGuid("9F94D327-0B18-4245-8FF2832E300D2CEF", name="WIFI_CONFIG_GUID"),
+    UefiGuid("9B942747-154E-4D29-A436BF7100C8B53B", name="IP4_CONFIG2_NV_DATA_GUID"),
+    UefiGuid("D79DF6B0-EF44-43BD-979743E93BCF5FA8", name="VLAN_CONFIG_FORM_SET_GUID"),
+    UefiGuid("6456ED61-3579-41C9-8A260A0BD62B78FC", name="IP4_I_SCSI_CONFIG_GUID"),
+    UefiGuid(
+        "786EC0AC-65AE-4D1B-B1370D110A483797", name="I_SCSI_C_H_A_P_AUTH_INFO_GUID"
+    ),
+    UefiGuid("480F8AE9-0C46-4AA9-BC89DB9FBA619806", name="EFI_DPC_PROTOCOL_GUID"),
+    UefiGuid(
+        "93BB96AF-B9F2-4EB8-9462E0BA74564236", name="UEFI_OVMF_PKG_TOKEN_SPACE_GUID"
+    ),
+    UefiGuid("D3B46F3B-D441-1244-9A120012273FC14D", name="EFI_XEN_INFO_GUID"),
+    UefiGuid(
+        "4E32566D-8E9E-4F52-81D35BB9715F9727", name="OVMF_PK_KEK1_APP_PREFIX_GUID"
+    ),
+    UefiGuid("7235C51C-0C80-4CAB-87AC3B084A6304B1", name="OVMF_PLATFORM_CONFIG_GUID"),
+    UefiGuid("837DCA9E-E874-4D82-B29A23FE0E23D1E2", name="VIRTIO_MMIO_TRANSPORT_GUID"),
+    UefiGuid("557423A1-63AB-406C-BE7E91CDBC08C457", name="QEMU_RAMFB_GUID"),
+    UefiGuid("A732241F-383D-4D9C-8AE18E09837589D7", name="XEN_BUS_ROOT_DEVICE_GUID"),
     UefiGuid(
         "24A2D66F-EEDD-4086-9042F26E4797EE69",
-        name="gRootBridgesConnectedEventGroupGuid",
+        name="ROOT_BRIDGES_CONNECTED_EVENT_GROUP_GUID",
     ),
-    UefiGuid("77FA9ABD-0359-4D32-BD6028F4E78F784B", name="gMicrosoftVendorGuid"),
-    UefiGuid("2E3044AC-879F-490F-9760BBDFAF695F50", name="gEfiLegacyBiosGuid"),
+    UefiGuid("77FA9ABD-0359-4D32-BD6028F4E78F784B", name="MICROSOFT_VENDOR_GUID"),
+    UefiGuid("2E3044AC-879F-490F-9760BBDFAF695F50", name="EFI_LEGACY_BIOS_GUID"),
     UefiGuid(
-        "A56074DB-65FE-45F7-BD212D2BDD8E9652", name="gEfiLegacyDevOrderVariableGuid"
+        "A56074DB-65FE-45F7-BD212D2BDD8E9652", name="EFI_LEGACY_DEV_ORDER_VARIABLE_GUID"
     ),
-    UefiGuid("FA920010-6785-4941-B6EC498C579F160A", name="gVirtioDeviceProtocolGuid"),
-    UefiGuid("3D3CA290-B9A5-11E3-B75DB8AC6F7D65E6", name="gXenBusProtocolGuid"),
-    UefiGuid("6EFAC84F-0AB0-4747-81BE855562590449", name="gXenIoProtocolGuid"),
-    UefiGuid("F8775D50-8ABD-4ADF-92AC853E51F6C8DC", name="gIoMmuAbsentProtocolGuid"),
-    UefiGuid("38321DBA-4FE0-4E17-8AEC413055EAEDC1", name="gEfiLegacy8259ProtocolGuid"),
+    UefiGuid("FA920010-6785-4941-B6EC498C579F160A", name="VIRTIO_DEVICE_PROTOCOL_GUID"),
+    UefiGuid("3D3CA290-B9A5-11E3-B75DB8AC6F7D65E6", name="XEN_BUS_PROTOCOL_GUID"),
+    UefiGuid("6EFAC84F-0AB0-4747-81BE855562590449", name="XEN_IO_PROTOCOL_GUID"),
+    UefiGuid("F8775D50-8ABD-4ADF-92AC853E51F6C8DC", name="IO_MMU_ABSENT_PROTOCOL_GUID"),
     UefiGuid(
-        "389F751F-1838-4388-8390CD8154BD27F8", name="gEfiFirmwareVolumeProtocolGuid"
-    ),
-    UefiGuid("64A892DC-5561-4536-92C7799BFC183355", name="gEfiIsaAcpiProtocolGuid"),
-    UefiGuid("7EE2BD44-3DA0-11D4-9A380090273FC14D", name="gEfiIsaIoProtocolGuid"),
-    UefiGuid("DB9A1E3D-45CB-4ABB-853BE5387FDB2E2D", name="gEfiLegacyBiosProtocolGuid"),
-    UefiGuid(
-        "783658A3-4172-4421-A299E009079C0CB4", name="gEfiLegacyBiosPlatformProtocolGuid"
+        "38321DBA-4FE0-4E17-8AEC413055EAEDC1", name="EFI_LEGACY8259_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "31CE593D-108A-485D-ADB278F21F2966BE", name="gEfiLegacyInterruptProtocolGuid"
+        "389F751F-1838-4388-8390CD8154BD27F8", name="EFI_FIRMWARE_VOLUME_PROTOCOL_GUID"
     ),
-    UefiGuid("C7735A2F-88F5-4882-AE63FAAC8C8B86B3", name="gEfiVgaMiniPortProtocolGuid"),
+    UefiGuid("64A892DC-5561-4536-92C7799BFC183355", name="EFI_ISA_ACPI_PROTOCOL_GUID"),
+    UefiGuid("7EE2BD44-3DA0-11D4-9A380090273FC14D", name="EFI_ISA_IO_PROTOCOL_GUID"),
     UefiGuid(
-        "326AE723-AE32-4589-98B8CAC23CDCC1B1", name="gPcAtChipsetPkgTokenSpaceGuid"
-    ),
-    UefiGuid(
-        "0D3FB176-9569-4D51-A3EF7D61C64FEABA", name="gEfiSecurityPkgTokenSpaceGuid"
+        "DB9A1E3D-45CB-4ABB-853BE5387FDB2E2D", name="EFI_LEGACY_BIOS_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "F0A30BC7-AF08-4556-99C4001009C93A44", name="gEfiSecureBootEnableDisableGuid"
-    ),
-    UefiGuid("C076EC0C-7028-4399-A07271EE5C448B9F", name="gEfiCustomModeEnableGuid"),
-    UefiGuid("9073E4E0-60EC-4B6E-99034C223C260F3C", name="gEfiVendorKeysNvGuid"),
-    UefiGuid("D9BEE56E-75DC-49D9-B4D7B534210F637A", name="gEfiCertDbGuid"),
-    UefiGuid("2B9FFB52-1B13-416F-A87BBC930DEF92A8", name="gTcgEventEntryHobGuid"),
-    UefiGuid("D26C221E-2430-4C8A-91703FCB4500413F", name="gTcgEvent2EntryHobGuid"),
-    UefiGuid("EF598499-B25E-473A-BFAFE7E57DCE82C4", name="gTpmErrorHobGuid"),
-    UefiGuid("0397B0C9-22E8-459E-A4FF99BC65270929", name="gTpm2StartupLocalityHobGuid"),
-    UefiGuid(
-        "E2C3BC69-615C-4B5B-8E5CA033A9C25ED6", name="gTcg800155PlatformIdEventHobGuid"
-    ),
-    UefiGuid("B2360B42-7173-420A-869646CA6BAB1060", name="gMeasuredFvHobGuid"),
-    UefiGuid("0F6499B1-E9AD-493D-B9C22F90815C6CBC", name="gEfiPhysicalPresenceGuid"),
-    UefiGuid(
-        "AEB9C5C1-94F1-4D02-BFD94602DB2D3C54", name="gEfiTcg2PhysicalPresenceGuid"
-    ),
-    UefiGuid("3CCD3DD8-8D45-4FED-962D2B38CD82B3C4", name="gUserIdentifyManagerGuid"),
-    UefiGuid("B0F901E4-C424-45DE-908195E20BDE6FB5", name="gTcgConfigFormSetGuid"),
-    UefiGuid("6339D487-26BA-424B-9A5D687E25D740BC", name="gTcg2ConfigFormSetGuid"),
-    UefiGuid(
-        "5DAF50A5-EA81-4DE2-8F9BCABDA9CF5C14", name="gSecureBootConfigFormSetGuid"
+        "783658A3-4172-4421-A299E009079C0CB4",
+        name="EFI_LEGACY_BIOS_PLATFORM_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "00000000-0000-0000-0000000000000000", name="gEfiTpmDeviceInstanceNoneGuid"
+        "31CE593D-108A-485D-ADB278F21F2966BE", name="EFI_LEGACY_INTERRUPT_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "8B01E5B6-4F19-46E8-AB931C53671B90CC", name="gEfiTpmDeviceInstanceTpm12Guid"
+        "C7735A2F-88F5-4882-AE63FAAC8C8B86B3", name="EFI_VGA_MINI_PORT_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "286BF25A-C2C3-408C-B3B425E6758B7317", name="gEfiTpmDeviceInstanceTpm20DtpmGuid"
+        "326AE723-AE32-4589-98B8CAC23CDCC1B1", name="PC_AT_CHIPSET_PKG_TOKEN_SPACE_GUID"
     ),
-    UefiGuid("7F4158D3-074D-456D-8CB201F9C8F79DAA", name="gEfiTpmDeviceSelectedGuid"),
-    UefiGuid("44A2AD5D-612C-47B3-B06EC8F50BFBF07D", name="gOpalExtraInfoVariableGuid"),
     UefiGuid(
-        "EF9AEFE5-2BD3-4031-AF7D5EFE5ABB9A0D", name="gPeiLockPhysicalPresencePpiGuid"
+        "0D3FB176-9569-4D51-A3EF7D61C64FEABA", name="EFI_SECURITY_PKG_TOKEN_SPACE_GUID"
     ),
-    UefiGuid("E9DB0D58-D48D-47F6-9C6E6F40E86C7B41", name="gPeiTpmInitializedPpiGuid"),
     UefiGuid(
-        "A030D115-54DD-447B-9064F206883D7CCC", name="gPeiTpmInitializationDonePpiGuid"
+        "F0A30BC7-AF08-4556-99C4001009C93A44",
+        name="EFI_SECURE_BOOT_ENABLE_DISABLE_GUID",
+    ),
+    UefiGuid("C076EC0C-7028-4399-A07271EE5C448B9F", name="EFI_CUSTOM_MODE_ENABLE_GUID"),
+    UefiGuid("9073E4E0-60EC-4B6E-99034C223C260F3C", name="EFI_VENDOR_KEYS_NV_GUID"),
+    UefiGuid("D9BEE56E-75DC-49D9-B4D7B534210F637A", name="EFI_CERT_DB_GUID"),
+    UefiGuid("2B9FFB52-1B13-416F-A87BBC930DEF92A8", name="TCG_EVENT_ENTRY_HOB_GUID"),
+    UefiGuid("D26C221E-2430-4C8A-91703FCB4500413F", name="TCG_EVENT2_ENTRY_HOB_GUID"),
+    UefiGuid("EF598499-B25E-473A-BFAFE7E57DCE82C4", name="TPM_ERROR_HOB_GUID"),
+    UefiGuid(
+        "0397B0C9-22E8-459E-A4FF99BC65270929", name="TPM2_STARTUP_LOCALITY_HOB_GUID"
+    ),
+    UefiGuid(
+        "E2C3BC69-615C-4B5B-8E5CA033A9C25ED6",
+        name="TCG800155_PLATFORM_ID_EVENT_HOB_GUID",
+    ),
+    UefiGuid("B2360B42-7173-420A-869646CA6BAB1060", name="MEASURED_FV_HOB_GUID"),
+    UefiGuid("0F6499B1-E9AD-493D-B9C22F90815C6CBC", name="EFI_PHYSICAL_PRESENCE_GUID"),
+    UefiGuid(
+        "AEB9C5C1-94F1-4D02-BFD94602DB2D3C54", name="EFI_TCG2_PHYSICAL_PRESENCE_GUID"
+    ),
+    UefiGuid("3CCD3DD8-8D45-4FED-962D2B38CD82B3C4", name="USER_IDENTIFY_MANAGER_GUID"),
+    UefiGuid("B0F901E4-C424-45DE-908195E20BDE6FB5", name="TCG_CONFIG_FORM_SET_GUID"),
+    UefiGuid("6339D487-26BA-424B-9A5D687E25D740BC", name="TCG2_CONFIG_FORM_SET_GUID"),
+    UefiGuid(
+        "5DAF50A5-EA81-4DE2-8F9BCABDA9CF5C14", name="SECURE_BOOT_CONFIG_FORM_SET_GUID"
+    ),
+    UefiGuid(
+        "00000000-0000-0000-0000000000000000", name="EFI_TPM_DEVICE_INSTANCE_NONE_GUID"
+    ),
+    UefiGuid(
+        "8B01E5B6-4F19-46E8-AB931C53671B90CC", name="EFI_TPM_DEVICE_INSTANCE_TPM12_GUID"
+    ),
+    UefiGuid(
+        "286BF25A-C2C3-408C-B3B425E6758B7317",
+        name="EFI_TPM_DEVICE_INSTANCE_TPM20_DTPM_GUID",
+    ),
+    UefiGuid(
+        "7F4158D3-074D-456D-8CB201F9C8F79DAA", name="EFI_TPM_DEVICE_SELECTED_GUID"
+    ),
+    UefiGuid(
+        "44A2AD5D-612C-47B3-B06EC8F50BFBF07D", name="OPAL_EXTRA_INFO_VARIABLE_GUID"
+    ),
+    UefiGuid(
+        "EF9AEFE5-2BD3-4031-AF7D5EFE5ABB9A0D",
+        name="PEI_LOCK_PHYSICAL_PRESENCE_PPI_GUID",
+    ),
+    UefiGuid(
+        "E9DB0D58-D48D-47F6-9C6E6F40E86C7B41", name="PEI_TPM_INITIALIZED_PPI_GUID"
+    ),
+    UefiGuid(
+        "A030D115-54DD-447B-9064F206883D7CCC",
+        name="PEI_TPM_INITIALIZATION_DONE_PPI_GUID",
     ),
     UefiGuid(
         "6E056FF9-C695-4364-9E2C6126F5CEEAAE",
-        name="gEfiPeiFirmwareVolumeInfoMeasurementExcludedPpiGuid",
+        name="EFI_PEI_FIRMWARE_VOLUME_INFO_MEASUREMENT_EXCLUDED_PPI_GUID",
     ),
     UefiGuid(
         "3CE1E631-7008-477C-ADA75DCFC7C1494B",
-        name="gEdkiiPeiFirmwareVolumeInfoPrehashedFvPpiGuid",
+        name="EDKII_PEI_FIRMWARE_VOLUME_INFO_PREHASHED_FV_PPI_GUID",
     ),
     UefiGuid(
         "7F5E4E31-81B1-47E5-9E211E4B5BC2F61D",
-        name="gEdkiiPeiFirmwareVolumeInfoStoredHashFvPpiGuid",
+        name="EDKII_PEI_FIRMWARE_VOLUME_INFO_STORED_HASH_FV_PPI_GUID",
     ),
     UefiGuid(
-        "D2C18636-40E5-4EB5-A31B36695FD42C87", name="gEfiShellEnvironment2ExtGuid"
+        "D2C18636-40E5-4EB5-A31B36695FD42C87", name="EFI_SHELL_ENVIRONMENT2_EXT_GUID"
     ),
-    UefiGuid("171E9188-31D3-40F5-B10C539B2DB940CD", name="gEfiShellPkgTokenSpaceGuid"),
-    UefiGuid("158DEF5A-F656-419C-B0277A3192C079D2", name="gShellVariableGuid"),
-    UefiGuid("51271E13-7DE3-43AF-8BC271AD3B824325", name="gShellMapGuid"),
-    UefiGuid("0053D9D6-2659-4599-A26BEF4536E631A9", name="gShellAliasGuid"),
-    UefiGuid("B8969637-81DE-43AF-BC9A24D98913F2F6", name="gHandleParsingHiiGuid"),
-    UefiGuid("25F200AA-D3CB-470A-BF51E7D162D22E6F", name="gShellDebug1HiiGuid"),
-    UefiGuid("0AF0B742-63EC-45BD-8DB671AD7F2FE8E8", name="gShellDriver1HiiGuid"),
-    UefiGuid("7D574D54-D364-4D4A-95E34945DB7AD3EE", name="gShellInstall1HiiGuid"),
-    UefiGuid("DEC5DAA4-6781-4820-9C63A7B0E4F1DB31", name="gShellLevel1HiiGuid"),
-    UefiGuid("F95A7CCC-4C55-4426-A7B4DC8961950BAE", name="gShellLevel2HiiGuid"),
-    UefiGuid("4344558D-4EF9-4725-B1E43376E8D6974F", name="gShellLevel3HiiGuid"),
-    UefiGuid("F3D301BB-F4A5-45A8-B0B7FA999C6237AE", name="gShellNetwork1HiiGuid"),
-    UefiGuid("0174B2B5-F505-4B12-AA6059DFF8D6EA37", name="gShellNetwork2HiiGuid"),
-    UefiGuid("738A9314-82C1-4592-8FF7C1BDF1B20ED4", name="gShellTftpHiiGuid"),
-    UefiGuid("5F5F605D-1583-4A2D-A6B2EB12DAB4A2B6", name="gShellBcfgHiiGuid"),
-    UefiGuid("DA8CCDF4-ED8F-4FFC-B5EF2EF55E24932A", name="gShellAcpiViewHiiGuid"),
-    UefiGuid("7C04A583-9E3E-4F1C-AD65E05268D0B4D1", name="gUefiShellFileGuid"),
-    UefiGuid("47C7B221-C42A-11D2-8E5700A0C969723B", name="gEfiShellEnvironment2Guid"),
-    UefiGuid("47C7B223-C42A-11D2-8E5700A0C969723B", name="gEfiShellInterfaceGuid"),
     UefiGuid(
-        "E1EB612F-1C6C-485D-9D06650844881569", name="gEfiSignedCapsulePkgTokenSpaceGuid"
+        "171E9188-31D3-40F5-B10C539B2DB940CD", name="EFI_SHELL_PKG_TOKEN_SPACE_GUID"
+    ),
+    UefiGuid("158DEF5A-F656-419C-B0277A3192C079D2", name="SHELL_VARIABLE_GUID"),
+    UefiGuid("51271E13-7DE3-43AF-8BC271AD3B824325", name="SHELL_MAP_GUID"),
+    UefiGuid("0053D9D6-2659-4599-A26BEF4536E631A9", name="SHELL_ALIAS_GUID"),
+    UefiGuid("B8969637-81DE-43AF-BC9A24D98913F2F6", name="HANDLE_PARSING_HII_GUID"),
+    UefiGuid("25F200AA-D3CB-470A-BF51E7D162D22E6F", name="SHELL_DEBUG1_HII_GUID"),
+    UefiGuid("0AF0B742-63EC-45BD-8DB671AD7F2FE8E8", name="SHELL_DRIVER1_HII_GUID"),
+    UefiGuid("7D574D54-D364-4D4A-95E34945DB7AD3EE", name="SHELL_INSTALL1_HII_GUID"),
+    UefiGuid("DEC5DAA4-6781-4820-9C63A7B0E4F1DB31", name="SHELL_LEVEL1_HII_GUID"),
+    UefiGuid("F95A7CCC-4C55-4426-A7B4DC8961950BAE", name="SHELL_LEVEL2_HII_GUID"),
+    UefiGuid("4344558D-4EF9-4725-B1E43376E8D6974F", name="SHELL_LEVEL3_HII_GUID"),
+    UefiGuid("F3D301BB-F4A5-45A8-B0B7FA999C6237AE", name="SHELL_NETWORK1_HII_GUID"),
+    UefiGuid("0174B2B5-F505-4B12-AA6059DFF8D6EA37", name="SHELL_NETWORK2_HII_GUID"),
+    UefiGuid("738A9314-82C1-4592-8FF7C1BDF1B20ED4", name="SHELL_TFTP_HII_GUID"),
+    UefiGuid("5F5F605D-1583-4A2D-A6B2EB12DAB4A2B6", name="SHELL_BCFG_HII_GUID"),
+    UefiGuid("DA8CCDF4-ED8F-4FFC-B5EF2EF55E24932A", name="SHELL_ACPI_VIEW_HII_GUID"),
+    UefiGuid("7C04A583-9E3E-4F1C-AD65E05268D0B4D1", name="UEFI_SHELL_FILE_GUID"),
+    UefiGuid("47C7B221-C42A-11D2-8E5700A0C969723B", name="EFI_SHELL_ENVIRONMENT2_GUID"),
+    UefiGuid("47C7B223-C42A-11D2-8E5700A0C969723B", name="EFI_SHELL_INTERFACE_GUID"),
+    UefiGuid(
+        "E1EB612F-1C6C-485D-9D06650844881569",
+        name="EFI_SIGNED_CAPSULE_PKG_TOKEN_SPACE_GUID",
     ),
     UefiGuid(
         "90B2B846-CA6D-4D6E-A8D3C140A8E110AC",
-        name="gEdkiiSystemFirmwareImageDescriptorFileGuid",
+        name="EDKII_SYSTEM_FIRMWARE_IMAGE_DESCRIPTOR_FILE_GUID",
     ),
     UefiGuid(
         "812136D3-4D3A-433A-941829BB9BF78F6E",
-        name="gEdkiiSystemFmpCapsuleConfigFileGuid",
+        name="EDKII_SYSTEM_FMP_CAPSULE_CONFIG_FILE_GUID",
     ),
     UefiGuid(
         "CE57B167-B0E4-41E8-A8975F4FEB781D40",
-        name="gEdkiiSystemFmpCapsuleDriverFvFileGuid",
+        name="EDKII_SYSTEM_FMP_CAPSULE_DRIVER_FV_FILE_GUID",
     ),
-    UefiGuid("865A5A9B-B85D-474C-845565D1BE844BE2", name="gEfiDebugAgentGuid"),
+    UefiGuid("865A5A9B-B85D-474C-845565D1BE844BE2", name="EFI_DEBUG_AGENT_GUID"),
     UefiGuid(
         "865A5AAB-B85D-474C-845565D1BE844BE2",
-        name="gEfiSourceLevelDebugPkgTokenSpaceGuid",
+        name="EFI_SOURCE_LEVEL_DEBUG_PKG_TOKEN_SPACE_GUID",
     ),
     UefiGuid(
-        "18FE7632-F5C8-4E63-8DE817A55C5913BD", name="gStandaloneMmPkgTokenSpaceGuid"
+        "18FE7632-F5C8-4E63-8DE817A55C5913BD", name="STANDALONE_MM_PKG_TOKEN_SPACE_GUID"
     ),
-    UefiGuid("BA33F15D-4000-45C1-8E88F91692D457E3", name="gMpInformationHobGuid"),
-    UefiGuid("B65694CC-09E3-4C3B-B5CD05F44D3CDBFF", name="gMmFvDispatchGuid"),
-    UefiGuid("A160BF99-2AA4-4D7D-9993899CB12DF376", name="gMmCoreDataHobGuid"),
+    UefiGuid("BA33F15D-4000-45C1-8E88F91692D457E3", name="MP_INFORMATION_HOB_GUID"),
+    UefiGuid("B65694CC-09E3-4C3B-B5CD05F44D3CDBFF", name="MM_FV_DISPATCH_GUID"),
+    UefiGuid("A160BF99-2AA4-4D7D-9993899CB12DF376", name="MM_CORE_DATA_HOB_GUID"),
     UefiGuid(
-        "0703F912-BF8D-4E2A-BE07AB272525C592", name="gEfiMmPeiMmramMemoryReserveGuid"
+        "0703F912-BF8D-4E2A-BE07AB272525C592",
+        name="EFI_MM_PEI_MMRAM_MEMORY_RESERVE_GUID",
     ),
     UefiGuid(
         "F00497E3-BFA2-41A1-9D2954C2E93721C5",
-        name="gEfiStandaloneMmNonSecureBufferGuid",
+        name="EFI_STANDALONE_MM_NON_SECURE_BUFFER_GUID",
     ),
     UefiGuid(
-        "6ECBD5A1-C0F8-4702-83014FC2C5470A51", name="gEfiArmTfCpuDriverEpDescriptorGuid"
-    ),
-    UefiGuid("AC05BF33-995A-4ED4-AAB8EF7AE80F5CB0", name="gUefiCpuPkgTokenSpaceGuid"),
-    UefiGuid("5802BCE4-EEEE-4E33-A130EBAD27F0E439", name="gMsegSmramGuid"),
-    UefiGuid(
-        "A82485CE-AD6B-4101-99D3E1358C9E7E37", name="gEdkiiCpuFeaturesSetDoneGuid"
+        "6ECBD5A1-C0F8-4702-83014FC2C5470A51",
+        name="EFI_ARM_TF_CPU_DRIVER_EP_DESCRIPTOR_GUID",
     ),
     UefiGuid(
-        "C77C3A41-61AB-4143-983E3339280628E5", name="gEdkiiCpuFeaturesInitDoneGuid"
+        "AC05BF33-995A-4ED4-AAB8EF7AE80F5CB0", name="UEFI_CPU_PKG_TOKEN_SPACE_GUID"
     ),
-    UefiGuid("D178F11D-8716-418E-A131967D2AC42843", name="gEdkiiMicrocodePatchHobGuid"),
+    UefiGuid("5802BCE4-EEEE-4E33-A130EBAD27F0E439", name="MSEG_SMRAM_GUID"),
     UefiGuid(
-        "1D202CAB-C8AB-4D5C-94F73CFCC0D3D335", name="gEfiSmmCpuServiceProtocolGuid"
+        "A82485CE-AD6B-4101-99D3E1358C9E7E37", name="EDKII_CPU_FEATURES_SET_DONE_GUID"
     ),
     UefiGuid(
-        "228F344D-B3DE-43BB-A4D7EA200B1B1482", name="gEfiSmMonitorInitProtocolGuid"
+        "C77C3A41-61AB-4143-983E3339280628E5", name="EDKII_CPU_FEATURES_INIT_DONE_GUID"
     ),
-    UefiGuid("5CB9CB3D-31A4-480C-949829D269BACFBA", name="gEdkiiPeiMpServices2PpiGuid"),
     UefiGuid(
-        "01D127EA-F6F1-4EF6-94158A000093F89D", name="gUefiPayloadPkgTokenSpaceGuid"
+        "D178F11D-8716-418E-A131967D2AC42843", name="EDKII_MICROCODE_PATCH_HOB_GUID"
     ),
-    UefiGuid("878AC2CC-5343-46F2-B56351F89DAF56BA", name="gBmpImageGuid"),
-    UefiGuid("16C8A6D0-FE8A-4082-A208CF89C4290433", name="gUefiSystemTableInfoGuid"),
-    UefiGuid("0AD3D31B-B3D8-4506-AE712EF11006D90F", name="gUefiAcpiBoardInfoGuid"),
-    UefiGuid("6C6872FE-56A9-4403-BB98958D62DE87F1", name="gUefiSerialPortInfoGuid"),
-    UefiGuid("A1FF7424-7A1A-478E-A9E492F357D12832", name="gLoaderMemoryMapInfoGuid"),
-    UefiGuid("DBE23AA1-A342-4B97-85B6B226F1617389", name="gEfiPayLoadHobBasePpiGuid"),
-    UefiGuid("EC2E931B-3281-48A5-8107DF8A8BED3C5D", name="gPlatformGOPPolicyGuid"),
+    UefiGuid(
+        "1D202CAB-C8AB-4D5C-94F73CFCC0D3D335", name="EFI_SMM_CPU_SERVICE_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "228F344D-B3DE-43BB-A4D7EA200B1B1482", name="EFI_SM_MONITOR_INIT_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "5CB9CB3D-31A4-480C-949829D269BACFBA", name="EDKII_PEI_MP_SERVICES2_PPI_GUID"
+    ),
+    UefiGuid(
+        "01D127EA-F6F1-4EF6-94158A000093F89D", name="UEFI_PAYLOAD_PKG_TOKEN_SPACE_GUID"
+    ),
+    UefiGuid("878AC2CC-5343-46F2-B56351F89DAF56BA", name="BMP_IMAGE_GUID"),
+    UefiGuid("16C8A6D0-FE8A-4082-A208CF89C4290433", name="UEFI_SYSTEM_TABLE_INFO_GUID"),
+    UefiGuid("0AD3D31B-B3D8-4506-AE712EF11006D90F", name="UEFI_ACPI_BOARD_INFO_GUID"),
+    UefiGuid("6C6872FE-56A9-4403-BB98958D62DE87F1", name="UEFI_SERIAL_PORT_INFO_GUID"),
+    UefiGuid("A1FF7424-7A1A-478E-A9E492F357D12832", name="LOADER_MEMORY_MAP_INFO_GUID"),
+    UefiGuid(
+        "DBE23AA1-A342-4B97-85B6B226F1617389", name="EFI_PAY_LOAD_HOB_BASE_PPI_GUID"
+    ),
+    UefiGuid("EC2E931B-3281-48A5-8107DF8A8BED3C5D", name="PLATFORM_G_O_P_POLICY_GUID"),
     UefiGuid("EB9D2D30-2D88-11D3-9A160090273FC14D", name="ACPI_TABLE_GUID"),
     UefiGuid(
         "2EA9743A-23D9-425E-872CF615AA195788",
@@ -5773,558 +6220,694 @@ PROTOCOLS_GUIDS = [
     UefiGuid(
         "ED52984E-6ED7-4445-9D5D200C3201F51E", name="LENOVO_PLATFORM_STAGE0_PEI_GUID"
     ),
-    UefiGuid("E7E1EFA6-7607-4A78-A7DD43E4BD72C099", name="gAppPkgTokenSpaceGuid"),
-    UefiGuid("A1147A20-3144-4F8D-8295B48311C8E4A4", name="gArmJunoTokenSpaceGuid"),
+    UefiGuid("E7E1EFA6-7607-4A78-A7DD43E4BD72C099", name="APP_PKG_TOKEN_SPACE_GUID"),
+    UefiGuid("A1147A20-3144-4F8D-8295B48311C8E4A4", name="ARM_JUNO_TOKEN_SPACE_GUID"),
     UefiGuid(
-        "AD651C7D-3C22-4DBF-92E838A7CDAE87B2", name="gVirtualUncachedPagesProtocolGuid"
-    ),
-    UefiGuid("CBD2E4D5-7068-4FF5-B4629822B4AD8D60", name="gVariableRuntimeDxeFileGuid"),
-    UefiGuid("C3253C90-A24F-4599-A6641F8813778FC9", name="gArmGlobalVariableGuid"),
-    UefiGuid("41E26B9C-ADA6-45B3-808E2357A35B60D6", name="gArmBootMonFsFileInfoGuid"),
-    UefiGuid(
-        "AFFE115B-8589-456D-BAB58F2EDA53AEB7", name="gArmPlatformUpdateFdtEventGuid"
-    ),
-    UefiGuid("AB1C1816-D542-4E6F-9B1E8ECD9253E2E7", name="gArmGlobalVariablePpiGuid"),
-    UefiGuid(
-        "44577A0D-361A-45B2-B33DBB9EE60D5A4F", name="gArmRealViewEbPkgTokenSpaceGuid"
-    ),
-    UefiGuid("9C0AAED4-74C5-4043-B417A3223814CE76", name="gArmVExpressTokenSpaceGuid"),
-    UefiGuid(
-        "0B6F5CA7-4F53-445A-B76E2E365B806366", name="gArmVirtualizationTokenSpaceGuid"
-    ),
-    UefiGuid("6834FE45-4AEE-4FC6-BCB5FF45B7A871E2", name="gBeagleBoardTokenSpaceGuid"),
-    UefiGuid(
-        "E1475E0C-1746-4802-862E011C2C2D9D86", name="gEfiRuntimeCryptProtocolGuid"
+        "AD651C7D-3C22-4DBF-92E838A7CDAE87B2",
+        name="VIRTUAL_UNCACHED_PAGES_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "3677D529-326F-4603-A926EAACE01DCBB0", name="gEfiPciExpressBaseAddressGuid"
+        "CBD2E4D5-7068-4FF5-B4629822B4AD8D60", name="VARIABLE_RUNTIME_DXE_FILE_GUID"
     ),
-    UefiGuid("3C699197-093C-4C69-B06B128AE3481DC9", name="gEfiAcpiDescriptionGuid"),
-    UefiGuid("B091E7D2-05A0-4198-94F074B7B8C55459", name="gEfiFlashMapHobGuid"),
-    UefiGuid("7462660F-1CBD-48DA-AD1191717913831C", name="gEfiPciOptionRomTableGuid"),
-    UefiGuid("ED150714-DF30-407D-B24A4B742FD5CEA2", name="gDuetConsoleOutConfigGuid"),
-    UefiGuid("D6A2CB7F-6A18-4E2F-B43B9920A733700A", name="gDxeCoreFileNameGuid"),
-    UefiGuid("7701D7E5-7D1D-4432-A468673DAB8ADE60", name="gLdrMemoryDescriptorGuid"),
+    UefiGuid("C3253C90-A24F-4599-A6641F8813778FC9", name="ARM_GLOBAL_VARIABLE_GUID"),
     UefiGuid(
-        "6568A3D6-015F-4B4A-9C891D146314130A", name="gEfiSmmBaseThunkCommunicationGuid"
+        "41E26B9C-ADA6-45B3-808E2357A35B60D6", name="ARM_BOOT_MON_FS_FILE_INFO_GUID"
     ),
-    UefiGuid("60B5E939-0FCF-4227-BA836BBED45BC0E3", name="gEfiBootStateGuid"),
+    UefiGuid(
+        "AFFE115B-8589-456D-BAB58F2EDA53AEB7", name="ARM_PLATFORM_UPDATE_FDT_EVENT_GUID"
+    ),
+    UefiGuid(
+        "AB1C1816-D542-4E6F-9B1E8ECD9253E2E7", name="ARM_GLOBAL_VARIABLE_PPI_GUID"
+    ),
+    UefiGuid(
+        "44577A0D-361A-45B2-B33DBB9EE60D5A4F",
+        name="ARM_REAL_VIEW_EB_PKG_TOKEN_SPACE_GUID",
+    ),
+    UefiGuid(
+        "9C0AAED4-74C5-4043-B417A3223814CE76", name="ARM_V_EXPRESS_TOKEN_SPACE_GUID"
+    ),
+    UefiGuid(
+        "0B6F5CA7-4F53-445A-B76E2E365B806366",
+        name="ARM_VIRTUALIZATION_TOKEN_SPACE_GUID",
+    ),
+    UefiGuid(
+        "6834FE45-4AEE-4FC6-BCB5FF45B7A871E2", name="BEAGLE_BOARD_TOKEN_SPACE_GUID"
+    ),
+    UefiGuid(
+        "E1475E0C-1746-4802-862E011C2C2D9D86", name="EFI_RUNTIME_CRYPT_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "3677D529-326F-4603-A926EAACE01DCBB0", name="EFI_PCI_EXPRESS_BASE_ADDRESS_GUID"
+    ),
+    UefiGuid("3C699197-093C-4C69-B06B128AE3481DC9", name="EFI_ACPI_DESCRIPTION_GUID"),
+    UefiGuid("B091E7D2-05A0-4198-94F074B7B8C55459", name="EFI_FLASH_MAP_HOB_GUID"),
+    UefiGuid(
+        "7462660F-1CBD-48DA-AD1191717913831C", name="EFI_PCI_OPTION_ROM_TABLE_GUID"
+    ),
+    UefiGuid(
+        "ED150714-DF30-407D-B24A4B742FD5CEA2", name="DUET_CONSOLE_OUT_CONFIG_GUID"
+    ),
+    UefiGuid("D6A2CB7F-6A18-4E2F-B43B9920A733700A", name="DXE_CORE_FILE_NAME_GUID"),
+    UefiGuid("7701D7E5-7D1D-4432-A468673DAB8ADE60", name="LDR_MEMORY_DESCRIPTOR_GUID"),
+    UefiGuid(
+        "6568A3D6-015F-4B4A-9C891D146314130A",
+        name="EFI_SMM_BASE_THUNK_COMMUNICATION_GUID",
+    ),
+    UefiGuid("60B5E939-0FCF-4227-BA836BBED45BC0E3", name="EFI_BOOT_STATE_GUID"),
     UefiGuid(
         "2354D320-3EB3-4C81-99F4CC4AE143463E",
-        name="gEfiEdkCompatibilityPkgTokenSpaceGuid",
+        name="EFI_EDK_COMPATIBILITY_PKG_TOKEN_SPACE_GUID",
     ),
     UefiGuid(
-        "9E0C30BC-3F06-4BA6-828809179B855DBE", name="gFrameworkBdsFrontPageFormsetGuid"
+        "9E0C30BC-3F06-4BA6-828809179B855DBE",
+        name="FRAMEWORK_BDS_FRONT_PAGE_FORMSET_GUID",
     ),
-    UefiGuid("B0EE53D4-A049-4A79-B2FF19D9FAEFAA94", name="gEcpPeiPciCfgPpiGuid"),
-    UefiGuid("DF2D868E-32FC-4CF0-8E6BFFD95D1343D0", name="gEfiPrintProtocolGuid"),
+    UefiGuid("B0EE53D4-A049-4A79-B2FF19D9FAEFAA94", name="ECP_PEI_PCI_CFG_PPI_GUID"),
+    UefiGuid("DF2D868E-32FC-4CF0-8E6BFFD95D1343D0", name="EFI_PRINT_PROTOCOL_GUID"),
     UefiGuid(
-        "910DCA07-1F94-4EE7-AF2FFF72F3154353", name="gEfiSmmBaseHelperReadyProtocolGuid"
+        "910DCA07-1F94-4EE7-AF2FFF72F3154353",
+        name="EFI_SMM_BASE_HELPER_READY_PROTOCOL_GUID",
     ),
     UefiGuid(
         "9546E07C-2CBB-4C88-986CCD341086F044",
-        name="gEfiDebugSupportPeriodicCallbackProtocolGuid",
+        name="EFI_DEBUG_SUPPORT_PERIODIC_CALLBACK_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "AEDA2428-9A22-4637-9B21545E28FBB829", name="gEfiEblAddCommandProtocolGuid"
+        "AEDA2428-9A22-4637-9B21545E28FBB829", name="EFI_EBL_ADD_COMMAND_PROTOCOL_GUID"
     ),
     UefiGuid(
         "D3705011-BC19-4AF7-BE16F68030378C15",
-        name="gEfiIntelFrameworkModulePkgTokenSpaceGuid",
+        name="EFI_INTEL_FRAMEWORK_MODULE_PKG_TOKEN_SPACE_GUID",
     ),
     UefiGuid(
-        "D083E94C-6560-42E4-B6D42DF75ADF6A2A", name="gEfiDataHubStatusCodeRecordGuid"
+        "D083E94C-6560-42E4-B6D42DF75ADF6A2A",
+        name="EFI_DATA_HUB_STATUS_CODE_RECORD_GUID",
     ),
     UefiGuid(
-        "C020489E-6DB2-4EF2-9AA5CA06FC11D36A", name="gEfiAcpiVariableCompatiblityGuid"
+        "C020489E-6DB2-4EF2-9AA5CA06FC11D36A",
+        name="EFI_ACPI_VARIABLE_COMPATIBLITY_GUID",
     ),
-    UefiGuid("283FA2EE-532C-484D-93839F93B36F0B7E", name="gEfiUpdateDataFileGuid"),
-    UefiGuid("CF31FAC5-C24E-11D2-85F300A0C93EC93B", name="gBlockIoVendorGuid"),
-    UefiGuid("9E0C30BC-3F06-4BA6-828809179B855DBE", name="gFrontPageFormSetGuid"),
-    UefiGuid("847BC3FE-B974-446D-94495AD5412E993B", name="gBootManagerFormSetGuid"),
-    UefiGuid("3EBFA8E6-511D-4B5B-A95FFB38260F1C27", name="gDeviceManagerFormSetGuid"),
-    UefiGuid("F76E0A70-B5ED-4C38-AC9AE5F54BF16E34", name="gDriverHealthFormSetGuid"),
-    UefiGuid("642237C7-35D4-472D-836512E0CCF27A22", name="gBootMaintFormSetGuid"),
-    UefiGuid("1F2D63E1-FEBD-4DC7-9CC5BA2B1CEF9C5B", name="gFileExploreFormSetGuid"),
-    UefiGuid("3B4D9B23-95AC-44F6-9FCD0E9594586C72", name="gBdsLibStringPackageGuid"),
-    UefiGuid("0E8C545B-A2EE-470D-8E26BDA1A13C0AA3", name="gLastEnumLangGuid"),
+    UefiGuid("283FA2EE-532C-484D-93839F93B36F0B7E", name="EFI_UPDATE_DATA_FILE_GUID"),
+    UefiGuid("CF31FAC5-C24E-11D2-85F300A0C93EC93B", name="BLOCK_IO_VENDOR_GUID"),
+    UefiGuid("9E0C30BC-3F06-4BA6-828809179B855DBE", name="FRONT_PAGE_FORM_SET_GUID"),
+    UefiGuid("847BC3FE-B974-446D-94495AD5412E993B", name="BOOT_MANAGER_FORM_SET_GUID"),
     UefiGuid(
-        "FAB7E9E1-39DD-4F2B-8408E20E906CB6DE", name="gHdBootDevicePathVariablGuid"
+        "3EBFA8E6-511D-4B5B-A95FFB38260F1C27", name="DEVICE_MANAGER_FORM_SET_GUID"
     ),
-    UefiGuid("170E13C0-BF1B-4218-871D2ABDC6F887BC", name="gEfiOEMBadgingProtocolGuid"),
-    UefiGuid("D088A413-0A70-4217-BA559A3CB65C41B3", name="gExitPmAuthProtocolGuid"),
-    UefiGuid("7F0013A7-DC79-4B22-809911F75FDC829D", name="gEfiCacheSubClassGuid"),
-    UefiGuid("4E8F4EBB-64B9-4E05-9B184CFE49235097", name="gEfiMemorySubClassGuid"),
-    UefiGuid("772484B2-7482-4B91-9F9AAD43F81C5881", name="gEfiMiscSubClassGuid"),
-    UefiGuid("26FDEB7E-B8AF-4CCF-AA9702633CE48CA7", name="gEfiProcessorSubClassGuid"),
-    UefiGuid("3B6686BD-0D76-4030-B70EB5519E2FC5A0", name="gEfiCapsuleGuid"),
-    UefiGuid("98B8D59B-E8BA-48EE-98DDC295392F1EDB", name="gEfiConfigFileNameGuid"),
+    UefiGuid("F76E0A70-B5ED-4C38-AC9AE5F54BF16E34", name="DRIVER_HEALTH_FORM_SET_GUID"),
+    UefiGuid("642237C7-35D4-472D-836512E0CCF27A22", name="BOOT_MAINT_FORM_SET_GUID"),
+    UefiGuid("1F2D63E1-FEBD-4DC7-9CC5BA2B1CEF9C5B", name="FILE_EXPLORE_FORM_SET_GUID"),
+    UefiGuid("3B4D9B23-95AC-44F6-9FCD0E9594586C72", name="BDS_LIB_STRING_PACKAGE_GUID"),
+    UefiGuid("0E8C545B-A2EE-470D-8E26BDA1A13C0AA3", name="LAST_ENUM_LANG_GUID"),
     UefiGuid(
-        "6DADF1D1-D4CC-4910-BB6E82B1FD80FF3D", name="gEfiSmmPeiSmramMemoryReserveGuid"
-    ),
-    UefiGuid("F328E36C-23B6-4A95-854B32E19534CD75", name="gSmmCommunicateHeaderGuid"),
-    UefiGuid("7A9354D9-0468-444A-81CE0BF617D890DF", name="gEfiFirmwareFileSystemGuid"),
-    UefiGuid("964E5B22-6459-11D2-8E3900A0C969723B", name="gEfiPeiIdeBlockIoPpiGuid"),
-    UefiGuid(
-        "DA6855BD-07B7-4C05-9ED8E259FD360E22", name="gEfiPei144FloppyBlockIoPpiGuid"
+        "FAB7E9E1-39DD-4F2B-8408E20E906CB6DE", name="HD_BOOT_DEVICE_PATH_VARIABL_GUID"
     ),
     UefiGuid(
-        "ABD42895-78CF-4872-84441B5C180BFBFF", name="gEfiPeiBootScriptExecuterPpiGuid"
+        "170E13C0-BF1B-4218-871D2ABDC6F887BC", name="EFI_O_E_M_BADGING_PROTOCOL_GUID"
     ),
-    UefiGuid("1388066E-3A57-4EFA-98F3C12F3A958A29", name="gEfiPeiSecurityPpiGuid"),
-    UefiGuid("ABD42895-78CF-4872-84441B5C180BFBDA", name="gEfiPeiSmbusPpiGuid"),
+    UefiGuid("D088A413-0A70-4217-BA559A3CB65C41B3", name="EXIT_PM_AUTH_PROTOCOL_GUID"),
+    UefiGuid("7F0013A7-DC79-4B22-809911F75FDC829D", name="EFI_CACHE_SUB_CLASS_GUID"),
+    UefiGuid("4E8F4EBB-64B9-4E05-9B184CFE49235097", name="EFI_MEMORY_SUB_CLASS_GUID"),
+    UefiGuid("772484B2-7482-4B91-9F9AAD43F81C5881", name="EFI_MISC_SUB_CLASS_GUID"),
     UefiGuid(
-        "E1F2EBA0-F7B9-4A26-8620131221642A90", name="gEfiPciCfgPpiInServiceTableGuid"
+        "26FDEB7E-B8AF-4CCF-AA9702633CE48CA7", name="EFI_PROCESSOR_SUB_CLASS_GUID"
     ),
+    UefiGuid("3B6686BD-0D76-4030-B70EB5519E2FC5A0", name="EFI_CAPSULE_GUID"),
+    UefiGuid("98B8D59B-E8BA-48EE-98DDC295392F1EDB", name="EFI_CONFIG_FILE_NAME_GUID"),
     UefiGuid(
-        "3CDC90C6-13FB-4A75-9E7959E9DD78B9FA", name="gEfiPeiReadOnlyVariablePpiGuid"
+        "6DADF1D1-D4CC-4910-BB6E82B1FD80FF3D",
+        name="EFI_SMM_PEI_SMRAM_MEMORY_RESERVE_GUID",
     ),
+    UefiGuid("F328E36C-23B6-4A95-854B32E19534CD75", name="SMM_COMMUNICATE_HEADER_GUID"),
     UefiGuid(
-        "4F89E208-E144-4804-9EC80F894F7E36D7", name="gEfiPeiSectionExtractionPpiGuid"
-    ),
-    UefiGuid("7E1F0D85-04FF-4BB2-866A31A2996A48A8", name="gEfiPeiFvFileLoaderPpiGuid"),
-    UefiGuid("36164812-A023-44E5-BD8505BF3C7700AA", name="gEfiFindFvPpiGuid"),
-    UefiGuid("4426CCB2-E684-4A8A-AE4020D4B025B710", name="gEfiPeiS3ResumePpiGuid"),
-    UefiGuid("125F2DE1-FB85-440C-A54C4D99358A8D38", name="gEfiAcpiS3SaveProtocolGuid"),
-    UefiGuid("DBFF9D55-89B7-46DA-BDDF677D3DC0241D", name="gEfiAcpiSupportProtocolGuid"),
-    UefiGuid(
-        "470E1529-B79E-4E32-A0FE6A156D29F9B2", name="gEfiBootScriptSaveProtocolGuid"
+        "7A9354D9-0468-444A-81CE0BF617D890DF", name="EFI_FIRMWARE_FILE_SYSTEM_GUID"
     ),
     UefiGuid(
-        "0FC9013A-0568-4BA9-9B7EC9C390A6609B", name="gEfiLegacyRegionProtocolGuid"
-    ),
-    UefiGuid("B0732526-38C8-4B40-887761C7B06AAC45", name="gEfiCpuIoProtocolGuid"),
-    UefiGuid("AE80D021-618E-11D4-BCD70080C73C8881", name="gEfiDataHubProtocolGuid"),
-    UefiGuid(
-        "448F5DA4-6DD7-4FE1-930769224192215D", name="gEfiSectionExtractionProtocolGuid"
-    ),
-    UefiGuid("D7AD636E-B997-459B-BF3F8846897980E1", name="gEfiHiiProtocolGuid"),
-    UefiGuid(
-        "5542CCE1-DF5C-4D1B-ABCA364F77D399FB", name="gEfiHiiCompatibilityProtocolGuid"
+        "964E5B22-6459-11D2-8E3900A0C969723B", name="EFI_PEI_IDE_BLOCK_IO_PPI_GUID"
     ),
     UefiGuid(
-        "F33261E7-23CB-11D5-BD5C0080C73C8881", name="gFrameworkEfiMpServiceProtocolGuid"
-    ),
-    UefiGuid("1390954D-DA95-4227-93287282C217DAA8", name="gEfiSmmBaseProtocolGuid"),
-    UefiGuid("3792095A-E309-4C1E-AA0185F5655A17F1", name="gEfiSmmAccessProtocolGuid"),
-    UefiGuid("8D12E231-C667-4FD1-98F22449A7E7B2E5", name="gEfiSmmControlProtocolGuid"),
-    UefiGuid(
-        "E541B773-DD11-420C-B026DF993653F8BF", name="gEfiSmmSwDispatchProtocolGuid"
+        "DA6855BD-07B7-4C05-9ED8E259FD360E22",
+        name="EFI_PEI144_FLOPPY_BLOCK_IO_PPI_GUID",
     ),
     UefiGuid(
-        "14FC52BE-01DC-426C-91AEA23C3E220AE8", name="gEfiSmmSxDispatchProtocolGuid"
+        "ABD42895-78CF-4872-84441B5C180BFBFF",
+        name="EFI_PEI_BOOT_SCRIPT_EXECUTER_PPI_GUID",
+    ),
+    UefiGuid("1388066E-3A57-4EFA-98F3C12F3A958A29", name="EFI_PEI_SECURITY_PPI_GUID"),
+    UefiGuid("ABD42895-78CF-4872-84441B5C180BFBDA", name="EFI_PEI_SMBUS_PPI_GUID"),
+    UefiGuid(
+        "E1F2EBA0-F7B9-4A26-8620131221642A90",
+        name="EFI_PCI_CFG_PPI_IN_SERVICE_TABLE_GUID",
+    ),
+    UefiGuid(
+        "3CDC90C6-13FB-4A75-9E7959E9DD78B9FA",
+        name="EFI_PEI_READ_ONLY_VARIABLE_PPI_GUID",
+    ),
+    UefiGuid(
+        "4F89E208-E144-4804-9EC80F894F7E36D7",
+        name="EFI_PEI_SECTION_EXTRACTION_PPI_GUID",
+    ),
+    UefiGuid(
+        "7E1F0D85-04FF-4BB2-866A31A2996A48A8", name="EFI_PEI_FV_FILE_LOADER_PPI_GUID"
+    ),
+    UefiGuid("36164812-A023-44E5-BD8505BF3C7700AA", name="EFI_FIND_FV_PPI_GUID"),
+    UefiGuid("4426CCB2-E684-4A8A-AE4020D4B025B710", name="EFI_PEI_S3_RESUME_PPI_GUID"),
+    UefiGuid(
+        "125F2DE1-FB85-440C-A54C4D99358A8D38", name="EFI_ACPI_S3_SAVE_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "DBFF9D55-89B7-46DA-BDDF677D3DC0241D", name="EFI_ACPI_SUPPORT_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "470E1529-B79E-4E32-A0FE6A156D29F9B2", name="EFI_BOOT_SCRIPT_SAVE_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "0FC9013A-0568-4BA9-9B7EC9C390A6609B", name="EFI_LEGACY_REGION_PROTOCOL_GUID"
+    ),
+    UefiGuid("B0732526-38C8-4B40-887761C7B06AAC45", name="EFI_CPU_IO_PROTOCOL_GUID"),
+    UefiGuid("AE80D021-618E-11D4-BCD70080C73C8881", name="EFI_DATA_HUB_PROTOCOL_GUID"),
+    UefiGuid(
+        "448F5DA4-6DD7-4FE1-930769224192215D",
+        name="EFI_SECTION_EXTRACTION_PROTOCOL_GUID",
+    ),
+    UefiGuid("D7AD636E-B997-459B-BF3F8846897980E1", name="EFI_HII_PROTOCOL_GUID"),
+    UefiGuid(
+        "5542CCE1-DF5C-4D1B-ABCA364F77D399FB",
+        name="EFI_HII_COMPATIBILITY_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "F33261E7-23CB-11D5-BD5C0080C73C8881",
+        name="FRAMEWORK_EFI_MP_SERVICE_PROTOCOL_GUID",
+    ),
+    UefiGuid("1390954D-DA95-4227-93287282C217DAA8", name="EFI_SMM_BASE_PROTOCOL_GUID"),
+    UefiGuid(
+        "3792095A-E309-4C1E-AA0185F5655A17F1", name="EFI_SMM_ACCESS_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "8D12E231-C667-4FD1-98F22449A7E7B2E5", name="EFI_SMM_CONTROL_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "E541B773-DD11-420C-B026DF993653F8BF", name="EFI_SMM_SW_DISPATCH_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "14FC52BE-01DC-426C-91AEA23C3E220AE8", name="EFI_SMM_SX_DISPATCH_PROTOCOL_GUID"
     ),
     UefiGuid(
         "9CCA03FC-4C9E-4A19-9B06ED7B479BDE55",
-        name="gEfiSmmPeriodicTimerDispatchProtocolGuid",
+        name="EFI_SMM_PERIODIC_TIMER_DISPATCH_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "A05B6FFD-87AF-4E42-95C96228B63CF3F3", name="gEfiSmmUsbDispatchProtocolGuid"
+        "A05B6FFD-87AF-4E42-95C96228B63CF3F3", name="EFI_SMM_USB_DISPATCH_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "E0744B81-9513-49CD-8CEAE9245E7039DA", name="gEfiSmmGpiDispatchProtocolGuid"
+        "E0744B81-9513-49CD-8CEAE9245E7039DA", name="EFI_SMM_GPI_DISPATCH_PROTOCOL_GUID"
     ),
     UefiGuid(
         "78965B98-B0BF-449E-8B22D2914E498A98",
-        name="gEfiSmmStandbyButtonDispatchProtocolGuid",
+        name="EFI_SMM_STANDBY_BUTTON_DISPATCH_PROTOCOL_GUID",
     ),
     UefiGuid(
         "B709EFA0-47A6-4B41-B93112ECE7A8EE56",
-        name="gEfiSmmPowerButtonDispatchProtocolGuid",
+        name="EFI_SMM_POWER_BUTTON_DISPATCH_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "C50B323E-9075-4F2A-AC8ED2596A1085CC", name="gEfiSmmIchnDispatchProtocolGuid"
+        "C50B323E-9075-4F2A-AC8ED2596A1085CC",
+        name="EFI_SMM_ICHN_DISPATCH_PROTOCOL_GUID",
     ),
-    UefiGuid("5F439A0B-45D8-4682-A4F4F0576B513441", name="gEfiSmmCpuIoGuid"),
+    UefiGuid("5F439A0B-45D8-4682-A4F4F0576B513441", name="EFI_SMM_CPU_IO_GUID"),
     UefiGuid(
-        "F3E4543D-CF35-6CEF-35C44FE6344DFC54", name="gEfiFormCallbackProtocolGuid"
+        "F3E4543D-CF35-6CEF-35C44FE6344DFC54", name="EFI_FORM_CALLBACK_PROTOCOL_GUID"
     ),
-    UefiGuid("E5A1333E-E1B4-4D55-CEEB35C3EF133443", name="gEfiFormBrowserProtocolGuid"),
+    UefiGuid(
+        "E5A1333E-E1B4-4D55-CEEB35C3EF133443", name="EFI_FORM_BROWSER_PROTOCOL_GUID"
+    ),
     UefiGuid(
         "0FB7C852-ADCA-4853-8D0FFBA71B1CE11A",
-        name="gEfiFormBrowserCompatibilityProtocolGuid",
+        name="EFI_FORM_BROWSER_COMPATIBILITY_PROTOCOL_GUID",
     ),
     UefiGuid(
         "DE28BC59-6228-41BD-BDF6A3B9ADB58DA1",
-        name="gFramerworkEfiFirmwareVolumeBlockProtocolGuid",
+        name="FRAMERWORK_EFI_FIRMWARE_VOLUME_BLOCK_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "21F302AD-6E94-471B-84BCB14800403A1D", name="gEfiSmmCpuSaveStateProtocolGuid"
+        "21F302AD-6E94-471B-84BCB14800403A1D",
+        name="EFI_SMM_CPU_SAVE_STATE_PROTOCOL_GUID",
     ),
-    UefiGuid("834C0C5F-ADB3-4372-AEEB03E4E9E6C591", name="gIntelFspPkgTokenSpaceGuid"),
     UefiGuid(
-        "BBCFF46C-C8D3-4113-8985B9D4F3B3F64E", name="gFspBootLoaderTemporaryMemoryGuid"
+        "834C0C5F-ADB3-4372-AEEB03E4E9E6C591", name="INTEL_FSP_PKG_TOKEN_SPACE_GUID"
+    ),
+    UefiGuid(
+        "BBCFF46C-C8D3-4113-8985B9D4F3B3F64E",
+        name="FSP_BOOT_LOADER_TEMPORARY_MEMORY_GUID",
     ),
     UefiGuid(
         "D038747C-D00C-4980-B319490199A47D55",
-        name="gFspReservedMemoryResourceHobTsegGuid",
+        name="FSP_RESERVED_MEMORY_RESOURCE_HOB_TSEG_GUID",
     ),
     UefiGuid(
         "9C7C3AA7-5332-4917-82B956A5F3E62A07",
-        name="gFspReservedMemoryResourceHobGfxGuid",
+        name="FSP_RESERVED_MEMORY_RESOURCE_HOB_GFX_GUID",
     ),
     UefiGuid(
         "00D6B14B-7DD0-4062-8821E5F96A2A1B00",
-        name="gFspReservedMemoryResourceHobMiscGuid",
+        name="FSP_RESERVED_MEMORY_RESOURCE_HOB_MISC_GUID",
     ),
-    UefiGuid("2BC1C74A-122F-40B2-B223082B7465225D", name="gFspWrapperTokenSpaceGuid"),
-    UefiGuid("F5EF05E4-D538-4774-8F1BE9773011E038", name="gFspInitDonePpiGuid"),
     UefiGuid(
-        "D8944553-C4DD-41F4-9B30E1397CFB267B", name="gEfiNicIp4ConfigVariableGuid"
+        "2BC1C74A-122F-40B2-B223082B7465225D", name="FSP_WRAPPER_TOKEN_SPACE_GUID"
     ),
-    UefiGuid("09D5B53F-F4B0-4F59-A0B17B57D35C0E05", name="gNicIp4ConfigNvDataGuid"),
-    UefiGuid("EB9D2D32-2D88-11D3-9A160090273FC14D", name="gEfiSalSystemTableGuid"),
+    UefiGuid("F5EF05E4-D538-4774-8F1BE9773011E038", name="FSP_INIT_DONE_PPI_GUID"),
     UefiGuid(
-        "B60DC6E8-3B6F-11D5-AF0900A0C944A05B", name="gEfiSalMcaInitPmiProtocolGuid"
+        "D8944553-C4DD-41F4-9B30E1397CFB267B", name="EFI_NIC_IP4_CONFIG_VARIABLE_GUID"
+    ),
+    UefiGuid("09D5B53F-F4B0-4F59-A0B17B57D35C0E05", name="NIC_IP4_CONFIG_NV_DATA_GUID"),
+    UefiGuid("EB9D2D32-2D88-11D3-9A160090273FC14D", name="EFI_SAL_SYSTEM_TABLE_GUID"),
+    UefiGuid(
+        "B60DC6E8-3B6F-11D5-AF0900A0C944A05B", name="EFI_SAL_MCA_INIT_PMI_PROTOCOL_GUID"
     ),
     UefiGuid(
         "DE0EE9A4-3C7A-44F2-B78BE3CCD69C3AF7",
-        name="gEfiExtendedSalBootServiceProtocolGuid",
+        name="EFI_EXTENDED_SAL_BOOT_SERVICE_PROTOCOL_GUID",
     ),
     UefiGuid(
         "5AEA42B5-31E1-4515-BC31B8D5257565A6",
-        name="gEfiExtendedSalBaseIoServicesProtocolGuid",
+        name="EFI_EXTENDED_SAL_BASE_IO_SERVICES_PROTOCOL_GUID",
     ),
     UefiGuid(
         "53A58D06-AC27-4D8C-B5E9F08A80654170",
-        name="gEfiExtendedSalStallServicesProtocolGuid",
+        name="EFI_EXTENDED_SAL_STALL_SERVICES_PROTOCOL_GUID",
     ),
     UefiGuid(
         "7E97A470-EFDB-4D02-8FCE6190D27BA296",
-        name="gEfiExtendedSalRtcServicesProtocolGuid",
+        name="EFI_EXTENDED_SAL_RTC_SERVICES_PROTOCOL_GUID",
     ),
     UefiGuid(
         "4ECB6C53-C641-4370-8CB23B0E496E8378",
-        name="gEfiExtendedSalVariableServicesProtocolGuid",
+        name="EFI_EXTENDED_SAL_VARIABLE_SERVICES_PROTOCOL_GUID",
     ),
     UefiGuid(
         "899AFD18-75E8-408B-A41A6E2E7ECDF454",
-        name="gEfiExtendedSalMtcServicesProtocolGuid",
+        name="EFI_EXTENDED_SAL_MTC_SERVICES_PROTOCOL_GUID",
     ),
     UefiGuid(
         "7D019990-8CE1-46F5-A7763C5198676AA0",
-        name="gEfiExtendedSalResetServicesProtocolGuid",
+        name="EFI_EXTENDED_SAL_RESET_SERVICES_PROTOCOL_GUID",
     ),
     UefiGuid(
         "00DBD91D-55E9-420F-96395E9F8437B44F",
-        name="gEfiExtendedSalStatusCodeServicesProtocolGuid",
+        name="EFI_EXTENDED_SAL_STATUS_CODE_SERVICES_PROTOCOL_GUID",
     ),
     UefiGuid(
         "A2271DF1-BCBB-4F1D-98A906BC172F071A",
-        name="gEfiExtendedSalFvBlockServicesProtocolGuid",
+        name="EFI_EXTENDED_SAL_FV_BLOCK_SERVICES_PROTOCOL_GUID",
     ),
     UefiGuid(
         "697D81A2-CF18-4DC0-9E0D06113B618A3F",
-        name="gEfiExtendedSalMpServicesProtocolGuid",
+        name="EFI_EXTENDED_SAL_MP_SERVICES_PROTOCOL_GUID",
     ),
     UefiGuid(
         "E1CD9D21-0FC2-438D-970304E66D961E57",
-        name="gEfiExtendedSalPalServicesProtocolGuid",
+        name="EFI_EXTENDED_SAL_PAL_SERVICES_PROTOCOL_GUID",
     ),
     UefiGuid(
         "D9E9FA06-0FE0-41C3-96FB83425A3394F8",
-        name="gEfiExtendedSalBaseServicesProtocolGuid",
+        name="EFI_EXTENDED_SAL_BASE_SERVICES_PROTOCOL_GUID",
     ),
     UefiGuid(
         "2A591128-6CC7-42B1-8AF058933B682DBB",
-        name="gEfiExtendedSalMcaServicesProtocolGuid",
+        name="EFI_EXTENDED_SAL_MCA_SERVICES_PROTOCOL_GUID",
     ),
     UefiGuid(
         "A46B1A31-AD66-4905-92F62B4659DC3063",
-        name="gEfiExtendedSalPciServicesProtocolGuid",
+        name="EFI_EXTENDED_SAL_PCI_SERVICES_PROTOCOL_GUID",
     ),
     UefiGuid(
         "0EDC9494-2743-4BA5-88180AEF5213F188",
-        name="gEfiExtendedSalCacheServicesProtocolGuid",
+        name="EFI_EXTENDED_SAL_CACHE_SERVICES_PROTOCOL_GUID",
     ),
     UefiGuid(
         "CB3FD86E-38A3-4C03-9A5C90CFA3A2AB7A",
-        name="gEfiExtendedSalMcaLogServicesProtocolGuid",
+        name="EFI_EXTENDED_SAL_MCA_LOG_SERVICES_PROTOCOL_GUID",
     ),
-    UefiGuid("CC664EB8-3C24-4086-B6F634E856BCE36E", name="gEfiWinNtPassThroughGuid"),
-    UefiGuid("BA73672C-A5D3-11D4-BD000080C73C8881", name="gEfiWinNtConsoleGuid"),
-    UefiGuid("AB248E99-ABE1-11D4-BD0D0080C73C8881", name="gEfiWinNtUgaGuid"),
-    UefiGuid("4E11E955-CCCA-11D4-BD0D0080C73C8881", name="gEfiWinNtGopGuid"),
-    UefiGuid("0C95A93D-A006-11D4-BCFA0080C73C8881", name="gEfiWinNtSerialPortGuid"),
-    UefiGuid("0C95A935-A006-11D4-BCFA0080C73C8881", name="gEfiWinNtFileSystemGuid"),
-    UefiGuid("0C95A92F-A006-11D4-BCFA0080C73C8881", name="gEfiWinNtPhysicalDisksGuid"),
-    UefiGuid("0C95A928-A006-11D4-BCFA0080C73C8881", name="gEfiWinNtVirtualDisksGuid"),
-    UefiGuid("0D79A645-1D91-40A6-A81F61E6982B32B4", name="gEfiNt32PkgTokenSpaceGuid"),
-    UefiGuid("B347F047-AF8C-490E-AC070AA9B7E53858", name="gEfiWinNtSystemConfigGuid"),
-    UefiGuid("98C281E5-F906-43DD-A92BB003BF2765DA", name="gPeiNtThunkPpiGuid"),
-    UefiGuid("0DCE384D-007C-4BA5-94BD0F6EB64D2AA9", name="gPeiNtAutoScanPpiGuid"),
-    UefiGuid("FD0C65EB-0405-4CD2-8AEEF400EF13BAC2", name="gNtPeiLoadFilePpiGuid"),
-    UefiGuid("4E76928F-50AD-4334-B06BA84213108A57", name="gNtFwhPpiGuid"),
-    UefiGuid("0419F582-0625-4531-8A3385A9965C95BC", name="gWinNtBusDriverGuid"),
-    UefiGuid("58C518B1-76F3-11D4-BCEA0080C73C8881", name="gEfiWinNtThunkProtocolGuid"),
-    UefiGuid("96EB4AD6-A32A-11D4-BCFD0080C73C8881", name="gEfiWinNtIoProtocolGuid"),
-    UefiGuid("24B09ABE-4E47-481C-A9ADCEF12C392327", name="gOmap35xxTokenSpaceGuid"),
-    UefiGuid("1E43298F-3478-41A7-B57786064635C728", name="gOptionRomPkgTokenSpaceGuid"),
-    UefiGuid("6B558CE3-69E5-4C67-A634F7FE72ADBE84", name="gBlockMmioProtocolGuid"),
     UefiGuid(
-        "669346EF-FDAD-4AEB-08A621462D3FEF7D", name="gPerformancePkgTokenSpaceGuid"
+        "CC664EB8-3C24-4086-B6F634E856BCE36E", name="EFI_WIN_NT_PASS_THROUGH_GUID"
     ),
-    UefiGuid("DBA6A7E3-BB57-4BE7-8AF8D578DB7E5687", name="gEfiTscFrequencyGuid"),
-    UefiGuid("EB9D2D30-2D88-11D3-9A160090273FC14D", name="gAcpi10TableGuid"),
-    UefiGuid("EB9D2D30-2D88-11D3-9A160090273FC14D", name="gAcpiTableGuid"),
-    UefiGuid("5CAC0099-0DC9-48E5-8068BB95F5400A9F", name="gPeiCapsuleOnDataCdGuid"),
+    UefiGuid("BA73672C-A5D3-11D4-BD000080C73C8881", name="EFI_WIN_NT_CONSOLE_GUID"),
+    UefiGuid("AB248E99-ABE1-11D4-BD0D0080C73C8881", name="EFI_WIN_NT_UGA_GUID"),
+    UefiGuid("4E11E955-CCCA-11D4-BD0D0080C73C8881", name="EFI_WIN_NT_GOP_GUID"),
+    UefiGuid("0C95A93D-A006-11D4-BCFA0080C73C8881", name="EFI_WIN_NT_SERIAL_PORT_GUID"),
+    UefiGuid("0C95A935-A006-11D4-BCFA0080C73C8881", name="EFI_WIN_NT_FILE_SYSTEM_GUID"),
     UefiGuid(
-        "2E3D2E75-9B2E-412D-B4B170416B8700FF", name="gPeiCapsuleOnFatFloppyDiskGuid"
+        "0C95A92F-A006-11D4-BCFA0080C73C8881", name="EFI_WIN_NT_PHYSICAL_DISKS_GUID"
     ),
-    UefiGuid("B38573B6-6200-4AC5-B51D82E65938D783", name="gPeiCapsuleOnFatIdeDiskGuid"),
-    UefiGuid("0FFBCE19-324C-4690-A00998C6AE2EB186", name="gPeiCapsuleOnFatUsbDiskGuid"),
     UefiGuid(
-        "31A4878F-230D-4FC2-90BBDA5F41A44B1B", name="gDxeDebugportExtProtocolGuid"
+        "0C95A928-A006-11D4-BCFA0080C73C8881", name="EFI_WIN_NT_VIRTUAL_DISKS_GUID"
     ),
-    UefiGuid("CA3B3A50-5698-4551-8B18CEAEEF917D50", name="gDxeDebugCmdProtocolGuid"),
     UefiGuid(
-        "301AF449-E0D7-43A3-8B1BBC16725D374B", name="gDxeDebugDispatchProtocolGuid"
+        "0D79A645-1D91-40A6-A81F61E6982B32B4", name="EFI_NT32_PKG_TOKEN_SPACE_GUID"
+    ),
+    UefiGuid(
+        "B347F047-AF8C-490E-AC070AA9B7E53858", name="EFI_WIN_NT_SYSTEM_CONFIG_GUID"
+    ),
+    UefiGuid("98C281E5-F906-43DD-A92BB003BF2765DA", name="PEI_NT_THUNK_PPI_GUID"),
+    UefiGuid("0DCE384D-007C-4BA5-94BD0F6EB64D2AA9", name="PEI_NT_AUTO_SCAN_PPI_GUID"),
+    UefiGuid("FD0C65EB-0405-4CD2-8AEEF400EF13BAC2", name="NT_PEI_LOAD_FILE_PPI_GUID"),
+    UefiGuid("4E76928F-50AD-4334-B06BA84213108A57", name="NT_FWH_PPI_GUID"),
+    UefiGuid("0419F582-0625-4531-8A3385A9965C95BC", name="WIN_NT_BUS_DRIVER_GUID"),
+    UefiGuid(
+        "58C518B1-76F3-11D4-BCEA0080C73C8881", name="EFI_WIN_NT_THUNK_PROTOCOL_GUID"
+    ),
+    UefiGuid("96EB4AD6-A32A-11D4-BCFD0080C73C8881", name="EFI_WIN_NT_IO_PROTOCOL_GUID"),
+    UefiGuid("24B09ABE-4E47-481C-A9ADCEF12C392327", name="OMAP35XX_TOKEN_SPACE_GUID"),
+    UefiGuid(
+        "1E43298F-3478-41A7-B57786064635C728", name="OPTION_ROM_PKG_TOKEN_SPACE_GUID"
+    ),
+    UefiGuid("6B558CE3-69E5-4C67-A634F7FE72ADBE84", name="BLOCK_MMIO_PROTOCOL_GUID"),
+    UefiGuid(
+        "669346EF-FDAD-4AEB-08A621462D3FEF7D", name="PERFORMANCE_PKG_TOKEN_SPACE_GUID"
+    ),
+    UefiGuid("DBA6A7E3-BB57-4BE7-8AF8D578DB7E5687", name="EFI_TSC_FREQUENCY_GUID"),
+    UefiGuid("EB9D2D30-2D88-11D3-9A160090273FC14D", name="ACPI10_TABLE_GUID"),
+    UefiGuid("EB9D2D30-2D88-11D3-9A160090273FC14D", name="ACPI_TABLE_GUID"),
+    UefiGuid("5CAC0099-0DC9-48E5-8068BB95F5400A9F", name="PEI_CAPSULE_ON_DATA_CD_GUID"),
+    UefiGuid(
+        "2E3D2E75-9B2E-412D-B4B170416B8700FF",
+        name="PEI_CAPSULE_ON_FAT_FLOPPY_DISK_GUID",
+    ),
+    UefiGuid(
+        "B38573B6-6200-4AC5-B51D82E65938D783", name="PEI_CAPSULE_ON_FAT_IDE_DISK_GUID"
+    ),
+    UefiGuid(
+        "0FFBCE19-324C-4690-A00998C6AE2EB186", name="PEI_CAPSULE_ON_FAT_USB_DISK_GUID"
+    ),
+    UefiGuid(
+        "31A4878F-230D-4FC2-90BBDA5F41A44B1B", name="DXE_DEBUGPORT_EXT_PROTOCOL_GUID"
+    ),
+    UefiGuid("CA3B3A50-5698-4551-8B18CEAEEF917D50", name="DXE_DEBUG_CMD_PROTOCOL_GUID"),
+    UefiGuid(
+        "301AF449-E0D7-43A3-8B1BBC16725D374B", name="DXE_DEBUG_DISPATCH_PROTOCOL_GUID"
     ),
     UefiGuid(
         "CC93A70B-EC27-49C5-8B3413931EFED6E2",
-        name="gEfiAlertStandardFormatProtocolGuid",
+        name="EFI_ALERT_STANDARD_FORMAT_PROTOCOL_GUID",
     ),
-    UefiGuid("EBA4E8D2-3858-41EC-A2812647BA9660D0", name="gEfiDebugportProtocolGuid"),
-    UefiGuid("F33261E7-23CB-11D5-BD5C0080C73C8881", name="gEfiMpServicesProtocolGuid"),
-    UefiGuid("D8117CFF-94A6-11D4-9A3A0090273FC14D", name="gEfiPeiPeCoffLoaderGuid"),
+    UefiGuid("EBA4E8D2-3858-41EC-A2812647BA9660D0", name="EFI_DEBUGPORT_PROTOCOL_GUID"),
     UefiGuid(
-        "387477C1-69C7-11D2-8E3900A0C969723B", name="gEfiSimpleTextInputProtocolGuid"
+        "F33261E7-23CB-11D5-BD5C0080C73C8881", name="EFI_MP_SERVICES_PROTOCOL_GUID"
     ),
+    UefiGuid("D8117CFF-94A6-11D4-9A3A0090273FC14D", name="EFI_PEI_PE_COFF_LOADER_GUID"),
     UefiGuid(
-        "387477C2-69C7-11D2-8E3900A0C969723B", name="gEfiSimpleTextOutputProtocolGuid"
-    ),
-    UefiGuid("7A28436A-E113-406A-AFF90DBF7F643E02", name="gEfiTcgPrivateInterfaceGuid"),
-    UefiGuid("EB9D2D2F-2D88-11D3-9A160090273FC14D", name="gMpsTableGuid"),
-    UefiGuid("5F65DFDB-AC20-4F43-9B21269E81A0EA7E", name="gPdmWindowButtonGuid"),
-    UefiGuid("60B27E1A-D65E-4DB0-B2BBC16FA71E44AB", name="gPdmWindowSpinGuid"),
-    UefiGuid("C153205A-E898-4C24-8689A4B4BCC5C8A2", name="gPeiCachePpiGuid"),
-    UefiGuid("C9737920-C2AD-41C3-B1330F9C251B6743", name="gPeiDebugDispatchPpiGuid"),
-    UefiGuid(
-        "88C9D306-0900-4EB5-82603E2DBEDA1F89", name="gPeiPostBootScriptTablePpiGuid"
-    ),
-    UefiGuid("63B6E435-32BC-49C6-81BDB7A1A0FE1A6C", name="gPeiSmbusPolicyPpiGuid"),
-    UefiGuid(
-        "87DD3539-0667-4BB7-9FB247D3C50B021B", name="gPhoenixDesktopMessageProtocolGuid"
+        "387477C1-69C7-11D2-8E3900A0C969723B",
+        name="EFI_SIMPLE_TEXT_INPUT_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "6FFEC78D-7DBF-4F8B-968D2F43A080C13F", name="gPhoenixDesktopWindowProtocolGuid"
+        "387477C2-69C7-11D2-8E3900A0C969723B",
+        name="EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL_GUID",
     ),
-    UefiGuid("3F5A74B2-BF80-4850-85914F2DF5F9CB2B", name="gPhoenixGdiProtocolGuid"),
+    UefiGuid(
+        "7A28436A-E113-406A-AFF90DBF7F643E02", name="EFI_TCG_PRIVATE_INTERFACE_GUID"
+    ),
+    UefiGuid("EB9D2D2F-2D88-11D3-9A160090273FC14D", name="MPS_TABLE_GUID"),
+    UefiGuid("5F65DFDB-AC20-4F43-9B21269E81A0EA7E", name="PDM_WINDOW_BUTTON_GUID"),
+    UefiGuid("60B27E1A-D65E-4DB0-B2BBC16FA71E44AB", name="PDM_WINDOW_SPIN_GUID"),
+    UefiGuid("C153205A-E898-4C24-8689A4B4BCC5C8A2", name="PEI_CACHE_PPI_GUID"),
+    UefiGuid("C9737920-C2AD-41C3-B1330F9C251B6743", name="PEI_DEBUG_DISPATCH_PPI_GUID"),
+    UefiGuid(
+        "88C9D306-0900-4EB5-82603E2DBEDA1F89",
+        name="PEI_POST_BOOT_SCRIPT_TABLE_PPI_GUID",
+    ),
+    UefiGuid("63B6E435-32BC-49C6-81BDB7A1A0FE1A6C", name="PEI_SMBUS_POLICY_PPI_GUID"),
+    UefiGuid(
+        "87DD3539-0667-4BB7-9FB247D3C50B021B",
+        name="PHOENIX_DESKTOP_MESSAGE_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "6FFEC78D-7DBF-4F8B-968D2F43A080C13F",
+        name="PHOENIX_DESKTOP_WINDOW_PROTOCOL_GUID",
+    ),
+    UefiGuid("3F5A74B2-BF80-4850-85914F2DF5F9CB2B", name="PHOENIX_GDI_PROTOCOL_GUID"),
     UefiGuid(
         "177E63C1-AED6-4D88-917E9B4FB9FE4092",
-        name="gPhoenixSmmCoreServicesProtocolGuid",
+        name="PHOENIX_SMM_CORE_SERVICES_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "FF052503-1AF9-4AEB-83C4C2D4CEB10CA3", name="gPhoenixEfiSmmSwSmiProtocolGuid"
+        "FF052503-1AF9-4AEB-83C4C2D4CEB10CA3",
+        name="PHOENIX_EFI_SMM_SW_SMI_PROTOCOL_GUID",
     ),
     UefiGuid(
         "6FDE3AF8-37AD-43FC-B728F4D341F39240",
-        name="gPhoenixSmmWatchdogTimerProtocolGuid",
+        name="PHOENIX_SMM_WATCHDOG_TIMER_PROTOCOL_GUID",
     ),
-    UefiGuid("EB9D2D32-2D88-11D3-9A160090273FC14D", name="gSalSystemTableGuid"),
-    UefiGuid("8D48BD70-C8A3-4C06-901B747946AAC358", name="gSctIsaHcPpiGuid"),
-    UefiGuid("5FAC7360-D4F2-4C9E-A7EDF2595E670889", name="gSctIsaHcProtocolGuid"),
-    UefiGuid("EB9D2D31-2D88-11D3-9A160090273FC14D", name="gSmbiosTableGuid"),
-    UefiGuid("30AC275E-BB30-4B84-A1CD0AF1322C89C0", name="gPeiSpeakerInterfacePpiGuid"),
-    UefiGuid("AB294A92-EAF5-4CF3-AB2B2D4BED4DB63D", name="gPeiMfgMemoryTestPpiGuid"),
-    UefiGuid("950E191B-8524-4F51-80A15C4F1B03F35C", name="gPeiSha256HashPpiGuid"),
-    UefiGuid("CE845704-1683-4D38-A4F97D0B50775793", name="gEfiPlatformBootModeGuid"),
-    UefiGuid("1E2ACC41-E26A-483D-AFC7A056C34E087B", name="gEfiPlatformInfoGuid"),
-    UefiGuid("80DBD530-B74C-4F11-8C03418665532831", name="gEfiMemoryConfigDataGuid"),
+    UefiGuid("EB9D2D32-2D88-11D3-9A160090273FC14D", name="SAL_SYSTEM_TABLE_GUID"),
+    UefiGuid("8D48BD70-C8A3-4C06-901B747946AAC358", name="SCT_ISA_HC_PPI_GUID"),
+    UefiGuid("5FAC7360-D4F2-4C9E-A7EDF2595E670889", name="SCT_ISA_HC_PROTOCOL_GUID"),
+    UefiGuid("EB9D2D31-2D88-11D3-9A160090273FC14D", name="SMBIOS_TABLE_GUID"),
     UefiGuid(
-        "69D13BF0-AF91-4D96-AA9F2184C5CE3BC0", name="gPlatformModuleTokenSpaceGuid"
+        "30AC275E-BB30-4B84-A1CD0AF1322C89C0", name="PEI_SPEAKER_INTERFACE_PPI_GUID"
     ),
     UefiGuid(
-        "5FAD2389-2BC7-4BD2-83D3429FB6AEA33F", name="gEfiSerialPortTokenSpaceGuid"
+        "AB294A92-EAF5-4CF3-AB2B2D4BED4DB63D", name="PEI_MFG_MEMORY_TEST_PPI_GUID"
     ),
-    UefiGuid("E38C11E3-968F-47B8-ACEFACC0693DB9FF", name="gEfiIchTokenSpaceGuid"),
-    UefiGuid("89A1B278-A1A1-4DF7-B137DE5AD7C47913", name="gEfiPchTokenSpaceGuid"),
-    UefiGuid("560BF58A-1E0D-4D7E-953F2980A261E031", name="gEfiSioVariableGuid"),
-    UefiGuid("1BF06AEA-5BEC-4A8D-9576749B09562D30", name="gProcessorProducerGuid"),
-    UefiGuid("0468A601-C535-46FD-A95DBBAB991B178C", name="gEfiPowerOnHobGuid"),
-    UefiGuid("BB9C7AB7-B8D9-4BF3-9C299BF341E217BC", name="gEfiPlatformCpuInfoGuid"),
-    UefiGuid("C3E36D09-8294-4B97-A857D5288FE33E28", name="gEfiBiosIdGuid"),
-    UefiGuid("94B9E8AE-8877-479A-9842F5974B82CED3", name="gEfiBoardFeaturesGuid"),
-    UefiGuid("3812723D-7E48-4E29-BC27F5A39AC94EF1", name="gItkDataVarGuid"),
-    UefiGuid("70E56C5E-280C-44B0-A49709681ABC375E", name="gDmiDataGuid"),
-    UefiGuid("788E1D9F-1EAB-47D2-A2F378CAE87D6012", name="gIdccDataHubGuid"),
-    UefiGuid("EC87D643-EBA4-4BB5-A1E53F3E36B20DA9", name="gEfiSetupVariableGuid"),
-    UefiGuid("EF14FD78-0793-4E2B-AC6D062847E01791", name="gMfgModeVariableGuid"),
-    UefiGuid("7E374E25-8E01-4FEE-87F2390C23C606CD", name="gEfiAcpiTableStorageGuid"),
+    UefiGuid("950E191B-8524-4F51-80A15C4F1B03F35C", name="PEI_SHA256_HASH_PPI_GUID"),
+    UefiGuid("CE845704-1683-4D38-A4F97D0B50775793", name="EFI_PLATFORM_BOOT_MODE_GUID"),
+    UefiGuid("1E2ACC41-E26A-483D-AFC7A056C34E087B", name="EFI_PLATFORM_INFO_GUID"),
+    UefiGuid("80DBD530-B74C-4F11-8C03418665532831", name="EFI_MEMORY_CONFIG_DATA_GUID"),
     UefiGuid(
-        "72234213-0FD7-48A1-A59FB41BC107FBCD", name="gACPIOSFRMfgStringVariableGuid"
+        "69D13BF0-AF91-4D96-AA9F2184C5CE3BC0", name="PLATFORM_MODULE_TOKEN_SPACE_GUID"
     ),
     UefiGuid(
-        "72234213-0FD7-48A1-A59FB41BC107FBCD", name="gACPIOSFRRefDataBlockVariableGuid"
+        "5FAD2389-2BC7-4BD2-83D3429FB6AEA33F", name="EFI_SERIAL_PORT_TOKEN_SPACE_GUID"
+    ),
+    UefiGuid("E38C11E3-968F-47B8-ACEFACC0693DB9FF", name="EFI_ICH_TOKEN_SPACE_GUID"),
+    UefiGuid("89A1B278-A1A1-4DF7-B137DE5AD7C47913", name="EFI_PCH_TOKEN_SPACE_GUID"),
+    UefiGuid("560BF58A-1E0D-4D7E-953F2980A261E031", name="EFI_SIO_VARIABLE_GUID"),
+    UefiGuid("1BF06AEA-5BEC-4A8D-9576749B09562D30", name="PROCESSOR_PRODUCER_GUID"),
+    UefiGuid("0468A601-C535-46FD-A95DBBAB991B178C", name="EFI_POWER_ON_HOB_GUID"),
+    UefiGuid("BB9C7AB7-B8D9-4BF3-9C299BF341E217BC", name="EFI_PLATFORM_CPU_INFO_GUID"),
+    UefiGuid("C3E36D09-8294-4B97-A857D5288FE33E28", name="EFI_BIOS_ID_GUID"),
+    UefiGuid("94B9E8AE-8877-479A-9842F5974B82CED3", name="EFI_BOARD_FEATURES_GUID"),
+    UefiGuid("3812723D-7E48-4E29-BC27F5A39AC94EF1", name="ITK_DATA_VAR_GUID"),
+    UefiGuid("70E56C5E-280C-44B0-A49709681ABC375E", name="DMI_DATA_GUID"),
+    UefiGuid("788E1D9F-1EAB-47D2-A2F378CAE87D6012", name="IDCC_DATA_HUB_GUID"),
+    UefiGuid("EC87D643-EBA4-4BB5-A1E53F3E36B20DA9", name="EFI_SETUP_VARIABLE_GUID"),
+    UefiGuid("EF14FD78-0793-4E2B-AC6D062847E01791", name="MFG_MODE_VARIABLE_GUID"),
+    UefiGuid("7E374E25-8E01-4FEE-87F2390C23C606CD", name="EFI_ACPI_TABLE_STORAGE_GUID"),
+    UefiGuid(
+        "72234213-0FD7-48A1-A59FB41BC107FBCD",
+        name="A_C_P_I_O_S_F_R_MFG_STRING_VARIABLE_GUID",
     ),
     UefiGuid(
-        "CA1BCAD9-E021-4547-A1B05B22C7F687F4", name="gACPIOSFRModelStringVariableGuid"
-    ),
-    UefiGuid("0D9A1427-E02A-437D-926BAA521FD722BA", name="gEfiPciLanInfoGuid"),
-    UefiGuid("EC87D643-EBA4-4BB5-A1E53F3E36B20DA9", name="gEfiNormalSetupGuid"),
-    UefiGuid("5E559C23-1FAA-4AE1-8D4AC6CF026C766F", name="gFirmwareIdGuid"),
-    UefiGuid("86843F56-675D-40A5-9530BC858372F103", name="gOsSelectionVariableGuid"),
-    UefiGuid("EBBE2D1B-1647-4BDA-AB9A7863E396D41A", name="gEfiActiveBiosProtocolGuid"),
-    UefiGuid("BD26CDC9-A092-462A-877A5AB6ADCE4812", name="gEfiPlatformCpuProtocolGuid"),
-    UefiGuid(
-        "4B0165A9-61D6-4E23-A0B53EC79C2E30D5", name="gDxePchPlatformPolicyProtocolGuid"
-    ),
-    UefiGuid("DE161CFE-1E60-42A1-8CC3EE7EF0735212", name="gEfiTpmMpDriverProtocolGuid"),
-    UefiGuid(
-        "AB2BEE2F-C1A6-4399-853DC07C774FFD0D", name="gEfiLpcWpce791PolicyProtocolGuid"
-    ),
-    UefiGuid("F617B358-12CF-414A-A06960677BDA13B4", name="gUsbPolicyGuid"),
-    UefiGuid(
-        "400B4476-3081-11D6-87ED00062945C3B9", name="gEfiSpeakerInterfaceProtocolGuid"
-    ),
-    UefiGuid("5BAB88BA-E0E2-4674-B6ADB812F6881CD6", name="gDxeVlvPlatformPolicyGuid"),
-    UefiGuid(
-        "EF7BF7D6-F8FF-4A76-8247C0D0D1CC49C0", name="gEfiSmbiosSlotPopulationGuid"
-    ),
-    UefiGuid("E227C522-D5FE-4A53-87B10FBE570F98E9", name="gObservableProtocolGuid"),
-    UefiGuid(
-        "3C485EA4-449A-46CE-BB082A336EA96B4E", name="gEfiCk505ClockPlatformInfoGuid"
+        "72234213-0FD7-48A1-A59FB41BC107FBCD",
+        name="A_C_P_I_O_S_F_R_REF_DATA_BLOCK_VARIABLE_GUID",
     ),
     UefiGuid(
-        "D3ECC567-9FD5-44C1-86CF5DA7A24F4B5D", name="gEfiLpcWpc83627PolicyProtocolGuid"
+        "CA1BCAD9-E021-4547-A1B05B22C7F687F4",
+        name="A_C_P_I_O_S_F_R_MODEL_STRING_VARIABLE_GUID",
     ),
-    UefiGuid("A6A79162-E325-4C30-BCC359373064EFB3", name="gEfiTcoResetProtocolGuid"),
+    UefiGuid("0D9A1427-E02A-437D-926BAA521FD722BA", name="EFI_PCI_LAN_INFO_GUID"),
+    UefiGuid("EC87D643-EBA4-4BB5-A1E53F3E36B20DA9", name="EFI_NORMAL_SETUP_GUID"),
+    UefiGuid("5E559C23-1FAA-4AE1-8D4AC6CF026C766F", name="FIRMWARE_ID_GUID"),
+    UefiGuid("86843F56-675D-40A5-9530BC858372F103", name="OS_SELECTION_VARIABLE_GUID"),
+    UefiGuid(
+        "EBBE2D1B-1647-4BDA-AB9A7863E396D41A", name="EFI_ACTIVE_BIOS_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "BD26CDC9-A092-462A-877A5AB6ADCE4812", name="EFI_PLATFORM_CPU_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "4B0165A9-61D6-4E23-A0B53EC79C2E30D5",
+        name="DXE_PCH_PLATFORM_POLICY_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "DE161CFE-1E60-42A1-8CC3EE7EF0735212", name="EFI_TPM_MP_DRIVER_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "AB2BEE2F-C1A6-4399-853DC07C774FFD0D",
+        name="EFI_LPC_WPCE791_POLICY_PROTOCOL_GUID",
+    ),
+    UefiGuid("F617B358-12CF-414A-A06960677BDA13B4", name="USB_POLICY_GUID"),
+    UefiGuid(
+        "400B4476-3081-11D6-87ED00062945C3B9",
+        name="EFI_SPEAKER_INTERFACE_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "5BAB88BA-E0E2-4674-B6ADB812F6881CD6", name="DXE_VLV_PLATFORM_POLICY_GUID"
+    ),
+    UefiGuid(
+        "EF7BF7D6-F8FF-4A76-8247C0D0D1CC49C0", name="EFI_SMBIOS_SLOT_POPULATION_GUID"
+    ),
+    UefiGuid("E227C522-D5FE-4A53-87B10FBE570F98E9", name="OBSERVABLE_PROTOCOL_GUID"),
+    UefiGuid(
+        "3C485EA4-449A-46CE-BB082A336EA96B4E", name="EFI_CK505_CLOCK_PLATFORM_INFO_GUID"
+    ),
+    UefiGuid(
+        "D3ECC567-9FD5-44C1-86CF5DA7A24F4B5D",
+        name="EFI_LPC_WPC83627_POLICY_PROTOCOL_GUID",
+    ),
+    UefiGuid("A6A79162-E325-4C30-BCC359373064EFB3", name="EFI_TCO_RESET_PROTOCOL_GUID"),
     UefiGuid(
         "D5B06D16-2EA1-4DEF-98D0A05D40728417",
-        name="gEfiWatchdogTimerDriverProtocolGuid",
+        name="EFI_WATCHDOG_TIMER_DRIVER_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "377C66A3-8FE7-4EE8-85B8F1A282569E3B", name="gEfiPlatformIdeInitProtocolGuid"
+        "377C66A3-8FE7-4EE8-85B8F1A282569E3B",
+        name="EFI_PLATFORM_IDE_INIT_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "91A1DDCF-5374-4939-8951D7293F1A786F", name="gEnhancedSpeedstepProtocolGuid"
+        "91A1DDCF-5374-4939-8951D7293F1A786F", name="ENHANCED_SPEEDSTEP_PROTOCOL_GUID"
     ),
     UefiGuid(
         "6FF23F1D-877C-4B1B-93FCF142B2EEA6A7",
-        name="gEfiGopDisplayBrightnessProtocolGuid",
+        name="EFI_GOP_DISPLAY_BRIGHTNESS_PROTOCOL_GUID",
     ),
-    UefiGuid("AD9C4381-1EDE-430C-8D4223767C465D52", name="gEfiUsbKeyboardConnectGuid"),
-    UefiGuid("24486226-F8C2-41F5-B9DD783E9E56DEA0", name="gEfiMmioDeviceProtocolGuid"),
+    UefiGuid(
+        "AD9C4381-1EDE-430C-8D4223767C465D52", name="EFI_USB_KEYBOARD_CONNECT_GUID"
+    ),
+    UefiGuid(
+        "24486226-F8C2-41F5-B9DD783E9E56DEA0", name="EFI_MMIO_DEVICE_PROTOCOL_GUID"
+    ),
     UefiGuid(
         "75032015-D156-423E-BFA37A65ABA47105",
-        name="gEfiI2cBusConfigurationManagementProtocol2Guid",
+        name="EFI_I2C_BUS_CONFIGURATION_MANAGEMENT_PROTOCOL2_GUID",
     ),
-    UefiGuid("F30C2915-5782-4E6A-A84605BABCE7B6A0", name="gEfiI2cAcpiProtocolGuid"),
-    UefiGuid("578C315A-68CF-4E81-B5C622DB40D010BC", name="gEfiI2cMasterProtocol2Guid"),
-    UefiGuid("70B221AF-FDFF-4FDE-99681AF623A956D9", name="gEfiI2cHostProtocol2Guid"),
-    UefiGuid("9FA1B225-3346-461B-A069ED01B673D240", name="gEfiI2cBusProtocolGuid"),
-    UefiGuid("F2C1910E-F5C9-4B72-B2436D59096A79F0", name="gEfiI2cSlaveProtocolGuid"),
-    UefiGuid("9F49A879-3D71-42B3-A0ADDDB1F33010A3", name="gEfiSpiAcpiProtocolGuid"),
-    UefiGuid("951B65E5-8872-41ED-AD1DD5681F4AF033", name="gEfiSpiHostProtocolGuid"),
-    UefiGuid("137B3044-F6D7-473E-A6259FB92505C180", name="gEfiSpiBusProtocolGuid"),
-    UefiGuid("AF4CC162-D41C-455A-AB456DBCC1CD32F3", name="gLpssDummyProtocolGuid"),
-    UefiGuid("1156EFC6-EA32-4396-B5D526932E83C313", name="gEfiSpiProtocolGuid"),
+    UefiGuid("F30C2915-5782-4E6A-A84605BABCE7B6A0", name="EFI_I2C_ACPI_PROTOCOL_GUID"),
     UefiGuid(
-        "38DDFE8F-8991-44AA-988983F4918465B0", name="gEfiGpioOperationProtocolGuid"
+        "578C315A-68CF-4E81-B5C622DB40D010BC", name="EFI_I2C_MASTER_PROTOCOL2_GUID"
+    ),
+    UefiGuid("70B221AF-FDFF-4FDE-99681AF623A956D9", name="EFI_I2C_HOST_PROTOCOL2_GUID"),
+    UefiGuid("9FA1B225-3346-461B-A069ED01B673D240", name="EFI_I2C_BUS_PROTOCOL_GUID"),
+    UefiGuid("F2C1910E-F5C9-4B72-B2436D59096A79F0", name="EFI_I2C_SLAVE_PROTOCOL_GUID"),
+    UefiGuid("9F49A879-3D71-42B3-A0ADDDB1F33010A3", name="EFI_SPI_ACPI_PROTOCOL_GUID"),
+    UefiGuid("951B65E5-8872-41ED-AD1DD5681F4AF033", name="EFI_SPI_HOST_PROTOCOL_GUID"),
+    UefiGuid("137B3044-F6D7-473E-A6259FB92505C180", name="EFI_SPI_BUS_PROTOCOL_GUID"),
+    UefiGuid("AF4CC162-D41C-455A-AB456DBCC1CD32F3", name="LPSS_DUMMY_PROTOCOL_GUID"),
+    UefiGuid("1156EFC6-EA32-4396-B5D526932E83C313", name="EFI_SPI_PROTOCOL_GUID"),
+    UefiGuid(
+        "38DDFE8F-8991-44AA-988983F4918465B0", name="EFI_GPIO_OPERATION_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "4549AB47-6E60-4293-B91D31B610AD8056", name="gEfiEsrtOperationProtocolGuid"
+        "4549AB47-6E60-4293-B91D31B610AD8056", name="EFI_ESRT_OPERATION_PROTOCOL_GUID"
     ),
-    UefiGuid("3B8C8162-188C-46A4-AEC9BE43F1D65697", name="gEfiFwDisplayCapsuleGuid"),
-    UefiGuid("B122A262-3551-4F48-889255F6C0614290", name="gEfiFirmwareClassGuid"),
-    UefiGuid("0DC73AED-CBF6-4A25-A68D59C80F44C7C3", name="gEfiDFUVerGuid"),
-    UefiGuid("B122A263-3661-4F68-992978F8B0D62180", name="gEfiEsrtTableGuid"),
-    UefiGuid("F3FF1468-04BA-4966-9FB2E4A790054650", name="gEfiCapsuleCrashLogVarGuid"),
-    UefiGuid("0E1D2972-65AF-4AC1-BFA3CEF4AB0C38FE", name="gEfiCapsuleCrashGuid"),
-    UefiGuid("78B9EC8B-C000-46C5-AC9324A0C1BB00CE", name="gPwdCredentialProviderGuid"),
-    UefiGuid("D0849ED1-A88C-4BA6-B1D6AB50E280B7A9", name="gUsbCredentialProviderGuid"),
-    UefiGuid("C35F272C-97C2-465A-A216696B668A8CFE", name="gUserProfileManagerGuid"),
+    UefiGuid("3B8C8162-188C-46A4-AEC9BE43F1D65697", name="EFI_FW_DISPLAY_CAPSULE_GUID"),
+    UefiGuid("B122A262-3551-4F48-889255F6C0614290", name="EFI_FIRMWARE_CLASS_GUID"),
+    UefiGuid("0DC73AED-CBF6-4A25-A68D59C80F44C7C3", name="EFI_D_F_U_VER_GUID"),
+    UefiGuid("B122A263-3661-4F68-992978F8B0D62180", name="EFI_ESRT_TABLE_GUID"),
     UefiGuid(
-        "F24643C2-C622-494E-8A0D4632579C2D5B", name="gEfiTrEEPhysicalPresenceGuid"
+        "F3FF1468-04BA-4966-9FB2E4A790054650", name="EFI_CAPSULE_CRASH_LOG_VAR_GUID"
     ),
-    UefiGuid("C54B425F-AA79-48B4-981F998B3C4B641C", name="gTrEEConfigFormSetGuid"),
-    UefiGuid("447559F0-D02E-4CF1-99BCCA11654054C2", name="gStdLibTokenSpaceGuid"),
-    UefiGuid("58E6ED63-1694-440B-9388E98FED6B65AF", name="gEfiSocketProtocolGuid"),
+    UefiGuid("0E1D2972-65AF-4AC1-BFA3CEF4AB0C38FE", name="EFI_CAPSULE_CRASH_GUID"),
+    UefiGuid(
+        "78B9EC8B-C000-46C5-AC9324A0C1BB00CE", name="PWD_CREDENTIAL_PROVIDER_GUID"
+    ),
+    UefiGuid(
+        "D0849ED1-A88C-4BA6-B1D6AB50E280B7A9", name="USB_CREDENTIAL_PROVIDER_GUID"
+    ),
+    UefiGuid("C35F272C-97C2-465A-A216696B668A8CFE", name="USER_PROFILE_MANAGER_GUID"),
+    UefiGuid(
+        "F24643C2-C622-494E-8A0D4632579C2D5B", name="EFI_TR_E_E_PHYSICAL_PRESENCE_GUID"
+    ),
+    UefiGuid("C54B425F-AA79-48B4-981F998B3C4B641C", name="TR_E_E_CONFIG_FORM_SET_GUID"),
+    UefiGuid("447559F0-D02E-4CF1-99BCCA11654054C2", name="STD_LIB_TOKEN_SPACE_GUID"),
+    UefiGuid("58E6ED63-1694-440B-9388E98FED6B65AF", name="EFI_SOCKET_PROTOCOL_GUID"),
     UefiGuid(
         "8AAEDB2A-A6BB-47C6-94CE1B8096423F2A",
-        name="gEfiSocketServiceBindingProtocolGuid",
+        name="EFI_SOCKET_SERVICE_BINDING_PROTOCOL_GUID",
     ),
-    UefiGuid("7D84B2C2-22A1-4372-B12CEBB232D3A6A3", name="gVlvPolicyPpiGuid"),
-    UefiGuid("E767BF7F-4DB6-5B34-10114FBE4CA7AFD2", name="gVlvMmioPolicyPpiGuid"),
-    UefiGuid("10E26DF1-8775-4EE1-B50A3AE82893703A", name="gSeCfTPMPpiGuid"),
-    UefiGuid("C02B0573-2B4E-4A31-A31A94567B50442C", name="gPchUsbPolicyPpiGuid"),
-    UefiGuid("09EA894A-BE0D-4230-A003EDC693B48E95", name="gPchInitPpiGuid"),
-    UefiGuid("15344673-D365-4BE2-85131497CC07611D", name="gPchPlatformPolicyPpiGuid"),
-    UefiGuid("A38C6898-2B5C-4FF6-93262E63212E56C2", name="gPeiSpiPpiGuid"),
-    UefiGuid("09EA8911-BE0D-4230-A003EDC693B48E11", name="gVlvPeiInitPpiGuid"),
-    UefiGuid("CBD86677-362F-4C04-9459A741326E05CF", name="gSeCUmaPpiGuid"),
+    UefiGuid("7D84B2C2-22A1-4372-B12CEBB232D3A6A3", name="VLV_POLICY_PPI_GUID"),
+    UefiGuid("E767BF7F-4DB6-5B34-10114FBE4CA7AFD2", name="VLV_MMIO_POLICY_PPI_GUID"),
+    UefiGuid("10E26DF1-8775-4EE1-B50A3AE82893703A", name="SE_CF_T_P_M_PPI_GUID"),
+    UefiGuid("C02B0573-2B4E-4A31-A31A94567B50442C", name="PCH_USB_POLICY_PPI_GUID"),
+    UefiGuid("09EA894A-BE0D-4230-A003EDC693B48E95", name="PCH_INIT_PPI_GUID"),
     UefiGuid(
-        "7AE3CEB7-2EE2-48FA-AA493510BC83CABF", name="gPeiSeCPlatformPolicyPpiGuid"
+        "15344673-D365-4BE2-85131497CC07611D", name="PCH_PLATFORM_POLICY_PPI_GUID"
     ),
-    UefiGuid("EE0EA811-FBD9-4777-B95ABA4F71101F74", name="gPeiHeciPpiGuid"),
-    UefiGuid("F4EF9D7A-98C5-4C1A-B4D9D8D87265BE0C", name="gPeiSdhcPpiGuid"),
-    UefiGuid("BC5FA650-EDBB-4D0D-B3A3D98907F847DF", name="gPeiBlockIoPpiGuid"),
-    UefiGuid("4FD1BA49-8F90-471A-A2C9173C7A732FD0", name="gSeCfTPMPolicyPpiGuid"),
-    UefiGuid("ACB93B08-5CDC-4A8F-93D406E342DF182E", name="gPchPeiInitPpiGuid"),
+    UefiGuid("A38C6898-2B5C-4FF6-93262E63212E56C2", name="PEI_SPI_PPI_GUID"),
+    UefiGuid("09EA8911-BE0D-4230-A003EDC693B48E11", name="VLV_PEI_INIT_PPI_GUID"),
+    UefiGuid("CBD86677-362F-4C04-9459A741326E05CF", name="SE_C_UMA_PPI_GUID"),
     UefiGuid(
-        "074E1E48-8132-47A1-8C2C3F14AD9A66DC", name="gEfiGlobalNvsAreaProtocolGuid"
+        "7AE3CEB7-2EE2-48FA-AA493510BC83CABF", name="PEI_SE_C_PLATFORM_POLICY_PPI_GUID"
     ),
+    UefiGuid("EE0EA811-FBD9-4777-B95ABA4F71101F74", name="PEI_HECI_PPI_GUID"),
+    UefiGuid("F4EF9D7A-98C5-4C1A-B4D9D8D87265BE0C", name="PEI_SDHC_PPI_GUID"),
+    UefiGuid("BC5FA650-EDBB-4D0D-B3A3D98907F847DF", name="PEI_BLOCK_IO_PPI_GUID"),
+    UefiGuid("4FD1BA49-8F90-471A-A2C9173C7A732FD0", name="SE_CF_T_P_M_POLICY_PPI_GUID"),
+    UefiGuid("ACB93B08-5CDC-4A8F-93D406E342DF182E", name="PCH_PEI_INIT_PPI_GUID"),
     UefiGuid(
-        "DDABFEAC-EF63-452C-8F39ED7FAED8265E", name="gPpmPlatformPolicyProtocolGuid"
-    ),
-    UefiGuid("6F20F7C8-E5EF-4F21-8D19EDC5F0C496AE", name="gMemInfoProtocolGuid"),
-    UefiGuid("B63F8EC7-A9C9-4472-A4C04D8BF365CC51", name="gEfiSdHostIoProtocolGuid"),
-    UefiGuid("D9072C35-EB8F-43AD-A22034D40E2A8285", name="gEfiSmmSpiProtocolGuid"),
-    UefiGuid(
-        "3920405B-C897-44DA-88F34C498A6FF736", name="gEfiSmmIchnDispatchExProtocolGuid"
+        "074E1E48-8132-47A1-8C2C3F14AD9A66DC", name="EFI_GLOBAL_NVS_AREA_PROTOCOL_GUID"
     ),
     UefiGuid(
-        "E287D20B-D897-4E1E-A5D9977763936A04", name="gEfiPchS3SupportProtocolGuid"
+        "DDABFEAC-EF63-452C-8F39ED7FAED8265E", name="PPM_PLATFORM_POLICY_PROTOCOL_GUID"
     ),
-    UefiGuid("DB63592C-B8CC-44C8-918C51F534598A5A", name="gPchResetProtocolGuid"),
+    UefiGuid("6F20F7C8-E5EF-4F21-8D19EDC5F0C496AE", name="MEM_INFO_PROTOCOL_GUID"),
     UefiGuid(
-        "3A3300AB-C929-487D-AB34159BC13562C0", name="gPchResetCallbackProtocolGuid"
+        "B63F8EC7-A9C9-4472-A4C04D8BF365CC51", name="EFI_SD_HOST_IO_PROTOCOL_GUID"
     ),
-    UefiGuid("D31F0400-7D16-4316-BF886065883B402B", name="gEfiPchInfoProtocolGuid"),
+    UefiGuid("D9072C35-EB8F-43AD-A22034D40E2A8285", name="EFI_SMM_SPI_PROTOCOL_GUID"),
     UefiGuid(
-        "F0BBFCA0-684E-48B3-BAE26C84B89E5339", name="gEfiPchExtendedResetProtocolGuid"
-    ),
-    UefiGuid(
-        "F617B358-12CF-414A-A06960677BDA13B3", name="gDxeIchPlatformPolicyProtocolGuid"
-    ),
-    UefiGuid("D31F0400-7D16-4316-BF886065883B402B", name="gEfiIchInfoProtocolGuid"),
-    UefiGuid(
-        "58DC368D-7BFA-4E77-ABBC0E29418DF930", name="gEfiSmmIoTrapDispatchProtocolGuid"
-    ),
-    UefiGuid("72E40094-2EE1-497A-8F334C934A9E9C0C", name="gEfiSmmSmbusProtocolGuid"),
-    UefiGuid("CDC5DDDF-E79D-41EC-A9B06565490DB9D3", name="gIgdOpRegionProtocolGuid"),
-    UefiGuid("CFB33810-6E87-4284-B203A66ABE07F6E8", name="gEfiHeciProtocolGuid"),
-    UefiGuid(
-        "BC52476E-F67E-4301-B262369C4878AAC2", name="gPlatformSeCHookProtocolGuid"
-    ),
-    UefiGuid("11FBFDFB-10D2-43E6-B5B1B4386EDCCB9A", name="gEfiSeCRcInfoProtocolGuid"),
-    UefiGuid("0BF70067-D53B-42DF-B770E92C91C61411", name="gEfiTdtProtocolGuid"),
-    UefiGuid("F8BFF014-18FB-4EF9-B10CAE22738DBEED", name="gDxePlatformSeCPolicyGuid"),
-    UefiGuid(
-        "1EBE5AB9-2129-49E7-84D7EEB9FCE5DEDD", name="gEfiEmmcCardInfoProtocolGuid"
+        "3920405B-C897-44DA-88F34C498A6FF736",
+        name="EFI_SMM_ICHN_DISPATCH_EX_PROTOCOL_GUID",
     ),
     UefiGuid(
-        "FD301BA4-5E62-4679-A06FE09AABDD2A91", name="gEfiTdtOperationProtocolGuid"
+        "E287D20B-D897-4E1E-A5D9977763936A04", name="EFI_PCH_S3_SUPPORT_PROTOCOL_GUID"
     ),
-    UefiGuid("14A7C46F-BC02-4047-9F18A5D725D8BD19", name="gEfiDFUResultGuid"),
-    UefiGuid("918211CE-A1D2-43A0-A04E75B5BF44500E", name="gEfiCPTokenSpaceGuid"),
-    UefiGuid("707BE83E-0BF6-40A5-BE6434C03AA0B8E2", name="gEfiSmbusArpMapGuid"),
-    UefiGuid("CA452C68-DF0C-45C9-82FBEAE42B312946", name="gEfiVLVTokenSpaceGuid"),
-    UefiGuid("BB929DA9-68F7-4035-B22CA3BB3F23DA55", name="gSataControllerDriverGuid"),
+    UefiGuid("DB63592C-B8CC-44C8-918C51F534598A5A", name="PCH_RESET_PROTOCOL_GUID"),
     UefiGuid(
-        "1A819E49-D8EE-48CB-9A9C0AA0D2810A38", name="gDxePchPolicyUpdateProtocolGuid"
+        "3A3300AB-C929-487D-AB34159BC13562C0", name="PCH_RESET_CALLBACK_PROTOCOL_GUID"
+    ),
+    UefiGuid("D31F0400-7D16-4316-BF886065883B402B", name="EFI_PCH_INFO_PROTOCOL_GUID"),
+    UefiGuid(
+        "F0BBFCA0-684E-48B3-BAE26C84B89E5339",
+        name="EFI_PCH_EXTENDED_RESET_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "F617B358-12CF-414A-A06960677BDA13B3",
+        name="DXE_ICH_PLATFORM_POLICY_PROTOCOL_GUID",
+    ),
+    UefiGuid("D31F0400-7D16-4316-BF886065883B402B", name="EFI_ICH_INFO_PROTOCOL_GUID"),
+    UefiGuid(
+        "58DC368D-7BFA-4E77-ABBC0E29418DF930",
+        name="EFI_SMM_IO_TRAP_DISPATCH_PROTOCOL_GUID",
+    ),
+    UefiGuid("72E40094-2EE1-497A-8F334C934A9E9C0C", name="EFI_SMM_SMBUS_PROTOCOL_GUID"),
+    UefiGuid("CDC5DDDF-E79D-41EC-A9B06565490DB9D3", name="IGD_OP_REGION_PROTOCOL_GUID"),
+    UefiGuid("CFB33810-6E87-4284-B203A66ABE07F6E8", name="EFI_HECI_PROTOCOL_GUID"),
+    UefiGuid(
+        "BC52476E-F67E-4301-B262369C4878AAC2", name="PLATFORM_SE_C_HOOK_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "11FBFDFB-10D2-43E6-B5B1B4386EDCCB9A", name="EFI_SE_C_RC_INFO_PROTOCOL_GUID"
+    ),
+    UefiGuid("0BF70067-D53B-42DF-B770E92C91C61411", name="EFI_TDT_PROTOCOL_GUID"),
+    UefiGuid(
+        "F8BFF014-18FB-4EF9-B10CAE22738DBEED", name="DXE_PLATFORM_SE_C_POLICY_GUID"
+    ),
+    UefiGuid(
+        "1EBE5AB9-2129-49E7-84D7EEB9FCE5DEDD", name="EFI_EMMC_CARD_INFO_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "FD301BA4-5E62-4679-A06FE09AABDD2A91", name="EFI_TDT_OPERATION_PROTOCOL_GUID"
+    ),
+    UefiGuid("14A7C46F-BC02-4047-9F18A5D725D8BD19", name="EFI_D_F_U_RESULT_GUID"),
+    UefiGuid("918211CE-A1D2-43A0-A04E75B5BF44500E", name="EFI_C_P_TOKEN_SPACE_GUID"),
+    UefiGuid("707BE83E-0BF6-40A5-BE6434C03AA0B8E2", name="EFI_SMBUS_ARP_MAP_GUID"),
+    UefiGuid("CA452C68-DF0C-45C9-82FBEAE42B312946", name="EFI_V_L_V_TOKEN_SPACE_GUID"),
+    UefiGuid("BB929DA9-68F7-4035-B22CA3BB3F23DA55", name="SATA_CONTROLLER_DRIVER_GUID"),
+    UefiGuid(
+        "1A819E49-D8EE-48CB-9A9C0AA0D2810A38",
+        name="DXE_PCH_POLICY_UPDATE_PROTOCOL_GUID",
     ),
     UefiGuid(
         "161BE597-E9C5-49DB-AE50C462AB54EEDA",
-        name="gPowerManagementAcpiTableStorageGuid",
+        name="POWER_MANAGEMENT_ACPI_TABLE_STORAGE_GUID",
     ),
-    UefiGuid("E6C2F70A-B604-4877-85BADEEC89E117EB", name="gPchInitVariableGuid"),
+    UefiGuid("E6C2F70A-B604-4877-85BADEEC89E117EB", name="PCH_INIT_VARIABLE_GUID"),
     UefiGuid(
-        "85768E4A-6CDC-444E-93DF936685B5DFCC", name="gVlvRefCodePkgTokenSpaceGuid"
+        "85768E4A-6CDC-444E-93DF936685B5DFCC", name="VLV_REF_CODE_PKG_TOKEN_SPACE_GUID"
     ),
-    UefiGuid("03FDF171-1D67-4ACE-A9043E36D338FA74", name="gSeCPlatformReadyToBootGuid"),
-    UefiGuid("40B09B5A-F0EF-4627-93D527F04B754D05", name="gAmtReadyToBootGuid"),
-    UefiGuid("10BA6BBE-A97E-41C3-9A07607AD9BD60E5", name="gEfiVlv2VariableGuid"),
+    UefiGuid(
+        "03FDF171-1D67-4ACE-A9043E36D338FA74", name="SE_C_PLATFORM_READY_TO_BOOT_GUID"
+    ),
+    UefiGuid("40B09B5A-F0EF-4627-93D527F04B754D05", name="AMT_READY_TO_BOOT_GUID"),
+    UefiGuid("10BA6BBE-A97E-41C3-9A07607AD9BD60E5", name="EFI_VLV2_VARIABLE_GUID"),
 ]
 
 GUID_FROM_VALUE: Dict[str, UefiGuid] = dict(
