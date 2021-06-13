@@ -28,6 +28,7 @@ class UefiRule:
         self._uefi_rule: Dict[str, Any] = dict()
         self._nvram_vars: Optional[List[NvramVariable]] = None
         self._protocols: Optional[List[UefiProtocol]] = None
+        self._ppi_list: Optional[List[UefiProtocol]] = None
         self._protocol_guids: Optional[List[List[str]]] = None
         self._esil_rules: Optional[List[str]] = None
         if os.path.isfile(self._rule):
@@ -136,6 +137,43 @@ class UefiRule:
         if self._protocols is None:
             self._protocols = self._get_protocols()
         return self._protocols
+
+    def _get_ppi_list(self) -> List[UefiProtocol]:
+
+        ppi_list: List[UefiProtocol] = list()
+        if "ppi_list" not in self._uefi_rule:
+            return ppi_list
+        for ppi in self._uefi_rule["ppi_list"]:
+            for num in ppi:
+                element_name: str = str()
+                element_value: str = str()
+                element_service: str = str()
+                protocol_item = ppi[num]
+                for obj in protocol_item:
+                    if "name" in obj:
+                        element_name = obj["name"]
+                    if "value" in obj:
+                        element_value = obj["value"]
+                    if "service" in obj:
+                        element_service = obj["service"][0]["name"]
+                ppi_list.append(
+                    UefiProtocol(
+                        name=element_name,
+                        value=element_value,
+                        service=element_service,
+                        address=0x0,
+                        guid_address=0x0,
+                    )
+                )
+        return ppi_list
+
+    @property
+    def ppi_list(self) -> List[UefiProtocol]:
+        """Get PPI list from rule"""
+
+        if self._ppi_list is None:
+            self._ppi_list = self._get_ppi_list()
+        return self._ppi_list
 
     def _get_protocol_guids(self) -> List[UefiProtocolGuid]:
 
@@ -271,6 +309,19 @@ class UefiScanner:
                     break
             if not guid_matched:
                 return False
+        # compare ppi
+        for ppi_rule in self._uefi_rule.ppi_list:
+            ppi_matched = False
+            for ppi_analyzer in self._uefi_analyzer.ppi_list:
+                if (
+                    ppi_rule.name == ppi_analyzer.name
+                    and ppi_rule.value == ppi_analyzer.value
+                ):
+                    ppi_matched = True
+                    break
+            if not ppi_matched:
+                return False
+
         return self._esil_scanner()
 
     @property

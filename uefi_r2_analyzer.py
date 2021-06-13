@@ -64,14 +64,26 @@ def scan(image_path: str, rule: str) -> bool:
 
     uefi_analyzer = UefiAnalyzer(image_path)
     prefix = click.style("UEFI analyzer", fg="green")
-    print(f"{prefix} nvram: {[x.__dict__ for x in uefi_analyzer.nvram_vars]}")
-    print(f"{prefix} protocols: {[x.__dict__ for x in uefi_analyzer.protocols]}")
-    print(f"{prefix} guids: {[x.__dict__ for x in uefi_analyzer.protocol_guids]}")
+    if (
+        uefi_analyzer.info["bin"]["arch"] == "x86"
+        and uefi_analyzer.info["bin"]["bits"] == 32
+    ):
+        print(f"{prefix} ppi_list: {[x.__dict__ for x in uefi_analyzer.ppi_list]}")
+        print(f"{prefix} guids: {[x.__dict__ for x in uefi_analyzer.protocol_guids]}")
+
+    elif (
+        uefi_analyzer.info["bin"]["arch"] == "x86"
+        and uefi_analyzer.info["bin"]["bits"] == 64
+    ):
+        print(f"{prefix} nvram: {[x.__dict__ for x in uefi_analyzer.nvram_vars]}")
+        print(f"{prefix} protocols: {[x.__dict__ for x in uefi_analyzer.protocols]}")
+        print(f"{prefix} guids: {[x.__dict__ for x in uefi_analyzer.protocol_guids]}")
 
     uefi_rule = UefiRule(rule)
     prefix = click.style("UEFI rule", fg="green")
     print(f"{prefix} nvram: {[x.__dict__ for x in uefi_rule.nvram_vars]}")
     print(f"{prefix} protocols: {[x.__dict__ for x in uefi_rule.protocols]}")
+    print(f"{prefix} ppi_list: {[x.__dict__ for x in uefi_rule.protocols]}")
     print(f"{prefix} guids: {[x.__dict__ for x in uefi_rule.protocol_guids]}")
     print(f"{prefix} esil: {uefi_rule.esil_rules}")
 

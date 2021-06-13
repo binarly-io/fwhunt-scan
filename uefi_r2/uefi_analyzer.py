@@ -147,15 +147,18 @@ class UefiAnalyzer:
     def _correct_addr(self, addr: int) -> int:
         if not self._te:
             return addr
-        offset = self._te.image_base + self._te.base_of_code - self._section_paddr(".text")
-        return (addr + offset)
+        offset = (
+            self._te.image_base + self._te.base_of_code - self._section_paddr(".text")
+        )
+        return addr + offset
 
     def _wrong_addr(self, addr: int) -> int:
         if not self._te:
             return addr
-        offset = self._te.image_base + self._te.base_of_code - self._section_paddr(".text")
-        return (addr - offset)
-
+        offset = (
+            self._te.image_base + self._te.base_of_code - self._section_paddr(".text")
+        )
+        return addr - offset
 
     def _pei_service_args_num(self, reg: str, addr: int) -> int:
         """Get number of arguments for specified PEI service call"""
@@ -245,7 +248,11 @@ class UefiAnalyzer:
                         g_bs_reg = esil[-2]
                     if not g_bs_reg:
                         continue
-                    if (esil[0] == g_bs_reg) and (esil[-1] == "=[8]") and ("ptr" in insn):
+                    if (
+                        (esil[0] == g_bs_reg)
+                        and (esil[-1] == "=[8]")
+                        and ("ptr" in insn)
+                    ):
                         return insn["ptr"]
         return 0
 
@@ -274,7 +281,11 @@ class UefiAnalyzer:
                         g_rt_reg = esil[-2]
                     if not g_rt_reg:
                         continue
-                    if (esil[0] == g_rt_reg) and (esil[-1] == "=[8]") and ("ptr" in insn):
+                    if (
+                        (esil[0] == g_rt_reg)
+                        and (esil[-1] == "=[8]")
+                        and ("ptr" in insn)
+                    ):
                         return insn["ptr"]
         return 0
 
@@ -434,9 +445,7 @@ class UefiAnalyzer:
                             rt_list.append(
                                 UefiService(
                                     address=g_rt_area_insn["offset"],
-                                    name=EFI_RUNTIME_SERVICES_X64[
-                                        service_offset
-                                    ],
+                                    name=EFI_RUNTIME_SERVICES_X64[service_offset],
                                 )
                             )
                             break

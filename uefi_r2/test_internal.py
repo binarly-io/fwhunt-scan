@@ -12,10 +12,10 @@ from .uefi_protocols import PROTOCOLS_GUIDS, GUID_FROM_VALUE
 
 
 class TestInternal(unittest.TestCase):
-    """ internal tests of privaet API """
+    """internal tests of privaet API"""
 
     def test_guid_convert(self):
-        """ convert to GUID by index and value """
+        """convert to GUID by index and value"""
 
         self.assertEqual(
             PROTOCOLS_GUIDS[144].value,
