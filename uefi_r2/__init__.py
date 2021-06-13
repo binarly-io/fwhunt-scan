@@ -10,9 +10,11 @@ __version__ = "1.0.0"
 
 from .uefi_analyzer import UefiAnalyzer
 from .uefi_scanner import UefiRule, UefiScanner
+from .uefi_te import TerseExecutableParser
 
 __all__ = [
     "UefiAnalyzer",
     "UefiRule",
     "UefiScanner",
+    "TerseExecutableParser"
 ]
