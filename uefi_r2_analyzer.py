@@ -39,6 +39,18 @@ def analyze_image(image_path: str, out: str) -> bool:
 
 @click.command()
 @click.argument("image_path")
+def parse_te(image_path: str) -> bool:
+    """Parse input TE file."""
+
+    if not os.path.isfile(image_path):
+        print("{} check image path".format(click.style("ERROR", fg="red", bold=True)))
+        return False
+    print(TerseExecutableParser(image_path))
+    return True
+
+
+@click.command()
+@click.argument("image_path")
 @click.option("-r", "--rule", help="The path to the rule.")
 def scan(image_path: str, rule: str) -> bool:
     """Scan input UEFI image."""
@@ -46,7 +58,7 @@ def scan(image_path: str, rule: str) -> bool:
     if not os.path.isfile(image_path):
         print("{} check image path".format(click.style("ERROR", fg="red", bold=True)))
         return False
-    if not os.path.isfile(rule):
+    if not (rule and os.path.isfile(rule)):
         print("{} check rule path".format(click.style("ERROR", fg="red", bold=True)))
         return False
 
@@ -61,6 +73,7 @@ def scan(image_path: str, rule: str) -> bool:
     print(f"{prefix} nvram: {[x.__dict__ for x in uefi_rule.nvram_vars]}")
     print(f"{prefix} protocols: {[x.__dict__ for x in uefi_rule.protocols]}")
     print(f"{prefix} guids: {[x.__dict__ for x in uefi_rule.protocol_guids]}")
+    print(f"{prefix} esil: {uefi_rule.esil_rules}")
 
     scanner = UefiScanner(uefi_analyzer, uefi_rule)
     prefix = click.style("Scanner result", fg="green")
@@ -70,6 +83,7 @@ def scan(image_path: str, rule: str) -> bool:
 
 
 cli.add_command(analyze_image)
+cli.add_command(parse_te)
 cli.add_command(scan)
 
 if __name__ == "__main__":

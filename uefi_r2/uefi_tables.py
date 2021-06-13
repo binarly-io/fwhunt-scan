@@ -130,3 +130,26 @@ BS_PROTOCOLS_INFO_X64 = {
 OFFSET_TO_SERVICE = dict(
     [(BS_PROTOCOLS_INFO_X64[s]["offset"], s) for s in BS_PROTOCOLS_INFO_X64]
 )
+
+EFI_PEI_SERVICES_X86 = {
+    0x00000018: {"name": "InstallPpi", "arg_num": 2},
+    0x0000001C: {"name": "ReInstallPpi", "arg_num": 3},
+    0x00000020: {"name": "LocatePpi", "arg_num": 5},
+    0x00000024: {"name": "NotifyPpi", "arg_num": 2},
+    0x00000028: {"name": "GetBootMode", "arg_num": 2},
+    0x0000002C: {"name": "SetBootMode", "arg_num": 2},
+    0x00000030: {"name": "GetHobList", "arg_num": 2},
+    0x00000034: {"name": "CreateHob", "arg_num": 4},
+    0x00000038: {"name": "FfsFindNextVolume", "arg_num": 3},
+    0x0000003C: {"name": "FfsFindNextFile", "arg_num": 4},
+    0x00000040: {"name": "FfsFindSectionData", "arg_num": 4},
+    0x00000044: {"name": "InstallPeiMemory", "arg_num": 3},
+    0x00000048: {"name": "AllocatePages", "arg_num": 4},
+    0x0000004C: {"name": "AllocatePool", "arg_num": 3},
+    0x00000050: {"name": "CopyMem", "arg_num": 3},
+    0x00000054: {"name": "SetMem", "arg_num": 3},
+    0x00000058: {"name": "ReportStatusCode", "arg_num": 6},
+    0x0000005C: {"name": "ResetSystem", "arg_num": 1},
+    0x00000060: {"name": "CpuIo", "arg_num": 1},
+    0x00000064: {"name": "PciCfg", "arg_num": 1},
+}

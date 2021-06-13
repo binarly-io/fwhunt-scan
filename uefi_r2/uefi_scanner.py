@@ -28,7 +28,8 @@ class UefiRule:
         self._uefi_rule: Dict[str, Any] = dict()
         self._nvram_vars: Optional[List[NvramVariable]] = None
         self._protocols: Optional[List[UefiProtocol]] = None
-        self._protocol_guids: Optional[List[UefiProtocolGuid]] = None
+        self._protocol_guids: Optional[List[List[str]]] = None
+        self._esil_rules: Optional[List[str]] = None
         if os.path.isfile(self._rule):
             try:
                 with open(self._rule, "r") as f:
@@ -168,6 +169,24 @@ class UefiRule:
             self._protocol_guids = self._get_protocol_guids()
         return self._protocol_guids
 
+    def _get_esil_rules(self) -> List[List[str]]:
+
+        esil_rules = list()
+        if "esil" not in self._uefi_rule:
+            return esil_rules
+        for esil_list in self._uefi_rule["esil"]:
+            for num in esil_list:
+                esil_rules.append(esil_list[num])
+        return esil_rules
+
+    @property
+    def esil_rules(self) -> List[List[str]]:
+        """Get esil rules"""
+
+        if self._esil_rules is None:
+            self._esil_rules = self._get_esil_rules()
+        return self._esil_rules
+
 
 class UefiScanner:
     """helper object for scanning an EFI image with a given rule"""
@@ -176,6 +195,42 @@ class UefiScanner:
         self._uefi_analyzer: UefiAnalyzer = uefi_analyzer
         self._uefi_rule: UefiRule = uefi_rule
         self._result: Optional[bool] = None
+
+    def _compare(self, x: list, y: list) -> bool:
+
+        if len(x) != len(y):
+            return False
+        for i in range(len(x)):
+            if x[i] == "X":
+                continue
+            if x[i] != y[i]:
+                return False
+        return True
+
+    def _check_rule(self, esil_rule: List[List[str]]) -> bool:
+
+        ops = self._uefi_analyzer.insns
+        for i in range(len(ops) - len(esil_rule) + 1):
+            counter_item = 0
+            for j in range(len(esil_rule)):
+                if "esil" not in ops[i + j]:
+                    continue
+                x, y = esil_rule[j].split(","), ops[i + j]["esil"].split(",")
+                if not self._compare(x, y):
+                    continue
+                counter_item += 1
+            if counter_item == len(esil_rule):
+                return True
+        return False
+
+    def _esil_scanner(self):
+
+        if self._uefi_rule.esil_rules is None:
+            return True
+        for esil_rule in self._uefi_rule.esil_rules:
+            if not self._check_rule(esil_rule):
+                return False
+        return True
 
     def _get_result(self) -> bool:
 
@@ -216,7 +271,7 @@ class UefiScanner:
                     break
             if not guid_matched:
                 return False
-        return True
+        return self._esil_scanner()
 
     @property
     def result(self) -> bool:
