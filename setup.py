@@ -33,6 +33,8 @@ setup(
             "uefi_analyzer.pyi",
             "uefi_protocols.pyi",
             "uefi_tables.pyi",
+            "uefi_scanner.pyi",
+            "uefi_te.pyi",
             "__init__.pyi",
         ]
     },
