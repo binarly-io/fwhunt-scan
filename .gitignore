@@ -25,6 +25,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 *.pyi
+.mypy_cache/
 MANIFEST
 
 # Directories

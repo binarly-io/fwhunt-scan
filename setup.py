@@ -18,6 +18,7 @@ setup(
     install_requires=REQUIRED,
     description="Tools for analyzing UEFI firmware using radare2",
     long_description=README,
+    long_description_content_type="text/markdown",
     platforms=["Platform Independent"],
     classifiers=[
         "Development Status :: 3 - Alpha",
