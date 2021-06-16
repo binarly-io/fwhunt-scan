@@ -31,6 +31,9 @@ class UefiRule:
         self._ppi_list: Optional[List[UefiProtocol]] = None
         self._protocol_guids: Optional[List[List[str]]] = None
         self._esil_rules: Optional[List[str]] = None
+        self._strings: Optional[List[str]] = None
+        self._wide_strings: Optional[List[str]] = None
+        self._hex_strings: Optional[List[str]] = None
         if os.path.isfile(self._rule):
             try:
                 with open(self._rule, "r") as f:
@@ -68,6 +71,60 @@ class UefiRule:
             return self._uefi_rule["meta"]["description"]
         except KeyError:
             return None
+
+    def _get_strings(self) -> List[str]:
+
+        strings: List[str] = list()
+        if "strings" not in self._uefi_rule:
+            return strings
+        for string_id in self._uefi_rule["strings"]:
+            string = self._uefi_rule["strings"][string_id]
+            strings.append(string)
+        return strings
+
+    @property
+    def strings(self) -> List[str]:
+        """Get strings from rule"""
+
+        if self._strings is None:
+            self._strings = self._get_strings()
+        return self._strings
+
+    def _get_wide_strings(self) -> List[str]:
+
+        wide_strings: List[str] = list()
+        if "wide_strings" not in self._uefi_rule:
+            return wide_strings
+        for wide_string_id in self._uefi_rule["wide_strings"]:
+            string = self._uefi_rule["wide_strings"][wide_string_id]
+            wide_strings.append(string)
+        return wide_strings
+
+    @property
+    def wide_strings(self) -> List[str]:
+        """Get wide strings from rule"""
+
+        if self._wide_strings is None:
+            self._wide_strings = self._get_wide_strings()
+        return self._wide_strings
+
+    def _get_hex_strings(self) -> List[str]:
+
+        hex_strings: List[str] = list()
+        if "hex_strings" not in self._uefi_rule:
+            return hex_strings
+        for hex_string_id in self._uefi_rule["hex_strings"]:
+            string = self._uefi_rule["hex_strings"][hex_string_id]
+            hex_strings.append(string)
+        return hex_strings
+
+    @property
+    def hex_strings(self) -> List[str]:
+        """Get hex strings from rule"""
+
+        if self._hex_strings is None:
+            self._hex_strings = self._get_hex_strings()
+        return self._hex_strings
 
     def _get_nvram_vars(self) -> List[NvramVariable]:
 
@@ -246,6 +303,7 @@ class UefiScanner:
         return True
 
     def _check_rule(self, esil_rule: List[List[str]]) -> bool:
+        """Esil scanner helper"""
 
         ops = self._uefi_analyzer.insns
         for i in range(len(ops) - len(esil_rule) + 1):
@@ -262,6 +320,7 @@ class UefiScanner:
         return False
 
     def _esil_scanner(self):
+        """Match ESIL patterns"""
 
         if self._uefi_rule.esil_rules is None:
             return True
@@ -270,9 +329,44 @@ class UefiScanner:
                 return False
         return True
 
-    def _get_result(self) -> bool:
+    def _strings_scanner(self):
+        """Match strings"""
 
-        # compare nvram
+        if self._uefi_rule.strings is None:
+            return True
+        for string in self._uefi_rule.strings:
+            res = self._uefi_analyzer._r2.cmdj("/j {}".format(string))
+            if not res:
+                return False
+        return True
+
+    def _wide_strings_scanner(self):
+        """Match wide strings"""
+
+        if self._uefi_rule.wide_strings is None:
+            return True
+        for wide_string in self._uefi_rule.wide_strings:
+            res = self._uefi_analyzer._r2.cmdj("/wj {}".format(wide_string))
+            if not res:
+                return False
+        return True
+
+    def _hex_strings_scanner(self):
+        """Match hex strings"""
+
+        if self._uefi_rule.hex_strings is None:
+            return True
+        for hex_string in self._uefi_rule.hex_strings:
+            res = self._uefi_analyzer._r2.cmdj("/xj {}".format(hex_string))
+            if not res:
+                return False
+        return True
+
+    def _nvram_scanner(self) -> bool:
+        """Compare NVRAM"""
+
+        if self._uefi_rule.nvram_vars is None:
+            return True
         for nvram_rule in self._uefi_rule.nvram_vars:
             nvram_matched = False
             for nvram_analyzer in self._uefi_analyzer.nvram_vars:
@@ -285,7 +379,13 @@ class UefiScanner:
                     break
             if not nvram_matched:
                 return False
-        # compare protocols
+        return True
+
+    def _compare_protocols(self) -> bool:
+        """Compare protocols"""
+
+        if self._uefi_rule.protocols is None:
+            return True
         for protocol_rule in self._uefi_rule.protocols:
             protocol_matched = False
             for protocol_analyzer in self._uefi_analyzer.protocols:
@@ -297,7 +397,13 @@ class UefiScanner:
                     break
             if not protocol_matched:
                 return False
-        # compare guids
+        return True
+
+    def _compare_guids(self) -> bool:
+        """Compare GUIDs"""
+
+        if self._uefi_rule.protocol_guids is None:
+            return True
         for guid_rule in self._uefi_rule.protocol_guids:
             guid_matched = False
             for guid_analyzer in self._uefi_analyzer.protocol_guids:
@@ -309,7 +415,13 @@ class UefiScanner:
                     break
             if not guid_matched:
                 return False
-        # compare ppi
+        return True
+
+    def _compare_ppi(self) -> bool:
+        """Compare PPI"""
+
+        if self._uefi_rule.ppi_list is None:
+            return True
         for ppi_rule in self._uefi_rule.ppi_list:
             ppi_matched = False
             for ppi_analyzer in self._uefi_analyzer.ppi_list:
@@ -321,8 +433,51 @@ class UefiScanner:
                     break
             if not ppi_matched:
                 return False
+        return True
 
-        return self._esil_scanner()
+    def _get_result(self) -> bool:
+
+        # compare NVRAM
+        result = self._nvram_scanner()
+        if not result:
+            return result
+
+        # compare protocols
+        result &= self._compare_protocols()
+        if not result:
+            return result
+
+        # compare GUIDs
+        result &= self._compare_guids()
+        if not result:
+            return result
+
+        # compare PPI
+        result &= self._compare_ppi()
+        if not result:
+            return result
+
+        # match ESIL patterns
+        result &= self._esil_scanner()
+        if not result:
+            return result
+
+        # match strings
+        result &= self._strings_scanner()
+        if not result:
+            return result
+
+        # match wide strings
+        result &= self._wide_strings_scanner()
+        if not result:
+            return result
+
+        # match hex strings
+        result &= self._hex_strings_scanner()
+        if not result:
+            return result
+
+        return result
 
     @property
     def result(self) -> bool:

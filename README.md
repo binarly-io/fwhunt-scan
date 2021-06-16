@@ -1,4 +1,5 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+[![uefi_r2 CI](https://github.com/binarly-io/uefi_r2/actions/workflows/ci.yml/badge.svg)](https://github.com/binarly-io/uefi_r2/actions)
 
 # uefi_r2
 

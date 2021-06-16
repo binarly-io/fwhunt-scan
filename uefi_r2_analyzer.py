@@ -86,6 +86,9 @@ def scan(image_path: str, rule: str) -> bool:
     print(f"{prefix} ppi_list: {[x.__dict__ for x in uefi_rule.protocols]}")
     print(f"{prefix} guids: {[x.__dict__ for x in uefi_rule.protocol_guids]}")
     print(f"{prefix} esil: {uefi_rule.esil_rules}")
+    print(f"{prefix} strings: {uefi_rule.strings}")
+    print(f"{prefix} wide_strings: {uefi_rule.wide_strings}")
+    print(f"{prefix} hex_strings: {uefi_rule.hex_strings}")
 
     scanner = UefiScanner(uefi_analyzer, uefi_rule)
     prefix = click.style("Scanner result", fg="green")

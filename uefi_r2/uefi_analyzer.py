@@ -14,10 +14,10 @@ import r2pipe
 
 from uefi_r2.uefi_protocols import GUID_FROM_BYTES, UefiGuid
 from uefi_r2.uefi_tables import (
-    BS_PROTOCOLS_INFO_X64,
-    EFI_BOOT_SERVICES_X64,
-    EFI_PEI_SERVICES_X86,
-    EFI_RUNTIME_SERVICES_X64,
+    BS_PROTOCOLS_INFO_64_BIT,
+    EFI_BOOT_SERVICES_64_BIT,
+    EFI_PEI_SERVICES_32_BIT,
+    EFI_RUNTIME_SERVICES_64_BIT,
     OFFSET_TO_SERVICE,
 )
 from uefi_r2.uefi_te import TerseExecutableError, TerseExecutableParser
@@ -230,7 +230,7 @@ class UefiAnalyzer:
             self._insns = self._get_insns()
         return self._insns
 
-    def _get_g_bs_x64(self) -> int:
+    def _get_g_bs_64_bit(self) -> int:
 
         for func in self.functions:
             func_addr = func["offset"]
@@ -260,10 +260,10 @@ class UefiAnalyzer:
     def g_bs(self) -> int:
         """Find BootServices table global address"""
         if self._g_bs is None:
-            self._g_bs = self._get_g_bs_x64()
+            self._g_bs = self._get_g_bs_64_bit()
         return self._g_bs
 
-    def _get_g_rt_x64(self) -> int:
+    def _get_g_rt_64_bit(self) -> int:
 
         for func in self.functions:
             func_addr = func["offset"]
@@ -293,10 +293,10 @@ class UefiAnalyzer:
     def g_rt(self) -> int:
         """Find RuntimeServices table global address"""
         if self._g_rt is None:
-            self._g_rt = self._get_g_rt_x64()
+            self._g_rt = self._get_g_rt_64_bit()
         return self._g_rt
 
-    def _get_boot_services_g_bs_x64(self) -> List[UefiService]:
+    def _get_boot_services_g_bs_64_bit(self) -> List[UefiService]:
 
         bs_list = list()
         for func in self.functions:
@@ -336,18 +336,18 @@ class UefiAnalyzer:
                     if "ptr" not in g_bs_area_insn:
                         continue
                     service_offset = g_bs_area_insn["ptr"]
-                    if service_offset in EFI_BOOT_SERVICES_X64:
+                    if service_offset in EFI_BOOT_SERVICES_64_BIT:
                         bs_list.append(
                             UefiService(
                                 address=g_bs_area_insn["offset"],
-                                name=EFI_BOOT_SERVICES_X64[service_offset],
+                                name=EFI_BOOT_SERVICES_64_BIT[service_offset],
                             )
                         )
                         break
                 insn_index += 1
         return bs_list
 
-    def _get_boot_services_prot_x64(
+    def _get_boot_services_prot_64_bit(
         self,
     ) -> Tuple[List[UefiService], List[UefiService]]:
 
@@ -388,19 +388,19 @@ class UefiAnalyzer:
     def boot_services(self) -> List[UefiService]:
         """Find boot services using g_bs"""
         if self._bs_list_g_bs is None:
-            self._bs_list_g_bs = self._get_boot_services_g_bs_x64()
+            self._bs_list_g_bs = self._get_boot_services_g_bs_64_bit()
         if self._bs_list_prot is None:
-            self._bs_list_prot, self._bs_prot = self._get_boot_services_prot_x64()
+            self._bs_list_prot, self._bs_prot = self._get_boot_services_prot_64_bit()
         return self._bs_list_g_bs + self._bs_list_prot
 
     @property
     def boot_services_protocols(self) -> List[Any]:
         """Find boot service that work with protocols"""
         if self._bs_prot is None:
-            self._bs_list_prot, self._bs_prot = self._get_boot_services_prot_x64()
+            self._bs_list_prot, self._bs_prot = self._get_boot_services_prot_64_bit()
         return self._bs_prot
 
-    def _get_runtime_services_x64(self) -> List[UefiService]:
+    def _get_runtime_services_64_bit(self) -> List[UefiService]:
 
         rt_list: List[UefiService] = list()
         if not self.g_rt:
@@ -441,11 +441,11 @@ class UefiAnalyzer:
                         if "ptr" not in g_rt_area_insn:
                             continue
                         service_offset = g_rt_area_insn["ptr"]
-                        if service_offset in EFI_RUNTIME_SERVICES_X64:
+                        if service_offset in EFI_RUNTIME_SERVICES_64_BIT:
                             rt_list.append(
                                 UefiService(
                                     address=g_rt_area_insn["offset"],
-                                    name=EFI_RUNTIME_SERVICES_X64[service_offset],
+                                    name=EFI_RUNTIME_SERVICES_64_BIT[service_offset],
                                 )
                             )
                             break
@@ -456,10 +456,10 @@ class UefiAnalyzer:
     def runtime_services(self) -> List[UefiService]:
         """Find all runtime services"""
         if self._rt_list is None:
-            self._rt_list = self._get_runtime_services_x64()
+            self._rt_list = self._get_runtime_services_64_bit()
         return self._rt_list
 
-    def _get_protocols_x64(self) -> List[UefiProtocol]:
+    def _get_protocols_64_bit(self) -> List[UefiProtocol]:
 
         protocols = list()
         for bs in self.boot_services_protocols:
@@ -470,7 +470,7 @@ class UefiAnalyzer:
                     if not (
                         (insn["type"] == "lea")
                         and (esil[-1] == "=")
-                        and (esil[-2] == BS_PROTOCOLS_INFO_X64[bs.name]["reg"])
+                        and (esil[-2] == BS_PROTOCOLS_INFO_64_BIT[bs.name]["reg"])
                         and (esil[-3] == "+")
                     ):
                         continue
@@ -503,7 +503,7 @@ class UefiAnalyzer:
     def protocols(self) -> List[UefiProtocol]:
         """Find proprietary protocols"""
         if self._protocols is None:
-            self._protocols = self._get_protocols_x64()
+            self._protocols = self._get_protocols_64_bit()
         return self._protocols
 
     def _get_protocol_guids(self) -> List[UefiProtocolGuid]:
@@ -539,7 +539,7 @@ class UefiAnalyzer:
             self._protocol_guids = self._get_protocol_guids()
         return self._protocol_guids
 
-    def r2_get_nvram_vars_x64(self) -> List[NvramVariable]:
+    def r2_get_nvram_vars_64_bit(self) -> List[NvramVariable]:
 
         nvram_vars = list()
         for service in self.runtime_services:
@@ -585,7 +585,7 @@ class UefiAnalyzer:
     def nvram_vars(self) -> List[NvramVariable]:
         """Find NVRAM variables passed to GetVariable and SetVariable services"""
         if self._nvram_vars is None:
-            self._nvram_vars = self.r2_get_nvram_vars_x64()
+            self._nvram_vars = self.r2_get_nvram_vars_64_bit()
         return self._nvram_vars
 
     def _get_pei_services(self) -> List[UefiService]:
@@ -603,10 +603,10 @@ class UefiAnalyzer:
                         offset = int(esil[0], 16)
                     except ValueError:
                         continue
-                    if offset not in EFI_PEI_SERVICES_X86.keys():
+                    if offset not in EFI_PEI_SERVICES_32_BIT.keys():
                         continue
                     reg = esil[1]
-                    service = EFI_PEI_SERVICES_X86[offset]
+                    service = EFI_PEI_SERVICES_32_BIT[offset]
                     # found potential pei service, compare number of arguments
                     arg_num = self._pei_service_args_num(reg, insn["offset"])
                     if arg_num < service["arg_num"]:
@@ -682,6 +682,7 @@ class UefiAnalyzer:
         if self.info["bin"]["arch"] == "x86" and self.info["bin"]["bits"] == 32:
             summary["pei_list"] = [x.__dict__ for x in self.pei_services]
             summary["ppi_list"] = [x.__dict__ for x in self.ppi_list]
+            summary["nvram_vars"] = [x.__dict__ for x in self.nvram_vars]
 
         elif self.info["bin"]["arch"] == "x86" and self.info["bin"]["bits"] == 64:
             summary["g_bs"] = str(self.g_bs)

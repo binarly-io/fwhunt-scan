@@ -6,7 +6,7 @@
 Tools for analyzing UEFI firmware using radare2
 """
 
-EFI_BOOT_SERVICES_X64 = {
+EFI_BOOT_SERVICES_64_BIT = {
     0x00000018: "RaiseTPL",
     0x00000020: "RestoreTPL",
     0x00000028: "AllocatePages",
@@ -53,7 +53,7 @@ EFI_BOOT_SERVICES_X64 = {
     0x00000170: "CreateEventEx",
 }
 
-EFI_RUNTIME_SERVICES_X64 = {
+EFI_RUNTIME_SERVICES_64_BIT = {
     0x00000018: "GetTime",
     0x00000020: "SetTime",
     0x00000028: "GetWakeupTime",
@@ -70,7 +70,7 @@ EFI_RUNTIME_SERVICES_X64 = {
     0x00000080: "QueryVariableInfo",
 }
 
-EFI_SMM_SYSTEM_TABLE2_X64 = {
+EFI_SMM_SYSTEM_TABLE2_64_BIT = {
     0x00000028: "SmmInstallConfigurationTable",
     0x00000030: "SmmIo",
     0x00000050: "SmmAllocatePool",
@@ -111,7 +111,7 @@ BS_PROTOCOLS = [
     "UninstallMultipleProtocolInterfaces",
 ]
 
-BS_PROTOCOLS_INFO_X64 = {
+BS_PROTOCOLS_INFO_64_BIT = {
     "InstallProtocolInterface": {"offset": 0x80, "reg": "rdx"},
     "ReinstallProtocolInterface": {"offset": 0x88, "reg": "rdx"},
     "UninstallProtocolInterface": {"offset": 0x90, "reg": "rdx"},
@@ -128,10 +128,10 @@ BS_PROTOCOLS_INFO_X64 = {
 }
 
 OFFSET_TO_SERVICE = dict(
-    [(BS_PROTOCOLS_INFO_X64[s]["offset"], s) for s in BS_PROTOCOLS_INFO_X64]
+    [(BS_PROTOCOLS_INFO_64_BIT[s]["offset"], s) for s in BS_PROTOCOLS_INFO_64_BIT]
 )
 
-EFI_PEI_SERVICES_X86 = {
+EFI_PEI_SERVICES_32_BIT = {
     0x00000018: {"name": "InstallPpi", "arg_num": 2},
     0x0000001C: {"name": "ReInstallPpi", "arg_num": 3},
     0x00000020: {"name": "LocatePpi", "arg_num": 5},
