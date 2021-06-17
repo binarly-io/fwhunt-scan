@@ -66,9 +66,17 @@ class UefiRule:
 
     @property
     def description(self) -> Optional[str]:
-        """Get rule description URL from the metadata block"""
+        """Get optional rule description from the metadata block"""
         try:
             return self._uefi_rule["meta"]["description"]
+        except KeyError:
+            return None
+
+    @property
+    def url(self) -> Optional[str]:
+        """Get optional rule URL from the metadata block"""
+        try:
+            return self._uefi_rule["meta"]["url"]
         except KeyError:
             return None
 
