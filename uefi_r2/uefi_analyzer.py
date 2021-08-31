@@ -115,10 +115,11 @@ class UefiAnalyzer:
             # analyze image
             self._r2.cmd("aaaa")
             # init TE parser object if file have Terse Executable format
+            self._te: Optional[TerseExecutableParser] = None
             try:
-                self._te: TerseExecutableParser = TerseExecutableParser(image_path)
+                self._te = TerseExecutableParser(image_path)
             except TerseExecutableError:
-                self._te: TerseExecutableParser = None
+                self._te = None
 
         # private cache
         self._bs_list_g_bs: Optional[List[UefiService]] = None
@@ -130,7 +131,7 @@ class UefiAnalyzer:
         self._protocols: Optional[List[UefiProtocol]] = None
         self._protocol_guids: Optional[List[UefiProtocolGuid]] = None
         self._nvram_vars: Optional[List[NvramVariable]] = None
-        self._info: Optional[List[Any]] = None
+        self._info: Optional[Dict[Any, Any]] = None
         self._strings: Optional[List[Any]] = None
         self._sections: Optional[List[Any]] = None
         self._functions: Optional[List[Any]] = None
@@ -138,7 +139,7 @@ class UefiAnalyzer:
         self._g_bs: Optional[int] = None
         self._g_rt: Optional[int] = None
 
-    def _section_paddr(self, section_name: str):
+    def _section_paddr(self, section_name: str) -> int:
         for section in self.sections:
             if section["name"] == section_name:
                 return section["paddr"]
@@ -186,7 +187,7 @@ class UefiAnalyzer:
         return 0
 
     @property
-    def info(self) -> List[Any]:
+    def info(self) -> Dict[Any, Any]:
         """Get common image properties (parsed header)"""
         if self._info is None:
             self._info = self._r2.cmdj("ij")
@@ -606,9 +607,9 @@ class UefiAnalyzer:
                     if offset not in EFI_PEI_SERVICES_32_BIT.keys():
                         continue
                     reg = esil[1]
-                    service = EFI_PEI_SERVICES_32_BIT[offset]
+                    service: Dict[str, Any] = EFI_PEI_SERVICES_32_BIT[offset]
                     # found potential pei service, compare number of arguments
-                    arg_num = self._pei_service_args_num(reg, insn["offset"])
+                    arg_num: Any = self._pei_service_args_num(reg, insn["offset"])
                     if arg_num < service["arg_num"]:
                         continue
                     # wrong addresses in r2 in case of TE
@@ -637,8 +638,10 @@ class UefiAnalyzer:
                     continue
                 if "ptr" not in block_insns[index]:
                     continue
-                p_guid_addr = block_insns[index]["ptr"]
-                if p_guid_addr < self._info["bin"]["baddr"]:
+                current_block = block_insns[index]
+                p_guid_addr = current_block["ptr"]
+                baddr = self.info["bin"]["baddr"]
+                if p_guid_addr < baddr:
                     continue
                 # wrong addresses in r2 in case of TE
                 p_guid_addr = self._wrong_addr(p_guid_addr)

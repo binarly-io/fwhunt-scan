@@ -29,8 +29,8 @@ class UefiRule:
         self._nvram_vars: Optional[List[NvramVariable]] = None
         self._protocols: Optional[List[UefiProtocol]] = None
         self._ppi_list: Optional[List[UefiProtocol]] = None
-        self._protocol_guids: Optional[List[List[str]]] = None
-        self._esil_rules: Optional[List[str]] = None
+        self._protocol_guids: Optional[List[UefiProtocolGuid]] = None
+        self._esil_rules: Optional[List[List[str]]] = None
         self._strings: Optional[List[str]] = None
         self._wide_strings: Optional[List[str]] = None
         self._hex_strings: Optional[List[str]] = None
@@ -274,7 +274,7 @@ class UefiRule:
 
     def _get_esil_rules(self) -> List[List[str]]:
 
-        esil_rules = list()
+        esil_rules: List[List[str]] = list()
         if "esil" not in self._uefi_rule:
             return esil_rules
         for esil_list in self._uefi_rule["esil"]:
@@ -310,7 +310,7 @@ class UefiScanner:
                 return False
         return True
 
-    def _check_rule(self, esil_rule: List[List[str]]) -> bool:
+    def _check_rule(self, esil_rule: List[str]) -> bool:
         """Esil scanner helper"""
 
         ops = self._uefi_analyzer.insns
@@ -327,7 +327,7 @@ class UefiScanner:
                 return True
         return False
 
-    def _esil_scanner(self):
+    def _esil_scanner(self) -> bool:
         """Match ESIL patterns"""
 
         if self._uefi_rule.esil_rules is None:
@@ -337,7 +337,7 @@ class UefiScanner:
                 return False
         return True
 
-    def _strings_scanner(self):
+    def _strings_scanner(self) -> bool:
         """Match strings"""
 
         if self._uefi_rule.strings is None:
@@ -348,7 +348,7 @@ class UefiScanner:
                 return False
         return True
 
-    def _wide_strings_scanner(self):
+    def _wide_strings_scanner(self) -> bool:
         """Match wide strings"""
 
         if self._uefi_rule.wide_strings is None:
@@ -359,7 +359,7 @@ class UefiScanner:
                 return False
         return True
 
-    def _hex_strings_scanner(self):
+    def _hex_strings_scanner(self) -> bool:
         """Match hex strings"""
 
         if self._uefi_rule.hex_strings is None:

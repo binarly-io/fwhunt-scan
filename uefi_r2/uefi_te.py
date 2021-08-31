@@ -1,11 +1,12 @@
 import os
 import struct
+from typing import Optional
 
 
 class TerseExecutableError(Exception):
     """Generic TE format error exception."""
 
-    def __init__(self, value):
+    def __init__(self, value: str) -> None:
         self.value = value
 
     def __str__(self):
@@ -15,7 +16,7 @@ class TerseExecutableError(Exception):
 class TerseExecutableParser:
     """Terse Executable header parser"""
 
-    def __init__(self, image_path: str):
+    def __init__(self, image_path: str) -> None:
         self._image_path = image_path
 
         # check file path
@@ -30,15 +31,9 @@ class TerseExecutableParser:
         if self._signature != b"VZ":
             raise TerseExecutableError("Wrong signature")
 
-        self._machine: int = None
-        self._number_of_sections: int = None
-        self._subsystem: int = None
-        self._stripped_size: int = None
-        self._address_of_entry_point: int = None
-        self._base_of_code: int = None
-        self._image_base: int = None
+        self._parse()
 
-    def _parse(self):
+    def _parse(self) -> None:
         format = "<2sHBBHIIQ"
         data = self._data[: struct.calcsize(format)]
         if len(data) != struct.calcsize(format):
@@ -55,57 +50,43 @@ class TerseExecutableParser:
         ) = struct.unpack(format, data)
 
     @property
-    def signature(self) -> int:
+    def signature(self) -> str:
         """Get Signature"""
         return self._signature.decode()
 
     @property
     def machine(self) -> int:
         """Get Machine"""
-        if self._machine is None:
-            self._parse()
         return self._machine
 
     @property
     def number_of_sections(self) -> int:
         """Get NumberOfSections"""
-        if self._number_of_sections is None:
-            self._parse()
         return self._number_of_sections
 
     @property
     def subsystem(self) -> int:
         """Get Subsystem"""
-        if self._subsystem is None:
-            self._parse()
         return self._subsystem
 
     @property
     def stripped_size(self) -> int:
         """Get StrippedSize"""
-        if self._stripped_size is None:
-            self._parse()
         return self._stripped_size
 
     @property
     def address_of_entry_point(self) -> int:
         """Get AddressOfEntryPoint"""
-        if self._address_of_entry_point is None:
-            self._parse()
         return self._address_of_entry_point
 
     @property
     def base_of_code(self) -> int:
         """Get BaseOfCode"""
-        if self._base_of_code is None:
-            self._parse()
         return self._base_of_code
 
     @property
     def image_base(self) -> int:
         """Get ImageBase"""
-        if self._image_base is None:
-            self._parse()
         return self._image_base
 
     def __str__(self):
