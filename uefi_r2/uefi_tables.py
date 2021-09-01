@@ -6,8 +6,6 @@
 Tools for analyzing UEFI firmware using radare2
 """
 
-from typing import Dict
-
 
 EFI_BOOT_SERVICES_64_BIT = {
     0x00000018: "RaiseTPL",
