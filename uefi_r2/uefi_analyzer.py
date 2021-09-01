@@ -661,7 +661,7 @@ class UefiAnalyzer:
                     address=block_insns[index]["offset"],
                     service=pei_service.name,
                 )
-                if not ppi in ppi_list:
+                if ppi not in ppi_list:
                     ppi_list.append(ppi)
 
         return ppi_list
