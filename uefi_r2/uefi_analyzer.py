@@ -197,21 +197,21 @@ class UefiAnalyzer:
     def strings(self) -> List[Any]:
         """Get common image properties (strings)"""
         if self._strings is None:
-            self._strings = self._r2.cmdj("izzzj")
+            self._strings = self._r2.cmdj("izzzj") or []
         return self._strings
 
     @property
     def sections(self) -> List[Any]:
         """Get common image properties (sections)"""
         if self._sections is None:
-            self._sections = self._r2.cmdj("iSj")
+            self._sections = self._r2.cmdj("iSj") or []
         return self._sections
 
     @property
     def functions(self) -> List[Any]:
         """Get common image properties (functions)"""
         if self._functions is None:
-            self._functions = self._r2.cmdj("aflj")
+            self._functions = self._r2.cmdj("aflj") or []
         return self._functions
 
     def _get_insns(self) -> List[Any]:
