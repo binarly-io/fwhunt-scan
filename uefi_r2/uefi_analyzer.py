@@ -175,6 +175,8 @@ class UefiAnalyzer:
         # get number of arguments
         for i in range(index, -1, -1):
             esil = res[i]["esil"].split(",")
+            if len(esil) < 4:  # fix IndexError
+                continue
             if esil[-3] == "4" and esil[-2] == "esp" and esil[-1] == "-=":
                 args_num += 1
             if (
