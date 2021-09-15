@@ -206,9 +206,9 @@ class UefiRule:
     def _get_ppi_list(self) -> List[UefiProtocol]:
 
         ppi_list: List[UefiProtocol] = list()
-        if "ppi_list" not in self._uefi_rule:
+        if "ppi" not in self._uefi_rule:
             return ppi_list
-        for ppi in self._uefi_rule["ppi_list"]:
+        for ppi in self._uefi_rule["ppi"]:
             for num in ppi:
                 element_name: str = str()
                 element_value: str = str()

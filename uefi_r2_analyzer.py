@@ -83,7 +83,7 @@ def scan(image_path: str, rule: str) -> bool:
     prefix = click.style("UEFI rule", fg="green")
     print(f"{prefix} nvram: {[x.__dict__ for x in uefi_rule.nvram_vars]}")
     print(f"{prefix} protocols: {[x.__dict__ for x in uefi_rule.protocols]}")
-    print(f"{prefix} ppi_list: {[x.__dict__ for x in uefi_rule.protocols]}")
+    print(f"{prefix} ppi: {[x.__dict__ for x in uefi_rule.ppi_list]}")
     print(f"{prefix} guids: {[x.__dict__ for x in uefi_rule.protocol_guids]}")
     print(f"{prefix} esil: {uefi_rule.esil_rules}")
     print(f"{prefix} strings: {uefi_rule.strings}")
