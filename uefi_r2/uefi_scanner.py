@@ -22,8 +22,10 @@ from uefi_r2.uefi_analyzer import (
 class UefiRule:
     """A rule for scanning EFI image"""
 
-    def __init__(self, rule: str):
-        self._rule: str = rule
+    def __init__(
+        self, rule_path: Optional[str] = None, rule_content: Optional[str] = None
+    ):
+        self._rule: str = rule_path
         self._rule_name: str = str()
         self._uefi_rule: Dict[str, Any] = dict()
         self._nvram_vars: Optional[List[NvramVariable]] = None
@@ -34,10 +36,16 @@ class UefiRule:
         self._strings: Optional[List[str]] = None
         self._wide_strings: Optional[List[str]] = None
         self._hex_strings: Optional[List[str]] = None
-        if os.path.isfile(self._rule):
+        if self._rule is not None:
+            if os.path.isfile(self._rule):
+                try:
+                    with open(self._rule, "r") as f:
+                        self._uefi_rule = yaml.safe_load(f)
+                except yaml.scanner.ScannerError as e:
+                    print(f"Error: {repr(e)}")
+        elif rule_content is not None:
             try:
-                with open(self._rule, "r") as f:
-                    self._uefi_rule = yaml.safe_load(f)
+                self._uefi_rule = yaml.safe_load(rule_content)
             except yaml.scanner.ScannerError as e:
                 print(f"Error: {repr(e)}")
         if self._uefi_rule:

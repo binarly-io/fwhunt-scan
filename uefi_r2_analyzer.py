@@ -79,7 +79,10 @@ def scan(image_path: str, rule: str) -> bool:
         print(f"{prefix} protocols: {[x.__dict__ for x in uefi_analyzer.protocols]}")
         print(f"{prefix} guids: {[x.__dict__ for x in uefi_analyzer.protocol_guids]}")
 
-    uefi_rule = UefiRule(rule)
+    with open(rule, "r") as f:
+        rule_content = f.read()
+
+    uefi_rule = UefiRule(rule_content=rule_content)
     prefix = click.style("UEFI rule", fg="green")
     print(f"{prefix} nvram: {[x.__dict__ for x in uefi_rule.nvram_vars]}")
     print(f"{prefix} protocols: {[x.__dict__ for x in uefi_rule.protocols]}")
