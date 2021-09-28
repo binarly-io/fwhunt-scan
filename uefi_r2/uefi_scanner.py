@@ -20,7 +20,7 @@ from uefi_r2.uefi_analyzer import (
 
 
 class UefiRule:
-    """a rule for scanning EFI image"""
+    """A rule for scanning EFI image"""
 
     def __init__(self, rule: str):
         self._rule: str = rule
@@ -51,6 +51,7 @@ class UefiRule:
     @property
     def name(self) -> Optional[str]:
         """Get rule name from the metadata block"""
+
         try:
             return self._uefi_rule["meta"]["name"]
         except KeyError:
@@ -59,6 +60,7 @@ class UefiRule:
     @property
     def namespace(self) -> Optional[str]:
         """Get rule namespace from the metadata block"""
+
         try:
             return self._uefi_rule["meta"]["namespace"]
         except KeyError:
@@ -67,6 +69,7 @@ class UefiRule:
     @property
     def description(self) -> Optional[str]:
         """Get optional rule description from the metadata block"""
+
         try:
             return self._uefi_rule["meta"]["description"]
         except KeyError:
@@ -75,13 +78,13 @@ class UefiRule:
     @property
     def url(self) -> Optional[str]:
         """Get optional rule URL from the metadata block"""
+
         try:
             return self._uefi_rule["meta"]["url"]
         except KeyError:
             return None
 
     def _get_strings(self) -> List[str]:
-
         strings: List[str] = list()
         if "strings" not in self._uefi_rule:
             return strings
@@ -99,7 +102,6 @@ class UefiRule:
         return self._strings
 
     def _get_wide_strings(self) -> List[str]:
-
         wide_strings: List[str] = list()
         if "wide_strings" not in self._uefi_rule:
             return wide_strings
@@ -117,7 +119,6 @@ class UefiRule:
         return self._wide_strings
 
     def _get_hex_strings(self) -> List[str]:
-
         hex_strings: List[str] = list()
         if "hex_strings" not in self._uefi_rule:
             return hex_strings
@@ -135,7 +136,6 @@ class UefiRule:
         return self._hex_strings
 
     def _get_nvram_vars(self) -> List[NvramVariable]:
-
         nvram_vars: List[NvramVariable] = list()
         if "nvram" not in self._uefi_rule:
             return nvram_vars
@@ -167,7 +167,6 @@ class UefiRule:
         return self._nvram_vars
 
     def _get_protocols(self) -> List[UefiProtocol]:
-
         protocols: List[UefiProtocol] = list()
         if "protocols" not in self._uefi_rule:
             return protocols
@@ -204,7 +203,6 @@ class UefiRule:
         return self._protocols
 
     def _get_ppi_list(self) -> List[UefiProtocol]:
-
         ppi_list: List[UefiProtocol] = list()
         if "ppi" not in self._uefi_rule:
             return ppi_list
@@ -241,7 +239,6 @@ class UefiRule:
         return self._ppi_list
 
     def _get_protocol_guids(self) -> List[UefiProtocolGuid]:
-
         protocol_guids: List[UefiProtocolGuid] = list()
         if "guids" not in self._uefi_rule:
             return protocol_guids
@@ -273,7 +270,6 @@ class UefiRule:
         return self._protocol_guids
 
     def _get_esil_rules(self) -> List[List[str]]:
-
         esil_rules: List[List[str]] = list()
         if "esil" not in self._uefi_rule:
             return esil_rules
@@ -343,7 +339,7 @@ class UefiScanner:
         if self._uefi_rule.strings is None:
             return True
         for string in self._uefi_rule.strings:
-            res = self._uefi_analyzer._r2.cmdj("/j {}".format(string))
+            res = self._uefi_analyzer._rz.cmdj("/j {}".format(string))
             if not res:
                 return False
         return True
@@ -354,7 +350,7 @@ class UefiScanner:
         if self._uefi_rule.wide_strings is None:
             return True
         for wide_string in self._uefi_rule.wide_strings:
-            res = self._uefi_analyzer._r2.cmdj("/wj {}".format(wide_string))
+            res = self._uefi_analyzer._rz.cmdj("/wj {}".format(wide_string))
             if not res:
                 return False
         return True
@@ -365,7 +361,7 @@ class UefiScanner:
         if self._uefi_rule.hex_strings is None:
             return True
         for hex_string in self._uefi_rule.hex_strings:
-            res = self._uefi_analyzer._r2.cmdj("/xj {}".format(hex_string))
+            res = self._uefi_analyzer._rz.cmdj("/xj {}".format(hex_string))
             if not res:
                 return False
         return True

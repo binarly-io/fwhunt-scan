@@ -4,14 +4,14 @@
 #
 # pylint: disable=invalid-name,missing-module-docstring,missing-function-docstring
 
-# uefi_r2: tools for analyzing UEFI firmware using radare2
+# uefi_r2: tools for analyzing UEFI firmware using radare2/rizin
 
 import json
 import os
 
 import click
 
-from uefi_r2 import TerseExecutableParser, UefiAnalyzer, UefiRule, UefiScanner
+from uefi_r2 import UefiAnalyzer, UefiRule, UefiScanner
 
 
 @click.group()
@@ -28,24 +28,21 @@ def analyze_image(image_path: str, out: str) -> bool:
     if not os.path.isfile(image_path):
         print("{} check image path".format(click.style("ERROR", fg="red", bold=True)))
         return False
-    summary = UefiAnalyzer.get_summary(image_path)
+
+    with open(image_path, "rb") as f:
+        data = f.read()
+
+    uefi_analyzer = UefiAnalyzer(blob=data)
+
+    summary = uefi_analyzer.get_summary()
+    uefi_analyzer.close()
+
     if out:
         with open(out, "w") as f:
             json.dump(summary, f, indent=4)
     else:
         print(json.dumps(summary, indent=4))
-    return True
 
-
-@click.command()
-@click.argument("image_path")
-def parse_te(image_path: str) -> bool:
-    """Parse input TE file."""
-
-    if not os.path.isfile(image_path):
-        print("{} check image path".format(click.style("ERROR", fg="red", bold=True)))
-        return False
-    print(TerseExecutableParser(image_path))
     return True
 
 
@@ -62,7 +59,10 @@ def scan(image_path: str, rule: str) -> bool:
         print("{} check rule path".format(click.style("ERROR", fg="red", bold=True)))
         return False
 
-    uefi_analyzer = UefiAnalyzer(image_path)
+    with open(image_path, "rb") as f:
+        data = f.read()
+
+    uefi_analyzer = UefiAnalyzer(blob=data)
     prefix = click.style("UEFI analyzer", fg="green")
     if (
         uefi_analyzer.info["bin"]["arch"] == "x86"
@@ -94,11 +94,12 @@ def scan(image_path: str, rule: str) -> bool:
     prefix = click.style("Scanner result", fg="green")
     print(f"{prefix} {uefi_rule.name} {scanner.result}")
 
+    uefi_analyzer.close()
+
     return True
 
 
 cli.add_command(analyze_image)
-cli.add_command(parse_te)
 cli.add_command(scan)
 
 if __name__ == "__main__":
