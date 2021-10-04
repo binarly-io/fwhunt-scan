@@ -671,6 +671,9 @@ class UefiAnalyzer:
         for key in self.info:
             summary[key] = self.info[key]
 
+        if "bin" not in summary:
+            return summary
+
         if self.info["bin"]["arch"] == "x86" and self.info["bin"]["bits"] == 32:
             summary["pei_list"] = [x.__dict__ for x in self.pei_services]
             summary["ppi_list"] = [x.__dict__ for x in self.ppi_list]
