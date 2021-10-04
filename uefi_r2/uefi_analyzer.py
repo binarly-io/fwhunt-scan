@@ -13,8 +13,8 @@ from multiprocessing import shared_memory
 from typing import Any, Dict, List, Optional, Tuple
 
 import rzpipe
-from rzpipe.open_base import OpenBase
 
+import uefi_r2
 from uefi_r2.uefi_protocols import GUID_FROM_BYTES, UefiGuid
 from uefi_r2.uefi_tables import (
     BS_PROTOCOLS_INFO_64_BIT,
@@ -24,84 +24,24 @@ from uefi_r2.uefi_tables import (
     OFFSET_TO_SERVICE,
 )
 from uefi_r2.uefi_te import TerseExecutableError, TerseExecutableParser
+from uefi_r2.uefi_types import (
+    NvramVariable,
+    SwSmiHandler,
+    UefiGuid,
+    UefiProtocol,
+    UefiProtocolGuid,
+    UefiService,
+)
 
 
-class UefiService:
-    """A UEFI service"""
+class AnalyzerError(Exception):
+    """Generic TE format error exception."""
 
-    def __init__(self, name: str, address: int) -> None:
-        self.name: str = name
-        self.address: int = address
+    def __init__(self, value: str) -> None:
+        self.value = value
 
-    @property
-    def __dict__(self):
-        val = dict()
-        if self.name:
-            val["name"] = self.name
-        if self.address:
-            val["address"] = self.address
-        return val
-
-
-class UefiProtocol(UefiGuid):
-    """A UEFI protocol"""
-
-    def __init__(
-        self, name: str, address: int, value: str, guid_address: int, service: str
-    ) -> None:
-        super().__init__(name=name, value=value)
-        self.address: int = address
-        self.guid_address: int = guid_address
-        self.service: str = service
-
-    @property
-    def __dict__(self):
-        val = super().__dict__
-        if self.address:
-            val["address"] = self.address
-        if self.guid_address:
-            val["guid_address"] = self.guid_address
-        if self.service:
-            val["service"] = self.service
-        return val
-
-
-class UefiProtocolGuid(UefiGuid):
-    """A UEFI protocol GUID"""
-
-    def __init__(self, name: str, address: int, value: str) -> None:
-        super().__init__(name=name, value=value)
-        self.address: int = address
-
-    @property
-    def __dict__(self):
-        val = super().__dict__
-        if self.address:
-            val["address"] = self.address
-        return val
-
-
-class NvramVariable:
-    """A UEFI NVRAM variable"""
-
-    def __init__(self, name: str, guid: str, service: UefiService) -> None:
-        self.name: str = name
-        self.guid: str = guid
-        self.service: UefiService = service
-
-    @property
-    def __dict__(self):
-        val = dict()
-        if self.name:
-            val["name"] = self.name
-        if self.guid:
-            val["guid"] = self.guid
-        if self.service:
-            val["service"] = {
-                "name": self.service.name,
-                "address": self.service.address,
-            }
-        return val
+    def __str__(self):
+        return repr(self.value)
 
 
 class UefiAnalyzer:
@@ -143,6 +83,9 @@ class UefiAnalyzer:
             except TerseExecutableError:
                 self._te = None
 
+        if self._rz is None:
+            raise AnalyzerError("Failed to initialize radare2/rizin analyzing engine")
+
         # private cache
         self._bs_list_g_bs: Optional[List[UefiService]] = None
         self._bs_list_prot: Optional[List[UefiService]] = None
@@ -160,6 +103,9 @@ class UefiAnalyzer:
         self._insns: Optional[List[Any]] = None
         self._g_bs: Optional[int] = None
         self._g_rt: Optional[int] = None
+
+        # SMI handlers addresses
+        self._swsmi_handlers: Optional[List[SwSmiHandler]] = None
 
     def _section_paddr(self, section_name: str) -> int:
         for section in self.sections:
@@ -232,6 +178,7 @@ class UefiAnalyzer:
     @property
     def sections(self) -> List[Any]:
         """Get common image properties (sections)"""
+
         if self._sections is None:
             self._sections = self._rz.cmdj("iSj") or []
         return self._sections
@@ -417,6 +364,7 @@ class UefiAnalyzer:
     @property
     def boot_services(self) -> List[UefiService]:
         """Find boot services using g_bs"""
+
         if self._bs_list_g_bs is None:
             self._bs_list_g_bs = self._get_boot_services_bs_64bit()
         if self._bs_list_prot is None:
@@ -426,12 +374,12 @@ class UefiAnalyzer:
     @property
     def boot_services_protocols(self) -> List[Any]:
         """Find boot service that work with protocols"""
+
         if self._bs_prot is None:
             self._bs_list_prot, self._bs_prot = self._get_boot_services_prot_64bit()
         return self._bs_prot
 
     def _get_runtime_services_64bit(self) -> List[UefiService]:
-
         rt_list: List[UefiService] = list()
         if not self.g_rt:
             return rt_list
@@ -708,6 +656,14 @@ class UefiAnalyzer:
             self._ppi_list = self._get_ppi_list()
         return self._ppi_list
 
+    @property
+    def swsmi_handlers(self) -> List[SwSmiHandler]:
+        """Find software SMI handlers"""
+
+        if self._swsmi_handlers is None:
+            self._swsmi_handlers = uefi_r2.uefi_smm.get_sw_smi_handlers(self._rz)
+        return self._swsmi_handlers
+
     def get_summary(self) -> Dict[str, Any]:
         """Collect all the information in a JSON object"""
 
@@ -727,6 +683,8 @@ class UefiAnalyzer:
             summary["rt_list"] = [x.__dict__ for x in self.runtime_services]
             summary["protocols"] = [x.__dict__ for x in self.protocols]
             summary["nvram_vars"] = [x.__dict__ for x in self.nvram_vars]
+            if len(self.swsmi_handlers) > 0:
+                summary["swsmi_handlers"] = [x.__dict__ for x in self.swsmi_handlers]
 
         summary["p_guids"] = [x.__dict__ for x in self.protocol_guids]
 

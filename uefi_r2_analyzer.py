@@ -11,7 +11,7 @@ import os
 
 import click
 
-from uefi_r2 import UefiAnalyzer, UefiRule, UefiScanner
+from uefi_r2 import UefiAnalyzer, UefiRule, UefiScanner, uefi_smm
 
 
 @click.group()
@@ -29,10 +29,10 @@ def analyze_image(image_path: str, out: str) -> bool:
         print("{} check image path".format(click.style("ERROR", fg="red", bold=True)))
         return False
 
-    with open(image_path, "rb") as f:
-        data = f.read()
+    # on linux platforms you can pass blob via shm://
+    # uefi_analyzer = UefiAnalyzer(blob=data)
 
-    uefi_analyzer = UefiAnalyzer(blob=data)
+    uefi_analyzer = UefiAnalyzer(image_path=image_path)
 
     summary = uefi_analyzer.get_summary()
     uefi_analyzer.close()
@@ -59,10 +59,11 @@ def scan(image_path: str, rule: str) -> bool:
         print("{} check rule path".format(click.style("ERROR", fg="red", bold=True)))
         return False
 
-    with open(image_path, "rb") as f:
-        data = f.read()
+    # on linux platforms you can pass blob via shm://
+    # uefi_analyzer = UefiAnalyzer(blob=data)
 
-    uefi_analyzer = UefiAnalyzer(blob=data)
+    uefi_analyzer = UefiAnalyzer(image_path=image_path)
+
     prefix = click.style("UEFI analyzer", fg="green")
     if (
         uefi_analyzer.info["bin"]["arch"] == "x86"
