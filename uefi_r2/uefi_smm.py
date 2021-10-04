@@ -93,6 +93,31 @@ def get_interface_from_bb(insns: List[Dict[str, Any]], code_addr: int) -> Option
     return res
 
 
+def get_interface_global(insns: List[Dict[str, Any]], code_addr: int) -> Optional[int]:
+    """Get the address of the interface
+    (in the case of local variables, this will be the address on the stack)"""
+
+    res = None
+
+    index = get_current_insn_index(insns, code_addr)
+    if index is None:
+        return res
+
+    # check all instructions from index to 0
+    for i in range(index - 1, -1, -1):
+        insn = insns[i]
+        if "esil" not in insn:
+            continue
+        esil = insn["esil"].split(",")
+        if not (esil[-1] == "=" and esil[-2] == "r8"):
+            continue
+        res = insn.get("ptr", None)
+        if res is not None:
+            return res
+
+    return res
+
+
 def get_handler(insns: List[Dict[str, Any]]) -> Optional[SwSmiHandler]:
     address = None
     sw_smi_input_value = None
@@ -171,8 +196,78 @@ def get_handlers(rz: rzpipe.open, code_addr: int, interface: int) -> List[SwSmiH
     return res
 
 
+def get_smst_bb(insns: List[Dict[str, Any]], interface: int) -> Optional[int]:
+    res = None
+
+    for insn in insns:
+        if "esil" not in insn:
+            continue
+        esil = insn["esil"].split(",")
+
+        # check esil insn ({offset},rip,+,rdx,=)
+        if esil[-1] == "=" and esil[-2] == "rdx":
+            res = insn.get("ptr", None)
+            if res is not None:
+                return res
+
+    return res
+
+
+def get_smst_func(rz: rzpipe.open, code_addr: int, interface: int) -> List[int]:
+    res: List[int] = list()
+
+    func = rz.cmdj(f"pdfj @{code_addr:#x}")
+    insns = func.get("ops", None)
+    if insns is None:
+        return res
+
+    index = get_current_insn_index(insns, code_addr)
+    if index is None:
+        return res
+
+    # check all instructions from index to end of function
+    for i in range(index + 1, len(insns), 1):
+        insn = insns[i]
+        if "esil" not in insn:
+            continue
+        esil = insn["esil"].split(",")
+        if esil[-1] == "=" and esil[-2] == "rax" and esil[-3] == "[8]":
+            if insn.get("ptr", None) == interface:
+                offset = insn.get("offset", None)
+                if offset is None:
+                    continue
+                bb = rz.cmdj(f"pdbj @{offset:#x}")
+                smst = get_smst_bb(bb, interface)
+                if smst is not None:
+                    res.append(smst)
+    return res
+
+
+def get_smst_list(rz: rzpipe.open) -> List[int]:
+    """Find SMST addresses"""
+
+    res: List[int] = list()
+
+    guids = [
+        UefiGuid(
+            "F4CCBFB7-F6E0-47FD-9DD410A8F150C191", name="EFI_SMM_BASE2_PROTOCOL_GUID"
+        )
+    ]
+    code_addrs = get_xrefs_to_guids(rz, guids)
+    for code_addr in code_addrs:
+        bb = rz.cmdj(f"pdbj @{code_addr:#x}")
+        interface = get_interface_global(bb, code_addr)
+        if interface is None:
+            continue
+        res += get_smst_func(rz, code_addr, interface)
+
+    return res
+
+
 def get_sw_smi_handlers(rz: rzpipe.open) -> List[SwSmiHandler]:
     """Find Software SMI Handlers"""
+
+    res: List[SwSmiHandler] = list()
 
     guids = [
         UefiGuid(
@@ -184,9 +279,6 @@ def get_sw_smi_handlers(rz: rzpipe.open) -> List[SwSmiHandler]:
             name="EFI_SMM_SW_DISPATCH_PROTOCOL_GUID",
         ),
     ]
-
-    res: List[SwSmiHandler] = list()
-
     code_addrs = get_xrefs_to_guids(rz, guids)
     for code_addr in code_addrs:
         # get basic block information

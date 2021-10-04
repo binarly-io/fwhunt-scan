@@ -103,6 +103,7 @@ class UefiAnalyzer:
         self._insns: Optional[List[Any]] = None
         self._g_bs: Optional[int] = None
         self._g_rt: Optional[int] = None
+        self._smst_list: Optional[List[int]] = None
 
         # SMI handlers addresses
         self._swsmi_handlers: Optional[List[SwSmiHandler]] = None
@@ -664,6 +665,14 @@ class UefiAnalyzer:
             self._swsmi_handlers = uefi_r2.uefi_smm.get_sw_smi_handlers(self._rz)
         return self._swsmi_handlers
 
+    @property
+    def smst_list(self) -> List[int]:
+        """Find list of SMST"""
+
+        if self._smst_list is None:
+            self._smst_list = uefi_r2.uefi_smm.get_smst_list(self._rz)
+        return self._smst_list
+
     def get_summary(self) -> Dict[str, Any]:
         """Collect all the information in a JSON object"""
 
@@ -682,6 +691,7 @@ class UefiAnalyzer:
         elif self.info["bin"]["arch"] == "x86" and self.info["bin"]["bits"] == 64:
             summary["g_bs"] = str(self.g_bs)
             summary["g_rt"] = str(self.g_rt)
+            summary["g_smst"] = [x for x in self.smst_list]
             summary["bs_list"] = [x.__dict__ for x in self.boot_services]
             summary["rt_list"] = [x.__dict__ for x in self.runtime_services]
             summary["protocols"] = [x.__dict__ for x in self.protocols]
