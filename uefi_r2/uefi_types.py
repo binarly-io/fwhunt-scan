@@ -20,7 +20,7 @@ class UefiService:
 
 
 class UefiGuid:
-    """a UEFI GUID"""
+    """A UEFI GUID"""
 
     def __init__(self, value: str, name: str) -> None:
         self.value: str = value
@@ -131,4 +131,21 @@ class SwSmiHandler(SmiHandler):
             val["address"] = self.address
         if self.sw_smi_input_value:
             val["sw_smi_input_value"] = self.sw_smi_input_value
+        return val
+
+
+class ChildSwSmiHandler(SmiHandler):
+    """Child software SMI handler"""
+
+    def __init__(self, handler_guid: Optional[str], address: int) -> None:
+        super().__init__(address=address)
+        self.handler_guid = handler_guid
+
+    @property
+    def __dict__(self):
+        val = dict()
+        if self.address:
+            val["address"] = self.address
+        if self.handler_guid:
+            val["handler_guid"] = self.handler_guid
         return val

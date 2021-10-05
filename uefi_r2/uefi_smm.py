@@ -1,11 +1,12 @@
 import binascii
 import json
+import uuid
 from typing import Any, Dict, List, Optional
 
 import rzpipe
 
 from uefi_r2.uefi_protocols import UefiGuid
-from uefi_r2.uefi_types import SwSmiHandler
+from uefi_r2.uefi_types import ChildSwSmiHandler, SwSmiHandler
 
 
 def get_int(item: str) -> Optional[int]:
@@ -45,6 +46,25 @@ def get_xrefs_to_guids(rz: rzpipe.open, guids: UefiGuid) -> List[int]:
                 # get code address
                 addr = xref["from"]
                 code_addrs.append(addr)
+
+    return code_addrs
+
+
+def get_xrefs_to_data(rz: rzpipe.open, addr: int) -> List[int]:
+    code_addrs = list()  # xrefs from code
+
+    rz.cmd(f"s {addr:#x}")
+
+    # get xrefs
+    xrefs = rz.cmdj(f"axtj")
+
+    for xref in xrefs:
+        if "from" not in xref:
+            continue
+
+        # get code address
+        addr = xref["from"]
+        code_addrs.append(addr)
 
     return code_addrs
 
@@ -196,7 +216,7 @@ def get_handlers(rz: rzpipe.open, code_addr: int, interface: int) -> List[SwSmiH
     return res
 
 
-def get_smst_bb(insns: List[Dict[str, Any]], interface: int) -> Optional[int]:
+def get_smst_bb(insns: List[Dict[str, Any]]) -> Optional[int]:
     res = None
 
     for insn in insns:
@@ -237,7 +257,7 @@ def get_smst_func(rz: rzpipe.open, code_addr: int, interface: int) -> List[int]:
                 if offset is None:
                     continue
                 bb = rz.cmdj(f"pdbj @{offset:#x}")
-                smst = get_smst_bb(bb, interface)
+                smst = get_smst_bb(bb)
                 if smst is not None:
                     res.append(smst)
     return res
@@ -260,6 +280,80 @@ def get_smst_list(rz: rzpipe.open) -> List[int]:
         if interface is None:
             continue
         res += get_smst_func(rz, code_addr, interface)
+
+    return res
+
+
+def find_handler_register_service(insns: List[Dict[str, Any]]) -> bool:
+    for insn in insns[::-1]:
+        if "esil" not in insn:
+            continue
+        esil = insn["esil"].split(",")
+
+        if esil[-7:] != ["8", "rsp", "-=", "rsp", "=[]", "rip", "="]:
+            continue
+
+        offset = get_int(esil[0])
+        if offset == 0xE0:  # SmiHandlerRegister
+            return True
+
+
+def get_child_sw_smi_handler_bb(rz, insns: List[Dict[str, Any]]):
+    handler_address = None
+    handler_guid = None
+
+    if not find_handler_register_service(insns):
+        return None
+
+    for insn in insns[::-1]:
+        if "esil" not in insn:
+            continue
+        esil = insn["esil"].split(",")
+
+        # try to get handler address (Handler parameter)
+        if esil[-1] == "=" and esil[-2] == "rcx":
+            handler_address = insn.get("ptr", None)
+
+        # try to get handler guid value (HandlerType parameter)
+        if esil[-1] == "=" and esil[-2] == "rdx":
+            guid_addr = insn.get("ptr", None)
+            if guid_addr is not None:
+                rz.cmd(f"s {guid_addr:#x}")
+                guid_b = bytes(rz.cmdj("xj 16"))
+                handler_guid = str(uuid.UUID(bytes_le=guid_b)).upper()
+
+        if handler_address is not None and handler_guid is not None:
+            return ChildSwSmiHandler(address=handler_address, handler_guid=handler_guid)
+
+    if handler_address is not None:  # but handler_guid is None
+        return ChildSwSmiHandler(address=handler_address, handler_guid=handler_guid)
+
+    return None
+
+
+def get_child_sw_smi_handlers(
+    rz: rzpipe.open, smst_list: List[int]
+) -> List[ChildSwSmiHandler]:
+
+    res: List[ChildSwSmiHandler] = list()
+
+    for smst in smst_list:
+        code_addrs = get_xrefs_to_data(rz, smst)
+        for addr in code_addrs:
+            # analyze basic block and found gSmst->SmiHandlerRegister call
+            result = rz.cmd(f"pdbj @{addr:#x}")
+            # prevent error messages to sys.stderr from rizin:
+            # https://github.com/rizinorg/rz-pipe/blob/0f7ac66e6d679ebb03be26bf61a33f9ccf199f27/python/rzpipe/open_base.py#L261
+            try:
+                bb = json.loads(result)
+            except (ValueError, KeyError, TypeError) as e:
+                continue
+            handler = get_child_sw_smi_handler_bb(rz, bb)
+            if handler is not None:
+                res.append(handler)
+
+    for handler in res:
+        print(json.dumps(handler.__dict__, indent=2))
 
     return res
 

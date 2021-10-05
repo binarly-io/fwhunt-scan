@@ -25,6 +25,7 @@ from uefi_r2.uefi_tables import (
 )
 from uefi_r2.uefi_te import TerseExecutableError, TerseExecutableParser
 from uefi_r2.uefi_types import (
+    ChildSwSmiHandler,
     NvramVariable,
     SwSmiHandler,
     UefiGuid,
@@ -107,6 +108,7 @@ class UefiAnalyzer:
 
         # SMI handlers addresses
         self._swsmi_handlers: Optional[List[SwSmiHandler]] = None
+        self._child_swsmi_handlers: Optional[List[ChildSwSmiHandler]] = None
 
     def _section_paddr(self, section_name: str) -> int:
         for section in self.sections:
@@ -666,6 +668,16 @@ class UefiAnalyzer:
         return self._swsmi_handlers
 
     @property
+    def child_swsmi_handlers(self) -> List[ChildSwSmiHandler]:
+        """Find child software SMI handlers"""
+
+        if self._child_swsmi_handlers is None:
+            self._child_swsmi_handlers = uefi_r2.uefi_smm.get_child_sw_smi_handlers(
+                self._rz, self.smst_list
+            )
+        return self._child_swsmi_handlers
+
+    @property
     def smst_list(self) -> List[int]:
         """Find list of SMST"""
 
@@ -698,6 +710,10 @@ class UefiAnalyzer:
             summary["nvram_vars"] = [x.__dict__ for x in self.nvram_vars]
             if len(self.swsmi_handlers) > 0:
                 summary["swsmi_handlers"] = [x.__dict__ for x in self.swsmi_handlers]
+            if len(self.child_swsmi_handlers) > 0:
+                summary["child_swsmi_handlers"] = [
+                    x.__dict__ for x in self.child_swsmi_handlers
+                ]
 
         summary["p_guids"] = [x.__dict__ for x in self.protocol_guids]
 
