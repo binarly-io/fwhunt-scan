@@ -16,15 +16,23 @@ import rzpipe
 
 import uefi_r2.uefi_smm as uefi_smm
 from uefi_r2.uefi_protocols import GUID_FROM_BYTES, UefiGuid
-from uefi_r2.uefi_tables import (BS_PROTOCOLS_INFO_64_BIT,
-                                 EFI_BOOT_SERVICES_64_BIT,
-                                 EFI_PEI_SERVICES_32_BIT,
-                                 EFI_RUNTIME_SERVICES_64_BIT,
-                                 OFFSET_TO_SERVICE)
+from uefi_r2.uefi_tables import (
+    BS_PROTOCOLS_INFO_64_BIT,
+    EFI_BOOT_SERVICES_64_BIT,
+    EFI_PEI_SERVICES_32_BIT,
+    EFI_RUNTIME_SERVICES_64_BIT,
+    OFFSET_TO_SERVICE,
+)
 from uefi_r2.uefi_te import TerseExecutableError, TerseExecutableParser
-from uefi_r2.uefi_types import (ChildSwSmiHandler, NvramVariable, SwSmiHandler,
-                                UefiGuid, UefiProtocol, UefiProtocolGuid,
-                                UefiService)
+from uefi_r2.uefi_types import (
+    ChildSwSmiHandler,
+    NvramVariable,
+    SwSmiHandler,
+    UefiGuid,
+    UefiProtocol,
+    UefiProtocolGuid,
+    UefiService,
+)
 
 
 class AnalyzerError(Exception):

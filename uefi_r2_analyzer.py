@@ -8,6 +8,7 @@
 
 import json
 import os
+from typing import List
 
 import click
 
@@ -64,39 +65,39 @@ def scan(image_path: str, rule: str) -> bool:
 
     uefi_analyzer = UefiAnalyzer(image_path=image_path)
 
-    prefix = click.style("UEFI analyzer", fg="green")
-    if (
-        uefi_analyzer.info["bin"]["arch"] == "x86"
-        and uefi_analyzer.info["bin"]["bits"] == 32
-    ):
-        print(f"{prefix} ppi_list: {[x.__dict__ for x in uefi_analyzer.ppi_list]}")
-        print(f"{prefix} guids: {[x.__dict__ for x in uefi_analyzer.protocol_guids]}")
-
-    elif (
-        uefi_analyzer.info["bin"]["arch"] == "x86"
-        and uefi_analyzer.info["bin"]["bits"] == 64
-    ):
-        print(f"{prefix} nvram: {[x.__dict__ for x in uefi_analyzer.nvram_vars]}")
-        print(f"{prefix} protocols: {[x.__dict__ for x in uefi_analyzer.protocols]}")
-        print(f"{prefix} guids: {[x.__dict__ for x in uefi_analyzer.protocol_guids]}")
-
     with open(rule, "r") as f:
         rule_content = f.read()
 
     uefi_rule = UefiRule(rule_content=rule_content)
     prefix = click.style("UEFI rule", fg="green")
-    print(f"{prefix} nvram: {[x.__dict__ for x in uefi_rule.nvram_vars]}")
-    print(f"{prefix} protocols: {[x.__dict__ for x in uefi_rule.protocols]}")
-    print(f"{prefix} ppi: {[x.__dict__ for x in uefi_rule.ppi_list]}")
-    print(f"{prefix} guids: {[x.__dict__ for x in uefi_rule.protocol_guids]}")
-    print(f"{prefix} esil: {uefi_rule.esil_rules}")
-    print(f"{prefix} strings: {uefi_rule.strings}")
-    print(f"{prefix} wide_strings: {uefi_rule.wide_strings}")
-    print(f"{prefix} hex_strings: {uefi_rule.hex_strings}")
+    if len(uefi_rule.nvram_vars):
+        print(f"{prefix} nvram: {[x.__dict__ for x in uefi_rule.nvram_vars]}")
+    if len(uefi_rule.protocols):
+        print(f"{prefix} protocols: {[x.__dict__ for x in uefi_rule.protocols]}")
+    if len(uefi_rule.ppi_list):
+        print(f"{prefix} ppi: {[x.__dict__ for x in uefi_rule.ppi_list]}")
+    if len(uefi_rule.protocol_guids):
+        print(f"{prefix} guids: {[x.__dict__ for x in uefi_rule.protocol_guids]}")
+    if len(uefi_rule.esil_rules):
+        print(f"{prefix} esil: {uefi_rule.esil_rules}")
+    if len(uefi_rule.strings):
+        print(f"{prefix} strings: {uefi_rule.strings}")
+    if len(uefi_rule.wide_strings):
+        print(f"{prefix} wide_strings: {uefi_rule.wide_strings}")
+    if len(uefi_rule.hex_strings):
+        print(f"{prefix} hex_strings: {uefi_rule.hex_strings}")
+    if len(uefi_rule.code):
+        for code in uefi_rule.code:
+            print(f"{prefix} code: {code.__dict__}")
 
     scanner = UefiScanner(uefi_analyzer, uefi_rule)
     prefix = click.style("Scanner result", fg="green")
-    print(f"{prefix} {uefi_rule.name} {scanner.result}")
+    res = click.style("No threats detected", fg="green")
+    if scanner.result:
+        res = click.style(
+            "FwHunt rule has been triggered and threat detected!", fg="red"
+        )
+    print(f"{prefix} {uefi_rule.name} {res}")
 
     uefi_analyzer.close()
 

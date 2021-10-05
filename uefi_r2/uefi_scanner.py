@@ -6,7 +6,7 @@ Tools for analyzing UEFI firmware using radare2
 
 import json
 import os
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 import yaml
 
@@ -17,6 +17,49 @@ from uefi_r2.uefi_analyzer import (
     UefiProtocolGuid,
     UefiService,
 )
+
+
+class CodePattern:
+    """Code pattern"""
+
+    def __init__(self, pattern: str, places: Optional[List[Any]]) -> None:
+        self.pattern: str = pattern
+        self.places: Optional[List[Any]] = places
+
+        # if True, scan in all SW SMI handlers
+        self.sw_smi_handlers: bool = False
+
+        # if True, scan in all child SW SMI handlers
+        self.child_sw_smi_handlers: bool = False
+
+        # list of child SW SMI handlers GUIDs
+        self.child_sw_smi_handlers_guids: List[str] = list()
+
+        if self.places is not None:
+
+            for place in self.places:
+                if type(place) == str and place == "sw_smi_handlers":
+                    self.sw_smi_handlers = True
+
+                elif type(place) == str and place == "child_sw_smi_handlers":
+                    self.child_sw_smi_handlers = True
+
+                elif type(place) == dict:
+                    if "child_sw_smi_handler" not in place:
+                        continue
+                    for guid in place["child_sw_smi_handler"]:
+                        self.child_sw_smi_handlers_guids.append(guid)
+
+    @property
+    def __dict__(self):
+        return dict(
+            {
+                "pattern": self.pattern,
+                "sw_smi_handlers": self.sw_smi_handlers,
+                "child_sw_smi_handlers": self.child_sw_smi_handlers,
+                "child_sw_smi_handlers_guids": self.child_sw_smi_handlers_guids,
+            }
+        )
 
 
 class UefiRule:
@@ -36,6 +79,7 @@ class UefiRule:
         self._strings: Optional[List[str]] = None
         self._wide_strings: Optional[List[str]] = None
         self._hex_strings: Optional[List[str]] = None
+        self._code: Optional[List[Any]] = None
         if self._rule is not None:
             if os.path.isfile(self._rule):
                 try:
@@ -91,6 +135,28 @@ class UefiRule:
             return self._uefi_rule["meta"]["url"]
         except KeyError:
             return None
+
+    def _get_code(self) -> List[Any]:
+        code: List[Any] = list()
+        if "code" not in self._uefi_rule:
+            return code
+        for index in self._uefi_rule["code"]:
+            c = self._uefi_rule["code"][index]
+            code.append(
+                CodePattern(
+                    pattern=c.get("pattern", None),
+                    places=c.get("place", None),
+                )
+            )
+        return code
+
+    @property
+    def code(self) -> List[Any]:
+        """Get code from rule"""
+
+        if self._code is None:
+            self._code = self._get_code()
+        return self._code
 
     def _get_strings(self) -> List[str]:
         strings: List[str] = list()
@@ -302,6 +368,9 @@ class UefiScanner:
         self._uefi_analyzer: UefiAnalyzer = uefi_analyzer
         self._uefi_rule: UefiRule = uefi_rule
         self._result: Optional[bool] = None
+        # temp value
+        self._funcs_bounds: List[Tuple[int]] = list()
+        self._rec_addrs: List[int] = list()
 
     def _compare(self, x: list, y: list) -> bool:
 
@@ -447,6 +516,131 @@ class UefiScanner:
                 return False
         return True
 
+    def _get_bounds_rec(self, start_addr: int) -> bool:
+        """Recursively traverse the function and find the boundaries of all child functions"""
+
+        self._uefi_analyzer._rz.cmd(f"s {start_addr:#x}")
+        self._uefi_analyzer._rz.cmd(f"af")
+
+        func = self._uefi_analyzer._rz.cmd("pdfj")
+        # prevent error messages to sys.stderr from rizin:
+        # https://github.com/rizinorg/rz-pipe/blob/0f7ac66e6d679ebb03be26bf61a33f9ccf199f27/python/rzpipe/open_base.py#L261
+        try:
+            func = json.loads(func)
+        except (ValueError, KeyError, TypeError) as e:
+            return False
+
+        if "ops" not in func:
+            return False
+
+        # append function bounds
+        insns = func["ops"]
+        start = insns[0].get("offset", None)
+        end = insns[-1].get("offset", None)
+        if start is not None and end is not None:
+            self._funcs_bounds.append((start, end))
+
+        # scan child functions
+        for insn in insns:
+            if "esil" not in insn:
+                continue
+            esil = insn["esil"].split(",")
+            if esil[-3:] != ["=[]", "rip", "="]:
+                continue
+            try:
+                address = int(esil[0])
+                if address not in self._rec_addrs:
+                    self._rec_addrs.append(address)
+                    self._get_bounds_rec(address)
+            except ValueError as e:
+                continue
+
+        return True
+
+    def _hex_strings_scanner_bounds(self, pattern, start, end) -> bool:
+        """Match hex strings"""
+
+        res = self._uefi_analyzer._rz.cmdj(f"/xj {pattern}")
+        if not res:
+            return False
+
+        for sres in res:
+            offset = sres.get("offset", None)
+            if offset is None:
+                continue
+
+            if offset >= start and offset <= end:
+                return True
+
+        return False
+
+    def _code_scan_rec(self, address, pattern):
+        res = False
+
+        if len(self._funcs_bounds):
+            self._funcs_bounds = list()
+
+        self._get_bounds_rec(address)
+        if not len(self._funcs_bounds):
+            return res
+
+        for start, end in self._funcs_bounds:
+            if self._hex_strings_scanner_bounds(pattern, start, end):
+                return True
+
+        return res
+
+    def _code_scanner(self) -> bool:
+        """Compare code patterns"""
+
+        if self._uefi_rule.code is None:
+            return True
+
+        res = True
+
+        for c in self._uefi_rule.code:
+
+            if c.sw_smi_handlers:
+                sw_smi_handler_res = False
+                for sw_smi_handler in self._uefi_analyzer.swsmi_handlers:
+                    sw_smi_handler_res = self._code_scan_rec(
+                        sw_smi_handler.address, c.pattern
+                    )
+                    if sw_smi_handler_res:
+                        break
+                res &= sw_smi_handler_res
+                if not res:
+                    return False
+
+            if c.child_sw_smi_handlers:
+                child_sw_smi_handler_res = False
+                for child_sw_smi_handler in self._uefi_analyzer.child_swsmi_handlers:
+                    child_sw_smi_handler_res = self._code_scan_rec(
+                        child_sw_smi_handler.address, c.pattern
+                    )
+                    if child_sw_smi_handler_res:
+                        break
+                res &= child_sw_smi_handler_res
+                if not res:
+                    return False
+
+            if len(c.child_sw_smi_handlers_guids):
+                child_sw_smi_handler_res = False
+                for child_sw_smi_handler in self._uefi_analyzer.child_swsmi_handlers:
+                    if (
+                        child_sw_smi_handler.handler_guid
+                        not in c.child_sw_smi_handlers_guids
+                    ):
+                        continue
+                    child_sw_smi_handler_res = self._code_scan_rec(
+                        child_sw_smi_handler.address, c.pattern
+                    )
+                    res &= child_sw_smi_handler_res
+                    if not res:
+                        return False
+
+        return res
+
     def _get_result(self) -> bool:
 
         # compare NVRAM
@@ -486,6 +680,11 @@ class UefiScanner:
 
         # match hex strings
         result &= self._hex_strings_scanner()
+        if not result:
+            return result
+
+        # match code patterns
+        result &= self._code_scanner()
         if not result:
             return result
 
