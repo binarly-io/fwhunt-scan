@@ -14,25 +14,17 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import rzpipe
 
-import uefi_r2
+import uefi_r2.uefi_smm as uefi_smm
 from uefi_r2.uefi_protocols import GUID_FROM_BYTES, UefiGuid
-from uefi_r2.uefi_tables import (
-    BS_PROTOCOLS_INFO_64_BIT,
-    EFI_BOOT_SERVICES_64_BIT,
-    EFI_PEI_SERVICES_32_BIT,
-    EFI_RUNTIME_SERVICES_64_BIT,
-    OFFSET_TO_SERVICE,
-)
+from uefi_r2.uefi_tables import (BS_PROTOCOLS_INFO_64_BIT,
+                                 EFI_BOOT_SERVICES_64_BIT,
+                                 EFI_PEI_SERVICES_32_BIT,
+                                 EFI_RUNTIME_SERVICES_64_BIT,
+                                 OFFSET_TO_SERVICE)
 from uefi_r2.uefi_te import TerseExecutableError, TerseExecutableParser
-from uefi_r2.uefi_types import (
-    ChildSwSmiHandler,
-    NvramVariable,
-    SwSmiHandler,
-    UefiGuid,
-    UefiProtocol,
-    UefiProtocolGuid,
-    UefiService,
-)
+from uefi_r2.uefi_types import (ChildSwSmiHandler, NvramVariable, SwSmiHandler,
+                                UefiGuid, UefiProtocol, UefiProtocolGuid,
+                                UefiService)
 
 
 class AnalyzerError(Exception):
@@ -664,7 +656,7 @@ class UefiAnalyzer:
         """Find software SMI handlers"""
 
         if self._swsmi_handlers is None:
-            self._swsmi_handlers = uefi_r2.uefi_smm.get_sw_smi_handlers(self._rz)
+            self._swsmi_handlers = uefi_smm.get_sw_smi_handlers(self._rz)
         return self._swsmi_handlers
 
     @property
@@ -672,7 +664,7 @@ class UefiAnalyzer:
         """Find child software SMI handlers"""
 
         if self._child_swsmi_handlers is None:
-            self._child_swsmi_handlers = uefi_r2.uefi_smm.get_child_sw_smi_handlers(
+            self._child_swsmi_handlers = uefi_smm.get_child_sw_smi_handlers(
                 self._rz, self.smst_list
             )
         return self._child_swsmi_handlers
@@ -682,7 +674,7 @@ class UefiAnalyzer:
         """Find list of SMST"""
 
         if self._smst_list is None:
-            self._smst_list = uefi_r2.uefi_smm.get_smst_list(self._rz)
+            self._smst_list = uefi_smm.get_smst_list(self._rz)
         return self._smst_list
 
     def get_summary(self) -> Dict[str, Any]:
