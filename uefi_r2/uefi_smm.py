@@ -70,8 +70,11 @@ def get_xrefs_to_data(rz: rzpipe.open, addr: int) -> List[int]:
 
 
 def get_current_insn_index(
-    insns: List[Dict[str, Any]], code_addr: int
+    insns: Optional[List[Dict[str, Any]]], code_addr: int
 ) -> Optional[int]:
+
+    if insns is None:
+        return None
 
     current_insn = None
     try:
