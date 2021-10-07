@@ -368,8 +368,8 @@ class UefiScanner:
         self._uefi_analyzer: UefiAnalyzer = uefi_analyzer
         self._uefi_rule: UefiRule = uefi_rule
         self._result: Optional[bool] = None
-        # temp value
-        self._funcs_bounds: List[Tuple[int]] = list()
+        # temp values
+        self._funcs_bounds: List[Tuple[int, int]] = list()
         self._rec_addrs: List[int] = list()
 
     def _compare(self, x: list, y: list) -> bool:
@@ -516,32 +516,71 @@ class UefiScanner:
                 return False
         return True
 
-    def _get_bounds_rec(self, start_addr: int) -> bool:
+    def _get_bounds(
+        self, insns: List[Dict[str, Any]]
+    ) -> Tuple[Optional[int], Optional[int]]:
+        """Get function end address"""
+
+        funcs = list(self._uefi_analyzer._rz.cmdj("aflqj"))
+        funcs.sort()
+
+        start = insns[0].get("offset", None)
+        end_insn = insns[-1].get("offset", None)
+
+        if start is None or end_insn is None:
+            return tuple((None, None))
+
+        if start == funcs[-1]:
+            return tuple((start, end_insn))
+
+        start_index = funcs.index(start)
+        if start_index < 0:
+            return tuple((None, None))
+
+        end_func = funcs[start_index + 1]
+        if end_insn < end_func:
+            return tuple((start, end_insn))
+
+        return tuple((start, end_func))
+
+    @staticmethod
+    def _tree_debug(start, end, depth) -> None:
+        if not depth:
+            print(
+                f"\nFunction tree in the handler at {start:#x} (from {start:#x} to {end:#x})"
+            )
+        else:
+            prefix = depth * "--"
+            print(f"{prefix}{start:#x} (from {start:#x} to {end:#x})")
+
+    def _get_bounds_rec(self, start_addr: int, depth: int, debug: bool) -> bool:
         """Recursively traverse the function and find the boundaries of all child functions"""
 
         self._uefi_analyzer._rz.cmd(f"s {start_addr:#x}")
         self._uefi_analyzer._rz.cmd(f"af")
 
-        func = self._uefi_analyzer._rz.cmd("pdfj")
+        insns = self._uefi_analyzer._rz.cmd("pdrj")
         # prevent error messages to sys.stderr from rizin:
         # https://github.com/rizinorg/rz-pipe/blob/0f7ac66e6d679ebb03be26bf61a33f9ccf199f27/python/rzpipe/open_base.py#L261
         try:
-            func = json.loads(func)
-        except (ValueError, KeyError, TypeError) as e:
-            return False
-
-        if "ops" not in func:
+            insns = json.loads(insns)
+        except (ValueError, KeyError, TypeError) as _:
             return False
 
         # append function bounds
-        insns = func["ops"]
-        start = insns[0].get("offset", None)
-        end = insns[-1].get("offset", None)
-        if start is not None and end is not None:
+        start, end = self._get_bounds(insns)
+
+        if start is not None and end is not None and start_addr == start:
             self._funcs_bounds.append((start, end))
+
+        if debug:
+            self._tree_debug(start_addr, end, depth)
+            depth += 1
 
         # scan child functions
         for insn in insns:
+            if insn.get("type", None) != "call":
+                continue
             if "esil" not in insn:
                 continue
             esil = insn["esil"].split(",")
@@ -551,13 +590,13 @@ class UefiScanner:
                 address = int(esil[0])
                 if address not in self._rec_addrs:
                     self._rec_addrs.append(address)
-                    self._get_bounds_rec(address)
-            except ValueError as e:
+                    self._get_bounds_rec(address, depth, debug)
+            except ValueError as _:
                 continue
 
         return True
 
-    def _hex_strings_scanner_bounds(self, pattern, start, end) -> bool:
+    def _hex_strings_scanner_bounds(self, pattern: str, start: int, end: int) -> bool:
         """Match hex strings"""
 
         res = self._uefi_analyzer._rz.cmdj(f"/xj {pattern}")
@@ -574,21 +613,25 @@ class UefiScanner:
 
         return False
 
-    def _code_scan_rec(self, address, pattern):
-        res = False
+    def _clear_cache(self) -> None:
+        self._funcs_bounds = list()
+        self._rec_addrs = list()
 
-        if len(self._funcs_bounds):
-            self._funcs_bounds = list()
+    def _code_scan_rec(self, address: int, pattern: str) -> bool:
 
-        self._get_bounds_rec(address)
+        self._clear_cache()
+
+        self._get_bounds_rec(address, depth=0, debug=False)
         if not len(self._funcs_bounds):
-            return res
+            return False
 
         for start, end in self._funcs_bounds:
             if self._hex_strings_scanner_bounds(pattern, start, end):
+                # Debug
+                # print(f"Matched: {start:#x} - {end:#x}")
                 return True
 
-        return res
+        return False
 
     def _code_scanner(self) -> bool:
         """Compare code patterns"""

@@ -97,7 +97,7 @@ def scan(image_path: str, rule: str) -> bool:
         res = click.style(
             "FwHunt rule has been triggered and threat detected!", fg="red"
         )
-    print(f"{prefix} {uefi_rule.name} {res}")
+    print(f"{prefix} {uefi_rule.name} {res} ({image_path})")
 
     uefi_analyzer.close()
 
