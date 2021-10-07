@@ -151,7 +151,8 @@ def get_handler(insns: List[Dict[str, Any]]) -> Optional[SwSmiHandler]:
         esil = insn["esil"].split(",")
 
         if (
-            esil[-1] == "="
+            len(esil) > 4
+            and esil[-1] == "="
             and esil[-2] == "rdx"
             # skip esil[-3]
             # (esil[-3] == "+" or esil[-3] == "-")

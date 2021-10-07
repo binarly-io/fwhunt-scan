@@ -485,12 +485,14 @@ class UefiScanner:
 
         if self._uefi_rule.protocol_guids is None:
             return True
+
         for guid_rule in self._uefi_rule.protocol_guids:
             guid_matched = False
             for guid_analyzer in self._uefi_analyzer.protocol_guids:
+                # name or value should match (both are unique)
                 if (
                     guid_rule.name == guid_analyzer.name
-                    and guid_rule.value == guid_analyzer.value
+                    or guid_rule.value == guid_analyzer.value
                 ):
                     guid_matched = True
                     break
@@ -533,9 +535,10 @@ class UefiScanner:
         if start == funcs[-1]:
             return tuple((start, end_insn))
 
-        start_index = funcs.index(start)
-        if start_index < 0:
-            return tuple((None, None))
+        try:
+            start_index = funcs.index(start)
+        except ValueError:
+            return tuple((start, end_insn))
 
         end_func = funcs[start_index + 1]
         if end_insn < end_func:
