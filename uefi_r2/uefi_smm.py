@@ -329,7 +329,7 @@ def get_child_sw_smi_handler_bb(rz, insns: List[Dict[str, Any]]):
         if handler_address is not None and handler_guid is not None:
             return ChildSwSmiHandler(address=handler_address, handler_guid=handler_guid)
 
-    if handler_address is not None:  # but handler_guid is None
+    if handler_address is not None:  # handler_guid is Optional
         return ChildSwSmiHandler(address=handler_address, handler_guid=handler_guid)
 
     return None
@@ -340,6 +340,8 @@ def get_child_sw_smi_handlers(
 ) -> List[ChildSwSmiHandler]:
 
     res: List[ChildSwSmiHandler] = list()
+
+    haddrs = list()  # addresses
 
     for smst in smst_list:
         code_addrs = get_xrefs_to_data(rz, smst)
@@ -354,10 +356,9 @@ def get_child_sw_smi_handlers(
                 continue
             handler = get_child_sw_smi_handler_bb(rz, bb)
             if handler is not None:
-                res.append(handler)
-
-    for handler in res:
-        print(json.dumps(handler.__dict__, indent=2))
+                if handler.address not in haddrs:
+                    res.append(handler)
+                    haddrs.append(handler.address)
 
     return res
 
