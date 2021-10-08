@@ -64,7 +64,8 @@ def get_xrefs_to_data(rz: rzpipe.open, addr: int) -> List[int]:
 
         # get code address
         addr = xref["from"]
-        code_addrs.append(addr)
+        if addr not in code_addrs:
+            code_addrs.append(addr)
 
     return code_addrs
 
@@ -354,7 +355,10 @@ def get_child_sw_smi_handlers(
                 bb = json.loads(result)
             except (ValueError, KeyError, TypeError) as e:
                 continue
-            handler = get_child_sw_smi_handler_bb(rz, bb)
+            index = get_current_insn_index(bb, addr)
+            if index is None:
+                continue
+            handler = get_child_sw_smi_handler_bb(rz, bb[:index])
             if handler is not None:
                 if handler.address not in haddrs:
                     res.append(handler)
