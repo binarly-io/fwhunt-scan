@@ -31,7 +31,7 @@ class TerseExecutableParser:
             if not os.path.join(image_path):
                 raise TerseExecutableError("Wrong file path")
 
-            self._data: bytes = bytes()
+            self._data = bytes()
             with open(image_path, "rb") as f:
                 self._data = f.read()
 

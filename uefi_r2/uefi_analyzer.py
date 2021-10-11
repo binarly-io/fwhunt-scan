@@ -56,7 +56,7 @@ class UefiAnalyzer:
     ):
         """UEFI analyzer initialization"""
 
-        self._rz: Optional[rzpipe.open] = None
+        self._rz: rzpipe.open = None
         self._shm: Optional[shared_memory.SharedMemory] = None
         self._te: Optional[TerseExecutableParser] = None
 

@@ -20,7 +20,7 @@ def get_int(item: str) -> Optional[int]:
     return res
 
 
-def get_xrefs_to_guids(rz: rzpipe.open, guids: UefiGuid) -> List[int]:
+def get_xrefs_to_guids(rz: rzpipe.open, guids: List[UefiGuid]) -> List[int]:
     code_addrs = list()  # xrefs from code
     for guid in guids:
         guid_bytes = binascii.hexlify(guid.bytes).decode()
@@ -302,8 +302,12 @@ def find_handler_register_service(insns: List[Dict[str, Any]]) -> bool:
         if offset == 0xE0:  # SmiHandlerRegister
             return True
 
+    return False
 
-def get_child_sw_smi_handler_bb(rz, insns: List[Dict[str, Any]]):
+
+def get_child_sw_smi_handler_bb(
+    rz: rzpipe.open, insns: List[Dict[str, Any]]
+) -> Optional[ChildSwSmiHandler]:
     handler_address = None
     handler_guid = None
 

@@ -68,7 +68,7 @@ class UefiRule:
     def __init__(
         self, rule_path: Optional[str] = None, rule_content: Optional[str] = None
     ):
-        self._rule: str = rule_path
+        self._rule: Optional[str] = rule_path
         self._rule_name: str = str()
         self._uefi_rule: Dict[str, Any] = dict()
         self._nvram_vars: Optional[List[NvramVariable]] = None
@@ -518,9 +518,7 @@ class UefiScanner:
                 return False
         return True
 
-    def _get_bounds(
-        self, insns: List[Dict[str, Any]]
-    ) -> Tuple[Optional[int], Optional[int]]:
+    def _get_bounds(self, insns: List[Dict[str, Any]]) -> Tuple:
         """Get function end address"""
 
         funcs = list(self._uefi_analyzer._rz.cmdj("aflqj"))
@@ -547,7 +545,7 @@ class UefiScanner:
         return tuple((start, end_func))
 
     @staticmethod
-    def _tree_debug(start, end, depth) -> None:
+    def _tree_debug(start: int, end: int, depth: int) -> None:
         if not depth:
             print(
                 f"\nFunction tree in the handler at {start:#x} (from {start:#x} to {end:#x})"
