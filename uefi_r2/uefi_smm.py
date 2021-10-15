@@ -138,6 +138,9 @@ def get_interface_global(insns: List[Dict[str, Any]], code_addr: int) -> Optiona
         res = insn.get("ptr", None)
         if res is not None:
             return res
+        res = get_int(esil[0])
+        if res is not None:
+            return res
 
     return res
 
@@ -257,7 +260,8 @@ def get_smst_func(rz: rzpipe.open, code_addr: int, interface: int) -> List[int]:
             continue
         esil = insn["esil"].split(",")
         if esil[-1] == "=" and esil[-2] == "rax" and esil[-3] == "[8]":
-            if insn.get("ptr", None) == interface:
+            # check both for global variable and local variable 
+            if insn.get("ptr", None) == interface or get_int(esil[0]) == interface:
                 offset = insn.get("offset", None)
                 if offset is None:
                     continue
