@@ -189,6 +189,7 @@ def get_handler(insns: List[Dict[str, Any]]) -> Optional[SwSmiHandler]:
 
 def get_handlers(rz: rzpipe.open, code_addr: int, interface: int) -> List[SwSmiHandler]:
     res: List[SwSmiHandler] = list()
+    res_addrs: List[int] = list()
 
     func = rz.cmdj(f"pdfj @{code_addr:#x}")
     insns = func.get("ops", None)
@@ -219,7 +220,10 @@ def get_handlers(rz: rzpipe.open, code_addr: int, interface: int) -> List[SwSmiH
             bb = rz.cmdj(f"pdbj @{offset:#x}")
             handler = get_handler(bb)
             if handler is not None:
-                res.append(handler)
+                if handler.address not in res_addrs:
+                    res.append(handler)
+                    # prevent duplicates
+                    res_addrs.append(handler.address)
 
     return res
 
@@ -260,7 +264,7 @@ def get_smst_func(rz: rzpipe.open, code_addr: int, interface: int) -> List[int]:
             continue
         esil = insn["esil"].split(",")
         if esil[-1] == "=" and esil[-2] == "rax" and esil[-3] == "[8]":
-            # check both for global variable and local variable 
+            # check both for global variable and local variable
             if insn.get("ptr", None) == interface or get_int(esil[0]) == interface:
                 offset = insn.get("offset", None)
                 if offset is None:
@@ -361,12 +365,9 @@ def get_child_sw_smi_handlers(
             # https://github.com/rizinorg/rz-pipe/blob/0f7ac66e6d679ebb03be26bf61a33f9ccf199f27/python/rzpipe/open_base.py#L261
             try:
                 bb = json.loads(result)
-            except (ValueError, KeyError, TypeError) as e:
+            except (ValueError, KeyError, TypeError) as _:
                 continue
-            index = get_current_insn_index(bb, addr)
-            if index is None:
-                continue
-            handler = get_child_sw_smi_handler_bb(rz, bb[:index])
+            handler = get_child_sw_smi_handler_bb(rz, bb)
             if handler is not None:
                 if handler.address not in haddrs:
                     res.append(handler)
