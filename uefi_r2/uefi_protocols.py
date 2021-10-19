@@ -6,32 +6,8 @@
 Tools for analyzing UEFI firmware using radare2
 """
 
-import uuid
 from typing import Dict
-
-
-class UefiGuid:
-    """a UEFI GUID"""
-
-    def __init__(self, value: str, name: str) -> None:
-        self.value: str = value
-        self.name: str = name
-        self._bytes: bytes = b""
-
-    @property
-    def bytes(self) -> bytes:
-        """Convert guid structure to array of bytes"""
-        if not self._bytes:
-            self._bytes = uuid.UUID(self.value).bytes_le
-        return self._bytes
-
-    @property
-    def __dict__(self):
-        return {"value": self.value, "name": self.name}
-
-    def __str__(self):
-        return "{} ({})".format(self.value, self.name)
-
+from uefi_r2.uefi_types import UefiGuid
 
 PROTOCOLS_GUIDS = [
     UefiGuid(

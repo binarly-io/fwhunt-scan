@@ -3,15 +3,14 @@
 
 # uefi_r2
 
-Tools for analyzing UEFI firmware using radare2
+Tools for analyzing UEFI firmware using radare2/rizin
 
 # Dependencies
 
-## radare2
+## rizin
 
 ```
-radare2 4.5.0-git 24764 @ linux-x86-64 git.4.4.0-225-g1cb18df8b
-commit: 1cb18df8b4dfd2ec98ca6697b5efb9381e1d2f40
+commit: d5f1aea5953fb7cbc59d219d7fa13d20390089f7
 ```
 
 # Installation
@@ -34,8 +33,17 @@ python setup.py install
 ```python
 from uefi_r2.uefi_analyzer import UefiAnalyzer
 
+uefi_analyzer = UefiAnalyzer(blob=data)
 ...
-summary = UefiAnalyzer.r2_get_summary(image_path, debug=True)
+uefi_analyzer.close()
+```
+
+```python
+from uefi_r2.uefi_analyzer import UefiAnalyzer
+
+uefi_analyzer = UefiAnalyzer(image_path=image_path)
+...
+uefi_analyzer.close()
 ```
 
 ```python

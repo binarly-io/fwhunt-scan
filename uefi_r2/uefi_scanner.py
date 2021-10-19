@@ -6,7 +6,7 @@ Tools for analyzing UEFI firmware using radare2
 
 import json
 import os
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 import yaml
 
@@ -19,11 +19,56 @@ from uefi_r2.uefi_analyzer import (
 )
 
 
-class UefiRule:
-    """a rule for scanning EFI image"""
+class CodePattern:
+    """Code pattern"""
 
-    def __init__(self, rule: str):
-        self._rule: str = rule
+    def __init__(self, pattern: str, places: Optional[List[Any]]) -> None:
+        self.pattern: str = pattern
+        self.places: Optional[List[Any]] = places
+
+        # if True, scan in all SW SMI handlers
+        self.sw_smi_handlers: bool = False
+
+        # if True, scan in all child SW SMI handlers
+        self.child_sw_smi_handlers: bool = False
+
+        # list of child SW SMI handlers GUIDs
+        self.child_sw_smi_handlers_guids: List[str] = list()
+
+        if self.places is not None:
+
+            for place in self.places:
+                if type(place) == str and place == "sw_smi_handlers":
+                    self.sw_smi_handlers = True
+
+                elif type(place) == str and place == "child_sw_smi_handlers":
+                    self.child_sw_smi_handlers = True
+
+                elif type(place) == dict:
+                    if "child_sw_smi_handler" not in place:
+                        continue
+                    for guid in place["child_sw_smi_handler"]:
+                        self.child_sw_smi_handlers_guids.append(guid)
+
+    @property
+    def __dict__(self):
+        return dict(
+            {
+                "pattern": self.pattern,
+                "sw_smi_handlers": self.sw_smi_handlers,
+                "child_sw_smi_handlers": self.child_sw_smi_handlers,
+                "child_sw_smi_handlers_guids": self.child_sw_smi_handlers_guids,
+            }
+        )
+
+
+class UefiRule:
+    """A rule for scanning EFI image"""
+
+    def __init__(
+        self, rule_path: Optional[str] = None, rule_content: Optional[str] = None
+    ):
+        self._rule: Optional[str] = rule_path
         self._rule_name: str = str()
         self._uefi_rule: Dict[str, Any] = dict()
         self._nvram_vars: Optional[List[NvramVariable]] = None
@@ -34,10 +79,17 @@ class UefiRule:
         self._strings: Optional[List[str]] = None
         self._wide_strings: Optional[List[str]] = None
         self._hex_strings: Optional[List[str]] = None
-        if os.path.isfile(self._rule):
+        self._code: Optional[List[Any]] = None
+        if self._rule is not None:
+            if os.path.isfile(self._rule):
+                try:
+                    with open(self._rule, "r") as f:
+                        self._uefi_rule = yaml.safe_load(f)
+                except yaml.scanner.ScannerError as e:
+                    print(f"Error: {repr(e)}")
+        elif rule_content is not None:
             try:
-                with open(self._rule, "r") as f:
-                    self._uefi_rule = yaml.safe_load(f)
+                self._uefi_rule = yaml.safe_load(rule_content)
             except yaml.scanner.ScannerError as e:
                 print(f"Error: {repr(e)}")
         if self._uefi_rule:
@@ -51,6 +103,7 @@ class UefiRule:
     @property
     def name(self) -> Optional[str]:
         """Get rule name from the metadata block"""
+
         try:
             return self._uefi_rule["meta"]["name"]
         except KeyError:
@@ -59,6 +112,7 @@ class UefiRule:
     @property
     def namespace(self) -> Optional[str]:
         """Get rule namespace from the metadata block"""
+
         try:
             return self._uefi_rule["meta"]["namespace"]
         except KeyError:
@@ -67,6 +121,7 @@ class UefiRule:
     @property
     def description(self) -> Optional[str]:
         """Get optional rule description from the metadata block"""
+
         try:
             return self._uefi_rule["meta"]["description"]
         except KeyError:
@@ -75,13 +130,35 @@ class UefiRule:
     @property
     def url(self) -> Optional[str]:
         """Get optional rule URL from the metadata block"""
+
         try:
             return self._uefi_rule["meta"]["url"]
         except KeyError:
             return None
 
-    def _get_strings(self) -> List[str]:
+    def _get_code(self) -> List[Any]:
+        code: List[Any] = list()
+        if "code" not in self._uefi_rule:
+            return code
+        for index in self._uefi_rule["code"]:
+            c = self._uefi_rule["code"][index]
+            code.append(
+                CodePattern(
+                    pattern=c.get("pattern", None),
+                    places=c.get("place", None),
+                )
+            )
+        return code
 
+    @property
+    def code(self) -> List[Any]:
+        """Get code from rule"""
+
+        if self._code is None:
+            self._code = self._get_code()
+        return self._code
+
+    def _get_strings(self) -> List[str]:
         strings: List[str] = list()
         if "strings" not in self._uefi_rule:
             return strings
@@ -99,7 +176,6 @@ class UefiRule:
         return self._strings
 
     def _get_wide_strings(self) -> List[str]:
-
         wide_strings: List[str] = list()
         if "wide_strings" not in self._uefi_rule:
             return wide_strings
@@ -117,7 +193,6 @@ class UefiRule:
         return self._wide_strings
 
     def _get_hex_strings(self) -> List[str]:
-
         hex_strings: List[str] = list()
         if "hex_strings" not in self._uefi_rule:
             return hex_strings
@@ -135,7 +210,6 @@ class UefiRule:
         return self._hex_strings
 
     def _get_nvram_vars(self) -> List[NvramVariable]:
-
         nvram_vars: List[NvramVariable] = list()
         if "nvram" not in self._uefi_rule:
             return nvram_vars
@@ -167,7 +241,6 @@ class UefiRule:
         return self._nvram_vars
 
     def _get_protocols(self) -> List[UefiProtocol]:
-
         protocols: List[UefiProtocol] = list()
         if "protocols" not in self._uefi_rule:
             return protocols
@@ -204,7 +277,6 @@ class UefiRule:
         return self._protocols
 
     def _get_ppi_list(self) -> List[UefiProtocol]:
-
         ppi_list: List[UefiProtocol] = list()
         if "ppi" not in self._uefi_rule:
             return ppi_list
@@ -241,7 +313,6 @@ class UefiRule:
         return self._ppi_list
 
     def _get_protocol_guids(self) -> List[UefiProtocolGuid]:
-
         protocol_guids: List[UefiProtocolGuid] = list()
         if "guids" not in self._uefi_rule:
             return protocol_guids
@@ -273,7 +344,6 @@ class UefiRule:
         return self._protocol_guids
 
     def _get_esil_rules(self) -> List[List[str]]:
-
         esil_rules: List[List[str]] = list()
         if "esil" not in self._uefi_rule:
             return esil_rules
@@ -298,6 +368,9 @@ class UefiScanner:
         self._uefi_analyzer: UefiAnalyzer = uefi_analyzer
         self._uefi_rule: UefiRule = uefi_rule
         self._result: Optional[bool] = None
+        # temp values
+        self._funcs_bounds: List[Tuple[int, int]] = list()
+        self._rec_addrs: List[int] = list()
 
     def _compare(self, x: list, y: list) -> bool:
 
@@ -343,7 +416,7 @@ class UefiScanner:
         if self._uefi_rule.strings is None:
             return True
         for string in self._uefi_rule.strings:
-            res = self._uefi_analyzer._r2.cmdj("/j {}".format(string))
+            res = self._uefi_analyzer._rz.cmdj("/j {}".format(string))
             if not res:
                 return False
         return True
@@ -354,7 +427,7 @@ class UefiScanner:
         if self._uefi_rule.wide_strings is None:
             return True
         for wide_string in self._uefi_rule.wide_strings:
-            res = self._uefi_analyzer._r2.cmdj("/wj {}".format(wide_string))
+            res = self._uefi_analyzer._rz.cmdj("/wj {}".format(wide_string))
             if not res:
                 return False
         return True
@@ -365,7 +438,7 @@ class UefiScanner:
         if self._uefi_rule.hex_strings is None:
             return True
         for hex_string in self._uefi_rule.hex_strings:
-            res = self._uefi_analyzer._r2.cmdj("/xj {}".format(hex_string))
+            res = self._uefi_analyzer._rz.cmdj("/xj {}".format(hex_string))
             if not res:
                 return False
         return True
@@ -412,12 +485,14 @@ class UefiScanner:
 
         if self._uefi_rule.protocol_guids is None:
             return True
+
         for guid_rule in self._uefi_rule.protocol_guids:
             guid_matched = False
             for guid_analyzer in self._uefi_analyzer.protocol_guids:
+                # name or value should match (both are unique)
                 if (
                     guid_rule.name == guid_analyzer.name
-                    and guid_rule.value == guid_analyzer.value
+                    or guid_rule.value == guid_analyzer.value
                 ):
                     guid_matched = True
                     break
@@ -442,6 +517,173 @@ class UefiScanner:
             if not ppi_matched:
                 return False
         return True
+
+    def _get_bounds(self, insns: List[Dict[str, Any]]) -> Tuple:
+        """Get function end address"""
+
+        funcs = list(self._uefi_analyzer._rz.cmdj("aflqj"))
+        funcs.sort()
+
+        start = insns[0].get("offset", None)
+        end_insn = insns[-1].get("offset", None)
+
+        if start is None or end_insn is None:
+            return tuple((None, None))
+
+        if start == funcs[-1]:
+            return tuple((start, end_insn))
+
+        try:
+            start_index = funcs.index(start)
+        except ValueError:
+            return tuple((start, end_insn))
+
+        end_func = funcs[start_index + 1]
+        if end_insn < end_func:
+            return tuple((start, end_insn))
+
+        return tuple((start, end_func))
+
+    @staticmethod
+    def _tree_debug(start: int, end: int, depth: int) -> None:
+        if not depth:
+            print(
+                f"\nFunction tree in the handler at {start:#x} (from {start:#x} to {end:#x})"
+            )
+        else:
+            prefix = depth * "--"
+            print(f"{prefix}{start:#x} (from {start:#x} to {end:#x})")
+
+    def _get_bounds_rec(self, start_addr: int, depth: int, debug: bool) -> bool:
+        """Recursively traverse the function and find the boundaries of all child functions"""
+
+        self._uefi_analyzer._rz.cmd(f"s {start_addr:#x}")
+        self._uefi_analyzer._rz.cmd(f"af")
+
+        insns = self._uefi_analyzer._rz.cmd("pdrj")
+        # prevent error messages to sys.stderr from rizin:
+        # https://github.com/rizinorg/rz-pipe/blob/0f7ac66e6d679ebb03be26bf61a33f9ccf199f27/python/rzpipe/open_base.py#L261
+        try:
+            insns = json.loads(insns)
+        except (ValueError, KeyError, TypeError) as _:
+            return False
+
+        # append function bounds
+        start, end = self._get_bounds(insns)
+
+        if start is not None and end is not None and start_addr == start:
+            self._funcs_bounds.append((start, end))
+
+        if debug:
+            self._tree_debug(start_addr, end, depth)
+            depth += 1
+
+        # scan child functions
+        for insn in insns:
+            if insn.get("type", None) != "call":
+                continue
+            if "esil" not in insn:
+                continue
+            esil = insn["esil"].split(",")
+            if esil[-3:] != ["=[]", "rip", "="]:
+                continue
+            try:
+                address = int(esil[0])
+                if address not in self._rec_addrs:
+                    self._rec_addrs.append(address)
+                    self._get_bounds_rec(address, depth, debug)
+            except ValueError as _:
+                continue
+
+        return True
+
+    def _hex_strings_scanner_bounds(self, pattern: str, start: int, end: int) -> bool:
+        """Match hex strings"""
+
+        res = self._uefi_analyzer._rz.cmdj(f"/xj {pattern}")
+        if not res:
+            return False
+
+        for sres in res:
+            offset = sres.get("offset", None)
+            if offset is None:
+                continue
+
+            if offset >= start and offset <= end:
+                return True
+
+        return False
+
+    def _clear_cache(self) -> None:
+        self._funcs_bounds = list()
+        self._rec_addrs = list()
+
+    def _code_scan_rec(self, address: int, pattern: str) -> bool:
+
+        self._clear_cache()
+
+        self._get_bounds_rec(address, depth=0, debug=False)
+        if not len(self._funcs_bounds):
+            return False
+
+        for start, end in self._funcs_bounds:
+            if self._hex_strings_scanner_bounds(pattern, start, end):
+                # Debug
+                # print(f"Matched: {start:#x} - {end:#x}")
+                return True
+
+        return False
+
+    def _code_scanner(self) -> bool:
+        """Compare code patterns"""
+
+        if self._uefi_rule.code is None:
+            return True
+
+        res = True
+
+        for c in self._uefi_rule.code:
+
+            if c.sw_smi_handlers:
+                sw_smi_handler_res = False
+                for sw_smi_handler in self._uefi_analyzer.swsmi_handlers:
+                    sw_smi_handler_res = self._code_scan_rec(
+                        sw_smi_handler.address, c.pattern
+                    )
+                    if sw_smi_handler_res:
+                        break
+                res &= sw_smi_handler_res
+                if not res:
+                    return False
+
+            if c.child_sw_smi_handlers:
+                child_sw_smi_handler_res = False
+                for child_sw_smi_handler in self._uefi_analyzer.child_swsmi_handlers:
+                    child_sw_smi_handler_res = self._code_scan_rec(
+                        child_sw_smi_handler.address, c.pattern
+                    )
+                    if child_sw_smi_handler_res:
+                        break
+                res &= child_sw_smi_handler_res
+                if not res:
+                    return False
+
+            if len(c.child_sw_smi_handlers_guids):
+                child_sw_smi_handler_res = False
+                for child_sw_smi_handler in self._uefi_analyzer.child_swsmi_handlers:
+                    if (
+                        child_sw_smi_handler.handler_guid
+                        not in c.child_sw_smi_handlers_guids
+                    ):
+                        continue
+                    child_sw_smi_handler_res = self._code_scan_rec(
+                        child_sw_smi_handler.address, c.pattern
+                    )
+                    res &= child_sw_smi_handler_res
+                    if not res:
+                        return False
+
+        return res
 
     def _get_result(self) -> bool:
 
@@ -482,6 +724,11 @@ class UefiScanner:
 
         # match hex strings
         result &= self._hex_strings_scanner()
+        if not result:
+            return result
+
+        # match code patterns
+        result &= self._code_scanner()
         if not result:
             return result
 

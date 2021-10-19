@@ -1,5 +1,6 @@
 import os
 import struct
+from typing import Optional
 
 
 class TerseExecutableError(Exception):
@@ -15,16 +16,24 @@ class TerseExecutableError(Exception):
 class TerseExecutableParser:
     """Terse Executable header parser"""
 
-    def __init__(self, image_path: str) -> None:
-        self._image_path = image_path
-
-        # check file path
-        if not os.path.join(self._image_path):
-            raise TerseExecutableError("Wrong file path")
+    def __init__(
+        self, image_path: Optional[str] = None, blob: Optional[bytes] = None
+    ) -> None:
 
         self._data: bytes = bytes()
-        with open(self._image_path, "rb") as f:
-            self._data = f.read()
+
+        if blob is not None:
+            self._data = blob
+
+        elif image_path is not None:
+
+            # check file path
+            if not os.path.join(image_path):
+                raise TerseExecutableError("Wrong file path")
+
+            self._data = bytes()
+            with open(image_path, "rb") as f:
+                self._data = f.read()
 
         self._signature: bytes = self._data[:2]
         if self._signature != b"VZ":
@@ -51,41 +60,49 @@ class TerseExecutableParser:
     @property
     def signature(self) -> str:
         """Get Signature"""
+
         return self._signature.decode()
 
     @property
     def machine(self) -> int:
         """Get Machine"""
+
         return self._machine
 
     @property
     def number_of_sections(self) -> int:
         """Get NumberOfSections"""
+
         return self._number_of_sections
 
     @property
     def subsystem(self) -> int:
         """Get Subsystem"""
+
         return self._subsystem
 
     @property
     def stripped_size(self) -> int:
         """Get StrippedSize"""
+
         return self._stripped_size
 
     @property
     def address_of_entry_point(self) -> int:
         """Get AddressOfEntryPoint"""
+
         return self._address_of_entry_point
 
     @property
     def base_of_code(self) -> int:
         """Get BaseOfCode"""
+
         return self._base_of_code
 
     @property
     def image_base(self) -> int:
         """Get ImageBase"""
+
         return self._image_base
 
     def __str__(self):
