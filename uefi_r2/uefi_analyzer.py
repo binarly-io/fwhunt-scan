@@ -7,10 +7,11 @@
 Tools for analyzing UEFI firmware using radare2/rizin
 """
 
+import json
 import sys
 import uuid
 from multiprocessing import shared_memory
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 import rzpipe
 
@@ -436,8 +437,12 @@ class UefiAnalyzer:
 
     def _get_protocols_64bit(self) -> List[UefiProtocol]:
         protocols = list()
-        for bs in self.boot_services:
-            block_insns = self._rz.cmdj("pdbj @{:#x}".format(bs.address))
+        for bs in self.boot_services_protocols:
+            block_insns = self._rz.cmd("pdbj @{:#x}".format(bs.address))
+            try:
+                block_insns = json.loads(block_insns)
+            except (ValueError, KeyError, TypeError) as _:
+                continue
             for insn in block_insns:
                 if "esil" in insn:
                     esil = insn["esil"].split(",")
