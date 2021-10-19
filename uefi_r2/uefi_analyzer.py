@@ -33,6 +33,7 @@ from uefi_r2.uefi_types import (
     UefiProtocolGuid,
     UefiService,
 )
+from uefi_r2.uefi_utils import get_int
 
 
 class AnalyzerError(Exception):
@@ -89,7 +90,6 @@ class UefiAnalyzer:
 
         # private cache
         self._bs_list_g_bs: Optional[List[UefiService]] = None
-        self._bs_list_prot: Optional[List[UefiService]] = None
         self._bs_prot: Optional[List[UefiService]] = None
         self._rt_list: Optional[List[UefiService]] = None
         self._pei_services: Optional[List[UefiService]] = None
@@ -102,8 +102,8 @@ class UefiAnalyzer:
         self._sections: Optional[List[Any]] = None
         self._functions: Optional[List[Any]] = None
         self._insns: Optional[List[Any]] = None
-        self._g_bs: Optional[int] = None
-        self._g_rt: Optional[int] = None
+        self._g_bs: Optional[List[int]] = None
+        self._g_rt: Optional[List[int]] = None
         self._smst_list: Optional[List[int]] = None
 
         # SMI handlers addresses
@@ -211,7 +211,9 @@ class UefiAnalyzer:
             self._insns = self._get_insns()
         return self._insns
 
-    def _get_bs_64bit(self) -> int:
+    def _get_bs_64bit(self) -> List[int]:
+        res: List[int] = list()
+
         for func in self.functions:
             func_addr = func["offset"]
             func_insns = self._rz.cmdj("pdfj @{:#x}".format(func_addr))
@@ -220,7 +222,7 @@ class UefiAnalyzer:
                 if "esil" in insn:
                     esil = insn["esil"].split(",")
                     if (
-                        (esil[0] == "0x60")
+                        get_int(esil[0]) == 0x60
                         and (esil[2] == "+")
                         and (esil[3] == "[8]")
                         and (esil[-1] == "=")
@@ -233,8 +235,9 @@ class UefiAnalyzer:
                         and (esil[-1] == "=[8]")
                         and ("ptr" in insn)
                     ):
-                        return insn["ptr"]
-        return 0
+                        res.append(insn["ptr"])
+                        break
+        return res
 
     @property
     def g_bs(self) -> int:
@@ -245,6 +248,8 @@ class UefiAnalyzer:
         return self._g_bs
 
     def _get_rt_64bit(self) -> int:
+        res: List[int] = list()
+
         for func in self.functions:
             func_addr = func["offset"]
             func_insns = self._rz.cmdj("pdfj @{:#x}".format(func_addr))
@@ -253,7 +258,7 @@ class UefiAnalyzer:
                 if "esil" in insn:
                     esil = insn["esil"].split(",")
                     if (
-                        (esil[0] == "0x58")
+                        get_int(esil[0]) == 0x58
                         and (esil[2] == "+")
                         and (esil[3] == "[8]")
                         and (esil[-1] == "=")
@@ -266,8 +271,9 @@ class UefiAnalyzer:
                         and (esil[-1] == "=[8]")
                         and ("ptr" in insn)
                     ):
-                        return insn["ptr"]
-        return 0
+                        res.append(insn["ptr"])
+                        break
+        return res
 
     @property
     def g_rt(self) -> int:
@@ -278,91 +284,82 @@ class UefiAnalyzer:
         return self._g_rt
 
     def _get_boot_services_bs_64bit(self) -> List[UefiService]:
-        bs_list = list()
-        for func in self.functions:
-            func_addr = func["offset"]
-            func_insns = self._rz.cmdj("pdfj @{:#x}".format(func_addr))
-            insn_index = 0
-            for insn in func_insns["ops"]:
-                # find "mov rax, qword [g_bs]" instruction
-                g_bs_found = False
-                if "esil" not in insn:
+        bs_list: List[UefiService] = list()
+        addrs: int = list()
+
+        if not len(self.g_bs):
+            return bs_list
+
+        for insn in self.insns:
+            # find "mov rax, qword [g_bs]" instruction
+            found = False
+            if "esil" not in insn:
+                continue
+            esil = insn["esil"].split(",")
+            if (
+                (insn["type"] == "mov")
+                and (esil[-1] == "=")
+                and (esil[-3] == "[8]")
+                and (esil[-4] == "+")
+            ):
+                if ("ptr" in insn) and (insn["ptr"] in self.g_bs):
+                    found = True
+            if not found:
+                continue
+
+            # if current instriction is "mov rax, qword [g_bs]"
+            index = self.insns.index(insn)
+            for g_bs_area_insn in self.insns[index : index + 0x10]:
+                if "esil" not in g_bs_area_insn.keys():
                     continue
-                esil = insn["esil"].split(",")
-                if (
-                    (insn["type"] == "mov")
-                    and (esil[-1] == "=")
-                    and (esil[-3] == "[8]")
-                    and (esil[-4] == "+")
+                g_bs_area_esil = g_bs_area_insn["esil"].split(",")
+                if not (
+                    (g_bs_area_insn["type"] == "ucall")
+                    and (g_bs_area_esil[1] == "rax")
+                    and (g_bs_area_esil[2] == "+")
+                    and (g_bs_area_esil[3] == "[8]")
+                    and (g_bs_area_esil[-1] == "=")
                 ):
-                    if ("ptr" in insn) and (insn["ptr"] == self.g_bs):
-                        g_bs_found = True
-                if not g_bs_found:
-                    insn_index += 1
                     continue
-                # if current instriction is "mov rax, qword [g_bs]"
-                for g_bs_area_insn in func_insns["ops"][insn_index : insn_index + 0x10]:
-                    if "esil" not in g_bs_area_insn.keys():
-                        continue
-                    g_bs_area_esil = g_bs_area_insn["esil"].split(",")
-                    if not (
-                        (g_bs_area_insn["type"] == "ucall")
-                        and (g_bs_area_esil[1] == "rax")
-                        and (g_bs_area_esil[2] == "+")
-                        and (g_bs_area_esil[3] == "[8]")
-                        and (g_bs_area_esil[-1] == "=")
-                    ):
-                        continue
-                    if "ptr" not in g_bs_area_insn:
-                        continue
-                    service_offset = g_bs_area_insn["ptr"]
-                    if service_offset in EFI_BOOT_SERVICES_64_BIT:
-                        bs_list.append(
-                            UefiService(
-                                address=g_bs_area_insn["offset"],
-                                name=EFI_BOOT_SERVICES_64_BIT[service_offset],
-                            )
-                        )
+                if "ptr" not in g_bs_area_insn:
+                    continue
+                service_offset = g_bs_area_insn["ptr"]
+                if service_offset in EFI_BOOT_SERVICES_64_BIT:
+                    if g_bs_area_insn["offset"] in addrs:
                         break
-                insn_index += 1
+                    bs_list.append(
+                        UefiService(
+                            address=g_bs_area_insn["offset"],
+                            name=EFI_BOOT_SERVICES_64_BIT[service_offset],
+                        )
+                    )
+                    break
+
         return bs_list
 
-    def _get_boot_services_prot_64bit(
-        self,
-    ) -> Tuple[List[UefiService], List[UefiService]]:
-
-        bs_list: List[UefiService] = list()
+    def _get_boot_services_prot_64bit(self) -> List[UefiService]:
         bs_prot: List[UefiService] = list()
-        for func in self.functions:
-            func_addr = func["offset"]
-            func_insns = self._rz.cmdj("pdfj @{:#x}".format(func_addr))
-            for insn in func_insns["ops"]:
-                if "esil" in insn:
-                    esil = insn["esil"].split(",")
-                    if not (
-                        (insn["type"] == "ucall")
-                        and (esil[1] == "rax")
-                        and (esil[2] == "+")
-                        and (esil[3] == "[8]")
-                    ):
-                        continue
-                    if "ptr" not in insn:
-                        continue
-                    service_offset = insn["ptr"]
-                    if service_offset in OFFSET_TO_SERVICE:
-                        name = OFFSET_TO_SERVICE[service_offset]
-                        # found boot service that work with protocol
-                        new = True
-                        for bs in bs_list:
-                            if bs.address == insn["offset"]:
-                                new = False
-                                break
-                        bs = UefiService(address=insn["offset"], name=name)
-                        if new:
-                            bs_list.append(bs)
-                        bs_prot.append(bs)
-                        break
-        return bs_list, bs_prot
+
+        for insn in self.insns:
+            if "esil" not in insn:
+                continue
+            esil = insn["esil"].split(",")
+            if not (
+                (insn["type"] == "ucall")
+                and (esil[1] == "rax")
+                and (esil[2] == "+")
+                and (esil[3] == "[8]")
+            ):
+                continue
+            if "ptr" not in insn:
+                continue
+            service_offset = insn["ptr"]
+            if service_offset in OFFSET_TO_SERVICE:
+                name = OFFSET_TO_SERVICE[service_offset]
+                # found boot service that work with protocol
+                bs_prot.append(UefiService(address=insn["offset"], name=name))
+
+        return bs_prot
 
     @property
     def boot_services(self) -> List[UefiService]:
@@ -370,67 +367,63 @@ class UefiAnalyzer:
 
         if self._bs_list_g_bs is None:
             self._bs_list_g_bs = self._get_boot_services_bs_64bit()
-        if self._bs_list_prot is None:
-            self._bs_list_prot, self._bs_prot = self._get_boot_services_prot_64bit()
-        return self._bs_list_g_bs + self._bs_list_prot
+        if self._bs_prot is None:
+            self._bs_prot = self._get_boot_services_prot_64bit()
+        return self._bs_list_g_bs + self._bs_prot
 
     @property
     def boot_services_protocols(self) -> List[Any]:
         """Find boot service that work with protocols"""
 
         if self._bs_prot is None:
-            self._bs_list_prot, self._bs_prot = self._get_boot_services_prot_64bit()
+            self._bs_prot = self._get_boot_services_prot_64bit()
         return self._bs_prot
 
     def _get_runtime_services_64bit(self) -> List[UefiService]:
         rt_list: List[UefiService] = list()
-        if not self.g_rt:
+
+        if not len(self.g_rt):
             return rt_list
-        for func in self.functions:
-            func_addr = func["offset"]
-            func_insns = self._rz.cmdj("pdfj @{:#x}".format(func_addr))
-            insn_index = 0
-            for insn in func_insns["ops"]:
-                # find "mov rax, qword [g_rt]" instruction
-                g_rt_found = False
-                if "esil" in insn:
-                    esil = insn["esil"].split(",")
-                    if (
-                        (insn["type"] == "mov")
-                        and (esil[-1] == "=")
-                        and (esil[-3] == "[8]")
-                        and (esil[-4] == "+")
-                    ):
-                        if ("ptr" in insn) and (insn["ptr"] == self.g_rt):
-                            g_rt_found = True
-                    if not g_rt_found:
-                        insn_index += 1
-                        continue
-                    # if current instriction is "mov rax, qword [g_rt]"
-                    for g_rt_area_insn in func_insns["ops"][
-                        insn_index : insn_index + 0x10
-                    ]:
-                        g_rt_area_esil = g_rt_area_insn["esil"].split(",")
-                        if not (
-                            (g_rt_area_insn["type"] == "ucall")
-                            and (g_rt_area_esil[1] == "rax")
-                            and (g_rt_area_esil[2] == "+")
-                            and (g_rt_area_esil[3] == "[8]")
-                            and (g_rt_area_esil[-1] == "=")
-                        ):
-                            continue
-                        if "ptr" not in g_rt_area_insn:
-                            continue
-                        service_offset = g_rt_area_insn["ptr"]
-                        if service_offset in EFI_RUNTIME_SERVICES_64_BIT:
-                            rt_list.append(
-                                UefiService(
-                                    address=g_rt_area_insn["offset"],
-                                    name=EFI_RUNTIME_SERVICES_64_BIT[service_offset],
-                                )
-                            )
-                            break
-                    insn_index += 1
+
+        for insn in self.insns:
+            # find "mov rax, qword [g_rt]" instruction
+            found = False
+            if "esil" not in insn:
+                continue
+            esil = insn["esil"].split(",")
+            if (
+                (insn["type"] == "mov")
+                and (esil[-1] == "=")
+                and (esil[-3] == "[8]")
+                and (esil[-4] == "+")
+            ):
+                if ("ptr" in insn) and (insn["ptr"] in self.g_rt):
+                    found = True
+            if not found:
+                continue
+
+            index = self.insns.index(insn)
+            for g_rt_area_insn in self.insns[index : index + 0x10]:
+                g_rt_area_esil = g_rt_area_insn["esil"].split(",")
+                if not (
+                    (g_rt_area_insn["type"] == "ucall")
+                    and (g_rt_area_esil[1] == "rax")
+                    and (g_rt_area_esil[2] == "+")
+                    and (g_rt_area_esil[3] == "[8]")
+                    and (g_rt_area_esil[-1] == "=")
+                ):
+                    continue
+                if "ptr" not in g_rt_area_insn:
+                    continue
+                service_offset = g_rt_area_insn["ptr"]
+                if service_offset in EFI_RUNTIME_SERVICES_64_BIT:
+                    rt_list.append(
+                        UefiService(
+                            address=g_rt_area_insn["offset"],
+                            name=EFI_RUNTIME_SERVICES_64_BIT[service_offset],
+                        )
+                    )
+                    break
         return rt_list
 
     @property
@@ -443,7 +436,7 @@ class UefiAnalyzer:
 
     def _get_protocols_64bit(self) -> List[UefiProtocol]:
         protocols = list()
-        for bs in self.boot_services_protocols:
+        for bs in self.boot_services:
             block_insns = self._rz.cmdj("pdbj @{:#x}".format(bs.address))
             for insn in block_insns:
                 if "esil" in insn:
@@ -580,10 +573,7 @@ class UefiAnalyzer:
                     continue
                 esil = insn["esil"].split(",")
                 if esil[-1] == "=" and esil[-2] == "eip":
-                    try:
-                        offset = int(esil[0], 16)
-                    except ValueError:
-                        continue
+                    offset = get_int(esil[0])
                     if offset is None:
                         continue
                     if offset not in EFI_PEI_SERVICES_32_BIT.keys():
@@ -701,8 +691,8 @@ class UefiAnalyzer:
             summary["nvram_vars"] = [x.__dict__ for x in self.nvram_vars]
 
         elif self.info["bin"]["arch"] == "x86" and self.info["bin"]["bits"] == 64:
-            summary["g_bs"] = str(self.g_bs)
-            summary["g_rt"] = str(self.g_rt)
+            summary["g_bs"] = self.g_bs
+            summary["g_rt"] = self.g_rt
             summary["g_smst"] = [x for x in self.smst_list]
             summary["bs_list"] = [x.__dict__ for x in self.boot_services]
             summary["rt_list"] = [x.__dict__ for x in self.runtime_services]
@@ -725,7 +715,7 @@ class UefiAnalyzer:
         summary = dict()
         for key in self.info:
             summary[key] = self.info[key]
-        summary["g_bs"] = str(self.g_bs)
+        summary["g_bs"] = self.g_bs
         summary["bs_list"] = [x.__dict__ for x in self.boot_services]
         summary["protocols"] = [x.__dict__ for x in self.protocols]
         return summary
