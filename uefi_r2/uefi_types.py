@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: GPL-3.0+
+
 from typing import Optional
 import uuid
 

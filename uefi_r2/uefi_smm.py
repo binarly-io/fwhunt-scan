@@ -1,4 +1,5 @@
-import binascii
+# SPDX-License-Identifier: GPL-3.0+
+
 import json
 import uuid
 from typing import Any, Dict, List, Optional

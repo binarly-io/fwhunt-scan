@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: GPL-3.0+
+
 import binascii
 from typing import Any, Dict, List, Optional
 

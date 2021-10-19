@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: GPL-3.0+
+
 import os
 import struct
 from typing import Optional
