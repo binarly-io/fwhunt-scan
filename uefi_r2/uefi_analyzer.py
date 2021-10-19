@@ -240,14 +240,14 @@ class UefiAnalyzer:
         return res
 
     @property
-    def g_bs(self) -> int:
+    def g_bs(self) -> List[int]:
         """Find BootServices table global address"""
 
         if self._g_bs is None:
             self._g_bs = self._get_bs_64bit()
         return self._g_bs
 
-    def _get_rt_64bit(self) -> int:
+    def _get_rt_64bit(self) -> List[int]:
         res: List[int] = list()
 
         for func in self.functions:
@@ -276,7 +276,7 @@ class UefiAnalyzer:
         return res
 
     @property
-    def g_rt(self) -> int:
+    def g_rt(self) -> List[int]:
         """Find RuntimeServices table global address"""
 
         if self._g_rt is None:
@@ -285,7 +285,7 @@ class UefiAnalyzer:
 
     def _get_boot_services_bs_64bit(self) -> List[UefiService]:
         bs_list: List[UefiService] = list()
-        addrs: int = list()
+        addrs: List[int] = list()
 
         if not len(self.g_bs):
             return bs_list
