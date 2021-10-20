@@ -30,7 +30,7 @@ python setup.py install
 
 ### From code
 
-### UefiAnalyzer
+#### UefiAnalyzer
 
 Basic usage examples:
 
@@ -61,7 +61,7 @@ with UefiAnalyzer(blob=data) as uefi_analyzer:
     print(uefi_analyzer.get_summary())
 ```
 
-### UefiScanner
+#### UefiScanner
 
 ```python
 from uefi_r2.uefi_analyzer import UefiAnalyzer
