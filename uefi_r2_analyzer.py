@@ -33,10 +33,9 @@ def analyze_image(image_path: str, out: str) -> bool:
     # on linux platforms you can pass blob via shm://
     # uefi_analyzer = UefiAnalyzer(blob=data)
 
-    uefi_analyzer = UefiAnalyzer(image_path=image_path)
-
-    summary = uefi_analyzer.get_summary()
-    uefi_analyzer.close()
+    summary = None
+    with UefiAnalyzer(image_path=image_path) as uefi_analyzer:
+        summary = uefi_analyzer.get_summary()
 
     if out:
         with open(out, "w") as f:

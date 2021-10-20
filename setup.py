@@ -16,7 +16,7 @@ setup(
     license="GPL-3.0",
     url="https://github.com/binarly-io/uefi_r2",
     install_requires=REQUIRED,
-    description="Tools for analyzing UEFI firmware using radare2",
+    description="Tools for analyzing UEFI firmware using radare2/rizin",
     long_description=README,
     long_description_content_type="text/markdown",
     platforms=["Platform Independent"],

@@ -11,7 +11,8 @@ import json
 import sys
 import uuid
 from multiprocessing import shared_memory
-from typing import Any, Dict, List, Optional
+from types import TracebackType
+from typing import Any, Dict, List, Optional, Type
 
 import rzpipe
 
@@ -110,6 +111,9 @@ class UefiAnalyzer:
         # SMI handlers addresses
         self._swsmi_handlers: Optional[List[SwSmiHandler]] = None
         self._child_swsmi_handlers: Optional[List[ChildSwSmiHandler]] = None
+
+    def __enter__(self):
+        return self
 
     def _section_paddr(self, section_name: str) -> int:
         for section in self.sections:
@@ -733,8 +737,10 @@ class UefiAnalyzer:
             self._shm.close()
             self._shm.unlink()
 
-    def __exit__(self, exception_type, exception_value, traceback):
-        self._rz.quit()
-        if self._shm is not None:
-            self._shm.close()
-            self._shm.unlink()
+    def __exit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_value: Optional[BaseException],
+        traceback: Optional[TracebackType],
+    ) -> None:
+        self.close()

@@ -30,21 +30,38 @@ python setup.py install
 
 ### From code
 
+### UefiAnalyzer
+
+Basic usage examples:
+
 ```python
 from uefi_r2.uefi_analyzer import UefiAnalyzer
 
-uefi_analyzer = UefiAnalyzer(blob=data)
 ...
-uefi_analyzer.close()
-```
-
-```python
-from uefi_r2.uefi_analyzer import UefiAnalyzer
-
 uefi_analyzer = UefiAnalyzer(image_path=image_path)
-...
+print(uefi_analyzer.get_summary())
 uefi_analyzer.close()
 ```
+
+```python
+from uefi_r2.uefi_analyzer import UefiAnalyzer
+
+...
+with UefiAnalyzer(image_path=image_path) as uefi_analyzer:
+    print(uefi_analyzer.get_summary())
+```
+
+On Linux platforms, you can pass blob for analysis instead of file:
+
+```python
+from uefi_r2.uefi_analyzer import UefiAnalyzer
+
+...
+with UefiAnalyzer(blob=data) as uefi_analyzer:
+    print(uefi_analyzer.get_summary())
+```
+
+### UefiScanner
 
 ```python
 from uefi_r2.uefi_analyzer import UefiAnalyzer
