@@ -76,6 +76,8 @@ class UefiAnalyzer:
                 self._te = None
 
         if blob and sys.platform in ["linux"]:
+            if blob[:2] != b"MZ":
+                raise AnalyzerError("Invalid data format")
             self._shm = shared_memory.SharedMemory(create=True, size=len(blob))
             self._shm.buf[:] = blob[:]
             self._rz = rzpipe.open(
@@ -688,10 +690,14 @@ class UefiAnalyzer:
         """Collect all the information in a JSON object"""
 
         summary = dict()
+
         for key in self.info:
             summary[key] = self.info[key]
 
         if "bin" not in summary:
+            return summary
+
+        if not self.info["bin"]["class"].startswith("PE"):
             return summary
 
         if self.info["bin"]["arch"] == "x86" and self.info["bin"]["bits"] == 32:
