@@ -225,7 +225,7 @@ def get_smst_list(rz: rzpipe.open) -> List[int]:
     return res
 
 
-def find_handler_register_service(insns: List[Dict[str, Any]]) -> bool:
+def find_handler_register_service(insns: List[Dict[str, Any]]) -> Optional[int]:
     for insn in insns[::-1]:
         if "esil" not in insn:
             continue
@@ -236,9 +236,9 @@ def find_handler_register_service(insns: List[Dict[str, Any]]) -> bool:
 
         offset = get_int(esil[0])
         if offset == 0xE0:  # SmiHandlerRegister
-            return True
+            return insns.index(insn)
 
-    return False
+    return None
 
 
 def get_child_sw_smi_handler_bb(
@@ -247,10 +247,11 @@ def get_child_sw_smi_handler_bb(
     handler_address = None
     handler_guid = None
 
-    if not find_handler_register_service(insns):
+    end_index = find_handler_register_service(insns)
+    if end_index is None:
         return None
 
-    for insn in insns[::-1]:
+    for insn in insns[:end_index][::-1]:
         if "esil" not in insn:
             continue
         esil = insn["esil"].split(",")
