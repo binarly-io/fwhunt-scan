@@ -6,10 +6,16 @@ Tools for analyzing UEFI firmware using radare2
 
 __author__ = "yeggor"
 __email__ = "yegor@binarly.io"
-__version__ = "1.1.2"
+__version__ = "1.1.3"
 
-from .uefi_analyzer import UefiAnalyzer
+from .uefi_analyzer import UefiAnalyzer, UefiAnalyzerError
 from .uefi_scanner import UefiRule, UefiScanner
 from .uefi_te import TerseExecutableParser
 
-__all__ = ["UefiAnalyzer", "UefiRule", "UefiScanner", "TerseExecutableParser"]
+__all__ = [
+    "UefiAnalyzer",
+    "UefiRule",
+    "UefiScanner",
+    "TerseExecutableParser",
+    "UefiAnalyzerError",
+]

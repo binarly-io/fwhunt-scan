@@ -38,7 +38,7 @@ from uefi_r2.uefi_types import (
 from uefi_r2.uefi_utils import get_int
 
 
-class AnalyzerError(Exception):
+class UefiAnalyzerError(Exception):
     """Generic TE format error exception."""
 
     def __init__(self, value: str) -> None:
@@ -77,7 +77,7 @@ class UefiAnalyzer:
 
         if blob and sys.platform in ["linux"]:
             if blob[:2] != b"MZ":
-                raise AnalyzerError("Invalid data format")
+                raise UefiAnalyzerError("Invalid data format")
             self._shm = shared_memory.SharedMemory(create=True, size=len(blob))
             self._shm.buf[:] = blob[:]
             self._rz = rzpipe.open(
@@ -90,7 +90,9 @@ class UefiAnalyzer:
                 self._te = None
 
         if self._rz is None:
-            raise AnalyzerError("Failed to initialize radare2/rizin analyzing engine")
+            raise UefiAnalyzerError(
+                "Failed to initialize radare2/rizin analyzing engine"
+            )
 
         # private cache
         self._bs_list_g_bs: Optional[List[UefiService]] = None
