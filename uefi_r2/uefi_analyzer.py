@@ -76,12 +76,15 @@ class UefiAnalyzer:
                 self._te = None
 
         if blob and sys.platform in ["linux"]:
-            if blob[:2] != b"MZ":
+            if blob[:2] not in [b"MZ", b"VZ"]:
                 raise UefiAnalyzerError("Invalid data format")
-            self._shm = shared_memory.SharedMemory(create=True, size=len(blob))
+            blob_size = len(blob)
+            self._shm = shared_memory.SharedMemory(create=True, size=blob_size)
             self._shm.buf[:] = blob[:]
             self._rz = rzpipe.open(
-                filename=f"shm://{self._shm.name}", flags=["-2"], rizinhome=rizinhome
+                filename=f"shm://{self._shm.name}/{blob_size:#d}",
+                flags=["-2"],
+                rizinhome=rizinhome,
             )
             self._rz.cmd("aaaa")
             try:
