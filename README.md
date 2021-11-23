@@ -2,6 +2,10 @@
 [![uefi_r2 CI](https://github.com/binarly-io/uefi_r2/actions/workflows/ci.yml/badge.svg)](https://github.com/binarly-io/uefi_r2/actions)
 [![uefi_r2 pypi](https://img.shields.io/pypi/v/uefi_r2.svg)](https://pypi.org/project/uefi_r2)
 
+<p align="center">
+  <img alt="fwhunt Logo" src="pics/fwhunt_logo.png" width="20%">
+</p>
+
 # uefi_r2
 
 Tools for analyzing UEFI firmware using radare2/rizin
