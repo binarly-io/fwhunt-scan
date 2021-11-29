@@ -228,7 +228,7 @@ class UefiAnalyzer:
 
         for func in self.functions:
             func_addr = func["offset"]
-            func_insns = self._rz.cmdj("pdfj @{:#x}".format(func_addr))
+            func_insns = self._rz.cmdj("pdfj @ {:#x}".format(func_addr))
             g_bs_reg = None
             for insn in func_insns["ops"]:
                 if "esil" in insn:
@@ -264,7 +264,7 @@ class UefiAnalyzer:
 
         for func in self.functions:
             func_addr = func["offset"]
-            func_insns = self._rz.cmdj("pdfj @{:#x}".format(func_addr))
+            func_insns = self._rz.cmdj("pdfj @ {:#x}".format(func_addr))
             g_rt_reg = None
             for insn in func_insns["ops"]:
                 if "esil" in insn:
@@ -449,7 +449,7 @@ class UefiAnalyzer:
     def _get_protocols_64bit(self) -> List[UefiProtocol]:
         protocols = list()
         for bs in self.boot_services_protocols:
-            block_insns = self._rz.cmd("pdbj @{:#x}".format(bs.address))
+            block_insns = self._rz.cmd("pdbj @ {:#x}".format(bs.address))
             try:
                 block_insns = json.loads(block_insns)
             except (ValueError, KeyError, TypeError) as _:
@@ -535,7 +535,7 @@ class UefiAnalyzer:
         for service in self.runtime_services:
             if service.name in ["GetVariable", "SetVariable"]:
                 # disassemble 8 instructions backward
-                block_insns = self._rz.cmdj("pdj -8 @{:#x}".format(service.address))
+                block_insns = self._rz.cmdj("pdj -8 @ {:#x}".format(service.address))
                 name: str = str()
                 p_guid_b: bytes = bytes()
                 for index in range(len(block_insns) - 2, -1, -1):
@@ -553,14 +553,14 @@ class UefiAnalyzer:
                         and (esil[-3] == "+")
                         and (esil[-4] == "rip")
                     ):
-                        name = self._rz.cmd("psw @{:#x}".format(ref_addr))[:-1]
+                        name = self._rz.cmd("psw @ {:#x}".format(ref_addr))[:-1]
                     if (
                         (esil[-1] == "=")
                         and (esil[-2] == "rdx")
                         and (esil[-3] == "+")
                         and (esil[-4] == "rip")
                     ):
-                        p_guid_b = bytes(self._rz.cmdj("xj 16 @{:#x}".format(ref_addr)))
+                        p_guid_b = bytes(self._rz.cmdj("xj 16 @ {:#x}".format(ref_addr)))
                     if not name:
                         name = "Unknown"
                     if p_guid_b:
@@ -583,7 +583,7 @@ class UefiAnalyzer:
         pei_list: List[UefiService] = list()
         for func in self.functions:
             func_addr = func["offset"]
-            func_insns = self._rz.cmdj("pdfj @{:#x}".format(func_addr))
+            func_insns = self._rz.cmdj("pdfj @ {:#x}".format(func_addr))
             for insn in func_insns["ops"]:
                 if "esil" not in insn:
                     continue
@@ -622,7 +622,7 @@ class UefiAnalyzer:
         for pei_service in self.pei_services:
             if pei_service.name != "LocatePpi":
                 continue
-            block_insns = self._rz.cmdj("pdj -16 @{:#x}".format(pei_service.address))
+            block_insns = self._rz.cmdj("pdj -16 @ {:#x}".format(pei_service.address))
             for index in range(len(block_insns) - 1, -1, -1):
                 esil = block_insns[index]["esil"].split(",")
                 if not (esil[-1] == "-=" and esil[-2] == "esp" and esil[-3] == "4"):
