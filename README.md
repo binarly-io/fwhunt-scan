@@ -3,7 +3,7 @@
 [![uefi_r2 pypi](https://img.shields.io/pypi/v/uefi_r2.svg)](https://pypi.org/project/uefi_r2)
 
 <p align="center">
-  <img alt="fwhunt Logo" src="pics/fwhunt_logo.png" width="20%">
+  <img alt="fwhunt Logo" src="https://raw.githubusercontent.com/binarly-io/uefi_r2/master/pics/fwhunt_logo.png" width="20%">
 </p>
 
 # uefi_r2
