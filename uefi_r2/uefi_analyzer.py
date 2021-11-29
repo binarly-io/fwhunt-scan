@@ -66,7 +66,7 @@ class UefiAnalyzer:
         # init rizin
         if image_path:
             self._rz = rzpipe.open(
-                filename=image_path, flags=["-2"], rizinhome=rizinhome
+                filename=image_path, flags=["-2"], rizin_home=rizinhome
             )
             # analyze image
             self._rz.cmd("aaaa")
@@ -84,7 +84,7 @@ class UefiAnalyzer:
             self._rz = rzpipe.open(
                 filename=f"shm://{self._shm.name}/{blob_size:#d}",
                 flags=["-2"],
-                rizinhome=rizinhome,
+                rizin_home=rizinhome,
             )
             self._rz.cmd("aaaa")
             try:
