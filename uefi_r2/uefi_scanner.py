@@ -101,6 +101,15 @@ class UefiRule:
         return json.dumps(self._uefi_rule, indent=2)
 
     @property
+    def author(self) -> Optional[str]:
+        """Get author from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["author"]
+        except KeyError:
+            return None
+
+    @property
     def name(self) -> Optional[str]:
         """Get rule name from the metadata block"""
 
@@ -110,11 +119,56 @@ class UefiRule:
             return None
 
     @property
+    def version(self) -> Optional[str]:
+        """Get rule version from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["version"]
+        except KeyError:
+            return None
+
+    @property
     def namespace(self) -> Optional[str]:
         """Get rule namespace from the metadata block"""
 
         try:
             return self._uefi_rule["meta"]["namespace"]
+        except KeyError:
+            return None
+
+    @property
+    def cve_number(self) -> Optional[str]:
+        """Get CVE number from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["CVE number"]
+        except KeyError:
+            return None
+
+    @property
+    def vendor_id(self) -> Optional[str]:
+        """Get vendor id from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["vendor id"]
+        except KeyError:
+            return None
+
+    @property
+    def cvss_score(self) -> Optional[str]:
+        """Get CVSS score from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["CVSS score"]
+        except KeyError:
+            return None
+
+    @property
+    def advisory(self) -> Optional[str]:
+        """Get advisory link from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["advisory"]
         except KeyError:
             return None
 
