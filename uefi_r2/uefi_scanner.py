@@ -138,6 +138,15 @@ class UefiRule:
             return None
 
     @property
+    def license(self) -> Optional[str]:
+        """Get rule license from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["license"]
+        except KeyError:
+            return None
+
+    @property
     def cve_number(self) -> Optional[str]:
         """Get CVE number from the metadata block"""
 
