@@ -90,6 +90,8 @@ def scan(image_path: str, rule: List[str]) -> bool:
             print(f"{prefix} wide_strings: {uefi_rule.wide_strings}")
         if len(uefi_rule.hex_strings):
             print(f"{prefix} hex_strings: {uefi_rule.hex_strings}")
+        if uefi_rule.volume_guids:
+            print(f"{prefix} volume_guids: {uefi_rule.volume_guids}")
         if len(uefi_rule.code):
             for code in uefi_rule.code:
                 print(f"{prefix} code: {code.__dict__}")
