@@ -117,7 +117,7 @@ def get_handlers(rz: rzpipe.open, code_addr: int, interface: int) -> List[SwSmiH
     res: List[SwSmiHandler] = list()
     res_addrs: List[int] = list()
 
-    func = rz.cmdj(f"pdfj @{code_addr:#x}")
+    func = rz.cmdj(f"pdfj @ {code_addr:#x}")
     insns = func.get("ops", None)
     if insns is None:
         return res
@@ -145,7 +145,7 @@ def get_handlers(rz: rzpipe.open, code_addr: int, interface: int) -> List[SwSmiH
             offset = insn.get("offset", None)
             if offset is None:
                 continue
-            bb = rz.cmdj(f"pdbj @{offset:#x}")
+            bb = rz.cmdj(f"pdbj @ {offset:#x}")
             handler = get_handler(bb)
             if handler is not None:
                 if handler.address not in res_addrs:
@@ -176,7 +176,7 @@ def get_smst_bb(insns: List[Dict[str, Any]]) -> Optional[int]:
 def get_smst_func(rz: rzpipe.open, code_addr: int, interface: int) -> List[int]:
     res: List[int] = list()
 
-    func = rz.cmdj(f"pdfj @{code_addr:#x}")
+    func = rz.cmdj(f"pdfj @ {code_addr:#x}")
     insns = func.get("ops", None)
     if insns is None:
         return res
@@ -197,7 +197,7 @@ def get_smst_func(rz: rzpipe.open, code_addr: int, interface: int) -> List[int]:
                 offset = insn.get("offset", None)
                 if offset is None:
                     continue
-                bb = rz.cmdj(f"pdbj @{offset:#x}")
+                bb = rz.cmdj(f"pdbj @ {offset:#x}")
                 smst = get_smst_bb(bb)
                 if smst is not None:
                     res.append(smst)
@@ -216,7 +216,7 @@ def get_smst_list(rz: rzpipe.open) -> List[int]:
     ]
     code_addrs = get_xrefs_to_guids(rz, guids)
     for code_addr in code_addrs:
-        bb = rz.cmdj(f"pdbj @{code_addr:#x}")
+        bb = rz.cmdj(f"pdbj @ {code_addr:#x}")
         interface = get_interface_global(bb, code_addr)
         if interface is None:
             continue
@@ -288,8 +288,8 @@ def get_child_sw_smi_handlers(
     for smst in smst_list:
         code_addrs = get_xrefs_to_data(rz, smst)
         for addr in code_addrs:
-            # analyze basic block and found gSmst->SmiHandlerRegister call
-            result = rz.cmd(f"pdbj @{addr:#x}")
+            # analyze instructions and found gSmst->SmiHandlerRegister call
+            result = rz.cmd(f"pdj 24 @ {addr:#x}")
             # prevent error messages to sys.stderr from rizin:
             # https://github.com/rizinorg/rz-pipe/blob/0f7ac66e6d679ebb03be26bf61a33f9ccf199f27/python/rzpipe/open_base.py#L261
             try:
@@ -323,7 +323,7 @@ def get_sw_smi_handlers(rz: rzpipe.open) -> List[SwSmiHandler]:
     code_addrs = get_xrefs_to_guids(rz, guids)
     for code_addr in code_addrs:
         # get basic block information
-        bb = rz.cmdj(f"pdbj @{code_addr:#x}")
+        bb = rz.cmdj(f"pdbj @ {code_addr:#x}")
         interface = get_interface_from_bb(bb, code_addr)
         if interface is None:
             continue

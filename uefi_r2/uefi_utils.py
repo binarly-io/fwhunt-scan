@@ -29,7 +29,7 @@ def get_xrefs_to_guids(rz: rzpipe.open, guids: List[UefiGuid]) -> List[int]:
                 continue
             offset = element["offset"]
 
-            # xrefs = rz.cmd(f"axtj @{offset:x}")
+            # xrefs = rz.cmd(f"axtj @ {offset:x}")
             # this doesn't work in rizin, so needs to be split into two separate steps (seek + axtj)
 
             # seek to GUID location in .data segment
