@@ -1246,8 +1246,10 @@ class UefiMultiScanner:
                         res &= child_sw_smi_handler_res
                         if not res:
                             break
+                    if not res:
+                        break
 
-                matches = self._update_index_match(matches, i, res)
+            matches = self._update_index_match(matches, i, res)
 
         return matches
 
