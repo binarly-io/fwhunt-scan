@@ -73,11 +73,10 @@ class UefiRule:
         self._rule: Optional[str] = rule_path
         self._rule_name: str = str()
         self._uefi_rule: Dict[str, Any] = dict()
-        self._nvram_vars: Optional[List[NvramVariable]] = None  # TODO
-        self._protocols: Optional[List[UefiProtocol]] = None  # TODO
-        self._ppi_list: Optional[List[UefiProtocol]] = None  # TODO
-        self._protocol_guids: Optional[List[UefiProtocolGuid]] = None  # TODO
-        self._esil_rules: Optional[List[List[str]]] = None  # TODO
+        self._nvram_vars: Optional[Dict[str, List[NvramVariable]]] = None
+        self._protocols: Optional[Dict[str, List[UefiProtocol]]] = None
+        self._ppi_list: Optional[Dict[str, List[UefiProtocol]]] = None
+        self._protocol_guids: Optional[Dict[str, List[UefiProtocolGuid]]] = None
         self._strings: Optional[Dict[str, List[str]]] = None
         self._wide_strings: Optional[Dict[str, List[Dict[str, str]]]] = None
         self._hex_strings: Optional[Dict[str, List[str]]] = None
@@ -265,59 +264,44 @@ class UefiRule:
             self._hex_strings = self._get_hex_strings()
         return self._hex_strings
 
-    def _get_nvram_vars(self) -> List[NvramVariable]:
-        nvram_vars: List[NvramVariable] = list()
+    def _get_nvram_vars(self) -> Dict[str, List[NvramVariable]]:
+        nvram_vars: Dict[str, List[NvramVariable]] = dict()
         if "nvram" not in self._uefi_rule:
             return nvram_vars
-        for nvrams in self._uefi_rule["nvram"]:
-            for num in nvrams:
-                element_name: str = str()
-                element_guid: str = str()
-                element_service: str = str()
-                nvram_item = nvrams[num]
-                for obj in nvram_item:
-                    if "name" in obj:
-                        element_name = obj["name"]
-                    if "guid" in obj:
-                        element_guid = obj["guid"]
-                    if "service" in obj:
-                        element_service = obj["service"][0]["name"]
-                service = UefiService(name=element_service, address=0x0)
-                nvram_vars.append(
-                    NvramVariable(name=element_name, guid=element_guid, service=service)
+        for op in self._uefi_rule["nvram"]:
+            nvram_vars[op] = list()
+            for element in self._uefi_rule["nvram"][op]:
+                nvram_vars[op].append(
+                    NvramVariable(
+                        name=element["name"],
+                        guid=element["guid"],
+                        service=UefiService(
+                            name=element["service"]["name"], address=0x0
+                        ),
+                    )
                 )
         return nvram_vars
 
     @property
-    def nvram_vars(self) -> List[NvramVariable]:
+    def nvram_vars(self) -> Dict[str, List[NvramVariable]]:
         """Get NVRAM variables from rule"""
 
         if self._nvram_vars is None:
             self._nvram_vars = self._get_nvram_vars()
         return self._nvram_vars
 
-    def _get_protocols(self) -> List[UefiProtocol]:
-        protocols: List[UefiProtocol] = list()
+    def _get_protocols(self) -> Dict[str, List[UefiProtocol]]:
+        protocols: Dict[str, List[UefiProtocol]] = dict()
         if "protocols" not in self._uefi_rule:
             return protocols
-        for protocols_list in self._uefi_rule["protocols"]:
-            for num in protocols_list:
-                element_name: str = str()
-                element_value: str = str()
-                element_service: str = str()
-                protocol_item = protocols_list[num]
-                for obj in protocol_item:
-                    if "name" in obj:
-                        element_name = obj["name"]
-                    if "value" in obj:
-                        element_value = obj["value"]
-                    if "service" in obj:
-                        element_service = obj["service"][0]["name"]
-                protocols.append(
+        for op in self._uefi_rule["protocols"]:
+            protocols[op] = list()
+            for element in self._uefi_rule["protocols"][op]:
+                protocols[op].append(
                     UefiProtocol(
-                        name=element_name,
-                        value=element_value,
-                        service=element_service,
+                        name=element["name"],
+                        value=element["value"],
+                        service=element["service"]["name"],
                         address=0x0,
                         guid_address=0x0,
                     )
@@ -325,7 +309,7 @@ class UefiRule:
         return protocols
 
     @property
-    def protocols(self) -> List[UefiProtocol]:
+    def protocols(self) -> Dict[str, List[UefiProtocol]]:
         """Get protocols from rule"""
 
         if self._protocols is None:
@@ -399,23 +383,6 @@ class UefiRule:
             self._protocol_guids = self._get_protocol_guids()
         return self._protocol_guids
 
-    def _get_esil_rules(self) -> List[List[str]]:
-        esil_rules: List[List[str]] = list()
-        if "esil" not in self._uefi_rule:
-            return esil_rules
-        for esil_list in self._uefi_rule["esil"]:
-            for num in esil_list:
-                esil_rules.append(esil_list[num])
-        return esil_rules
-
-    @property
-    def esil_rules(self) -> List[List[str]]:
-        """Get esil rules"""
-
-        if self._esil_rules is None:
-            self._esil_rules = self._get_esil_rules()
-        return self._esil_rules
-
 
 class UefiScannerError(Exception):
     """Generic scanner error exception."""
@@ -436,14 +403,14 @@ class UefiScanner:
         self._results: Optional[Set[int]] = None
 
         # decision indexes
-        self._nvram_index: DefaultDict[NvramVariable, Set[int]] = defaultdict(set)
-        self._protocol_index: DefaultDict[UefiProtocol, Set[int]] = defaultdict(set)
         self._ppi_index: DefaultDict[UefiProtocol, Set[int]] = defaultdict(set)
         self._protocol_guid_index: DefaultDict[
             UefiProtocolGuid, Set[int]
         ] = defaultdict(set)
 
         # likley not to be shared; indices correspond to self._uefi_rules
+        self._nvram_index: List[Any] = list()
+        self._protocol_index: List[Any] = list()
         self._string_index: List[Any] = list()
         self._hex_string_index: List[Any] = list()
         self._wide_string_index: List[Any] = list()
@@ -468,17 +435,16 @@ class UefiScanner:
     def _index_rule(self, rule: UefiRule, index: int) -> None:
         """Adds a rule to the index"""
 
-        self._index_iterable_to_dict(self._nvram_index, rule.nvram_vars, index)
-        self._index_iterable_to_dict(self._protocol_index, rule.protocols, index)
         self._index_iterable_to_dict(self._ppi_index, rule.ppi_list, index)
         self._index_iterable_to_dict(
             self._protocol_guid_index, rule.protocol_guids, index
         )
 
+        self._nvram_index.append(rule.nvram_vars)
+        self._protocol_index.append(rule.protocols)
         self._string_index.append(rule.strings)
         self._wide_string_index.append(rule.wide_strings)
         self._hex_string_index.append(rule.hex_strings)
-        self._esil_index.append(rule.esil_rules)
         self._code_index.append(rule.code)
 
     def _index_rules(self) -> None:
@@ -525,28 +491,6 @@ class UefiScanner:
                 return True
         return False
 
-    def _esil_scanner(self, current: Set[int]) -> Set[int]:
-        """Match ESIL patterns"""
-
-        matches = current
-
-        for i, esil_rules in enumerate(self._esil_index):
-            if i not in matches:
-                continue
-
-            esil_match = True
-            for esil_rule in esil_rules:
-                if not self._check_rule(esil_rule):
-                    esil_match = False
-                    break
-
-            matches = self._update_index_match(matches, i, esil_match)
-
-            if len(matches) == 0:
-                break
-
-        return matches
-
     def _and_strings(self, strings: List[str]) -> bool:
         res = True
         for string in strings:
@@ -556,7 +500,7 @@ class UefiScanner:
         return res
 
     def _or_strings(self, strings: List[str]) -> bool:
-        res = True
+        res = False
         for string in strings:
             res |= not not self._uefi_analyzer._rz.cmdj("/j {}".format(string))
             if res:
@@ -572,7 +516,7 @@ class UefiScanner:
         return res
 
     def _or_hex_strings(self, strings: List[str]) -> bool:
-        res = True
+        res = False
         for string in strings:
             res |= not not self._uefi_analyzer._rz.cmdj("/xj {}".format(string))
             if res:
@@ -602,7 +546,7 @@ class UefiScanner:
         return res
 
     def _or_wide_strings(self, strings: List[dict]) -> bool:
-        res = True
+        res = False
         for item in strings:
             if "utf16le" in item:
                 res |= not not self._uefi_analyzer._rz.cmdj(
@@ -747,56 +691,137 @@ class UefiScanner:
 
         return matches
 
-    def _nvram_scanner(self, current: Set[int]) -> Set[int]:
-        """Compare NVRAM"""
+    def _search_nvram(self, nvram_rule: NvramVariable) -> bool:
+        for nvram_analyzer in self._uefi_analyzer.nvram_vars:
+            if (
+                nvram_rule.name == nvram_analyzer.name
+                and nvram_rule.guid == nvram_analyzer.guid
+                and nvram_rule.service.name == nvram_analyzer.service.name
+            ):
+                return True
+        return False
+
+    def _and_nvram(self, nvram_vars: List[NvramVariable]) -> bool:
+        res = True
+        for nvram_var in nvram_vars:
+            res &= self._search_nvram(nvram_var)
+            if not res:
+                break
+        return res
+
+    def _or_nvram(self, nvram_vars: List[NvramVariable]) -> bool:
+        res = False
+        for nvram_var in nvram_vars:
+            res |= self._search_nvram(nvram_var)
+            if res:
+                break
+        return res
+
+    def _compare_nvram_vars(self, current: Set[int]) -> Set[int]:
+        """Compare NVRAM variables"""
 
         matches = current
 
-        for nvram_rule, expected in self._nvram_index.items():
-            if matches.isdisjoint(expected):
+        for i, rule_nvram in enumerate(self._nvram_index):
+            if i not in matches:
                 continue
 
-            nvram_matched = False
+            final_res = True
+            for op in rule_nvram:
 
-            for nvram_analyzer in self._uefi_analyzer.nvram_vars:
-                if (
-                    nvram_rule.name == nvram_analyzer.name
-                    and nvram_rule.guid == nvram_analyzer.guid
-                    and nvram_rule.service.name == nvram_analyzer.service.name
-                ):
-                    nvram_matched = True
+                # check kind of matches
+                if op not in ["and", "or", "not-any", "not-all"]:
+                    raise UefiScannerError(
+                        f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
+                    )
+
+                res = True
+                if op == "and":  # AND
+                    res = self._and_nvram(rule_nvram[op])
+
+                if op == "or":  # OR
+                    res = self._or_nvram(rule_nvram[op])
+
+                if op == "not-any":  # NOT OR
+                    res = not self._or_nvram(rule_nvram[op])
+
+                if op == "not-all":  # NOT AND
+                    res = not self._and_nvram(rule_nvram[op])
+
+                print(f"[I] Final: {res}, {op}: {rule_nvram[op]}")
+
+                final_res &= res  # AND between all sets of NVRAM variables
+                if not final_res:
                     break
 
-            matches = self._update_index_match(matches, expected, nvram_matched)
-
-            if len(matches) == 0:
-                break
+            matches = self._update_index_match(matches, i, final_res)
 
         return matches
+
+    def _search_protocol(self, protocol_rule: UefiProtocol) -> bool:
+        for protocol_analyzer in self._uefi_analyzer.protocols:
+            if (
+                protocol_rule.name == protocol_analyzer.name
+                and protocol_rule.value == protocol_analyzer.value
+                and protocol_rule.service == protocol_analyzer.service
+            ):
+                return True
+        return False
+
+    def _and_protocols(self, protocols: List[UefiProtocol]):
+        res = True
+        for protocol in protocols:
+            res &= self._search_protocol(protocol)
+            if not res:
+                break
+        return res
+
+    def _or_protocols(self, protocols: List[UefiProtocol]):
+        res = False
+        for protocol in protocols:
+            res |= self._search_protocol(protocol)
+            if res:
+                break
+        return res
 
     def _compare_protocols(self, current: Set[int]) -> Set[int]:
         """Compare protocols"""
 
         matches = current
 
-        for protocol_rule, expected in self._protocol_index.items():
-            if matches.isdisjoint(expected):
+        for i, rule_protocol in enumerate(self._protocol_index):
+            if i not in matches:
                 continue
 
-            protocol_matched = False
+            final_res = True
+            for op in rule_protocol:
 
-            for protocol_analyzer in self._uefi_analyzer.protocols:
-                if (
-                    protocol_rule.name == protocol_analyzer.name
-                    and protocol_rule.value == protocol_analyzer.value
-                ):
-                    protocol_matched = True
+                # check kind of matches
+                if op not in ["and", "or", "not-any", "not-all"]:
+                    raise UefiScannerError(
+                        f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
+                    )
+
+                res = True
+                if op == "and":  # AND
+                    res = self._and_protocols(rule_protocol[op])
+
+                if op == "or":  # OR
+                    res = self._or_protocols(rule_protocol[op])
+
+                if op == "not-any":  # NOT OR
+                    res = not self._or_protocols(rule_protocol[op])
+
+                if op == "not-all":  # NOT AND
+                    res = not self._and_protocols(rule_protocol[op])
+
+                print(f"[I] Final: {res}, {op}: {rule_protocol[op]}")
+
+                final_res &= res  # AND between all sets of protocols
+                if not final_res:
                     break
 
-            matches = self._update_index_match(matches, expected, protocol_matched)
-
-            if len(matches) == 0:
-                break
+            matches = self._update_index_match(matches, i, final_res)
 
         return matches
 
@@ -1029,15 +1054,15 @@ class UefiScanner:
     def _get_results(self) -> Set[int]:
         matches = set(range(len(self._uefi_rules)))
 
-        # compare NVRAM
-        # matches = self._nvram_scanner(matches)
-        # if len(matches) == 0:
-        #     return matches
+        # compare NVRAM variables
+        matches = self._compare_nvram_vars(matches)
+        if len(matches) == 0:
+            return matches
 
         # compare protocols
-        # matches = self._compare_protocols(matches)
-        # if len(matches) == 0:
-        #     return matches
+        matches = self._compare_protocols(matches)
+        if len(matches) == 0:
+            return matches
 
         # compare GUIDs
         # matches = self._compare_guids(matches)
@@ -1046,11 +1071,6 @@ class UefiScanner:
 
         # compare PPI
         # matches = self._compare_ppi(matches)
-        # if len(matches) == 0:
-        #     return matches
-
-        # match ESIL patterns
-        # matches = self._esil_scanner(matches)
         # if len(matches) == 0:
         #     return matches
 
