@@ -4,6 +4,7 @@
 Tools for analyzing UEFI firmware using radare2
 """
 
+import binascii
 from collections import defaultdict
 import json
 import os
@@ -72,15 +73,15 @@ class UefiRule:
         self._rule: Optional[str] = rule_path
         self._rule_name: str = str()
         self._uefi_rule: Dict[str, Any] = dict()
-        self._nvram_vars: Optional[List[NvramVariable]] = None
-        self._protocols: Optional[List[UefiProtocol]] = None
-        self._ppi_list: Optional[List[UefiProtocol]] = None
-        self._protocol_guids: Optional[List[UefiProtocolGuid]] = None
-        self._esil_rules: Optional[List[List[str]]] = None
-        self._strings: Optional[List[str]] = None
-        self._wide_strings: Optional[List[str]] = None
-        self._hex_strings: Optional[List[str]] = None
-        self._code: Optional[List[Any]] = None
+        self._nvram_vars: Optional[List[NvramVariable]] = None  # TODO
+        self._protocols: Optional[List[UefiProtocol]] = None  # TODO
+        self._ppi_list: Optional[List[UefiProtocol]] = None  # TODO
+        self._protocol_guids: Optional[List[UefiProtocolGuid]] = None  # TODO
+        self._esil_rules: Optional[List[List[str]]] = None  # TODO
+        self._strings: Optional[Dict[str, List[str]]] = None
+        self._wide_strings: Optional[Dict[str, List[Dict[str, str]]]] = None
+        self._hex_strings: Optional[Dict[str, List[str]]] = None
+        self._code: Optional[List[Any]] = None  # TODO
         if self._rule is not None:
             if os.path.isfile(self._rule):
                 try:
@@ -231,51 +232,33 @@ class UefiRule:
             self._code = self._get_code()
         return self._code
 
-    def _get_strings(self) -> List[str]:
-        strings: List[str] = list()
-        if "strings" not in self._uefi_rule:
-            return strings
-        for string_id in self._uefi_rule["strings"]:
-            string = self._uefi_rule["strings"][string_id]
-            strings.append(string)
-        return strings
+    def _get_strings(self) -> Dict[str, List[str]]:
+        return self._uefi_rule.get("strings", dict())
 
     @property
-    def strings(self) -> List[str]:
+    def strings(self) -> Dict[str, List[str]]:
         """Get strings from rule"""
 
         if self._strings is None:
             self._strings = self._get_strings()
         return self._strings
 
-    def _get_wide_strings(self) -> List[str]:
-        wide_strings: List[str] = list()
-        if "wide_strings" not in self._uefi_rule:
-            return wide_strings
-        for wide_string_id in self._uefi_rule["wide_strings"]:
-            string = self._uefi_rule["wide_strings"][wide_string_id]
-            wide_strings.append(string)
-        return wide_strings
+    def _get_wide_strings(self) -> Dict[str, List[Dict[str, str]]]:
+        return self._uefi_rule.get("wide_strings", dict())
 
     @property
-    def wide_strings(self) -> List[str]:
+    def wide_strings(self) -> Dict[str, List[Dict[str, str]]]:
         """Get wide strings from rule"""
 
         if self._wide_strings is None:
             self._wide_strings = self._get_wide_strings()
         return self._wide_strings
 
-    def _get_hex_strings(self) -> List[str]:
-        hex_strings: List[str] = list()
-        if "hex_strings" not in self._uefi_rule:
-            return hex_strings
-        for hex_string_id in self._uefi_rule["hex_strings"]:
-            string = self._uefi_rule["hex_strings"][hex_string_id]
-            hex_strings.append(string)
-        return hex_strings
+    def _get_hex_strings(self) -> Dict[str, List[str]]:
+        return self._uefi_rule.get("hex_strings", dict())
 
     @property
-    def hex_strings(self) -> List[str]:
+    def hex_strings(self) -> Dict[str, List[str]]:
         """Get hex strings from rule"""
 
         if self._hex_strings is None:
@@ -434,388 +417,17 @@ class UefiRule:
         return self._esil_rules
 
 
+class UefiScannerError(Exception):
+    """Generic scanner error exception."""
+
+    def __init__(self, value: str) -> None:
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
+
+
 class UefiScanner:
-    """helper object for scanning an EFI image with a given rule"""
-
-    def __init__(self, uefi_analyzer: UefiAnalyzer, uefi_rule: UefiRule):
-        self._uefi_analyzer: UefiAnalyzer = uefi_analyzer
-        self._uefi_rule: UefiRule = uefi_rule
-        self._result: Optional[bool] = None
-        # temp values
-        self._funcs_bounds: List[Tuple[int, int]] = list()
-        self._rec_addrs: List[int] = list()
-
-    def _compare(self, x: list, y: list) -> bool:
-
-        if len(x) != len(y):
-            return False
-        for i in range(len(x)):
-            if x[i] == "X":
-                continue
-            if x[i] != y[i]:
-                return False
-        return True
-
-    def _check_rule(self, esil_rule: List[str]) -> bool:
-        """Esil scanner helper"""
-
-        ops = self._uefi_analyzer.insns
-        for i in range(len(ops) - len(esil_rule) + 1):
-            counter_item = 0
-            for j in range(len(esil_rule)):
-                if "esil" not in ops[i + j]:
-                    continue
-                x, y = esil_rule[j].split(","), ops[i + j]["esil"].split(",")
-                if not self._compare(x, y):
-                    continue
-                counter_item += 1
-            if counter_item == len(esil_rule):
-                return True
-        return False
-
-    def _esil_scanner(self) -> bool:
-        """Match ESIL patterns"""
-
-        if self._uefi_rule.esil_rules is None:
-            return True
-        for esil_rule in self._uefi_rule.esil_rules:
-            if not self._check_rule(esil_rule):
-                return False
-        return True
-
-    def _strings_scanner(self) -> bool:
-        """Match strings"""
-
-        if self._uefi_rule.strings is None:
-            return True
-        for string in self._uefi_rule.strings:
-            res = self._uefi_analyzer._rz.cmdj("/j {}".format(string))
-            if not res:
-                return False
-        return True
-
-    def _wide_strings_scanner(self) -> bool:
-        """Match wide strings"""
-
-        if self._uefi_rule.wide_strings is None:
-            return True
-        for wide_string in self._uefi_rule.wide_strings:
-            res = self._uefi_analyzer._rz.cmdj("/wj {}".format(wide_string))
-            if not res:
-                return False
-        return True
-
-    def _hex_strings_scanner(self) -> bool:
-        """Match hex strings"""
-
-        if self._uefi_rule.hex_strings is None:
-            return True
-        for hex_string in self._uefi_rule.hex_strings:
-            res = self._uefi_analyzer._rz.cmdj("/xj {}".format(hex_string))
-            if not res:
-                return False
-        return True
-
-    def _nvram_scanner(self) -> bool:
-        """Compare NVRAM"""
-
-        if self._uefi_rule.nvram_vars is None:
-            return True
-        for nvram_rule in self._uefi_rule.nvram_vars:
-            nvram_matched = False
-            for nvram_analyzer in self._uefi_analyzer.nvram_vars:
-                if (
-                    nvram_rule.name == nvram_analyzer.name
-                    and nvram_rule.guid == nvram_analyzer.guid
-                    and nvram_rule.service.name == nvram_analyzer.service.name
-                ):
-                    nvram_matched = True
-                    break
-            if not nvram_matched:
-                return False
-        return True
-
-    def _compare_protocols(self) -> bool:
-        """Compare protocols"""
-
-        if self._uefi_rule.protocols is None:
-            return True
-        for protocol_rule in self._uefi_rule.protocols:
-            protocol_matched = False
-            for protocol_analyzer in self._uefi_analyzer.protocols:
-                if (
-                    protocol_rule.name == protocol_analyzer.name
-                    and protocol_rule.value == protocol_analyzer.value
-                ):
-                    protocol_matched = True
-                    break
-            if not protocol_matched:
-                return False
-        return True
-
-    def _compare_guids(self) -> bool:
-        """Compare GUIDs"""
-
-        if self._uefi_rule.protocol_guids is None:
-            return True
-
-        for guid_rule in self._uefi_rule.protocol_guids:
-            guid_matched = False
-            for guid_analyzer in self._uefi_analyzer.protocol_guids:
-                # name or value should match (both are unique)
-                if (
-                    guid_rule.name == guid_analyzer.name
-                    or guid_rule.value == guid_analyzer.value
-                ):
-                    guid_matched = True
-                    break
-            if not guid_matched:
-                return False
-        return True
-
-    def _compare_ppi(self) -> bool:
-        """Compare PPI"""
-
-        if self._uefi_rule.ppi_list is None:
-            return True
-        for ppi_rule in self._uefi_rule.ppi_list:
-            ppi_matched = False
-            for ppi_analyzer in self._uefi_analyzer.ppi_list:
-                if (
-                    ppi_rule.name == ppi_analyzer.name
-                    and ppi_rule.value == ppi_analyzer.value
-                ):
-                    ppi_matched = True
-                    break
-            if not ppi_matched:
-                return False
-        return True
-
-    def _get_bounds(self, insns: List[Dict[str, Any]]) -> Tuple:
-        """Get function end address"""
-
-        funcs = list(self._uefi_analyzer._rz.cmdj("aflqj"))
-        funcs.sort()
-
-        start = insns[0].get("offset", None)
-        end_insn = insns[-1].get("offset", None)
-
-        if start is None or end_insn is None:
-            return tuple((None, None))
-
-        if start == funcs[-1]:
-            return tuple((start, end_insn))
-
-        try:
-            start_index = funcs.index(start)
-        except ValueError:
-            return tuple((start, end_insn))
-
-        end_func = funcs[start_index + 1]
-        if end_insn < end_func:
-            return tuple((start, end_insn))
-
-        return tuple((start, end_func))
-
-    @staticmethod
-    def _tree_debug(start: int, end: int, depth: int) -> None:
-        if not depth:
-            print(
-                f"\nFunction tree in the handler at {start:#x} (from {start:#x} to {end:#x})"
-            )
-        else:
-            prefix = depth * "--"
-            print(f"{prefix}{start:#x} (from {start:#x} to {end:#x})")
-
-    def _get_bounds_rec(self, start_addr: int, depth: int, debug: bool) -> bool:
-        """Recursively traverse the function and find the boundaries of all child functions"""
-
-        self._uefi_analyzer._rz.cmd(f"s {start_addr:#x}")
-        self._uefi_analyzer._rz.cmd(f"af")
-
-        insns = self._uefi_analyzer._rz.cmd("pdrj")
-        # prevent error messages to sys.stderr from rizin:
-        # https://github.com/rizinorg/rz-pipe/blob/0f7ac66e6d679ebb03be26bf61a33f9ccf199f27/python/rzpipe/open_base.py#L261
-        try:
-            insns = json.loads(insns)
-        except (ValueError, KeyError, TypeError) as _:
-            return False
-
-        # append function bounds
-        start, end = self._get_bounds(insns)
-
-        if start is not None and end is not None and start_addr == start:
-            self._funcs_bounds.append((start, end))
-
-        if debug:
-            self._tree_debug(start_addr, end, depth)
-            depth += 1
-
-        # scan child functions
-        for insn in insns:
-            if insn.get("type", None) != "call":
-                continue
-            if "esil" not in insn:
-                continue
-            esil = insn["esil"].split(",")
-            if esil[-3:] != ["=[]", "rip", "="]:
-                continue
-            try:
-                address = int(esil[0])
-                if address not in self._rec_addrs:
-                    self._rec_addrs.append(address)
-                    self._get_bounds_rec(address, depth, debug)
-            except ValueError as _:
-                continue
-
-        return True
-
-    def _hex_strings_scanner_bounds(self, pattern: str, start: int, end: int) -> bool:
-        """Match hex strings"""
-
-        res = self._uefi_analyzer._rz.cmdj(f"/xj {pattern}")
-        if not res:
-            return False
-
-        for sres in res:
-            offset = sres.get("offset", None)
-            if offset is None:
-                continue
-
-            if offset >= start and offset <= end:
-                return True
-
-        return False
-
-    def _clear_cache(self) -> None:
-        self._funcs_bounds = list()
-        self._rec_addrs = list()
-
-    def _code_scan_rec(self, address: int, pattern: str) -> bool:
-
-        self._clear_cache()
-
-        self._get_bounds_rec(address, depth=0, debug=False)
-        if not len(self._funcs_bounds):
-            return False
-
-        for start, end in self._funcs_bounds:
-            if self._hex_strings_scanner_bounds(pattern, start, end):
-                # Debug
-                # print(f"Matched: {start:#x} - {end:#x}")
-                return True
-
-        return False
-
-    def _code_scanner(self) -> bool:
-        """Compare code patterns"""
-
-        if self._uefi_rule.code is None:
-            return True
-
-        res = True
-
-        for c in self._uefi_rule.code:
-
-            if c.sw_smi_handlers:
-                sw_smi_handler_res = False
-                for sw_smi_handler in self._uefi_analyzer.swsmi_handlers:
-                    sw_smi_handler_res = self._code_scan_rec(
-                        sw_smi_handler.address, c.pattern
-                    )
-                    if sw_smi_handler_res:
-                        break
-                res &= sw_smi_handler_res
-                if not res:
-                    return False
-
-            if c.child_sw_smi_handlers:
-                child_sw_smi_handler_res = False
-                for child_sw_smi_handler in self._uefi_analyzer.child_swsmi_handlers:
-                    child_sw_smi_handler_res = self._code_scan_rec(
-                        child_sw_smi_handler.address, c.pattern
-                    )
-                    if child_sw_smi_handler_res:
-                        break
-                res &= child_sw_smi_handler_res
-                if not res:
-                    return False
-
-            if len(c.child_sw_smi_handlers_guids):
-                child_sw_smi_handler_res = False
-                for child_sw_smi_handler in self._uefi_analyzer.child_swsmi_handlers:
-                    if (
-                        child_sw_smi_handler.handler_guid
-                        not in c.child_sw_smi_handlers_guids
-                    ):
-                        continue
-                    child_sw_smi_handler_res = self._code_scan_rec(
-                        child_sw_smi_handler.address, c.pattern
-                    )
-                    res &= child_sw_smi_handler_res
-                    if not res:
-                        return False
-
-        return res
-
-    def _get_result(self) -> bool:
-
-        # compare NVRAM
-        result = self._nvram_scanner()
-        if not result:
-            return result
-
-        # compare protocols
-        result &= self._compare_protocols()
-        if not result:
-            return result
-
-        # compare GUIDs
-        result &= self._compare_guids()
-        if not result:
-            return result
-
-        # compare PPI
-        result &= self._compare_ppi()
-        if not result:
-            return result
-
-        # match ESIL patterns
-        result &= self._esil_scanner()
-        if not result:
-            return result
-
-        # match strings
-        result &= self._strings_scanner()
-        if not result:
-            return result
-
-        # match wide strings
-        result &= self._wide_strings_scanner()
-        if not result:
-            return result
-
-        # match hex strings
-        result &= self._hex_strings_scanner()
-        if not result:
-            return result
-
-        # match code patterns
-        result &= self._code_scanner()
-        if not result:
-            return result
-
-        return result
-
-    @property
-    def result(self) -> bool:
-        """Get scanning result"""
-
-        if self._result is None:
-            self._result = self._get_result()
-        return self._result
-
-class UefiMultiScanner:
     """helper object for scanning an EFI image with multiple rules"""
 
     def __init__(self, uefi_analyzer: UefiAnalyzer, uefi_rules: List[UefiRule]):
@@ -827,13 +439,15 @@ class UefiMultiScanner:
         self._nvram_index: DefaultDict[NvramVariable, Set[int]] = defaultdict(set)
         self._protocol_index: DefaultDict[UefiProtocol, Set[int]] = defaultdict(set)
         self._ppi_index: DefaultDict[UefiProtocol, Set[int]] = defaultdict(set)
-        self._protocol_guid_index: DefaultDict[UefiProtocolGuid, Set[int]] = defaultdict(set)
-
-        self._string_index: DefaultDict[str, Set[int]] = defaultdict(set)
-        self._hex_string_index: DefaultDict[str, Set[int]] = defaultdict(set)
-        self._wide_string_index: DefaultDict[str, Set[int]] = defaultdict(set)
+        self._protocol_guid_index: DefaultDict[
+            UefiProtocolGuid, Set[int]
+        ] = defaultdict(set)
 
         # likley not to be shared; indices correspond to self._uefi_rules
+        self._string_index: List[Any] = list()
+        self._hex_string_index: List[Any] = list()
+        self._wide_string_index: List[Any] = list()
+
         self._esil_index: List[List[Any]] = list()
         self._code_index: List[List[Any]] = list()
 
@@ -844,7 +458,9 @@ class UefiMultiScanner:
         self._index_rules()
 
     @staticmethod
-    def _index_iterable_to_dict(target: DefaultDict[Any, Set[int]], source: Optional[Iterable[Any]], index: int) -> None:
+    def _index_iterable_to_dict(
+        target: DefaultDict[Any, Set[int]], source: Optional[Iterable[Any]], index: int
+    ) -> None:
         if source is not None:
             for elem in source:
                 target[elem].add(index)
@@ -855,11 +471,13 @@ class UefiMultiScanner:
         self._index_iterable_to_dict(self._nvram_index, rule.nvram_vars, index)
         self._index_iterable_to_dict(self._protocol_index, rule.protocols, index)
         self._index_iterable_to_dict(self._ppi_index, rule.ppi_list, index)
-        self._index_iterable_to_dict(self._protocol_guid_index, rule.protocol_guids, index)
-        self._index_iterable_to_dict(self._string_index, rule.strings, index)
-        self._index_iterable_to_dict(self._hex_string_index, rule.hex_strings, index)
-        self._index_iterable_to_dict(self._wide_string_index, rule.wide_strings, index)
+        self._index_iterable_to_dict(
+            self._protocol_guid_index, rule.protocol_guids, index
+        )
 
+        self._string_index.append(rule.strings)
+        self._wide_string_index.append(rule.wide_strings)
+        self._hex_string_index.append(rule.hex_strings)
         self._esil_index.append(rule.esil_rules)
         self._code_index.append(rule.code)
 
@@ -869,9 +487,11 @@ class UefiMultiScanner:
             self._index_rule(rule, i)
 
     @staticmethod
-    def _update_index_match(previous: Set[int], expected: Union[int, Set[int]], matched: bool) -> Set[int]:
+    def _update_index_match(
+        previous: Set[int], expected: Union[int, Set[int]], matched: bool
+    ) -> Set[int]:
         if type(expected) is int:
-            return previous if matched else (previous - { expected })
+            return previous if matched else (previous - {expected})
         elif type(expected) is set:
             return previous if matched else (previous - expected)
         else:
@@ -927,18 +547,120 @@ class UefiMultiScanner:
 
         return matches
 
+    def _and_strings(self, strings: List[str]) -> bool:
+        res = True
+        for string in strings:
+            res &= not not self._uefi_analyzer._rz.cmdj("/j {}".format(string))
+            if not res:
+                break
+        return res
+
+    def _or_strings(self, strings: List[str]) -> bool:
+        res = True
+        for string in strings:
+            res |= not not self._uefi_analyzer._rz.cmdj("/j {}".format(string))
+            if res:
+                break
+        return res
+
+    def _and_hex_strings(self, strings: List[str]) -> bool:
+        res = True
+        for string in strings:
+            res &= not not self._uefi_analyzer._rz.cmdj("/xj {}".format(string))
+            if not res:
+                break
+        return res
+
+    def _or_hex_strings(self, strings: List[str]) -> bool:
+        res = True
+        for string in strings:
+            res |= not not self._uefi_analyzer._rz.cmdj("/xj {}".format(string))
+            if res:
+                break
+        return res
+
+    def _and_wide_strings(self, strings: List[dict]) -> bool:
+        res = True
+        for item in strings:
+            if "utf16le" in item:
+                res &= not not self._uefi_analyzer._rz.cmdj(
+                    "/wj {}".format(item["utf16le"])
+                )
+            elif "utf16be" in item:
+                string = item["utf16be"]
+                res &= not not self._uefi_analyzer._rz.cmdj(
+                    "/xj {}".format(
+                        binascii.hexlify(string.encode("utf-16be")).decode()
+                    )
+                )
+            else:
+                raise UefiScannerError("Wrong wide string format")
+
+            if not res:
+                break
+
+        return res
+
+    def _or_wide_strings(self, strings: List[dict]) -> bool:
+        res = True
+        for item in strings:
+            if "utf16le" in item:
+                res |= not not self._uefi_analyzer._rz.cmdj(
+                    "/wj {}".format(item["utf16le"])
+                )
+            elif "utf16be" in item:
+                string = item["utf16be"]
+                res |= not not self._uefi_analyzer._rz.cmdj(
+                    "/xj {}".format(
+                        binascii.hexlify(string.encode("utf-16be")).decode()
+                    )
+                )
+            else:
+                raise UefiScannerError("Wrong wide string format")
+
+            if res:
+                break
+
+        return res
+
     def _strings_scanner(self, current: Set[int]) -> Set[int]:
         """Match strings"""
 
         matches = current
 
-        for string, expected in self._string_index.items():
-            if matches.isdisjoint(expected):
+        for i, rule_strings in enumerate(self._string_index):
+            if i not in matches:
                 continue
 
-            res = self._uefi_analyzer._rz.cmdj("/j {}".format(string))
+            final_res = True
+            for op in rule_strings:
 
-            matches = self._update_index_match(matches, expected, not not res)
+                # check kind of matches
+                if op not in ["and", "or", "not-any", "not-all"]:
+                    raise UefiScannerError(
+                        f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
+                    )
+
+                res = True
+                if op == "and":  # AND
+                    res = self._and_strings(rule_strings[op])
+
+                if op == "or":  # OR
+                    res = self._or_strings(rule_strings[op])
+
+                if op == "not-any":  # NOT OR
+                    res = not self._or_strings(rule_strings[op])
+
+                if op == "not-all":  # NOT AND
+                    res = not self._and_strings(rule_strings[op])
+
+                print(f"[I] Final: {res}, {op}: {rule_strings[op]}")
+
+                final_res &= res  # AND between all sets of strings
+                if not final_res:
+                    break
+
+            matches = self._update_index_match(matches, i, final_res)
 
         return matches
 
@@ -947,16 +669,40 @@ class UefiMultiScanner:
 
         matches = current
 
-        for wide_string, expected in self._wide_string_index.items():
-            if matches.isdisjoint(expected):
+        for i, rule_wide_strings in enumerate(self._wide_string_index):
+            if i not in matches:
                 continue
 
-            res = self._uefi_analyzer._rz.cmdj("/wj {}".format(wide_string))
+            final_res = True
+            for op in rule_wide_strings:
 
-            matches = self._update_index_match(matches, expected, not not res)
+                # check kind of matches
+                if op not in ["and", "or", "not-any", "not-all"]:
+                    raise UefiScannerError(
+                        f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
+                    )
 
-            if len(matches) == 0:
-                break
+                print(rule_wide_strings[op])
+                res = True
+                if op == "and":  # AND
+                    res = self._and_wide_strings(rule_wide_strings[op])
+
+                if op == "or":  # OR
+                    res = self._or_wide_strings(rule_wide_strings[op])
+
+                if op == "not-any":  # NOT OR
+                    res = not self._or_wide_strings(rule_wide_strings[op])
+
+                if op == "not-all":  # NOT AND
+                    res = not self._and_wide_strings(rule_wide_strings[op])
+
+                print(f"[I] Final: {res}, {op}: {rule_wide_strings[op]}")
+
+                final_res &= res  # AND between all sets of strings
+                if not final_res:
+                    break
+
+            matches = self._update_index_match(matches, i, final_res)
 
         return matches
 
@@ -965,16 +711,39 @@ class UefiMultiScanner:
 
         matches = current
 
-        for hex_string, expected in self._hex_string_index.items():
-            if matches.isdisjoint(expected):
+        for i, rule_hex_strings in enumerate(self._hex_string_index):
+            if i not in matches:
                 continue
 
-            res = self._uefi_analyzer._rz.cmdj("/xj {}".format(hex_string))
+            final_res = True
+            for op in rule_hex_strings:
 
-            matches = self._update_index_match(matches, expected, not not res)
+                # check kind of matches
+                if op not in ["and", "or", "not-any", "not-all"]:
+                    raise UefiScannerError(
+                        f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
+                    )
 
-            if len(matches) == 0:
-                break
+                res = True
+                if op == "and":  # AND
+                    res = self._and_hex_strings(rule_hex_strings[op])
+
+                if op == "or":  # OR
+                    res = self._or_hex_strings(rule_hex_strings[op])
+
+                if op == "not-any":  # NOT OR
+                    res = not self._or_hex_strings(rule_hex_strings[op])
+
+                if op == "not-all":  # NOT AND
+                    res = not self._and_hex_strings(rule_hex_strings[op])
+
+                print(f"[I] Final: {res}, {op}: {rule_hex_strings[op]}")
+
+                final_res &= res  # AND between all sets of strings
+                if not final_res:
+                    break
+
+            matches = self._update_index_match(matches, i, final_res)
 
         return matches
 
@@ -1222,7 +991,9 @@ class UefiMultiScanner:
 
                 if c.child_sw_smi_handlers:
                     child_sw_smi_handler_res = False
-                    for child_sw_smi_handler in self._uefi_analyzer.child_swsmi_handlers:
+                    for (
+                        child_sw_smi_handler
+                    ) in self._uefi_analyzer.child_swsmi_handlers:
                         child_sw_smi_handler_res = self._code_scan_rec(
                             child_sw_smi_handler.address, c.pattern
                         )
@@ -1234,7 +1005,9 @@ class UefiMultiScanner:
 
                 if len(c.child_sw_smi_handlers_guids):
                     child_sw_smi_handler_res = False
-                    for child_sw_smi_handler in self._uefi_analyzer.child_swsmi_handlers:
+                    for (
+                        child_sw_smi_handler
+                    ) in self._uefi_analyzer.child_swsmi_handlers:
                         if (
                             child_sw_smi_handler.handler_guid
                             not in c.child_sw_smi_handlers_guids
@@ -1257,29 +1030,34 @@ class UefiMultiScanner:
         matches = set(range(len(self._uefi_rules)))
 
         # compare NVRAM
-        matches = self._nvram_scanner(matches)
-        if len(matches) == 0:
-            return matches
+        # matches = self._nvram_scanner(matches)
+        # if len(matches) == 0:
+        #     return matches
 
         # compare protocols
-        matches = self._compare_protocols(matches)
-        if len(matches) == 0:
-            return matches
+        # matches = self._compare_protocols(matches)
+        # if len(matches) == 0:
+        #     return matches
 
         # compare GUIDs
-        matches = self._compare_guids(matches)
-        if len(matches) == 0:
-            return matches
+        # matches = self._compare_guids(matches)
+        # if len(matches) == 0:
+        #     return matches
 
         # compare PPI
-        matches = self._compare_ppi(matches)
-        if len(matches) == 0:
-            return matches
+        # matches = self._compare_ppi(matches)
+        # if len(matches) == 0:
+        #     return matches
 
         # match ESIL patterns
-        matches = self._esil_scanner(matches)
-        if len(matches) == 0:
-            return matches
+        # matches = self._esil_scanner(matches)
+        # if len(matches) == 0:
+        #     return matches
+
+        # match code patterns
+        # matches = self._code_scanner(matches)
+        # if len(matches) == 0:
+        #     return matches
 
         # match strings
         matches = self._strings_scanner(matches)
@@ -1293,11 +1071,6 @@ class UefiMultiScanner:
 
         # match hex strings
         matches = self._hex_strings_scanner(matches)
-        if len(matches) == 0:
-            return matches
-
-        # match code patterns
-        matches = self._code_scanner(matches)
         if len(matches) == 0:
             return matches
 
