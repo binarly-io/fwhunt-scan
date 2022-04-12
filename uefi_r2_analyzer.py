@@ -12,7 +12,7 @@ from typing import List
 
 import click
 
-from uefi_r2 import UefiAnalyzer, UefiRule, UefiScanner, UefiMultiScanner
+from uefi_r2 import UefiAnalyzer, UefiRule, UefiScanner
 
 
 @click.group()
@@ -98,31 +98,20 @@ def scan(image_path: str, rule: List[str]) -> bool:
 
         uefi_rules.append(uefi_rule)
 
-    if len(uefi_rules) > 1:
-        scanner = UefiMultiScanner(uefi_analyzer, uefi_rules)
-        prefix = click.style("Scanner result", fg="green")
+    scanner = UefiScanner(uefi_analyzer, uefi_rules)
+    prefix = click.style("Scanner result", fg="green")
 
-        no_threat = click.style("No threat detected", fg="green")
-        threat = click.style(
-            "FwHunt rule has been triggered and threat detected!", fg="red"
-        )
+    no_threat = click.style("No threat detected", fg="green")
+    threat = click.style(
+        "FwHunt rule has been triggered and threat detected!", fg="red"
+    )
 
-        results = scanner.results
-        for i, uefi_rule in enumerate(uefi_rules):
-            if i in results:
-                print(f"{prefix} {uefi_rule.name} {threat} ({image_path})")
-            else:
-                print(f"{prefix} {uefi_rule.name} {no_threat} ({image_path})")
-    else:
-        uefi_rule = uefi_rules[0]
-        scanner = UefiScanner(uefi_analyzer, uefi_rule)
-        prefix = click.style("Scanner result", fg="green")
-        res = click.style("No threats detected", fg="green")
-        if scanner.result:
-            res = click.style(
-                "FwHunt rule has been triggered and threat detected!", fg="red"
-            )
-        print(f"{prefix} {uefi_rule.name} {res} ({image_path})")
+    results = scanner.results
+    for i, uefi_rule in enumerate(uefi_rules):
+        if i in results:
+            print(f"{prefix} {uefi_rule.name} {threat} ({image_path})")
+        else:
+            print(f"{prefix} {uefi_rule.name} {no_threat} ({image_path})")
 
     uefi_analyzer.close()
 
