@@ -5,7 +5,6 @@ Tools for analyzing UEFI firmware using radare2
 """
 
 import binascii
-from collections import defaultdict
 import json
 import os
 from typing import Any, DefaultDict, Dict, Iterable, List, Optional, Set, Tuple, Union
@@ -15,8 +14,8 @@ import yaml
 from uefi_r2.uefi_analyzer import (
     NvramVariable,
     UefiAnalyzer,
-    UefiProtocol,
     UefiGuid,
+    UefiProtocol,
     UefiService,
 )
 
@@ -24,33 +23,15 @@ from uefi_r2.uefi_analyzer import (
 class CodePattern:
     """Code pattern"""
 
-    def __init__(self, pattern: str, places: Optional[List[Any]]) -> None:
+    def __init__(self, pattern: str, place: Optional[str]) -> None:
         self.pattern: str = pattern
-        self.places: Optional[List[Any]] = places
+        self.place: Optional[str] = place
 
         # if True, scan in all SW SMI handlers
-        self.sw_smi_handlers: bool = False
+        self.sw_smi_handlers: bool = place == "sw_smi_handlers"
 
         # if True, scan in all child SW SMI handlers
-        self.child_sw_smi_handlers: bool = False
-
-        # list of child SW SMI handlers GUIDs
-        self.child_sw_smi_handlers_guids: List[str] = list()
-
-        if self.places is not None:
-
-            for place in self.places:
-                if type(place) == str and place == "sw_smi_handlers":
-                    self.sw_smi_handlers = True
-
-                elif type(place) == str and place == "child_sw_smi_handlers":
-                    self.child_sw_smi_handlers = True
-
-                elif type(place) == dict:
-                    if "child_sw_smi_handler" not in place:
-                        continue
-                    for guid in place["child_sw_smi_handler"]:
-                        self.child_sw_smi_handlers_guids.append(guid)
+        self.child_sw_smi_handlers: bool = place == "child_sw_smi_handlers"
 
     @property
     def __dict__(self):
@@ -59,7 +40,6 @@ class CodePattern:
                 "pattern": self.pattern,
                 "sw_smi_handlers": self.sw_smi_handlers,
                 "child_sw_smi_handlers": self.child_sw_smi_handlers,
-                "child_sw_smi_handlers_guids": self.child_sw_smi_handlers_guids,
             }
         )
 
@@ -80,7 +60,7 @@ class UefiRule:
         self._strings: Optional[Dict[str, List[str]]] = None
         self._wide_strings: Optional[Dict[str, List[Dict[str, str]]]] = None
         self._hex_strings: Optional[Dict[str, List[str]]] = None
-        self._code: Optional[List[Any]] = None  # TODO
+        self._code: Optional[Dict[str, List[Dict[str, str]]]] = None
         if self._rule is not None:
             if os.path.isfile(self._rule):
                 try:
@@ -209,22 +189,22 @@ class UefiRule:
         except KeyError:
             return None
 
-    def _get_code(self) -> List[Any]:
-        code: List[Any] = list()
+    def _get_code(self) -> Dict[str, List[Dict[str, str]]]:
+        code: Dict[str, List[Dict[str, str]]] = dict()
         if "code" not in self._uefi_rule:
             return code
-        for index in self._uefi_rule["code"]:
-            c = self._uefi_rule["code"][index]
-            code.append(
-                CodePattern(
+        for op in self._uefi_rule["code"]:
+            code[op] = list()
+            for c in self._uefi_rule["code"][op]:
+                cp = CodePattern(
                     pattern=c.get("pattern", None),
-                    places=c.get("place", None),
+                    place=c.get("place", None),
                 )
-            )
+                code[op].append(cp)
         return code
 
     @property
-    def code(self) -> List[Any]:
+    def code(self) -> Dict[str, List[Dict[str, str]]]:
         """Get code from rule"""
 
         if self._code is None:
@@ -873,8 +853,8 @@ class UefiScanner:
     def _compare_ppi(self, matches: Set[int]) -> Set[int]:
         """Compare PPI"""
 
-        for ppi_rule, expected in self._ppi_index.items():
-            if matches.isdisjoint(expected):
+        for i, ppi_rule in enumerate(self._ppi_index):
+            if i not in matches:
                 continue
 
             ppi_matched = False
@@ -886,7 +866,7 @@ class UefiScanner:
                     ppi_matched = True
                     break
 
-            matches = self._update_index_match(matches, expected, ppi_matched)
+            matches = self._update_index_match(matches, i, ppi_matched)
 
             if len(matches) == 0:
                 break
@@ -1009,63 +989,88 @@ class UefiScanner:
 
         return False
 
+    def _and_code(self, cs: List[CodePattern]) -> bool:
+        res = True
+        for c in cs:
+            handlers = None
+            if c.sw_smi_handlers:
+                handlers = self._uefi_analyzer.swsmi_handlers
+            elif c.child_sw_smi_handlers:
+                handlers = self._uefi_analyzer.child_swsmi_handlers
+            else:
+                raise UefiScannerError(f"The search place is incorrect")
+            search_res = False
+            for handler in handlers:
+                search_res = self._code_scan_rec(handler.address, c.pattern)
+                if search_res:
+                    break
+
+            res &= search_res
+            if not res:
+                break
+
+        return res
+
+    def _or_code(self, cs: List[CodePattern]) -> bool:
+        res = False
+        for c in cs:
+            handlers = None
+            if c.sw_smi_handlers:
+                handlers = self._uefi_analyzer.swsmi_handlers
+            elif c.child_sw_smi_handlers:
+                handlers = self._uefi_analyzer.child_swsmi_handlers
+            else:
+                raise UefiScannerError(f"The search place is incorrect")
+            search_res = False
+            for handler in handlers:
+                search_res = self._code_scan_rec(handler.address, c.pattern)
+                if search_res:
+                    break
+
+            res |= search_res
+            if res:
+                break
+
+        return res
+
     def _code_scanner(self, current: Set[int]) -> Set[int]:
         """Compare code patterns"""
 
         matches = current
 
-        for i, cs in enumerate(self._code_index):
+        for i, rule_code in enumerate(self._code_index):
             if i not in matches:
                 continue
 
-            res = True
-            for c in cs:
-                if c.sw_smi_handlers:
-                    sw_smi_handler_res = False
-                    for sw_smi_handler in self._uefi_analyzer.swsmi_handlers:
-                        sw_smi_handler_res = self._code_scan_rec(
-                            sw_smi_handler.address, c.pattern
-                        )
-                        if sw_smi_handler_res:
-                            break
-                    res &= sw_smi_handler_res
-                    if not res:
-                        break
+            final_res = True
+            for op in rule_code:
 
-                if c.child_sw_smi_handlers:
-                    child_sw_smi_handler_res = False
-                    for (
-                        child_sw_smi_handler
-                    ) in self._uefi_analyzer.child_swsmi_handlers:
-                        child_sw_smi_handler_res = self._code_scan_rec(
-                            child_sw_smi_handler.address, c.pattern
-                        )
-                        if child_sw_smi_handler_res:
-                            break
-                    res &= child_sw_smi_handler_res
-                    if not res:
-                        break
+                # check kind of matches
+                if op not in ["and", "or", "not-any", "not-all"]:
+                    raise UefiScannerError(
+                        f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
+                    )
 
-                if len(c.child_sw_smi_handlers_guids):
-                    child_sw_smi_handler_res = False
-                    for (
-                        child_sw_smi_handler
-                    ) in self._uefi_analyzer.child_swsmi_handlers:
-                        if (
-                            child_sw_smi_handler.handler_guid
-                            not in c.child_sw_smi_handlers_guids
-                        ):
-                            continue
-                        child_sw_smi_handler_res = self._code_scan_rec(
-                            child_sw_smi_handler.address, c.pattern
-                        )
-                        res &= child_sw_smi_handler_res
-                        if not res:
-                            break
-                    if not res:
-                        break
+                res = True
+                if op == "and":  # AND
+                    res = self._and_code(rule_code[op])
 
-            matches = self._update_index_match(matches, i, res)
+                if op == "or":  # OR
+                    res = self._or_code(rule_code[op])
+
+                if op == "not-any":  # NOT OR
+                    res = not self._or_code(rule_code[op])
+
+                if op == "not-all":  # NOT AND
+                    res = not self._and_code(rule_code[op])
+
+                print(f"[I] Final: {res}, {op}: {rule_code[op]}")
+
+                final_res &= res  # AND between all sets of NVRAM variables
+                if not final_res:
+                    break
+
+            matches = self._update_index_match(matches, i, final_res)
 
         return matches
 
@@ -1093,9 +1098,9 @@ class UefiScanner:
             return matches
 
         # match code patterns
-        # matches = self._code_scanner(matches)
-        # if len(matches) == 0:
-        #     return matches
+        matches = self._code_scanner(matches)
+        if len(matches) == 0:
+            return matches
 
         # match strings
         matches = self._strings_scanner(matches)
