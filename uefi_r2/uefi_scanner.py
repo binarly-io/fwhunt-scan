@@ -16,7 +16,7 @@ from uefi_r2.uefi_analyzer import (
     NvramVariable,
     UefiAnalyzer,
     UefiProtocol,
-    UefiProtocolGuid,
+    UefiGuid,
     UefiService,
 )
 
@@ -76,7 +76,7 @@ class UefiRule:
         self._nvram_vars: Optional[Dict[str, List[NvramVariable]]] = None
         self._protocols: Optional[Dict[str, List[UefiProtocol]]] = None
         self._ppi_list: Optional[Dict[str, List[UefiProtocol]]] = None
-        self._protocol_guids: Optional[Dict[str, List[UefiProtocolGuid]]] = None
+        self._guids: Optional[Dict[str, List[UefiGuid]]] = None
         self._strings: Optional[Dict[str, List[str]]] = None
         self._wide_strings: Optional[Dict[str, List[Dict[str, str]]]] = None
         self._hex_strings: Optional[Dict[str, List[str]]] = None
@@ -316,28 +316,18 @@ class UefiRule:
             self._protocols = self._get_protocols()
         return self._protocols
 
-    def _get_ppi_list(self) -> List[UefiProtocol]:
-        ppi_list: List[UefiProtocol] = list()
+    def _get_ppi_list(self) -> Dict[str, List[UefiProtocol]]:
+        ppi_list: Dict[str, List[UefiProtocol]] = dict()
         if "ppi" not in self._uefi_rule:
             return ppi_list
-        for ppi in self._uefi_rule["ppi"]:
-            for num in ppi:
-                element_name: str = str()
-                element_value: str = str()
-                element_service: str = str()
-                protocol_item = ppi[num]
-                for obj in protocol_item:
-                    if "name" in obj:
-                        element_name = obj["name"]
-                    if "value" in obj:
-                        element_value = obj["value"]
-                    if "service" in obj:
-                        element_service = obj["service"][0]["name"]
-                ppi_list.append(
+        for op in self._uefi_rule["ppi"]:
+            ppi_list[op] = list()
+            for element in self._uefi_rule["ppi"][op]:
+                ppi_list[op].append(
                     UefiProtocol(
-                        name=element_name,
-                        value=element_value,
-                        service=element_service,
+                        name=element["name"],
+                        value=element["value"],
+                        service=element["service"]["name"],
                         address=0x0,
                         guid_address=0x0,
                     )
@@ -345,43 +335,35 @@ class UefiRule:
         return ppi_list
 
     @property
-    def ppi_list(self) -> List[UefiProtocol]:
+    def ppi_list(self) -> Dict[str, List[UefiProtocol]]:
         """Get PPI list from rule"""
 
         if self._ppi_list is None:
             self._ppi_list = self._get_ppi_list()
         return self._ppi_list
 
-    def _get_protocol_guids(self) -> List[UefiProtocolGuid]:
-        protocol_guids: List[UefiProtocolGuid] = list()
+    def _get_guids(self) -> Dict[str, List[UefiGuid]]:
+        guids: Dict[str, List[UefiGuid]] = dict()
         if "guids" not in self._uefi_rule:
-            return protocol_guids
-        for guids_list in self._uefi_rule["guids"]:
-            for num in guids_list:
-                element_name: str = str()
-                element_value: str = str()
-                guid_item = guids_list[num]
-                for obj in guid_item:
-                    if "name" in obj:
-                        element_name = obj["name"]
-                    if "value" in obj:
-                        element_value = obj["value"]
-                protocol_guids.append(
-                    UefiProtocolGuid(
-                        name=element_name,
-                        value=element_value,
-                        address=0x0,
+            return guids
+        for op in self._uefi_rule["guids"]:
+            guids[op] = list()
+            for element in self._uefi_rule["guids"][op]:
+                guids[op].append(
+                    UefiGuid(
+                        name=element["name"],
+                        value=element["value"],
                     )
                 )
-        return protocol_guids
+        return guids
 
     @property
-    def protocol_guids(self) -> List[UefiProtocolGuid]:
+    def guids(self) -> Dict[str, List[UefiGuid]]:
         """Get GUIDs from rule"""
 
-        if self._protocol_guids is None:
-            self._protocol_guids = self._get_protocol_guids()
-        return self._protocol_guids
+        if self._guids is None:
+            self._guids = self._get_guids()
+        return self._guids
 
 
 class UefiScannerError(Exception):
@@ -397,25 +379,23 @@ class UefiScannerError(Exception):
 class UefiScanner:
     """helper object for scanning an EFI image with multiple rules"""
 
+    PROTOCOL: int = 0
+    PPI: int = 1
+
     def __init__(self, uefi_analyzer: UefiAnalyzer, uefi_rules: List[UefiRule]):
         self._uefi_analyzer: UefiAnalyzer = uefi_analyzer
         self._uefi_rules: List[UefiRule] = uefi_rules
         self._results: Optional[Set[int]] = None
 
-        # decision indexes
-        self._ppi_index: DefaultDict[UefiProtocol, Set[int]] = defaultdict(set)
-        self._protocol_guid_index: DefaultDict[
-            UefiProtocolGuid, Set[int]
-        ] = defaultdict(set)
-
         # likley not to be shared; indices correspond to self._uefi_rules
         self._nvram_index: List[Any] = list()
         self._protocol_index: List[Any] = list()
+        self._ppi_index: List[Any] = list()
+        self._guid_index: List[Any] = list()
         self._string_index: List[Any] = list()
         self._hex_string_index: List[Any] = list()
         self._wide_string_index: List[Any] = list()
 
-        self._esil_index: List[List[Any]] = list()
         self._code_index: List[List[Any]] = list()
 
         # temp values
@@ -435,13 +415,10 @@ class UefiScanner:
     def _index_rule(self, rule: UefiRule, index: int) -> None:
         """Adds a rule to the index"""
 
-        self._index_iterable_to_dict(self._ppi_index, rule.ppi_list, index)
-        self._index_iterable_to_dict(
-            self._protocol_guid_index, rule.protocol_guids, index
-        )
-
         self._nvram_index.append(rule.nvram_vars)
         self._protocol_index.append(rule.protocols)
+        self._ppi_index.append(rule.ppi_list)
+        self._guid_index.append(rule.guids)
         self._string_index.append(rule.strings)
         self._wide_string_index.append(rule.wide_strings)
         self._hex_string_index.append(rule.hex_strings)
@@ -626,7 +603,6 @@ class UefiScanner:
                         f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
                     )
 
-                print(rule_wide_strings[op])
                 res = True
                 if op == "and":  # AND
                     res = self._and_wide_strings(rule_wide_strings[op])
@@ -758,8 +734,11 @@ class UefiScanner:
 
         return matches
 
-    def _search_protocol(self, protocol_rule: UefiProtocol) -> bool:
-        for protocol_analyzer in self._uefi_analyzer.protocols:
+    def _search_protocol(self, protocol_rule: UefiProtocol, mode: int) -> bool:
+        items: List[UefiProtocol] = self._uefi_analyzer.protocols
+        if mode == UefiScanner.PPI:
+            items = self._uefi_analyzer.ppi_list
+        for protocol_analyzer in items:
             if (
                 protocol_rule.name == protocol_analyzer.name
                 and protocol_rule.value == protocol_analyzer.value
@@ -768,23 +747,23 @@ class UefiScanner:
                 return True
         return False
 
-    def _and_protocols(self, protocols: List[UefiProtocol]):
+    def _and_protocols(self, protocols: List[UefiProtocol], mode: int) -> bool:
         res = True
         for protocol in protocols:
-            res &= self._search_protocol(protocol)
+            res &= self._search_protocol(protocol, mode)
             if not res:
                 break
         return res
 
-    def _or_protocols(self, protocols: List[UefiProtocol]):
+    def _or_protocols(self, protocols: List[UefiProtocol], mode: int) -> bool:
         res = False
         for protocol in protocols:
-            res |= self._search_protocol(protocol)
+            res |= self._search_protocol(protocol, mode)
             if res:
                 break
         return res
 
-    def _compare_protocols(self, current: Set[int]) -> Set[int]:
+    def _compare_protocols(self, current: Set[int], mode: int) -> Set[int]:
         """Compare protocols"""
 
         matches = current
@@ -804,16 +783,16 @@ class UefiScanner:
 
                 res = True
                 if op == "and":  # AND
-                    res = self._and_protocols(rule_protocol[op])
+                    res = self._and_protocols(rule_protocol[op], mode)
 
                 if op == "or":  # OR
-                    res = self._or_protocols(rule_protocol[op])
+                    res = self._or_protocols(rule_protocol[op], mode)
 
                 if op == "not-any":  # NOT OR
-                    res = not self._or_protocols(rule_protocol[op])
+                    res = not self._or_protocols(rule_protocol[op], mode)
 
                 if op == "not-all":  # NOT AND
-                    res = not self._and_protocols(rule_protocol[op])
+                    res = not self._and_protocols(rule_protocol[op], mode)
 
                 print(f"[I] Final: {res}, {op}: {rule_protocol[op]}")
 
@@ -825,30 +804,69 @@ class UefiScanner:
 
         return matches
 
+    def _search_guid(self, guid_rule: UefiGuid) -> bool:
+        for protocol_analyzer in self._uefi_analyzer.protocols:
+            if (
+                guid_rule.name == protocol_analyzer.name
+                and guid_rule.value == protocol_analyzer.value
+            ):
+                return True
+        return False
+
+    def _and_guids(self, guids: List[UefiGuid]):
+        res = True
+        for guid in guids:
+            res &= self._search_guid(guid)
+            if not res:
+                break
+        return res
+
+    def _or_guids(self, guids: List[UefiGuid]):
+        res = False
+        for guid in guids:
+            res |= self._search_guid(guid)
+            if res:
+                break
+        return res
+
     def _compare_guids(self, current: Set[int]) -> Set[int]:
         """Compare GUIDs"""
 
         matches = current
 
-        for guid_rule, expected in self._protocol_guid_index.items():
-            if matches.isdisjoint(expected):
+        for i, rule_guid in enumerate(self._guid_index):
+            if i not in matches:
                 continue
 
-            guid_matched = False
+            final_res = True
+            for op in rule_guid:
 
-            for guid_analyzer in self._uefi_analyzer.protocol_guids:
-                # name or value should match (both are unique)
-                if (
-                    guid_rule.name == guid_analyzer.name
-                    or guid_rule.value == guid_analyzer.value
-                ):
-                    guid_matched = True
+                # check kind of matches
+                if op not in ["and", "or", "not-any", "not-all"]:
+                    raise UefiScannerError(
+                        f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
+                    )
+
+                res = True
+                if op == "and":  # AND
+                    res = self._and_guids(rule_guid[op])
+
+                if op == "or":  # OR
+                    res = self._or_guids(rule_guid[op])
+
+                if op == "not-any":  # NOT OR
+                    res = not self._or_guids(rule_guid[op])
+
+                if op == "not-all":  # NOT AND
+                    res = not self._and_guids(rule_guid[op])
+
+                print(f"[I] Final: {res}, {op}: {rule_guid[op]}")
+
+                final_res &= res  # AND between all sets of GUIDs
+                if not final_res:
                     break
 
-            matches = self._update_index_match(matches, expected, guid_matched)
-
-            if len(matches) == 0:
-                break
+            matches = self._update_index_match(matches, i, final_res)
 
         return matches
 
@@ -1060,19 +1078,19 @@ class UefiScanner:
             return matches
 
         # compare protocols
-        matches = self._compare_protocols(matches)
+        matches = self._compare_protocols(matches, UefiScanner.PROTOCOL)
         if len(matches) == 0:
             return matches
 
         # compare GUIDs
-        # matches = self._compare_guids(matches)
-        # if len(matches) == 0:
-        #     return matches
+        matches = self._compare_guids(matches)
+        if len(matches) == 0:
+            return matches
 
         # compare PPI
-        # matches = self._compare_ppi(matches)
-        # if len(matches) == 0:
-        #     return matches
+        matches = self._compare_protocols(matches, UefiScanner.PPI)
+        if len(matches) == 0:
+            return matches
 
         # match code patterns
         # matches = self._code_scanner(matches)
