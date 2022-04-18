@@ -82,8 +82,6 @@ def scan(image_path: str, rule: List[str]) -> bool:
             print(f"{prefix} ppi: {[x.__dict__ for x in uefi_rule.ppi_list]}")
         if len(uefi_rule.protocol_guids):
             print(f"{prefix} guids: {[x.__dict__ for x in uefi_rule.protocol_guids]}")
-        if len(uefi_rule.esil_rules):
-            print(f"{prefix} esil: {uefi_rule.esil_rules}")
         if len(uefi_rule.strings):
             print(f"{prefix} strings: {uefi_rule.strings}")
         if len(uefi_rule.wide_strings):

@@ -555,8 +555,6 @@ class UefiScanner:
                 if op == "not-all":  # NOT AND
                     res = not self._and_strings(rule_strings[op])
 
-                print(f"[I] Final: {res}, {op}: {rule_strings[op]}")
-
                 final_res &= res  # AND between all sets of strings
                 if not final_res:
                     break
@@ -596,8 +594,6 @@ class UefiScanner:
                 if op == "not-all":  # NOT AND
                     res = not self._and_wide_strings(rule_wide_strings[op])
 
-                print(f"[I] Final: {res}, {op}: {rule_wide_strings[op]}")
-
                 final_res &= res  # AND between all sets of strings
                 if not final_res:
                     break
@@ -636,8 +632,6 @@ class UefiScanner:
 
                 if op == "not-all":  # NOT AND
                     res = not self._and_hex_strings(rule_hex_strings[op])
-
-                print(f"[I] Final: {res}, {op}: {rule_hex_strings[op]}")
 
                 final_res &= res  # AND between all sets of strings
                 if not final_res:
@@ -703,8 +697,6 @@ class UefiScanner:
 
                 if op == "not-all":  # NOT AND
                     res = not self._and_nvram(rule_nvram[op])
-
-                print(f"[I] Final: {res}, {op}: {rule_nvram[op]}")
 
                 final_res &= res  # AND between all sets of NVRAM variables
                 if not final_res:
@@ -774,8 +766,6 @@ class UefiScanner:
                 if op == "not-all":  # NOT AND
                     res = not self._and_protocols(rule_protocol[op], mode)
 
-                print(f"[I] Final: {res}, {op}: {rule_protocol[op]}")
-
                 final_res &= res  # AND between all sets of protocols
                 if not final_res:
                     break
@@ -839,8 +829,6 @@ class UefiScanner:
 
                 if op == "not-all":  # NOT AND
                     res = not self._and_guids(rule_guid[op])
-
-                print(f"[I] Final: {res}, {op}: {rule_guid[op]}")
 
                 final_res &= res  # AND between all sets of GUIDs
                 if not final_res:
@@ -1063,8 +1051,6 @@ class UefiScanner:
 
                 if op == "not-all":  # NOT AND
                     res = not self._and_code(rule_code[op])
-
-                print(f"[I] Final: {res}, {op}: {rule_code[op]}")
 
                 final_res &= res  # AND between all sets of NVRAM variables
                 if not final_res:
