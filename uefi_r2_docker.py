@@ -12,6 +12,8 @@ def cli():
 
 @click.command()
 def install():
+    """Pull docker image."""
+
     os.system(" ".join(["docker", "pull", TAG]))
 
 
