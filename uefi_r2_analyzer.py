@@ -12,7 +12,7 @@ from typing import List
 
 import click
 
-from uefi_r2 import UefiAnalyzer, UefiRule, UefiScanner, UefiMultiScanner
+from uefi_r2 import UefiAnalyzer, UefiMultiScanner, UefiRule, UefiScanner
 
 
 @click.group()
