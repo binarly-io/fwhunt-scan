@@ -71,30 +71,8 @@ def scan(image_path: str, rule: List[str]) -> bool:
     for r in rules:
         with open(r, "r") as f:
             rule_content = f.read()
-
-        uefi_rule = UefiRule(rule_content=rule_content)
-        prefix = click.style("UEFI rule", fg="green")
-        if len(uefi_rule.nvram_vars):
-            print(f"{prefix} nvram: {[x.__dict__ for x in uefi_rule.nvram_vars]}")
-        if len(uefi_rule.protocols):
-            print(f"{prefix} protocols: {[x.__dict__ for x in uefi_rule.protocols]}")
-        if len(uefi_rule.ppi_list):
-            print(f"{prefix} ppi: {[x.__dict__ for x in uefi_rule.ppi_list]}")
-        if len(uefi_rule.protocol_guids):
-            print(f"{prefix} guids: {[x.__dict__ for x in uefi_rule.protocol_guids]}")
-        if len(uefi_rule.strings):
-            print(f"{prefix} strings: {uefi_rule.strings}")
-        if len(uefi_rule.wide_strings):
-            print(f"{prefix} wide_strings: {uefi_rule.wide_strings}")
-        if len(uefi_rule.hex_strings):
-            print(f"{prefix} hex_strings: {uefi_rule.hex_strings}")
-        if uefi_rule.volume_guids:
-            print(f"{prefix} volume_guids: {uefi_rule.volume_guids}")
-        if len(uefi_rule.code):
-            for code in uefi_rule.code:
-                print(f"{prefix} code: {code.__dict__}")
-
-        uefi_rules.append(uefi_rule)
+            uefi_rule = UefiRule(rule_content=rule_content)
+            uefi_rules.append(uefi_rule)
 
     scanner = UefiScanner(uefi_analyzer, uefi_rules)
     prefix = click.style("Scanner result", fg="green")
