@@ -4,8 +4,8 @@
 Tools for analyzing UEFI firmware using radare2
 """
 
-__author__ = "yeggor"
-__email__ = "yegor@binarly.io"
+__author__ = "FwHunt team"
+__email__ = "fwhunt@binarly.io"
 __version__ = "2.0.0"
 
 from .uefi_analyzer import UefiAnalyzer, UefiAnalyzerError
