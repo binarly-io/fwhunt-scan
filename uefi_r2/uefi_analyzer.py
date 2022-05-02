@@ -560,7 +560,9 @@ class UefiAnalyzer:
                         and (esil[-3] == "+")
                         and (esil[-4] == "rip")
                     ):
-                        p_guid_b = bytes(self._rz.cmdj("xj 16 @ {:#x}".format(ref_addr)))
+                        p_guid_b = bytes(
+                            self._rz.cmdj("xj 16 @ {:#x}".format(ref_addr))
+                        )
                     if not name:
                         name = "Unknown"
                     if p_guid_b:
@@ -702,7 +704,10 @@ class UefiAnalyzer:
         if "bin" not in summary:
             return summary
 
-        if not self.info["bin"]["class"].startswith("PE"):
+        if not (
+            self.info["bin"]["class"].startswith("PE")
+            or self.info["bin"]["class"].startswith("TE")
+        ):
             return summary
 
         if self.info["bin"]["arch"] == "x86" and self.info["bin"]["bits"] == 32:
