@@ -10,7 +10,6 @@ Tools for analyzing UEFI firmware using radare2/rizin
 import json
 import sys
 import uuid
-from multiprocessing import shared_memory
 from types import TracebackType
 from typing import Any, Dict, List, Optional, Type
 
@@ -18,24 +17,23 @@ import rzpipe
 
 import uefi_r2.uefi_smm as uefi_smm
 from uefi_r2.uefi_protocols import GUID_FROM_BYTES, UefiGuid
-from uefi_r2.uefi_tables import (
-    BS_PROTOCOLS_INFO_64_BIT,
-    EFI_BOOT_SERVICES_64_BIT,
-    EFI_PEI_SERVICES_32_BIT,
-    EFI_RUNTIME_SERVICES_64_BIT,
-    OFFSET_TO_SERVICE,
-)
+from uefi_r2.uefi_tables import (BS_PROTOCOLS_INFO_64_BIT,
+                                 EFI_BOOT_SERVICES_64_BIT,
+                                 EFI_PEI_SERVICES_32_BIT,
+                                 EFI_RUNTIME_SERVICES_64_BIT,
+                                 OFFSET_TO_SERVICE)
 from uefi_r2.uefi_te import TerseExecutableError, TerseExecutableParser
-from uefi_r2.uefi_types import (
-    ChildSwSmiHandler,
-    NvramVariable,
-    SwSmiHandler,
-    UefiGuid,
-    UefiProtocol,
-    UefiProtocolGuid,
-    UefiService,
-)
+from uefi_r2.uefi_types import (ChildSwSmiHandler, NvramVariable, SwSmiHandler,
+                                UefiGuid, UefiProtocol, UefiProtocolGuid,
+                                UefiService)
 from uefi_r2.uefi_utils import get_int
+
+if sys.version_info.major == 3 and sys.version_info.minor >= 8:
+    from multiprocessing import shared_memory
+if sys.version_info.major == 3 and (
+    sys.version_info.minor >= 6 and sys.version_info.minor < 8
+):
+    import shared_memory
 
 
 class UefiAnalyzerError(Exception):
@@ -560,7 +558,9 @@ class UefiAnalyzer:
                         and (esil[-3] == "+")
                         and (esil[-4] == "rip")
                     ):
-                        p_guid_b = bytes(self._rz.cmdj("xj 16 @ {:#x}".format(ref_addr)))
+                        p_guid_b = bytes(
+                            self._rz.cmdj("xj 16 @ {:#x}".format(ref_addr))
+                        )
                     if not name:
                         name = "Unknown"
                     if p_guid_b:
