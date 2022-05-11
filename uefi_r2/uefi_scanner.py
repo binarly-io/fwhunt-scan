@@ -193,9 +193,17 @@ class UefiRule:
         code: Dict[str, List[Dict[str, str]]] = dict()
         if "code" not in self._uefi_rule:
             return code
-        for op in self._uefi_rule["code"]:
+        dict_items = dict()
+        if type(self._uefi_rule["code"]) == list:
+            # if kind of matches is not specified
+            dict_items["and"] = self._uefi_rule["code"]
+        elif type(self._uefi_rule["code"]) == dict:
+            dict_items = self._uefi_rule["code"]
+        else:
+            return code
+        for op in dict_items:
             code[op] = list()
-            for c in self._uefi_rule["code"][op]:
+            for c in dict_items[op]:
                 cp = CodePattern(
                     pattern=c.get("pattern", None),
                     place=c.get("place", None),
@@ -212,7 +220,17 @@ class UefiRule:
         return self._code
 
     def _get_strings(self) -> Dict[str, List[str]]:
-        return self._uefi_rule.get("strings", dict())
+        strings: Dict[str, List[str]] = dict()
+        if "strings" not in self._uefi_rule:
+            return strings
+        if type(self._uefi_rule["strings"]) == list:
+            # if kind of matches is not specified
+            strings["and"] = self._uefi_rule["strings"]
+        elif type(self._uefi_rule["strings"]) == dict:
+            strings = self._uefi_rule["strings"]
+        else:
+            return strings
+        return strings
 
     @property
     def strings(self) -> Dict[str, List[str]]:
@@ -223,7 +241,17 @@ class UefiRule:
         return self._strings
 
     def _get_wide_strings(self) -> Dict[str, List[Dict[str, str]]]:
-        return self._uefi_rule.get("wide_strings", dict())
+        wide_strings: Dict[str, List[Dict[str, str]]] = dict()
+        if "wide_strings" not in self._uefi_rule:
+            return wide_strings
+        if type(self._uefi_rule["wide_strings"]) == list:
+            # if kind of matches is not specified
+            wide_strings["and"] = self._uefi_rule["wide_strings"]
+        elif type(self._uefi_rule["wide_strings"]) == dict:
+            wide_strings = self._uefi_rule["wide_strings"]
+        else:
+            return wide_strings
+        return wide_strings
 
     @property
     def wide_strings(self) -> Dict[str, List[Dict[str, str]]]:
@@ -234,7 +262,17 @@ class UefiRule:
         return self._wide_strings
 
     def _get_hex_strings(self) -> Dict[str, List[str]]:
-        return self._uefi_rule.get("hex_strings", dict())
+        hex_strings: Dict[str, List[str]] = dict()
+        if "hex_strings" not in self._uefi_rule:
+            return hex_strings
+        if type(self._uefi_rule["hex_strings"]) == list:
+            # if kind of matches is not specified
+            hex_strings["and"] = self._uefi_rule["hex_strings"]
+        elif type(self._uefi_rule["hex_strings"]) == dict:
+            hex_strings = self._uefi_rule["hex_strings"]
+        else:
+            return hex_strings
+        return hex_strings
 
     @property
     def hex_strings(self) -> Dict[str, List[str]]:
@@ -248,9 +286,17 @@ class UefiRule:
         nvram_vars: Dict[str, List[NvramVariable]] = dict()
         if "nvram" not in self._uefi_rule:
             return nvram_vars
-        for op in self._uefi_rule["nvram"]:
+        dict_items = dict()
+        if type(self._uefi_rule["nvram"]) == list:
+            # if kind of matches is not specified
+            dict_items["and"] = self._uefi_rule["nvram"]
+        elif type(self._uefi_rule["nvram"]) == dict:
+            dict_items = self._uefi_rule["nvram"]
+        else:
+            return nvram_vars
+        for op in dict_items:
             nvram_vars[op] = list()
-            for element in self._uefi_rule["nvram"][op]:
+            for element in dict_items[op]:
                 nvram_vars[op].append(
                     NvramVariable(
                         name=element["name"],
@@ -274,9 +320,17 @@ class UefiRule:
         protocols: Dict[str, List[UefiProtocol]] = dict()
         if "protocols" not in self._uefi_rule:
             return protocols
-        for op in self._uefi_rule["protocols"]:
+        dict_items = dict()
+        if type(self._uefi_rule["protocols"]) == list:
+            # if kind of matches is not specified
+            dict_items["and"] = self._uefi_rule["protocols"]
+        elif type(self._uefi_rule["protocols"]) == dict:
+            dict_items = self._uefi_rule["protocols"]
+        else:
+            return protocols
+        for op in dict_items:
             protocols[op] = list()
-            for element in self._uefi_rule["protocols"][op]:
+            for element in dict_items[op]:
                 protocols[op].append(
                     UefiProtocol(
                         name=element["name"],
@@ -300,9 +354,17 @@ class UefiRule:
         ppi_list: Dict[str, List[UefiProtocol]] = dict()
         if "ppi" not in self._uefi_rule:
             return ppi_list
-        for op in self._uefi_rule["ppi"]:
+        dict_items = dict()
+        if type(self._uefi_rule["ppi"]) == list:
+            # if kind of matches is not specified
+            dict_items["and"] = self._uefi_rule["ppi"]
+        elif type(self._uefi_rule["ppi"]) == dict:
+            dict_items = self._uefi_rule["ppi"]
+        else:
+            return ppi_list
+        for op in dict_items:
             ppi_list[op] = list()
-            for element in self._uefi_rule["ppi"][op]:
+            for element in dict_items[op]:
                 ppi_list[op].append(
                     UefiProtocol(
                         name=element["name"],
@@ -326,9 +388,17 @@ class UefiRule:
         guids: Dict[str, List[UefiGuid]] = dict()
         if "guids" not in self._uefi_rule:
             return guids
-        for op in self._uefi_rule["guids"]:
+        dict_items = dict()
+        if type(self._uefi_rule["guids"]) == list:
+            # if kind of matches is not specified
+            dict_items["and"] = self._uefi_rule["guids"]
+        elif type(self._uefi_rule["guids"]) == dict:
+            dict_items = self._uefi_rule["guids"]
+        else:
+            return guids
+        for op in dict_items:
             guids[op] = list()
-            for element in self._uefi_rule["guids"][op]:
+            for element in dict_items[op]:
                 guids[op].append(
                     UefiGuid(
                         name=element["name"],
