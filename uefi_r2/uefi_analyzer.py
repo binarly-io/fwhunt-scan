@@ -534,16 +534,16 @@ class UefiAnalyzer:
         nvram_vars = list()
         for service in self.runtime_services:
             if service.name in ["GetVariable", "SetVariable"]:
-                # disassemble 8 instructions backward
-                block_insns = self._rz.cmdj("pdj -8 @ {:#x}".format(service.address))
+                print(f"GetVariable or SetVariable detected ({service.address:#x})")
+                # disassemble 16 instructions backward
+                block_insns = self._rz.cmdj("pdj -16 @ {:#x}".format(service.address))
                 name: str = str()
                 p_guid_b: bytes = bytes()
                 for index in range(len(block_insns) - 2, -1, -1):
-                    if "refs" not in block_insns[index]:
+                    print(json.dumps(block_insns[index], indent=2))
+                    if "xrefs_from" not in block_insns[index]:
                         continue
-                    if len(block_insns[index]["refs"]) > 1:
-                        continue
-                    ref_addr = block_insns[index]["refs"][0]["addr"]
+                    ref_addr = block_insns[index]["xrefs_from"][0]["addr"]
                     if "esil" not in block_insns[index]:
                         continue
                     esil = block_insns[index]["esil"].split(",")
