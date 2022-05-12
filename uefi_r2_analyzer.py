@@ -82,12 +82,11 @@ def scan(image_path: str, rule: List[str]) -> bool:
         "FwHunt rule has been triggered and threat detected!", fg="red"
     )
 
-    results = scanner.results
-    for i, uefi_rule in enumerate(uefi_rules):
-        if i in results:
-            print(f"{prefix} {uefi_rule.name} {threat} ({image_path})")
-        else:
-            print(f"{prefix} {uefi_rule.name} {no_threat} ({image_path})")
+    for result in scanner.results:
+        msg = threat if result.res else no_threat
+        print(
+            f"{prefix} {result.rule.name} (variant: {result.variant_label}) {msg} ({image_path})"
+        )
 
     uefi_analyzer.close()
 
