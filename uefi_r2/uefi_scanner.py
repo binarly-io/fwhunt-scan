@@ -7,7 +7,7 @@ Tools for analyzing UEFI firmware using radare2
 import binascii
 import json
 import os
-from typing import Any, DefaultDict, Dict, Iterable, List, Optional, Set, Tuple, Union
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 import yaml
 
@@ -24,7 +24,7 @@ class CodePattern:
     """Code pattern"""
 
     def __init__(self, pattern: str, place: Optional[str]) -> None:
-        self.pattern: str = pattern
+        self.pattern: str = str(pattern)
         self.place: Optional[str] = place
 
         # if True, scan in all SW SMI handlers
@@ -44,15 +44,11 @@ class CodePattern:
         )
 
 
-class UefiRule:
-    """A rule for scanning EFI image"""
+class UefiRuleVariant:
+    """A rule for scanning EFI image (content without meta and variants)"""
 
-    def __init__(
-        self, rule_path: Optional[str] = None, rule_content: Optional[str] = None
-    ):
-        self._rule: Optional[str] = rule_path
-        self._rule_name: str = str()
-        self._uefi_rule: Dict[str, Any] = dict()
+    def __init__(self, rule_content: Dict[str, Any]):
+        self._uefi_rule: Dict[str, Any] = rule_content
         self._nvram_vars: Optional[Dict[str, List[NvramVariable]]] = None
         self._protocols: Optional[Dict[str, List[UefiProtocol]]] = None
         self._ppi_list: Optional[Dict[str, List[UefiProtocol]]] = None
@@ -61,133 +57,6 @@ class UefiRule:
         self._wide_strings: Optional[Dict[str, List[Dict[str, str]]]] = None
         self._hex_strings: Optional[Dict[str, List[str]]] = None
         self._code: Optional[Dict[str, List[Dict[str, str]]]] = None
-        if self._rule is not None:
-            if os.path.isfile(self._rule):
-                try:
-                    with open(self._rule, "r") as f:
-                        self._uefi_rule = yaml.safe_load(f)
-                except yaml.scanner.ScannerError as e:
-                    print(f"Error: {repr(e)}")
-        elif rule_content is not None:
-            try:
-                self._uefi_rule = yaml.safe_load(rule_content)
-            except yaml.scanner.ScannerError as e:
-                print(f"Error: {repr(e)}")
-        if self._uefi_rule:
-            self._rule_name = list(self._uefi_rule.keys())[0]
-        if self._rule_name:
-            self._uefi_rule = self._uefi_rule[self._rule_name]
-
-    def __str__(self):
-        return json.dumps(self._uefi_rule, indent=2)
-
-    @property
-    def author(self) -> Optional[str]:
-        """Get author from the metadata block"""
-
-        try:
-            return self._uefi_rule["meta"]["author"]
-        except KeyError:
-            return None
-
-    @property
-    def name(self) -> Optional[str]:
-        """Get rule name from the metadata block"""
-
-        try:
-            return self._uefi_rule["meta"]["name"]
-        except KeyError:
-            return None
-
-    @property
-    def version(self) -> Optional[str]:
-        """Get rule version from the metadata block"""
-
-        try:
-            return self._uefi_rule["meta"]["version"]
-        except KeyError:
-            return None
-
-    @property
-    def namespace(self) -> Optional[str]:
-        """Get rule namespace from the metadata block"""
-
-        try:
-            return self._uefi_rule["meta"]["namespace"]
-        except KeyError:
-            return None
-
-    @property
-    def license(self) -> Optional[str]:
-        """Get rule license from the metadata block"""
-
-        try:
-            return self._uefi_rule["meta"]["license"]
-        except KeyError:
-            return None
-
-    @property
-    def cve_number(self) -> Optional[str]:
-        """Get CVE number from the metadata block"""
-
-        try:
-            return self._uefi_rule["meta"]["CVE number"]
-        except KeyError:
-            return None
-
-    @property
-    def volume_guids(self) -> Optional[List[str]]:
-        """Get any volume GUIDs from the metadata block"""
-
-        try:
-            return self._uefi_rule["meta"]["volume guids"]
-        except KeyError:
-            return None
-
-    @property
-    def vendor_id(self) -> Optional[str]:
-        """Get vendor id from the metadata block"""
-
-        try:
-            return self._uefi_rule["meta"]["vendor id"]
-        except KeyError:
-            return None
-
-    @property
-    def cvss_score(self) -> Optional[str]:
-        """Get CVSS score from the metadata block"""
-
-        try:
-            return self._uefi_rule["meta"]["CVSS score"]
-        except KeyError:
-            return None
-
-    @property
-    def advisory(self) -> Optional[str]:
-        """Get advisory link from the metadata block"""
-
-        try:
-            return self._uefi_rule["meta"]["advisory"]
-        except KeyError:
-            return None
-
-    @property
-    def description(self) -> Optional[str]:
-        """Get optional rule description from the metadata block"""
-
-        try:
-            return self._uefi_rule["meta"]["description"]
-        except KeyError:
-            return None
-
-    @property
-    def url(self) -> Optional[str]:
-        """Get optional rule URL from the metadata block"""
-
-        try:
-            return self._uefi_rule["meta"]["url"]
-        except KeyError:
-            return None
 
     def _get_code(self) -> Dict[str, List[Dict[str, str]]]:
         code: Dict[str, List[Dict[str, str]]] = dict()
@@ -416,6 +285,171 @@ class UefiRule:
         return self._guids
 
 
+class UefiRule:
+    """A rule for scanning EFI image"""
+
+    def __init__(
+        self, rule_path: Optional[str] = None, rule_content: Optional[str] = None
+    ):
+        self._rule: Optional[str] = rule_path
+        self._rule_name: str = str()
+        self._uefi_rule: Dict[str, Any] = dict()
+        if self._rule is not None:
+            if os.path.isfile(self._rule):
+                try:
+                    with open(self._rule, "r") as f:
+                        self._uefi_rule = yaml.safe_load(f)
+                except yaml.scanner.ScannerError as e:
+                    print(f"Error: {repr(e)}")
+        elif rule_content is not None:
+            try:
+                self._uefi_rule = yaml.safe_load(rule_content)
+            except yaml.scanner.ScannerError as e:
+                print(f"Error: {repr(e)}")
+        if self._uefi_rule:
+            self._rule_name = list(self._uefi_rule.keys())[0]
+        if self._rule_name:
+            self._uefi_rule = self._uefi_rule[self._rule_name]
+        self._variants: Optional[Dict[str, UefiRuleVariant]] = None
+
+    def __str__(self):
+        return json.dumps(self._uefi_rule, indent=2)
+
+    @property
+    def author(self) -> Optional[str]:
+        """Get author from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["author"]
+        except KeyError:
+            return None
+
+    @property
+    def name(self) -> Optional[str]:
+        """Get rule name from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["name"]
+        except KeyError:
+            return None
+
+    @property
+    def version(self) -> Optional[str]:
+        """Get rule version from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["version"]
+        except KeyError:
+            return None
+
+    @property
+    def namespace(self) -> Optional[str]:
+        """Get rule namespace from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["namespace"]
+        except KeyError:
+            return None
+
+    @property
+    def license(self) -> Optional[str]:
+        """Get rule license from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["license"]
+        except KeyError:
+            return None
+
+    @property
+    def cve_number(self) -> Optional[str]:
+        """Get CVE number from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["CVE number"]
+        except KeyError:
+            return None
+
+    @property
+    def volume_guids(self) -> Optional[List[str]]:
+        """Get any volume GUIDs from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["volume guids"]
+        except KeyError:
+            return None
+
+    @property
+    def vendor_id(self) -> Optional[str]:
+        """Get vendor id from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["vendor id"]
+        except KeyError:
+            return None
+
+    @property
+    def cvss_score(self) -> Optional[str]:
+        """Get CVSS score from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["CVSS score"]
+        except KeyError:
+            return None
+
+    @property
+    def advisory(self) -> Optional[str]:
+        """Get advisory link from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["advisory"]
+        except KeyError:
+            return None
+
+    @property
+    def description(self) -> Optional[str]:
+        """Get optional rule description from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["description"]
+        except KeyError:
+            return None
+
+    @property
+    def url(self) -> Optional[str]:
+        """Get optional rule URL from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["url"]
+        except KeyError:
+            return None
+
+    def _get_variants(self) -> Dict[str, UefiRuleVariant]:
+        """Get rules variants"""
+
+        variants: Dict[str, UefiRuleVariant] = dict()
+        if "variants" in self._uefi_rule:
+            for variant in self._uefi_rule["variants"]:
+                variants[variant] = UefiRuleVariant(
+                    rule_content=self._uefi_rule["variants"][variant]
+                )
+
+        if "variants" not in self._uefi_rule:
+            rule_content = {
+                k: self._uefi_rule[k] for k in self._uefi_rule if k != "meta"
+            }
+            variants["default"] = UefiRuleVariant(rule_content=rule_content)
+
+        return variants
+
+    @property
+    def variants(self) -> Dict[str, UefiRuleVariant]:
+        """Get GUIDs from rule"""
+
+        if self._variants is None:
+            self._variants = self._get_variants()
+        return self._variants
+
+
 class UefiScannerError(Exception):
     """Generic scanner error exception."""
 
@@ -424,6 +458,15 @@ class UefiScannerError(Exception):
 
     def __str__(self):
         return repr(self.value)
+
+
+class UefiScannerRes:
+    """Scanner result for single rule"""
+
+    def __init__(self, rule: UefiRule, variant_label: str, res: bool) -> None:
+        self.rule = rule
+        self.variant_label = variant_label
+        self.res = res
 
 
 class UefiScanner:
@@ -435,88 +478,7 @@ class UefiScanner:
     def __init__(self, uefi_analyzer: UefiAnalyzer, uefi_rules: List[UefiRule]):
         self._uefi_analyzer: UefiAnalyzer = uefi_analyzer
         self._uefi_rules: List[UefiRule] = uefi_rules
-        self._results: Optional[Set[int]] = None
-
-        # likley not to be shared; indices correspond to self._uefi_rules
-        self._nvram_index: List[Any] = list()
-        self._protocol_index: List[Any] = list()
-        self._ppi_index: List[Any] = list()
-        self._guid_index: List[Any] = list()
-        self._string_index: List[Any] = list()
-        self._hex_string_index: List[Any] = list()
-        self._wide_string_index: List[Any] = list()
-
-        self._code_index: List[List[Any]] = list()
-
-        # temp values
-        self._funcs_bounds: List[Tuple[int, int]] = list()
-        self._rec_addrs: List[int] = list()
-
-        self._index_rules()
-
-    @staticmethod
-    def _index_iterable_to_dict(
-        target: DefaultDict[Any, Set[int]], source: Optional[Iterable[Any]], index: int
-    ) -> None:
-        if source is not None:
-            for elem in source:
-                target[elem].add(index)
-
-    def _index_rule(self, rule: UefiRule, index: int) -> None:
-        """Adds a rule to the index"""
-
-        self._nvram_index.append(rule.nvram_vars)
-        self._protocol_index.append(rule.protocols)
-        self._ppi_index.append(rule.ppi_list)
-        self._guid_index.append(rule.guids)
-        self._string_index.append(rule.strings)
-        self._wide_string_index.append(rule.wide_strings)
-        self._hex_string_index.append(rule.hex_strings)
-        self._code_index.append(rule.code)
-
-    def _index_rules(self) -> None:
-        """Creates index for all rules"""
-        for i, rule in enumerate(self._uefi_rules):
-            self._index_rule(rule, i)
-
-    @staticmethod
-    def _update_index_match(
-        previous: Set[int], expected: Union[int, Set[int]], matched: bool
-    ) -> Set[int]:
-        if type(expected) is int:
-            return previous if matched else (previous - {expected})
-        elif type(expected) is set:
-            return previous if matched else (previous - expected)
-        else:
-            raise TypeError("expected must be Union[int, Set[int]]")
-
-    def _compare(self, x: list, y: list) -> bool:
-
-        if len(x) != len(y):
-            return False
-        for i in range(len(x)):
-            if x[i] == "X":
-                continue
-            if x[i] != y[i]:
-                return False
-        return True
-
-    def _check_rule(self, esil_rule: List[str]) -> bool:
-        """Esil scanner helper"""
-
-        ops = self._uefi_analyzer.insns
-        for i in range(len(ops) - len(esil_rule) + 1):
-            counter_item = 0
-            for j in range(len(esil_rule)):
-                if "esil" not in ops[i + j]:
-                    continue
-                x, y = esil_rule[j].split(","), ops[i + j]["esil"].split(",")
-                if not self._compare(x, y):
-                    continue
-                counter_item += 1
-            if counter_item == len(esil_rule):
-                return True
-        return False
+        self._results: Optional[List[UefiScannerRes]] = None
 
     def _and_strings(self, strings: List[str]) -> bool:
         res = True
@@ -594,122 +556,98 @@ class UefiScanner:
 
         return res
 
-    def _strings_scanner(self, current: Set[int]) -> Set[int]:
+    def _strings_scanner(self, rule_strings: Dict[str, List[str]]) -> bool:
         """Match strings"""
 
-        matches = current
+        final_res = True
+        for op in rule_strings:
 
-        for i, rule_strings in enumerate(self._string_index):
-            if i not in matches:
-                continue
+            # check kind of matches
+            if op not in ["and", "or", "not-any", "not-all"]:
+                raise UefiScannerError(
+                    f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
+                )
 
-            final_res = True
-            for op in rule_strings:
+            res = True
+            if op == "and":  # AND
+                res = self._and_strings(rule_strings[op])
 
-                # check kind of matches
-                if op not in ["and", "or", "not-any", "not-all"]:
-                    raise UefiScannerError(
-                        f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
-                    )
+            if op == "or":  # OR
+                res = self._or_strings(rule_strings[op])
 
-                res = True
-                if op == "and":  # AND
-                    res = self._and_strings(rule_strings[op])
+            if op == "not-any":  # NOT OR
+                res = not self._or_strings(rule_strings[op])
 
-                if op == "or":  # OR
-                    res = self._or_strings(rule_strings[op])
+            if op == "not-all":  # NOT AND
+                res = not self._and_strings(rule_strings[op])
 
-                if op == "not-any":  # NOT OR
-                    res = not self._or_strings(rule_strings[op])
+            final_res &= res  # AND between all sets of strings
+            if not final_res:
+                break
 
-                if op == "not-all":  # NOT AND
-                    res = not self._and_strings(rule_strings[op])
+        return final_res
 
-                final_res &= res  # AND between all sets of strings
-                if not final_res:
-                    break
-
-            matches = self._update_index_match(matches, i, final_res)
-
-        return matches
-
-    def _wide_strings_scanner(self, current: Set[int]) -> Set[int]:
+    def _wide_strings_scanner(self, rule_wide_strings: Dict[str, List[str]]) -> bool:
         """Match wide strings"""
 
-        matches = current
+        final_res = True
+        for op in rule_wide_strings:
 
-        for i, rule_wide_strings in enumerate(self._wide_string_index):
-            if i not in matches:
-                continue
+            # check kind of matches
+            if op not in ["and", "or", "not-any", "not-all"]:
+                raise UefiScannerError(
+                    f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
+                )
 
-            final_res = True
-            for op in rule_wide_strings:
+            res = True
+            if op == "and":  # AND
+                res = self._and_wide_strings(rule_wide_strings[op])
 
-                # check kind of matches
-                if op not in ["and", "or", "not-any", "not-all"]:
-                    raise UefiScannerError(
-                        f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
-                    )
+            if op == "or":  # OR
+                res = self._or_wide_strings(rule_wide_strings[op])
 
-                res = True
-                if op == "and":  # AND
-                    res = self._and_wide_strings(rule_wide_strings[op])
+            if op == "not-any":  # NOT OR
+                res = not self._or_wide_strings(rule_wide_strings[op])
 
-                if op == "or":  # OR
-                    res = self._or_wide_strings(rule_wide_strings[op])
+            if op == "not-all":  # NOT AND
+                res = not self._and_wide_strings(rule_wide_strings[op])
 
-                if op == "not-any":  # NOT OR
-                    res = not self._or_wide_strings(rule_wide_strings[op])
+            final_res &= res  # AND between all sets of strings
+            if not final_res:
+                break
 
-                if op == "not-all":  # NOT AND
-                    res = not self._and_wide_strings(rule_wide_strings[op])
+        return final_res
 
-                final_res &= res  # AND between all sets of strings
-                if not final_res:
-                    break
-
-            matches = self._update_index_match(matches, i, final_res)
-
-        return matches
-
-    def _hex_strings_scanner(self, current: Set[int]) -> Set[int]:
+    def _hex_strings_scanner(self, rule_hex_strings: Dict[str, List[str]]) -> bool:
         """Match hex strings"""
 
-        matches = current
+        final_res = True
+        for op in rule_hex_strings:
 
-        for i, rule_hex_strings in enumerate(self._hex_string_index):
-            if i not in matches:
-                continue
+            # check kind of matches
+            if op not in ["and", "or", "not-any", "not-all"]:
+                raise UefiScannerError(
+                    f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
+                )
 
-            final_res = True
-            for op in rule_hex_strings:
+            res = True
+            if op == "and":  # AND
+                res = self._and_hex_strings(rule_hex_strings[op])
 
-                # check kind of matches
-                if op not in ["and", "or", "not-any", "not-all"]:
-                    raise UefiScannerError(
-                        f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
-                    )
+            if op == "or":  # OR
+                res = self._or_hex_strings(rule_hex_strings[op])
 
-                res = True
-                if op == "and":  # AND
-                    res = self._and_hex_strings(rule_hex_strings[op])
+            if op == "not-any":  # NOT OR
+                res = not self._or_hex_strings(rule_hex_strings[op])
 
-                if op == "or":  # OR
-                    res = self._or_hex_strings(rule_hex_strings[op])
+            if op == "not-all":  # NOT AND
+                res = not self._and_hex_strings(rule_hex_strings[op])
 
-                if op == "not-any":  # NOT OR
-                    res = not self._or_hex_strings(rule_hex_strings[op])
+            final_res &= res  # AND between all sets of strings
+            if not final_res:
+                break
 
-                if op == "not-all":  # NOT AND
-                    res = not self._and_hex_strings(rule_hex_strings[op])
-
-                final_res &= res  # AND between all sets of strings
-                if not final_res:
-                    break
-
-            matches = self._update_index_match(matches, i, final_res)
-
-        return matches
+        return final_res
 
     def _search_nvram(self, nvram_rule: NvramVariable) -> bool:
         for nvram_analyzer in self._uefi_analyzer.nvram_vars:
@@ -737,44 +675,36 @@ class UefiScanner:
                 break
         return res
 
-    def _compare_nvram_vars(self, current: Set[int]) -> Set[int]:
+    def _compare_nvram_vars(self, rule_nvram: Dict[str, List[NvramVariable]]) -> bool:
         """Compare NVRAM variables"""
 
-        matches = current
+        final_res = True
+        for op in rule_nvram:
 
-        for i, rule_nvram in enumerate(self._nvram_index):
-            if i not in matches:
-                continue
+            # check kind of matches
+            if op not in ["and", "or", "not-any", "not-all"]:
+                raise UefiScannerError(
+                    f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
+                )
 
-            final_res = True
-            for op in rule_nvram:
+            res = True
+            if op == "and":  # AND
+                res = self._and_nvram(rule_nvram[op])
 
-                # check kind of matches
-                if op not in ["and", "or", "not-any", "not-all"]:
-                    raise UefiScannerError(
-                        f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
-                    )
+            if op == "or":  # OR
+                res = self._or_nvram(rule_nvram[op])
 
-                res = True
-                if op == "and":  # AND
-                    res = self._and_nvram(rule_nvram[op])
+            if op == "not-any":  # NOT OR
+                res = not self._or_nvram(rule_nvram[op])
 
-                if op == "or":  # OR
-                    res = self._or_nvram(rule_nvram[op])
+            if op == "not-all":  # NOT AND
+                res = not self._and_nvram(rule_nvram[op])
 
-                if op == "not-any":  # NOT OR
-                    res = not self._or_nvram(rule_nvram[op])
+            final_res &= res  # AND between all sets of NVRAM variables
+            if not final_res:
+                break
 
-                if op == "not-all":  # NOT AND
-                    res = not self._and_nvram(rule_nvram[op])
-
-                final_res &= res  # AND between all sets of NVRAM variables
-                if not final_res:
-                    break
-
-            matches = self._update_index_match(matches, i, final_res)
-
-        return matches
+        return final_res
 
     def _search_protocol(self, protocol_rule: UefiProtocol, mode: int) -> bool:
         items: List[UefiProtocol] = self._uefi_analyzer.protocols
@@ -805,44 +735,38 @@ class UefiScanner:
                 break
         return res
 
-    def _compare_protocols(self, current: Set[int], mode: int) -> Set[int]:
+    def _compare_protocols(
+        self, rule_protocol: Dict[str, List[UefiProtocol]], mode: int
+    ) -> bool:
         """Compare protocols"""
 
-        matches = current
+        final_res = True
+        for op in rule_protocol:
 
-        for i, rule_protocol in enumerate(self._protocol_index):
-            if i not in matches:
-                continue
+            # check kind of matches
+            if op not in ["and", "or", "not-any", "not-all"]:
+                raise UefiScannerError(
+                    f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
+                )
 
-            final_res = True
-            for op in rule_protocol:
+            res = True
+            if op == "and":  # AND
+                res = self._and_protocols(rule_protocol[op], mode)
 
-                # check kind of matches
-                if op not in ["and", "or", "not-any", "not-all"]:
-                    raise UefiScannerError(
-                        f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
-                    )
+            if op == "or":  # OR
+                res = self._or_protocols(rule_protocol[op], mode)
 
-                res = True
-                if op == "and":  # AND
-                    res = self._and_protocols(rule_protocol[op], mode)
+            if op == "not-any":  # NOT OR
+                res = not self._or_protocols(rule_protocol[op], mode)
 
-                if op == "or":  # OR
-                    res = self._or_protocols(rule_protocol[op], mode)
+            if op == "not-all":  # NOT AND
+                res = not self._and_protocols(rule_protocol[op], mode)
 
-                if op == "not-any":  # NOT OR
-                    res = not self._or_protocols(rule_protocol[op], mode)
+            final_res &= res  # AND between all sets of protocols
+            if not final_res:
+                break
 
-                if op == "not-all":  # NOT AND
-                    res = not self._and_protocols(rule_protocol[op], mode)
-
-                final_res &= res  # AND between all sets of protocols
-                if not final_res:
-                    break
-
-            matches = self._update_index_match(matches, i, final_res)
-
-        return matches
+        return final_res
 
     def _search_guid(self, guid_rule: UefiGuid) -> bool:
         for protocol_analyzer in self._uefi_analyzer.protocols:
@@ -869,67 +793,36 @@ class UefiScanner:
                 break
         return res
 
-    def _compare_guids(self, current: Set[int]) -> Set[int]:
+    def _compare_guids(self, rule_guid: Dict[str, List[UefiGuid]]) -> Set[int]:
         """Compare GUIDs"""
 
-        matches = current
+        final_res = True
+        for op in rule_guid:
 
-        for i, rule_guid in enumerate(self._guid_index):
-            if i not in matches:
-                continue
+            # check kind of matches
+            if op not in ["and", "or", "not-any", "not-all"]:
+                raise UefiScannerError(
+                    f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
+                )
 
-            final_res = True
-            for op in rule_guid:
+            res = True
+            if op == "and":  # AND
+                res = self._and_guids(rule_guid[op])
 
-                # check kind of matches
-                if op not in ["and", "or", "not-any", "not-all"]:
-                    raise UefiScannerError(
-                        f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
-                    )
+            if op == "or":  # OR
+                res = self._or_guids(rule_guid[op])
 
-                res = True
-                if op == "and":  # AND
-                    res = self._and_guids(rule_guid[op])
+            if op == "not-any":  # NOT OR
+                res = not self._or_guids(rule_guid[op])
 
-                if op == "or":  # OR
-                    res = self._or_guids(rule_guid[op])
+            if op == "not-all":  # NOT AND
+                res = not self._and_guids(rule_guid[op])
 
-                if op == "not-any":  # NOT OR
-                    res = not self._or_guids(rule_guid[op])
-
-                if op == "not-all":  # NOT AND
-                    res = not self._and_guids(rule_guid[op])
-
-                final_res &= res  # AND between all sets of GUIDs
-                if not final_res:
-                    break
-
-            matches = self._update_index_match(matches, i, final_res)
-
-        return matches
-
-    def _compare_ppi(self, matches: Set[int]) -> Set[int]:
-        """Compare PPI"""
-
-        for i, ppi_rule in enumerate(self._ppi_index):
-            if i not in matches:
-                continue
-
-            ppi_matched = False
-            for ppi_analyzer in self._uefi_analyzer.ppi_list:
-                if (
-                    ppi_rule.name == ppi_analyzer.name
-                    and ppi_rule.value == ppi_analyzer.value
-                ):
-                    ppi_matched = True
-                    break
-
-            matches = self._update_index_match(matches, i, ppi_matched)
-
-            if len(matches) == 0:
+            final_res &= res  # AND between all sets of GUIDs
+            if not final_res:
                 break
 
-        return matches
+        return final_res
 
     def _get_bounds(self, insns: List[Dict[str, Any]]) -> Tuple:
         """Get function end address"""
@@ -1091,89 +984,93 @@ class UefiScanner:
 
         return res
 
-    def _code_scanner(self, current: Set[int]) -> Set[int]:
+    def _code_scanner(self, rule_code: Dict[str, List[CodePattern]]) -> bool:
         """Compare code patterns"""
 
-        matches = current
+        final_res = True
+        for op in rule_code:
 
-        for i, rule_code in enumerate(self._code_index):
-            if i not in matches:
-                continue
+            # check kind of matches
+            if op not in ["and", "or", "not-any", "not-all"]:
+                raise UefiScannerError(
+                    f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
+                )
 
-            final_res = True
-            for op in rule_code:
+            res = True
+            if op == "and":  # AND
+                res = self._and_code(rule_code[op])
 
-                # check kind of matches
-                if op not in ["and", "or", "not-any", "not-all"]:
-                    raise UefiScannerError(
-                        f"Invalid kind of matches: {op} (possible kinds of matches: and, or, not-any, not-all)"
-                    )
+            if op == "or":  # OR
+                res = self._or_code(rule_code[op])
 
-                res = True
-                if op == "and":  # AND
-                    res = self._and_code(rule_code[op])
+            if op == "not-any":  # NOT OR
+                res = not self._or_code(rule_code[op])
 
-                if op == "or":  # OR
-                    res = self._or_code(rule_code[op])
+            if op == "not-all":  # NOT AND
+                res = not self._and_code(rule_code[op])
 
-                if op == "not-any":  # NOT OR
-                    res = not self._or_code(rule_code[op])
+            final_res &= res  # AND between all sets of NVRAM variables
+            if not final_res:
+                break
 
-                if op == "not-all":  # NOT AND
-                    res = not self._and_code(rule_code[op])
+        return final_res
 
-                final_res &= res  # AND between all sets of NVRAM variables
-                if not final_res:
-                    break
-
-            matches = self._update_index_match(matches, i, final_res)
-
-        return matches
-
-    def _get_results(self) -> Set[int]:
-        matches = set(range(len(self._uefi_rules)))
+    def _get_results_variants(self, rule_variant: UefiRuleVariant) -> bool:
+        res = True
 
         # compare NVRAM variables
-        matches = self._compare_nvram_vars(matches)
-        if len(matches) == 0:
-            return matches
+        res &= self._compare_nvram_vars(rule_variant.nvram_vars)
+        if not res:
+            return res
 
         # compare protocols
-        matches = self._compare_protocols(matches, UefiScanner.PROTOCOL)
-        if len(matches) == 0:
-            return matches
+        res &= self._compare_protocols(rule_variant.protocols, UefiScanner.PROTOCOL)
+        if not res:
+            return res
 
         # compare GUIDs
-        matches = self._compare_guids(matches)
-        if len(matches) == 0:
-            return matches
+        res &= self._compare_guids(rule_variant.guids)
+        if not res:
+            return res
 
         # compare PPI
-        matches = self._compare_protocols(matches, UefiScanner.PPI)
-        if len(matches) == 0:
-            return matches
+        res &= self._compare_protocols(rule_variant.ppi_list, UefiScanner.PPI)
+        if not res:
+            return res
 
         # match code patterns
-        matches = self._code_scanner(matches)
-        if len(matches) == 0:
-            return matches
+        res &= self._code_scanner(rule_variant.code)
+        if not res:
+            return res
 
         # match strings
-        matches = self._strings_scanner(matches)
-        if len(matches) == 0:
-            return matches
+        res &= self._strings_scanner(rule_variant.strings)
+        if not res:
+            return res
 
         # match wide strings
-        matches = self._wide_strings_scanner(matches)
-        if len(matches) == 0:
-            return matches
+        res &= self._wide_strings_scanner(rule_variant.wide_strings)
+        if not res:
+            return res
 
         # match hex strings
-        matches = self._hex_strings_scanner(matches)
-        if len(matches) == 0:
-            return matches
+        res &= self._hex_strings_scanner(rule_variant.hex_strings)
+        if not res:
+            return res
 
-        return matches
+        return res
+
+    def _get_results(self) -> List[UefiScannerRes]:
+        results: List[UefiRule, bool] = list()
+
+        for uefi_rule in self._uefi_rules:
+            for variant in uefi_rule.variants:
+                res = self._get_results_variants(uefi_rule.variants[variant])
+                results.append(
+                    UefiScannerRes(rule=uefi_rule, variant_label=variant, res=res)
+                )
+
+        return results
 
     @property
     def results(self) -> Set[int]:
