@@ -15,17 +15,17 @@ from typing import Any, Dict, List, Optional, Type
 
 import rzpipe
 
-import uefi_r2.uefi_smm as uefi_smm
-from uefi_r2.uefi_protocols import GUID_FROM_BYTES, UefiGuid
-from uefi_r2.uefi_tables import (
+import fwhunt_scan.uefi_smm as uefi_smm
+from fwhunt_scan.uefi_protocols import GUID_FROM_BYTES, UefiGuid
+from fwhunt_scan.uefi_tables import (
     BS_PROTOCOLS_INFO_64_BIT,
     EFI_BOOT_SERVICES_64_BIT,
     EFI_PEI_SERVICES_32_BIT,
     EFI_RUNTIME_SERVICES_64_BIT,
     OFFSET_TO_SERVICE,
 )
-from uefi_r2.uefi_te import TerseExecutableError, TerseExecutableParser
-from uefi_r2.uefi_types import (
+from fwhunt_scan.uefi_te import TerseExecutableError, TerseExecutableParser
+from fwhunt_scan.uefi_types import (
     ChildSwSmiHandler,
     NvramVariable,
     SwSmiHandler,
@@ -34,7 +34,7 @@ from uefi_r2.uefi_types import (
     UefiProtocolGuid,
     UefiService,
 )
-from uefi_r2.uefi_utils import get_int
+from fwhunt_scan.uefi_utils import get_int
 
 if sys.version_info.major == 3 and sys.version_info.minor >= 8:
     from multiprocessing import shared_memory

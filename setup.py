@@ -1,5 +1,5 @@
 from setuptools import setup
-from uefi_r2 import __author__, __email__, __version__
+from fwhunt_scan import __author__, __email__, __version__
 
 with open("requirements.txt") as f:
     REQUIRED = f.readlines()
@@ -8,15 +8,15 @@ with open("README.md", "r") as f:
     README = f.read()
 
 setup(
-    name="uefi_r2",
+    name="fwhunt_scan",
     version=__version__,
     author=__author__,
     author_email=__email__,
-    packages=["uefi_r2"],
+    packages=["fwhunt_scan"],
     license="GPL-3.0",
-    url="https://github.com/binarly-io/uefi_r2",
+    url="https://github.com/binarly-io/fwhunt-scan",
     install_requires=REQUIRED,
-    description="Tools for analyzing UEFI firmware using radare2/rizin",
+    description="Tools for analyzing UEFI firmware and checking UEFI modules with FwHunt rules",
     long_description=README,
     long_description_content_type="text/markdown",
     platforms=["Platform Independent"],
@@ -29,7 +29,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     package_data={
-        "uefi_r2": [
+        "fwhunt_scan": [
             "py.typed",
             "uefi_analyzer.pyi",
             "uefi_protocols.pyi",

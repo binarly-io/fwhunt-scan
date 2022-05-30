@@ -4,7 +4,7 @@
 #
 # pylint: disable=invalid-name,missing-module-docstring,missing-function-docstring
 
-# uefi_r2: tools for analyzing UEFI firmware using radare2/rizin
+# fwhunt_scan: tools for analyzing UEFI firmware and checking UEFI modules with FwHunt rules
 
 import json
 import os
@@ -12,7 +12,7 @@ from typing import List
 
 import click
 
-from uefi_r2 import UefiAnalyzer, UefiRule, UefiScanner
+from fwhunt_scan import UefiAnalyzer, UefiRule, UefiScanner
 
 
 @click.group()

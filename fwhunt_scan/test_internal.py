@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0+
 
 """
-Simple self tests for uefi_r2
+Simple self tests for fwhunt_scan
 """
 
 import unittest

@@ -10,21 +10,21 @@ MYPY=$(VENV)/bin/mypy
 STUBGEN=$(VENV)/bin/stubgen
 
 setup: requirements.txt
-	virtualenv ./env
 	$(VENV)/bin/pip install -r requirements.txt
 
 clean:
 	rm -rf ./build
 	rm -rf ./htmlcov
+	rm -rf ./dist
 
 blacken:
-	find uefi_r2 -name '*.py' -exec $(BLACK) {} \;
+	find fwhunt_scan -name '*.py' -exec $(BLACK) {} \;
 
 check: $(PYTEST)
 	$(PYTEST)
-	$(MYPY) uefi_r2
+	$(MYPY) fwhunt_scan
 	$(FLAKE8)
 
 pkg: $(STUBGEN)
-	$(STUBGEN) --output . --package uefi_r2
+	$(STUBGEN) --output . --package fwhunt_scan
 	$(PYTHON) setup.py sdist bdist_wheel

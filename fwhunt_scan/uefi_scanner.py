@@ -11,7 +11,7 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 
 import yaml
 
-from uefi_r2.uefi_analyzer import (
+from fwhunt_scan.uefi_analyzer import (
     NvramVariable,
     UefiAnalyzer,
     UefiGuid,
@@ -56,10 +56,10 @@ class UefiRuleVariant:
         self._strings: Optional[Dict[str, List[str]]] = None
         self._wide_strings: Optional[Dict[str, List[Dict[str, str]]]] = None
         self._hex_strings: Optional[Dict[str, List[str]]] = None
-        self._code: Optional[Dict[str, List[Dict[str, str]]]] = None
+        self._code: Optional[Dict[str, List[CodePattern]]] = None
 
-    def _get_code(self) -> Dict[str, List[Dict[str, str]]]:
-        code: Dict[str, List[Dict[str, str]]] = dict()
+    def _get_code(self) -> Dict[str, List[CodePattern]]:
+        code: Dict[str, List[CodePattern]] = dict()
         if "code" not in self._uefi_rule:
             return code
         dict_items = dict()
@@ -81,7 +81,7 @@ class UefiRuleVariant:
         return code
 
     @property
-    def code(self) -> Dict[str, List[Dict[str, str]]]:
+    def code(self) -> Dict[str, List[CodePattern]]:
         """Get code from rule"""
 
         if self._code is None:
@@ -587,7 +587,9 @@ class UefiScanner:
 
         return final_res
 
-    def _wide_strings_scanner(self, rule_wide_strings: Dict[str, List[str]]) -> bool:
+    def _wide_strings_scanner(
+        self, rule_wide_strings: Dict[str, List[Dict[str, str]]]
+    ) -> bool:
         """Match wide strings"""
 
         final_res = True
@@ -777,7 +779,7 @@ class UefiScanner:
                 return True
         return False
 
-    def _and_guids(self, guids: List[UefiGuid]):
+    def _and_guids(self, guids: List[UefiGuid]) -> bool:
         res = True
         for guid in guids:
             res &= self._search_guid(guid)
@@ -785,7 +787,7 @@ class UefiScanner:
                 break
         return res
 
-    def _or_guids(self, guids: List[UefiGuid]):
+    def _or_guids(self, guids: List[UefiGuid]) -> bool:
         res = False
         for guid in guids:
             res |= self._search_guid(guid)
@@ -793,7 +795,7 @@ class UefiScanner:
                 break
         return res
 
-    def _compare_guids(self, rule_guid: Dict[str, List[UefiGuid]]) -> Set[int]:
+    def _compare_guids(self, rule_guid: Dict[str, List[UefiGuid]]) -> bool:
         """Compare GUIDs"""
 
         final_res = True
@@ -921,8 +923,8 @@ class UefiScanner:
         return False
 
     def _clear_cache(self) -> None:
-        self._funcs_bounds = list()
-        self._rec_addrs = list()
+        self._funcs_bounds: List[Any] = list()
+        self._rec_addrs: List[Any] = list()
 
     def _code_scan_rec(self, address: int, pattern: str) -> bool:
 
@@ -943,7 +945,7 @@ class UefiScanner:
     def _and_code(self, cs: List[CodePattern]) -> bool:
         res = True
         for c in cs:
-            handlers = None
+            handlers: Optional[List[Any]] = None
             if c.sw_smi_handlers:
                 handlers = self._uefi_analyzer.swsmi_handlers
             elif c.child_sw_smi_handlers:
@@ -965,7 +967,7 @@ class UefiScanner:
     def _or_code(self, cs: List[CodePattern]) -> bool:
         res = False
         for c in cs:
-            handlers = None
+            handlers: Optional[List[Any]] = None
             if c.sw_smi_handlers:
                 handlers = self._uefi_analyzer.swsmi_handlers
             elif c.child_sw_smi_handlers:
@@ -1061,7 +1063,7 @@ class UefiScanner:
         return res
 
     def _get_results(self) -> List[UefiScannerRes]:
-        results: List[UefiRule, bool] = list()
+        results: List[UefiScannerRes] = list()
 
         for uefi_rule in self._uefi_rules:
             for variant in uefi_rule.variants:
@@ -1073,7 +1075,7 @@ class UefiScanner:
         return results
 
     @property
-    def results(self) -> Set[int]:
+    def results(self) -> List[UefiScannerRes]:
         """Get scanning results as a list of matched rules"""
 
         if self._results is None:

@@ -2,7 +2,7 @@ import os
 import click
 from typing import List
 
-TAG = "ghcr.io/binarly-io/uefi_r2:latest"
+TAG = "ghcr.io/binarly-io/fwhunt_scan:latest"
 
 
 @click.group()

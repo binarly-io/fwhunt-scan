@@ -1,9 +1,9 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-[![uefi_r2 CI](https://github.com/binarly-io/uefi_r2/actions/workflows/ci.yml/badge.svg)](https://github.com/binarly-io/uefi_r2/actions)
-[![uefi_r2 pypi](https://img.shields.io/pypi/v/uefi_r2.svg)](https://pypi.org/project/uefi_r2)
+[![fwhunt_scan CI](https://github.com/binarly-io/fwhunt_scan/actions/workflows/ci.yml/badge.svg)](https://github.com/binarly-io/fwhunt_scan/actions)
+[![fwhunt_scan pypi](https://img.shields.io/pypi/v/fwhunt_scan.svg)](https://pypi.org/project/fwhunt_scan)
 
 <p align="center">
-  <img alt="fwhunt Logo" src="https://raw.githubusercontent.com/binarly-io/uefi_r2/master/pics/fwhunt_logo.png" width="20%">
+  <img alt="fwhunt Logo" src="https://raw.githubusercontent.com/binarly-io/fwhunt_scan/master/pics/fwhunt_logo.png" width="20%">
 </p>
 
 # FwHunt Community Scanner
@@ -23,14 +23,14 @@ max commit: c09ff31205f18f478234249fc76b101ebb101663 (v0.3.3)
 
 Install with `pip` (tested on `python3.6` and above):
 
-```bash
-$ python -m pip install uefi-r2
+```
+$ python -m pip install fwhunt-scan
 ```
 
 Install manually:
 
-```bash
-$ git clone https://github.com/binarly-io/uefi_r2.git && cd uefi_r2
+```
+$ git clone https://github.com/binarly-io/fwhunt_scan.git && cd fwhunt_scan
 $ python setup.py install
 ```
 
@@ -39,8 +39,8 @@ $ python setup.py install
 ### With script
 
 ```
-./uefi_r2_analyzer.py analyze-image {image_path} -o out.json
-./uefi_r2_analyzer.py scan --rule {rule_path} {image_path}
+./fwhunt_scan_analyzer.py analyze-image {image_path} -o out.json
+./fwhunt_scan_analyzer.py scan --rule {rule_path} {image_path}
 ```
 
 ### From code
@@ -50,7 +50,7 @@ $ python setup.py install
 Basic usage examples:
 
 ```python
-from uefi_r2.uefi_analyzer import UefiAnalyzer
+from fwhunt_scan.uefi_analyzer import UefiAnalyzer
 
 ...
 uefi_analyzer = UefiAnalyzer(image_path=image_path)
@@ -59,7 +59,7 @@ uefi_analyzer.close()
 ```
 
 ```python
-from uefi_r2.uefi_analyzer import UefiAnalyzer
+from fwhunt_scan.uefi_analyzer import UefiAnalyzer
 
 ...
 with UefiAnalyzer(image_path=image_path) as uefi_analyzer:
@@ -69,7 +69,7 @@ with UefiAnalyzer(image_path=image_path) as uefi_analyzer:
 On Linux platforms, you can pass blob for analysis instead of file:
 
 ```python
-from uefi_r2.uefi_analyzer import UefiAnalyzer
+from fwhunt_scan.uefi_analyzer import UefiAnalyzer
 
 ...
 with UefiAnalyzer(blob=data) as uefi_analyzer:
@@ -79,8 +79,8 @@ with UefiAnalyzer(blob=data) as uefi_analyzer:
 #### UefiScanner
 
 ```python
-from uefi_r2.uefi_analyzer import UefiAnalyzer
-from uefi_r2.uefi_scanner import UefiRule, UefiScanner
+from fwhunt_scan.uefi_analyzer import UefiAnalyzer
+from fwhunt_scan.uefi_scanner import UefiRule, UefiScanner
 
 ...
 uefi_analyzer = UefiAnalyzer(image_path)

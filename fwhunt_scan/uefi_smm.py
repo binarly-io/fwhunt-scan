@@ -6,9 +6,9 @@ from typing import Any, Dict, List, Optional
 
 import rzpipe
 
-from uefi_r2.uefi_protocols import UefiGuid
-from uefi_r2.uefi_types import ChildSwSmiHandler, SwSmiHandler
-from uefi_r2.uefi_utils import (
+from fwhunt_scan.uefi_protocols import UefiGuid
+from fwhunt_scan.uefi_types import ChildSwSmiHandler, SwSmiHandler
+from fwhunt_scan.uefi_utils import (
     get_current_insn_index,
     get_int,
     get_xrefs_to_data,

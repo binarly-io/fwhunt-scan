@@ -3,11 +3,11 @@
 # pylint: disable=too-many-lines,consider-using-dict-comprehension
 
 """
-Tools for analyzing UEFI firmware using radare2
+Tools for analyzing UEFI firmware and checking UEFI modules with FwHunt rules
 """
 
 from typing import Dict
-from uefi_r2.uefi_types import UefiGuid
+from fwhunt_scan.uefi_types import UefiGuid
 
 PROTOCOLS_GUIDS = [
     UefiGuid(

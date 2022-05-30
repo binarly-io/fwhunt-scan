@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-3.0+
 
 """
-Tools for analyzing UEFI firmware using radare2
+Tools for analyzing UEFI firmware and checking UEFI modules with FwHunt rules
 """
 
 __author__ = "FwHunt team"
