@@ -1,9 +1,9 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-[![fwhunt_scan CI](https://github.com/binarly-io/fwhunt_scan/actions/workflows/ci.yml/badge.svg)](https://github.com/binarly-io/fwhunt_scan/actions)
-[![fwhunt_scan pypi](https://img.shields.io/pypi/v/fwhunt_scan.svg)](https://pypi.org/project/fwhunt_scan)
+[![fwhunt-scan CI](https://github.com/binarly-io/fwhunt-scan/actions/workflows/ci.yml/badge.svg)](https://github.com/binarly-io/fwhunt-scan/actions)
+[![fwhunt-scan pypi](https://img.shields.io/pypi/v/fwhunt-scan.svg)](https://pypi.org/project/fwhunt-scan)
 
 <p align="center">
-  <img alt="fwhunt Logo" src="https://raw.githubusercontent.com/binarly-io/fwhunt_scan/master/pics/fwhunt_logo.png" width="20%">
+  <img alt="fwhunt Logo" src="https://raw.githubusercontent.com/binarly-io/fwhunt-scan/master/pics/fwhunt_logo.png" width="20%">
 </p>
 
 # FwHunt Community Scanner
@@ -30,7 +30,7 @@ $ python -m pip install fwhunt-scan
 Install manually:
 
 ```
-$ git clone https://github.com/binarly-io/fwhunt_scan.git && cd fwhunt_scan
+$ git clone https://github.com/binarly-io/fwhunt-scan.git && cd fwhunt_scan
 $ python setup.py install
 ```
 
