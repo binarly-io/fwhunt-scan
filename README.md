@@ -8,7 +8,7 @@
 
 # FwHunt Community Scanner
 
-Tools for analyzing UEFI firmware using radare2/rizin
+Tools for analyzing UEFI firmware and checking UEFI modules with [FwHunt rules](https://github.com/binarly-io/fwhunt).
 
 # Dependencies
 
@@ -84,7 +84,10 @@ from uefi_r2.uefi_scanner import UefiRule, UefiScanner
 
 ...
 uefi_analyzer = UefiAnalyzer(image_path)
-uefi_rule = UefiRule(rule)
-scanner = UefiScanner(uefi_analyzer, uefi_rule)
+
+# rule1 and rule2 - contents of the rules on YAML format
+uefi_rules = [UefiRule(rule1), UefiRule(rule2)]
+
+scanner = UefiScanner(uefi_analyzer, uefi_rules)
 result = scanner.result
 ```
