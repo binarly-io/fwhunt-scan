@@ -26,10 +26,12 @@ share/python-wheels/
 *.egg
 *.pyi
 .mypy_cache/
+.pytest_cache/
 MANIFEST
 
 # Directories
 .vscode/
+env/
 test/
 rules/
 
