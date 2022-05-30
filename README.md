@@ -15,12 +15,13 @@ Tools for analyzing UEFI firmware and checking UEFI modules with [FwHunt rules](
 ## rizin
 
 ```
-commit: d5f1aea5953fb7cbc59d219d7fa13d20390089f7
+min commit: d5f1aea5953fb7cbc59d219d7fa13d20390089f7
+max commit: c09ff31205f18f478234249fc76b101ebb101663 (v0.3.3)
 ```
 
 # Installation
 
-Install with `pip`:
+Install with `pip` (tested on `python3.6` and above):
 
 ```bash
 $ python -m pip install uefi-r2

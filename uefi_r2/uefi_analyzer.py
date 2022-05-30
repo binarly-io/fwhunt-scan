@@ -10,7 +10,6 @@ Tools for analyzing UEFI firmware using radare2/rizin
 import json
 import sys
 import uuid
-from multiprocessing import shared_memory
 from types import TracebackType
 from typing import Any, Dict, List, Optional, Type
 
@@ -36,6 +35,13 @@ from uefi_r2.uefi_types import (
     UefiService,
 )
 from uefi_r2.uefi_utils import get_int
+
+if sys.version_info.major == 3 and sys.version_info.minor >= 8:
+    from multiprocessing import shared_memory
+if sys.version_info.major == 3 and (
+    sys.version_info.minor >= 6 and sys.version_info.minor < 8
+):
+    import shared_memory
 
 
 class UefiAnalyzerError(Exception):
