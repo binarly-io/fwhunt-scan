@@ -1,5 +1,7 @@
 FROM python:3.9
 
+LABEL org.opencontainers.image.source https://github.com/binarly-io/fwhunt-scan
+
 RUN apt-get update
 RUN apt-get install -y ninja-build parallel
 RUN pip install meson
