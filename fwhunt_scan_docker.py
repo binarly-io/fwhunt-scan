@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+#
+# SPDX-License-Identifier: GPL-3.0+
+
 import os
 import click
 from typing import List
@@ -11,10 +15,17 @@ def cli():
 
 
 @click.command()
-def install():
+def pull():
     """Pull docker image."""
 
     os.system(" ".join(["docker", "pull", TAG]))
+
+
+@click.command()
+def build():
+    """Build docker image."""
+
+    os.system(" ".join(["docker", "build", "-t", TAG, "."]))
 
 
 @click.command()
@@ -88,7 +99,8 @@ def scan(image_path: str, rule: List[str]) -> bool:
     return True
 
 
-cli.add_command(install)
+cli.add_command(build)
+cli.add_command(pull)
 cli.add_command(analyze_image)
 cli.add_command(scan)
 

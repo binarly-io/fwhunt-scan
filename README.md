@@ -43,6 +43,36 @@ $ python setup.py install
 ./fwhunt_scan_analyzer.py scan --rule {rule_path} {image_path}
 ```
 
+### With docker
+
+To avoid installing dependencies, you can use the docker image.
+
+You can build a docker image locally:
+
+```
+docker build -t ghcr.io/binarly-io/fwhunt_scan:latest .
+```
+
+Or pull it from `ghcr`:
+
+```
+docker pull ghcr.io/binarly-io/fwhunt_scan:latest # pull docker image from ghcr
+```
+
+Example of use:
+
+```
+docker run --rm -it -v {module_path}:/tmp/image:ro \
+  ghcr.io/binarly-io/fwhunt_scan:latest \
+  analyze-image /tmp/image # to analyze image
+
+docker run --rm -it -v {module_path}:/tmp/image:ro -v {rule_path}:/tmp/rule.yml:ro \
+  ghcr.io/binarly-io/fwhunt_scan:latest \
+  scan /tmp/image -r /tmp/rule.yml # to scan image with specified FwHunt rule
+```
+
+All these steps are automated in the `fwhunt_scan_docker.py` script.
+
 ### From code
 
 #### UefiAnalyzer
@@ -50,7 +80,7 @@ $ python setup.py install
 Basic usage examples:
 
 ```python
-from fwhunt_scan.uefi_analyzer import UefiAnalyzer
+from fwhunt_scan import UefiAnalyzer
 
 ...
 uefi_analyzer = UefiAnalyzer(image_path=image_path)
@@ -59,7 +89,7 @@ uefi_analyzer.close()
 ```
 
 ```python
-from fwhunt_scan.uefi_analyzer import UefiAnalyzer
+from fwhunt_scan import UefiAnalyzer
 
 ...
 with UefiAnalyzer(image_path=image_path) as uefi_analyzer:
@@ -69,7 +99,7 @@ with UefiAnalyzer(image_path=image_path) as uefi_analyzer:
 On Linux platforms, you can pass blob for analysis instead of file:
 
 ```python
-from fwhunt_scan.uefi_analyzer import UefiAnalyzer
+from fwhunt_scan import UefiAnalyzer
 
 ...
 with UefiAnalyzer(blob=data) as uefi_analyzer:
@@ -79,8 +109,7 @@ with UefiAnalyzer(blob=data) as uefi_analyzer:
 #### UefiScanner
 
 ```python
-from fwhunt_scan.uefi_analyzer import UefiAnalyzer
-from fwhunt_scan.uefi_scanner import UefiRule, UefiScanner
+from fwhunt_scan import UefiAnalyzer, UefiRule, UefiScanner
 
 ...
 uefi_analyzer = UefiAnalyzer(image_path)
