@@ -829,7 +829,12 @@ class UefiScanner:
     def _get_bounds(self, insns: List[Dict[str, Any]]) -> Tuple:
         """Get function end address"""
 
-        funcs = list(self._uefi_analyzer._rz.cmdj("aflqj"))
+        funcs = list(
+            filter(
+                lambda addr: addr,
+                [addr.get("offset", None) for addr in self._uefi_analyzer.functions],
+            )
+        )
         funcs.sort()
 
         start = insns[0].get("offset", None)
