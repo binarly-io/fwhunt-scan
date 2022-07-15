@@ -16,7 +16,7 @@ from typing import Any, Dict, List, Optional, Type
 import rzpipe
 
 import fwhunt_scan.uefi_smm as uefi_smm
-from fwhunt_scan.uefi_protocols import GUID_FROM_BYTES, UefiGuid
+from fwhunt_scan.uefi_protocols import GUID_FROM_BYTES
 from fwhunt_scan.uefi_tables import (
     BS_PROTOCOLS_INFO_64_BIT,
     EFI_BOOT_SERVICES_64_BIT,
