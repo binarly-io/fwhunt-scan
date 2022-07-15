@@ -36,7 +36,7 @@ def get_xrefs_to_guids(rz: rzpipe.open, guids: List[UefiGuid]) -> List[int]:
             rz.cmd(f"s {offset:#x}")
 
             # get xrefs
-            xrefs = rz.cmdj(f"axtj")
+            xrefs = rz.cmdj("axtj")
 
             for xref in xrefs:
                 if "from" not in xref:
@@ -55,7 +55,7 @@ def get_xrefs_to_data(rz: rzpipe.open, addr: int) -> List[int]:
     rz.cmd(f"s {addr:#x}")
 
     # get xrefs
-    xrefs = rz.cmdj(f"axtj")
+    xrefs = rz.cmdj("axtj")
 
     for xref in xrefs:
         if "from" not in xref:

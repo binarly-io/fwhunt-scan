@@ -866,7 +866,7 @@ class UefiScanner:
         """Recursively traverse the function and find the boundaries of all child functions"""
 
         self._uefi_analyzer._rz.cmd(f"s {start_addr:#x}")
-        self._uefi_analyzer._rz.cmd(f"af")
+        self._uefi_analyzer._rz.cmd("af")
 
         insns = self._uefi_analyzer._rz.cmd("pdrj")
         # prevent error messages to sys.stderr from rizin:
@@ -951,7 +951,7 @@ class UefiScanner:
             elif c.child_sw_smi_handlers:
                 handlers = self._uefi_analyzer.child_swsmi_handlers
             else:
-                raise UefiScannerError(f"The search place is incorrect")
+                raise UefiScannerError("The search place is incorrect")
             search_res = False
             for handler in handlers:
                 search_res = self._code_scan_rec(handler.address, c.pattern)
@@ -973,7 +973,7 @@ class UefiScanner:
             elif c.child_sw_smi_handlers:
                 handlers = self._uefi_analyzer.child_swsmi_handlers
             else:
-                raise UefiScannerError(f"The search place is incorrect")
+                raise UefiScannerError("The search place is incorrect")
             search_res = False
             for handler in handlers:
                 search_res = self._code_scan_rec(handler.address, c.pattern)
