@@ -41,7 +41,7 @@ if sys.version_info.major == 3 and sys.version_info.minor >= 8:
 if sys.version_info.major == 3 and (
     sys.version_info.minor >= 6 and sys.version_info.minor < 8
 ):
-    import shared_memory
+    import shared_memory  # type: ignore # noqa: F811
 
 
 class UefiAnalyzerError(Exception):
