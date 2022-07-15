@@ -7,7 +7,7 @@ Tools for analyzing UEFI firmware using radare2
 import binascii
 import json
 import os
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import yaml
 
