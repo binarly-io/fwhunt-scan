@@ -193,7 +193,7 @@ class UefiAnalyzer:
         """Get common image properties (strings)"""
 
         if self._strings is None:
-            self._strings = self._rz.cmdj("izzzj") or []
+            self._strings = self._rz.cmdj("izzj") or []
         return self._strings
 
     @property
