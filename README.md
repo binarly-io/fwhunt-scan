@@ -12,9 +12,7 @@ Tools for analyzing UEFI firmware and checking UEFI modules with [FwHunt rules](
 
 # Dependencies
 
-## rizin
-
-Supported rizin versions: v0.3.4-v4.0.0
+rizin (v0.3.4-v0.4.0)
 
 # Installation
 
