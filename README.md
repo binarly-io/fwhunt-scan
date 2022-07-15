@@ -14,10 +14,7 @@ Tools for analyzing UEFI firmware and checking UEFI modules with [FwHunt rules](
 
 ## rizin
 
-```
-min commit: d5f1aea5953fb7cbc59d219d7fa13d20390089f7
-max commit: c09ff31205f18f478234249fc76b101ebb101663 (v0.3.3)
-```
+Supported rizin versions: v0.3.4-v4.0.0
 
 # Installation
 
