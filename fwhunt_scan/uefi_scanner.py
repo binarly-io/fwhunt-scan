@@ -7,7 +7,7 @@ Tools for analyzing UEFI firmware using radare2
 import binascii
 import json
 import os
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import yaml
 
@@ -866,14 +866,14 @@ class UefiScanner:
         """Recursively traverse the function and find the boundaries of all child functions"""
 
         self._uefi_analyzer._rz.cmd(f"s {start_addr:#x}")
-        self._uefi_analyzer._rz.cmd(f"af")
+        self._uefi_analyzer._rz.cmd("af")
 
         insns = self._uefi_analyzer._rz.cmd("pdrj")
         # prevent error messages to sys.stderr from rizin:
         # https://github.com/rizinorg/rz-pipe/blob/0f7ac66e6d679ebb03be26bf61a33f9ccf199f27/python/rzpipe/open_base.py#L261
         try:
             insns = json.loads(insns)
-        except (ValueError, KeyError, TypeError) as _:
+        except (ValueError, KeyError, TypeError):
             return False
 
         # append function bounds
@@ -900,7 +900,7 @@ class UefiScanner:
                 if address not in self._rec_addrs:
                     self._rec_addrs.append(address)
                     self._get_bounds_rec(address, depth, debug)
-            except ValueError as _:
+            except ValueError:
                 continue
 
         return True
@@ -951,7 +951,7 @@ class UefiScanner:
             elif c.child_sw_smi_handlers:
                 handlers = self._uefi_analyzer.child_swsmi_handlers
             else:
-                raise UefiScannerError(f"The search place is incorrect")
+                raise UefiScannerError("The search place is incorrect")
             search_res = False
             for handler in handlers:
                 search_res = self._code_scan_rec(handler.address, c.pattern)
@@ -973,7 +973,7 @@ class UefiScanner:
             elif c.child_sw_smi_handlers:
                 handlers = self._uefi_analyzer.child_swsmi_handlers
             else:
-                raise UefiScannerError(f"The search place is incorrect")
+                raise UefiScannerError("The search place is incorrect")
             search_res = False
             for handler in handlers:
                 search_res = self._code_scan_rec(handler.address, c.pattern)

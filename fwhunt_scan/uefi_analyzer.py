@@ -16,7 +16,7 @@ from typing import Any, Dict, List, Optional, Type
 import rzpipe
 
 import fwhunt_scan.uefi_smm as uefi_smm
-from fwhunt_scan.uefi_protocols import GUID_FROM_BYTES, UefiGuid
+from fwhunt_scan.uefi_protocols import GUID_FROM_BYTES
 from fwhunt_scan.uefi_tables import (
     BS_PROTOCOLS_INFO_64_BIT,
     EFI_BOOT_SERVICES_64_BIT,
@@ -41,7 +41,7 @@ if sys.version_info.major == 3 and sys.version_info.minor >= 8:
 if sys.version_info.major == 3 and (
     sys.version_info.minor >= 6 and sys.version_info.minor < 8
 ):
-    import shared_memory
+    import shared_memory  # type: ignore # noqa: F811
 
 
 class UefiAnalyzerError(Exception):
@@ -458,7 +458,7 @@ class UefiAnalyzer:
             block_insns = self._rz.cmd("pdbj @ {:#x}".format(bs.address))
             try:
                 block_insns = json.loads(block_insns)
-            except (ValueError, KeyError, TypeError) as _:
+            except (ValueError, KeyError, TypeError):
                 continue
             for insn in block_insns:
                 if "esil" in insn:
