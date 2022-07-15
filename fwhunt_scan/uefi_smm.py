@@ -294,7 +294,7 @@ def get_child_sw_smi_handlers(
             # https://github.com/rizinorg/rz-pipe/blob/0f7ac66e6d679ebb03be26bf61a33f9ccf199f27/python/rzpipe/open_base.py#L261
             try:
                 bb = json.loads(result)
-            except (ValueError, KeyError, TypeError) as _:
+            except (ValueError, KeyError, TypeError):
                 continue
             handler = get_child_sw_smi_handler_bb(rz, bb)
             if handler is not None:

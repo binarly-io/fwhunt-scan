@@ -458,7 +458,7 @@ class UefiAnalyzer:
             block_insns = self._rz.cmd("pdbj @ {:#x}".format(bs.address))
             try:
                 block_insns = json.loads(block_insns)
-            except (ValueError, KeyError, TypeError) as _:
+            except (ValueError, KeyError, TypeError):
                 continue
             for insn in block_insns:
                 if "esil" in insn:

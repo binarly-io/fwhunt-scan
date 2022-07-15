@@ -873,7 +873,7 @@ class UefiScanner:
         # https://github.com/rizinorg/rz-pipe/blob/0f7ac66e6d679ebb03be26bf61a33f9ccf199f27/python/rzpipe/open_base.py#L261
         try:
             insns = json.loads(insns)
-        except (ValueError, KeyError, TypeError) as _:
+        except (ValueError, KeyError, TypeError):
             return False
 
         # append function bounds
@@ -900,7 +900,7 @@ class UefiScanner:
                 if address not in self._rec_addrs:
                     self._rec_addrs.append(address)
                     self._get_bounds_rec(address, depth, debug)
-            except ValueError as _:
+            except ValueError:
                 continue
 
         return True
