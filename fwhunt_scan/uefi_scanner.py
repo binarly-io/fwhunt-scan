@@ -478,7 +478,36 @@ class UefiScanner:
     def __init__(self, uefi_analyzer: UefiAnalyzer, uefi_rules: List[UefiRule]):
         self._uefi_analyzer: UefiAnalyzer = uefi_analyzer
         self._uefi_rules: List[UefiRule] = uefi_rules
+        self._valid_rules: bool = self._check_rules()
+        if not self._valid_rules:
+            raise UefiScannerError(
+                "Invalid rule format. Visit https://github.com/binarly-io/FwHunt to find the latest version of the rules format."
+            )
         self._results: Optional[List[UefiScannerRes]] = None
+
+    def _check_rule(self, rule: UefiRule):
+        variants: Optional[Dict[str, UefiRuleVariant]] = None
+        try:
+            variants = rule.variants
+        except KeyError:
+            return False
+
+        if not isinstance(variants, dict):
+            return False
+
+        for label in variants:
+            if not isinstance(label, str):
+                return False
+            if not isinstance(variants[label], UefiRuleVariant):
+                return False
+
+        return True
+
+    def _check_rules(self):
+        for rule in self._uefi_rules:
+            if not self._check_rule(rule):
+                return False
+        return True
 
     def _and_strings(self, strings: List[str]) -> bool:
         res = True
