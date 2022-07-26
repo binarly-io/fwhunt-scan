@@ -33,9 +33,17 @@ $ python setup.py install
 
 ### With script
 
+Analyze/scan separate module:
+
 ```
 ./fwhunt_scan_analyzer.py analyze-image {image_path} -o out.json
 ./fwhunt_scan_analyzer.py scan --rule {rule_path} {image_path}
+```
+
+Scan the entire firmware image:
+
+```
+$ python3 fwhunt_scan_analyzer.py scan-firmware -r rules/BRLY-2021-001.yml -r rules/BRLY-2021-004.yml -r rules/RsbStuffingCheck.yml test/fw.bin
 ```
 
 ### With docker
