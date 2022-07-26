@@ -36,8 +36,8 @@ $ python setup.py install
 Analyze/scan separate module:
 
 ```
-./fwhunt_scan_analyzer.py analyze-image {image_path} -o out.json
-./fwhunt_scan_analyzer.py scan --rule {rule_path} {image_path}
+$ python3 fwhunt_scan_analyzer.py analyze-image {image_path} -o out.json
+$ python3 fwhunt_scan_analyzer.py scan --rule {rule_path} {image_path}
 ```
 
 Scan the entire firmware image:
