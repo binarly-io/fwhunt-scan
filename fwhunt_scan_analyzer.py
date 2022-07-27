@@ -13,7 +13,7 @@ from typing import Dict, List
 
 import click
 
-from fwhunt_scan import UefiAnalyzer, UefiRule, UefiScanner, UefiBinary, UefiExtractor
+from fwhunt_scan import UefiAnalyzer, UefiExtractor, UefiRule, UefiScanner
 
 
 @click.group()
