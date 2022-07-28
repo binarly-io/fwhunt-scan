@@ -184,7 +184,7 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
 
         uefi_analyzer.close()
 
-        return True
+    return True
 
 
 cli.add_command(analyze_image)

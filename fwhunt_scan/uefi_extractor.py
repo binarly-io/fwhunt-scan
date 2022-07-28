@@ -54,7 +54,7 @@ class UefiExtractor:
 
     def __init__(self, firmware_data: bytes, file_guid: str):
         self._firmware_data: bytes = firmware_data
-        self._file_guid: str = file_guid
+        self._file_guid: str = file_guid.lower()
         self._parser: uefi_firmware.AutoParser = None
         self._extracted: bool = False
         self._ext: Optional[str] = None
