@@ -84,7 +84,6 @@ class UefiExtractor:
         for offset in potencial_volumes:
             self._parser = uefi_firmware.AutoParser(self._firmware_data[offset - 40 :])
             if self._parser.type() == "unknown":
-                print(f"Current offset: {offset:#x}")
                 continue
             break
 
