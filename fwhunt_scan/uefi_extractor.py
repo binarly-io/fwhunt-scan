@@ -53,9 +53,12 @@ class UefiExtractor:
     UI = {0x15: ("User interface name", "ui", "UI")}
 
     def __init__(self, firmware_data: bytes, file_guid: str):
+        offset = firmware_data.find(b"_FVH")
+        if offset >= 0:
+            firmware_data = firmware_data[offset - 40 :]
         self._firmware_data: bytes = firmware_data
         self._file_guid: str = file_guid.lower()
-        self._parser: uefi_firmware.AutoParser = None
+        self._parsers: List[uefi_firmware.AutoParser] = list()
         self._extracted: bool = False
         self._ext: Optional[str] = None
         self._name: Optional[str] = None
@@ -82,15 +85,20 @@ class UefiExtractor:
     def _extract(self) -> bool:
         potencial_volumes = uefi_firmware.search_firmware_volumes(self._firmware_data)
         for offset in potencial_volumes:
-            self._parser = uefi_firmware.AutoParser(self._firmware_data[offset - 40 :])
-            if self._parser.type() == "unknown":
+            parser = uefi_firmware.AutoParser(self._firmware_data[offset - 40 :])
+            if parser is None or parser.type() == "unknown":
                 continue
-            break
+            self._parsers.append(parser)
 
-        if self._parser.type() == "unknown":
+        if not len(self._parsers):
             return False
-        firmware = self._parser.parse()
-        self._search_binary(firmware)
+
+        for parser in self._parsers:
+            firmware = parser.parse()
+            self._search_binary(firmware)
+            if self._content is not None:
+                break
+
         return True
 
     @property
