@@ -50,6 +50,10 @@ class UefiExtractor:
         0x0C: ("combined smm/driver", "smm.dxe", "COMBO_SMM_DRIVER"),
         0x0D: ("smm core", "smm.core", "SMM_CORE"),
     }
+    SECTION_TYPES = {
+        0x10: ("PE32 image", "pe", "PE32"),
+        0x12: ("Terse executable (TE)", "te", "TE"),
+    }
     UI = {0x15: ("User interface name", "ui", "UI")}
 
     def __init__(self, firmware_data: bytes, file_guid: str):
@@ -65,20 +69,39 @@ class UefiExtractor:
         self._binary: Optional[UefiBinary] = None
         self._content: Optional[bytes] = None
 
-    def _get_name(self, data: bytes) -> None:
-        try:
-            self._name = data.decode("utf-16le")
-        except UnicodeDecodeError:
-            pass
+    def _compressed_search(self, object: Any) -> None:
+        for component in object.iterate_objects():
+            attrs = component.get("attrs", None)
+            if attrs is not None:
+                type = attrs.get("type", None)
+                if type in UefiExtractor.UI:
+                    self._name = component["label"]
+                if type in UefiExtractor.SECTION_TYPES:
+                    self._content = component["_self"].content
+            self._compressed_search(component["_self"])
+
+    def _compressed_handle(self, object: Any) -> None:
+        for obj in object.iterate_objects():
+            if (
+                obj.get("attrs", None) is not None
+                and obj["attrs"].get("attrs", None) == 0x01
+            ):  # if compressed
+                self._compressed_search(obj["_self"])
 
     def _search_binary(self, object: Any) -> None:
         for component in object.iterate_objects():
             guid = component.get("guid", None)
             attrs = component.get("attrs", None)
             if guid is not None and attrs is not None and guid == self._file_guid:
-                if attrs.get("type", None) in UefiExtractor.UI:
-                    self._get_name(component["_self"].content[:-2])
-                if attrs.get("type", None) in UefiExtractor.FILE_TYPES:
+                type = attrs.get("type", None)
+                if type in UefiExtractor.UI:
+                    self._name = component["label"]
+                if type in UefiExtractor.FILE_TYPES:
+                    if self._ext is None:
+                        ext = UefiExtractor.FILE_TYPES[type][1]
+                        self._ext = f".{ext}"
+                    self._compressed_handle(component["_self"])
+                if type in UefiExtractor.SECTION_TYPES:
                     self._content = component["_self"].content
             self._search_binary(component["_self"])
 

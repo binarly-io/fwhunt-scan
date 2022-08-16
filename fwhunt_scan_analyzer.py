@@ -182,7 +182,7 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
                     f"{prefix} {result.rule.name} (variant: {result.variant_label}) {msg} ({extractor.binary.name})"
                 )
 
-        uefi_analyzer.close()
+            uefi_analyzer.close()
 
     return True
 
