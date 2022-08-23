@@ -266,7 +266,8 @@ def get_child_sw_smi_handler_bb(
             if guid_addr is not None:
                 rz.cmd(f"s {guid_addr:#x}")
                 guid_b = bytes(rz.cmdj("xj 16"))
-                handler_guid = str(uuid.UUID(bytes_le=guid_b)).upper()
+                if len(guid_b) == 16:
+                    handler_guid = str(uuid.UUID(bytes_le=guid_b)).upper()
 
         if handler_address is not None and handler_guid is not None:
             return ChildSwSmiHandler(address=handler_address, handler_guid=handler_guid)
