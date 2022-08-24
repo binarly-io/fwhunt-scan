@@ -6,19 +6,50 @@ import os
 import click
 from typing import List
 
-TAG = "ghcr.io/binarly-io/fwhunt_scan:latest"
+TAG = "fwhunt_scan"
+
+
+def scan_module_or_firmware(image_path: str, rule: List[str], command: str):
+
+    if command not in ["scan", "scan-firmware"]:
+        return False
+
+    rules = rule
+
+    if not os.path.isfile(image_path):
+        print("{} check image path".format(click.style("ERROR", fg="red", bold=True)))
+        return False
+    if not all(rule and os.path.isfile(rule) for rule in rules):
+        print("{} check rule(s) path".format(click.style("ERROR", fg="red", bold=True)))
+        return False
+
+    cmd = [
+        "docker",
+        "run",
+        "--rm",
+        "-it",
+        "-v",
+        f"{os.path.realpath(image_path)}:/tmp/image:ro",
+    ]
+    rules_cmd = [TAG, command, "/tmp/image"]
+    for rule in rules:
+        _, name = os.path.split(rule)
+        cmd += ["-v", f"{os.path.realpath(rule)}:/tmp/{name}:ro"]
+        rules_cmd += ["-r", f"/tmp/{name}"]
+
+    cmd += rules_cmd
+    cmdstr = " ".join(cmd)
+
+    print(f"Command: {cmdstr}")
+
+    os.system(cmdstr)
+
+    return True
 
 
 @click.group()
 def cli():
     pass
-
-
-@click.command()
-def pull():
-    """Pull docker image."""
-
-    os.system(" ".join(["docker", "pull", TAG]))
 
 
 @click.command()
@@ -64,45 +95,24 @@ def analyze_image(image_path: str) -> bool:
 @click.argument("image_path")
 @click.option("-r", "--rule", help="The path to the rule.", multiple=True)
 def scan(image_path: str, rule: List[str]) -> bool:
-    """Scan input UEFI image."""
+    """Scan input UEFI module."""
 
-    rules = rule
+    return scan_module_or_firmware(image_path, rule, "scan")
 
-    if not os.path.isfile(image_path):
-        print("{} check image path".format(click.style("ERROR", fg="red", bold=True)))
-        return False
-    if not all(rule and os.path.isfile(rule) for rule in rules):
-        print("{} check rule(s) path".format(click.style("ERROR", fg="red", bold=True)))
-        return False
 
-    cmd = [
-        "docker",
-        "run",
-        "--rm",
-        "-it",
-        "-v",
-        f"{os.path.realpath(image_path)}:/tmp/image:ro",
-    ]
-    rules_cmd = [TAG, "scan", "/tmp/image"]
-    for rule in rules:
-        _, name = os.path.split(rule)
-        cmd += ["-v", f"{os.path.realpath(rule)}:/tmp/{name}:ro"]
-        rules_cmd += ["-r", f"/tmp/{name}"]
+@click.command()
+@click.argument("image_path")
+@click.option("-r", "--rule", help="The path to the rule.", multiple=True)
+def scan_firmware(image_path: str, rule: List[str]) -> bool:
+    """Scan UEFI firmware image."""
 
-    cmd += rules_cmd
-    cmdstr = " ".join(cmd)
-
-    print(f"Command: {cmdstr}")
-
-    os.system(cmdstr)
-
-    return True
+    return scan_module_or_firmware(image_path, rule, "scan-firmware")
 
 
 cli.add_command(build)
-cli.add_command(pull)
 cli.add_command(analyze_image)
 cli.add_command(scan)
+cli.add_command(scan_firmware)
 
 if __name__ == "__main__":
     cli()

@@ -50,28 +50,23 @@ $ python3 fwhunt_scan_analyzer.py scan-firmware -r rules/BRLY-2021-001.yml -r ru
 
 To avoid installing dependencies, you can use the docker image.
 
-You can build a docker image locally:
+You can build a docker image locally as follows:
 
 ```
-docker build -t ghcr.io/binarly-io/fwhunt_scan:latest .
-```
-
-Or pull it from `ghcr`:
-
-```
-docker pull ghcr.io/binarly-io/fwhunt_scan:latest # pull docker image from ghcr
+docker build -t fwhunt_scan .
 ```
 
 Example of use:
 
 ```
 docker run --rm -it -v {module_path}:/tmp/image:ro \
-  ghcr.io/binarly-io/fwhunt_scan:latest \
-  analyze-image /tmp/image # to analyze image
+  fwhunt_scan analyze-image /tmp/image # to analyze EFI module
 
 docker run --rm -it -v {module_path}:/tmp/image:ro -v {rule_path}:/tmp/rule.yml:ro \
-  ghcr.io/binarly-io/fwhunt_scan:latest \
-  scan /tmp/image -r /tmp/rule.yml # to scan image with specified FwHunt rule
+  fwhunt_scan scan /tmp/image -r /tmp/rule.yml # to scan EFI module with specified FwHunt rule
+
+docker run --rm -it -v {module_path}:/tmp/image:ro -v {rule_path}:/tmp/rule.yml:ro \
+  fwhunt_scan scan-firmware /tmp/image -r /tmp/rule.yml # to scan firmware image with specified FwHunt rule
 ```
 
 All these steps are automated in the `fwhunt_scan_docker.py` script.
