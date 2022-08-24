@@ -9,6 +9,7 @@
 import json
 import os
 import pathlib
+import sys
 import tempfile
 from typing import Dict, List
 
@@ -165,12 +166,13 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
         if not extractor.binary.content:
             continue
 
+        delete = not sys.platform.startswith("win")
         with tempfile.NamedTemporaryFile(
             mode="wb",
             prefix=f"{extractor.binary.name}_",
             suffix=f".{extractor.binary.ext}",
             dir=None,
-            delete=True,
+            delete=delete,
         ) as f:
             f.write(extractor.binary.content)
             uefi_analyzer = UefiAnalyzer(image_path=f.name)
