@@ -16,10 +16,6 @@ WORKDIR /tmp/rizin-v0.4.0
 RUN meson build
 RUN ninja -C build install
 
-COPY rz_libfix.sh /tmp/rizin-v0.4.0/
-RUN chmod +x rz_libfix.sh
-RUN ./rz_libfix.sh
-
 # install fwhunt_scan
 RUN useradd -u 1001 -m fwhunt_scan
 USER fwhunt_scan
