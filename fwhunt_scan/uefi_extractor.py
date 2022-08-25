@@ -1,4 +1,4 @@
-from typing import Any, List, Optional
+from typing import Any, Dict, List, Optional
 
 import uefi_firmware
 
@@ -56,54 +56,53 @@ class UefiExtractor:
     }
     UI = {0x15: ("User interface name", "ui", "UI")}
 
-    def __init__(self, firmware_data: bytes, file_guid: str):
+    def __init__(self, firmware_data: bytes, file_guids: List[str]):
         offset = firmware_data.find(b"_FVH")
         if offset >= 0:
             firmware_data = firmware_data[offset - 40 :]
         self._firmware_data: bytes = firmware_data
-        self._file_guid: str = file_guid.lower()
+        self._file_guids: List[str] = [g.lower() for g in file_guids]
         self._parsers: List[uefi_firmware.AutoParser] = list()
-        self._extracted: bool = False
-        self._ext: Optional[str] = None
-        self._name: Optional[str] = None
-        self._binary: Optional[UefiBinary] = None
-        self._content: Optional[bytes] = None
+        self._info: Dict[str, Any] = dict()
+        self.binaries: List[UefiBinary] = list()
 
-    def _compressed_search(self, object: Any) -> None:
+    def _compressed_search(self, object: Any, root_guid: str) -> None:
         for component in object.iterate_objects():
             attrs = component.get("attrs", None)
             if attrs is not None:
                 type = attrs.get("type", None)
                 if type in UefiExtractor.UI:
-                    self._name = component["label"]
+                    self._info[root_guid]["name"] = component["label"]
                 if type in UefiExtractor.SECTION_TYPES:
-                    self._content = component["_self"].content
-            self._compressed_search(component["_self"])
+                    self._info[root_guid]["content"] = component["_self"].content
+            self._compressed_search(component["_self"], root_guid)
 
-    def _compressed_handle(self, object: Any) -> None:
+    def _compressed_handle(self, object: Any, root_guid: str) -> None:
         for obj in object.iterate_objects():
             if (
                 obj.get("attrs", None) is not None
                 and obj["attrs"].get("attrs", None) == 0x01
             ):  # if compressed
-                self._compressed_search(obj["_self"])
+                self._compressed_search(obj["_self"], root_guid)
 
-    def _search_binary(self, object: Any) -> None:
+    def _append_binaries(self, object: Any) -> None:
         for component in object.iterate_objects():
             guid = component.get("guid", None)
             attrs = component.get("attrs", None)
-            if guid is not None and attrs is not None and guid == self._file_guid:
+            if guid is not None and attrs is not None:
+                if guid not in self._info:
+                    self._info[guid] = {"name": None, "ext": None, "content": None}
                 type = attrs.get("type", None)
                 if type in UefiExtractor.UI:
-                    self._name = component["label"]
+                    self._info[guid]["name"] = component["label"]
                 if type in UefiExtractor.FILE_TYPES:
-                    if self._ext is None:
+                    if self._info[guid]["ext"] is None:
                         ext = UefiExtractor.FILE_TYPES[type][1]
-                        self._ext = f".{ext}"
-                    self._compressed_handle(component["_self"])
+                        self._info[guid]["ext"] = f".{ext}"
+                    self._compressed_handle(component["_self"], guid)
                 if type in UefiExtractor.SECTION_TYPES:
-                    self._content = component["_self"].content
-            self._search_binary(component["_self"])
+                    self._info[guid]["content"] = component["_self"].content
+            self._append_binaries(component["_self"])
 
     def _extract(self) -> bool:
         potencial_volumes = uefi_firmware.search_firmware_volumes(self._firmware_data)
@@ -118,23 +117,19 @@ class UefiExtractor:
 
         for parser in self._parsers:
             firmware = parser.parse()
-            self._search_binary(firmware)
-            if self._content is not None:
-                break
+            self._append_binaries(firmware)
 
         return True
 
-    @property
-    def binary(self) -> Optional[UefiBinary]:
-        if self._extracted:
-            return self._binary
+    def extract_all(self) -> None:
         self._extract()
-        self._extracted = True
-        if self._content is not None:
-            self._binary = UefiBinary(
-                content=self._content,
-                name=self._name,
-                guid=self._file_guid,
-                ext=self._ext,
-            )
-        return self._binary
+        for guid in self._info:
+            if self._info[guid]["content"] is not None and guid in self._file_guids:
+                self.binaries.append(
+                    UefiBinary(
+                        content=self._info[guid]["content"],
+                        name=self._info[guid]["name"],
+                        guid=guid,
+                        ext=self._info[guid]["ext"],
+                    )
+                )

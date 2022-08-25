@@ -9,7 +9,6 @@
 import json
 import os
 import pathlib
-import sys
 import tempfile
 from typing import Dict, List
 
@@ -135,9 +134,9 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
             continue
         for guid in rule.volume_guids:
             if not guid in rules_guids:
-                rules_guids[guid] = [rule]
+                rules_guids[guid.lower()] = [rule]
             else:
-                rules_guids[guid].append(rule)
+                rules_guids[guid.lower()].append(rule)
 
     if not rules_guids.keys():
         print(
@@ -154,37 +153,29 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
         "FwHunt rule has been triggered and threat detected!", fg="red"
     )
 
-    for volume_guid in rules_guids:
-        extractor = UefiExtractor(firmware_data, volume_guid)
-        if extractor.binary is None:
-            for rule in rules_guids[volume_guid]:
-                print(
-                    f"[I] Skipping the rule {rule.name} (module not present in firmware image)"
-                )
-            continue
+    extractor = UefiExtractor(firmware_data, rules_guids.keys())
+    extractor.extract_all()
 
-        if not extractor.binary.content:
-            continue
+    if not len(extractor.binaries):
+        print("No modules were found for scanning")
+        return False
 
-        delete = not sys.platform.startswith("win")
-        with tempfile.NamedTemporaryFile(
-            mode="wb",
-            prefix=f"{extractor.binary.name}_",
-            suffix=f".{extractor.binary.ext}",
-            dir=None,
-            delete=delete,
-        ) as f:
-            f.write(extractor.binary.content)
-            uefi_analyzer = UefiAnalyzer(image_path=f.name)
-            scanner = UefiScanner(uefi_analyzer, rules_guids[volume_guid])
+    for binary in extractor.binaries:
+        fpath = os.path.join(tempfile.gettempdir(), f"{binary.name}{binary.ext}")
+        with open(fpath, "wb") as f:
+            f.write(binary.content)
 
-            for result in scanner.results:
-                msg = threat if result.res else no_threat
-                print(
-                    f"{prefix} {result.rule.name} (variant: {result.variant_label}) {msg} ({extractor.binary.name})"
-                )
+        uefi_analyzer = UefiAnalyzer(image_path=fpath)
+        scanner = UefiScanner(uefi_analyzer, rules_guids[binary.guid])
 
-            uefi_analyzer.close()
+        for result in scanner.results:
+            msg = threat if result.res else no_threat
+            print(
+                f"{prefix} {result.rule.name} (variant: {result.variant_label}) {msg} ({binary.name})"
+            )
+
+        uefi_analyzer.close()
+        os.remove(fpath)
 
     return True
 
