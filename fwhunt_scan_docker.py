@@ -3,8 +3,10 @@
 # SPDX-License-Identifier: GPL-3.0+
 
 import os
-import click
+import pathlib
 from typing import List
+
+import click
 
 TAG = "fwhunt_scan"
 
@@ -39,8 +41,6 @@ def scan_module_or_firmware(image_path: str, rule: List[str], command: str):
 
     cmd += rules_cmd
     cmdstr = " ".join(cmd)
-
-    print(f"Command: {cmdstr}")
 
     os.system(cmdstr)
 
@@ -103,10 +103,20 @@ def scan(image_path: str, rule: List[str]) -> bool:
 @click.command()
 @click.argument("image_path")
 @click.option("-r", "--rule", help="The path to the rule.", multiple=True)
-def scan_firmware(image_path: str, rule: List[str]) -> bool:
+@click.option("-d", "--rules_dir", help="The path to the rules directory.")
+def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
     """Scan UEFI firmware image."""
 
-    return scan_module_or_firmware(image_path, rule, "scan-firmware")
+    rules = list(rule)
+    error_prefix = click.style("ERROR", fg="red", bold=True)
+    if not rules_dir:
+        if not all(rules and os.path.isfile(rule) for rule in rules):
+            print(f"{error_prefix} check rule(s) path")
+            return False
+    else:
+        rules += list(map(str, pathlib.Path(rules_dir).rglob("*.yml")))
+
+    return scan_module_or_firmware(image_path, rules, "scan-firmware")
 
 
 cli.add_command(build)
