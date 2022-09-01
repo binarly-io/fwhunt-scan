@@ -3,48 +3,11 @@
 # SPDX-License-Identifier: GPL-3.0+
 
 import os
-import pathlib
 from typing import List
 
 import click
 
 TAG = "fwhunt_scan"
-
-
-def scan_module_or_firmware(image_path: str, rule: List[str], command: str):
-
-    if command not in ["scan", "scan-firmware"]:
-        return False
-
-    rules = rule
-
-    if not os.path.isfile(image_path):
-        print("{} check image path".format(click.style("ERROR", fg="red", bold=True)))
-        return False
-    if not all(rule and os.path.isfile(rule) for rule in rules):
-        print("{} check rule(s) path".format(click.style("ERROR", fg="red", bold=True)))
-        return False
-
-    cmd = [
-        "docker",
-        "run",
-        "--rm",
-        "-it",
-        "-v",
-        f"{os.path.realpath(image_path)}:/tmp/image:ro",
-    ]
-    rules_cmd = [TAG, command, "/tmp/image"]
-    for rule in rules:
-        _, name = os.path.split(rule)
-        cmd += ["-v", f"{os.path.realpath(rule)}:/tmp/{name}:ro"]
-        rules_cmd += ["-r", f"/tmp/{name}"]
-
-    cmd += rules_cmd
-    cmdstr = " ".join(cmd)
-
-    os.system(cmdstr)
-
-    return True
 
 
 @click.group()
@@ -97,7 +60,37 @@ def analyze_image(image_path: str) -> bool:
 def scan(image_path: str, rule: List[str]) -> bool:
     """Scan input UEFI module."""
 
-    return scan_module_or_firmware(image_path, rule, "scan")
+    rules = rule
+
+    if not os.path.isfile(image_path):
+        print("{} check image path".format(click.style("ERROR", fg="red", bold=True)))
+        return False
+    if not all(rule and os.path.isfile(rule) for rule in rules):
+        print("{} check rule(s) path".format(click.style("ERROR", fg="red", bold=True)))
+        return False
+
+    cmd = [
+        "docker",
+        "run",
+        "--rm",
+        "-it",
+        "-v",
+        f"{os.path.realpath(image_path)}:/tmp/image:ro",
+    ]
+    rules_cmd = [TAG, "scan", "/tmp/image"]
+    for rule in rules:
+        _, name = os.path.split(rule)
+        cmd += ["-v", f"{os.path.realpath(rule)}:/tmp/{name}:ro"]
+        rules_cmd += ["-r", f"/tmp/{name}"]
+
+    cmd += rules_cmd
+    cmdstr = " ".join(cmd)
+
+    print(f"Commamd: {cmdstr}")
+
+    os.system(cmdstr)
+
+    return True
 
 
 @click.command()
@@ -107,16 +100,52 @@ def scan(image_path: str, rule: List[str]) -> bool:
 def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
     """Scan UEFI firmware image."""
 
-    rules = list(rule)
-    error_prefix = click.style("ERROR", fg="red", bold=True)
-    if not rules_dir:
-        if not all(rules and os.path.isfile(rule) for rule in rules):
-            print(f"{error_prefix} check rule(s) path")
-            return False
-    else:
-        rules += list(map(str, pathlib.Path(rules_dir).rglob("*.yml")))
+    rules = rule
 
-    return scan_module_or_firmware(image_path, rules, "scan-firmware")
+    if not os.path.isfile(image_path):
+        print("{} check image path".format(click.style("ERROR", fg="red", bold=True)))
+        return False
+    if not (rules_dir or rule):
+        print("{} check command".format(click.style("ERROR", fg="red", bold=True)))
+        return False
+    if rules_dir and not os.path.isdir(rules_dir):
+        print(
+            "{} check rules directory path".format(
+                click.style("ERROR", fg="red", bold=True)
+            )
+        )
+        return False
+    if rule and not all(rule and os.path.isfile(rule) for rule in rules):
+        print("{} check rule(s) path".format(click.style("ERROR", fg="red", bold=True)))
+        return False
+
+    cmd = [
+        "docker",
+        "run",
+        "--rm",
+        "-it",
+        "-v",
+        f"{os.path.realpath(image_path)}:/tmp/image:ro",
+    ]
+    rules_cmd = [TAG, "scan-firmware", "/tmp/image"]
+    for rule in rules:
+        _, name = os.path.split(rule)
+        cmd += ["-v", f"{os.path.realpath(rule)}:/tmp/{name}:ro"]
+        rules_cmd += ["-r", f"/tmp/{name}"]
+
+    if rules_dir:
+        _, name = os.path.split(rules_dir)
+        cmd += ["-v", f"{os.path.realpath(rules_dir)}:/tmp/{name}:ro"]
+        rules_cmd += ["--rules_dir", f"/tmp/{name}"]
+
+    cmd += rules_cmd
+    cmdstr = " ".join(cmd)
+
+    print(f"Commamd: {cmdstr}")
+
+    os.system(cmdstr)
+
+    return True
 
 
 cli.add_command(build)
