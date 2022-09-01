@@ -67,9 +67,22 @@ docker run --rm -it -v {module_path}:/tmp/image:ro -v {rule_path}:/tmp/rule.yml:
 
 docker run --rm -it -v {module_path}:/tmp/image:ro -v {rule_path}:/tmp/rule.yml:ro \
   fwhunt_scan scan-firmware /tmp/image -r /tmp/rule.yml # to scan firmware image with specified FwHunt rule
+
+docker run --rm -it -v {module_path}:/tmp/image:ro -v {rules_directory}:/tmp/rules:ro \
+  fwhunt_scan scan-firmware /tmp/image --rules_dir /tmp/rules # to scan firmware image with specified rules directory
 ```
 
-All these steps are automated in the `fwhunt_scan_docker.py` script.
+All these steps are automated in the `fwhunt_scan_docker.py` script:
+
+```
+python3 fwhunt_scan_docker.py analyze-image {module_path} # to analyze EFI module
+
+python3 fwhunt_scan_docker.py scan -r {rule_path} {module_path} # to scan EFI module with specified FwHunt rule
+
+python3 fwhunt_scan_docker.py scan-firmware -r {rule_path} {firmware_path} # to scan firmware image with specified FwHunt rule
+
+python3 fwhunt_scan_docker.py scan-firmware --rules_dir {rules_directory} {firmware_path} # to scan firmware image with specified rules directory
+```
 
 ### From code
 
