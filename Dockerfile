@@ -9,10 +9,10 @@ RUN pip install meson==0.61.5
 WORKDIR /tmp
 
 # install rizin from source code
-RUN wget https://github.com/rizinorg/rizin/releases/download/v0.4.0/rizin-src-v0.4.0.tar.xz
-RUN tar -xvf rizin-src-v0.4.0.tar.xz
+RUN wget https://github.com/rizinorg/rizin/releases/download/v0.4.1/rizin-src-v0.4.1.tar.xz
+RUN tar -xvf rizin-src-v0.4.1.tar.xz
 
-WORKDIR /tmp/rizin-v0.4.0
+WORKDIR /tmp/rizin-v0.4.1
 RUN meson build
 RUN ninja -C build install
 
