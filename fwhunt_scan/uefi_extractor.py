@@ -11,7 +11,7 @@ class UefiBinary:
         guid: str,
         ext: Optional[str],
     ) -> None:
-        self.guid: str = guid
+        self.guid: str = guid.lower()
         self._content: Optional[bytes] = content
         self._name: Optional[str] = name
         self._ext: Optional[str] = ext
