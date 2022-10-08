@@ -121,10 +121,12 @@ class UefiExtractor:
 
         return True
 
-    def extract_all(self) -> None:
+    def extract_all(self, ignore_guid=False) -> None:
         self._extract()
         for guid in self._info:
-            if self._info[guid]["content"] is not None and guid in self._file_guids:
+            if self._info[guid]["content"] is not None and \
+                (guid in self._file_guids or ignore_guid):
+
                 self.binaries.append(
                     UefiBinary(
                         content=self._info[guid]["content"],
