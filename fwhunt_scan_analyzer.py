@@ -15,6 +15,7 @@ from typing import Dict, List
 import click
 
 from fwhunt_scan import UefiAnalyzer, UefiExtractor, UefiRule, UefiScanner
+from fwhunt_scan.uefi_protocols import PROTOCOLS_GUIDS
 
 
 @click.group()
@@ -178,9 +179,39 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
     return True
 
 
+@click.command()
+@click.argument(
+    "image_path",
+    type=click.Path(exists=True, dir_okay=False, file_okay=True))
+@click.argument(
+    "extract_path",
+    type=click.Path(exists=True, dir_okay=True, file_okay=False))
+def extract(image_path: str, extract_path: str) -> bool:
+    """Extract all modules from UEFI firmware image."""
+
+    with open(image_path, "rb") as f:
+        firmware_data = f.read()
+
+    extractor = UefiExtractor(firmware_data, [])
+    extractor.extract_all(ignore_guid=True)
+
+    if not len(extractor.binaries):
+        click.echo("No modules found", err=True)
+        return False
+
+    for binary in extractor.binaries:
+        fpath = os.path.join(extract_path, f"{binary.guid}-{binary.name}{binary.ext}")
+        with open(fpath, "wb") as f:
+            f.write(binary.content)
+
+        click.echo(f"{binary.guid} -> {fpath}")
+
+    return True
+
 cli.add_command(analyze_image)
 cli.add_command(scan)
 cli.add_command(scan_firmware)
+cli.add_command(extract)
 
 if __name__ == "__main__":
     cli()
