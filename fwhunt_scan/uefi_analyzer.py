@@ -75,7 +75,9 @@ class UefiAnalyzer:
                 filename=image_path, flags=["-2"], rizin_home=rizinhome
             )
             # analyze image
-            self._rz.cmd("aaaa")
+            with open(image_path, "rb") as f:
+                if f.read(2) in [b"MZ", b"VZ"]:
+                    self._rz.cmd("aaaa")
             try:
                 self._te = TerseExecutableParser(image_path=image_path)
             except TerseExecutableError:
