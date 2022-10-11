@@ -423,6 +423,15 @@ class UefiRule:
         except KeyError:
             return None
 
+    @property
+    def target(self) -> Optional[str]:
+        """Get optional rule target from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["target"]
+        except KeyError:
+            return None
+
     def _get_variants(self) -> Dict[str, UefiRuleVariant]:
         """Get rules variants"""
 
@@ -1051,7 +1060,11 @@ class UefiScanner:
 
         return final_res
 
-    def _get_results_variants(self, rule_variant: UefiRuleVariant) -> bool:
+    def _get_results_variants(self, rule_variant: UefiRuleVariant, target: Optional[str]) -> bool:
+        if target in ["firmware"]:
+            # match hex strings
+            return self._hex_strings_scanner(rule_variant.hex_strings)
+
         res = True
 
         # compare NVRAM variables
@@ -1101,7 +1114,7 @@ class UefiScanner:
 
         for uefi_rule in self._uefi_rules:
             for variant in uefi_rule.variants:
-                res = self._get_results_variants(uefi_rule.variants[variant])
+                res = self._get_results_variants(uefi_rule.variants[variant], uefi_rule.target)
                 results.append(
                     UefiScannerRes(rule=uefi_rule, variant_label=variant, res=res)
                 )
