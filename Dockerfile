@@ -1,18 +1,18 @@
-FROM python:3.9
+FROM python:3.10
 
 LABEL org.opencontainers.image.source https://github.com/binarly-io/fwhunt-scan
 
 RUN apt-get update
 RUN apt-get install -y ninja-build parallel
-RUN pip install meson==0.61.5
+RUN pip install meson==1.0.0
 
 WORKDIR /tmp
 
 # install rizin from source code
-RUN wget https://github.com/rizinorg/rizin/releases/download/v0.4.1/rizin-src-v0.4.1.tar.xz
-RUN tar -xvf rizin-src-v0.4.1.tar.xz
+RUN wget https://github.com/rizinorg/rizin/releases/download/v0.5.0/rizin-src-v0.5.0.tar.xz
+RUN tar -xvf rizin-src-v0.5.0.tar.xz
 
-WORKDIR /tmp/rizin-v0.4.1
+WORKDIR /tmp/rizin-v0.5.0
 RUN meson build
 RUN ninja -C build install
 
