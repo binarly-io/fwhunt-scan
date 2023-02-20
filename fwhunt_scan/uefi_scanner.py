@@ -1060,7 +1060,9 @@ class UefiScanner:
 
         return final_res
 
-    def _get_results_variants(self, rule_variant: UefiRuleVariant, target: Optional[str]) -> bool:
+    def _get_results_variants(
+        self, rule_variant: UefiRuleVariant, target: Optional[str]
+    ) -> bool:
         if target in ["firmware"]:
             # match hex strings
             return self._hex_strings_scanner(rule_variant.hex_strings)
@@ -1114,7 +1116,9 @@ class UefiScanner:
 
         for uefi_rule in self._uefi_rules:
             for variant in uefi_rule.variants:
-                res = self._get_results_variants(uefi_rule.variants[variant], uefi_rule.target)
+                res = self._get_results_variants(
+                    uefi_rule.variants[variant], uefi_rule.target
+                )
                 results.append(
                     UefiScannerRes(rule=uefi_rule, variant_label=variant, res=res)
                 )
