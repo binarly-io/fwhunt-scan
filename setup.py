@@ -32,11 +32,15 @@ setup(
         "fwhunt_scan": [
             "py.typed",
             "uefi_analyzer.pyi",
-            "uefi_protocols.pyi",
-            "uefi_tables.pyi",
+            "uefi_extractor.pyi" "uefi_protocols.pyi",
             "uefi_scanner.pyi",
+            "uefi_smm.pyi",
+            "uefi_tables.pyi",
             "uefi_te.pyi",
+            "uefi_types.pyi",
+            "uefi_utils.pyi",
             "__init__.pyi",
         ]
     },
+    scripts=["fwhunt_scan_analyzer.py", "fwhunt_scan_docker.py"],
 )
