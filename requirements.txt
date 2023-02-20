@@ -1,5 +1,5 @@
 click>=7
-rzpipe==0.1.2
+rzpipe==0.4.0
 pyyaml~=5.4.1
 uefi-firmware==1.9
 shared_memory38; python_version >= "3.6" and python_version < "3.8"
