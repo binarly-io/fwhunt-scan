@@ -78,9 +78,9 @@ def scan(image_path: str, rule: List[str]) -> bool:
         f"{os.path.realpath(image_path)}:/tmp/image:ro",
     ]
     rules_cmd = [TAG, "scan", "/tmp/image"]
-    for rule in rules:
-        _, name = os.path.split(rule)
-        cmd += ["-v", f"{os.path.realpath(rule)}:/tmp/{name}:ro"]
+    for r in rules:
+        _, name = os.path.split(r)
+        cmd += ["-v", f"{os.path.realpath(r)}:/tmp/{name}:ro"]
         rules_cmd += ["-r", f"/tmp/{name}"]
 
     cmd += rules_cmd
@@ -128,9 +128,9 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
         f"{os.path.realpath(image_path)}:/tmp/image:ro",
     ]
     rules_cmd = [TAG, "scan-firmware", "/tmp/image"]
-    for rule in rules:
-        _, name = os.path.split(rule)
-        cmd += ["-v", f"{os.path.realpath(rule)}:/tmp/{name}:ro"]
+    for r in rules:
+        _, name = os.path.split(r)
+        cmd += ["-v", f"{os.path.realpath(r)}:/tmp/{name}:ro"]
         rules_cmd += ["-r", f"/tmp/{name}"]
 
     if rules_dir:

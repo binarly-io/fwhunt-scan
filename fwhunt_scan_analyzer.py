@@ -15,7 +15,6 @@ from typing import Dict, List
 import click
 
 from fwhunt_scan import UefiAnalyzer, UefiExtractor, UefiRule, UefiScanner
-from fwhunt_scan.uefi_protocols import PROTOCOLS_GUIDS
 
 
 @click.group()
@@ -127,15 +126,15 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
 
     # Group rules by guids
     rules_guids: Dict[str, List[UefiRule]] = dict()
-    for rule in uefi_rules:
-        if rule.volume_guids is None:
-            print(f"[I] Specify volume_guids in {rule.name} or use scan command")
+    for uefi_rule in uefi_rules:
+        if uefi_rule.volume_guids is None:
+            print(f"[I] Specify volume_guids in {uefi_rule.name} or use scan command")
             continue
-        for guid in [g.lower() for g in rule.volume_guids]:
+        for guid in [g.lower() for g in uefi_rule.volume_guids]:
             lower_guid = guid.lower()
             if not lower_guid in rules_guids:
                 rules_guids[lower_guid] = list()
-            rules_guids[lower_guid].append(rule)
+            rules_guids[lower_guid].append(uefi_rule)
 
     if not rules_guids.keys():
         print(
@@ -152,8 +151,8 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
         "FwHunt rule has been triggered and threat detected!", fg="red"
     )
 
-    extractor = UefiExtractor(firmware_data, rules_guids.keys())
-    extractor.extract_all()
+    extractor = UefiExtractor(firmware_data, list(rules_guids.keys()))
+    extractor.extract_all(ignore_guid=False)
 
     if not len(extractor.binaries):
         print("No modules were found for scanning")
@@ -181,18 +180,19 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
 
 @click.command()
 @click.argument(
-    "image_path",
-    type=click.Path(exists=True, dir_okay=False, file_okay=True))
-@click.argument(
-    "extract_path",
-    type=click.Path(exists=True, dir_okay=True, file_okay=False))
+    "image_path", type=click.Path(exists=True, dir_okay=False, file_okay=True)
+)
+@click.argument("extract_path", type=click.Path(dir_okay=True, file_okay=False))
 def extract(image_path: str, extract_path: str) -> bool:
     """Extract all modules from UEFI firmware image."""
+
+    if not os.path.isdir(extract_path):
+        os.mkdir(extract_path)
 
     with open(image_path, "rb") as f:
         firmware_data = f.read()
 
-    extractor = UefiExtractor(firmware_data, [])
+    extractor = UefiExtractor(firmware_data, list())
     extractor.extract_all(ignore_guid=True)
 
     if not len(extractor.binaries):
@@ -200,6 +200,8 @@ def extract(image_path: str, extract_path: str) -> bool:
         return False
 
     for binary in extractor.binaries:
+        if not binary.guid or not len(binary.content):
+            continue
         fpath = os.path.join(extract_path, f"{binary.guid}-{binary.name}{binary.ext}")
         with open(fpath, "wb") as f:
             f.write(binary.content)
@@ -207,6 +209,7 @@ def extract(image_path: str, extract_path: str) -> bool:
         click.echo(f"{binary.guid} -> {fpath}")
 
     return True
+
 
 cli.add_command(analyze_image)
 cli.add_command(scan)
