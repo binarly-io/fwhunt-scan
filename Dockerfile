@@ -2,6 +2,9 @@ FROM python:3.10
 
 LABEL org.opencontainers.image.source https://github.com/binarly-io/fwhunt-scan
 
+# add library paths
+ENV LD_LIBRARY_PATH=/tmp/rizin-v0.5.0/build/librz/core
+
 RUN apt-get update
 RUN apt-get install -y ninja-build parallel
 RUN pip install meson==1.0.0
@@ -27,8 +30,5 @@ WORKDIR /home/fwhunt_scan/app/
 RUN pip install -r requirements.txt
 
 USER fwhunt_scan
-
-# add library paths
-RUN export "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tmp/rizin-v0.5.0/build/librz/core"
 
 ENTRYPOINT ["python3", "fwhunt_scan_analyzer.py"]

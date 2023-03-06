@@ -42,7 +42,7 @@ def analyze_module(module_path: str) -> bool:
             "-v",
             f"{fpath}:/tmp/image:ro",
             TAG,
-            "analyze-image",
+            "analyze-module",
             "/tmp/image",
         ]
     )

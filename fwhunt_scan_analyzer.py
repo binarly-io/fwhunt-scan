@@ -36,7 +36,7 @@ def analyze_module(module_path: str, out: str) -> bool:
     # uefi_analyzer = UefiAnalyzer(blob=data)
 
     summary = None
-    with UefiAnalyzer(module_path=module_path) as uefi_analyzer:
+    with UefiAnalyzer(image_path=module_path) as uefi_analyzer:
         summary = uefi_analyzer.get_summary()
 
     if out:
@@ -66,7 +66,7 @@ def scan(module_path: str, rule: List[str]) -> bool:
     # on linux platforms you can pass blob via shm://
     # uefi_analyzer = UefiAnalyzer(blob=data)
 
-    uefi_analyzer = UefiAnalyzer(module_path=module_path)
+    uefi_analyzer = UefiAnalyzer(image_path=module_path)
 
     uefi_rules: List[UefiRule] = list()
 
@@ -163,7 +163,7 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
         with open(fpath, "wb") as f:
             f.write(binary.content)
 
-        uefi_analyzer = UefiAnalyzer(module_path=fpath)
+        uefi_analyzer = UefiAnalyzer(image_path=fpath)
         scanner = UefiScanner(uefi_analyzer, rules_guids[binary.guid])
 
         for result in scanner.results:
