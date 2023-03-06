@@ -36,7 +36,7 @@ $ python setup.py install
 Analyze/scan separate module:
 
 ```
-$ python3 fwhunt_scan_analyzer.py analyze-image {image_path} -o out.json
+$ python3 fwhunt_scan_analyzer.py analyze-module {image_path} -o out.json
 $ python3 fwhunt_scan_analyzer.py scan --rule {rule_path} {image_path}
 ```
 
@@ -60,7 +60,7 @@ Example of use:
 
 ```
 docker run --rm -it -v {module_path}:/tmp/image:ro \
-  fwhunt_scan analyze-image /tmp/image # to analyze EFI module
+  fwhunt_scan analyze-module /tmp/image # to analyze EFI module
 
 docker run --rm -it -v {module_path}:/tmp/image:ro -v {rule_path}:/tmp/rule.yml:ro \
   fwhunt_scan scan /tmp/image -r /tmp/rule.yml # to scan EFI module with specified FwHunt rule
@@ -75,7 +75,7 @@ docker run --rm -it -v {module_path}:/tmp/image:ro -v {rules_directory}:/tmp/rul
 All these steps are automated in the `fwhunt_scan_docker.py` script:
 
 ```
-python3 fwhunt_scan_docker.py analyze-image {module_path} # to analyze EFI module
+python3 fwhunt_scan_docker.py analyze-module {module_path} # to analyze EFI module
 
 python3 fwhunt_scan_docker.py scan -r {rule_path} {module_path} # to scan EFI module with specified FwHunt rule
 
@@ -94,7 +94,7 @@ Basic usage examples:
 from fwhunt_scan import UefiAnalyzer
 
 ...
-uefi_analyzer = UefiAnalyzer(image_path=image_path)
+uefi_analyzer = UefiAnalyzer(image_path=module_path)
 print(uefi_analyzer.get_summary())
 uefi_analyzer.close()
 ```
@@ -103,7 +103,7 @@ uefi_analyzer.close()
 from fwhunt_scan import UefiAnalyzer
 
 ...
-with UefiAnalyzer(image_path=image_path) as uefi_analyzer:
+with UefiAnalyzer(image_path=module_path) as uefi_analyzer:
     print(uefi_analyzer.get_summary())
 ```
 
@@ -123,7 +123,7 @@ with UefiAnalyzer(blob=data) as uefi_analyzer:
 from fwhunt_scan import UefiAnalyzer, UefiRule, UefiScanner
 
 ...
-uefi_analyzer = UefiAnalyzer(image_path)
+uefi_analyzer = UefiAnalyzer(module_path)
 
 # rule1 and rule2 - contents of the rules on YAML format
 uefi_rules = [UefiRule(rule1), UefiRule(rule2)]
