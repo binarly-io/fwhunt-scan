@@ -23,15 +23,15 @@ def build():
 
 
 @click.command()
-@click.argument("image_path")
-def analyze_image(image_path: str) -> bool:
-    """Analyze input UEFI image."""
+@click.argument("module_path")
+def analyze_module(module_path: str) -> bool:
+    """Analyze single UEFI module."""
 
-    if not os.path.isfile(image_path):
-        print("{} check image path".format(click.style("ERROR", fg="red", bold=True)))
+    if not os.path.isfile(module_path):
+        print("{} check module path".format(click.style("ERROR", fg="red", bold=True)))
         return False
 
-    fpath = os.path.realpath(image_path)
+    fpath = os.path.realpath(module_path)
 
     cmdstr = " ".join(
         [
@@ -55,15 +55,15 @@ def analyze_image(image_path: str) -> bool:
 
 
 @click.command()
-@click.argument("image_path")
+@click.argument("module_path")
 @click.option("-r", "--rule", help="The path to the rule.", multiple=True)
-def scan(image_path: str, rule: List[str]) -> bool:
-    """Scan input UEFI module."""
+def scan(module_path: str, rule: List[str]) -> bool:
+    """Scan singe UEFI module."""
 
     rules = rule
 
-    if not os.path.isfile(image_path):
-        print("{} check image path".format(click.style("ERROR", fg="red", bold=True)))
+    if not os.path.isfile(module_path):
+        print("{} check module path".format(click.style("ERROR", fg="red", bold=True)))
         return False
     if not all(rule and os.path.isfile(rule) for rule in rules):
         print("{} check rule(s) path".format(click.style("ERROR", fg="red", bold=True)))
@@ -75,9 +75,9 @@ def scan(image_path: str, rule: List[str]) -> bool:
         "--rm",
         "-it",
         "-v",
-        f"{os.path.realpath(image_path)}:/tmp/image:ro",
+        f"{os.path.realpath(module_path)}:/tmp/module:ro",
     ]
-    rules_cmd = [TAG, "scan", "/tmp/image"]
+    rules_cmd = [TAG, "scan", "/tmp/module"]
     for r in rules:
         _, name = os.path.split(r)
         cmd += ["-v", f"{os.path.realpath(r)}:/tmp/{name}:ro"]
@@ -149,7 +149,7 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
 
 
 cli.add_command(build)
-cli.add_command(analyze_image)
+cli.add_command(analyze_module)
 cli.add_command(scan)
 cli.add_command(scan_firmware)
 
