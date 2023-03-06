@@ -809,11 +809,10 @@ class UefiScanner:
         return final_res
 
     def _search_guid(self, guid_rule: UefiGuid) -> bool:
-        for protocol_analyzer in self._uefi_analyzer.protocols:
-            if (
-                guid_rule.name == protocol_analyzer.name
-                and guid_rule.value == protocol_analyzer.value
-            ):
+        for guid in self._uefi_analyzer.protocol_guids:
+            if guid_rule.name == guid.name or guid_rule.value == guid.value:
+                # True if name or value is matches
+                # so that UNKNOWN_GUIDs can be specified
                 return True
         return False
 
