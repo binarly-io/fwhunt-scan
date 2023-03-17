@@ -77,7 +77,7 @@ def scan_module(module_path: str, rule: List[str]) -> bool:
         "-v",
         f"{os.path.realpath(module_path)}:/tmp/module:ro",
     ]
-    rules_cmd = [TAG, "scan", "/tmp/module"]
+    rules_cmd = [TAG, "scan-module", "/tmp/module"]
     for r in rules:
         _, name = os.path.split(r)
         cmd += ["-v", f"{os.path.realpath(r)}:/tmp/{name}:ro"]
