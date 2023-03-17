@@ -40,10 +40,10 @@ def analyze_module(module_path: str) -> bool:
             "--rm",
             "-it",
             "-v",
-            f"{fpath}:/tmp/image:ro",
+            f"{fpath}:/tmp/module:ro",
             TAG,
             "analyze-module",
-            "/tmp/image",
+            "/tmp/module",
         ]
     )
 
@@ -57,7 +57,7 @@ def analyze_module(module_path: str) -> bool:
 @click.command()
 @click.argument("module_path")
 @click.option("-r", "--rule", help="The path to the rule.", multiple=True)
-def scan(module_path: str, rule: List[str]) -> bool:
+def scan_module(module_path: str, rule: List[str]) -> bool:
     """Scan singe UEFI module."""
 
     rules = rule
@@ -150,7 +150,7 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
 
 cli.add_command(build)
 cli.add_command(analyze_module)
-cli.add_command(scan)
+cli.add_command(scan_module)
 cli.add_command(scan_firmware)
 
 if __name__ == "__main__":

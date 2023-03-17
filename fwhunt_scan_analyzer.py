@@ -51,7 +51,7 @@ def analyze_module(module_path: str, out: str) -> bool:
 @click.command()
 @click.argument("module_path")
 @click.option("-r", "--rule", help="The path to the rule.", multiple=True)
-def scan(module_path: str, rule: List[str]) -> bool:
+def scan_module(module_path: str, rule: List[str]) -> bool:
     """Scan single UEFI module."""
 
     rules = rule
@@ -96,7 +96,7 @@ def scan(module_path: str, rule: List[str]) -> bool:
 
 
 @click.command()
-@click.argument("module_path")
+@click.argument("image_path")
 @click.option("-r", "--rule", help="The path to the rule.", multiple=True)
 @click.option("-d", "--rules_dir", help="The path to the rules directory.")
 def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
@@ -180,16 +180,16 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
 
 @click.command()
 @click.argument(
-    "module_path", type=click.Path(exists=True, dir_okay=False, file_okay=True)
+    "image_path", type=click.Path(exists=True, dir_okay=False, file_okay=True)
 )
 @click.argument("extract_path", type=click.Path(dir_okay=True, file_okay=False))
-def extract(module_path: str, extract_path: str) -> bool:
+def extract(image_path: str, extract_path: str) -> bool:
     """Extract all modules from UEFI firmware image."""
 
     if not os.path.isdir(extract_path):
         os.mkdir(extract_path)
 
-    with open(module_path, "rb") as f:
+    with open(image_path, "rb") as f:
         firmware_data = f.read()
 
     extractor = UefiExtractor(firmware_data, list())
@@ -212,7 +212,7 @@ def extract(module_path: str, extract_path: str) -> bool:
 
 
 cli.add_command(analyze_module)
-cli.add_command(scan)
+cli.add_command(scan_module)
 cli.add_command(scan_firmware)
 cli.add_command(extract)
 
