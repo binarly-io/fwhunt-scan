@@ -37,7 +37,7 @@ Analyze/scan separate module:
 
 ```
 $ python3 fwhunt_scan_analyzer.py analyze-module {image_path} -o out.json
-$ python3 fwhunt_scan_analyzer.py scan --rule {rule_path} {image_path}
+$ python3 fwhunt_scan_analyzer.py scan-module --rule {rule_path} {image_path}
 ```
 
 Scan the entire firmware image:
@@ -63,7 +63,7 @@ docker run --rm -it -v {module_path}:/tmp/image:ro \
   fwhunt_scan analyze-module /tmp/image # to analyze EFI module
 
 docker run --rm -it -v {module_path}:/tmp/image:ro -v {rule_path}:/tmp/rule.yml:ro \
-  fwhunt_scan scan /tmp/image -r /tmp/rule.yml # to scan EFI module with specified FwHunt rule
+  fwhunt_scan scan-module /tmp/image -r /tmp/rule.yml # to scan EFI module with specified FwHunt rule
 
 docker run --rm -it -v {module_path}:/tmp/image:ro -v {rule_path}:/tmp/rule.yml:ro \
   fwhunt_scan scan-firmware /tmp/image -r /tmp/rule.yml # to scan firmware image with specified FwHunt rule
@@ -77,7 +77,7 @@ All these steps are automated in the `fwhunt_scan_docker.py` script:
 ```
 python3 fwhunt_scan_docker.py analyze-module {module_path} # to analyze EFI module
 
-python3 fwhunt_scan_docker.py scan -r {rule_path} {module_path} # to scan EFI module with specified FwHunt rule
+python3 fwhunt_scan_docker.py scan-module -r {rule_path} {module_path} # to scan EFI module with specified FwHunt rule
 
 python3 fwhunt_scan_docker.py scan-firmware -r {rule_path} {firmware_path} # to scan firmware image with specified FwHunt rule
 
