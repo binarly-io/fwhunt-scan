@@ -99,7 +99,7 @@ def scan(module_path: str, rule: List[str]) -> bool:
 @click.argument("module_path")
 @click.option("-r", "--rule", help="The path to the rule.", multiple=True)
 @click.option("-d", "--rules_dir", help="The path to the rules directory.")
-def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
+def scan_firmware(module_path: str, rule: List[str], rules_dir: str) -> bool:
     """Scan UEFI firmware image."""
 
     rules = list(rule)
@@ -111,7 +111,7 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
     else:
         rules += list(map(str, pathlib.Path(rules_dir).rglob("*.yml")))
 
-    if not os.path.isfile(image_path):
+    if not os.path.isfile(module_path):
         print(f"{error_prefix} check image path")
         return False
 
@@ -142,7 +142,7 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
         )
         return False
 
-    with open(image_path, "rb") as f:
+    with open(module_path, "rb") as f:
         firmware_data = f.read()
 
     prefix = click.style("Scanner result", fg="green")
