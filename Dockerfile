@@ -2,8 +2,10 @@ FROM python:3.10
 
 LABEL org.opencontainers.image.source https://github.com/binarly-io/fwhunt-scan
 
+ARG rz_version=v0.5.2
+
 # add library paths
-ENV LD_LIBRARY_PATH=/tmp/rizin-v0.5.0/build/librz/core
+ENV LD_LIBRARY_PATH=/tmp/rizin-$rz_version/build/librz/core
 
 RUN apt-get update
 RUN apt-get install -y ninja-build parallel
@@ -14,10 +16,10 @@ RUN useradd -u 1001 -m fwhunt_scan
 
 # install rizin from source code
 WORKDIR /tmp
-RUN wget https://github.com/rizinorg/rizin/releases/download/v0.5.0/rizin-src-v0.5.0.tar.xz
-RUN tar -xvf rizin-src-v0.5.0.tar.xz
+RUN wget https://github.com/rizinorg/rizin/releases/download/$rz_version/rizin-src-$rz_version.tar.xz
+RUN tar -xvf rizin-src-$rz_version.tar.xz
 
-WORKDIR /tmp/rizin-v0.5.0
+WORKDIR /tmp/rizin-$rz_version
 RUN meson build
 RUN ninja -C build install
 
