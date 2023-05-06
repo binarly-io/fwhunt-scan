@@ -115,6 +115,12 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
         print(f"{error_prefix} check image path")
         return False
 
+    prefix = click.style("Scanner result", fg="green")
+    no_threat = click.style("No threat detected", fg="green")
+    threat = click.style(
+        "FwHunt rule has been triggered and threat detected!", fg="red"
+    )
+
     # on linux platforms you can pass blob via shm://
     # uefi_analyzer = UefiAnalyzer(blob=data)
 
@@ -123,6 +129,19 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
     for r in rules:
         with open(r, "r") as f:
             uefi_rules.append(UefiRule(rule_content=f.read()))
+
+    # Select the rules with `target: firmware`
+    uefi_rules_fw: List[UefiRule] = list(
+        filter(lambda rule: rule.target == "firmware", uefi_rules)
+    )
+    if len(uefi_rules_fw):
+        with UefiAnalyzer(image_path=image_path) as uefi_analyzer_fw:
+            scanner_fw = UefiScanner(uefi_analyzer_fw, uefi_rules_fw)
+            for result in scanner_fw.results:
+                msg = threat if result.res else no_threat
+                print(
+                    f"{prefix} {result.rule.name} (variant: {result.variant_label}) {msg}"
+                )
 
     # Group rules by guids
     rules_guids: Dict[str, List[UefiRule]] = dict()
@@ -144,12 +163,6 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
 
     with open(image_path, "rb") as f:
         firmware_data = f.read()
-
-    prefix = click.style("Scanner result", fg="green")
-    no_threat = click.style("No threat detected", fg="green")
-    threat = click.style(
-        "FwHunt rule has been triggered and threat detected!", fg="red"
-    )
 
     extractor = UefiExtractor(firmware_data, list(rules_guids.keys()))
     extractor.extract_all(ignore_guid=False)
