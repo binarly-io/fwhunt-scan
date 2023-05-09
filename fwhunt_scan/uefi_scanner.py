@@ -33,6 +33,12 @@ class CodePattern:
         # if True, scan in all child SW SMI handlers
         self.child_sw_smi_handlers: bool = place == "child_sw_smi_handlers"
 
+        # if True, scan the whole binary
+        self.unspecified: bool = place not in [
+            "sw_smi_handlers",
+            "child_sw_smi_handlers",
+        ]
+
     @property
     def __dict__(self):
         return dict(
@@ -40,6 +46,7 @@ class CodePattern:
                 "pattern": self.pattern,
                 "sw_smi_handlers": self.sw_smi_handlers,
                 "child_sw_smi_handlers": self.child_sw_smi_handlers,
+                "unspecified": self.unspecified,
             }
         )
 
@@ -599,7 +606,6 @@ class UefiScanner:
 
         final_res = True
         for op in rule_strings:
-
             # check kind of matches
             if op not in ["and", "or", "not-any", "not-all"]:
                 raise UefiScannerError(
@@ -632,7 +638,6 @@ class UefiScanner:
 
         final_res = True
         for op in rule_wide_strings:
-
             # check kind of matches
             if op not in ["and", "or", "not-any", "not-all"]:
                 raise UefiScannerError(
@@ -663,7 +668,6 @@ class UefiScanner:
 
         final_res = True
         for op in rule_hex_strings:
-
             # check kind of matches
             if op not in ["and", "or", "not-any", "not-all"]:
                 raise UefiScannerError(
@@ -720,7 +724,6 @@ class UefiScanner:
 
         final_res = True
         for op in rule_nvram:
-
             # check kind of matches
             if op not in ["and", "or", "not-any", "not-all"]:
                 raise UefiScannerError(
@@ -782,7 +785,6 @@ class UefiScanner:
 
         final_res = True
         for op in rule_protocol:
-
             # check kind of matches
             if op not in ["and", "or", "not-any", "not-all"]:
                 raise UefiScannerError(
@@ -837,7 +839,6 @@ class UefiScanner:
 
         final_res = True
         for op in rule_guid:
-
             # check kind of matches
             if op not in ["and", "or", "not-any", "not-all"]:
                 raise UefiScannerError(
@@ -969,7 +970,6 @@ class UefiScanner:
         self._rec_addrs: List[Any] = list()
 
     def _code_scan_rec(self, address: int, pattern: str) -> bool:
-
         self._clear_cache()
 
         self._get_bounds_rec(address, depth=0, debug=False)
@@ -984,23 +984,25 @@ class UefiScanner:
 
         return False
 
+    def _single_code_scan(self, c: CodePattern) -> bool:
+        handlers: Optional[List[Any]] = None
+        if c.sw_smi_handlers:
+            handlers = self._uefi_analyzer.swsmi_handlers
+        if c.child_sw_smi_handlers:
+            handlers = self._uefi_analyzer.child_swsmi_handlers
+        search_res = False
+        if c.unspecified:
+            return not not self._uefi_analyzer._rz.cmdj("/xj {}".format(c.pattern))
+        for handler in handlers:
+            search_res = self._code_scan_rec(handler.address, c.pattern)
+            if search_res:
+                break
+        return search_res
+
     def _and_code(self, cs: List[CodePattern]) -> bool:
         res = True
         for c in cs:
-            handlers: Optional[List[Any]] = None
-            if c.sw_smi_handlers:
-                handlers = self._uefi_analyzer.swsmi_handlers
-            elif c.child_sw_smi_handlers:
-                handlers = self._uefi_analyzer.child_swsmi_handlers
-            else:
-                raise UefiScannerError("The search place is incorrect")
-            search_res = False
-            for handler in handlers:
-                search_res = self._code_scan_rec(handler.address, c.pattern)
-                if search_res:
-                    break
-
-            res &= search_res
+            res &= self._single_code_scan(c)
             if not res:
                 break
 
@@ -1009,20 +1011,7 @@ class UefiScanner:
     def _or_code(self, cs: List[CodePattern]) -> bool:
         res = False
         for c in cs:
-            handlers: Optional[List[Any]] = None
-            if c.sw_smi_handlers:
-                handlers = self._uefi_analyzer.swsmi_handlers
-            elif c.child_sw_smi_handlers:
-                handlers = self._uefi_analyzer.child_swsmi_handlers
-            else:
-                raise UefiScannerError("The search place is incorrect")
-            search_res = False
-            for handler in handlers:
-                search_res = self._code_scan_rec(handler.address, c.pattern)
-                if search_res:
-                    break
-
-            res |= search_res
+            res |= self._single_code_scan(c)
             if res:
                 break
 
@@ -1033,7 +1022,6 @@ class UefiScanner:
 
         final_res = True
         for op in rule_code:
-
             # check kind of matches
             if op not in ["and", "or", "not-any", "not-all"]:
                 raise UefiScannerError(
