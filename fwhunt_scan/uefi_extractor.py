@@ -1,3 +1,5 @@
+import contextlib
+import os
 from typing import Any, Dict, List, Optional
 
 import uefi_firmware
@@ -122,16 +124,19 @@ class UefiExtractor:
         return True
 
     def extract_all(self, ignore_guid: bool = False) -> None:
-        self._extract()
-        for guid in self._info:
-            if ignore_guid or (
-                self._info[guid]["content"] is not None and (guid in self._file_guids)
-            ):
-                self.binaries.append(
-                    UefiBinary(
-                        content=self._info[guid]["content"],
-                        name=self._info[guid]["name"],
-                        guid=guid,
-                        ext=self._info[guid]["ext"],
-                    )
-                )
+        with open(os.devnull, "w") as devnull:
+            with contextlib.redirect_stderr(devnull):
+                self._extract()
+                for guid in self._info:
+                    if ignore_guid or (
+                        self._info[guid]["content"] is not None
+                        and (guid in self._file_guids)
+                    ):
+                        self.binaries.append(
+                            UefiBinary(
+                                content=self._info[guid]["content"],
+                                name=self._info[guid]["name"],
+                                guid=guid,
+                                ext=self._info[guid]["ext"],
+                            )
+                        )
