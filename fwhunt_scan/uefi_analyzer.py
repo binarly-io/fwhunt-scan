@@ -84,8 +84,6 @@ class UefiAnalyzer:
                 self._te = None
 
         if blob and sys.platform in ["linux"]:
-            if blob[:2] not in [b"MZ", b"VZ"]:
-                raise UefiAnalyzerError("Invalid data format")
             blob_size = len(blob)
             self._shm = shared_memory.SharedMemory(create=True, size=blob_size)
             self._shm.buf[:] = blob[:]
@@ -94,7 +92,8 @@ class UefiAnalyzer:
                 flags=["-2"],
                 rizin_home=rizinhome,
             )
-            self._rz.cmd("aaaa")
+            if blob[:2] in [b"MZ", b"VZ"]:
+                self._rz.cmd("aaaa")
             try:
                 self._te = TerseExecutableParser(blob=blob)
             except TerseExecutableError:
