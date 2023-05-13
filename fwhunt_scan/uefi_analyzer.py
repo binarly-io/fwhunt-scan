@@ -333,7 +333,7 @@ class UefiAnalyzer:
                     continue
                 g_bs_area_esil = g_bs_area_insn["esil"].split(",")
                 if not (
-                    (g_bs_area_insn["type"] == "ucall")
+                    (g_bs_area_insn["type"] in ["ucall", "ircall", "ujmp", "irjmp"])
                     and (g_bs_area_esil[1] == "rax")
                     and (g_bs_area_esil[2] == "+")
                     and (g_bs_area_esil[3] == "[8]")
@@ -364,7 +364,7 @@ class UefiAnalyzer:
                 continue
             esil = insn["esil"].split(",")
             if not (
-                (insn["type"] == "ucall")
+                (insn["type"] in ["ucall", "ircall", "ujmp", "irjmp"])
                 and (esil[1] == "rax")
                 and (esil[2] == "+")
                 and (esil[3] == "[8]")
@@ -425,7 +425,7 @@ class UefiAnalyzer:
             for g_rt_area_insn in self.insns[index : index + 0x10]:
                 g_rt_area_esil = g_rt_area_insn["esil"].split(",")
                 if not (
-                    (g_rt_area_insn["type"] == "ucall")
+                    (g_rt_area_insn["type"] in ["ucall", "ircall", "ujmp", "irjmp"])
                     and (g_rt_area_esil[1] == "rax")
                     and (g_rt_area_esil[2] == "+")
                     and (g_rt_area_esil[3] == "[8]")
