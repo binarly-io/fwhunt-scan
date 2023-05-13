@@ -553,6 +553,9 @@ class UefiAnalyzer:
         return True
 
     def r2_get_nvram_vars_64bit(self) -> List[NvramVariable]:
+        # to fix FPs need to apply filtering
+        # of the extracted Runtime Services (from self.runtime_services)
+
         nvram_vars = list()
         for service in self.runtime_services:
             if service.name not in ["GetVariable", "SetVariable"]:
@@ -562,11 +565,16 @@ class UefiAnalyzer:
             func_insns = self._rz.cmdj("pdfj @ {:#x}".format(service.address))
             if "ops" not in func_insns:
                 continue
+
             insns = func_insns["ops"]
             index = get_current_insn_index(insns, service.address)
+            if index is None:
+                continue
+
             name: Optional[str] = None
-            p_guid_b: Optional[bytes] = None
             name_addr_reg: Optional[str] = None
+            p_guid_b: Optional[bytes] = None
+            stack_guid: bool = False
             for i in range(index - 1, -1, -1):
                 insn = insns[i]
                 if name is not None and p_guid_b is not None:
@@ -587,9 +595,9 @@ class UefiAnalyzer:
                 ):
                     name_addr_reg = esil[0]
 
-                if "xrefs_from" not in insn:
+                ptr = insn.get("ptr", None)
+                if ptr is None:
                     continue
-                ref_addr = insn["xrefs_from"][0]["addr"]
 
                 if (
                     name is None
@@ -600,28 +608,41 @@ class UefiAnalyzer:
                     and esil[-3] == "+"
                     and esil[-4] == "rip"
                 ):
-                    tmp_name = self._rz.cmd("psw @ {:#x}".format(ref_addr))[:-1]
+                    tmp_name = self._rz.cmd("psw @ {:#x}".format(ptr))[:-1]
                     if UefiAnalyzer._name_is_valid(tmp_name):
                         name = tmp_name
 
                 if (
                     name is None
+                    and len(esil) == 5
                     and (esil[-1] == "=")
                     and (esil[-2] == "rcx")
                     and (esil[-3] == "+")
                     and (esil[-4] == "rip")
                 ):
-                    tmp_name = self._rz.cmd("psw @ {:#x}".format(ref_addr))[:-1]
+                    tmp_name = self._rz.cmd("psw @ {:#x}".format(ptr))[:-1]
                     if UefiAnalyzer._name_is_valid(tmp_name):
                         name = tmp_name
+
                 if (
                     p_guid_b is None
+                    and len(esil) == 5
+                    and (esil[-1] == "=")
+                    and (esil[-2] == "rdx")
+                    and (esil[-4] in ["rsp", "rbp"])
+                ):
+                    stack_guid = True
+
+                if (
+                    not stack_guid
+                    and p_guid_b is None
+                    and len(esil) == 5
                     and (esil[-1] == "=")
                     and (esil[-2] == "rdx")
                     and (esil[-3] == "+")
                     and (esil[-4] == "rip")
                 ):
-                    p_guid_b = bytes(self._rz.cmdj("xj 16 @ {:#x}".format(ref_addr)))
+                    p_guid_b = bytes(self._rz.cmdj("xj 16 @ {:#x}".format(ptr)))
 
             if not name:
                 name = "Unknown"
