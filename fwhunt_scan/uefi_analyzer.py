@@ -12,6 +12,7 @@ import sys
 import uuid
 from types import TracebackType
 from typing import Any, Dict, List, Optional, Type
+import string
 
 import rzpipe
 
@@ -537,45 +538,89 @@ class UefiAnalyzer:
             self._protocol_guids = self._get_protocol_guids()
         return self._protocol_guids
 
+    @staticmethod
+    def _name_is_valid(name: str) -> bool:
+        for c in name:
+            if c not in string.printable:
+                return False
+        return True
+
     def r2_get_nvram_vars_64bit(self) -> List[NvramVariable]:
         nvram_vars = list()
         for service in self.runtime_services:
-            if service.name in ["GetVariable", "SetVariable"]:
-                # disassemble 16 instructions backward
-                block_insns = self._rz.cmdj("pdj -16 @ {:#x}".format(service.address))
-                name: str = str()
-                p_guid_b: bytes = bytes()
-                for index in range(len(block_insns) - 2, -1, -1):
-                    if "xrefs_from" not in block_insns[index]:
-                        continue
-                    ref_addr = block_insns[index]["xrefs_from"][0]["addr"]
-                    if "esil" not in block_insns[index]:
-                        continue
-                    esil = block_insns[index]["esil"].split(",")
-                    if (
-                        (esil[-1] == "=")
-                        and (esil[-2] == "rcx")
-                        and (esil[-3] == "+")
-                        and (esil[-4] == "rip")
-                    ):
-                        name = self._rz.cmd("psw @ {:#x}".format(ref_addr))[:-1]
-                    if (
-                        (esil[-1] == "=")
-                        and (esil[-2] == "rdx")
-                        and (esil[-3] == "+")
-                        and (esil[-4] == "rip")
-                    ):
-                        p_guid_b = bytes(
-                            self._rz.cmdj("xj 16 @ {:#x}".format(ref_addr))
-                        )
-                    if not name:
-                        name = "Unknown"
-                    if p_guid_b:
-                        guid = str(uuid.UUID(bytes_le=p_guid_b)).upper()
-                        nvram_vars.append(
-                            NvramVariable(name=name, guid=guid, service=service)
-                        )
-                        break
+            if service.name not in ["GetVariable", "SetVariable"]:
+                continue
+
+            # disassemble 16 instructions backward
+            block_insns = self._rz.cmdj("pdj -16 @ {:#x}".format(service.address))
+            name: Optional[str] = None
+            p_guid_b: Optional[bytes] = None
+            name_addr_reg: Optional[str] = None
+            for index in range(len(block_insns) - 2, -1, -1):
+                if name is not None and p_guid_b is not None:
+                    break
+
+                if "esil" not in block_insns[index]:
+                    continue
+                esil = block_insns[index]["esil"].split(",")
+
+                # handle case when we have:
+                # NAME_ADDR,rip,+,REG,=
+                # REG,rcx,=
+                if (
+                    name is None
+                    and name_addr_reg is None
+                    and len(esil) == 3
+                    and (esil[-1] == "=" and esil[-2] == "rcx")
+                ):
+                    name_addr_reg = esil[0]
+
+                if "xrefs_from" not in block_insns[index]:
+                    continue
+                ref_addr = block_insns[index]["xrefs_from"][0]["addr"]
+
+                if (
+                    name is None
+                    and name_addr_reg
+                    and len(esil) == 5
+                    and esil[-1] == "="
+                    and esil[-2] == name_addr_reg
+                    and esil[-3] == "+"
+                    and esil[-4] == "rip"
+                ):
+                    tmp_name = self._rz.cmd("psw @ {:#x}".format(ref_addr))[:-1]
+                    if UefiAnalyzer._name_is_valid(tmp_name):
+                        name = tmp_name
+
+                if (
+                    name is None
+                    and (esil[-1] == "=")
+                    and (esil[-2] == "rcx")
+                    and (esil[-3] == "+")
+                    and (esil[-4] == "rip")
+                ):
+                    tmp_name = self._rz.cmd("psw @ {:#x}".format(ref_addr))[:-1]
+                    if UefiAnalyzer._name_is_valid(tmp_name):
+                        name = tmp_name
+                if (
+                    p_guid_b is None
+                    and (esil[-1] == "=")
+                    and (esil[-2] == "rdx")
+                    and (esil[-3] == "+")
+                    and (esil[-4] == "rip")
+                ):
+                    p_guid_b = bytes(self._rz.cmdj("xj 16 @ {:#x}".format(ref_addr)))
+
+            if not name:
+                name = "Unknown"
+
+            if p_guid_b is not None:
+                guid = str(uuid.UUID(bytes_le=p_guid_b)).upper()
+            else:
+                guid = "Unknown"
+
+            nvram_vars.append(NvramVariable(name=name, guid=guid, service=service))
+
         return nvram_vars
 
     @property
