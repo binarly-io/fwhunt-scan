@@ -558,7 +558,7 @@ class UefiAnalyzer:
             if service.name not in ["GetVariable", "SetVariable"]:
                 continue
 
-            # disassemble  instructions backward
+            # disassemble current function
             func_insns = self._rz.cmdj("pdfj @ {:#x}".format(service.address))
             if "ops" not in func_insns:
                 continue
