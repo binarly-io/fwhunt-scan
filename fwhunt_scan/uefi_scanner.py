@@ -501,7 +501,7 @@ class UefiScanner:
             )
         self._results: Optional[List[UefiScannerRes]] = None
 
-    def _check_rule(self, rule: UefiRule):
+    def _check_rule(self, rule: UefiRule) -> bool:
         variants: Optional[Dict[str, UefiRuleVariant]] = None
         try:
             variants = rule.variants
@@ -519,7 +519,7 @@ class UefiScanner:
 
         return True
 
-    def _check_rules(self):
+    def _check_rules(self) -> bool:
         for rule in self._uefi_rules:
             if not self._check_rule(rule):
                 return False
@@ -985,7 +985,7 @@ class UefiScanner:
         return False
 
     def _single_code_scan(self, c: CodePattern) -> bool:
-        handlers: Optional[List[Any]] = None
+        handlers: List[Any] = list()
         if c.sw_smi_handlers:
             handlers = self._uefi_analyzer.swsmi_handlers
         if c.child_sw_smi_handlers:
