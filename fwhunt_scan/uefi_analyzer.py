@@ -8,11 +8,11 @@ Tools for analyzing UEFI firmware using radare2/rizin
 """
 
 import json
+import string
 import sys
 import uuid
 from types import TracebackType
 from typing import Any, Dict, List, Optional, Type
-import string
 
 import rzpipe
 
@@ -35,7 +35,7 @@ from fwhunt_scan.uefi_types import (
     UefiProtocolGuid,
     UefiService,
 )
-from fwhunt_scan.uefi_utils import get_int
+from fwhunt_scan.uefi_utils import get_current_insn_index, get_int
 
 if sys.version_info.major == 3 and sys.version_info.minor >= 8:
     from multiprocessing import shared_memory
@@ -558,18 +558,23 @@ class UefiAnalyzer:
             if service.name not in ["GetVariable", "SetVariable"]:
                 continue
 
-            # disassemble 16 instructions backward
-            block_insns = self._rz.cmdj("pdj -16 @ {:#x}".format(service.address))
+            # disassemble  instructions backward
+            func_insns = self._rz.cmdj("pdfj @ {:#x}".format(service.address))
+            if "ops" not in func_insns:
+                continue
+            insns = func_insns["ops"]
+            index = get_current_insn_index(insns, service.address)
             name: Optional[str] = None
             p_guid_b: Optional[bytes] = None
             name_addr_reg: Optional[str] = None
-            for index in range(len(block_insns) - 2, -1, -1):
+            for i in range(index - 1, -1, -1):
+                insn = insns[i]
                 if name is not None and p_guid_b is not None:
                     break
 
-                if "esil" not in block_insns[index]:
+                if "esil" not in insn:
                     continue
-                esil = block_insns[index]["esil"].split(",")
+                esil = insn["esil"].split(",")
 
                 # handle case when we have:
                 # NAME_ADDR,rip,+,REG,=
@@ -582,9 +587,9 @@ class UefiAnalyzer:
                 ):
                     name_addr_reg = esil[0]
 
-                if "xrefs_from" not in block_insns[index]:
+                if "xrefs_from" not in insn:
                     continue
-                ref_addr = block_insns[index]["xrefs_from"][0]["addr"]
+                ref_addr = insn["xrefs_from"][0]["addr"]
 
                 if (
                     name is None
