@@ -216,11 +216,9 @@ class UefiAnalyzer:
 
     def _get_insns(self) -> List[Any]:
         insns = list()
-        target_sections = [".text"]
-        for section in self.sections:
-            if section["name"] in target_sections:
-                self._rz.cmd("s {:#x}".format(section["vaddr"]))
-                insns = self._rz.cmdj("pDj {:#x}".format(section["vsize"]))
+        for function in self.functions:
+            self._rz.cmd("s {:#x}".format(function["offset"]))
+            insns += self._rz.cmdj("pDj {:#x}".format(function["size"]))
         return insns
 
     @property
