@@ -123,6 +123,10 @@ class UefiAnalyzer:
         self._g_rt: Optional[List[int]] = None
         self._smst_list: Optional[List[int]] = None
 
+        self._rt_filter_list: List[int] = list()
+        self._bs_filter_list: List[int] = list()
+        self._pei_filter_list: List[int] = list()
+
         # SMI handlers addresses
         self._swsmi_handlers: Optional[List[SwSmiHandler]] = None
         self._child_swsmi_handlers: Optional[List[ChildSwSmiHandler]] = None
@@ -345,12 +349,14 @@ class UefiAnalyzer:
                 if service_offset in EFI_BOOT_SERVICES_64_BIT:
                     if g_bs_area_insn["offset"] in addrs:
                         break
-                    bs_list.append(
-                        UefiService(
-                            address=g_bs_area_insn["offset"],
-                            name=EFI_BOOT_SERVICES_64_BIT[service_offset],
+                    if g_bs_area_insn["offset"] not in self._bs_filter_list:
+                        bs_list.append(
+                            UefiService(
+                                address=g_bs_area_insn["offset"],
+                                name=EFI_BOOT_SERVICES_64_BIT[service_offset],
+                            )
                         )
-                    )
+                        self._bs_filter_list.append(g_bs_area_insn["offset"])
                     break
 
         return bs_list
@@ -375,18 +381,19 @@ class UefiAnalyzer:
             if service_offset in OFFSET_TO_SERVICE:
                 name = OFFSET_TO_SERVICE[service_offset]
                 # found boot service that work with protocol
-                bs_prot.append(UefiService(address=insn["offset"], name=name))
-
+                if insn["offset"] not in self._bs_filter_list:
+                    bs_prot.append(UefiService(address=insn["offset"], name=name))
+                    self._bs_filter_list.append(insn["offset"])
         return bs_prot
 
     @property
     def boot_services(self) -> List[UefiService]:
         """Find boot services using g_bs"""
 
-        if self._bs_list_g_bs is None:
-            self._bs_list_g_bs = self._get_boot_services_bs_64bit()
         if self._bs_prot is None:
             self._bs_prot = self._get_boot_services_prot_64bit()
+        if self._bs_list_g_bs is None:
+            self._bs_list_g_bs = self._get_boot_services_bs_64bit()
         return self._bs_list_g_bs + self._bs_prot
 
     @property
@@ -435,12 +442,14 @@ class UefiAnalyzer:
                     continue
                 service_offset = g_rt_area_insn["ptr"]
                 if service_offset in EFI_RUNTIME_SERVICES_64_BIT:
-                    rt_list.append(
-                        UefiService(
-                            address=g_rt_area_insn["offset"],
-                            name=EFI_RUNTIME_SERVICES_64_BIT[service_offset],
+                    if g_rt_area_insn["offset"] not in self._rt_filter_list:
+                        rt_list.append(
+                            UefiService(
+                                address=g_rt_area_insn["offset"],
+                                name=EFI_RUNTIME_SERVICES_64_BIT[service_offset],
+                            )
                         )
-                    )
+                        self._rt_filter_list.append(g_rt_area_insn["offset"])
                     break
         return rt_list
 
@@ -653,9 +662,11 @@ class UefiAnalyzer:
                         continue
 
                     # wrong addresses in r2 in case of TE
-                    pei_list.append(
-                        UefiService(address=insn["offset"], name=service["name"])
-                    )
+                    if insn["offset"] not in self._pei_filter_list:
+                        pei_list.append(
+                            UefiService(address=insn["offset"], name=service["name"])
+                        )
+                        self._pei_filter_list.append(insn["offset"])
 
         return pei_list
 
