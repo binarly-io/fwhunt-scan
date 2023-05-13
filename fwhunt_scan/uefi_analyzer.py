@@ -782,7 +782,7 @@ class UefiAnalyzer:
         elif self.info["bin"]["arch"] == "x86" and self.info["bin"]["bits"] == 64:
             summary["g_bs"] = self.g_bs
             summary["g_rt"] = self.g_rt
-            summary["g_smst"] = [x for x in self.smst_list]
+            summary["g_smst"] = self.smst_list
             summary["bs_list"] = [x.__dict__ for x in self.boot_services]
             summary["rt_list"] = [x.__dict__ for x in self.runtime_services]
             summary["protocols"] = [x.__dict__ for x in self.protocols]
