@@ -482,7 +482,7 @@ class UefiAnalyzer:
                     if not guid:
                         guid = UefiGuid(
                             value=str(uuid.UUID(bytes_le=p_guid_b)).upper(),
-                            name="proprietary_protocol",
+                            name="UNKNOWN_PROTOCOL",
                         )
 
                     protocols.append(
