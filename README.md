@@ -25,7 +25,7 @@ $ python -m pip install fwhunt-scan
 Install manually:
 
 ```
-$ git clone https://github.com/binarly-io/fwhunt-scan.git && cd fwhunt_scan
+$ git clone https://github.com/binarly-io/fwhunt-scan.git && cd fwhunt-scan
 $ python setup.py install
 ```
 
