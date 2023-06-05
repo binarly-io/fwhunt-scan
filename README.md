@@ -12,7 +12,7 @@ Tools for analyzing UEFI firmware and checking UEFI modules with [FwHunt rules](
 
 # Dependencies
 
-rizin (v0.4.1)
+rizin (v0.5.2)
 
 # Installation
 
@@ -55,6 +55,8 @@ You can build a docker image locally as follows:
 ```
 docker build -t fwhunt_scan .
 ```
+
+Or pull the latest image from [ghcr](https://github.com/binarly-io/fwhunt-scan/pkgs/container/fwhunt-scan).
 
 Example of use:
 
