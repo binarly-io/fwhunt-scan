@@ -1,7 +1,30 @@
 # SPDX-License-Identifier: GPL-3.0+
 
-from typing import Optional
 import uuid
+from enum import Enum
+from typing import Optional
+
+
+class SmiKind(Enum):
+    CHILD_SW_SMI = 0
+    SW_SMI = 1
+    USB_SMI = 2
+    SX_SMI = 3
+    IO_TRAP_SMI = 4
+    GPI_SMI = 5
+    TCO_SMI = 6
+    STANDBY_BUTTON_SMI = 7
+    PERIODIC_TIMER_SMI = 8
+    POWER_BUTTON_SMI = 9
+    ICHN_SMI = 10
+    PCH_TCO_SMI = 11
+    PCH_PCIE_SMI = 12
+    PCH_ACPI_SMI = 13
+    PCH_GPIO_UNLOCK_SMI = 14
+    PCH_SMI = 15
+    PCH_ESPI_SMI = 16
+    ACPI_EN_SMI = 17
+    ACPI_DIS_SMI = 18
 
 
 class UefiService:
@@ -108,31 +131,27 @@ class NvramVariable:
 class SmiHandler:
     """SMI handler basic class"""
 
-    def __init__(self, address: int) -> None:
+    def __init__(self, address: int, kind: SmiKind) -> None:
         self.address = address
+        self.kind = kind
+        self._place: Optional[str] = None
+
+    def _get_place(self):
+        return f"{self.kind.name.lower()}_handlers"
+
+    @property
+    def place(self):
+        if self._place is None:
+            self._place = self._get_place()
+        return self._place
 
     @property
     def __dict__(self):
         val = dict()
         if self.address:
             val["address"] = self.address
-        return val
-
-
-class SwSmiHandler(SmiHandler):
-    """Software SMI handler"""
-
-    def __init__(self, sw_smi_input_value: Optional[int], address: int) -> None:
-        super().__init__(address=address)
-        self.sw_smi_input_value = sw_smi_input_value
-
-    @property
-    def __dict__(self):
-        val = dict()
-        if self.address:
-            val["address"] = self.address
-        if self.sw_smi_input_value:
-            val["sw_smi_input_value"] = self.sw_smi_input_value
+        if self.kind:
+            val["kind"] = self.kind.name
         return val
 
 
@@ -140,7 +159,7 @@ class ChildSwSmiHandler(SmiHandler):
     """Child software SMI handler"""
 
     def __init__(self, handler_guid: Optional[str], address: int) -> None:
-        super().__init__(address=address)
+        super().__init__(address=address, kind=SmiKind.CHILD_SW_SMI)
         self.handler_guid = handler_guid
 
     @property
@@ -150,4 +169,6 @@ class ChildSwSmiHandler(SmiHandler):
             val["address"] = self.address
         if self.handler_guid:
             val["handler_guid"] = self.handler_guid
+        if self.kind:
+            val["kind"] = self.kind.name
         return val

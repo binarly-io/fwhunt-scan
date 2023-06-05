@@ -29,7 +29,7 @@ from fwhunt_scan.uefi_te import TerseExecutableError, TerseExecutableParser
 from fwhunt_scan.uefi_types import (
     ChildSwSmiHandler,
     NvramVariable,
-    SwSmiHandler,
+    SmiHandler,
     UefiGuid,
     UefiProtocol,
     UefiProtocolGuid,
@@ -128,7 +128,7 @@ class UefiAnalyzer:
         self._pei_filter_list: List[int] = list()
 
         # SMI handlers addresses
-        self._swsmi_handlers: Optional[List[SwSmiHandler]] = None
+        self._smi_handlers: Optional[List[SmiHandler]] = None
         self._child_swsmi_handlers: Optional[List[ChildSwSmiHandler]] = None
 
     def __enter__(self):
@@ -753,12 +753,12 @@ class UefiAnalyzer:
         return self._ppi_list
 
     @property
-    def swsmi_handlers(self) -> List[SwSmiHandler]:
+    def smi_handlers(self) -> List[SmiHandler]:
         """Find software SMI handlers"""
 
-        if self._swsmi_handlers is None:
-            self._swsmi_handlers = uefi_smm.get_sw_smi_handlers(self._rz)
-        return self._swsmi_handlers
+        if self._smi_handlers is None:
+            self._smi_handlers = uefi_smm.get_smi_handlers(self._rz)
+        return self._smi_handlers
 
     @property
     def child_swsmi_handlers(self) -> List[ChildSwSmiHandler]:
@@ -808,8 +808,8 @@ class UefiAnalyzer:
             summary["rt_list"] = [x.__dict__ for x in self.runtime_services]
             summary["protocols"] = [x.__dict__ for x in self.protocols]
             summary["nvram_vars"] = [x.__dict__ for x in self.nvram_vars]
-            if len(self.swsmi_handlers) > 0:
-                summary["swsmi_handlers"] = [x.__dict__ for x in self.swsmi_handlers]
+            if len(self.smi_handlers) > 0:
+                summary["smi_handlers"] = [x.__dict__ for x in self.smi_handlers]
             if len(self.child_swsmi_handlers) > 0:
                 summary["child_swsmi_handlers"] = [
                     x.__dict__ for x in self.child_swsmi_handlers

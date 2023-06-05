@@ -26,26 +26,14 @@ class CodePattern:
     def __init__(self, pattern: str, place: Optional[str]) -> None:
         self.pattern: str = str(pattern)
         self.place: Optional[str] = place
-
-        # if True, scan in all SW SMI handlers
-        self.sw_smi_handlers: bool = place == "sw_smi_handlers"
-
-        # if True, scan in all child SW SMI handlers
-        self.child_sw_smi_handlers: bool = place == "child_sw_smi_handlers"
-
         # if True, scan the whole binary
-        self.unspecified: bool = place not in [
-            "sw_smi_handlers",
-            "child_sw_smi_handlers",
-        ]
+        self.unspecified: bool = place is None
 
     @property
     def __dict__(self):
         return dict(
             {
                 "pattern": self.pattern,
-                "sw_smi_handlers": self.sw_smi_handlers,
-                "child_sw_smi_handlers": self.child_sw_smi_handlers,
                 "unspecified": self.unspecified,
             }
         )
@@ -984,16 +972,22 @@ class UefiScanner:
 
         return False
 
+    def _get_handlers(self, c: CodePattern) -> List[Any]:
+        if c.place == "child_sw_smi_handlers":
+            return self._uefi_analyzer.child_swsmi_handlers
+        if c.place == "smi_handlers":
+            return self._uefi_analyzer.smi_handlers
+        return [
+            handler
+            for handler in self._uefi_analyzer.smi_handlers
+            if handler.place == c.place
+        ]
+
     def _single_code_scan(self, c: CodePattern) -> bool:
-        handlers: List[Any] = list()
-        if c.sw_smi_handlers:
-            handlers = self._uefi_analyzer.swsmi_handlers
-        if c.child_sw_smi_handlers:
-            handlers = self._uefi_analyzer.child_swsmi_handlers
         search_res = False
         if c.unspecified:
             return not not self._uefi_analyzer._rz.cmdj("/xj {}".format(c.pattern))
-        for handler in handlers:
+        for handler in self._get_handlers(c):
             search_res = self._code_scan_rec(handler.address, c.pattern)
             if search_res:
                 break

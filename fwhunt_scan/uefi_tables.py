@@ -2,11 +2,6 @@
 #
 # pylint: disable=consider-using-dict-comprehension
 
-"""
-Tools for analyzing UEFI firmware and checking UEFI modules with FwHunt rules
-"""
-
-
 EFI_BOOT_SERVICES_64_BIT = {
     0x00000018: "RaiseTPL",
     0x00000020: "RestoreTPL",
