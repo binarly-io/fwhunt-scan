@@ -6410,6 +6410,10 @@ PROTOCOLS_GUIDS = [
         "C50B323E-9075-4F2A-AC8ED2596A1085CC",
         name="EFI_SMM_ICHN_DISPATCH_PROTOCOL_GUID",
     ),
+    UefiGuid(
+        "ADF3A128-416D-4060-8DDF-30A1D7AAB699",
+        name="EFI_SMM_ICHN_DISPATCH2_PROTOCOL_GUID",
+    ),
     UefiGuid("5F439A0B-45D8-4682-A4F4F0576B513441", name="EFI_SMM_CPU_IO_GUID"),
     UefiGuid(
         "F3E4543D-CF35-6CEF-35C44FE6344DFC54", name="EFI_FORM_CALLBACK_PROTOCOL_GUID"
@@ -6886,6 +6890,37 @@ PROTOCOLS_GUIDS = [
     UefiGuid("10BA6BBE-A97E-41C3-9A07607AD9BD60E5", name="EFI_VLV2_VARIABLE_GUID"),
     UefiGuid(
         "BFD02359-8DFE-459A-8B69-A73A6BAFADC0", name="LENOVO_VARIABLE_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "9E71D609-6D24-47FD-B572-6140F8D9C2A4",
+        name="PCH_TCO_SMI_DISPATCH_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "3e7d2b56-3f47-42aa-8f6b-22f519818dab",
+        name="PCH_PCIE_SMI_DISPATCH_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "d52bb262-f022-49ec-86d2-7a293a7a054b",
+        name="PCH_ACPI_SMI_DISPATCH_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "83339ef7-9392-4716-8d3a-d1fc67cd55db",
+        name="PCH_GPIO_UNLOCK_SMI_DISPATCH_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "e6a81bbf-873d-47fd-b6be-61b3e5720993", name="PCH_SMI_DISPATCH_PROTOCOL_GUID"
+    ),
+    UefiGuid(
+        "b3c14ff3-bae8-456c-8631-27fe0ceb340c",
+        name="PCH_ESPI_SMI_DISPATCH_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "bd88ec68-ebe4-4f7b-935a-4f666642e75f",
+        name="EFI_ACPI_EN_DISPATCH_PROTOCOL_GUID",
+    ),
+    UefiGuid(
+        "9c939ba6-1fcc-46f6-b4e1-102dbe186567",
+        name="EFI_ACPI_DIS_DISPATCH_PROTOCOL_GUID",
     ),
 ]
 
