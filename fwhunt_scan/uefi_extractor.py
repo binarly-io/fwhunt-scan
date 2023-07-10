@@ -69,6 +69,9 @@ class UefiExtractor:
         self.binaries: List[UefiBinary] = list()
 
     def _compressed_search(self, object: Any, root_guid: str) -> None:
+        if object is None:
+            return
+
         for component in object.iterate_objects():
             attrs = component.get("attrs", None)
             if attrs is not None:
@@ -80,6 +83,9 @@ class UefiExtractor:
             self._compressed_search(component["_self"], root_guid)
 
     def _compressed_handle(self, object: Any, root_guid: str) -> None:
+        if object is None:
+            return
+
         for obj in object.iterate_objects():
             if (
                 obj.get("attrs", None) is not None
@@ -88,6 +94,9 @@ class UefiExtractor:
                 self._compressed_search(obj["_self"], root_guid)
 
     def _append_binaries(self, object: Any) -> None:
+        if object is None:
+            return
+
         for component in object.iterate_objects():
             guid = component.get("guid", None)
             attrs = component.get("attrs", None)
