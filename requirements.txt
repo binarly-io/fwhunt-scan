@@ -2,4 +2,4 @@ click>=7
 rzpipe==0.4.0
 pyyaml~=6.0.1
 shared_memory38; python_version >= "3.6" and python_version < "3.8"
-uefi_firmware @ git+https://github.com/theopolis/uefi-firmware-parser@v1.10
+uefi_firmware>=1.9
