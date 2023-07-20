@@ -151,7 +151,7 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
             continue
         for guid in [g.lower() for g in uefi_rule.volume_guids]:
             lower_guid = guid.lower()
-            if not lower_guid in rules_guids:
+            if lower_guid not in rules_guids:
                 rules_guids[lower_guid] = list()
             rules_guids[lower_guid].append(uefi_rule)
 
