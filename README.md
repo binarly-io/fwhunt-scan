@@ -12,7 +12,7 @@ Tools for analyzing UEFI firmware and checking UEFI modules with [FwHunt rules](
 
 # Dependencies
 
-rizin (v0.5.2)
+rizin (v0.6.0)
 
 # Installation
 
