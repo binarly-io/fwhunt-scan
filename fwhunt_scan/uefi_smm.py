@@ -113,36 +113,6 @@ SMI_KINDS = {
             name="EFI_SMM_TCO_DISPATCH_PROTOCOL_GUID",
         ),
     ],
-    SmiKind.STANDBY_BUTTON_SMI: [
-        UefiGuid(
-            "7300C4A1-43F2-4017-A51BC81A7F40585B",
-            name="EFI_SMM_STANDBY_BUTTON_DISPATCH2_PROTOCOL_GUID",
-        ),
-        UefiGuid(
-            "78965B98-B0BF-449E-8B22D2914E498A98",
-            name="EFI_SMM_STANDBY_BUTTON_DISPATCH_PROTOCOL_GUID",
-        ),
-    ],
-    SmiKind.PERIODIC_TIMER_SMI: [
-        UefiGuid(
-            "4CEC368E-8E8E-4D71-8BE1958C45FC8A53",
-            name="EFI_SMM_PERIODIC_TIMER_DISPATCH2_PROTOCOL_GUID",
-        ),
-        UefiGuid(
-            "9CCA03FC-4C9E-4A19-9B06ED7B479BDE55",
-            name="EFI_SMM_PERIODIC_TIMER_DISPATCH_PROTOCOL_GUID",
-        ),
-    ],
-    SmiKind.POWER_BUTTON_SMI: [
-        UefiGuid(
-            "1B1183FA-1823-46A7-88729C578755409D",
-            name="EFI_SMM_POWER_BUTTON_DISPATCH2_PROTOCOL_GUID",
-        ),
-        UefiGuid(
-            "B709EFA0-47A6-4B41-B93112ECE7A8EE56",
-            name="EFI_SMM_POWER_BUTTON_DISPATCH_PROTOCOL_GUID",
-        ),
-    ],
     SmiKind.PCH_TCO_SMI: [
         UefiGuid(
             "9E71D609-6D24-47FD-B572-6140F8D9C2A4",
