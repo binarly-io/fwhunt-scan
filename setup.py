@@ -32,7 +32,8 @@ setup(
         "fwhunt_scan": [
             "py.typed",
             "uefi_analyzer.pyi",
-            "uefi_extractor.pyi" "uefi_protocols.pyi",
+            "uefi_extractor.pyi",
+            "uefi_protocols.pyi",
             "uefi_scanner.pyi",
             "uefi_smm.pyi",
             "uefi_tables.pyi",
