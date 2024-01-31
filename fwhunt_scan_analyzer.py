@@ -215,11 +215,11 @@ def extract(image_path: str, extract_path: str) -> bool:
     for binary in extractor.binaries:
         if not binary.guid or not len(binary.content):
             continue
-        fpath = os.path.join(extract_path, f"{binary.guid}-{binary.name}{binary.ext}")
+        fpath = os.path.join(extract_path, f"{binary.name}-{binary.guid}{binary.ext}")
         with open(fpath, "wb") as f:
             f.write(binary.content)
 
-        click.echo(f"{binary.guid} -> {fpath}")
+        click.echo(f"{binary.guid}: {fpath}")
 
     return True
 

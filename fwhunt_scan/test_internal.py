@@ -8,7 +8,7 @@ Simple self tests for fwhunt_scan
 
 import unittest
 
-from .uefi_protocols import PROTOCOLS_GUIDS, GUID_FROM_VALUE
+from .uefi_protocols import GUID_FROM_VALUE, PROTOCOLS_GUIDS
 
 
 class TestInternal(unittest.TestCase):

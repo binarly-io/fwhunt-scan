@@ -1,4 +1,5 @@
 from setuptools import setup
+
 from fwhunt_scan import __author__, __email__, __version__
 
 with open("requirements.txt") as f:

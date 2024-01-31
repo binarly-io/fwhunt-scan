@@ -9,9 +9,9 @@ __email__ = "fwhunt@binarly.io"
 __version__ = "2.3.4"
 
 from .uefi_analyzer import UefiAnalyzer, UefiAnalyzerError
+from .uefi_extractor import UefiBinary, UefiExtractor
 from .uefi_scanner import UefiRule, UefiScanner, UefiScannerError
 from .uefi_te import TerseExecutableParser
-from .uefi_extractor import UefiBinary, UefiExtractor
 
 __all__ = [
     "UefiAnalyzer",

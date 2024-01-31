@@ -18,23 +18,15 @@ import rzpipe
 
 import fwhunt_scan.uefi_smm as uefi_smm
 from fwhunt_scan.uefi_protocols import GUID_FROM_BYTES
-from fwhunt_scan.uefi_tables import (
-    BS_PROTOCOLS_INFO_64_BIT,
-    EFI_BOOT_SERVICES_64_BIT,
-    EFI_PEI_SERVICES_32_BIT,
-    EFI_RUNTIME_SERVICES_64_BIT,
-    OFFSET_TO_SERVICE,
-)
+from fwhunt_scan.uefi_tables import (BS_PROTOCOLS_INFO_64_BIT,
+                                     EFI_BOOT_SERVICES_64_BIT,
+                                     EFI_PEI_SERVICES_32_BIT,
+                                     EFI_RUNTIME_SERVICES_64_BIT,
+                                     OFFSET_TO_SERVICE)
 from fwhunt_scan.uefi_te import TerseExecutableError, TerseExecutableParser
-from fwhunt_scan.uefi_types import (
-    ChildSwSmiHandler,
-    NvramVariable,
-    SmiHandler,
-    UefiGuid,
-    UefiProtocol,
-    UefiProtocolGuid,
-    UefiService,
-)
+from fwhunt_scan.uefi_types import (ChildSwSmiHandler, NvramVariable,
+                                    SmiHandler, UefiGuid, UefiProtocol,
+                                    UefiProtocolGuid, UefiService)
 from fwhunt_scan.uefi_utils import get_current_insn_index, get_int
 
 if sys.version_info.major == 3 and sys.version_info.minor >= 8:

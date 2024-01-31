@@ -8,13 +8,8 @@ import rzpipe
 
 from fwhunt_scan.uefi_protocols import UefiGuid
 from fwhunt_scan.uefi_types import ChildSwSmiHandler, SmiHandler, SmiKind
-from fwhunt_scan.uefi_utils import (
-    get_current_insn_index,
-    get_int,
-    get_xrefs_to_data,
-    get_xrefs_to_guids,
-)
-
+from fwhunt_scan.uefi_utils import (get_current_insn_index, get_int,
+                                    get_xrefs_to_data, get_xrefs_to_guids)
 
 SMI_KINDS = {
     SmiKind.SW_SMI: [
