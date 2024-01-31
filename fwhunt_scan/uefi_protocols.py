@@ -7,6 +7,7 @@ Tools for analyzing UEFI firmware and checking UEFI modules with FwHunt rules
 """
 
 from typing import Dict
+
 from fwhunt_scan.uefi_types import UefiGuid
 
 PROTOCOLS_GUIDS = [

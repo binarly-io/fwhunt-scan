@@ -75,10 +75,10 @@ class UefiExtractor:
         for component in object.iterate_objects():
             attrs = component.get("attrs", None)
             if attrs is not None:
-                type = attrs.get("type", None)
-                if type in UefiExtractor.UI:
+                section_type = attrs.get("type", None)
+                if section_type in UefiExtractor.UI:
                     self._info[root_guid]["name"] = component["label"]
-                if type in UefiExtractor.SECTION_TYPES:
+                if section_type in UefiExtractor.SECTION_TYPES:
                     self._info[root_guid]["content"] = component["_self"].content
             self._compressed_search(component["_self"], root_guid)
 
@@ -103,15 +103,15 @@ class UefiExtractor:
             if guid is not None and attrs is not None:
                 if guid not in self._info:
                     self._info[guid] = {"name": None, "ext": None, "content": None}
-                type = attrs.get("type", None)
-                if type in UefiExtractor.UI:
+                section_type = attrs.get("type", None)
+                if section_type in UefiExtractor.UI:
                     self._info[guid]["name"] = component["label"]
-                if type in UefiExtractor.FILE_TYPES:
+                if section_type in UefiExtractor.FILE_TYPES:
                     if self._info[guid]["ext"] is None:
-                        ext = UefiExtractor.FILE_TYPES[type][1]
+                        ext = UefiExtractor.FILE_TYPES[section_type][1]
                         self._info[guid]["ext"] = f".{ext}"
                     self._compressed_handle(component["_self"], guid)
-                if type in UefiExtractor.SECTION_TYPES:
+                if section_type in UefiExtractor.SECTION_TYPES:
                     self._info[guid]["content"] = component["_self"].content
             self._append_binaries(component["_self"])
 
