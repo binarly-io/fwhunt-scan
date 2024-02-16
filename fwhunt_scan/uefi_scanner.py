@@ -53,10 +53,10 @@ class UefiRuleVariant:
         if "code" not in self._uefi_rule:
             return code
         dict_items = dict()
-        if type(self._uefi_rule["code"]) == list:
+        if isinstance(self._uefi_rule["code"], list):
             # if kind of matches is not specified
             dict_items["and"] = self._uefi_rule["code"]
-        elif type(self._uefi_rule["code"]) == dict:
+        elif isinstance(self._uefi_rule["code"], dict):
             dict_items = self._uefi_rule["code"]
         else:
             return code
@@ -82,10 +82,10 @@ class UefiRuleVariant:
         strings: Dict[str, List[str]] = dict()
         if "strings" not in self._uefi_rule:
             return strings
-        if type(self._uefi_rule["strings"]) == list:
+        if isinstance(self._uefi_rule["strings"], list):
             # if kind of matches is not specified
             strings["and"] = self._uefi_rule["strings"]
-        elif type(self._uefi_rule["strings"]) == dict:
+        elif isinstance(self._uefi_rule["strings"], dict):
             strings = self._uefi_rule["strings"]
         else:
             return strings
@@ -103,10 +103,10 @@ class UefiRuleVariant:
         wide_strings: Dict[str, List[Dict[str, str]]] = dict()
         if "wide_strings" not in self._uefi_rule:
             return wide_strings
-        if type(self._uefi_rule["wide_strings"]) == list:
+        if isinstance(self._uefi_rule["wide_strings"], list):
             # if kind of matches is not specified
             wide_strings["and"] = self._uefi_rule["wide_strings"]
-        elif type(self._uefi_rule["wide_strings"]) == dict:
+        elif isinstance(self._uefi_rule["wide_strings"], dict):
             wide_strings = self._uefi_rule["wide_strings"]
         else:
             return wide_strings
@@ -124,10 +124,10 @@ class UefiRuleVariant:
         hex_strings: Dict[str, List[str]] = dict()
         if "hex_strings" not in self._uefi_rule:
             return hex_strings
-        if type(self._uefi_rule["hex_strings"]) == list:
+        if isinstance(self._uefi_rule["hex_strings"], list):
             # if kind of matches is not specified
             hex_strings["and"] = self._uefi_rule["hex_strings"]
-        elif type(self._uefi_rule["hex_strings"]) == dict:
+        elif isinstance(self._uefi_rule["hex_strings"], dict):
             hex_strings = self._uefi_rule["hex_strings"]
         else:
             return hex_strings
@@ -146,10 +146,10 @@ class UefiRuleVariant:
         if "nvram" not in self._uefi_rule:
             return nvram_vars
         dict_items = dict()
-        if type(self._uefi_rule["nvram"]) == list:
+        if isinstance(self._uefi_rule["nvram"], list):
             # if kind of matches is not specified
             dict_items["and"] = self._uefi_rule["nvram"]
-        elif type(self._uefi_rule["nvram"]) == dict:
+        elif isinstance(self._uefi_rule["nvram"], dict):
             dict_items = self._uefi_rule["nvram"]
         else:
             return nvram_vars
@@ -180,10 +180,10 @@ class UefiRuleVariant:
         if "protocols" not in self._uefi_rule:
             return protocols
         dict_items = dict()
-        if type(self._uefi_rule["protocols"]) == list:
+        if isinstance(self._uefi_rule["protocols"], list):
             # if kind of matches is not specified
             dict_items["and"] = self._uefi_rule["protocols"]
-        elif type(self._uefi_rule["protocols"]) == dict:
+        elif isinstance(self._uefi_rule["protocols"], dict):
             dict_items = self._uefi_rule["protocols"]
         else:
             return protocols
@@ -214,10 +214,10 @@ class UefiRuleVariant:
         if "ppi" not in self._uefi_rule:
             return ppi_list
         dict_items = dict()
-        if type(self._uefi_rule["ppi"]) == list:
+        if isinstance(self._uefi_rule["ppi"], list):
             # if kind of matches is not specified
             dict_items["and"] = self._uefi_rule["ppi"]
-        elif type(self._uefi_rule["ppi"]) == dict:
+        elif isinstance(self._uefi_rule["ppi"], dict):
             dict_items = self._uefi_rule["ppi"]
         else:
             return ppi_list
@@ -248,10 +248,10 @@ class UefiRuleVariant:
         if "guids" not in self._uefi_rule:
             return guids
         dict_items = dict()
-        if type(self._uefi_rule["guids"]) == list:
+        if isinstance(self._uefi_rule["guids"], list):
             # if kind of matches is not specified
             dict_items["and"] = self._uefi_rule["guids"]
-        elif type(self._uefi_rule["guids"]) == dict:
+        elif isinstance(self._uefi_rule["guids"], dict):
             dict_items = self._uefi_rule["guids"]
         else:
             return guids
