@@ -145,9 +145,11 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
 
     # Group rules by guids
     rules_guids: Dict[str, List[UefiRule]] = dict()
-    for uefi_rule in uefi_rules:
+    for uefi_rule in set(uefi_rules) - set(uefi_rules_fw):
         if uefi_rule.volume_guids is None:
-            print(f"[I] Specify volume_guids in {uefi_rule.name} or use scan command")
+            print(
+                f"[I] Specify volume_guids in {uefi_rule.name} or use scan-module command"
+            )
             continue
         for guid in [g.lower() for g in uefi_rule.volume_guids]:
             lower_guid = guid.lower()
@@ -157,7 +159,7 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
 
     if not rules_guids.keys():
         print(
-            f"{error_prefix} None of the rules specify volume_guids (use scan command)"
+            f"{error_prefix} None of the rules specify volume_guids (use scan-module command)"
         )
         return False
 
