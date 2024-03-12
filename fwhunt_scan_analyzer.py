@@ -146,6 +146,11 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
     # Group rules by guids
     rules_guids: Dict[str, List[UefiRule]] = dict()
     for uefi_rule in set(uefi_rules) - set(uefi_rules_fw):
+        if uefi_rule.target is not None:
+            print(
+                f"[I] The rule {uefi_rule.name} incompatible with scan-firmware command (target: {uefi_rule.target})"
+            )
+            continue
         if uefi_rule.volume_guids is None:
             print(
                 f"[I] Specify volume_guids in {uefi_rule.name} or use scan-module command"
