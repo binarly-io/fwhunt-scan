@@ -110,7 +110,15 @@ def scan(path: str, rule: List[str]) -> bool:
 @click.argument("image_path")
 @click.option("-r", "--rule", help="The path to the rule.", multiple=True)
 @click.option("-d", "--rules_dir", help="The path to the rules directory.")
-def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
+@click.option(
+    "-f",
+    "--force",
+    help="Enforcing the use of rules without specified volume guids.",
+    is_flag=True,
+)
+def scan_firmware(
+    image_path: str, rule: List[str], rules_dir: str, force: bool
+) -> bool:
     """Scan UEFI firmware image."""
 
     rules = rule
@@ -145,6 +153,10 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
         f"{os.path.realpath(image_path)}:/tmp/image:ro",
     ]
     rules_cmd = [TAG, "scan-firmware", "/tmp/image"]
+
+    if force:
+        rules_cmd += ["-f"]
+
     for r in rules:
         _, name = os.path.split(r)
         cmd += ["-v", f"{os.path.realpath(r)}:/tmp/{name}:ro"]

@@ -363,15 +363,6 @@ class UefiRule:
             return None
 
     @property
-    def volume_guids(self) -> Optional[List[str]]:
-        """Get any volume GUIDs from the metadata block"""
-
-        try:
-            return self._uefi_rule["meta"]["volume guids"]
-        except KeyError:
-            return None
-
-    @property
     def vendor_id(self) -> Optional[str]:
         """Get vendor id from the metadata block"""
 
@@ -424,6 +415,15 @@ class UefiRule:
             return self._uefi_rule["meta"]["target"]
         except KeyError:
             return None
+
+    @property
+    def volume_guids(self) -> List[str]:
+        """Get any volume GUIDs from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["volume guids"]
+        except KeyError:
+            return list()
 
     def _get_variants(self) -> Dict[str, UefiRuleVariant]:
         """Get rules variants"""

@@ -112,7 +112,15 @@ def scan(path: str, rule: List[str]) -> bool:
 @click.argument("image_path")
 @click.option("-r", "--rule", help="The path to the rule.", multiple=True)
 @click.option("-d", "--rules_dir", help="The path to the rules directory.")
-def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
+@click.option(
+    "-f",
+    "--force",
+    help="Enforcing the use of rules without specified volume guids.",
+    is_flag=True,
+)
+def scan_firmware(
+    image_path: str, rule: List[str], rules_dir: str, force: bool
+) -> bool:
     """Scan UEFI firmware image."""
 
     rules = list(rule)
@@ -164,9 +172,9 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
                 f"The rule {uefi_rule.name} incompatible with scan-firmware command (target: {uefi_rule.target})"
             )
             continue
-        if uefi_rule.volume_guids is None:
+        if not len(uefi_rule.volume_guids) and not force:
             logger.warning(
-                f"Specify volume_guids in {uefi_rule.name} or use scan-module command"
+                f"Specify volume_guids in {uefi_rule.name} or run command with --force flag"
             )
             continue
         for guid in [g.lower() for g in uefi_rule.volume_guids]:
