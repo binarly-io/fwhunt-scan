@@ -195,7 +195,9 @@ def scan_firmware(
     with open(image_path, "rb") as f:
         firmware_data = f.read()
 
-    extractor = UefiExtractor(firmware_data, list(rules_guids.keys()))
+    extractor = UefiExtractor(
+        firmware_data, list(rules_guids.keys()) if not force else list()
+    )
     extractor.extract_all(ignore_guid=force)
 
     if not len(extractor.binaries):
@@ -203,7 +205,7 @@ def scan_firmware(
         return False
 
     for binary in extractor.binaries:
-        if not binary.guid:
+        if not binary.is_ok:
             continue
 
         fpath = os.path.join(tempfile.gettempdir(), f"{binary.name}{binary.ext}")
@@ -212,7 +214,7 @@ def scan_firmware(
 
         uefi_analyzer = UefiAnalyzer(image_path=fpath)
 
-        logger.debug(f"Scan binary {binary.name} ({binary.guid})")
+        logger.debug(f"Scan binary {binary.name}{binary.ext}")
 
         rules = rules_universal + (
             rules_guids[binary.guid] if binary.guid in rules_guids else list()
@@ -252,7 +254,7 @@ def extract(image_path: str, extract_path: str) -> bool:
         return False
 
     for binary in extractor.binaries:
-        if not binary.guid or not len(binary.content):
+        if not binary.is_ok:
             continue
         fpath = os.path.join(extract_path, f"{binary.name}-{binary.guid}{binary.ext}")
         with open(fpath, "wb") as f:

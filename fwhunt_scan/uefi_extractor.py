@@ -6,6 +6,19 @@ import uefi_firmware
 
 
 class UefiBinary:
+    KINDS = [
+        ".sec",
+        ".pei.core",
+        ".dxe.core",
+        ".peim",
+        ".dxe",
+        ".peim.dxe",
+        ".app",
+        ".smm",
+        ".smm.dxe",
+        ".smm.core",
+    ]
+
     def __init__(
         self,
         content: Optional[bytes],
@@ -35,6 +48,10 @@ class UefiBinary:
         if self._ext is None:
             self._ext = ".bin"
         return self._ext
+
+    @property
+    def is_ok(self) -> bool:
+        return self.guid and len(self.content) and self.ext in UefiBinary.KINDS
 
 
 class UefiExtractor:
