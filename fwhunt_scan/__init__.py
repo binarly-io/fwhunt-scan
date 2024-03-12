@@ -6,7 +6,7 @@ Tools for analyzing UEFI firmware and checking UEFI modules with FwHunt rules
 
 __author__ = "FwHunt team"
 __email__ = "fwhunt@binarly.io"
-__version__ = "2.3.4"
+__version__ = "2.3.5"
 
 from .uefi_analyzer import UefiAnalyzer, UefiAnalyzerError
 from .uefi_extractor import UefiBinary, UefiExtractor
