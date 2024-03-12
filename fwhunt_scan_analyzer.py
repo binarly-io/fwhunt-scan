@@ -203,6 +203,9 @@ def scan_firmware(
         return False
 
     for binary in extractor.binaries:
+        if not binary.guid:
+            continue
+
         fpath = os.path.join(tempfile.gettempdir(), f"{binary.name}{binary.ext}")
         with open(fpath, "wb") as f:
             f.write(binary.content)
@@ -210,14 +213,11 @@ def scan_firmware(
         uefi_analyzer = UefiAnalyzer(image_path=fpath)
 
         logger.debug(f"Scan binary {binary.name} ({binary.guid})")
-        scanner = UefiScanner(
-            uefi_analyzer,
-            (
-                rules_universal + rules_guids[binary.guid]
-                if binary.guid in rules_guids
-                else list()
-            ),
+
+        rules = rules_universal + (
+            rules_guids[binary.guid] if binary.guid in rules_guids else list()
         )
+        scanner = UefiScanner(uefi_analyzer, rules)
         for result in scanner.results:
             msg = threat if result.res else no_threat
             click.echo(
