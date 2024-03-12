@@ -166,6 +166,7 @@ def scan_firmware(
 
     # Group rules by guids
     rules_guids: Dict[str, List[UefiRule]] = dict()
+    rules_universal: List[UefiRule] = list()
     for uefi_rule in set(uefi_rules) - set(uefi_rules_fw):
         if uefi_rule.target not in (None, "module"):
             logger.debug(
@@ -177,13 +178,15 @@ def scan_firmware(
                 f"Specify volume_guids in {uefi_rule.name} or run command with --force flag"
             )
             continue
+        elif not len(uefi_rule.volume_guids):
+            rules_universal.append(uefi_rule)
         for guid in [g.lower() for g in uefi_rule.volume_guids]:
             lower_guid = guid.lower()
             if lower_guid not in rules_guids:
                 rules_guids[lower_guid] = list()
             rules_guids[lower_guid].append(uefi_rule)
 
-    if not rules_guids.keys():
+    if not rules_guids.keys() and not force:
         click.echo(
             f"{error_prefix} None of the rules specify volume_guids (use scan-module command)"
         )
@@ -193,7 +196,7 @@ def scan_firmware(
         firmware_data = f.read()
 
     extractor = UefiExtractor(firmware_data, list(rules_guids.keys()))
-    extractor.extract_all(ignore_guid=False)
+    extractor.extract_all(ignore_guid=force)
 
     if not len(extractor.binaries):
         click.echo("No modules were found for scanning")
@@ -205,8 +208,16 @@ def scan_firmware(
             f.write(binary.content)
 
         uefi_analyzer = UefiAnalyzer(image_path=fpath)
-        scanner = UefiScanner(uefi_analyzer, rules_guids[binary.guid])
 
+        logger.debug(f"Scan binary {binary.name} ({binary.guid})")
+        scanner = UefiScanner(
+            uefi_analyzer,
+            (
+                rules_universal + rules_guids[binary.guid]
+                if binary.guid in rules_guids
+                else list()
+            ),
+        )
         for result in scanner.results:
             msg = threat if result.res else no_threat
             click.echo(
