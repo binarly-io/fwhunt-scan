@@ -161,12 +161,12 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
     for uefi_rule in set(uefi_rules) - set(uefi_rules_fw):
         if uefi_rule.target not in (None, "module"):
             logger.debug(
-                f"[I] The rule {uefi_rule.name} incompatible with scan-firmware command (target: {uefi_rule.target})"
+                f"The rule {uefi_rule.name} incompatible with scan-firmware command (target: {uefi_rule.target})"
             )
             continue
         if uefi_rule.volume_guids is None:
             logger.warning(
-                f"[I] Specify volume_guids in {uefi_rule.name} or use scan-module command"
+                f"Specify volume_guids in {uefi_rule.name} or use scan-module command"
             )
             continue
         for guid in [g.lower() for g in uefi_rule.volume_guids]:

@@ -6,6 +6,7 @@ Tools for analyzing UEFI firmware using radare2
 
 import binascii
 import json
+import logging
 import os
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -13,6 +14,8 @@ import yaml
 
 from fwhunt_scan.uefi_analyzer import (NvramVariable, UefiAnalyzer, UefiGuid,
                                        UefiProtocol, UefiService)
+
+logger = logging.getLogger(__name__)
 
 
 class CodePattern:
@@ -290,12 +293,12 @@ class UefiRule:
                     with open(self._rule, "r") as f:
                         self._uefi_rule = yaml.safe_load(f)
                 except yaml.scanner.ScannerError as e:
-                    print(f"Error: {repr(e)}")
+                    logger.error(repr(e))
         elif rule_content is not None:
             try:
                 self._uefi_rule = yaml.safe_load(rule_content)
             except yaml.scanner.ScannerError as e:
-                print(f"Error: {repr(e)}")
+                logger.error(repr(e))
         if self._uefi_rule:
             self._rule_name = list(self._uefi_rule.keys())[0]
         if self._rule_name:
@@ -881,12 +884,12 @@ class UefiScanner:
     @staticmethod
     def _tree_debug(start: int, end: int, depth: int) -> None:
         if not depth:
-            print(
+            logger.debug(
                 f"\nFunction tree in the handler at {start:#x} (from {start:#x} to {end:#x})"
             )
         else:
             prefix = depth * "--"
-            print(f"{prefix}{start:#x} (from {start:#x} to {end:#x})")
+            logger.debug(f"{prefix}{start:#x} (from {start:#x} to {end:#x})")
 
     def _get_bounds_rec(self, start_addr: int, depth: int, debug: bool) -> bool:
         """Recursively traverse the function and find the boundaries of all child functions"""
@@ -961,8 +964,6 @@ class UefiScanner:
 
         for start, end in self._funcs_bounds:
             if self._hex_strings_scanner_bounds(pattern, start, end):
-                # Debug
-                # print(f"Matched: {start:#x} - {end:#x}")
                 return True
 
         return False
