@@ -208,25 +208,27 @@ def scan_firmware(
         if not binary.is_ok:
             continue
 
+        rules = rules_universal + (
+            rules_guids[binary.guid] if binary.guid in rules_guids else list()
+        )
+
+        if not len(rules):
+            continue
+
         fpath = os.path.join(tempfile.gettempdir(), f"{binary.name}{binary.ext}")
         with open(fpath, "wb") as f:
             f.write(binary.content)
 
-        uefi_analyzer = UefiAnalyzer(image_path=fpath)
+        logger.debug(f"Scanning the module {binary.name}{binary.ext}")
 
-        logger.debug(f"Scan binary {binary.name}{binary.ext}")
+        with UefiAnalyzer(image_path=fpath) as uefi_analyzer:
+            scanner = UefiScanner(uefi_analyzer, rules)
+            for result in scanner.results:
+                msg = threat if result.res else no_threat
+                click.echo(
+                    f"{prefix} {result.rule.name} (variant: {result.variant_label}) {msg} ({binary.name})"
+                )
 
-        rules = rules_universal + (
-            rules_guids[binary.guid] if binary.guid in rules_guids else list()
-        )
-        scanner = UefiScanner(uefi_analyzer, rules)
-        for result in scanner.results:
-            msg = threat if result.res else no_threat
-            click.echo(
-                f"{prefix} {result.rule.name} (variant: {result.variant_label}) {msg} ({binary.name})"
-            )
-
-        uefi_analyzer.close()
         os.remove(fpath)
 
     return True
