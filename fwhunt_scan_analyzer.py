@@ -146,7 +146,7 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
     # Group rules by guids
     rules_guids: Dict[str, List[UefiRule]] = dict()
     for uefi_rule in set(uefi_rules) - set(uefi_rules_fw):
-        if uefi_rule.target is not None:
+        if uefi_rule.target not in (None, "module"):
             print(
                 f"[I] The rule {uefi_rule.name} incompatible with scan-firmware command (target: {uefi_rule.target})"
             )
@@ -233,6 +233,7 @@ def extract(image_path: str, extract_path: str) -> bool:
 
 cli.add_command(analyze_module)
 cli.add_command(scan_module)
+cli.add_command(scan_module, "scan-bootloader")
 cli.add_command(scan_firmware)
 cli.add_command(extract)
 

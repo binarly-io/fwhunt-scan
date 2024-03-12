@@ -151,6 +151,7 @@ def scan_firmware(image_path: str, rule: List[str], rules_dir: str) -> bool:
 cli.add_command(build)
 cli.add_command(analyze_module)
 cli.add_command(scan_module)
+cli.add_command(scan_module, "scan-bootloader")
 cli.add_command(scan_firmware)
 
 if __name__ == "__main__":
