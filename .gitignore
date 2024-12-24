@@ -7,33 +7,34 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+.eggs/
+.installed.cfg
+.mypy_cache/
+.pytest_cache/
 .Python
+*.egg
+*.egg-info/
+*.pyi
 build/
 develop-eggs/
 dist/
 downloads/
 eggs/
-.eggs/
 lib/
 lib64/
+MANIFEST
 parts/
 sdist/
+share/python-wheels/
 var/
 wheels/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-*.pyi
-.mypy_cache/
-.pytest_cache/
-MANIFEST
 
 # Directories
+.ruff_cache
 .vscode/
 env/
-test/
 rules/
+test/
 
 # Files
 .DS_Store

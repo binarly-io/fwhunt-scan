@@ -3,7 +3,7 @@
 [![fwhunt-scan pypi](https://img.shields.io/pypi/v/fwhunt-scan.svg)](https://pypi.org/project/fwhunt-scan)
 
 <p align="center">
-  <img alt="fwhunt Logo" src="https://raw.githubusercontent.com/binarly-io/fwhunt-scan/master/pics/fwhunt_logo.png" width="20%">
+  <img alt="fwhunt Logo" src="https://raw.githubusercontent.com/binarly-io/fwhunt-scan/master/pics/fwhunt_logo.png" width="35%">
 </p>
 
 # FwHunt Community Scanner
