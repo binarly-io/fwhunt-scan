@@ -1,7 +1,5 @@
 from setuptools import setup
 
-from fwhunt_scan import __author__, __email__, __version__
-
 with open("requirements.txt") as f:
     REQUIRED = f.readlines()
 
@@ -10,9 +8,9 @@ with open("README.md", "r") as f:
 
 setup(
     name="fwhunt_scan",
-    version=__version__,
-    author=__author__,
-    author_email=__email__,
+    version="2.3.6",
+    author="FwHunt team",
+    author_email="fwhunt@binarly.io",
     packages=["fwhunt_scan"],
     license="GPL-3.0",
     url="https://github.com/binarly-io/fwhunt-scan",
