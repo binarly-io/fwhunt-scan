@@ -8,7 +8,7 @@ with open("README.md", "r") as f:
 
 setup(
     name="fwhunt_scan",
-    version="2.3.6",
+    version="2.3.7",
     author="FwHunt team",
     author_email="fwhunt@binarly.io",
     packages=["fwhunt_scan"],
