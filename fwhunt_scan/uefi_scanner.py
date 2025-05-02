@@ -6,6 +6,7 @@ Tools for analyzing UEFI firmware using radare2
 
 import binascii
 import json
+import logging
 import os
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -18,6 +19,8 @@ from fwhunt_scan.uefi_analyzer import (
     UefiProtocol,
     UefiService,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class CodePattern:
@@ -58,10 +61,10 @@ class UefiRuleVariant:
         if "code" not in self._uefi_rule:
             return code
         dict_items = dict()
-        if type(self._uefi_rule["code"]) == list:
+        if isinstance(self._uefi_rule["code"], list):
             # if kind of matches is not specified
             dict_items["and"] = self._uefi_rule["code"]
-        elif type(self._uefi_rule["code"]) == dict:
+        elif isinstance(self._uefi_rule["code"], dict):
             dict_items = self._uefi_rule["code"]
         else:
             return code
@@ -87,10 +90,10 @@ class UefiRuleVariant:
         strings: Dict[str, List[str]] = dict()
         if "strings" not in self._uefi_rule:
             return strings
-        if type(self._uefi_rule["strings"]) == list:
+        if isinstance(self._uefi_rule["strings"], list):
             # if kind of matches is not specified
             strings["and"] = self._uefi_rule["strings"]
-        elif type(self._uefi_rule["strings"]) == dict:
+        elif isinstance(self._uefi_rule["strings"], dict):
             strings = self._uefi_rule["strings"]
         else:
             return strings
@@ -108,10 +111,10 @@ class UefiRuleVariant:
         wide_strings: Dict[str, List[Dict[str, str]]] = dict()
         if "wide_strings" not in self._uefi_rule:
             return wide_strings
-        if type(self._uefi_rule["wide_strings"]) == list:
+        if isinstance(self._uefi_rule["wide_strings"], list):
             # if kind of matches is not specified
             wide_strings["and"] = self._uefi_rule["wide_strings"]
-        elif type(self._uefi_rule["wide_strings"]) == dict:
+        elif isinstance(self._uefi_rule["wide_strings"], dict):
             wide_strings = self._uefi_rule["wide_strings"]
         else:
             return wide_strings
@@ -129,10 +132,10 @@ class UefiRuleVariant:
         hex_strings: Dict[str, List[str]] = dict()
         if "hex_strings" not in self._uefi_rule:
             return hex_strings
-        if type(self._uefi_rule["hex_strings"]) == list:
+        if isinstance(self._uefi_rule["hex_strings"], list):
             # if kind of matches is not specified
             hex_strings["and"] = self._uefi_rule["hex_strings"]
-        elif type(self._uefi_rule["hex_strings"]) == dict:
+        elif isinstance(self._uefi_rule["hex_strings"], dict):
             hex_strings = self._uefi_rule["hex_strings"]
         else:
             return hex_strings
@@ -151,10 +154,10 @@ class UefiRuleVariant:
         if "nvram" not in self._uefi_rule:
             return nvram_vars
         dict_items = dict()
-        if type(self._uefi_rule["nvram"]) == list:
+        if isinstance(self._uefi_rule["nvram"], list):
             # if kind of matches is not specified
             dict_items["and"] = self._uefi_rule["nvram"]
-        elif type(self._uefi_rule["nvram"]) == dict:
+        elif isinstance(self._uefi_rule["nvram"], dict):
             dict_items = self._uefi_rule["nvram"]
         else:
             return nvram_vars
@@ -185,10 +188,10 @@ class UefiRuleVariant:
         if "protocols" not in self._uefi_rule:
             return protocols
         dict_items = dict()
-        if type(self._uefi_rule["protocols"]) == list:
+        if isinstance(self._uefi_rule["protocols"], list):
             # if kind of matches is not specified
             dict_items["and"] = self._uefi_rule["protocols"]
-        elif type(self._uefi_rule["protocols"]) == dict:
+        elif isinstance(self._uefi_rule["protocols"], dict):
             dict_items = self._uefi_rule["protocols"]
         else:
             return protocols
@@ -219,10 +222,10 @@ class UefiRuleVariant:
         if "ppi" not in self._uefi_rule:
             return ppi_list
         dict_items = dict()
-        if type(self._uefi_rule["ppi"]) == list:
+        if isinstance(self._uefi_rule["ppi"], list):
             # if kind of matches is not specified
             dict_items["and"] = self._uefi_rule["ppi"]
-        elif type(self._uefi_rule["ppi"]) == dict:
+        elif isinstance(self._uefi_rule["ppi"], dict):
             dict_items = self._uefi_rule["ppi"]
         else:
             return ppi_list
@@ -253,10 +256,10 @@ class UefiRuleVariant:
         if "guids" not in self._uefi_rule:
             return guids
         dict_items = dict()
-        if type(self._uefi_rule["guids"]) == list:
+        if isinstance(self._uefi_rule["guids"], list):
             # if kind of matches is not specified
             dict_items["and"] = self._uefi_rule["guids"]
-        elif type(self._uefi_rule["guids"]) == dict:
+        elif isinstance(self._uefi_rule["guids"], dict):
             dict_items = self._uefi_rule["guids"]
         else:
             return guids
@@ -295,12 +298,12 @@ class UefiRule:
                     with open(self._rule, "r") as f:
                         self._uefi_rule = yaml.safe_load(f)
                 except yaml.scanner.ScannerError as e:
-                    print(f"Error: {repr(e)}")
+                    logger.error(repr(e))
         elif rule_content is not None:
             try:
                 self._uefi_rule = yaml.safe_load(rule_content)
             except yaml.scanner.ScannerError as e:
-                print(f"Error: {repr(e)}")
+                logger.error(repr(e))
         if self._uefi_rule:
             self._rule_name = list(self._uefi_rule.keys())[0]
         if self._rule_name:
@@ -365,15 +368,6 @@ class UefiRule:
             return None
 
     @property
-    def volume_guids(self) -> Optional[List[str]]:
-        """Get any volume GUIDs from the metadata block"""
-
-        try:
-            return self._uefi_rule["meta"]["volume guids"]
-        except KeyError:
-            return None
-
-    @property
     def vendor_id(self) -> Optional[str]:
         """Get vendor id from the metadata block"""
 
@@ -426,6 +420,15 @@ class UefiRule:
             return self._uefi_rule["meta"]["target"]
         except KeyError:
             return None
+
+    @property
+    def volume_guids(self) -> List[str]:
+        """Get any volume GUIDs from the metadata block"""
+
+        try:
+            return self._uefi_rule["meta"]["volume guids"]
+        except KeyError:
+            return list()
 
     def _get_variants(self) -> Dict[str, UefiRuleVariant]:
         """Get rules variants"""
@@ -886,12 +889,12 @@ class UefiScanner:
     @staticmethod
     def _tree_debug(start: int, end: int, depth: int) -> None:
         if not depth:
-            print(
+            logger.debug(
                 f"\nFunction tree in the handler at {start:#x} (from {start:#x} to {end:#x})"
             )
         else:
             prefix = depth * "--"
-            print(f"{prefix}{start:#x} (from {start:#x} to {end:#x})")
+            logger.debug(f"{prefix}{start:#x} (from {start:#x} to {end:#x})")
 
     def _get_bounds_rec(self, start_addr: int, depth: int, debug: bool) -> bool:
         """Recursively traverse the function and find the boundaries of all child functions"""
@@ -966,8 +969,6 @@ class UefiScanner:
 
         for start, end in self._funcs_bounds:
             if self._hex_strings_scanner_bounds(pattern, start, end):
-                # Debug
-                # print(f"Matched: {start:#x} - {end:#x}")
                 return True
 
         return False

@@ -15,7 +15,6 @@ from fwhunt_scan.uefi_utils import (
     get_xrefs_to_guids,
 )
 
-
 SMI_KINDS = {
     SmiKind.SW_SMI: [
         UefiGuid(

@@ -1,6 +1,6 @@
-FROM python:3.10
+FROM python:3.11
 
-LABEL org.opencontainers.image.source https://github.com/binarly-io/fwhunt-scan
+LABEL org.opencontainers.image.source=https://github.com/binarly-io/fwhunt-scan
 
 ARG rz_version=v0.6.2
 
